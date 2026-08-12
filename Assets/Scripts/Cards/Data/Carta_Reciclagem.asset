@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40823cf725e860e6b9da051808a111e5, type: 3}
+  m_Name: Carta_Reciclagem
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardName: Sistema de Reciclagem com Sensores
+  description: "Instala\xE7\xE3o de c\xE2meras nas lixeiras para coleta sob demanda"
+  impactoSustentabilidade: 15
+  impactoSatisfacao: 0
+  impactoMobilidade: 0
+  custoEconomia: -10

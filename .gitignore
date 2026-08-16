@@ -42,6 +42,9 @@
 # Visual Studio cache directory
 .vs/
 
+# Configurações locais do VS Code (específicas de cada máquina/usuário)
+/.vscode/
+
 # Gradle cache directory
 .gradle/
 
@@ -105,3 +108,29 @@ InitTestScene*.unity*
 
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# JetBrains Rider (arquivos de projeto completos do IDE, além dos já ignorados acima)
+.idea/
+
+# Editores de texto (backups/swap)
+*~
+*.swp
+*.swo
+
+# Variáveis de ambiente / segredos locais
+.env
+.env.local
+*.env.local

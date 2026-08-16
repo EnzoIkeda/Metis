@@ -9,8 +9,8 @@ public class MainMenuManager : MonoBehaviour
     // Metodo para o botao 'Jogar'
     public void PlayGame()
     {
-        // Carrega a cena 3D do jogo (Assets/Scenes/Game/Game.unity)
-        SceneManager.LoadScene("Game");
+        // Carrega a cena 3D do jogo (Assets/Scenes/City_Scene.unity)
+        SceneManager.LoadScene("City_Scene");
     }
 
     // Metodos para o botao 'Configuracoes'

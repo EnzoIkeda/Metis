@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a17274e29c4cba04cae830be71476a04, type: 3}
+  m_Name: EventFeriado
+  m_EditorClassIdentifier: Assembly-CSharp::RandomEventData
+  _title: Feriado
+  _description: "\xC9 feriado! Menos congestionamento, mais felicidade!"
+  _triggerConditions: []
+  _statEffects:
+  - Parameter: 6
+    Amount: 5
+  - Parameter: 8
+    Amount: 5

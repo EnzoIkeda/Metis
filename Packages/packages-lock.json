@@ -28,7 +28,7 @@
     },
     "com.unity.collections": {
       "version": "2.6.6",
-      "depth": 1,
+      "depth": 2,
       "source": "registry",
       "dependencies": {
         "com.unity.burst": "1.8.28",

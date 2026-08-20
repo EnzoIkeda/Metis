@@ -1,4 +1,4 @@
-/// <summary>Tipo de ocupacao de uma celula do grid</summary>
+// Tipo de ocupacao de uma celula do grid.
 public enum CellType
 {
     Empty,
@@ -8,11 +8,7 @@ public enum CellType
     None
 }
 
-/// <summary>
-/// Grid 2D: guarda o CellType de cada célula com um indexador (grid[i, j]) 
-/// para leitura/escrita direta. PlacementManager é o wrapper que traduz 
-/// posicoes para este grid.
-/// </summary>
+// Grid 2D que guarda o tipo de cada celula, acessivel por indexador.
 public class Grid
 {
     private CellType[,] _grid;
@@ -28,7 +24,7 @@ public class Grid
         _grid = new CellType[width, height];
     }
 
-    // Adding index operator to our Grid class so that we can use grid[][] to access specific cell from our grid.
+    // Indexador pra ler ou escrever o tipo de uma celula direto.
     public CellType this[int i, int j]
     {
         get

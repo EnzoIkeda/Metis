@@ -1,9 +1,7 @@
 using System;
 using UnityEngine;
 
-/// <summary>
-/// Wrapper de CityStats, Bridge entre a logica de dominio pura e a cena Unity
-/// </summary>
+// Ponte entre a logica de dominio pura e a cena.
 public class CityStatsManager : MonoBehaviour
 {
     [SerializeField] private CityParameterConfig[] _initialParameters = Array.Empty<CityParameterConfig>();
@@ -29,8 +27,7 @@ public class CityStatsManager : MonoBehaviour
         Stats.OnGameOver -= HandleGameOver;
     }
 
-    // Preenche valores placeholder ao adicionar o componente; ajustar no Inspector conforme o
-    // balanceamento real do jogo
+    // Preenche valores placeholder ao adicionar o componente.
     private void Reset()
     {
         var parameters = (CityParameterType[])Enum.GetValues(typeof(CityParameterType));
@@ -69,8 +66,7 @@ public class CityStatsManager : MonoBehaviour
             Debug.Log($"[CityStats] {parameter} = {Stats.GetValue(parameter)}");
     }
 
-    
-    // DEBUG
+    // Debug.
     [ContextMenu("Debug: Aplicar +10 em Renda")]
     private void DebugApplyRendaModifier()
     {

@@ -1,9 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-/// <summary>
-/// Contador de turno reativo
-/// </summary>
+// Contador de turno reativo.
 public class TurnCounterView : MonoBehaviour
 {
     [SerializeField] private TurnManager _turnManager;

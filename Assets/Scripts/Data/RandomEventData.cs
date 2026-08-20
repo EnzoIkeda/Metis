@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary> Comparacao de uma condicao contra o valor atual do parametro.</summary>
+// Comparacao de uma condicao contra o valor atual do parametro.
 public enum ComparisonType
 {
     GreaterThanOrEqual,
@@ -16,10 +16,8 @@ public struct TriggerCondition
     public float Threshold;
 }
 
-/// <summary>
-/// Definicao orientada a dados de um evento aleatorio, como um ScriptableObject
-/// TODO: adicionar o field para alterar visualmente o grid
-/// </summary>
+// Definicao orientada a dados de um evento aleatorio.
+// TODO: adicionar o field para alterar visualmente o grid.
 [CreateAssetMenu(fileName = "New Event", menuName = "Metis/Random Event Data")]
 public class RandomEventData : ScriptableObject
 {

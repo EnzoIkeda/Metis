@@ -2,9 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>
-/// Uma linha da barra superior para mostrar os parametros
-/// </summary>
+// Uma linha da barra superior mostrando um parametro.
 public class StatRowView : MonoBehaviour
 {
     [SerializeField] private TMP_Text _labelText;

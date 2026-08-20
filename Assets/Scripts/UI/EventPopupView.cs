@@ -2,9 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>
-/// Popup do evento aleatorio
-/// </summary>
+// Popup do evento aleatorio.
 public class EventPopupView : MonoBehaviour
 {
     [SerializeField] private TurnManager _turnManager;

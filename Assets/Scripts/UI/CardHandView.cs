@@ -1,9 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Factory para criar a mao de cartas a partir do prefab
-/// </summary>
+// Reconstroi a mao de cartas visivel sempre que a mao muda.
 public class CardHandView : MonoBehaviour
 {
     [SerializeField] private TurnManager _turnManager;

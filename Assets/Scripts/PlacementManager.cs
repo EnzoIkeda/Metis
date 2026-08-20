@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Bridge entre o espaço de mundo e o Grid
-/// </summary>
+// Bridge entre o espaco de mundo e o grid.
 public class PlacementManager : MonoBehaviour
 {
     public int width, height;

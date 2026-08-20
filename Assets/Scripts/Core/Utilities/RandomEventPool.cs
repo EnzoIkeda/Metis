@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-/// <summary>
-/// Sorteia e resolve o evento aleatorio da fase de evento do turno
-/// </summary>
+// Sorteia e resolve o evento aleatorio da fase de evento do turno.
 public class RandomEventPool
 {
     private readonly IReadOnlyList<RandomEventData> _pool;
@@ -30,9 +28,7 @@ public class RandomEventPool
         return true;
     }
 
-    /// <summary>
-    /// Sorteia um evento do pool e aplica seus efeitos. Retorna null se o pool estiver vazio ou nenhum evento estiver elegível agora.
-    /// </summary>
+    // Sorteia um evento elegivel do pool e aplica seus efeitos, ou retorna null se nenhum for elegivel.
     public RandomEventData TryTriggerEvent(CityStats stats)
     {
         var eligible = new List<RandomEventData>();

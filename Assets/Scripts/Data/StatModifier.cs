@@ -1,6 +1,6 @@
 using System;
 
-/// <summary>Parametros da cidade utilizados por CityStatsManager.</summary>
+// Parametros que compoem o estado da cidade.
 public enum CityParameterType
 {
     Renda,
@@ -22,9 +22,7 @@ public struct StatModifier
     public float Amount;
 }
 
-/// <summary>
-/// Nomes de exibição em português (com acentuação) para CityParameterType
-/// </summary>
+// Nomes de exibicao abreviados de cada parametro.
 public static class CityParameterTypeExtensions
 {
     public static string GetDisplayName(this CityParameterType parameter)

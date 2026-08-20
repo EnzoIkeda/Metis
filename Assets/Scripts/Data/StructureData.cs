@@ -1,9 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Categoria de gameplay de uma estrutura
-/// </summary>
+// Categoria de gameplay de uma estrutura.
 public enum StructureCategory
 {
     Road,
@@ -14,9 +12,7 @@ public enum StructureCategory
     SpecialStructure
 }
 
-/// <summary>
-/// Definicao orientada a dados de uma estrutura colocavel como um ScriptableObject
-/// </summary>
+// Definicao orientada a dados de uma estrutura colocavel.
 [CreateAssetMenu(fileName = "New Structure", menuName = "Metis/Structure Data")]
 public class StructureData : ScriptableObject
 {
@@ -30,7 +26,7 @@ public class StructureData : ScriptableObject
     public StructureCategory Category => _category;
     public GameObject Prefab => _prefab;
 
-    /// <summary>CellType ocupado ao ser colocada </summary>
+    // Tipo de celula ocupado ao ser colocada.
     public CellType FootprintCellType => _footprintCellType;
 
     public IReadOnlyList<StatModifier> StatEffects => _statEffects;

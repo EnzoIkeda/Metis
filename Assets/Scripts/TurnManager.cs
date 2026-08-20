@@ -2,9 +2,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-/// <summary>
-/// Wrapper de TurnMachine: um Bridge entre a logica de turno pura e a cena
-/// </summary>
+// Ponte entre a maquina de turno pura e a cena.
 [DefaultExecutionOrder(-100)]
 public class TurnManager : MonoBehaviour
 {
@@ -125,7 +123,7 @@ public class TurnManager : MonoBehaviour
         Debug.Log($"[CardHand] Mão atual: [{cardNames}]");
     }
 
-    // DEBUG
+    // Debug.
     [ContextMenu("Debug: Reiniciar Jogo")]
     private void DebugStartGame()
     {

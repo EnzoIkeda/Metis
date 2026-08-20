@@ -1,8 +1,6 @@
 using System;
 
-/// <summary>
-/// As 6 fases do turno, na ordem em que acontecem.
-/// </summary>
+// As 6 fases do turno, na ordem em que acontecem.
 public enum TurnPhase
 {
     StartOfTurn,
@@ -20,14 +18,7 @@ public enum GameOutcome
     GameOver
 }
 
-/// <summary>
-/// Loop de turno do design desejado, implementado como uma State machine explicita, 
-/// TurnManager e o wrapper que a conecta na cena.
-///
-/// TurnMachine em si nao ve as cartas ou eventos e notifica via
-/// Observer, deixando TurnManager controlar a compra de mao, disparar eventos e descartar. 
-/// Duas paradas que esperam chamada externa: a fase de acao e a fase de evento
-/// </summary>
+// Maquina de estados explicita do loop de turno, com duas paradas que esperam chamada externa.
 public class TurnMachine
 {
     public const int VictoryTurnCount = 20;
@@ -57,7 +48,7 @@ public class TurnMachine
     private void BeginTurn()
     {
         SetPhase(TurnPhase.StartOfTurn);
-        // TurnManager reage a esta fase para comprar a mao
+        // A mao e comprada em reacao a esta fase.
 
         SetPhase(TurnPhase.Action);
         // Espera ser chamado externamente.
@@ -72,14 +63,10 @@ public class TurnMachine
         _cityStats.RecomputeDerivedParameters();
 
         SetPhase(TurnPhase.Event);
-        // TurnManager reage a este phase pra sortear o evento e
-        // decide na hora se chama AcknowledgeEvent() de volta ou espera
-        // o jogador fechar o popup
+        // O evento e sorteado em reacao a esta fase, e o turno so continua quando o popup fecha.
     }
 
-    /// <summary>
-    /// Continua o turno depois da fase de Evento
-    /// </summary>
+    // Continua o turno depois da fase de evento.
     public void AcknowledgeEvent()
     {
         if (Outcome != GameOutcome.None || CurrentPhase != TurnPhase.Event)
@@ -98,14 +85,14 @@ public class TurnMachine
         }
 
         SetPhase(TurnPhase.Advance);
-        // TurnManager reage a este phase pra descartar a mao
+        // A mao e descartada em reacao a esta fase.
         TurnIndex++;
         OnTurnAdvanced?.Invoke(TurnIndex);
 
         BeginTurn();
     }
 
-    // debug: vai para a proxima fase
+    // Debug: pula direto pra um turno especifico.
     public void DebugJumpToTurn(int turnIndex)
     {
         if (Outcome != GameOutcome.None)

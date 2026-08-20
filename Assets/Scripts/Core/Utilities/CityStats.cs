@@ -1,10 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-/// <summary>
-/// Configuracao inicial de um parametro: valor de partida e limites inferiores e superiores
-/// Por enquanto MinValue/MaxValue tambem sao o limite critico
-/// </summary>
+// Configuracao inicial de um parametro: valor de partida e limites, que tambem valem como critico.
 [Serializable]
 public struct CityParameterConfig
 {
@@ -14,10 +11,7 @@ public struct CityParameterConfig
     public float MaxValue;
 }
 
-/// <summary>
-/// Estado dos 9 parametros da cidade: valores, clamp e nivel critico
-/// Notifica mudancas via Observer
-/// </summary>
+// Estado dos 9 parametros da cidade, com clamp, nivel critico e notificacao de mudancas.
 public class CityStats
 {
     private readonly Dictionary<CityParameterType, float> _values = new Dictionary<CityParameterType, float>();
@@ -64,9 +58,7 @@ public class CityStats
         return false;
     }
 
-    /// <summary> 
-    /// Aplica um unico modificador a um parametro
-    /// </summary>
+    // Aplica um unico modificador a um parametro.
     public void ApplyModifier(StatModifier modifier)
     {
         if (_values.ContainsKey(modifier.Parameter) == false)
@@ -81,9 +73,7 @@ public class CityStats
             ApplyModifier(modifier);
     }
 
-    /// <summary>
-    /// Formulas de interacao entre parametros, chamado na fase de resolucao do turno
-    /// </summary>
+    // Recalcula Bem-estar a partir dos outros parametros, chamado na fase de resolucao do turno.
     public void RecomputeDerivedParameters()
     {
         var mediaPositivos = (GetValue(CityParameterType.Mobilidade)

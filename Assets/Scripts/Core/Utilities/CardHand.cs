@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
 
-/// <summary>
-/// Mao de cartas do turno atual, comprada de um pool. Notifica mudancas via Observer.
-/// TODO: Baralho de cartas finito, e com estrategia propria de onde a mao sera gerada.
-/// </summary>
+// Mao de cartas do turno atual, comprada de um pool.
+// TODO: baralho de cartas finito, com estrategia propria de geracao da mao.
 public class CardHand
 {
     private readonly IReadOnlyList<CardData> _pool;
@@ -41,9 +39,7 @@ public class CardHand
         OnHandChanged?.Invoke();
     }
 
-    /// <summary>
-    /// Checagem simples to requisitos
-    /// </summary>
+    // Checagem simples dos requisitos pra jogar a carta.
     public bool CanPlay(CardData card, CityStats stats)
     {
         return card != null
@@ -52,9 +48,7 @@ public class CardHand
             && stats.GetValue(CityParameterType.Renda) >= card.Cost;
     }
 
-    /// <summary>
-    /// Joga uma carta da mao 
-    /// </summary>
+    // Joga uma carta da mao.
     public bool TryPlay(CardData card, CityStats stats)
     {
         if (CanPlay(card, stats) == false)

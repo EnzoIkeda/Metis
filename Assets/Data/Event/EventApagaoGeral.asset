@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a17274e29c4cba04cae830be71476a04, type: 3}
+  m_Name: EventApagaoGeral
+  m_EditorClassIdentifier: Assembly-CSharp::RandomEventData
+  _title: "Apag\xE3o geral"
+  _description: "A cidade ficou \xE0s escuras por 14 horas. Com\xE9rcios fecharam e a popula\xE7\xE3o cobra explica\xE7\xF5es."
+  _triggerConditions: []
+  _statEffects:
+  - Parameter: 0
+    Amount: -4
+  - Parameter: 1
+    Amount: -5
+  - Parameter: 2
+    Amount: -3
+  - Parameter: 6
+    Amount: -3
+  - Parameter: 7
+    Amount: -2
+  - Parameter: 8
+    Amount: -3

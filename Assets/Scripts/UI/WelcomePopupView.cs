@@ -2,9 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>
-/// Popup de boas-vindas
-/// </summary>
+// Popup de boas-vindas mostrado ao carregar a cena.
 public class WelcomePopupView : MonoBehaviour
 {
     [SerializeField] private GameObject _panelRoot;

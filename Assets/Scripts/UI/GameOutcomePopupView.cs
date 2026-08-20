@@ -2,9 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>
-/// Popup de fim de jogo
-/// </summary>
+// Popup de fim de jogo, reutilizavel pra vitoria ou derrota conforme o desfecho configurado.
 public class GameOutcomePopupView : MonoBehaviour
 {
     [SerializeField] private TurnManager _turnManager;

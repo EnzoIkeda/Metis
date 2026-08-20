@@ -2,9 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Barra superior reativa, observer que sincroniza com os parametros
-/// </summary>
+// Barra superior reativa que sincroniza com os parametros.
 public class TopBarView : MonoBehaviour
 {
     [SerializeField] private CityStatsManager _cityStatsManager;

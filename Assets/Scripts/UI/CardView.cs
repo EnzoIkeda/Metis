@@ -3,9 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>
-/// Uma carta na mao
-/// </summary>
+// Uma carta na mao, com nome, descricao e custo, que dispara a jogada ao ser clicada.
 public class CardView : MonoBehaviour
 {
     [SerializeField] private TMP_Text _nameText;

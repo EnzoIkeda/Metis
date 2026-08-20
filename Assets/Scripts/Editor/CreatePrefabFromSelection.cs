@@ -2,10 +2,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-/// <summary>
-/// Atalho pra criar um prefab a partir do GameObject selecionado na Hierarchy sem precisar
-/// arrastar entre paineis ( por causa de um bug da Unity que as vezes me aparece )
-/// </summary>
+// Atalho pra criar um prefab a partir do GameObject selecionado, sem precisar arrastar entre paineis.
 public static class CreatePrefabFromSelection
 {
     private const string DefaultFolder = "Assets/Prefabs/UI";

@@ -30,3 +30,5 @@ MonoBehaviour:
     Amount: -3
   - Parameter: 7
     Amount: -4
+  _minTurn: 1
+  _maxTurn: 999

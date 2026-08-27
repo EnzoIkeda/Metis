@@ -96,7 +96,7 @@ public class TurnManager : MonoBehaviour
 
     private void HandleEventPhase()
     {
-        var triggeredEvent = _events.TryTriggerEvent(_cityStatsManager.Stats);
+        var triggeredEvent = _events.TryTriggerEvent(_cityStatsManager.Stats, Machine.TurnIndex);
         if (triggeredEvent == null)
         {
             Machine.AcknowledgeEvent();

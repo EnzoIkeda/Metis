@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: CardEscolaTecnica
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   _cardName: "Escola T\xE9cnica"
-  _description: "Forma m\xE3o de obra e abre caminho para tecnologia. Investimento em educa\xE7\xE3o tamb\xE9m melhora a sustentabilidade do curr\xEDculo e a autoestima da comunidade."
+  _description: "Forma m\xE3o de obra e abre caminho para tecnologia. Investimento
+    em educa\xE7\xE3o tamb\xE9m melhora a sustentabilidade do curr\xEDculo e a autoestima
+    da comunidade."
   _cost: 0
   _tier: 0
   _requiredPesquisa: 0

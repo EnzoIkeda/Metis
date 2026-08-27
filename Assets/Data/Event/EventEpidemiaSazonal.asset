@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a17274e29c4cba04cae830be71476a04, type: 3}
   m_Name: EventEpidemiaSazonal
   m_EditorClassIdentifier: Assembly-CSharp::RandomEventData
-  _title: "Epidemia sazonal"
-  _description: "Um surto respirat\xF3rio se espalhou pelas escolas. A rede de sa\xFAde opera no limite."
+  _title: Epidemia sazonal
+  _description: "Um surto respirat\xF3rio se espalhou pelas escolas. A rede de sa\xFAde
+    opera no limite."
   _triggerConditions: []
   _statEffects:
   - Parameter: 0
@@ -28,3 +29,5 @@ MonoBehaviour:
     Amount: -8
   - Parameter: 8
     Amount: -1
+  _minTurn: 1
+  _maxTurn: 999

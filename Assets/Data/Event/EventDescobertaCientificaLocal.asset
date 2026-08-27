@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: EventDescobertaCientificaLocal
   m_EditorClassIdentifier: Assembly-CSharp::RandomEventData
   _title: "Descoberta cient\xEDfica local"
-  _description: "Um laborat\xF3rio da cidade publicou uma inova\xE7\xE3o que ganhou destaque nacional."
+  _description: "Um laborat\xF3rio da cidade publicou uma inova\xE7\xE3o que ganhou
+    destaque nacional."
   _triggerConditions: []
   _statEffects:
   - Parameter: 0
@@ -28,3 +29,5 @@ MonoBehaviour:
     Amount: 2
   - Parameter: 7
     Amount: 1
+  _minTurn: 1
+  _maxTurn: 999

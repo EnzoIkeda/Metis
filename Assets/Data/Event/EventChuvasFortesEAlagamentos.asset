@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a17274e29c4cba04cae830be71476a04, type: 3}
   m_Name: EventChuvasFortesEAlagamentos
   m_EditorClassIdentifier: Assembly-CSharp::RandomEventData
-  _title: "Chuvas fortes e alagamentos"
-  _description: "Um temporal alagou as avenidas principais. O tr\xE2nsito parou e bairros inteiros ficaram isolados."
+  _title: Chuvas fortes e alagamentos
+  _description: "Um temporal alagou as avenidas principais. O tr\xE2nsito parou e
+    bairros inteiros ficaram isolados."
   _triggerConditions: []
   _statEffects:
   - Parameter: 0
@@ -32,3 +33,5 @@ MonoBehaviour:
     Amount: -3
   - Parameter: 8
     Amount: -3
+  _minTurn: 1
+  _maxTurn: 999

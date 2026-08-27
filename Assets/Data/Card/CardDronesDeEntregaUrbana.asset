@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39c804f1a5f690765908711b18576891, type: 3}
+  m_Name: CardDronesDeEntregaUrbana
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  _cardName: Drones de Entrega Urbana
+  _description: "Frota de drones entrega encomenda pela cidade, sem caminh\xE3o nem
+    motorista. Tecnologia real: os programas Wing (Alphabet) e Amazon Prime Air,
+    j\xE1 operando entregas comerciais \u2014 mas ru\xEDdo, privacidade e seguran\xE7a
+    do espa\xE7o a\xE9reo urbano ainda dividem opini\xE3o."
+  _cost: 0
+  _tier: 3
+  _requiredPesquisa: 75
+  _statEffects:
+  - Parameter: 0
+    Amount: 4
+  - Parameter: 1
+    Amount: -1
+  - Parameter: 2
+    Amount: -2
+  - Parameter: 3
+    Amount: -1
+  - Parameter: 4
+    Amount: 3
+  - Parameter: 5
+    Amount: 1
+  - Parameter: 8
+    Amount: 6
+  _structureToPlace: {fileID: 0}

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: EventBoomEconomico
   m_EditorClassIdentifier: Assembly-CSharp::RandomEventData
   _title: "Boom econ\xF4mico"
-  _description: "A economia regional aqueceu. A arrecada\xE7\xE3o cresceu acima do previsto neste turno."
+  _description: "A economia regional aqueceu. A arrecada\xE7\xE3o cresceu acima do
+    previsto neste turno."
   _triggerConditions: []
   _statEffects:
   - Parameter: 0
@@ -30,3 +31,5 @@ MonoBehaviour:
     Amount: 3
   - Parameter: 8
     Amount: 1
+  _minTurn: 1
+  _maxTurn: 999

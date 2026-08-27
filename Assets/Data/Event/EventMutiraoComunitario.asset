@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: EventMutiraoComunitario
   m_EditorClassIdentifier: Assembly-CSharp::RandomEventData
   _title: "Mutir\xE3o comunit\xE1rio"
-  _description: "Os moradores se organizaram para revitalizar pra\xE7as e ruas do bairro."
+  _description: "Os moradores se organizaram para revitalizar pra\xE7as e ruas do
+    bairro."
   _triggerConditions: []
   _statEffects:
   - Parameter: 0
@@ -32,3 +33,5 @@ MonoBehaviour:
     Amount: 2
   - Parameter: 8
     Amount: 1
+  _minTurn: 1
+  _maxTurn: 999

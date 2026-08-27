@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39c804f1a5f690765908711b18576891, type: 3}
   m_Name: CardConjuntoHabitacional
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  _cardName: "Conjunto Habitacional"
+  _cardName: Conjunto Habitacional
   _description: "Mais moradia, mais pessoas, mais demanda por servi\xE7os."
   _cost: 0
   _tier: 0

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39c804f1a5f690765908711b18576891, type: 3}
   m_Name: CardZonaComercial
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  _cardName: "Zona Comercial"
+  _cardName: Zona Comercial
   _description: "Novos com\xE9rcios geram renda, mas trazem tr\xE2nsito e polui\xE7\xE3o."
   _cost: 0
   _tier: 0

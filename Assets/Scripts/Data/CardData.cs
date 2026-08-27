@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// 4 tiers, alinhados aos limiares de Pesquisa e aos tiers da planilha de balanceamento.
 public enum CardTier
 {
     Basica,
-    Avancada,
+    CidadeDigital,
+    CidadeConectada,
     SmartCity
 }
 

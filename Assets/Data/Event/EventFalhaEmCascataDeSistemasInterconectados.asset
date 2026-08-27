@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a17274e29c4cba04cae830be71476a04, type: 3}
+  m_Name: EventFalhaEmCascataDeSistemasInterconectados
+  m_EditorClassIdentifier: Assembly-CSharp::RandomEventData
+  _title: Falha em Cascata de Sistemas Interconectados
+  _description: "Uma falha pequena num sistema se espalhou pra v\xE1rios outros conectados
+    a ele, derrubando servi\xE7os que n\xE3o tinham nada a ver entre si a princ\xEDpio.
+    \xC9 o que a teoria dos 'acidentes normais' de Charles Perrow descreve: sistemas
+    complexos e interligados demais falham em cascata, n\xE3o isoladamente."
+  _triggerConditions:
+  - Parameter: 4
+    Comparison: 0
+    Threshold: 45
+  _statEffects:
+  - Parameter: 0
+    Amount: -4
+  - Parameter: 1
+    Amount: -3
+  - Parameter: 2
+    Amount: -1
+  - Parameter: 4
+    Amount: -1
+  - Parameter: 6
+    Amount: -2
+  - Parameter: 8
+    Amount: -3
+  _minTurn: 10
+  _maxTurn: 999

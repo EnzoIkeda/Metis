@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39c804f1a5f690765908711b18576891, type: 3}
+  m_Name: CardManutencaoPreditivaComIA
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  _cardName: "Manuten\xE7\xE3o Preditiva com IA"
+  _description: "Sensores e algoritmos preveem falha em tubula\xE7\xE3o, rede el\xE9trica
+    ou pavimento antes que ela aconte\xE7a. Pr\xE1tica real de manuten\xE7\xE3o preditiva
+    com IA, cada vez mais usada por concession\xE1rias de \xE1gua e energia \u2014
+    economiza reparo emergencial, mas reduz postos de manuten\xE7\xE3o manual."
+  _cost: 0
+  _tier: 2
+  _requiredPesquisa: 50
+  _statEffects:
+  - Parameter: 0
+    Amount: -3
+  - Parameter: 1
+    Amount: 2
+  - Parameter: 2
+    Amount: -1
+  - Parameter: 3
+    Amount: -1
+  - Parameter: 4
+    Amount: 6
+  - Parameter: 5
+    Amount: 2
+  - Parameter: 6
+    Amount: 1
+  - Parameter: 8
+    Amount: 1
+  _structureToPlace: {fileID: 0}

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: EventEscandaloDeCorrupcao
   m_EditorClassIdentifier: Assembly-CSharp::RandomEventData
   _title: "Esc\xE2ndalo de corrup\xE7\xE3o"
-  _description: "Um desvio de verbas veio a p\xFAblico. A confian\xE7a na gest\xE3o despencou."
+  _description: "Um desvio de verbas veio a p\xFAblico. A confian\xE7a na gest\xE3o
+    despencou."
   _triggerConditions: []
   _statEffects:
   - Parameter: 0
@@ -28,3 +29,5 @@ MonoBehaviour:
     Amount: -1
   - Parameter: 8
     Amount: -1
+  _minTurn: 1
+  _maxTurn: 999

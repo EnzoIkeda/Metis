@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a17274e29c4cba04cae830be71476a04, type: 3}
   m_Name: EventOndaDeCalor
   m_EditorClassIdentifier: Assembly-CSharp::RandomEventData
-  _title: "Onda de calor"
-  _description: "Term\xF4metros bateram recorde. O consumo de ar-condicionado disparou e os hospitais lotaram."
+  _title: Onda de calor
+  _description: "Term\xF4metros bateram recorde. O consumo de ar-condicionado disparou
+    e os hospitais lotaram."
   _triggerConditions: []
   _statEffects:
   - Parameter: 0
@@ -26,3 +27,5 @@ MonoBehaviour:
     Amount: -4
   - Parameter: 7
     Amount: -3
+  _minTurn: 1
+  _maxTurn: 999

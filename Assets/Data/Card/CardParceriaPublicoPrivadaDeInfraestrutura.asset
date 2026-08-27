@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39c804f1a5f690765908711b18576891, type: 3}
+  m_Name: CardParceriaPublicoPrivadaDeInfraestrutura
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  _cardName: "Parceria P\xFAblico-Privada de Infraestrutura"
+  _description: "Capital privado financia e opera a obra p\xFAblica, em troca de
+    um contrato de longo prazo. Modelo real de parceria p\xFAblico-privada (PPP),
+    amplamente usado em rodovias, portos e saneamento \u2014 acelera o investimento,
+    mas a l\xF3gica de lucro pressiona o lado ambiental e social do contrato."
+  _cost: 0
+  _tier: 2
+  _requiredPesquisa: 50
+  _statEffects:
+  - Parameter: 0
+    Amount: 11
+  - Parameter: 3
+    Amount: 1
+  - Parameter: 4
+    Amount: 2
+  - Parameter: 5
+    Amount: -4
+  - Parameter: 6
+    Amount: -1
+  - Parameter: 7
+    Amount: -3
+  - Parameter: 8
+    Amount: 1
+  _structureToPlace: {fileID: 0}

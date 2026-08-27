@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39c804f1a5f690765908711b18576891, type: 3}
+  m_Name: CardCapturaDeCarbonoUrbana
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  _cardName: Captura de Carbono Urbana
+  _description: "M\xE1quinas sugam CO2 direto do ar e o enterram no subsolo. Tecnologia
+    real: a planta Orca da Climeworks, na Isl\xE2ndia, a primeira captura direta
+    de carbono em escala comercial do mundo \u2014 cara e faminta por energia, mas
+    tira carbono do ar de verdade."
+  _cost: 0
+  _tier: 3
+  _requiredPesquisa: 75
+  _statEffects:
+  - Parameter: 0
+    Amount: -6
+  - Parameter: 1
+    Amount: -3
+  - Parameter: 4
+    Amount: 6
+  - Parameter: 5
+    Amount: 11
+  - Parameter: 6
+    Amount: 1
+  - Parameter: 7
+    Amount: 1
+  _structureToPlace: {fileID: 0}

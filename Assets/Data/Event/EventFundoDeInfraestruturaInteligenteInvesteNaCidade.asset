@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a17274e29c4cba04cae830be71476a04, type: 3}
+  m_Name: EventFundoDeInfraestruturaInteligenteInvesteNaCidade
+  m_EditorClassIdentifier: Assembly-CSharp::RandomEventData
+  _title: Fundo de Infraestrutura Inteligente Investe na Cidade
+  _description: "Um fundo de investimento em infraestrutura escolheu a cidade pra
+    um aporte de longo prazo. Tend\xEAncia real: fundos soberanos e de pens\xE3o
+    investindo cada vez mais em infraestrutura inteligente ao redor do mundo."
+  _triggerConditions:
+  - Parameter: 4
+    Comparison: 0
+    Threshold: 30
+  _statEffects:
+  - Parameter: 0
+    Amount: 6
+  - Parameter: 1
+    Amount: 1
+  - Parameter: 4
+    Amount: 3
+  - Parameter: 6
+    Amount: 1
+  - Parameter: 8
+    Amount: 1
+  _minTurn: 6
+  _maxTurn: 999

@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a17274e29c4cba04cae830be71476a04, type: 3}
   m_Name: EventTurnoTranquilo
   m_EditorClassIdentifier: Assembly-CSharp::RandomEventData
-  _title: "Turno tranquilo"
+  _title: Turno tranquilo
   _description: "Nada de extraordin\xE1rio aconteceu. A cidade seguiu sua rotina."
   _triggerConditions: []
   _statEffects:
   - Parameter: 6
     Amount: 1
+  _minTurn: 1
+  _maxTurn: 999

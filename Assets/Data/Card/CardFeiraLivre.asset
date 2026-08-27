@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39c804f1a5f690765908711b18576891, type: 3}
   m_Name: CardFeiraLivre
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  _cardName: "Feira Livre"
+  _cardName: Feira Livre
   _description: "Com\xE9rcio local barato e vida nas ruas."
   _cost: 0
   _tier: 0

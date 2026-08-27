@@ -25,9 +25,15 @@ public class RandomEventData : ScriptableObject
     [SerializeField] private string _description;
     [SerializeField] private TriggerCondition[] _triggerConditions;
     [SerializeField] private StatModifier[] _statEffects;
+    [SerializeField] private int _minTurn = 1;
+    [SerializeField] private int _maxTurn = 999;
 
     public string Title => _title;
     public string Description => _description;
     public IReadOnlyList<TriggerCondition> TriggerConditions => _triggerConditions;
     public IReadOnlyList<StatModifier> StatEffects => _statEffects;
+
+    // Turno minimo e maximo, inclusive, em que o evento pode ser sorteado.
+    public int MinTurn => _minTurn;
+    public int MaxTurn => _maxTurn;
 }

@@ -12,8 +12,11 @@ public class RandomEventPool
         _pool = pool;
     }
 
-    public bool IsEligible(RandomEventData eventData, CityStats stats)
+    public bool IsEligible(RandomEventData eventData, CityStats stats, int turnIndex)
     {
+        if (turnIndex < eventData.MinTurn || turnIndex > eventData.MaxTurn)
+            return false;
+
         if (eventData.TriggerConditions == null)
             return true;
 
@@ -29,12 +32,12 @@ public class RandomEventPool
     }
 
     // Sorteia um evento elegivel do pool e aplica seus efeitos, ou retorna null se nenhum for elegivel.
-    public RandomEventData TryTriggerEvent(CityStats stats)
+    public RandomEventData TryTriggerEvent(CityStats stats, int turnIndex)
     {
         var eligible = new List<RandomEventData>();
         foreach (var eventData in _pool)
         {
-            if (IsEligible(eventData, stats))
+            if (IsEligible(eventData, stats, turnIndex))
                 eligible.Add(eventData);
         }
 

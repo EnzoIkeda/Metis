@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a17274e29c4cba04cae830be71476a04, type: 3}
+  m_Name: EventBacklashContraVigilanciaUrbana
+  m_EditorClassIdentifier: Assembly-CSharp::RandomEventData
+  _title: "Backlash contra Vigil\xE2ncia Urbana"
+  _description: "Moradores protestaram contra c\xE2meras e sensores instalados sem
+    debate p\xFAblico. Epis\xF3dio real: o projeto Sidewalk Labs em Toronto foi cancelado
+    em 2020 ap\xF3s press\xE3o popular sobre privacidade."
+  _triggerConditions:
+  - Parameter: 4
+    Comparison: 0
+    Threshold: 15
+  _statEffects:
+  - Parameter: 2
+    Amount: -3
+  - Parameter: 4
+    Amount: -1
+  - Parameter: 6
+    Amount: -3
+  _minTurn: 4
+  _maxTurn: 999

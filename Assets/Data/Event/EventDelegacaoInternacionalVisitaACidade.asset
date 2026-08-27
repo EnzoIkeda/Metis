@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a17274e29c4cba04cae830be71476a04, type: 3}
+  m_Name: EventDelegacaoInternacionalVisitaACidade
+  m_EditorClassIdentifier: Assembly-CSharp::RandomEventData
+  _title: "Delega\xE7\xE3o internacional visita a cidade"
+  _description: "Uma comitiva internacional veio conhecer os avan\xE7os da cidade
+    rumo \xE0 Cidade Conectada. A visibilidade traz neg\xF3cios e orgulho local."
+  _triggerConditions:
+  - Parameter: 4
+    Comparison: 0
+    Threshold: 30
+  _statEffects:
+  - Parameter: 0
+    Amount: 3
+  - Parameter: 3
+    Amount: 1
+  - Parameter: 4
+    Amount: 2
+  - Parameter: 5
+    Amount: 1
+  - Parameter: 6
+    Amount: 3
+  _minTurn: 6
+  _maxTurn: 999

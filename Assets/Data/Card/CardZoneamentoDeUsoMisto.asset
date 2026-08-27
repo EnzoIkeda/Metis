@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39c804f1a5f690765908711b18576891, type: 3}
+  m_Name: CardZoneamentoDeUsoMisto
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  _cardName: Zoneamento de Uso Misto
+  _description: "Com\xE9rcio, moradia e servi\xE7o no mesmo quarteir\xE3o: mais gente
+    na rua olhando pra rua reduz o crime \u2014 a ideia de Jane Jacobs sobre a vida
+    urbana."
+  _cost: 0
+  _tier: 0
+  _requiredPesquisa: 0
+  _statEffects:
+  - Parameter: 0
+    Amount: 2
+  - Parameter: 1
+    Amount: 1
+  - Parameter: 2
+    Amount: 2
+  - Parameter: 3
+    Amount: 1
+  - Parameter: 5
+    Amount: 1
+  - Parameter: 6
+    Amount: 2
+  - Parameter: 8
+    Amount: 1
+  _structureToPlace: {fileID: 0}

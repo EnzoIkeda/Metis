@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: EventIncendioIndustrial
   m_EditorClassIdentifier: Assembly-CSharp::RandomEventData
   _title: "Inc\xEAndio industrial"
-  _description: "Um galp\xE3o industrial pegou fogo. A fuma\xE7a cobriu tr\xEAs bairros por dois dias."
+  _description: "Um galp\xE3o industrial pegou fogo. A fuma\xE7a cobriu tr\xEAs bairros
+    por dois dias."
   _triggerConditions: []
   _statEffects:
   - Parameter: 0
@@ -32,3 +33,5 @@ MonoBehaviour:
     Amount: -3
   - Parameter: 8
     Amount: -1
+  _minTurn: 1
+  _maxTurn: 999

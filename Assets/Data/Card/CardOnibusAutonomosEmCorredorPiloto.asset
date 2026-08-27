@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39c804f1a5f690765908711b18576891, type: 3}
+  m_Name: CardOnibusAutonomosEmCorredorPiloto
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  _cardName: "\xD4nibus Aut\xF4nomos em Corredor Piloto"
+  _description: "\xD4nibus sem motorista rodam numa rota fixa e protegida, ainda
+    em fase piloto. Tecnologia real (ve\xEDculos como o Navya Autonom Shuttle), j\xE1
+    testada em cidades como Lyon e Cingapura \u2014 mas a seguran\xE7a de rodar sem
+    motorista humano ainda gera debate."
+  _cost: 0
+  _tier: 2
+  _requiredPesquisa: 50
+  _statEffects:
+  - Parameter: 0
+    Amount: -4
+  - Parameter: 1
+    Amount: -1
+  - Parameter: 2
+    Amount: -2
+  - Parameter: 3
+    Amount: -1
+  - Parameter: 4
+    Amount: 4
+  - Parameter: 5
+    Amount: 1
+  - Parameter: 6
+    Amount: 1
+  - Parameter: 8
+    Amount: 9
+  _structureToPlace: {fileID: 0}

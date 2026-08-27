@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: EventDoacaoInternacional
   m_EditorClassIdentifier: Assembly-CSharp::RandomEventData
   _title: "Doa\xE7\xE3o internacional"
-  _description: "Uma funda\xE7\xE3o internacional escolheu a cidade para um programa de desenvolvimento urbano."
+  _description: "Uma funda\xE7\xE3o internacional escolheu a cidade para um programa
+    de desenvolvimento urbano."
   _triggerConditions: []
   _statEffects:
   - Parameter: 0
@@ -32,3 +33,5 @@ MonoBehaviour:
     Amount: 3
   - Parameter: 8
     Amount: 1
+  _minTurn: 1
+  _maxTurn: 999

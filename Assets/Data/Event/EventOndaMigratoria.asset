@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: EventOndaMigratoria
   m_EditorClassIdentifier: Assembly-CSharp::RandomEventData
   _title: "Onda migrat\xF3ria"
-  _description: "Milhares de novas fam\xEDlias chegaram \xE0 cidade. H\xE1 mais for\xE7a de trabalho e mais press\xE3o nos servi\xE7os."
+  _description: "Milhares de novas fam\xEDlias chegaram \xE0 cidade. H\xE1 mais for\xE7a
+    de trabalho e mais press\xE3o nos servi\xE7os."
   _triggerConditions: []
   _statEffects:
   - Parameter: 0
@@ -32,3 +33,5 @@ MonoBehaviour:
     Amount: -2
   - Parameter: 8
     Amount: -3
+  _minTurn: 1
+  _maxTurn: 999

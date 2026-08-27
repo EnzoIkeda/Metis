@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a17274e29c4cba04cae830be71476a04, type: 3}
   m_Name: EventCongestionamentoRecorde
   m_EditorClassIdentifier: Assembly-CSharp::RandomEventData
-  _title: "Congestionamento recorde"
-  _description: "O tr\xE2nsito travou por 6 horas seguidas. A cidade parou e o desgaste foi enorme."
+  _title: Congestionamento recorde
+  _description: "O tr\xE2nsito travou por 6 horas seguidas. A cidade parou e o desgaste
+    foi enorme."
   _triggerConditions: []
   _statEffects:
   - Parameter: 0
@@ -28,3 +29,5 @@ MonoBehaviour:
     Amount: -2
   - Parameter: 8
     Amount: -6
+  _minTurn: 1
+  _maxTurn: 999

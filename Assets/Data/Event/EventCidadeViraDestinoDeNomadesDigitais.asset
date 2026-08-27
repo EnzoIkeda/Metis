@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a17274e29c4cba04cae830be71476a04, type: 3}
+  m_Name: EventCidadeViraDestinoDeNomadesDigitais
+  m_EditorClassIdentifier: Assembly-CSharp::RandomEventData
+  _title: "Cidade Vira Destino de N\xF4mades Digitais"
+  _description: "Trabalhadores remotos do mundo inteiro escolheram a cidade pra viver.
+    Fen\xF4meno real: Lisboa, Medell\xEDn e Bali, entre outras, viraram destino de
+    n\xF4made digital \u2014 algumas j\xE1 t\xEAm visto pr\xF3prio pra isso \u2014
+    mas o aluguel sobe pra quem sempre morou ali."
+  _triggerConditions:
+  - Parameter: 4
+    Comparison: 0
+    Threshold: 45
+  _statEffects:
+  - Parameter: 0
+    Amount: 5
+  - Parameter: 3
+    Amount: 2
+  - Parameter: 4
+    Amount: 1
+  - Parameter: 6
+    Amount: -2
+  _minTurn: 10
+  _maxTurn: 999

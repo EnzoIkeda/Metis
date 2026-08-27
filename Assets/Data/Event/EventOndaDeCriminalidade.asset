@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a17274e29c4cba04cae830be71476a04, type: 3}
   m_Name: EventOndaDeCriminalidade
   m_EditorClassIdentifier: Assembly-CSharp::RandomEventData
-  _title: "Onda de criminalidade"
-  _description: "Uma sequ\xEAncia de assaltos assustou os bairros centrais. A popula\xE7\xE3o pede resposta."
+  _title: Onda de criminalidade
+  _description: "Uma sequ\xEAncia de assaltos assustou os bairros centrais. A popula\xE7\xE3o
+    pede resposta."
   _triggerConditions: []
   _statEffects:
   - Parameter: 0
@@ -26,3 +27,5 @@ MonoBehaviour:
     Amount: -5
   - Parameter: 7
     Amount: -1
+  _minTurn: 1
+  _maxTurn: 999

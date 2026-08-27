@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: EventPremioDeCidadeSustentavel
   m_EditorClassIdentifier: Assembly-CSharp::RandomEventData
   _title: "Pr\xEAmio de cidade sustent\xE1vel"
-  _description: "A cidade foi reconhecida internacionalmente por suas pol\xEDticas ambientais."
+  _description: "A cidade foi reconhecida internacionalmente por suas pol\xEDticas
+    ambientais."
   _triggerConditions: []
   _statEffects:
   - Parameter: 0
@@ -32,3 +33,5 @@ MonoBehaviour:
     Amount: 1
   - Parameter: 8
     Amount: 1
+  _minTurn: 1
+  _maxTurn: 999

@@ -2800,41 +2800,69 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CityStatsManager
   _initialParameters:
   - Parameter: 0
-    InitialValue: 50
+    InitialValue: 55
     MinValue: 0
     MaxValue: 100
+    CriticalLevel: 10
+    Deriva: 1
   - Parameter: 1
     InitialValue: 50
     MinValue: 0
     MaxValue: 100
+    CriticalLevel: 10
+    Deriva: -1
   - Parameter: 2
     InitialValue: 50
     MinValue: 0
     MaxValue: 100
+    CriticalLevel: 10
+    Deriva: -1
   - Parameter: 3
-    InitialValue: 50
+    InitialValue: 40
     MinValue: 0
     MaxValue: 100
+    CriticalLevel: 10
+    Deriva: 0
   - Parameter: 4
-    InitialValue: 50
+    InitialValue: 10
     MinValue: 0
     MaxValue: 100
+    CriticalLevel: -1
+    Deriva: 0
   - Parameter: 5
+    InitialValue: 45
+    MinValue: 0
+    MaxValue: 100
+    CriticalLevel: 10
+    Deriva: -1
+  - Parameter: 6
     InitialValue: 50
     MinValue: 0
     MaxValue: 100
-  - Parameter: 6
-    InitialValue: 5
-    MinValue: 0
-    MaxValue: 100
+    CriticalLevel: 10
+    Deriva: 0
   - Parameter: 7
     InitialValue: 50
     MinValue: 0
     MaxValue: 100
+    CriticalLevel: 10
+    Deriva: -1
   - Parameter: 8
-    InitialValue: 50
+    InitialValue: 45
     MinValue: 0
     MaxValue: 100
+    CriticalLevel: 10
+    Deriva: -1
+  _interactionConfig:
+    ValorNeutro: 50
+    EscalaGlobal: 1
+    ZonaCrise: 25
+    ZonaExcesso: 75
+    MultiplicadorPressaoCrise: 1.6
+    MultiplicadorApoioCrise: 0.5
+    MultiplicadorApoioExcesso: 0.6
+    DerivaCorrecaoExcesso: 0.1
+    PenalidadeColapso: 12
 --- !u!4 &278176691
 Transform:
   m_ObjectHideFlags: 0
@@ -7752,10 +7780,10 @@ RectTransform:
   - {fileID: 1140465190}
   m_Father: {fileID: 1575728841}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -257}
-  m_SizeDelta: {x: 500, y: 86}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &759973908
 MonoBehaviour:
@@ -15859,10 +15887,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1575728841}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -49.175}
-  m_SizeDelta: {x: 500, y: 98.35}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1316192791
 MonoBehaviour:
@@ -16751,10 +16779,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1575728841}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -156.175}
-  m_SizeDelta: {x: 500, y: 91.65}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1394966363
 MonoBehaviour:

@@ -60,7 +60,7 @@ public class TurnMachine
             return;
 
         SetPhase(TurnPhase.Resolution);
-        _cityStats.RecomputeDerivedParameters();
+        _cityStats.ResolveTurn();
 
         SetPhase(TurnPhase.Event);
         // O evento e sorteado em reacao a esta fase, e o turno so continua quando o popup fecha.
@@ -73,7 +73,7 @@ public class TurnMachine
             return;
 
         SetPhase(TurnPhase.EndCheck);
-        if (_cityStats.AnyParameterCritical())
+        if (_cityStats.IsAnchorCritical())
         {
             EndGame(GameOutcome.GameOver);
             return;

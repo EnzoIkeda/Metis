@@ -7,6 +7,7 @@ public class CardHandView : MonoBehaviour
     [SerializeField] private TurnManager _turnManager;
     [SerializeField] private CardView _cardPrefab;
     [SerializeField] private Transform _cardContainer;
+    [SerializeField] private CardDetailPopupView _detailPopup;
 
     private readonly List<CardView> _spawnedCards = new List<CardView>();
 
@@ -31,7 +32,7 @@ public class CardHandView : MonoBehaviour
         foreach (var card in _turnManager.Hand.Cards)
         {
             var view = Instantiate(_cardPrefab, _cardContainer);
-            view.Bind(card, HandleCardClicked);
+            view.Bind(card, HandleCardClicked, HandleCardExpandRequested);
             _spawnedCards.Add(view);
         }
     }
@@ -39,5 +40,11 @@ public class CardHandView : MonoBehaviour
     private void HandleCardClicked(CardData card)
     {
         _turnManager.PlayCard(card);
+    }
+
+    private void HandleCardExpandRequested(CardData card)
+    {
+        if (_detailPopup != null)
+            _detailPopup.Show(card, () => HandleCardClicked(card));
     }
 }

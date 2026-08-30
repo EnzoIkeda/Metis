@@ -21,6 +21,9 @@ public class CardData : ScriptableObject
     [SerializeField] private StatModifier[] _statEffects;
     [SerializeField] private StructureData _structureToPlace;
 
+    // Arte opcional da carta, mostrada no espaco reservado de imagem quando definida.
+    [SerializeField] private Sprite _artwork;
+
     public string CardName => _cardName;
     public string Description => _description;
 
@@ -33,4 +36,6 @@ public class CardData : ScriptableObject
     public IReadOnlyList<StatModifier> StatEffects => _statEffects;
 
     public StructureData StructureToPlace => _structureToPlace;
+
+    public Sprite Artwork => _artwork;
 }

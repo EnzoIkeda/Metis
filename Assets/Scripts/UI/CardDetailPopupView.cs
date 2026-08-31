@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-// Popup de detalhe de uma carta, com scrim de fundo e titulo, descricao e custo.
+// Popup de detalhe de uma carta, com scrim de fundo e titulo, descricao e requisitos.
 public class CardDetailPopupView : MonoBehaviour
 {
     [SerializeField] private GameObject _panelRoot;
@@ -37,7 +37,7 @@ public class CardDetailPopupView : MonoBehaviour
         if (_descriptionText != null)
             _descriptionText.text = card.Description;
         if (_costText != null)
-            _costText.text = $"Custo: {card.Cost:0}";
+            _costText.text = $"Pesquisa mín.: {card.RequiredPesquisa:0} · Custo: {card.Cost:0}";
 
         if (_panelRoot != null)
             _panelRoot.SetActive(true);

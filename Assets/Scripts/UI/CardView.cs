@@ -4,12 +4,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-// Uma carta na mao, com nome e imagem, que abre um popup de detalhe ou joga direto com swipe pra cima.
+// Uma carta na mao, com nome, imagem e requisitos, que abre um popup de detalhe ao ser clicada.
 public class CardView : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [SerializeField] private TMP_Text _nameText;
     [SerializeField] private Image _artworkImage;
     [SerializeField] private GameObject _artworkPlaceholder;
+    [SerializeField] private TMP_Text _requirementsText;
     [SerializeField] private RectTransform _rectTransform;
     [SerializeField] private float _swipeUpThreshold = 100f;
 
@@ -35,6 +36,9 @@ public class CardView : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, 
         }
         if (_artworkPlaceholder != null)
             _artworkPlaceholder.SetActive(hasArtwork == false);
+
+        if (_requirementsText != null)
+            _requirementsText.text = $"Pesq {card.RequiredPesquisa:0} · Custo {card.Cost:0}";
     }
 
     public void OnPointerClick(PointerEventData eventData)

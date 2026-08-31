@@ -91,7 +91,7 @@ MonoBehaviour:
   m_IgnoreLayout: 0
   m_MinWidth: -1
   m_MinHeight: -1
-  m_PreferredWidth: 130
+  m_PreferredWidth: 260
   m_PreferredHeight: -1
   m_FlexibleWidth: 0
   m_FlexibleHeight: 1
@@ -189,8 +189,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 13
-  m_fontSizeBase: 13
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 9
@@ -228,7 +228,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 8, z: 0, w: 0}
+  m_margin: {x: 0, y: 16, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -249,8 +249,8 @@ MonoBehaviour:
   m_IgnoreLayout: 0
   m_MinWidth: -1
   m_MinHeight: -1
-  m_PreferredWidth: 130
-  m_PreferredHeight: 44
+  m_PreferredWidth: 260
+  m_PreferredHeight: 88
   m_FlexibleWidth: 0
   m_FlexibleHeight: 0
   m_LayoutPriority: 1
@@ -377,8 +377,8 @@ MonoBehaviour:
   m_IgnoreLayout: 0
   m_MinWidth: -1
   m_MinHeight: -1
-  m_PreferredWidth: 140
-  m_PreferredHeight: 196
+  m_PreferredWidth: 280
+  m_PreferredHeight: 392
   m_FlexibleWidth: 0
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
@@ -400,6 +400,7 @@ MonoBehaviour:
   _requirementsText: {fileID: 890592404690962416}
   _rectTransform: {fileID: 2869456942818204881}
   _swipeUpThreshold: 100
+  _dragDirectionThreshold: 12
 --- !u!1 &8433683697286184367
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,7 +492,7 @@ MonoBehaviour:
   m_IgnoreLayout: 0
   m_MinWidth: -1
   m_MinHeight: -1
-  m_PreferredWidth: 130
+  m_PreferredWidth: 260
   m_PreferredHeight: -1
   m_FlexibleWidth: 0
   m_FlexibleHeight: 1
@@ -589,8 +590,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 11
-  m_fontSizeBase: 11
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -649,8 +650,8 @@ MonoBehaviour:
   m_IgnoreLayout: 0
   m_MinWidth: -1
   m_MinHeight: -1
-  m_PreferredWidth: 130
-  m_PreferredHeight: 20
+  m_PreferredWidth: 260
+  m_PreferredHeight: 40
   m_FlexibleWidth: 0
   m_FlexibleHeight: 0
   m_LayoutPriority: 1

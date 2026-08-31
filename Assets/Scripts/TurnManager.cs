@@ -49,6 +49,11 @@ public class TurnManager : MonoBehaviour
             Hand.OnHandChanged -= HandleHandChanged;
     }
 
+    public bool CanPlay(CardData card)
+    {
+        return card != null && Hand.CanPlay(card, _cityStatsManager.Stats);
+    }
+
     public bool PlayCard(CardData card)
     {
         if (Machine == null || Machine.CurrentPhase != TurnPhase.Action)

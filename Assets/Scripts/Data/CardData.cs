@@ -15,6 +15,8 @@ public class CardData : ScriptableObject
 {
     [SerializeField] private string _cardName;
     [SerializeField] private string _description;
+    [SerializeField] private string _cardNameEn;
+    [SerializeField, TextArea(2, 6)] private string _descriptionEn;
     [SerializeField] private float _cost;
     [SerializeField] private CardTier _tier;
     [SerializeField] private float _requiredPesquisa;
@@ -24,8 +26,14 @@ public class CardData : ScriptableObject
     // Arte opcional da carta, mostrada no espaco reservado de imagem quando definida.
     [SerializeField] private Sprite _artwork;
 
-    public string CardName => _cardName;
-    public string Description => _description;
+    // Nome no idioma atual, com fallback pro portugues se a traducao em ingles nao existir.
+    public string CardName => LocalizationManager.Current == Language.English && string.IsNullOrEmpty(_cardNameEn) == false
+        ? _cardNameEn
+        : _cardName;
+
+    public string Description => LocalizationManager.Current == Language.English && string.IsNullOrEmpty(_descriptionEn) == false
+        ? _descriptionEn
+        : _description;
 
     public float Cost => _cost;
 

@@ -15,6 +15,8 @@ MonoBehaviour:
   _title: "Descoberta cient\xEDfica local"
   _description: "Um laborat\xF3rio da cidade publicou uma inova\xE7\xE3o que ganhou
     destaque nacional."
+  _titleEn: Local Scientific Discovery
+  _descriptionEn: A city lab published an innovation that gained national attention.
   _triggerConditions: []
   _statEffects:
   - Parameter: 0

@@ -17,6 +17,11 @@ MonoBehaviour:
     motorista. Tecnologia real: os programas Wing (Alphabet) e Amazon Prime Air,
     j\xE1 operando entregas comerciais \u2014 mas ru\xEDdo, privacidade e seguran\xE7a
     do espa\xE7o a\xE9reo urbano ainda dividem opini\xE3o."
+  _cardNameEn: Urban Delivery Drones
+  _descriptionEn: "A drone fleet delivers packages across the city, no truck or driver
+    needed. Real technology: the Wing (Alphabet) and Amazon Prime Air programs, already
+    running commercial deliveries \u2014 but noise, privacy and urban airspace safety
+    still divide opinion."
   _cost: 0
   _tier: 3
   _requiredPesquisa: 75
@@ -36,3 +41,4 @@ MonoBehaviour:
   - Parameter: 8
     Amount: 6
   _structureToPlace: {fileID: 0}
+  _artwork: {fileID: 0}

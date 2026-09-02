@@ -15,6 +15,9 @@ MonoBehaviour:
   _cardName: Ruas Completas
   _description: "Ruas redesenhadas para pedestre, ciclista e \xF4nibus, n\xE3o s\xF3
     carro, reduzem acidentes e destravam o deslocamento de todo mundo."
+  _cardNameEn: Complete Streets
+  _descriptionEn: Streets redesigned for pedestrians, cyclists and buses, not just
+    cars, reduce accidents and unlock everyone's mobility.
   _cost: 0
   _tier: 0
   _requiredPesquisa: 0
@@ -32,3 +35,4 @@ MonoBehaviour:
   - Parameter: 8
     Amount: 4
   _structureToPlace: {fileID: 0}
+  _artwork: {fileID: 0}

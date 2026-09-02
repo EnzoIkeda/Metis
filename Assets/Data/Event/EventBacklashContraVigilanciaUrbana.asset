@@ -16,6 +16,10 @@ MonoBehaviour:
   _description: "Moradores protestaram contra c\xE2meras e sensores instalados sem
     debate p\xFAblico. Epis\xF3dio real: o projeto Sidewalk Labs em Toronto foi cancelado
     em 2020 ap\xF3s press\xE3o popular sobre privacidade."
+  _titleEn: Backlash Against Urban Surveillance
+  _descriptionEn: 'Residents protested against cameras and sensors installed without
+    public debate. Real episode: the Sidewalk Labs project in Toronto was cancelled
+    in 2020 after public pressure over privacy.'
   _triggerConditions:
   - Parameter: 4
     Comparison: 0

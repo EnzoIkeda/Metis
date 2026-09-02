@@ -15,6 +15,8 @@ MonoBehaviour:
   _title: "Esc\xE2ndalo de corrup\xE7\xE3o"
   _description: "Um desvio de verbas veio a p\xFAblico. A confian\xE7a na gest\xE3o
     despencou."
+  _titleEn: Corruption Scandal
+  _descriptionEn: A misuse of funds came to light. Trust in the administration plummeted.
   _triggerConditions: []
   _statEffects:
   - Parameter: 0

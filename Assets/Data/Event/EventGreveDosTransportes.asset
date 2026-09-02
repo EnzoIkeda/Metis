@@ -15,6 +15,8 @@ MonoBehaviour:
   _title: Greve dos transportes
   _description: "Os rodovi\xE1rios cruzaram os bra\xE7os. Ningu\xE9m conseguiu chegar
     ao trabalho."
+  _titleEn: Transit Strike
+  _descriptionEn: Transit workers walked off the job. Nobody could get to work.
   _triggerConditions: []
   _statEffects:
   - Parameter: 0

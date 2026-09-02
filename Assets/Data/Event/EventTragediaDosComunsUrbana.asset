@@ -16,6 +16,10 @@ MonoBehaviour:
   _description: "Sem manejo compartilhado, o uso excessivo de um recurso de todos
     \u2014 \xE1gua, pra\xE7a, parque \u2014 degradou o que pertencia \xE0 cidade
     inteira."
+  _titleEn: Urban Tragedy of the Commons
+  _descriptionEn: "Without shared management, excessive use of a resource that belongs
+    to everyone \u2014 water, a plaza, a park \u2014 degraded what belonged to the
+    whole city."
   _triggerConditions: []
   _statEffects:
   - Parameter: 5

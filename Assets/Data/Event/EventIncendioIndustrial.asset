@@ -15,6 +15,9 @@ MonoBehaviour:
   _title: "Inc\xEAndio industrial"
   _description: "Um galp\xE3o industrial pegou fogo. A fuma\xE7a cobriu tr\xEAs bairros
     por dois dias."
+  _titleEn: Industrial Fire
+  _descriptionEn: An industrial warehouse caught fire. Smoke covered three neighborhoods
+    for two days.
   _triggerConditions: []
   _statEffects:
   - Parameter: 0

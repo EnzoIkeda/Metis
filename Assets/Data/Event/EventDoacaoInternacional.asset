@@ -15,6 +15,9 @@ MonoBehaviour:
   _title: "Doa\xE7\xE3o internacional"
   _description: "Uma funda\xE7\xE3o internacional escolheu a cidade para um programa
     de desenvolvimento urbano."
+  _titleEn: International Donation
+  _descriptionEn: An international foundation chose the city for an urban development
+    program.
   _triggerConditions: []
   _statEffects:
   - Parameter: 0

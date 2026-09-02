@@ -15,6 +15,9 @@ MonoBehaviour:
   _title: Bicicletas Compartilhadas Bombam
   _description: "O sistema de bicicletas compartilhadas virou parte da rotina da
     cidade. Modelo real replicado do Citi Bike (Nova York) ao Bike Ita\xFA (Brasil)."
+  _titleEn: Bike Sharing Takes Off
+  _descriptionEn: "The bike-sharing system became part of the city's routine. Real
+    model replicated from Citi Bike (New York) to Bike Ita\xFA (Brazil)."
   _triggerConditions:
   - Parameter: 4
     Comparison: 0

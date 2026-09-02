@@ -15,6 +15,9 @@ MonoBehaviour:
   _cardName: "Manuten\xE7\xE3o Preventiva de Fachadas"
   _description: "Fachada limpa, ilumina\xE7\xE3o em dia: ambiente cuidado desestimula
     o crime antes que ele comece (teoria das janelas quebradas)."
+  _cardNameEn: Preventive Facade Maintenance
+  _descriptionEn: 'Clean facades, working lights: a well-kept environment discourages
+    crime before it starts (broken windows theory).'
   _cost: 0
   _tier: 0
   _requiredPesquisa: 0
@@ -28,3 +31,4 @@ MonoBehaviour:
   - Parameter: 6
     Amount: 2
   _structureToPlace: {fileID: 0}
+  _artwork: {fileID: 0}

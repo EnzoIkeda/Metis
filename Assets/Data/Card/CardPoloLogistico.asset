@@ -16,6 +16,10 @@ MonoBehaviour:
   _description: "Centro de distribui\xE7\xE3o perto das rodovias movimenta carga
     pra cidade inteira. Pe\xE7a padr\xE3o de qualquer polo industrial moderno, mas
     o tr\xE2nsito de caminh\xF5es cobra seu pre\xE7o ambiental e na mobilidade local."
+  _cardNameEn: Logistics Hub
+  _descriptionEn: A distribution center near the highways moves cargo for the whole
+    city. Standard piece of any modern industrial hub, but truck traffic takes its
+    environmental and local mobility toll.
   _cost: 0
   _tier: 1
   _requiredPesquisa: 25
@@ -35,3 +39,4 @@ MonoBehaviour:
   - Parameter: 8
     Amount: -2
   _structureToPlace: {fileID: 0}
+  _artwork: {fileID: 0}

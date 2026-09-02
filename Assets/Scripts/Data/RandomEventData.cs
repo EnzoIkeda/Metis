@@ -23,13 +23,21 @@ public class RandomEventData : ScriptableObject
 {
     [SerializeField] private string _title;
     [SerializeField] private string _description;
+    [SerializeField] private string _titleEn;
+    [SerializeField, TextArea(2, 6)] private string _descriptionEn;
     [SerializeField] private TriggerCondition[] _triggerConditions;
     [SerializeField] private StatModifier[] _statEffects;
     [SerializeField] private int _minTurn = 1;
     [SerializeField] private int _maxTurn = 999;
 
-    public string Title => _title;
-    public string Description => _description;
+    // Titulo no idioma atual, com fallback pro portugues se a traducao em ingles nao existir.
+    public string Title => LocalizationManager.Current == Language.English && string.IsNullOrEmpty(_titleEn) == false
+        ? _titleEn
+        : _title;
+
+    public string Description => LocalizationManager.Current == Language.English && string.IsNullOrEmpty(_descriptionEn) == false
+        ? _descriptionEn
+        : _description;
     public IReadOnlyList<TriggerCondition> TriggerConditions => _triggerConditions;
     public IReadOnlyList<StatModifier> StatEffects => _statEffects;
 

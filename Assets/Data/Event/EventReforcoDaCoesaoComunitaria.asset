@@ -15,6 +15,9 @@ MonoBehaviour:
   _title: "Refor\xE7o da Coes\xE3o Comunit\xE1ria"
   _description: "Vizinhos se organizaram em associa\xE7\xF5es de bairro. Os la\xE7os
     locais mais fortes deixaram a cidade mais segura e mais unida, quase sem custo."
+  _titleEn: Community Cohesion Boost
+  _descriptionEn: Neighbors organized into neighborhood associations. Stronger local
+    bonds made the city safer and more united, almost at no cost.
   _triggerConditions: []
   _statEffects:
   - Parameter: 2

@@ -15,6 +15,9 @@ MonoBehaviour:
   _title: "Pr\xEAmio internacional de cidade inteligente"
   _description: "A cidade foi reconhecida internacionalmente como refer\xEAncia em
     Smart City. O reconhecimento atrai investimento, turismo e talentos."
+  _titleEn: International Smart City Award
+  _descriptionEn: The city was internationally recognized as a Smart City reference.
+    The recognition attracts investment, tourism and talent.
   _triggerConditions:
   - Parameter: 4
     Comparison: 0

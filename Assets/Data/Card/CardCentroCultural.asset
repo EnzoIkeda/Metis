@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   _cardName: Centro Cultural
   _description: "Cultura como pol\xEDtica p\xFAblica."
+  _cardNameEn: Cultural Center
+  _descriptionEn: Culture as public policy.
   _cost: 0
   _tier: 1
   _requiredPesquisa: 25
@@ -33,3 +35,4 @@ MonoBehaviour:
   - Parameter: 7
     Amount: 1
   _structureToPlace: {fileID: 0}
+  _artwork: {fileID: 0}

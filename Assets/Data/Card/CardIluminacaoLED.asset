@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   _cardName: "Ilumina\xE7\xE3o LED"
   _description: Ruas mais claras gastando menos energia.
+  _cardNameEn: LED Lighting
+  _descriptionEn: Brighter streets using less energy.
   _cost: 0
   _tier: 1
   _requiredPesquisa: 25
@@ -33,3 +35,4 @@ MonoBehaviour:
   - Parameter: 8
     Amount: 1
   _structureToPlace: {fileID: 0}
+  _artwork: {fileID: 0}

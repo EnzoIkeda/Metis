@@ -19,9 +19,19 @@ public class CardDetailPopupView : MonoBehaviour
     private void Start()
     {
         if (_playButton != null)
+        {
             _playButton.onClick.AddListener(HandlePlayClicked);
+            var playText = _playButton.GetComponentInChildren<TMP_Text>();
+            if (playText != null)
+                playText.text = UIStrings.PlayButton;
+        }
         if (_backButton != null)
+        {
             _backButton.onClick.AddListener(Hide);
+            var backText = _backButton.GetComponentInChildren<TMP_Text>();
+            if (backText != null)
+                backText.text = UIStrings.BackButton;
+        }
         if (_scrimButton != null)
             _scrimButton.onClick.AddListener(Hide);
 
@@ -37,7 +47,7 @@ public class CardDetailPopupView : MonoBehaviour
         if (_descriptionText != null)
             _descriptionText.text = card.Description;
         if (_costText != null)
-            _costText.text = $"Pesquisa mín.: {card.RequiredPesquisa:0} · Custo: {card.Cost:0}";
+            _costText.text = UIStrings.CardRequirementsFull(card.RequiredPesquisa, card.Cost);
 
         if (_panelRoot != null)
             _panelRoot.SetActive(true);

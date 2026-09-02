@@ -16,6 +16,9 @@ MonoBehaviour:
   _description: "Fam\xEDlias de maior renda trocaram o centro por bairros afastados
     em busca de mais espa\xE7o \u2014 o n\xFAcleo urbano perdeu arrecada\xE7\xE3o
     e gente."
+  _titleEn: Flight to the Suburbs
+  _descriptionEn: "Higher-income families traded downtown for outlying neighborhoods
+    in search of more space \u2014 the urban core lost tax revenue and people."
   _triggerConditions: []
   _statEffects:
   - Parameter: 0

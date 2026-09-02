@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   _cardName: Conjunto Habitacional
   _description: "Mais moradia, mais pessoas, mais demanda por servi\xE7os."
+  _cardNameEn: Housing Complex
+  _descriptionEn: More housing, more people, more demand for services.
   _cost: 0
   _tier: 0
   _requiredPesquisa: 0
@@ -33,3 +35,4 @@ MonoBehaviour:
   - Parameter: 8
     Amount: -2
   _structureToPlace: {fileID: 0}
+  _artwork: {fileID: 0}

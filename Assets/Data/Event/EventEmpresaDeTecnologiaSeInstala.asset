@@ -15,6 +15,9 @@ MonoBehaviour:
   _title: Empresa de tecnologia se instala
   _description: Uma grande empresa anunciou sua sede na cidade, trazendo empregos
     qualificados.
+  _titleEn: Tech Company Sets Up Shop
+  _descriptionEn: A major company announced its headquarters in the city, bringing
+    skilled jobs.
   _triggerConditions: []
   _statEffects:
   - Parameter: 0

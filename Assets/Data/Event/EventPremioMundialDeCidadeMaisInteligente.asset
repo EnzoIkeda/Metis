@@ -16,6 +16,10 @@ MonoBehaviour:
   _description: 'A cidade entrou no topo de um ranking mundial de cidades inteligentes.
     Modelo real: o IMD Smart City Index, que ano a ano compara cidades como Singapura,
     Zurique e Oslo.'
+  _titleEn: World's Smartest City Award
+  _descriptionEn: 'The city entered the top of a world smart city ranking. Real model:
+    the IMD Smart City Index, which every year compares cities like Singapore, Zurich
+    and Oslo.'
   _triggerConditions:
   - Parameter: 4
     Comparison: 0

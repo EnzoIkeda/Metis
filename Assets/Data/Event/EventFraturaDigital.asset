@@ -16,6 +16,10 @@ MonoBehaviour:
   _description: "Servi\xE7os digitais avan\xE7am, mas parte da popula\xE7\xE3o sem
     acesso \xE0 internet ou letramento digital ficou pra tr\xE1s. A exclus\xE3o digital
     \xE9 um efeito colateral bem documentado da moderniza\xE7\xE3o apressada."
+  _titleEn: Digital Divide
+  _descriptionEn: Digital services advance, but part of the population without internet
+    access or digital literacy was left behind. Digital exclusion is a well-documented
+    side effect of hasty modernization.
   _triggerConditions:
   - Parameter: 4
     Comparison: 0

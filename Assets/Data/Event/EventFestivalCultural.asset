@@ -15,6 +15,9 @@ MonoBehaviour:
   _title: Festival cultural
   _description: "O festival de rua lotou o centro. A cidade ganhou visibilidade e
     a popula\xE7\xE3o, \xE2nimo."
+  _titleEn: Cultural Festival
+  _descriptionEn: The street festival packed downtown. The city gained visibility
+    and the population, spirit.
   _triggerConditions: []
   _statEffects:
   - Parameter: 0

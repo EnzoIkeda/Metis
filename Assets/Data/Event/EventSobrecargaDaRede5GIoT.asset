@@ -16,6 +16,10 @@ MonoBehaviour:
   _description: "Tantos sensores e dispositivos conectados de uma vez congestionaram
     a rede. Desafio real de infraestrutura de telecom \u2014 espectro e capacidade
     de rede s\xE3o recursos finitos, mesmo numa cidade digital."
+  _titleEn: 5G/IoT Network Overload
+  _descriptionEn: "So many sensors and connected devices at once congested the network.
+    Real telecom infrastructure challenge \u2014 spectrum and network capacity are
+    finite resources, even in a digital city."
   _triggerConditions:
   - Parameter: 4
     Comparison: 0

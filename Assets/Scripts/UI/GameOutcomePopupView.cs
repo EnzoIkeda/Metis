@@ -12,9 +12,6 @@ public class GameOutcomePopupView : MonoBehaviour
     [SerializeField] private TMP_Text _messageText;
     [SerializeField] private Button _closeButton;
 
-    [SerializeField] private string _title = "Fim de Jogo";
-    [SerializeField, TextArea(3, 8)] private string _message = "";
-
     private void Start()
     {
         _turnManager.Machine.OnGameEnded += HandleGameEnded;
@@ -22,9 +19,9 @@ public class GameOutcomePopupView : MonoBehaviour
             _closeButton.onClick.AddListener(Hide);
 
         if (_titleText != null)
-            _titleText.text = _title;
+            _titleText.text = _outcomeToShowFor == GameOutcome.Victory ? UIStrings.VictoryTitle : UIStrings.GameOverTitle;
         if (_messageText != null)
-            _messageText.text = _message;
+            _messageText.text = _outcomeToShowFor == GameOutcome.Victory ? UIStrings.VictoryMessage : UIStrings.GameOverMessage;
 
         Hide();
     }

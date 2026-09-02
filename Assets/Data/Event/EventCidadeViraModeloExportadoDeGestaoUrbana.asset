@@ -16,6 +16,10 @@ MonoBehaviour:
   _description: "Delega\xE7\xF5es de outras cidades v\xEAm estudar o modelo de gest\xE3o
     local. Fen\xF4meno real: Barcelona e Medell\xEDn, entre outras, viraram estudo
     de caso e exportam consultoria de transforma\xE7\xE3o urbana."
+  _titleEn: City Becomes an Exported Urban Management Model
+  _descriptionEn: "Delegations from other cities come to study the local management
+    model. Real phenomenon: Barcelona and Medell\xEDn, among others, became case
+    studies and export urban transformation consulting."
   _triggerConditions:
   - Parameter: 4
     Comparison: 0

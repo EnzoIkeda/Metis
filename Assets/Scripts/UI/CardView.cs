@@ -50,7 +50,7 @@ public class CardView : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, 
 
         if (_requirementsText != null)
         {
-            _requirementsText.text = $"Pesq {card.RequiredPesquisa:0} · Custo {card.Cost:0}";
+            _requirementsText.text = UIStrings.CardRequirementsShort(card.RequiredPesquisa, card.Cost);
             // Fica vermelho se a carta nao puder ser jogada agora, so como aviso visual antecipado.
             _requirementsText.color = isPlayable ? PlayableColor : UnplayableColor;
         }

@@ -15,6 +15,9 @@ MonoBehaviour:
   _title: "Delega\xE7\xE3o internacional visita a cidade"
   _description: "Uma comitiva internacional veio conhecer os avan\xE7os da cidade
     rumo \xE0 Cidade Conectada. A visibilidade traz neg\xF3cios e orgulho local."
+  _titleEn: International Delegation Visits the City
+  _descriptionEn: An international delegation came to see the city's progress toward
+    becoming a Connected City. The visibility brings business and local pride.
   _triggerConditions:
   - Parameter: 4
     Comparison: 0

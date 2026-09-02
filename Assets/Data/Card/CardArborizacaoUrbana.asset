@@ -15,6 +15,9 @@ MonoBehaviour:
   _cardName: "Arboriza\xE7\xE3o Urbana"
   _description: "\xC1rvores nas cal\xE7adas d\xE3o sombra, esfriam a cidade e purificam
     o ar \u2014 resposta direta \xE0 ilha de calor urbana."
+  _cardNameEn: Urban Tree Planting
+  _descriptionEn: "Trees along sidewalks give shade, cool the city and clean the
+    air \u2014 a direct answer to the urban heat island effect."
   _cost: 0
   _tier: 0
   _requiredPesquisa: 0
@@ -32,3 +35,4 @@ MonoBehaviour:
   - Parameter: 8
     Amount: 1
   _structureToPlace: {fileID: 0}
+  _artwork: {fileID: 0}

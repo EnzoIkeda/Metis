@@ -17,6 +17,11 @@ MonoBehaviour:
     em fase piloto. Tecnologia real (ve\xEDculos como o Navya Autonom Shuttle), j\xE1
     testada em cidades como Lyon e Cingapura \u2014 mas a seguran\xE7a de rodar sem
     motorista humano ainda gera debate."
+  _cardNameEn: Autonomous Buses on Pilot Corridor
+  _descriptionEn: "Driverless buses run a fixed, protected route, still in pilot
+    phase. Real technology (vehicles like the Navya Autonom Shuttle), already tested
+    in cities like Lyon and Singapore \u2014 but the safety of running without a
+    human driver still sparks debate."
   _cost: 0
   _tier: 2
   _requiredPesquisa: 50
@@ -38,3 +43,4 @@ MonoBehaviour:
   - Parameter: 8
     Amount: 9
   _structureToPlace: {fileID: 0}
+  _artwork: {fileID: 0}

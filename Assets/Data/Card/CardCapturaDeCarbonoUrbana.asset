@@ -17,6 +17,11 @@ MonoBehaviour:
     real: a planta Orca da Climeworks, na Isl\xE2ndia, a primeira captura direta
     de carbono em escala comercial do mundo \u2014 cara e faminta por energia, mas
     tira carbono do ar de verdade."
+  _cardNameEn: Urban Carbon Capture
+  _descriptionEn: "Machines suck CO2 straight out of the air and bury it underground.
+    Real technology: Climeworks' Orca plant in Iceland, the world's first commercial-scale
+    direct air capture facility \u2014 expensive and energy-hungry, but it really
+    does pull carbon out of the air."
   _cost: 0
   _tier: 3
   _requiredPesquisa: 75
@@ -34,3 +39,4 @@ MonoBehaviour:
   - Parameter: 7
     Amount: 1
   _structureToPlace: {fileID: 0}
+  _artwork: {fileID: 0}

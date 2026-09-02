@@ -15,6 +15,10 @@ MonoBehaviour:
   _title: Infraestrutura urbana obsoleta
   _description: "Anos sem modernizar a infraestrutura cobraram o pre\xE7o: redes
     antigas falham mais e custam mais caro pra manter do que custaria j\xE1 ter atualizado."
+  _titleEn: Obsolete Urban Infrastructure
+  _descriptionEn: 'Years without modernizing infrastructure took their toll: old
+    networks fail more and cost more to maintain than it would have cost to already
+    have upgraded them.'
   _triggerConditions:
   - Parameter: 4
     Comparison: 1

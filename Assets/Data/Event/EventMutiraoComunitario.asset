@@ -15,6 +15,9 @@ MonoBehaviour:
   _title: "Mutir\xE3o comunit\xE1rio"
   _description: "Os moradores se organizaram para revitalizar pra\xE7as e ruas do
     bairro."
+  _titleEn: Community Work Day
+  _descriptionEn: Residents organized to revitalize the neighborhood's squares and
+    streets.
   _triggerConditions: []
   _statEffects:
   - Parameter: 0

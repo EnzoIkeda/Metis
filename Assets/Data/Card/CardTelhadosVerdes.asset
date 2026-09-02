@@ -16,6 +16,10 @@ MonoBehaviour:
   _description: "Telhados cobertos de vegeta\xE7\xE3o reduzem o calor, absorvem chuva
     e isolam melhor os pr\xE9dios. Pol\xEDtica real adotada por cidades como Toronto
     (Green Roof Bylaw) e boa parte da Uni\xE3o Europeia."
+  _cardNameEn: Green Roofs
+  _descriptionEn: Roofs covered in vegetation reduce heat, absorb rain and insulate
+    buildings better. Real policy adopted by cities like Toronto (Green Roof Bylaw)
+    and much of the European Union.
   _cost: 0
   _tier: 1
   _requiredPesquisa: 25
@@ -33,3 +37,4 @@ MonoBehaviour:
   - Parameter: 7
     Amount: 1
   _structureToPlace: {fileID: 0}
+  _artwork: {fileID: 0}

@@ -16,6 +16,10 @@ MonoBehaviour:
   _description: "Outras cidades licenciaram o software de gest\xE3o urbana desenvolvido
     aqui. Modelo real: a plataforma Sentilo, criada em Barcelona e aberta pra outras
     prefeituras adotarem."
+  _titleEn: Civic Tech Export
+  _descriptionEn: 'Other cities licensed the urban management software developed
+    here. Real model: the Sentilo platform, created in Barcelona and opened for other
+    city halls to adopt.'
   _triggerConditions:
   - Parameter: 4
     Comparison: 0

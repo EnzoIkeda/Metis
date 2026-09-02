@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   _cardName: "Rede Solar Distribu\xEDda"
   _description: "Telhados solares em pr\xE9dios p\xFAblicos e residenciais."
+  _cardNameEn: Distributed Solar Network
+  _descriptionEn: Solar roofs on public and residential buildings.
   _cost: 0
   _tier: 2
   _requiredPesquisa: 50
@@ -29,3 +31,4 @@ MonoBehaviour:
   - Parameter: 6
     Amount: 1
   _structureToPlace: {fileID: 0}
+  _artwork: {fileID: 0}

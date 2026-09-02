@@ -16,6 +16,10 @@ MonoBehaviour:
   _description: "Uma onda de golpes online explorou os novos servi\xE7os digitais
     da prefeitura. Problema real e documentado: quanto mais servi\xE7o p\xFAblico
     vira digital, mais espa\xE7o pra fraude contra quem usa."
+  _titleEn: Digital Scam Epidemic
+  _descriptionEn: 'A wave of online scams exploited city hall''s new digital services.
+    Real, documented problem: the more public service goes digital, the more room
+    there is for fraud against those who use it.'
   _triggerConditions:
   - Parameter: 4
     Comparison: 0

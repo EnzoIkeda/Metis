@@ -16,6 +16,10 @@ MonoBehaviour:
   _description: "A prefeitura abriu suas bases de dados pro p\xFAblico. Times de
     tecnologia c\xEDvica usaram os dados pra criar servi\xE7os novos. Modelo real
     de portal de dados abertos, como o NYC Open Data."
+  _titleEn: Open Data Drives Local Innovation
+  _descriptionEn: City hall opened its databases to the public. Civic tech teams
+    used the data to build new services. Real open-data-portal model, like NYC Open
+    Data.
   _triggerConditions:
   - Parameter: 4
     Comparison: 0

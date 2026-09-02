@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   _cardName: "Mobilidade Aut\xF4noma"
   _description: "Frota aut\xF4noma sob demanda integrada ao VLT."
+  _cardNameEn: Autonomous Mobility
+  _descriptionEn: On-demand autonomous fleet integrated with the LRT.
   _cost: 0
   _tier: 3
   _requiredPesquisa: 75
@@ -37,3 +39,4 @@ MonoBehaviour:
   - Parameter: 8
     Amount: 10
   _structureToPlace: {fileID: 0}
+  _artwork: {fileID: 0}

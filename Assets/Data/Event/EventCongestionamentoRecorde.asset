@@ -15,6 +15,9 @@ MonoBehaviour:
   _title: Congestionamento recorde
   _description: "O tr\xE2nsito travou por 6 horas seguidas. A cidade parou e o desgaste
     foi enorme."
+  _titleEn: Record Traffic Jam
+  _descriptionEn: Traffic was gridlocked for 6 straight hours. The city ground to
+    a halt and the toll was huge.
   _triggerConditions: []
   _statEffects:
   - Parameter: 0

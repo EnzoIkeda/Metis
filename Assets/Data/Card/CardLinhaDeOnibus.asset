@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   _cardName: "Linha de \xD4nibus"
   _description: "Corredor de \xF4nibus conecta a periferia ao centro."
+  _cardNameEn: Bus Line
+  _descriptionEn: Bus corridor connects the outskirts to downtown.
   _cost: 0
   _tier: 0
   _requiredPesquisa: 0
@@ -31,3 +33,4 @@ MonoBehaviour:
   - Parameter: 8
     Amount: 7
   _structureToPlace: {fileID: 0}
+  _artwork: {fileID: 0}

@@ -16,6 +16,10 @@ MonoBehaviour:
   _description: "Um sequestro de dados (ransomware) tirou sistemas da prefeitura
     do ar por dias. Risco real de cidades cada vez mais digitais \u2014 o caso de
     Atlanta em 2018 \xE9 uma refer\xEAncia conhecida."
+  _titleEn: Cyberattack on Municipal Services
+  _descriptionEn: "A ransomware attack took city hall systems offline for days. A
+    real risk for increasingly digital cities \u2014 the 2018 Atlanta case is a well-known
+    reference."
   _triggerConditions:
   - Parameter: 4
     Comparison: 0

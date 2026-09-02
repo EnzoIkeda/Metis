@@ -15,6 +15,9 @@ MonoBehaviour:
   _title: "Apag\xE3o geral"
   _description: "A cidade ficou \xE0s escuras por 14 horas. Com\xE9rcios fecharam
     e a popula\xE7\xE3o cobra explica\xE7\xF5es."
+  _titleEn: General Blackout
+  _descriptionEn: The city went dark for 14 hours. Businesses closed and the population
+    demands answers.
   _triggerConditions: []
   _statEffects:
   - Parameter: 0

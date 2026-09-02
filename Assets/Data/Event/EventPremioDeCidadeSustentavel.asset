@@ -15,6 +15,8 @@ MonoBehaviour:
   _title: "Pr\xEAmio de cidade sustent\xE1vel"
   _description: "A cidade foi reconhecida internacionalmente por suas pol\xEDticas
     ambientais."
+  _titleEn: Sustainable City Award
+  _descriptionEn: The city was internationally recognized for its environmental policies.
   _triggerConditions: []
   _statEffects:
   - Parameter: 0

@@ -15,6 +15,10 @@ MonoBehaviour:
   _title: Efeito NIMBY
   _description: "Moradores organizados bloquearam uma obra p\xFAblica no bairro.
     O conflito de 'n\xE3o no meu quintal' travou o cronograma e azedou o clima pol\xEDtico."
+  _titleEn: NIMBY Effect
+  _descriptionEn: Organized residents blocked a public works project in the neighborhood.
+    The 'not in my backyard' conflict stalled the schedule and soured the political
+    climate.
   _triggerConditions: []
   _statEffects:
   - Parameter: 0

@@ -15,6 +15,9 @@ MonoBehaviour:
   _title: "Boom econ\xF4mico"
   _description: "A economia regional aqueceu. A arrecada\xE7\xE3o cresceu acima do
     previsto neste turno."
+  _titleEn: Economic Boom
+  _descriptionEn: The regional economy heated up. Tax revenue grew above forecast
+    this turn.
   _triggerConditions: []
   _statEffects:
   - Parameter: 0

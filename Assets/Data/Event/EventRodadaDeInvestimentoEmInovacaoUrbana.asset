@@ -16,6 +16,9 @@ MonoBehaviour:
   _description: "Fundos de investimento em inova\xE7\xE3o urbana escolheram a cidade
     para um aporte, atra\xEDdos pelo hist\xF3rico j\xE1 provado de resultados em
     tecnologia."
+  _titleEn: Urban Innovation Investment Round
+  _descriptionEn: Urban innovation investment funds chose the city for a funding
+    round, drawn by its already-proven track record in technology.
   _triggerConditions:
   - Parameter: 4
     Comparison: 0

@@ -15,6 +15,9 @@ MonoBehaviour:
   _title: Onda de criminalidade
   _description: "Uma sequ\xEAncia de assaltos assustou os bairros centrais. A popula\xE7\xE3o
     pede resposta."
+  _titleEn: Crime Wave
+  _descriptionEn: A string of robberies rattled the central neighborhoods. The population
+    demands a response.
   _triggerConditions: []
   _statEffects:
   - Parameter: 0

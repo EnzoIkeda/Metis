@@ -15,6 +15,9 @@ MonoBehaviour:
   _cardName: "Pra\xE7as de Bolso"
   _description: "Pequenos espa\xE7os p\xFAblicos bem desenhados viram ponto de encontro
     do bairro, como mostrou William Whyte observando pra\xE7as de Nova York."
+  _cardNameEn: Pocket Parks
+  _descriptionEn: Small, well-designed public spaces become neighborhood meeting
+    points, as William Whyte showed by observing New York's plazas.
   _cost: 0
   _tier: 0
   _requiredPesquisa: 0
@@ -30,3 +33,4 @@ MonoBehaviour:
   - Parameter: 7
     Amount: 1
   _structureToPlace: {fileID: 0}
+  _artwork: {fileID: 0}

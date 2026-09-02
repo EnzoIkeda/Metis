@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   _cardName: Aumento de Impostos
   _description: Caixa cheio, povo insatisfeito.
+  _cardNameEn: Tax Increase
+  _descriptionEn: Full coffers, unhappy citizens.
   _cost: 0
   _tier: 0
   _requiredPesquisa: 0
@@ -27,3 +29,4 @@ MonoBehaviour:
   - Parameter: 6
     Amount: -5
   _structureToPlace: {fileID: 0}
+  _artwork: {fileID: 0}

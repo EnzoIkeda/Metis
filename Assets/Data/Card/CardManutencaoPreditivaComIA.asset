@@ -17,6 +17,11 @@ MonoBehaviour:
     ou pavimento antes que ela aconte\xE7a. Pr\xE1tica real de manuten\xE7\xE3o preditiva
     com IA, cada vez mais usada por concession\xE1rias de \xE1gua e energia \u2014
     economiza reparo emergencial, mas reduz postos de manuten\xE7\xE3o manual."
+  _cardNameEn: AI Predictive Maintenance
+  _descriptionEn: "Sensors and algorithms predict a failure in piping, the power
+    grid or pavement before it happens. Real predictive-maintenance-with-AI practice,
+    increasingly used by water and power utilities \u2014 saves on emergency repairs,
+    but cuts manual maintenance jobs."
   _cost: 0
   _tier: 2
   _requiredPesquisa: 50
@@ -38,3 +43,4 @@ MonoBehaviour:
   - Parameter: 8
     Amount: 1
   _structureToPlace: {fileID: 0}
+  _artwork: {fileID: 0}

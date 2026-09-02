@@ -16,6 +16,9 @@ MonoBehaviour:
   _description: "Pesquisadores e profissionais qualificados foram embora atr\xE1s
     de cidades que investem mais em inova\xE7\xE3o. A cidade perde gente e know-how
     ao mesmo tempo."
+  _titleEn: Brain Drain
+  _descriptionEn: Researchers and skilled professionals left, following cities that
+    invest more in innovation. The city loses people and know-how at the same time.
   _triggerConditions:
   - Parameter: 4
     Comparison: 1

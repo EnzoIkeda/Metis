@@ -17,6 +17,11 @@ MonoBehaviour:
     saiu do ar por horas. Risco real de depender demais de sistemas centralizados
     de IA/nuvem \u2014 incidentes de apag\xE3o de servi\xE7os cr\xEDticos j\xE1 aconteceram
     em cidades e empresas ao redor do mundo."
+  _titleEn: Central AI System Blackout
+  _descriptionEn: "The central AI system that coordinates the city went offline for
+    hours. A real risk of relying too heavily on centralized AI/cloud systems \u2014
+    critical service outage incidents have already happened in cities and companies
+    around the world."
   _triggerConditions:
   - Parameter: 4
     Comparison: 0

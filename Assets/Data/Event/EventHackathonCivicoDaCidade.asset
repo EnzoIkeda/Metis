@@ -16,6 +16,9 @@ MonoBehaviour:
   _description: "Um fim de semana de maratona de programa\xE7\xE3o reuniu desenvolvedores
     pra resolver problemas da cidade. Pr\xE1tica real, comum em iniciativas de cidade
     inteligente ao redor do mundo."
+  _titleEn: City Civic Hackathon
+  _descriptionEn: A weekend-long coding marathon brought developers together to solve
+    city problems. Real practice, common in smart city initiatives around the world.
   _triggerConditions:
   - Parameter: 4
     Comparison: 0

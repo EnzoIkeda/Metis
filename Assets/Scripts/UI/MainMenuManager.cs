@@ -1,15 +1,52 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// Controla o menu principal, incluindo troca de idioma e navegacao entre paineis.
 public class MainMenuManager : MonoBehaviour
 {
     [Header("Paineis da UI")]
-    [SerializeField] private GameObject settingsPanel; 
+    [SerializeField] private GameObject settingsPanel;
+
+    [Header("Textos localizados")]
+    [SerializeField] private TMP_Text _playButtonText;
+    [SerializeField] private TMP_Text _settingsButtonText;
+    [SerializeField] private TMP_Text _quitButtonText;
+    [SerializeField] private TMP_Text _settingsBackButtonText;
+    [SerializeField] private TMP_Text _languageButtonText;
+
+    private void Start()
+    {
+        RefreshTexts();
+    }
+
+    private void RefreshTexts()
+    {
+        if (_playButtonText != null)
+            _playButtonText.text = UIStrings.MainMenuPlay;
+        if (_settingsButtonText != null)
+            _settingsButtonText.text = UIStrings.MainMenuSettings;
+        if (_quitButtonText != null)
+            _quitButtonText.text = UIStrings.MainMenuQuit;
+        if (_settingsBackButtonText != null)
+            _settingsBackButtonText.text = UIStrings.MainMenuSettingsBack;
+        if (_languageButtonText != null)
+            _languageButtonText.text = UIStrings.LanguageButtonLabel;
+    }
+
+    // Metodo para o botao de idioma nas Configuracoes
+    public void ToggleLanguage()
+    {
+        LocalizationManager.Current = LocalizationManager.Current == Language.English
+            ? Language.Portuguese
+            : Language.English;
+        RefreshTexts();
+    }
 
     // Metodo para o botao 'Jogar'
     public void PlayGame()
     {
-        // Carrega a cena 3D do jogo (Assets/Scenes/City_Scene.unity)
+        // Carrega a cena principal do jogo.
         SceneManager.LoadScene("City_Scene");
     }
 

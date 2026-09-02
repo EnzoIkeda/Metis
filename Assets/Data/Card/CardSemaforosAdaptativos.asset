@@ -16,6 +16,10 @@ MonoBehaviour:
   _description: "Sinaliza\xE7\xE3o que se ajusta ao fluxo de tr\xE2nsito em tempo
     real, sem tempo fixo de espera. Tecnologia real de controle de tr\xE1fego adaptativo
     (sistemas como SCOOT/SCATS), em uso em centenas de cidades."
+  _cardNameEn: Adaptive Traffic Lights
+  _descriptionEn: Signaling that adjusts to traffic flow in real time, with no fixed
+    wait time. Real adaptive traffic control technology (systems like SCOOT/SCATS),
+    in use in hundreds of cities.
   _cost: 0
   _tier: 1
   _requiredPesquisa: 25
@@ -33,3 +37,4 @@ MonoBehaviour:
   - Parameter: 8
     Amount: 6
   _structureToPlace: {fileID: 0}
+  _artwork: {fileID: 0}

@@ -17,6 +17,11 @@ MonoBehaviour:
     nos algoritmos que a prefeitura usa pra decidir servi\xE7o e fiscaliza\xE7\xE3o.
     Caso real e documentado: o esc\xE2ndalo do algoritmo de detec\xE7\xE3o de fraude
     em benef\xEDcios sociais usado por Roterd\xE3, discriminando por perfil socioecon\xF4mico."
+  _titleEn: Audit Reveals Algorithmic Bias
+  _descriptionEn: 'An independent audit found racial/economic bias in the algorithms
+    the city uses to decide services and enforcement. Real, documented case: the
+    fraud-detection algorithm scandal used by Rotterdam, discriminating by socioeconomic
+    profile.'
   _triggerConditions:
   - Parameter: 4
     Comparison: 0

@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RandomEventData
   _title: "Crise h\xEDdrica"
   _description: "Os reservat\xF3rios chegaram a 20%. Racionamento foi decretado."
+  _titleEn: Water Crisis
+  _descriptionEn: Reservoirs dropped to 20%. Rationing was declared.
   _triggerConditions: []
   _statEffects:
   - Parameter: 0

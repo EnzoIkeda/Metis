@@ -17,6 +17,11 @@ MonoBehaviour:
     de tecnologia. Modelo real: o Porto Digital de Recife, refer\xEAncia brasileira
     de polo de inova\xE7\xE3o \u2014 gera renda e pesquisa, mas o entorno valoriza
     r\xE1pido e pressiona quem j\xE1 morava ali."
+  _cardNameEn: Export Technology Park
+  _descriptionEn: "A tech park with tax incentives attracts technology export companies.
+    Real model: Porto Digital in Recife, a Brazilian reference for an innovation
+    hub \u2014 generates income and research, but the surrounding area appreciates
+    fast and pressures those who already lived there."
   _cost: 0
   _tier: 2
   _requiredPesquisa: 50
@@ -36,3 +41,4 @@ MonoBehaviour:
   - Parameter: 7
     Amount: -1
   _structureToPlace: {fileID: 0}
+  _artwork: {fileID: 0}

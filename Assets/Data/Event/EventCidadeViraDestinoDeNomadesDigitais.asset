@@ -17,6 +17,11 @@ MonoBehaviour:
     Fen\xF4meno real: Lisboa, Medell\xEDn e Bali, entre outras, viraram destino de
     n\xF4made digital \u2014 algumas j\xE1 t\xEAm visto pr\xF3prio pra isso \u2014
     mas o aluguel sobe pra quem sempre morou ali."
+  _titleEn: City Becomes a Digital Nomad Destination
+  _descriptionEn: "Remote workers from around the world chose the city to live in.
+    Real phenomenon: Lisbon, Medell\xEDn and Bali, among others, became digital nomad
+    destinations \u2014 some even have dedicated visas \u2014 but rent rises for
+    longtime residents."
   _triggerConditions:
   - Parameter: 4
     Comparison: 0

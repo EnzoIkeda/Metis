@@ -16,6 +16,10 @@ MonoBehaviour:
   _description: "Cidades vizinhas que investiram em tecnologia atraem as empresas
     e os investimentos que antes vinham pra c\xE1. A regi\xE3o seguiu em frente sem
     esperar."
+  _titleEn: City Loses Regional Competitiveness
+  _descriptionEn: Neighboring cities that invested in technology are attracting the
+    businesses and investment that used to come here. The region moved on without
+    waiting.
   _triggerConditions:
   - Parameter: 4
     Comparison: 1

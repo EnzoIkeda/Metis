@@ -16,6 +16,10 @@ MonoBehaviour:
   _description: "Um fundo de investimento em infraestrutura escolheu a cidade pra
     um aporte de longo prazo. Tend\xEAncia real: fundos soberanos e de pens\xE3o
     investindo cada vez mais em infraestrutura inteligente ao redor do mundo."
+  _titleEn: Smart Infrastructure Fund Invests in the City
+  _descriptionEn: 'An infrastructure investment fund chose the city for a long-term
+    commitment. Real trend: sovereign wealth and pension funds increasingly investing
+    in smart infrastructure around the world.'
   _triggerConditions:
   - Parameter: 4
     Comparison: 0

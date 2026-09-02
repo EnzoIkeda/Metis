@@ -15,6 +15,9 @@ MonoBehaviour:
   _title: Epidemia sazonal
   _description: "Um surto respirat\xF3rio se espalhou pelas escolas. A rede de sa\xFAde
     opera no limite."
+  _titleEn: Seasonal Epidemic
+  _descriptionEn: A respiratory outbreak spread through the schools. The health network
+    is operating at its limit.
   _triggerConditions: []
   _statEffects:
   - Parameter: 0

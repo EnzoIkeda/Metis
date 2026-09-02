@@ -17,6 +17,11 @@ MonoBehaviour:
     em camadas sob luz artificial. Tecnologia real (empresas como AeroFarms e Plenty,
     e o pioneiro Sky Greens em Singapura) \u2014 produz muita comida perto de casa,
     mas consome bastante energia."
+  _cardNameEn: Urban Vertical Farm
+  _descriptionEn: "Vertical farms grow food inside the city, stacked in layers under
+    artificial light. Real technology (companies like AeroFarms and Plenty, and pioneer
+    Sky Greens in Singapore) \u2014 produces a lot of food close to home, but consumes
+    a lot of energy."
   _cost: 0
   _tier: 2
   _requiredPesquisa: 50
@@ -36,3 +41,4 @@ MonoBehaviour:
   - Parameter: 7
     Amount: 4
   _structureToPlace: {fileID: 0}
+  _artwork: {fileID: 0}

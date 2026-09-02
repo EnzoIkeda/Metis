@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   _cardName: "Universidade P\xFAblica"
   _description: Motor de pesquisa de longo prazo.
+  _cardNameEn: Public University
+  _descriptionEn: Long-term research engine.
   _cost: 0
   _tier: 2
   _requiredPesquisa: 50
@@ -35,3 +37,4 @@ MonoBehaviour:
   - Parameter: 7
     Amount: 2
   _structureToPlace: {fileID: 0}
+  _artwork: {fileID: 0}

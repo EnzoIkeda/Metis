@@ -17,6 +17,11 @@ MonoBehaviour:
     num ciclo fechado. Modelo real: o distrito industrial de Kalundborg, na Dinamarca,
     a simbiose industrial mais estudada do mundo \u2014 d\xE9cadas rodando sem perder
     res\xEDduo."
+  _cardNameEn: Industrial Symbiosis (Circular Economy)
+  _descriptionEn: "One industry's waste becomes the neighboring industry's input,
+    in a closed loop. Real model: the Kalundborg industrial district in Denmark,
+    the most studied industrial symbiosis in the world \u2014 decades running without
+    losing waste."
   _cost: 0
   _tier: 3
   _requiredPesquisa: 75
@@ -34,3 +39,4 @@ MonoBehaviour:
   - Parameter: 7
     Amount: 1
   _structureToPlace: {fileID: 0}
+  _artwork: {fileID: 0}

@@ -17,6 +17,11 @@ MonoBehaviour:
     a ele, derrubando servi\xE7os que n\xE3o tinham nada a ver entre si a princ\xEDpio.
     \xC9 o que a teoria dos 'acidentes normais' de Charles Perrow descreve: sistemas
     complexos e interligados demais falham em cascata, n\xE3o isoladamente."
+  _titleEn: Cascading Failure of Interconnected Systems
+  _descriptionEn: 'A small failure in one system spread to several others connected
+    to it, taking down services that had nothing to do with each other at first.
+    This is what Charles Perrow''s ''normal accidents'' theory describes: overly
+    complex, interconnected systems fail in cascades, not in isolation.'
   _triggerConditions:
   - Parameter: 4
     Comparison: 0

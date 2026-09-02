@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RandomEventData
   _title: Turno tranquilo
   _description: "Nada de extraordin\xE1rio aconteceu. A cidade seguiu sua rotina."
+  _titleEn: Quiet Turn
+  _descriptionEn: Nothing extraordinary happened. The city went about its routine.
   _triggerConditions: []
   _statEffects:
   - Parameter: 6

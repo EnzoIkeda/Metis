@@ -15,6 +15,9 @@ MonoBehaviour:
   _title: Efeito de Demanda Induzida
   _description: "Mais uma via alargada, mais um engarrafamento novo: ampliar ruas
     sem repensar mobilidade s\xF3 atrai mais carros pro mesmo gargalo."
+  _titleEn: Induced Demand Effect
+  _descriptionEn: 'One more widened road, one more new traffic jam: widening streets
+    without rethinking mobility only draws more cars into the same bottleneck.'
   _triggerConditions: []
   _statEffects:
   - Parameter: 1

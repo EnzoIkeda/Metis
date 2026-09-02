@@ -16,6 +16,10 @@ MonoBehaviour:
   _description: "Categorias inteiras pararam contra a automa\xE7\xE3o de postos de
     trabalho. Movimento real: greves de trabalhadores portu\xE1rios e de outras categorias
     contra automa\xE7\xE3o j\xE1 aconteceram em v\xE1rios pa\xEDses."
+  _titleEn: Workers Protest Automation
+  _descriptionEn: 'Entire trades went on strike against the automation of jobs. Real
+    movement: strikes by dockworkers and other trades against automation have already
+    happened in several countries.'
   _triggerConditions:
   - Parameter: 4
     Comparison: 0

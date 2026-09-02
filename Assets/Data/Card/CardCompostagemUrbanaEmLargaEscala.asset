@@ -16,6 +16,10 @@ MonoBehaviour:
   _description: "Coleta separada de org\xE2nicos vira composto em vez de lixo de
     aterro. Programa real: a coleta obrigat\xF3ria de org\xE2nicos de San Francisco,
     uma das pioneiras do mundo nesse modelo."
+  _cardNameEn: Large-Scale Urban Composting
+  _descriptionEn: 'Separate organic waste collection turns into compost instead of
+    landfill trash. Real program: San Francisco''s mandatory organics collection,
+    one of the world''s pioneers of this model.'
   _cost: 0
   _tier: 1
   _requiredPesquisa: 25
@@ -33,3 +37,4 @@ MonoBehaviour:
   - Parameter: 7
     Amount: 1
   _structureToPlace: {fileID: 0}
+  _artwork: {fileID: 0}

@@ -16,6 +16,10 @@ MonoBehaviour:
   _description: "\xC1gua de esgoto tratada at\xE9 o padr\xE3o pot\xE1vel \xE9 devolvida
     \xE0 rede. Tecnologia real: o programa NEWater de Singapura, uma das refer\xEAncias
     mundiais em re\xFAso pot\xE1vel de \xE1gua."
+  _cardNameEn: Potable Water Reuse
+  _descriptionEn: 'Sewage treated to potable standard is returned to the supply network.
+    Real technology: Singapore''s NEWater program, one of the world''s references
+    in potable water reuse.'
   _cost: 0
   _tier: 2
   _requiredPesquisa: 50
@@ -35,3 +39,4 @@ MonoBehaviour:
   - Parameter: 7
     Amount: 4
   _structureToPlace: {fileID: 0}
+  _artwork: {fileID: 0}

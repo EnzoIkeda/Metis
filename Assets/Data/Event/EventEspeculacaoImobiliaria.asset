@@ -15,6 +15,9 @@ MonoBehaviour:
   _title: "Especula\xE7\xE3o Imobili\xE1ria"
   _description: "A \xE1rea valorizou e atraiu investidores, mas o aumento dos alugu\xE9is
     expulsou moradores antigos do bairro."
+  _titleEn: Real Estate Speculation
+  _descriptionEn: The area appreciated and attracted investors, but rising rents
+    pushed longtime residents out of the neighborhood.
   _triggerConditions: []
   _statEffects:
   - Parameter: 0

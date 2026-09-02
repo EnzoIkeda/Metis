@@ -15,6 +15,9 @@ MonoBehaviour:
   _title: "Onda migrat\xF3ria"
   _description: "Milhares de novas fam\xEDlias chegaram \xE0 cidade. H\xE1 mais for\xE7a
     de trabalho e mais press\xE3o nos servi\xE7os."
+  _titleEn: Migration Wave
+  _descriptionEn: Thousands of new families arrived in the city. More workforce,
+    and more pressure on services.
   _triggerConditions: []
   _statEffects:
   - Parameter: 0

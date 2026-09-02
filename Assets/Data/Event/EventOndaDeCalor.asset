@@ -15,6 +15,9 @@ MonoBehaviour:
   _title: Onda de calor
   _description: "Term\xF4metros bateram recorde. O consumo de ar-condicionado disparou
     e os hospitais lotaram."
+  _titleEn: Heat Wave
+  _descriptionEn: Thermometers hit record highs. Air conditioning use spiked and
+    hospitals filled up.
   _triggerConditions: []
   _statEffects:
   - Parameter: 0

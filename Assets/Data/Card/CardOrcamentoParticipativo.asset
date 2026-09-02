@@ -15,6 +15,9 @@ MonoBehaviour:
   _cardName: "Or\xE7amento Participativo"
   _description: "A popula\xE7\xE3o decide parte do or\xE7amento da cidade \u2014
     modelo nascido em Porto Alegre e hoje replicado no mundo todo."
+  _cardNameEn: Participatory Budgeting
+  _descriptionEn: "The population decides part of the city's budget \u2014 a model
+    born in Porto Alegre and now replicated worldwide."
   _cost: 0
   _tier: 0
   _requiredPesquisa: 0
@@ -26,3 +29,4 @@ MonoBehaviour:
   - Parameter: 6
     Amount: 5
   _structureToPlace: {fileID: 0}
+  _artwork: {fileID: 0}

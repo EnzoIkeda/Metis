@@ -15,6 +15,9 @@ MonoBehaviour:
   _title: Chuvas fortes e alagamentos
   _description: "Um temporal alagou as avenidas principais. O tr\xE2nsito parou e
     bairros inteiros ficaram isolados."
+  _titleEn: Heavy Rains and Flooding
+  _descriptionEn: A storm flooded the main avenues. Traffic stopped and whole neighborhoods
+    were cut off.
   _triggerConditions: []
   _statEffects:
   - Parameter: 0

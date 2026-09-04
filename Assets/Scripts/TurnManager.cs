@@ -13,8 +13,10 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private CardData[] _cardPool;
     [SerializeField] private CardData _debugCardToPlay;
     [SerializeField] private RandomEventData[] _eventPool;
+    [SerializeField] private CityEffectsController _effects;
 
     private RandomEventPool _events;
+    private RandomEventData _pendingEvent;
 
     public TurnMachine Machine { get; private set; }
     public CardHand Hand { get; private set; }
@@ -77,19 +79,60 @@ public class TurnManager : MonoBehaviour
         }
 
         if (played)
-            Machine.EndActionPhase();
+        {
+            // O ambiente some ja nesse instante, antes mesmo do efeito de impacto.
+            _effects?.SetAmbientGlowsVisible(false);
+
+            if (_effects != null)
+                _effects.PlayImpactGlowing(() => Machine.EndActionPhase());
+            else
+                Machine.EndActionPhase();
+        }
 
         return played;
     }
 
     public void AcknowledgeEvent()
     {
-        Machine?.AcknowledgeEvent();
+        var closedEvent = _pendingEvent;
+        _pendingEvent = null;
+
+        if (closedEvent != null && _effects != null && IsPositiveOrMixed(closedEvent))
+            _effects.PlayMagicPoof(() => Machine?.AcknowledgeEvent());
+        else if (closedEvent != null && _effects != null && IsNegative(closedEvent))
+            _effects.PlayExplosion(() => Machine?.AcknowledgeEvent());
+        else
+            Machine?.AcknowledgeEvent();
+    }
+
+    // Positivo ou misto, quando o evento tem pelo menos um efeito de valor positivo.
+    private static bool IsPositiveOrMixed(RandomEventData eventData)
+    {
+        foreach (var effect in eventData.StatEffects)
+        {
+            if (effect.Amount > 0f)
+                return true;
+        }
+        return false;
+    }
+
+    // Negativo, quando o evento tem pelo menos um efeito de valor negativo e nenhum positivo.
+    private static bool IsNegative(RandomEventData eventData)
+    {
+        foreach (var effect in eventData.StatEffects)
+        {
+            if (effect.Amount < 0f)
+                return true;
+        }
+        return false;
     }
 
     private void HandlePhaseChanged(TurnPhase phase)
     {
         Debug.Log($"[TurnMachine] Turno {Machine.TurnIndex}, fase {phase}");
+
+        // Liga de novo no comeco do proximo turno, ja que jogar uma carta esconde na hora.
+        _effects?.SetAmbientGlowsVisible(phase == TurnPhase.Action);
 
         if (phase == TurnPhase.StartOfTurn)
             Hand.Draw(HandSize);
@@ -102,6 +145,7 @@ public class TurnManager : MonoBehaviour
     private void HandleEventPhase()
     {
         var triggeredEvent = _events.TryTriggerEvent(_cityStatsManager.Stats, Machine.TurnIndex);
+        _pendingEvent = triggeredEvent;
         if (triggeredEvent == null)
         {
             Machine.AcknowledgeEvent();

@@ -10,6 +10,8 @@ public class CardDetailPopupView : MonoBehaviour
     [SerializeField] private TMP_Text _titleText;
     [SerializeField] private TMP_Text _descriptionText;
     [SerializeField] private TMP_Text _costText;
+    [SerializeField] private Image _artworkImage;
+    [SerializeField] private GameObject _artworkPlaceholder;
     [SerializeField] private Button _playButton;
     [SerializeField] private Button _backButton;
     [SerializeField] private Button _scrimButton;
@@ -48,6 +50,16 @@ public class CardDetailPopupView : MonoBehaviour
             _descriptionText.text = card.Description;
         if (_costText != null)
             _costText.text = UIStrings.CardRequirementsFull(card.RequiredPesquisa, card.Cost);
+
+        // Mostra a arte se a carta tiver uma, senao so o placeholder.
+        var hasArtwork = card.Artwork != null;
+        if (_artworkImage != null)
+        {
+            _artworkImage.sprite = card.Artwork;
+            _artworkImage.gameObject.SetActive(hasArtwork);
+        }
+        if (_artworkPlaceholder != null)
+            _artworkPlaceholder.SetActive(hasArtwork == false);
 
         if (_panelRoot != null)
             _panelRoot.SetActive(true);

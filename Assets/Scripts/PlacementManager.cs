@@ -10,6 +10,9 @@ public class PlacementManager : MonoBehaviour
 
     Grid placementGrid;
 
+    // Instancia pura do grid, exposta pra outros sistemas consultarem o layout.
+    public Grid Grid => placementGrid;
+
     private readonly Dictionary<Vector3Int, StructureData> _placedStructureData = new Dictionary<Vector3Int, StructureData>();
 
     private void Awake()
@@ -73,7 +76,8 @@ public class PlacementManager : MonoBehaviour
         structureModel.CreateModel(structurePrefab);
     }
 
-    private Vector3 CellToLocalPosition(Vector3Int cell)
+    // Converte uma celula pra posicao local, reaproveitavel por qualquer GameObject filho do grid.
+    public Vector3 CellToLocalPosition(Vector3Int cell)
     {
         return new Vector3(cell.x * cellSize, cell.y, cell.z * cellSize);
     }

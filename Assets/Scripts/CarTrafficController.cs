@@ -9,6 +9,9 @@ public class CarTrafficController : MonoBehaviour
     [SerializeField] private float _minSpeed = 1.2f;
     [SerializeField] private float _maxSpeed = 2.2f;
 
+    [Tooltip("Distância do centro da célula (cellSize=1) até o centro de cada faixa — 2 faixas por rua, uma em cada sentido, a essa distância pra cada lado. Precisa deixar espaço até a borda da célula pra PedestrianDriver._edgeOffset (calçada) nunca se sobrepor com a faixa de carro.")]
+    [SerializeField] private float _laneOffset = 0.22f;
+
     [Tooltip("Graus somados por cima da rotação calculada (Quaternion.LookRotation na direção de movimento) — compensa o eixo \"de frente\" de verdade do mesh do carro, igual à FrontAxisCorrection dos prédios da cidade inicial (ver ARCHITECTURE.md).")]
     [SerializeField] private float _forwardAxisCorrectionDegrees;
 
@@ -50,6 +53,6 @@ public class CarTrafficController : MonoBehaviour
 
         var instance = Instantiate(prefab, parent);
         var driver = instance.AddComponent<CarDriver>();
-        driver.Initialize(_placementManager, _roadNetwork, startCell, speed, _forwardAxisCorrectionDegrees, seed);
+        driver.Initialize(_placementManager, _roadNetwork, startCell, speed, _laneOffset, _forwardAxisCorrectionDegrees, seed);
     }
 }

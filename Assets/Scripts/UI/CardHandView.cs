@@ -38,8 +38,7 @@ public class CardHandView : MonoBehaviour
             _spawnedCards.Add(view);
         }
 
-        // Mao nova comeca do inicio (senao a rolagem podia ficar "presa"
-        // numa posicao que nao existe mais na mao seguinte).
+        // Mao nova sempre comeca com a rolagem do inicio.
         if (_scrollRect != null)
             _scrollRect.horizontalNormalizedPosition = 0f;
     }

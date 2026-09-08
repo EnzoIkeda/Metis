@@ -19122,6 +19122,7 @@ MonoBehaviour:
   _carCount: 10
   _minSpeed: 1.2
   _maxSpeed: 2.2
+  _laneOffset: 0.22
   _forwardAxisCorrectionDegrees: 0
 --- !u!1001 &837983900
 PrefabInstance:
@@ -32454,6 +32455,66 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3970261373664373580, guid: b251aac2e265df74f91db1dee1baee73, type: 3}
   m_PrefabInstance: {fileID: 1276950298}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1281792492
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1281792493}
+  - component: {fileID: 1281792494}
+  m_Layer: 0
+  m_Name: PedestrianTrafficController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1281792493
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281792492}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1281792494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281792492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99a81a46bd3f1a07ba1e182d49a9040e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PedestrianTrafficController
+  _placementManager: {fileID: 1483889502}
+  _pedestrianPrefabs:
+  - {fileID: 4512452417682273497, guid: ca1e9d1d91cd33e31b020fb5882d60f3, type: 3}
+  - {fileID: 5319887045266746918, guid: 8d4092a07aa9a8e49b5e5b3144790879, type: 3}
+  - {fileID: 7150945867086273790, guid: c9eb38e3bf1d17ffa93ff9783d1d691d, type: 3}
+  - {fileID: 2005113449441065846, guid: b42875c629e5b3e3992b593f9ca4a118, type: 3}
+  - {fileID: 1479039805635563392, guid: 20500f453a5346b7da72514ce312e903, type: 3}
+  - {fileID: 2505182254412857113, guid: e634a6df144d0bd769f47c433a033447, type: 3}
+  - {fileID: 4182151124189024184, guid: 74b5b1a2046641194bee5a61a8e96677, type: 3}
+  - {fileID: 2796389398324022688, guid: a0e451c8d05db1944aa940399869d236, type: 3}
+  _pedestrianCount: 12
+  _minSpeed: 0.5
+  _maxSpeed: 0.9
+  _edgeOffset: 0.4
+  _crossingChance: 0.35
+  _forwardAxisCorrectionDegrees: 0
 --- !u!1001 &1283650335
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54955,3 +55016,4 @@ SceneRoots:
   - {fileID: 995819618}
   - {fileID: 529777304}
   - {fileID: 837911077}
+  - {fileID: 1281792493}

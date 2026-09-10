@@ -30,7 +30,8 @@ public class TurnManager : MonoBehaviour
         Machine.OnTurnAdvanced += HandleTurnAdvanced;
         Machine.OnGameEnded += HandleGameEnded;
 
-        Hand = new CardHand(_cardPool);
+        var pool = DeckBuilder.Build(_cardPool, MetaProgressionManager.Archetype, MetaProgressionManager.LoadedCardNames);
+        Hand = new CardHand(pool);
         Hand.OnHandChanged += HandleHandChanged;
 
         _events = new RandomEventPool(_eventPool);

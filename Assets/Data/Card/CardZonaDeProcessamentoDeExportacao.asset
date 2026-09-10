@@ -22,6 +22,7 @@ MonoBehaviour:
     but so does environmental and health pressure."
   _cost: 0
   _tier: 1
+  _archetype: 2
   _requiredPesquisa: 25
   _statEffects:
   - Parameter: 0

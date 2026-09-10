@@ -20,6 +20,7 @@ MonoBehaviour:
     crime before it starts (broken windows theory).'
   _cost: 0
   _tier: 0
+  _archetype: 0
   _requiredPesquisa: 0
   _statEffects:
   - Parameter: 0

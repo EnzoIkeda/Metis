@@ -10,6 +10,15 @@ public enum CardTier
     SmartCity
 }
 
+// Baralho tematico da carta na planilha. Geral cobre tanto as cartas sem baralho proprio quanto o tier 0 compartilhado.
+public enum CardArchetype
+{
+    Geral,
+    Sustentabilidade,
+    Industria,
+    Automacao
+}
+
 [CreateAssetMenu(fileName = "New Card", menuName = "Metis/Card Data")]
 public class CardData : ScriptableObject
 {
@@ -19,6 +28,7 @@ public class CardData : ScriptableObject
     [SerializeField, TextArea(2, 6)] private string _descriptionEn;
     [SerializeField] private float _cost;
     [SerializeField] private CardTier _tier;
+    [SerializeField] private CardArchetype _archetype;
     [SerializeField] private float _requiredPesquisa;
     [SerializeField] private StatModifier[] _statEffects;
     [SerializeField] private StructureData _structureToPlace;
@@ -38,6 +48,8 @@ public class CardData : ScriptableObject
     public float Cost => _cost;
 
     public CardTier Tier => _tier;
+
+    public CardArchetype Archetype => _archetype;
 
     public float RequiredPesquisa => _requiredPesquisa;
 

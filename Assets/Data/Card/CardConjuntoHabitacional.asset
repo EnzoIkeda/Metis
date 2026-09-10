@@ -18,6 +18,7 @@ MonoBehaviour:
   _descriptionEn: More housing, more people, more demand for services.
   _cost: 0
   _tier: 0
+  _archetype: 0
   _requiredPesquisa: 0
   _statEffects:
   - Parameter: 0

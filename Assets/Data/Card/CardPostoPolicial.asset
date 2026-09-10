@@ -18,6 +18,7 @@ MonoBehaviour:
   _descriptionEn: Police presence in the neighborhood reduces crime.
   _cost: 0
   _tier: 0
+  _archetype: 0
   _requiredPesquisa: 0
   _statEffects:
   - Parameter: 0

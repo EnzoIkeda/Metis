@@ -18,6 +18,7 @@ MonoBehaviour:
   _descriptionEn: Bus corridor connects the outskirts to downtown.
   _cost: 0
   _tier: 0
+  _archetype: 0
   _requiredPesquisa: 0
   _statEffects:
   - Parameter: 0

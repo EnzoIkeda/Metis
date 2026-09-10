@@ -18,6 +18,7 @@ MonoBehaviour:
   _descriptionEn: Cycling network integrated with public transit.
   _cost: 0
   _tier: 1
+  _archetype: 1
   _requiredPesquisa: 25
   _statEffects:
   - Parameter: 0

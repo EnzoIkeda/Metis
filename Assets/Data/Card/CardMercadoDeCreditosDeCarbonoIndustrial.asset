@@ -24,6 +24,7 @@ MonoBehaviour:
     always mean real pollution reduction."
   _cost: 0
   _tier: 3
+  _archetype: 2
   _requiredPesquisa: 75
   _statEffects:
   - Parameter: 0

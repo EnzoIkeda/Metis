@@ -18,6 +18,7 @@ MonoBehaviour:
   _descriptionEn: Expensive project that redesigns the city.
   _cost: 0
   _tier: 2
+  _archetype: 3
   _requiredPesquisa: 50
   _statEffects:
   - Parameter: 0

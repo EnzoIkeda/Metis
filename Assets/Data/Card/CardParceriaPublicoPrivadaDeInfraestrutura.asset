@@ -24,6 +24,7 @@ MonoBehaviour:
     profit logic pressures the contract's environmental and social side."
   _cost: 0
   _tier: 2
+  _archetype: 2
   _requiredPesquisa: 50
   _statEffects:
   - Parameter: 0

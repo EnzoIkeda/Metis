@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private CardData[] _cardPool;
     [SerializeField] private CardData _debugCardToPlay;
     [SerializeField] private RandomEventData[] _eventPool;
+    [SerializeField] private PassiveAdvantageData[] _advantagePool;
     [SerializeField] private CityEffectsController _effects;
 
     private RandomEventPool _events;
@@ -21,10 +23,18 @@ public class TurnManager : MonoBehaviour
     public TurnMachine Machine { get; private set; }
     public CardHand Hand { get; private set; }
 
+    // Pool completo de 54 cartas, exposto pro popup de recompensa de fim de fase sortear opcoes.
+    public IReadOnlyList<CardData> CardPool => _cardPool;
+
+    // Todas as vantagens passivas cadastradas, exposto pro popup de recompensa sortear opcoes.
+    public IReadOnlyList<PassiveAdvantageData> AdvantagePool => _advantagePool;
+
     public event Action<RandomEventData> OnRandomEventTriggered;
 
     private void Start()
     {
+        ApplyLoadedAdvantages();
+
         Machine = new TurnMachine(_cityStatsManager.Stats);
         Machine.OnPhaseChanged += HandlePhaseChanged;
         Machine.OnTurnAdvanced += HandleTurnAdvanced;
@@ -50,6 +60,17 @@ public class TurnManager : MonoBehaviour
 
         if (Hand != null)
             Hand.OnHandChanged -= HandleHandChanged;
+    }
+
+    // Aplica de uma vez, no inicio da fase, o efeito de cada vantagem passiva carregada de uma fase anterior.
+    private void ApplyLoadedAdvantages()
+    {
+        foreach (var name in MetaProgressionManager.LoadedAdvantageNames)
+        {
+            var advantage = _advantagePool.FirstOrDefault(candidate => candidate.name == name);
+            if (advantage != null)
+                _cityStatsManager.Stats.ApplyModifiers(advantage.StatEffects);
+        }
     }
 
     public bool CanPlay(CardData card)

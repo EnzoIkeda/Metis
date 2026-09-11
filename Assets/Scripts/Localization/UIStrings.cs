@@ -77,6 +77,19 @@ public static class UIStrings
         }
     }
 
+    public static string PhaseMapTitle => IsPt ? "Escolha o próximo destino" : "Choose your next destination";
+
+    public static string PhaseMapNodeLabel(string nodeId)
+    {
+        switch (nodeId)
+        {
+            case "next":
+                return IsPt ? "Avançar" : "Advance";
+            default:
+                return nodeId;
+        }
+    }
+
     public static string ArchetypeDescription(CardArchetype archetype)
     {
         switch (archetype)

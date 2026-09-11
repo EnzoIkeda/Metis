@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 // Popup de fim de jogo, reutilizavel pra vitoria ou derrota conforme o desfecho configurado.
@@ -16,7 +17,7 @@ public class GameOutcomePopupView : MonoBehaviour
     {
         _turnManager.Machine.OnGameEnded += HandleGameEnded;
         if (_closeButton != null)
-            _closeButton.onClick.AddListener(Hide);
+            _closeButton.onClick.AddListener(HandleCloseClicked);
 
         if (_titleText != null)
             _titleText.text = _outcomeToShowFor == GameOutcome.Victory ? UIStrings.VictoryTitle : UIStrings.GameOverTitle;
@@ -39,6 +40,18 @@ public class GameOutcomePopupView : MonoBehaviour
 
         if (_panelRoot != null)
             _panelRoot.SetActive(true);
+    }
+
+    // Derrota encerra a rodada inteira; vitoria so fecha o popup e segue pro fluxo de recompensa.
+    private void HandleCloseClicked()
+    {
+        Hide();
+
+        if (_outcomeToShowFor == GameOutcome.GameOver)
+        {
+            MetaProgressionManager.ResetRun();
+            SceneManager.LoadScene("MainMenu");
+        }
     }
 
     private void Hide()

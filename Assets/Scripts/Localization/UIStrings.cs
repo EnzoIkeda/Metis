@@ -59,4 +59,42 @@ public static class UIStrings
     public static string TurnCounter(int turnIndex, int totalTurns) => IsPt
         ? $"Turno {turnIndex}/{totalTurns}"
         : $"Turn {turnIndex}/{totalTurns}";
+
+    public static string DeckSelectionTitle => IsPt ? "Escolha seu baralho" : "Choose your deck";
+
+    public static string ArchetypeName(CardArchetype archetype)
+    {
+        switch (archetype)
+        {
+            case CardArchetype.Sustentabilidade:
+                return IsPt ? "Sustentabilidade" : "Sustainability";
+            case CardArchetype.Industria:
+                return IsPt ? "Indústria" : "Industry";
+            case CardArchetype.Automacao:
+                return IsPt ? "Automação" : "Automation";
+            default:
+                return IsPt ? "Geral" : "General";
+        }
+    }
+
+    public static string ArchetypeDescription(CardArchetype archetype)
+    {
+        switch (archetype)
+        {
+            case CardArchetype.Sustentabilidade:
+                return IsPt
+                    ? "Acelera Sustentabilidade e Bem-estar, mas é fraco em Renda e Energia."
+                    : "Boosts Sustainability and Wellbeing, but weak in Income and Energy.";
+            case CardArchetype.Industria:
+                return IsPt
+                    ? "Acelera Renda, mas pressiona Sustentabilidade e Saúde."
+                    : "Boosts Income, but pressures Sustainability and Health.";
+            case CardArchetype.Automacao:
+                return IsPt
+                    ? "Acelera Pesquisa e Mobilidade, mas pressiona Segurança e População."
+                    : "Boosts Research and Mobility, but pressures Security and Population.";
+            default:
+                return string.Empty;
+        }
+    }
 }

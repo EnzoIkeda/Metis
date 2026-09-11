@@ -46,8 +46,8 @@ public class MainMenuManager : MonoBehaviour
     // Metodo para o botao 'Jogar'
     public void PlayGame()
     {
-        // Carrega a cena principal do jogo.
-        SceneManager.LoadScene("City_Scene");
+        // Vai pra selecao de baralho antes da primeira fase da rodada.
+        SceneManager.LoadScene("DeckSelection");
     }
 
     // Metodos para o botao 'Configuracoes'

@@ -21,6 +21,7 @@ public class CityStatsManager : MonoBehaviour
 {
     [SerializeField] private CityParameterConfig[] _initialParameters = Array.Empty<CityParameterConfig>();
     [SerializeField] private InteractionConfig _interactionConfig;
+    [SerializeField] private CityParameterPresetData[] _phasePresets = Array.Empty<CityParameterPresetData>();
 
     public CityStats Stats { get; private set; }
 
@@ -36,7 +37,28 @@ public class CityStatsManager : MonoBehaviour
             _interactionConfig.MultiplicadorApoioExcesso,
             _interactionConfig.DerivaCorrecaoExcesso);
 
-        Stats = new CityStats(_initialParameters, interactions, _interactionConfig.PenalidadeColapso);
+        Stats = new CityStats(BuildInitialParameters(), interactions, _interactionConfig.PenalidadeColapso);
+    }
+
+    // Fase 1 de uma rodada usa a cidade calibrada padrao; da fase 2 em diante sorteia um preset e aplica por cima.
+    private CityParameterConfig[] BuildInitialParameters()
+    {
+        if (MetaProgressionManager.IsNewPhase == false || _phasePresets.Length == 0)
+            return _initialParameters;
+
+        var preset = _phasePresets[UnityEngine.Random.Range(0, _phasePresets.Length)];
+        var parameters = (CityParameterConfig[])_initialParameters.Clone();
+        for (int i = 0; i < parameters.Length; i++)
+        {
+            foreach (var overrideValue in preset.Overrides)
+            {
+                if (parameters[i].Parameter == overrideValue.Parameter)
+                    parameters[i].InitialValue = overrideValue.InitialValue;
+            }
+        }
+
+        Debug.Log($"[CityStatsManager] Fase nova, preset '{preset.PresetName}' aplicado.");
+        return parameters;
     }
 
     private void OnEnable()

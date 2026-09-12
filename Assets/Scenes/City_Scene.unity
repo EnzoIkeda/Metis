@@ -6463,6 +6463,10 @@ MonoBehaviour:
     MultiplicadorApoioExcesso: 0.6
     DerivaCorrecaoExcesso: 0.1
     PenalidadeColapso: 12
+  _phasePresets:
+  - {fileID: 11400000, guid: b6183e917bb009debbc247a3d7c7e522, type: 2}
+  - {fileID: 11400000, guid: d0896d270ab607da28b6cd0b4b391a91, type: 2}
+  - {fileID: 11400000, guid: 3dca4ef7be69dedddacd4171eddd8699, type: 2}
 --- !u!4 &278176691
 Transform:
   m_ObjectHideFlags: 0

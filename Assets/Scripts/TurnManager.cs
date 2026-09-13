@@ -20,6 +20,11 @@ public class TurnManager : MonoBehaviour
     private RandomEventPool _events;
     private RandomEventData _pendingEvent;
 
+    // Guardas de reentrancia: a fase so muda de verdade quando a animacao do efeito termina (callback atrasado),
+    // entao sem isso da pra jogar mais de uma carta ou confirmar o evento mais de uma vez na mesma janela.
+    private bool _actionEffectPending;
+    private bool _eventEffectPending;
+
     public TurnMachine Machine { get; private set; }
     public CardHand Hand { get; private set; }
 
@@ -80,6 +85,8 @@ public class TurnManager : MonoBehaviour
 
     public bool PlayCard(CardData card)
     {
+        if (_actionEffectPending)
+            return false;
         if (Machine == null || Machine.CurrentPhase != TurnPhase.Action)
             return false;
         if (card == null || Hand.CanPlay(card, _cityStatsManager.Stats) == false)
@@ -106,9 +113,18 @@ public class TurnManager : MonoBehaviour
             _effects?.SetAmbientGlowsVisible(false);
 
             if (_effects != null)
-                _effects.PlayImpactGlowing(() => Machine.EndActionPhase());
+            {
+                _actionEffectPending = true;
+                _effects.PlayImpactGlowing(() =>
+                {
+                    _actionEffectPending = false;
+                    Machine.EndActionPhase();
+                });
+            }
             else
+            {
                 Machine.EndActionPhase();
+            }
         }
 
         return played;
@@ -116,15 +132,34 @@ public class TurnManager : MonoBehaviour
 
     public void AcknowledgeEvent()
     {
+        if (_eventEffectPending)
+            return;
+
         var closedEvent = _pendingEvent;
         _pendingEvent = null;
 
         if (closedEvent != null && _effects != null && IsPositiveOrMixed(closedEvent))
-            _effects.PlayMagicPoof(() => Machine?.AcknowledgeEvent());
+        {
+            _eventEffectPending = true;
+            _effects.PlayMagicPoof(() =>
+            {
+                _eventEffectPending = false;
+                Machine?.AcknowledgeEvent();
+            });
+        }
         else if (closedEvent != null && _effects != null && IsNegative(closedEvent))
-            _effects.PlayExplosion(() => Machine?.AcknowledgeEvent());
+        {
+            _eventEffectPending = true;
+            _effects.PlayExplosion(() =>
+            {
+                _eventEffectPending = false;
+                Machine?.AcknowledgeEvent();
+            });
+        }
         else
+        {
             Machine?.AcknowledgeEvent();
+        }
     }
 
     // Positivo ou misto, quando o evento tem pelo menos um efeito de valor positivo.

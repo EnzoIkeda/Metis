@@ -229,4 +229,48 @@ public class TurnManager : MonoBehaviour
             ? $"[CardHand] Jogou '{_debugCardToPlay.CardName}'"
             : $"[CardHand] Não foi possível jogar '{_debugCardToPlay?.CardName}' (fase errada, fora da mão, Pesquisa/Renda insuficientes, ou grid cheio?)");
     }
+
+    [ContextMenu("Debug: Finalizar Jogo com Vitoria")]
+    private void DebugForceVictory()
+    {
+        Machine.DebugForceVictory();
+    }
+
+    [ContextMenu("Debug: Finalizar Jogo com Derrota")]
+    private void DebugForceGameOver()
+    {
+        Machine.DebugForceGameOver();
+    }
+
+    [ContextMenu("Debug: Subir Pesquisa - Tier Cidade Digital")]
+    private void DebugUnlockCidadeDigital()
+    {
+        DebugSetPesquisaForTier(CardTier.CidadeDigital);
+    }
+
+    [ContextMenu("Debug: Subir Pesquisa - Tier Cidade Conectada")]
+    private void DebugUnlockCidadeConectada()
+    {
+        DebugSetPesquisaForTier(CardTier.CidadeConectada);
+    }
+
+    [ContextMenu("Debug: Subir Pesquisa - Tier Smart City")]
+    private void DebugUnlockSmartCity()
+    {
+        DebugSetPesquisaForTier(CardTier.SmartCity);
+    }
+
+    // Sobe Pesquisa ate o RequiredPesquisa mais baixo do tier, o suficiente pra liberar as cartas dele.
+    private void DebugSetPesquisaForTier(CardTier tier)
+    {
+        var required = _cardPool
+            .Where(card => card.Tier == tier)
+            .Select(card => card.RequiredPesquisa)
+            .DefaultIfEmpty(0f)
+            .Min();
+
+        var stats = _cityStatsManager.Stats;
+        var delta = required - stats.GetValue(CityParameterType.Pesquisa);
+        stats.ApplyModifier(new StatModifier { Parameter = CityParameterType.Pesquisa, Amount = delta });
+    }
 }

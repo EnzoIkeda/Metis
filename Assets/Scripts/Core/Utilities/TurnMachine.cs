@@ -102,6 +102,24 @@ public class TurnMachine
         BeginTurn();
     }
 
+    // Debug: forca fim de jogo com vitoria, ignorando turno e fase atuais.
+    public void DebugForceVictory()
+    {
+        if (Outcome != GameOutcome.None)
+            return;
+
+        EndGame(GameOutcome.Victory);
+    }
+
+    // Debug: forca fim de jogo com derrota, ignorando turno e fase atuais.
+    public void DebugForceGameOver()
+    {
+        if (Outcome != GameOutcome.None)
+            return;
+
+        EndGame(GameOutcome.GameOver);
+    }
+
     private void EndGame(GameOutcome outcome)
     {
         Outcome = outcome;

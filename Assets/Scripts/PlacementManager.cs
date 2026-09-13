@@ -8,6 +8,10 @@ public class PlacementManager : MonoBehaviour
 
     [SerializeField] private float cellSize = 1f;
 
+    // Usados so nas fases 2+ de uma rodada, pra sortear o conteudo dos quarteiroes por cima da malha de ruas fixa.
+    [SerializeField] private StructureData[] _proceduralBuildingOptions;
+    [SerializeField] private StructureData[] _proceduralGreenLotOptions;
+
     Grid placementGrid;
 
     // Instancia pura do grid, exposta pra outros sistemas consultarem o layout.
@@ -23,6 +27,8 @@ public class PlacementManager : MonoBehaviour
 
     private void RegisterInitialOccupants()
     {
+        var isNewPhase = MetaProgressionManager.IsNewPhase;
+
         foreach (Transform child in transform)
         {
             var occupant = child.GetComponent<InitialGridOccupant>();
@@ -37,8 +43,32 @@ public class PlacementManager : MonoBehaviour
             }
 
             placementGrid[position.x, position.z] = occupant.CellType;
+
+            var isBlockCell = occupant.CellType == CellType.Structure || occupant.CellType == CellType.SpecialStructure;
+            if (isBlockCell && isNewPhase)
+            {
+                // Fase nova: o quarteirao desenhado a mao vira o sorteado em RegenerateBlocks, entao some daqui.
+                child.gameObject.SetActive(false);
+                continue;
+            }
+
             if (occupant.StructureData != null)
                 _placedStructureData[position] = occupant.StructureData;
+        }
+
+        if (isNewPhase)
+            RegenerateBlocks();
+    }
+
+    // Sorteia de novo o conteudo dos quarteiroes (nunca a malha de ruas) pras fases 2+ de uma rodada.
+    private void RegenerateBlocks()
+    {
+        var generator = new CityLayoutGenerator(_proceduralBuildingOptions, _proceduralGreenLotOptions);
+        foreach (var cell in generator.Generate(placementGrid))
+        {
+            var position = new Vector3Int(cell.X, 0, cell.Z);
+            PlaceTemporaryStructure(position, cell.Structure.Prefab, cell.Structure.FootprintCellType, cell.FacingDegrees);
+            _placedStructureData[position] = cell.Structure;
         }
     }
 
@@ -61,17 +91,18 @@ public class PlacementManager : MonoBehaviour
         return placementGrid[position.x, position.z] == type;
     }
 
-    internal void PlaceTemporaryStructure(Vector3Int position, GameObject structurePrefab, CellType type)
+    internal void PlaceTemporaryStructure(Vector3Int position, GameObject structurePrefab, CellType type, float yRotationDegrees = 0f)
     {
         placementGrid[position.x, position.z] = type;
-        CreateANewStructureModel(position, structurePrefab, type);
+        CreateANewStructureModel(position, structurePrefab, type, yRotationDegrees);
     }
 
-    private void CreateANewStructureModel(Vector3Int position, GameObject structurePrefab, CellType type)
+    private void CreateANewStructureModel(Vector3Int position, GameObject structurePrefab, CellType type, float yRotationDegrees = 0f)
     {
         GameObject structure = new GameObject(type.ToString());
         structure.transform.SetParent(transform);
         structure.transform.localPosition = CellToLocalPosition(position);
+        structure.transform.localRotation = Quaternion.Euler(0f, yRotationDegrees, 0f);
         var structureModel = structure.AddComponent<StructureModel>();
         structureModel.CreateModel(structurePrefab);
     }

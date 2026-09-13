@@ -37484,6 +37484,16 @@ MonoBehaviour:
   width: 15
   height: 15
   cellSize: 1
+  _proceduralBuildingOptions:
+  - {fileID: 11400000, guid: e95e15d383ba1683795d3bc88790c1f9, type: 2}
+  - {fileID: 11400000, guid: f6e06664cf06c0dc4829e9ab1f302c12, type: 2}
+  - {fileID: 11400000, guid: 40d3adfa33068050688f681855ff742b, type: 2}
+  - {fileID: 11400000, guid: ca0aafcd65692703c9db9d7ca662c4a9, type: 2}
+  - {fileID: 11400000, guid: 2c0e9b69dfcc033dbb59878fdbfd5baf, type: 2}
+  - {fileID: 11400000, guid: e611d0dab3ddbe4a1b4270e7d408f538, type: 2}
+  _proceduralGreenLotOptions:
+  - {fileID: 11400000, guid: 687b48f4a3346811e87af08d19de2f51, type: 2}
+  - {fileID: 11400000, guid: 814659170716e8c58bd3543d3839bccd, type: 2}
 --- !u!4 &1483889503
 Transform:
   m_ObjectHideFlags: 0

@@ -157,7 +157,7 @@ public class TurnManager : MonoBehaviour
         _effects?.SetAmbientGlowsVisible(phase == TurnPhase.Action);
 
         if (phase == TurnPhase.StartOfTurn)
-            Hand.Draw(HandSize);
+            Hand.Draw(HandSize, _cityStatsManager.Stats);
         else if (phase == TurnPhase.Event)
             HandleEventPhase();
         else if (phase == TurnPhase.Advance)

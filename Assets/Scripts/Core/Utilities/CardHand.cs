@@ -18,14 +18,22 @@ public class CardHand
         _pool = pool;
     }
 
-    public void Draw(int count)
+    // So compra carta cujo RequiredPesquisa ja foi atingido, senao a mao vem cheia de carta travada.
+    public void Draw(int count, CityStats stats)
     {
-        if (_pool.Count == 0)
+        var eligible = new List<CardData>();
+        foreach (var card in _pool)
+        {
+            if (stats.GetValue(CityParameterType.Pesquisa) >= card.RequiredPesquisa)
+                eligible.Add(card);
+        }
+
+        if (eligible.Count == 0)
             return;
 
         for (int i = 0; i < count; i++)
         {
-            _cards.Add(_pool[_random.Next(_pool.Count)]);
+            _cards.Add(eligible[_random.Next(eligible.Count)]);
         }
         OnHandChanged?.Invoke();
     }

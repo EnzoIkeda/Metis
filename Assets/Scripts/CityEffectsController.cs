@@ -20,6 +20,13 @@ public class CityEffectsController : MonoBehaviour
     [Tooltip("Duração total do CFXR Explosion 1 (duration + lifetime das partículas).")]
     [SerializeField] private float _explosionDuration = 2.1f;
 
+    private void Awake()
+    {
+        // AmbientGlows e persistente na cena (so liga/desliga), os outros 3 sao corrigidos a cada Instantiate em PlayOneShot.
+        if (_ambientGlows != null)
+            AlignFlatMeshParticlesToGround(_ambientGlows);
+    }
+
     // Toca ao jogar uma carta, atrasando o popup de evento ate o efeito terminar.
     public void PlayImpactGlowing(Action onComplete)
     {
@@ -51,6 +58,7 @@ public class CityEffectsController : MonoBehaviour
         {
             var spawnPosition = _effectSpawnPoint != null ? _effectSpawnPoint.position : transform.position;
             var instance = Instantiate(prefab, spawnPosition, Quaternion.identity);
+            AlignFlatMeshParticlesToGround(instance.gameObject);
             instance.Play();
             // Margem de seguranca pra garantir que toda particula ja sumiu antes de destruir.
             Destroy(instance.gameObject, duration + 0.5f);
@@ -58,5 +66,28 @@ public class CityEffectsController : MonoBehaviour
 
         yield return new WaitForSeconds(duration);
         onComplete?.Invoke();
+    }
+
+    // A CFXR Ubershader deixa esses efeitos com alignment View por padrao (mesh sempre de frente pra camera),
+    // o que fica torto numa camera fixa em angulo isometrico: o disco/anel fica encarando o jogador em vez de
+    // deitado no chao junto com o resto da cidade. So corrige quem tem mesh achatado no proprio plano XY local
+    // (achado numa revisao de codigo: bounds.z == 0), deixando efeito tipo faisca/fumaca/brilho (Billboard/Stretch,
+    // sem plano proprio) do jeito que ja estava.
+    private static void AlignFlatMeshParticlesToGround(GameObject root)
+    {
+        foreach (var renderer in root.GetComponentsInChildren<ParticleSystemRenderer>(true))
+        {
+            if (renderer.renderMode != ParticleSystemRenderMode.Mesh)
+                continue;
+
+            var mesh = renderer.mesh;
+            if (mesh == null || Mathf.Approximately(mesh.bounds.size.z, 0f) == false)
+                continue;
+
+            renderer.alignment = ParticleSystemRenderSpace.Local;
+            // Rotacao em espaco de mundo, nao local: varios desses sub-sistemas sao pai/filho um do outro,
+            // e ambos batem no mesmo criterio (mesh achatado), entao local acumularia a correcao em dobro no filho.
+            renderer.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
+        }
     }
 }

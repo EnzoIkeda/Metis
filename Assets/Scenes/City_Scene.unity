@@ -1634,7 +1634,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 16, y: -374}
+  m_AnchoredPosition: {x: 16, y: -430}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &55835819
@@ -25924,7 +25924,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 190}
+  m_SizeDelta: {x: 0, y: 246}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1061829971
 MonoBehaviour:
@@ -29168,7 +29168,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 16, y: -282}
+  m_AnchoredPosition: {x: 16, y: -338}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1156948103
@@ -30262,7 +30262,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 16, y: -206}
+  m_AnchoredPosition: {x: 16, y: -262}
   m_SizeDelta: {x: 280, y: 60}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1187724191
@@ -37243,12 +37243,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.VerticalLayoutGroup
   m_Padding:
-    m_Left: 4
-    m_Right: 4
-    m_Top: 8
-    m_Bottom: 8
+    m_Left: 5
+    m_Right: 5
+    m_Top: 10
+    m_Bottom: 10
   m_ChildAlignment: 1
-  m_Spacing: 6
+  m_Spacing: 8
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
@@ -37468,7 +37468,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -16, y: -282}
+  m_AnchoredPosition: {x: -16, y: -338}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 1, y: 1}
 --- !u!1001 &1445566708
@@ -54657,6 +54657,7 @@ GameObject:
   - component: {fileID: 2044889010}
   - component: {fileID: 2044889013}
   - component: {fileID: 2044889014}
+  - component: {fileID: 2044889015}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -54796,11 +54797,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraZoomController
   _camera: {fileID: 2044889011}
-  _minOrthographicSize: 8
+  _minOrthographicSize: 4
   _maxOrthographicSize: 19
   _scrollZoomSpeed: 0.02
   _pinchZoomSpeed: 0.015
   _buttonZoomStep: 2
+--- !u!114 &2044889015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044889009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 659f49772d47da45bb32f1ee8fc689ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraPanController
+  _camera: {fileID: 2044889011}
+  _minX: -8.4
+  _maxX: 6.5
+  _minZ: -14.6
+  _maxZ: 0.3
 --- !u!1001 &2045321602
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -30,4 +30,4 @@ MonoBehaviour:
   - Parameter: 6
     Amount: 2
   _structureToPlace: {fileID: 0}
-  _artwork: {fileID: 0}
+  _artwork: {fileID: 21300000, guid: 71edd5cf635cbeeffb2f2b4344df6d68, type: 3}

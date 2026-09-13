@@ -71,10 +71,24 @@ public static class AssignCardArtwork
     private static Sprite LoadAsSprite(string path)
     {
         var importer = AssetImporter.GetAtPath(path) as TextureImporter;
-        if (importer != null && importer.textureType != TextureImporterType.Sprite)
+        if (importer != null)
         {
-            importer.textureType = TextureImporterType.Sprite;
-            importer.SaveAndReimport();
+            var needsReimport = false;
+            if (importer.textureType != TextureImporterType.Sprite)
+            {
+                importer.textureType = TextureImporterType.Sprite;
+                needsReimport = true;
+            }
+
+            // Modo Multiple sem slice nenhum nao gera Sprite nenhum no arquivo, mesmo com textureType Sprite
+            if (importer.spriteImportMode != SpriteImportMode.Single)
+            {
+                importer.spriteImportMode = SpriteImportMode.Single;
+                needsReimport = true;
+            }
+
+            if (needsReimport)
+                importer.SaveAndReimport();
         }
 
         return AssetDatabase.LoadAssetAtPath<Sprite>(path);

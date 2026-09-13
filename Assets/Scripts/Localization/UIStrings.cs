@@ -40,6 +40,10 @@ public static class UIStrings
     public static string MainMenuQuit => IsPt ? "Sair" : "Quit";
     public static string MainMenuSettingsBack => IsPt ? "Voltar" : "Back";
 
+    public static string PauseTitle => IsPt ? "Pausado" : "Paused";
+    public static string PauseResumeButton => IsPt ? "Continuar" : "Resume";
+    public static string PauseMainMenuButton => IsPt ? "Menu Principal" : "Main Menu";
+
     public static string LanguageName(Language language) =>
         language == Language.Portuguese ? "Português" : "English";
 

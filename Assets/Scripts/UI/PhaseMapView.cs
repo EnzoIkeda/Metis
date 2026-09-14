@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-// Mostra um botao por no de PhaseMapProvider. No Beta e sempre 1 (avancar), mas ja suporta N nos.
+// Mostra um botao por no do mapa de fase. No Beta e sempre 1 (avancar), mas ja suporta N nos.
 public class PhaseMapView : MonoBehaviour
 {
     [SerializeField] private TMP_Text _titleText;

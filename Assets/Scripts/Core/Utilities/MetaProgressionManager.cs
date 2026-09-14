@@ -12,7 +12,7 @@ public class MetaProgressionState
     public int PhasesCompleted;
 }
 
-// Meta-progressao da rodada atual, persistida entre cenas via PlayerPrefs. Mesmo padrao do LocalizationManager.
+// Meta-progressao da rodada atual, persistida entre cenas via PlayerPrefs, mesmo padrao ja usado pro idioma.
 public static class MetaProgressionManager
 {
     private const string PrefsKey = "Metis.MetaProgression";

@@ -57,7 +57,7 @@ public class PhaseRewardPopupView : MonoBehaviour
             _panelRoot.SetActive(true);
     }
 
-    // Sorteia entre o pool inteiro de cartas do TurnManager e as vantagens passivas cadastradas.
+    // Sorteia entre o pool inteiro de cartas e as vantagens passivas cadastradas.
     private UnityEngine.Object[] DrawOptions()
     {
         var pool = new List<UnityEngine.Object>();

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-// Monta o pool de cartas que o CardHand compra, combinando arquetipo escolhido e recompensas carregadas de fases anteriores.
+// Monta o pool de cartas que a mao compra, combinando arquetipo escolhido e recompensas carregadas de fases anteriores.
 public static class DeckBuilder
 {
     public static List<CardData> Build(IReadOnlyList<CardData> fullPool, CardArchetype archetype, IReadOnlyList<string> loadedCardNames)

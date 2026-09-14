@@ -20,8 +20,7 @@ public class TurnManager : MonoBehaviour
     private RandomEventPool _events;
     private RandomEventData _pendingEvent;
 
-    // Guardas de reentrancia: a fase so muda de verdade quando a animacao do efeito termina (callback atrasado),
-    // entao sem isso da pra jogar mais de uma carta ou confirmar o evento mais de uma vez na mesma janela.
+    // Guardas de reentrancia contra jogar carta ou confirmar evento duas vezes durante a animacao atrasada.
     private bool _actionEffectPending;
     private bool _eventEffectPending;
 

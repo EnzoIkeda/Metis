@@ -9,14 +9,14 @@ public class PedestrianTrafficController : MonoBehaviour
     [SerializeField] private float _minSpeed = 0.5f;
     [SerializeField] private float _maxSpeed = 0.9f;
 
-    [Tooltip("Distância do centro da célula até a beira da calçada — precisa ficar claramente fora de CarTrafficController._laneOffset (mais a metade da largura de um carro) pra nunca se sobrepor com uma faixa de carro.")]
+    [Tooltip("Distância do centro da célula até a beira da calçada, precisa ficar claramente fora da faixa de carro (mais a metade da largura de um carro) pra nunca se sobrepor.")]
     [SerializeField] private float _edgeOffset = 0.4f;
 
-    [Tooltip("Chance (0-1) de trocar de lado da rua toda vez que um pedestre SAI de uma célula de interseção (4 vizinhos) — a \"faixa de pedestre\" do design, já que interseção é o único lugar onde ruas se cruzam.")]
+    [Tooltip("Chance (0-1) de trocar de lado da rua toda vez que um pedestre sai de uma célula de interseção (4 vizinhos), a \"faixa de pedestre\" do design.")]
     [Range(0f, 1f)]
     [SerializeField] private float _crossingChance = 0.35f;
 
-    [Tooltip("Graus somados por cima da rotação calculada na direção de movimento — mesmo propósito do campo equivalente em CarTrafficController, mas pros meshes de pessoa do pacote CityPeople.")]
+    [Tooltip("Graus somados por cima da rotação calculada na direção de movimento, pra compensar o eixo \"de frente\" de verdade dos meshes de pessoa do pacote CityPeople.")]
     [SerializeField] private float _forwardAxisCorrectionDegrees;
 
     private RoadNetwork _roadNetwork;

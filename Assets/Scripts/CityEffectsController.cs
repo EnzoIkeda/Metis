@@ -11,7 +11,7 @@ public class CityEffectsController : MonoBehaviour
     [SerializeField] private GameObject _ambientGlows;
     [SerializeField] private Transform _effectSpawnPoint;
 
-    [Tooltip("Duração total do CFXR Impact Glowing (duration + lifetime das partículas) — quanto tempo esperar antes de considerar a animação terminada.")]
+    [Tooltip("Duração total do CFXR Impact Glowing (duration + lifetime das partículas), quanto tempo esperar antes de considerar a animação terminada.")]
     [SerializeField] private float _impactGlowingDuration = 1.6f;
 
     [Tooltip("Duração total do CFXR Magic Poof (duration + lifetime das partículas).")]
@@ -68,11 +68,8 @@ public class CityEffectsController : MonoBehaviour
         onComplete?.Invoke();
     }
 
-    // A CFXR Ubershader deixa esses efeitos com alignment View por padrao (mesh sempre de frente pra camera),
-    // o que fica torto numa camera fixa em angulo isometrico: o disco/anel fica encarando o jogador em vez de
-    // deitado no chao junto com o resto da cidade. So corrige quem tem mesh achatado no proprio plano XY local
-    // (achado numa revisao de codigo: bounds.z == 0), deixando efeito tipo faisca/fumaca/brilho (Billboard/Stretch,
-    // sem plano proprio) do jeito que ja estava.
+    // CFXR usa alignment View por padrao (mesh sempre de frente pra camera), errado nessa camera isometrica fixa.
+    // So corrige mesh achatado (bounds.z == 0); faisca/fumaca/brilho ficam de frente pra camera como antes.
     private static void AlignFlatMeshParticlesToGround(GameObject root)
     {
         foreach (var renderer in root.GetComponentsInChildren<ParticleSystemRenderer>(true))
@@ -85,8 +82,7 @@ public class CityEffectsController : MonoBehaviour
                 continue;
 
             renderer.alignment = ParticleSystemRenderSpace.Local;
-            // Rotacao em espaco de mundo, nao local: varios desses sub-sistemas sao pai/filho um do outro,
-            // e ambos batem no mesmo criterio (mesh achatado), entao local acumularia a correcao em dobro no filho.
+            // Rotacao em espaco de mundo, nao local, pra nao dobrar a correcao quando pai e filho batem no mesmo criterio.
             renderer.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
         }
     }

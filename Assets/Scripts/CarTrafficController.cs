@@ -9,10 +9,10 @@ public class CarTrafficController : MonoBehaviour
     [SerializeField] private float _minSpeed = 1.2f;
     [SerializeField] private float _maxSpeed = 2.2f;
 
-    [Tooltip("Distância do centro da célula (cellSize=1) até o centro de cada faixa — 2 faixas por rua, uma em cada sentido, a essa distância pra cada lado. Precisa deixar espaço até a borda da célula pra PedestrianDriver._edgeOffset (calçada) nunca se sobrepor com a faixa de carro.")]
+    [Tooltip("Distância do centro da célula (cellSize=1) até o centro de cada faixa, 2 faixas por rua (uma pra cada sentido). Precisa deixar espaço até a borda da célula pra nunca se sobrepor com a calçada do pedestre.")]
     [SerializeField] private float _laneOffset = 0.22f;
 
-    [Tooltip("Graus somados por cima da rotação calculada (Quaternion.LookRotation na direção de movimento) — compensa o eixo \"de frente\" de verdade do mesh do carro, igual à FrontAxisCorrection dos prédios da cidade inicial (ver ARCHITECTURE.md).")]
+    [Tooltip("Graus somados por cima da rotação calculada na direção de movimento, pra compensar o eixo \"de frente\" de verdade do mesh do carro.")]
     [SerializeField] private float _forwardAxisCorrectionDegrees;
 
     private RoadNetwork _roadNetwork;

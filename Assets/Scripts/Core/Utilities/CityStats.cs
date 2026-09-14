@@ -165,7 +165,7 @@ public class CityStats
         if (IsCritical(parameter))
         {
             OnParameterCritical?.Invoke(parameter);
-            if (_gameOverRaised == false)
+            if (parameter == AnchorParameter && _gameOverRaised == false)
             {
                 _gameOverRaised = true;
                 OnGameOver?.Invoke();

@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# Roda a Camada 2 (Assets/Tests/EditMode) antes de todo push, ja que o CI so cobre a Camada 1.
+# SKIP_UNITY_TESTS=1 git push pula esse hook de proposito.
+set -uo pipefail
+
+if [ -n "${SKIP_UNITY_TESTS:-}" ]; then
+    echo "pre-push: SKIP_UNITY_TESTS setado, pulando testes EditMode (Camada 2)."
+    exit 0
+fi
+
+if ! command -v unity >/dev/null 2>&1; then
+    echo "pre-push: CLI 'unity' nao encontrada no PATH, pulando testes EditMode (Camada 2)."
+    echo "pre-push: instale a Unity CLI ou rode 'SKIP_UNITY_TESTS=1 git push' pra pular de proposito."
+    exit 0
+fi
+
+repo_root="$(git rev-parse --show-toplevel)"
+
+echo "pre-push: rodando testes EditMode (Camada 2)..."
+unity test "$repo_root" --mode EditMode --timeout 600
+status=$?
+
+if [ "$status" -eq 0 ]; then
+    echo "pre-push: testes EditMode passaram."
+    exit 0
+elif [ "$status" -eq 8 ]; then
+    echo "pre-push: testes EditMode FALHARAM. Push bloqueado."
+    echo "pre-push: rode 'unity test . --mode EditMode' pra ver detalhes, ou 'SKIP_UNITY_TESTS=1 git push' pra pular."
+    exit 1
+else
+    echo "pre-push: 'unity test' nao completou (falha de infraestrutura, codigo $status). Push bloqueado."
+    echo "pre-push: rode 'unity test . --mode EditMode' pra investigar, ou 'SKIP_UNITY_TESTS=1 git push' pra pular."
+    exit 1
+fi

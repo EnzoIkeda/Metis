@@ -17,7 +17,7 @@ jobs:
           dotnet-version: '10.0.x'
       - run: dotnet format Tests/Metis.Core.Tests --verify-no-changes
 
-  test:
+  core-tests:
     name: Tests (Metis.Core.Tests)
     runs-on: ubuntu-latest
     steps:
@@ -26,3 +26,10 @@ jobs:
         with:
           dotnet-version: '10.0.x'
       - run: dotnet test Tests/Metis.Core.Tests
+
+# Sem job pros testes EditMode do Unity Test Framework (Assets/Tests/EditMode): a Unity restringiu
+# ativacao manual offline (.alf/.ulf) a seats Enterprise/Industry, entao uma conta Personal nao
+# ativa licenca sem interacao humana num runner hospedado do GitHub. Um runner self-hosted
+# contornaria isso, mas o repo e publico - PR de fork rodando codigo arbitrario numa maquina
+# pessoal e o exato cenario que o GitHub desaconselha. Rodar `unity test . --mode EditMode`
+# local antes de cada push/PR fica como pratica manual (ver ARCHITECTURE.md).

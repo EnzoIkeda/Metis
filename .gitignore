@@ -140,3 +140,6 @@ $RECYCLE.BIN/
 !/Tests/**/*.csproj
 /Tests/**/obj/
 /Tests/**/bin/
+
+# Saida de 'unity test' (Camada 2, disparado pelo hook .githooks/pre-push)
+/test-results.xml

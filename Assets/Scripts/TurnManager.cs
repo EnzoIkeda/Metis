@@ -137,7 +137,11 @@ public class TurnManager : MonoBehaviour
         var closedEvent = _pendingEvent;
         _pendingEvent = null;
 
-        if (closedEvent != null && _effects != null && IsPositiveOrMixed(closedEvent))
+        var tone = closedEvent != null && _effects != null
+            ? CityEffectsController.ClassifyEventTone(closedEvent.StatEffects)
+            : EventTone.Neutral;
+
+        if (tone == EventTone.PositiveOrMixed)
         {
             _eventEffectPending = true;
             _effects.PlayMagicPoof(() =>
@@ -146,7 +150,7 @@ public class TurnManager : MonoBehaviour
                 Machine?.AcknowledgeEvent();
             });
         }
-        else if (closedEvent != null && _effects != null && IsNegative(closedEvent))
+        else if (tone == EventTone.Negative)
         {
             _eventEffectPending = true;
             _effects.PlayExplosion(() =>
@@ -159,28 +163,6 @@ public class TurnManager : MonoBehaviour
         {
             Machine?.AcknowledgeEvent();
         }
-    }
-
-    // Positivo ou misto, quando o evento tem pelo menos um efeito de valor positivo.
-    private static bool IsPositiveOrMixed(RandomEventData eventData)
-    {
-        foreach (var effect in eventData.StatEffects)
-        {
-            if (effect.Amount > 0f)
-                return true;
-        }
-        return false;
-    }
-
-    // Negativo, quando o evento tem pelo menos um efeito de valor negativo e nenhum positivo.
-    private static bool IsNegative(RandomEventData eventData)
-    {
-        foreach (var effect in eventData.StatEffects)
-        {
-            if (effect.Amount < 0f)
-                return true;
-        }
-        return false;
     }
 
     private void HandlePhaseChanged(TurnPhase phase)

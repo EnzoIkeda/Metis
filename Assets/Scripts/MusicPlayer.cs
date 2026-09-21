@@ -3,7 +3,7 @@ using UnityEngine;
 
 // Toca a trilha de fundo do jogo, rotacionando entre as faixas da playlist ativa.
 // Singleton persistente entre cenas (DontDestroyOnLoad); uma instancia em cada cena garante que sempre exista uma, sem duplicar.
-// SetPlaylist troca a playlist ativa em runtime, ponto de extensao pra usar uma trilha especifica numa aba/cena no futuro.
+// A playlist ativa pode ser trocada em runtime, ponto de extensao pra usar uma trilha especifica numa aba/cena no futuro.
 [RequireComponent(typeof(AudioSource))]
 public class MusicPlayer : MonoBehaviour
 {
@@ -33,6 +33,10 @@ public class MusicPlayer : MonoBehaviour
 
     private void Start()
     {
+        // Uma instancia duplicada so e destruida no fim do frame: sem essa checagem ela ainda tentaria tocar musica antes disso.
+        if (Instance != this)
+            return;
+
         PlayNextTrack();
     }
 
@@ -66,7 +70,8 @@ public class MusicPlayer : MonoBehaviour
 
     private IEnumerator WaitAndPlayNext(float delaySeconds)
     {
-        yield return new WaitForSeconds(delaySeconds);
+        // Tempo real, nao escalado: o AudioSource ignora Time.timeScale, entao a espera precisa acompanhar.
+        yield return new WaitForSecondsRealtime(delaySeconds);
         PlayNextTrack();
     }
 }

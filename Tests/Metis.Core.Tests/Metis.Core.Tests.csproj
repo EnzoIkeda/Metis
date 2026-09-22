@@ -29,6 +29,7 @@
     <Compile Include="../../Assets/Scripts/Core/Utilities/TurnMachine.cs" Link="Source/TurnMachine.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/RoadNetwork.cs" Link="Source/RoadNetwork.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/PhaseMapProvider.cs" Link="Source/PhaseMapProvider.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/MusicRotation.cs" Link="Source/MusicRotation.cs" />
   </ItemGroup>
 
 </Project>

@@ -2,8 +2,7 @@ using System;
 using System.Reflection;
 using UnityEngine;
 
-// Constroi CardData/RandomEventData/StructureData pra teste via reflection, ja que os campos sao
-// [SerializeField] private sem setter publico (por padrao de codigo do projeto). So pra EditMode.
+// Constroi CardData/RandomEventData/StructureData pra teste via reflection, ja que os campos sao [SerializeField] private sem setter publico. So pra EditMode.
 public static class TestDataFactory
 {
     public static CardData CreateCard(

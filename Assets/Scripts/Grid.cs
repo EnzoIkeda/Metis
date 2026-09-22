@@ -37,4 +37,35 @@ public class Grid
         }
     }
 
+    // Verifica se a celula esta dentro dos limites do grid.
+    public bool IsInBounds(int x, int z)
+    {
+        return x >= 0 && x < _width && z >= 0 && z < _height;
+    }
+
+    // Sorteia uma celula livre (CellType.Empty); false se nao houver nenhuma.
+    public bool TryGetRandomFreePosition(System.Random random, out int x, out int z)
+    {
+        var freePositions = new System.Collections.Generic.List<(int X, int Z)>();
+        for (var i = 0; i < _width; i++)
+        {
+            for (var j = 0; j < _height; j++)
+            {
+                if (_grid[i, j] == CellType.Empty)
+                    freePositions.Add((i, j));
+            }
+        }
+
+        if (freePositions.Count == 0)
+        {
+            x = 0;
+            z = 0;
+            return false;
+        }
+
+        var chosen = freePositions[random.Next(freePositions.Count)];
+        x = chosen.X;
+        z = chosen.Z;
+        return true;
+    }
 }

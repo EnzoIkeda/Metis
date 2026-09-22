@@ -3,8 +3,7 @@ using System.Collections.Generic;
 
 namespace Metis.Core.Tests;
 
-// Monta um CityStats com os 9 parametros em valores neutros e nunca criticos por padrao,
-// pra cada teste customizar so o que importa pro caso em questao.
+// Monta um CityStats com os 9 parametros em valores neutros e nunca criticos por padrao, pra cada teste customizar so o que importa pro caso em questao.
 internal static class CityStatsTestFactory
 {
     public const float NeutralValue = 50f;

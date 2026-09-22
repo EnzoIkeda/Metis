@@ -74,9 +74,7 @@ public class TurnMachineTests
     [Test]
     public void AcknowledgeEvent_AnchorCritical_EndsGameAsGameOver()
     {
-        // EndActionPhase chama CityStats.ResolveTurn(), que recalcula BemEstar a partir dos 4
-        // parametros positivos (RecomputeDerivedParameters) - entao e neles, nao no InitialValue
-        // de BemEstar, que precisa forcar o valor recalculado pra ficar abaixo do critico.
+        // A resolucao de turno recalcula BemEstar a partir dos 4 parametros positivos, entao e neles, nao no valor inicial de BemEstar, que precisa forcar o valor recalculado pra ficar abaixo do critico.
         var stats = CityStatsTestFactory.Build(customize: configs =>
         {
             var bemEstar = configs[CityParameterType.BemEstar];

@@ -1,5 +1,4 @@
-// Nomes de exibicao abreviados de cada parametro, no idioma atual. Separado de StatModifier.cs
-// (Data/) porque depende de LocalizationManager e so e usado pela UI, mantendo Data/ livre de UnityEngine.
+// Nomes de exibicao abreviados de cada parametro, no idioma atual. Fica fora de Data/ por depender de LocalizationManager e ser usado so pela UI.
 public static class CityParameterTypeExtensions
 {
     public static string GetDisplayName(this CityParameterType parameter)

@@ -1,9 +1,6 @@
 namespace Metis.Core.Tests;
 
-// Os valores esperados abaixo sao calculados a mao a partir da formula documentada em Resolve():
-// efeito = soma_fontes[ (valorFonte - valorNeutro) / valorNeutro * coeficiente * fatorZona ],
-// delta = efeito * escalaGlobal + deriva + correcaoExcesso. Cada teste isola um unico termo
-// deixando todo o resto no valor neutro (contribuicao zero) pra poder prever o resultado exato.
+// Valores esperados calculados a mao pela formula: efeito = soma_fontes[(valorFonte - valorNeutro) / valorNeutro * coeficiente * fatorZona], delta = efeito * escalaGlobal + deriva + correcaoExcesso; cada teste isola um unico termo, deixando o resto no valor neutro (contribuicao zero) pra prever o resultado exato.
 public class InteractionMatrixTests
 {
     private const float ValorNeutro = 50f;
@@ -43,8 +40,7 @@ public class InteractionMatrixTests
     [Test]
     public void Resolve_SourceInCrisisZoneWithPositiveCoefficient_UsesApoioCriseMultiplier()
     {
-        // Renda resolve primeiro (indice 0), entao le direto os valores de configuracao, sem
-        // contaminacao de Gauss-Seidel. Populacao tem coeficiente +1.2 sobre Renda.
+        // Renda resolve primeiro (indice 0), entao le direto os valores de configuracao, sem contaminacao de Gauss-Seidel; Populacao tem coeficiente +1.2 sobre Renda.
         var matrix = BuildMatrix(multiplicadorApoioCrise: 3f);
         var stats = CityStatsTestFactory.Build(matrix, customize: configs =>
         {
@@ -80,8 +76,7 @@ public class InteractionMatrixTests
     [Test]
     public void Resolve_TargetItselfInExcessoZone_AppliesSelfCorrectionDrift()
     {
-        // Com tudo mais neutro o efeito de interacao e zero; so sobra a autocorrecao sobre o
-        // proprio alvo (Renda), calculada sobre o valor dele ANTES desta resolucao.
+        // Com tudo mais neutro o efeito de interacao e zero; so sobra a autocorrecao sobre o proprio alvo (Renda), calculada sobre o valor dele antes desta resolucao.
         var matrix = BuildMatrix(derivaCorrecaoExcesso: 0.1f);
         var stats = CityStatsTestFactory.Build(matrix, customize: configs =>
         {
@@ -99,10 +94,7 @@ public class InteractionMatrixTests
     [Test]
     public void Resolve_IsGaussSeidel_LaterTargetsSeeEarlierTargetsAlreadyUpdatedThisPass()
     {
-        // Renda (indice 0) tem deriva propria, entao muda antes de qualquer outro alvo resolver.
-        // Energia (indice 1) depende de Renda (coeficiente +0.3): sob Gauss-Seidel ela deve reagir
-        // ao valor de Renda JA ATUALIZADO nesta mesma passada, nao ao snapshot do inicio do turno
-        // (que daria efeito zero, ja que Renda comecou exatamente no valor neutro).
+        // Renda (indice 0) tem deriva propria e muda antes de Energia (indice 1, coeficiente +0.3), que sob Gauss-Seidel deve reagir ao valor de Renda ja atualizado nesta mesma passada, nao ao snapshot do inicio do turno.
         var matrix = BuildMatrix();
         var stats = CityStatsTestFactory.Build(matrix, customize: configs =>
         {

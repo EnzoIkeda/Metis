@@ -75,11 +75,7 @@ public class PlacementManager : MonoBehaviour
 
     internal bool CheckIfPositionInBound(Vector3Int position)
     {
-        if(position.x >= 0 && position.x < _width && position.z >=0 && position.z < _height)
-        {
-            return true;
-        }
-        return false;
+        return _placementGrid.IsInBounds(position.x, position.z);
     }
 
     internal bool CheckIfPositionIsFree(Vector3Int position)
@@ -139,24 +135,14 @@ public class PlacementManager : MonoBehaviour
 
     public bool TryGetRandomFreePosition(out Vector3Int position)
     {
-        var freePositions = new List<Vector3Int>();
-        for (var x = 0; x < _width; x++)
-        {
-            for (var z = 0; z < _height; z++)
-            {
-                var candidate = new Vector3Int(x, 0, z);
-                if (CheckIfPositionIsFree(candidate))
-                    freePositions.Add(candidate);
-            }
-        }
-
-        if (freePositions.Count == 0)
+        var random = new System.Random(UnityEngine.Random.Range(int.MinValue, int.MaxValue));
+        if (_placementGrid.TryGetRandomFreePosition(random, out var x, out var z) == false)
         {
             position = default;
             return false;
         }
 
-        position = freePositions[UnityEngine.Random.Range(0, freePositions.Count)];
+        position = new Vector3Int(x, 0, z);
         return true;
     }
 

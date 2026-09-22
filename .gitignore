@@ -135,8 +135,7 @@ $RECYCLE.BIN/
 .env.local
 *.env.local
 
-# Projeto de teste standalone (Tests/Metis.Core.Tests) — csproj é próprio do repo, ao contrário
-# dos *.csproj gerados pelo Unity ignorados acima; obj/bin são artefato de build, esses sim ignorados.
+# Projeto de teste standalone: csproj é próprio do repo (diferente dos *.csproj gerados pelo Unity, ignorados acima); obj/bin são artefato de build, esses sim ignorados.
 !/Tests/**/*.csproj
 /Tests/**/obj/
 /Tests/**/bin/

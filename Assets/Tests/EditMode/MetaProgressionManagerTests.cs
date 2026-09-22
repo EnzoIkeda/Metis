@@ -16,8 +16,7 @@ public class MetaProgressionManagerTests
         MetaProgressionManager.ResetRun();
     }
 
-    // Zera o cache estatico em memoria pra forcar a proxima leitura a vir do PlayerPrefs de novo,
-    // provando que o round-trip de serializacao (JsonUtility) funciona, nao so o objeto em memoria.
+    // Zera o cache estatico em memoria pra forcar a proxima leitura a vir do PlayerPrefs de novo, provando que o round-trip de serializacao funciona, nao so o objeto em memoria.
     private static void ForceReloadFromPlayerPrefs()
     {
         var field = typeof(MetaProgressionManager).GetField("_state", BindingFlags.NonPublic | BindingFlags.Static);

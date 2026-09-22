@@ -176,8 +176,7 @@ public class CityStatsTests
     [Test]
     public void ResolveTurn_AppliesCollapsePenaltyToAnchor_ProportionalToCollapsedCountBeforeResolve()
     {
-        // Renda e Energia nao entram na formula de RecomputeDerivedParameters (so Mobilidade/Saude/
-        // Seguranca/Sustentabilidade entram), entao colapsa--los isola o efeito so na penalidade.
+        // Renda e Energia nao entram na formula de recomputo de BemEstar, entao colapsa-los isola o efeito so na penalidade.
         var stats = CityStatsTestFactory.Build(colapsoPenaltyPerParameter: 5f, customize: configs =>
         {
             foreach (var parameter in new[] { CityParameterType.Renda, CityParameterType.Energia })
@@ -192,8 +191,7 @@ public class CityStatsTests
         var bemEstarAntes = stats.GetValue(CityParameterType.BemEstar);
         stats.ResolveTurn();
 
-        // RecomputeDerivedParameters roda antes da penalidade e nao muda BemEstar aqui (os 4 positivos
-        // seguem neutros); a unica diferenca esperada e a penalidade: -5 * 2 parametros colapsados = -10.
+        // Recomputo de BemEstar roda antes da penalidade e nao muda nada aqui (os 4 positivos seguem neutros); a unica diferenca esperada e a penalidade: -5 * 2 parametros colapsados = -10.
         Assert.That(stats.GetValue(CityParameterType.BemEstar), Is.EqualTo(bemEstarAntes - 10f).Within(0.001f));
     }
 

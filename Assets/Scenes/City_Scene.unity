@@ -38806,9 +38806,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2579291c11f2f7145bcb17a548190b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlacementManager
-  _width: 15
-  _height: 15
-  _cellSize: 1
+  width: 15
+  height: 15
+  cellSize: 1
   _proceduralBuildingOptions:
   - {fileID: 11400000, guid: e95e15d383ba1683795d3bc88790c1f9, type: 2}
   - {fileID: 11400000, guid: f6e06664cf06c0dc4829e9ab1f302c12, type: 2}

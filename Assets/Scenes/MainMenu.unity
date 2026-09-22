@@ -628,7 +628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67059bbb9e74b288e845638dc17e4250, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuManager
-  _settingsPanel: {fileID: 187424657}
+  settingsPanel: {fileID: 187424657}
   _playButtonText: {fileID: 1106211047}
   _settingsButtonText: {fileID: 454878439}
   _quitButtonText: {fileID: 1576681624}

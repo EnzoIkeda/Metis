@@ -1,12 +1,13 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 // Controla o menu principal, incluindo troca de idioma e navegacao entre paineis.
 public class MainMenuManager : MonoBehaviour
 {
     [Header("Paineis da UI")]
-    [SerializeField] private GameObject settingsPanel;
+    [FormerlySerializedAs("settingsPanel")] [SerializeField] private GameObject _settingsPanel;
 
     [Header("Textos localizados")]
     [SerializeField] private TMP_Text _playButtonText;
@@ -53,14 +54,14 @@ public class MainMenuManager : MonoBehaviour
     // Metodos para o botao 'Configuracoes'
     public void OpenSettings()
     {
-        if (settingsPanel != null)
-            settingsPanel.SetActive(true);
+        if (_settingsPanel != null)
+            _settingsPanel.SetActive(true);
     }
 
     public void CloseSettings()
     {
-        if (settingsPanel != null)
-            settingsPanel.SetActive(false);
+        if (_settingsPanel != null)
+            _settingsPanel.SetActive(false);
     }
 
     // Metodo para o botao 'Sair'

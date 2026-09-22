@@ -1,6 +1,15 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+
+// Tom de um evento pra decidir qual efeito de particula tocar ao fechar o popup.
+public enum EventTone
+{
+    Neutral,
+    PositiveOrMixed,
+    Negative
+}
 
 // Toca efeitos visuais de particula em resposta ao loop de turno, sem logica de jogo.
 public class CityEffectsController : MonoBehaviour
@@ -50,6 +59,27 @@ public class CityEffectsController : MonoBehaviour
     {
         if (_ambientGlows != null)
             _ambientGlows.SetActive(visible);
+    }
+
+    // Positivo ou misto tem prioridade sobre negativo, cobrindo evento com efeito positivo e negativo ao mesmo tempo.
+    public static EventTone ClassifyEventTone(IReadOnlyList<StatModifier> effects)
+    {
+        var hasPositive = false;
+        var hasNegative = false;
+
+        foreach (var effect in effects)
+        {
+            if (effect.Amount > 0f)
+                hasPositive = true;
+            else if (effect.Amount < 0f)
+                hasNegative = true;
+        }
+
+        if (hasPositive)
+            return EventTone.PositiveOrMixed;
+        if (hasNegative)
+            return EventTone.Negative;
+        return EventTone.Neutral;
     }
 
     private IEnumerator PlayOneShot(ParticleSystem prefab, float duration, Action onComplete)

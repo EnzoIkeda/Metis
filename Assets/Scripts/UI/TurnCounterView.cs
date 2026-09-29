@@ -27,6 +27,6 @@ public class TurnCounterView : MonoBehaviour
     private void Refresh(int turnIndex)
     {
         if (_turnText != null)
-            _turnText.text = UIStrings.TurnCounter(turnIndex, TurnMachine.VictoryTurnCount);
+            _turnText.text = UIStrings.TurnCounter(turnIndex, _turnManager.Machine.VictoryTurnCount);
     }
 }

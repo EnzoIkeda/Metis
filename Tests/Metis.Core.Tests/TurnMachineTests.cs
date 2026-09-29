@@ -106,12 +106,29 @@ public class TurnMachineTests
     {
         var machine = BuildMachine();
         machine.StartGame();
-        machine.DebugJumpToTurn(TurnMachine.VictoryTurnCount);
+        machine.DebugJumpToTurn(machine.VictoryTurnCount);
         machine.EndActionPhase();
 
         machine.AcknowledgeEvent();
 
         Assert.That(machine.Outcome, Is.EqualTo(GameOutcome.Victory));
+    }
+
+    [Test]
+    public void AcknowledgeEvent_CustomVictoryTurnCount_EndsGameAtThatTurn()
+    {
+        var machine = new TurnMachine(CityStatsTestFactory.Build(), victoryTurnCount: 3);
+        machine.StartGame();
+
+        for (int turn = 1; turn <= 3; turn++)
+        {
+            Assert.That(machine.Outcome, Is.EqualTo(GameOutcome.None));
+            machine.EndActionPhase();
+            machine.AcknowledgeEvent();
+        }
+
+        Assert.That(machine.Outcome, Is.EqualTo(GameOutcome.Victory));
+        Assert.That(machine.TurnIndex, Is.EqualTo(3));
     }
 
     [Test]

@@ -57,6 +57,30 @@ public class CityStats
         }
     }
 
+    private CityStats(CityStats source)
+    {
+        _interactions = source._interactions;
+        _colapsoPenaltyPerParameter = source._colapsoPenaltyPerParameter;
+        _gameOverRaised = source._gameOverRaised;
+
+        foreach (var entry in source._values)
+            _values[entry.Key] = entry.Value;
+        foreach (var entry in source._minValues)
+            _minValues[entry.Key] = entry.Value;
+        foreach (var entry in source._maxValues)
+            _maxValues[entry.Key] = entry.Value;
+        foreach (var entry in source._criticalLevels)
+            _criticalLevels[entry.Key] = entry.Value;
+        foreach (var entry in source._derivas)
+            _derivas[entry.Key] = entry.Value;
+    }
+
+    // Copia independente do estado atual, sem os inscritos nos eventos, pra simular futuros sem mexer no original.
+    public CityStats Clone()
+    {
+        return new CityStats(this);
+    }
+
     public float GetValue(CityParameterType parameter)
     {
         return _values.TryGetValue(parameter, out var value) ? value : 0f;

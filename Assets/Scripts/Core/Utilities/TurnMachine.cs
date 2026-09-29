@@ -21,9 +21,12 @@ public enum GameOutcome
 // Maquina de estados explicita do loop de turno, com duas paradas que esperam chamada externa.
 public class TurnMachine
 {
-    public const int VictoryTurnCount = 20;
+    public const int DefaultVictoryTurnCount = 20;
 
     private readonly CityStats _cityStats;
+
+    // Turnos que precisam ser sobrevividos pra vencer a fase.
+    public int VictoryTurnCount { get; }
 
     public int TurnIndex { get; private set; }
     public TurnPhase CurrentPhase { get; private set; }
@@ -33,9 +36,10 @@ public class TurnMachine
     public event Action<int> OnTurnAdvanced;
     public event Action<GameOutcome> OnGameEnded;
 
-    public TurnMachine(CityStats cityStats)
+    public TurnMachine(CityStats cityStats, int victoryTurnCount = DefaultVictoryTurnCount)
     {
         _cityStats = cityStats;
+        VictoryTurnCount = victoryTurnCount;
     }
 
     public void StartGame()

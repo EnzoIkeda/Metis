@@ -8,12 +8,13 @@ using UnityEngine.UI;
 // Popup de recompensa de fim de fase, mostrado so na vitoria: sorteia opcoes entre cartas e vantagens passivas.
 public class PhaseRewardPopupView : MonoBehaviour
 {
-    private const int OptionCount = 3;
-
     [SerializeField] private TurnManager _turnManager;
     [SerializeField] private GameObject _panelRoot;
     [SerializeField] private Button[] _optionButtons;
     [SerializeField] private TMP_Text[] _optionTexts;
+
+    // Limitado pela quantidade de botoes de opcao montados no painel.
+    [SerializeField, Min(1)] private int _optionCount = 3;
 
     private readonly System.Random _random = new System.Random();
     private UnityEngine.Object[] _currentOptions = Array.Empty<UnityEngine.Object>();
@@ -64,15 +65,8 @@ public class PhaseRewardPopupView : MonoBehaviour
         pool.AddRange(_turnManager.CardPool);
         pool.AddRange(_turnManager.AdvantagePool);
 
-        var options = new List<UnityEngine.Object>();
-        while (options.Count < OptionCount && pool.Count > 0)
-        {
-            var index = _random.Next(pool.Count);
-            options.Add(pool[index]);
-            pool.RemoveAt(index);
-        }
-
-        return options.ToArray();
+        var count = Math.Min(_optionCount, _optionButtons.Length);
+        return RewardOptionPicker.Draw(pool, count, _random).ToArray();
     }
 
     private static string DescribeOption(UnityEngine.Object option)

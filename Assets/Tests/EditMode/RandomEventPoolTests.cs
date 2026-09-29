@@ -25,7 +25,7 @@ public class RandomEventPoolTests
     public void IsEligible_TurnWindow_IsInclusiveOnBothEnds()
     {
         var evt = Event("Janela", minTurn: 5, maxTurn: 10);
-        var pool = new RandomEventPool(new List<RandomEventData> { evt });
+        var pool = new RandomEventPool<RandomEventData>(new List<RandomEventData> { evt });
         var stats = EditModeCityStatsFactory.Build();
 
         Assert.That(pool.IsEligible(evt, stats, 4), Is.False);
@@ -38,7 +38,7 @@ public class RandomEventPoolTests
     public void IsEligible_NullTriggerConditions_OnlyDependsOnTurnWindow()
     {
         var evt = Event("SemCondicao", triggerConditions: null);
-        var pool = new RandomEventPool(new List<RandomEventData> { evt });
+        var pool = new RandomEventPool<RandomEventData>(new List<RandomEventData> { evt });
 
         Assert.That(pool.IsEligible(evt, EditModeCityStatsFactory.Build(), 1), Is.True);
     }
@@ -48,7 +48,7 @@ public class RandomEventPoolTests
     {
         var condition = new TriggerCondition { Parameter = CityParameterType.Pesquisa, Comparison = ComparisonType.GreaterThanOrEqual, Threshold = 50f };
         var evt = Event("Gate", triggerConditions: new[] { condition });
-        var pool = new RandomEventPool(new List<RandomEventData> { evt });
+        var pool = new RandomEventPool<RandomEventData>(new List<RandomEventData> { evt });
 
         var abaixo = EditModeCityStatsFactory.Build(c => SetInitial(c, CityParameterType.Pesquisa, 49f));
         var noLimite = EditModeCityStatsFactory.Build(c => SetInitial(c, CityParameterType.Pesquisa, 50f));
@@ -62,7 +62,7 @@ public class RandomEventPoolTests
     {
         var condition = new TriggerCondition { Parameter = CityParameterType.Seguranca, Comparison = ComparisonType.LessThanOrEqual, Threshold = 30f };
         var evt = Event("Gate", triggerConditions: new[] { condition });
-        var pool = new RandomEventPool(new List<RandomEventData> { evt });
+        var pool = new RandomEventPool<RandomEventData>(new List<RandomEventData> { evt });
 
         var acima = EditModeCityStatsFactory.Build(c => SetInitial(c, CityParameterType.Seguranca, 31f));
         var noLimite = EditModeCityStatsFactory.Build(c => SetInitial(c, CityParameterType.Seguranca, 30f));
@@ -80,7 +80,7 @@ public class RandomEventPoolTests
             new TriggerCondition { Parameter = CityParameterType.Seguranca, Comparison = ComparisonType.LessThanOrEqual, Threshold = 10f },
         };
         var evt = Event("DuasCondicoes", triggerConditions: conditions);
-        var pool = new RandomEventPool(new List<RandomEventData> { evt });
+        var pool = new RandomEventPool<RandomEventData>(new List<RandomEventData> { evt });
 
         // Pesquisa neutro (50) passa a primeira, mas Seguranca neutro (50) falha a segunda.
         Assert.That(pool.IsEligible(evt, EditModeCityStatsFactory.Build(), 1), Is.False);
@@ -93,7 +93,7 @@ public class RandomEventPoolTests
     public void TryTriggerEvent_NoneEligible_ReturnsNull()
     {
         var foraDaJanela = Event("ForaDaJanela", minTurn: 100, maxTurn: 200);
-        var pool = new RandomEventPool(new List<RandomEventData> { foraDaJanela });
+        var pool = new RandomEventPool<RandomEventData>(new List<RandomEventData> { foraDaJanela });
 
         var chosen = pool.TryTriggerEvent(EditModeCityStatsFactory.Build(), 1);
 
@@ -105,7 +105,7 @@ public class RandomEventPoolTests
     {
         var statEffects = new[] { new StatModifier { Parameter = CityParameterType.Sustentabilidade, Amount = -8f } };
         var evt = Event("Unico", statEffects: statEffects);
-        var pool = new RandomEventPool(new List<RandomEventData> { evt });
+        var pool = new RandomEventPool<RandomEventData>(new List<RandomEventData> { evt });
         var stats = EditModeCityStatsFactory.Build();
 
         var chosen = pool.TryTriggerEvent(stats, 1);

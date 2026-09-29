@@ -7,8 +7,6 @@ using UnityEngine;
 [DefaultExecutionOrder(-100)]
 public class TurnManager : MonoBehaviour
 {
-    private const int HandSize = 5;
-
     [SerializeField] private CityStatsManager _cityStatsManager;
     [SerializeField] private PlacementManager _placementManager;
     [SerializeField] private CardData[] _cardPool;
@@ -16,8 +14,10 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private RandomEventData[] _eventPool;
     [SerializeField] private PassiveAdvantageData[] _advantagePool;
     [SerializeField] private CityEffectsController _effects;
+    [SerializeField, Min(1)] private int _handSize = 5;
+    [SerializeField, Min(1)] private int _victoryTurnCount = TurnMachine.DefaultVictoryTurnCount;
 
-    private RandomEventPool _events;
+    private RandomEventPool<RandomEventData> _events;
     private RandomEventData _pendingEvent;
 
     // Guardas de reentrancia contra jogar carta ou confirmar evento duas vezes durante a animacao atrasada.
@@ -25,7 +25,7 @@ public class TurnManager : MonoBehaviour
     private bool _eventEffectPending;
 
     public TurnMachine Machine { get; private set; }
-    public CardHand Hand { get; private set; }
+    public CardHand<CardData> Hand { get; private set; }
 
     // Pool completo de 54 cartas, exposto pro popup de recompensa de fim de fase sortear opcoes.
     public IReadOnlyList<CardData> CardPool => _cardPool;
@@ -39,16 +39,16 @@ public class TurnManager : MonoBehaviour
     {
         ApplyLoadedAdvantages();
 
-        Machine = new TurnMachine(_cityStatsManager.Stats);
+        Machine = new TurnMachine(_cityStatsManager.Stats, _victoryTurnCount);
         Machine.OnPhaseChanged += HandlePhaseChanged;
         Machine.OnTurnAdvanced += HandleTurnAdvanced;
         Machine.OnGameEnded += HandleGameEnded;
 
         var pool = DeckBuilder.Build(_cardPool, MetaProgressionManager.Archetype, MetaProgressionManager.LoadedCardNames);
-        Hand = new CardHand(pool);
+        Hand = new CardHand<CardData>(pool);
         Hand.OnHandChanged += HandleHandChanged;
 
-        _events = new RandomEventPool(_eventPool);
+        _events = new RandomEventPool<RandomEventData>(_eventPool);
 
         Machine.StartGame();
     }
@@ -173,7 +173,7 @@ public class TurnManager : MonoBehaviour
         _effects?.SetAmbientGlowsVisible(phase == TurnPhase.Action);
 
         if (phase == TurnPhase.StartOfTurn)
-            Hand.Draw(HandSize, _cityStatsManager.Stats);
+            Hand.Draw(_handSize, _cityStatsManager.Stats);
         else if (phase == TurnPhase.Event)
             HandleEventPhase();
         else if (phase == TurnPhase.Advance)
@@ -234,7 +234,7 @@ public class TurnManager : MonoBehaviour
     private void DebugJumpToTurnTwenty()
     {
         Hand.DiscardAll();
-        Machine.DebugJumpToTurn(TurnMachine.VictoryTurnCount);
+        Machine.DebugJumpToTurn(Machine.VictoryTurnCount);
     }
 
     [ContextMenu("Debug: Jogar carta selecionada")]

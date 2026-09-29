@@ -1,25 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Comparacao de uma condicao contra o valor atual do parametro.
-public enum ComparisonType
-{
-    GreaterThanOrEqual,
-    LessThanOrEqual
-}
-
-[System.Serializable]
-public struct TriggerCondition
-{
-    public CityParameterType Parameter;
-    public ComparisonType Comparison;
-    public float Threshold;
-}
-
 // Definicao orientada a dados de um evento aleatorio.
 // TODO: adicionar o field para alterar visualmente o grid.
 [CreateAssetMenu(fileName = "New Event", menuName = "Metis/Random Event Data")]
-public class RandomEventData : ScriptableObject
+public class RandomEventData : ScriptableObject, IRandomEventDefinition
 {
     [SerializeField] private string _title;
     [SerializeField] private string _description;
@@ -38,6 +23,9 @@ public class RandomEventData : ScriptableObject
     public string Description => LocalizationManager.Current == Language.English && string.IsNullOrEmpty(_descriptionEn) == false
         ? _descriptionEn
         : _description;
+
+    string IRandomEventDefinition.Id => name;
+
     public IReadOnlyList<TriggerCondition> TriggerConditions => _triggerConditions;
     public IReadOnlyList<StatModifier> StatEffects => _statEffects;
 

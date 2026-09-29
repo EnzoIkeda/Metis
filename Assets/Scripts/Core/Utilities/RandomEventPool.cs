@@ -2,17 +2,19 @@ using System;
 using System.Collections.Generic;
 
 // Sorteia e resolve o evento aleatorio da fase de evento do turno.
-public class RandomEventPool
+public class RandomEventPool<TEvent> where TEvent : class, IRandomEventDefinition
 {
-    private readonly IReadOnlyList<RandomEventData> _pool;
-    private readonly Random _random = new Random();
+    private readonly IReadOnlyList<TEvent> _pool;
+    private readonly Random _random;
 
-    public RandomEventPool(IReadOnlyList<RandomEventData> pool)
+    // random e opcional, passar um com seed fixa deixa o sorteio reproduzivel.
+    public RandomEventPool(IReadOnlyList<TEvent> pool, Random random = null)
     {
         _pool = pool;
+        _random = random ?? new Random();
     }
 
-    public bool IsEligible(RandomEventData eventData, CityStats stats, int turnIndex)
+    public bool IsEligible(TEvent eventData, CityStats stats, int turnIndex)
     {
         if (turnIndex < eventData.MinTurn || turnIndex > eventData.MaxTurn)
             return false;
@@ -32,9 +34,9 @@ public class RandomEventPool
     }
 
     // Sorteia um evento elegivel do pool e aplica seus efeitos, ou retorna null se nenhum for elegivel.
-    public RandomEventData TryTriggerEvent(CityStats stats, int turnIndex)
+    public TEvent TryTriggerEvent(CityStats stats, int turnIndex)
     {
-        var eligible = new List<RandomEventData>();
+        var eligible = new List<TEvent>();
         foreach (var eventData in _pool)
         {
             if (IsEligible(eventData, stats, turnIndex))

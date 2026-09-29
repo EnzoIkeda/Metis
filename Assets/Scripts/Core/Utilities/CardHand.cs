@@ -3,25 +3,27 @@ using System.Collections.Generic;
 
 // Mao de cartas do turno atual, comprada de um pool.
 // TODO: baralho de cartas finito, com estrategia propria de geracao da mao.
-public class CardHand
+public class CardHand<TCard> where TCard : class, ICardDefinition
 {
-    private readonly IReadOnlyList<CardData> _pool;
-    private readonly List<CardData> _cards = new List<CardData>();
-    private readonly Random _random = new Random();
+    private readonly IReadOnlyList<TCard> _pool;
+    private readonly List<TCard> _cards = new List<TCard>();
+    private readonly Random _random;
 
-    public IReadOnlyList<CardData> Cards => _cards;
+    public IReadOnlyList<TCard> Cards => _cards;
 
     public event Action OnHandChanged;
 
-    public CardHand(IReadOnlyList<CardData> pool)
+    // random e opcional, passar um com seed fixa deixa a compra reproduzivel.
+    public CardHand(IReadOnlyList<TCard> pool, Random random = null)
     {
         _pool = pool;
+        _random = random ?? new Random();
     }
 
     // So compra carta cujo RequiredPesquisa ja foi atingido, senao a mao vem cheia de carta travada.
     public void Draw(int count, CityStats stats)
     {
-        var eligible = new List<CardData>();
+        var eligible = new List<TCard>();
         foreach (var card in _pool)
         {
             if (stats.GetValue(CityParameterType.Pesquisa) >= card.RequiredPesquisa)
@@ -48,7 +50,7 @@ public class CardHand
     }
 
     // Checagem simples dos requisitos pra jogar a carta.
-    public bool CanPlay(CardData card, CityStats stats)
+    public bool CanPlay(TCard card, CityStats stats)
     {
         return card != null
             && _cards.Contains(card)
@@ -57,7 +59,7 @@ public class CardHand
     }
 
     // Joga uma carta da mao.
-    public bool TryPlay(CardData card, CityStats stats)
+    public bool TryPlay(TCard card, CityStats stats)
     {
         if (CanPlay(card, stats) == false)
             return false;

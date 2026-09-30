@@ -16,6 +16,8 @@ jobs:
         with:
           dotnet-version: '10.0.x'
       - run: dotnet format Tests/Metis.Core.Tests --verify-no-changes
+      - run: dotnet format Tools/Metis.Simulator --verify-no-changes
+      - run: dotnet format Tests/Metis.Simulator.Tests --verify-no-changes
 
   core-tests:
     name: Tests (Metis.Core.Tests)
@@ -26,5 +28,15 @@ jobs:
         with:
           dotnet-version: '10.0.x'
       - run: dotnet test Tests/Metis.Core.Tests
+
+  simulator-tests:
+    name: Tests (Metis.Simulator.Tests)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - run: dotnet test Tests/Metis.Simulator.Tests
 
 # Sem job pros testes EditMode do Unity Test Framework: Unity restringe ativacao manual offline a seats Enterprise/Industry, entao uma conta Personal nao ativa licenca sem interacao humana num runner hospedado, e self-hosted exporia a maquina a codigo de PR de fork num repo publico; rodar localmente antes de cada push/PR fica como pratica manual.

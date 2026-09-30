@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <IsPackable>false</IsPackable>
+    <ServerGarbageCollection>true</ServerGarbageCollection>
+  </PropertyGroup>
+
+  <!-- Mesma logica de jogo que roda no Unity, linkada direto de Assets/Scripts (sem copia), pra simulacao usar o motor real. -->
+  <ItemGroup>
+    <Compile Include="../../Assets/Scripts/Data/StatModifier.cs" Link="Game/StatModifier.cs" />
+    <Compile Include="../../Assets/Scripts/Data/ICardDefinition.cs" Link="Game/ICardDefinition.cs" />
+    <Compile Include="../../Assets/Scripts/Data/IRandomEventDefinition.cs" Link="Game/IRandomEventDefinition.cs" />
+    <Compile Include="../../Assets/Scripts/Data/IAdvantageDefinition.cs" Link="Game/IAdvantageDefinition.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/CityStats.cs" Link="Game/CityStats.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/InteractionMatrix.cs" Link="Game/InteractionMatrix.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/TurnMachine.cs" Link="Game/TurnMachine.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/CardHand.cs" Link="Game/CardHand.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/RandomEventPool.cs" Link="Game/RandomEventPool.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/DeckBuilder.cs" Link="Game/DeckBuilder.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/RewardOptionPicker.cs" Link="Game/RewardOptionPicker.cs" />
+  </ItemGroup>
+
+</Project>

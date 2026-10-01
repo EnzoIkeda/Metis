@@ -8,6 +8,12 @@ public sealed class DecisionContext
     public int TurnIndex { get; init; }
     public BalanceData Data { get; init; } = null!;
     public Random Random { get; init; } = null!;
+
+    // O que o jogador sabe do resto da fase, pra quem planeja adiante: baralho que a mao compra, eventos possiveis, regras.
+    public IReadOnlyList<SimCard> Deck { get; init; } = Array.Empty<SimCard>();
+    public IReadOnlyList<SimEvent> Events { get; init; } = Array.Empty<SimEvent>();
+    public int HandSize { get; init; } = 5;
+    public int VictoryTurnCount { get; init; } = TurnMachine.DefaultVictoryTurnCount;
 }
 
 // Jogador simulado: escolhe uma das cartas jogaveis da mao.
@@ -28,10 +34,10 @@ public static class PolicyHelpers
     }
 
     // Maior pontuacao vence; empate e sorteado com o gerador da politica, pra nao favorecer a ordem da mao.
-    public static SimCard PickBest(IReadOnlyList<SimCard> cards, Func<SimCard, double> score, Random random)
+    public static T PickBest<T>(IReadOnlyList<T> cards, Func<T, double> score, Random random)
     {
         const double tolerance = 1e-9;
-        var best = new List<SimCard>();
+        var best = new List<T>();
         var bestScore = double.NegativeInfinity;
         foreach (var card in cards)
         {

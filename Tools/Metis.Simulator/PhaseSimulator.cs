@@ -95,7 +95,8 @@ public static class PhaseSimulator
         }
 
         var machine = new TurnMachine(stats, setup.VictoryTurnCount);
-        var hand = new CardHand<SimCard>(DeckBuilder.Build(data.Cards, setup.Archetype, setup.LoadedCardIds), new Random(seeds.Hand));
+        var deck = DeckBuilder.Build(data.Cards, setup.Archetype, setup.LoadedCardIds);
+        var hand = new CardHand<SimCard>(deck, new Random(seeds.Hand));
         var events = new RandomEventPool<SimEvent>(data.Events, new Random(seeds.Events));
         var policyRandom = new Random(seeds.Policy);
 
@@ -126,6 +127,10 @@ public static class PhaseSimulator
                     TurnIndex = turn,
                     Data = data,
                     Random = policyRandom,
+                    Deck = deck,
+                    Events = data.Events,
+                    HandSize = setup.HandSize,
+                    VictoryTurnCount = setup.VictoryTurnCount,
                 });
                 if (chosen.PlacesStructure)
                     throw new NotSupportedException($"Carta '{chosen.Id}' coloca estrutura no grid, o simulador nao modela o grid.");

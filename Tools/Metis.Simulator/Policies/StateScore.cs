@@ -17,6 +17,23 @@ public static class StateScore
 
     public const double GameOverScore = -1000.0;
 
+    // Nota de uma cidade com todo parametro no teto da margem e Pesquisa no ultimo limiar.
+    public static double MaxScore(BalanceData data)
+    {
+        double score = 0.0;
+        foreach (var config in data.Parameters)
+        {
+            if (config.CriticalLevel < 0f)
+                continue;
+            score += config.Parameter == CityStats.AnchorParameter ? AnchorWeight * MarginCap : MarginCap;
+        }
+
+        var thresholds = data.TierThresholds;
+        if (thresholds.Count > 0)
+            score += PesquisaWeight * thresholds[thresholds.Count - 1];
+        return score;
+    }
+
     public static double Evaluate(CityStats stats, BalanceData data)
     {
         if (stats.IsAnchorCritical())

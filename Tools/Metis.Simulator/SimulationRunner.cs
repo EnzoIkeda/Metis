@@ -29,19 +29,28 @@ public sealed class SimulationOptions
     public List<string> Setups { get; set; } = new();
     public int? HandSize { get; set; }
     public int? VictoryTurnCount { get; set; }
+    // "fase" simula fases avulsas; "rodada" simula rodadas inteiras com recompensa entre as fases.
+    public string Mode { get; set; } = "fase";
+    public int PhaseCount { get; set; } = 3;
+    public int RewardRollouts { get; set; } = 40;
+    public int MctsIterations { get; set; } = new MctsOptions().Iterations;
+    public double MctsExploration { get; set; } = new MctsOptions().Exploration;
 }
 
 public static class SimulationRunner
 {
     public const string BaseSetupName = "fase1";
 
-    public static IPlayerPolicy CreatePolicy(string name)
+    public static IPlayerPolicy CreatePolicy(string name, SimulationOptions options = null)
     {
+        options ??= new SimulationOptions();
         return name switch
         {
             "aleatoria" => new RandomPolicy(),
             "gulosa" => new GreedyPolicy(),
             "equilibrada" => new BalancedPolicy(),
+            "mcts" => new MctsPolicy(new MctsOptions { Iterations = options.MctsIterations, Exploration = options.MctsExploration, Informed = true }),
+            "mcts_desinformado" => new MctsPolicy(new MctsOptions { Iterations = options.MctsIterations, Exploration = options.MctsExploration, Informed = false }),
             _ => throw new ArgumentException($"Politica desconhecida: '{name}'."),
         };
     }
@@ -68,7 +77,7 @@ public static class SimulationRunner
                     jobs.Add(new SimulationJob
                     {
                         SetupName = setupName,
-                        Policy = CreatePolicy(policyName),
+                        Policy = CreatePolicy(policyName, options),
                         Setup = new PhaseSetup
                         {
                             Data = data,
@@ -82,6 +91,81 @@ public static class SimulationRunner
             }
         }
         return jobs;
+    }
+
+    // Quem joga sem decidir tambem escolhe recompensa sem decidir; as outras politicas avaliam cada opcao por simulacao.
+    public static IRewardPolicy CreateRewardPolicy(string playerPolicyName, SimulationOptions options)
+    {
+        return playerPolicyName == "aleatoria" ? new RandomRewardPolicy() : new RolloutRewardPolicy(options.RewardRollouts);
+    }
+
+    public static void RunRuns(SimulationOptions options, TextWriter log)
+    {
+        var data = BalanceData.Load(options.DataPath);
+        var jobs = new List<(CardArchetype Archetype, string PolicyName)>();
+        foreach (var archetypeName in options.Archetypes)
+        {
+            foreach (var policyName in options.Policies)
+                jobs.Add((Enum.Parse<CardArchetype>(archetypeName), policyName));
+        }
+
+        var total = jobs.Count * options.GamesPerJob;
+        var results = new RunRecord[total];
+        log.WriteLine($"{jobs.Count} combinacoes x {options.GamesPerJob} rodadas de ate {options.PhaseCount} fases = {total} rodadas.");
+        var started = DateTime.Now;
+        var done = 0;
+        var parallel = new ParallelOptions { MaxDegreeOfParallelism = options.MaxThreads ?? Environment.ProcessorCount };
+        var policies = jobs.Select(job => CreatePolicy(job.PolicyName, options)).ToList();
+        var rewardPolicies = jobs.Select(job => CreateRewardPolicy(job.PolicyName, options)).ToList();
+        Parallel.For(0, total, parallel, index =>
+        {
+            var jobIndex = index / options.GamesPerJob;
+            var setup = new RunSetup
+            {
+                Data = data,
+                Archetype = jobs[jobIndex].Archetype,
+                PhaseCount = options.PhaseCount,
+                HandSizeOverride = options.HandSize,
+                VictoryTurnCountOverride = options.VictoryTurnCount,
+            };
+            results[index] = RunSimulator.Run(setup, policies[jobIndex], rewardPolicies[jobIndex], options.BaseSeed, index % options.GamesPerJob);
+
+            var finished = Interlocked.Increment(ref done);
+            if (finished % Math.Max(1, total / 10) == 0)
+                log.WriteLine($"  {finished}/{total} ({(DateTime.Now - started).TotalSeconds:F1}s)");
+        });
+
+        Directory.CreateDirectory(options.OutputDirectory);
+        using (var writer = new StreamWriter(Path.Combine(options.OutputDirectory, "runs.csv"), false, new UTF8Encoding(false)))
+        {
+            writer.WriteLine("run_id,archetype,policy,reward_policy,run_index,phases_won,phase,preset,outcome,turns_played,offered_ids,chosen_id,chosen_redundant,redundant_offered");
+            for (int index = 0; index < results.Length; index++)
+            {
+                var jobIndex = index / options.GamesPerJob;
+                foreach (var phase in results[index].Phases)
+                {
+                    writer.WriteLine(string.Join(',', new[]
+                    {
+                        index.ToString(CultureInfo.InvariantCulture),
+                        jobs[jobIndex].Archetype.ToString(),
+                        policies[jobIndex].Name,
+                        rewardPolicies[jobIndex].Name,
+                        (index % options.GamesPerJob).ToString(CultureInfo.InvariantCulture),
+                        results[index].PhasesWon.ToString(CultureInfo.InvariantCulture),
+                        phase.Phase.ToString(CultureInfo.InvariantCulture),
+                        phase.PresetId,
+                        phase.Game.Outcome.ToString(),
+                        phase.Game.TurnsPlayed.ToString(CultureInfo.InvariantCulture),
+                        string.Join('|', phase.OfferedIds),
+                        phase.ChosenId,
+                        phase.ChosenWasRedundant ? "1" : "0",
+                        phase.RedundantOffered.ToString(CultureInfo.InvariantCulture),
+                    }));
+                }
+            }
+        }
+        WriteRunInfo(Path.Combine(options.OutputDirectory, "run_info.json"), options, data, started);
+        log.WriteLine($"Pronto em {(DateTime.Now - started).TotalSeconds:F1}s, saida em '{options.OutputDirectory}'.");
     }
 
     public static void Run(SimulationOptions options, TextWriter log)
@@ -195,6 +279,11 @@ public static class SimulationRunner
             ["setups"] = options.Setups.Count > 0 ? options.Setups : new[] { BaseSetupName }.Concat(data.Presets.Select(preset => preset.Id)).ToList(),
             ["hand_size"] = options.HandSize ?? data.Rules.HandSize,
             ["victory_turns"] = options.VictoryTurnCount ?? data.Rules.VictoryTurnCount,
+            ["mode"] = options.Mode,
+            ["phase_count"] = options.PhaseCount,
+            ["reward_rollouts"] = options.RewardRollouts,
+            ["mcts_iterations"] = options.MctsIterations,
+            ["mcts_exploration"] = options.MctsExploration,
         };
         File.WriteAllText(path, JsonSerializer.Serialize(info, new JsonSerializerOptions { WriteIndented = true }));
     }

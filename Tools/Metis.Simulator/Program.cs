@@ -22,15 +22,23 @@ for (int i = 0; i < args.Length; i++)
         case "--hand-size": options.HandSize = NextInt(); break;
         case "--turns": options.VictoryTurnCount = NextInt(); break;
         case "--no-turns": options.WriteTurns = false; break;
+        case "--mode": options.Mode = Next(); break;
+        case "--phases": options.PhaseCount = NextInt(); break;
+        case "--reward-rollouts": options.RewardRollouts = NextInt(); break;
+        case "--mcts-iterations": options.MctsIterations = NextInt(); break;
+        case "--mcts-c": options.MctsExploration = double.Parse(Next(), CultureInfo.InvariantCulture); break;
         default: throw new ArgumentException($"Opcao desconhecida: '{args[i]}'.");
     }
 }
 
 if (string.IsNullOrEmpty(options.DataPath) || string.IsNullOrEmpty(options.OutputDirectory))
 {
-    Console.Error.WriteLine("Uso: --data <balance_data.json> --out <pasta> [--games N] [--seed S] [--threads N] [--policies a,b] [--archetypes a,b] [--setups fase1,PresetX] [--hand-size N] [--turns N] [--no-turns]");
+    Console.Error.WriteLine("Uso: --data <balance_data.json> --out <pasta> [--games N] [--seed S] [--threads N] [--policies a,b] [--archetypes a,b] [--setups fase1,PresetX] [--hand-size N] [--turns N] [--no-turns] [--mcts-iterations N] [--mcts-c C] [--mode fase|rodada] [--phases N] [--reward-rollouts N]");
     return 1;
 }
 
-SimulationRunner.Run(options, Console.Out);
+if (options.Mode == "rodada")
+    SimulationRunner.RunRuns(options, Console.Out);
+else
+    SimulationRunner.Run(options, Console.Out);
 return 0;

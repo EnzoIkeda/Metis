@@ -34,6 +34,9 @@ public class CityStats
 
     private bool _gameOverRaised;
 
+    // Soma dos efeitos diretos de carta e evento em Bem-estar, que persiste por cima do valor derivado dos outros parametros.
+    private float _anchorBonus;
+
     public event Action<CityParameterType, float> OnParameterChanged;
     public event Action<CityParameterType> OnParameterCritical;
     public event Action OnGameOver;
@@ -62,6 +65,7 @@ public class CityStats
         _interactions = source._interactions;
         _colapsoPenaltyPerParameter = source._colapsoPenaltyPerParameter;
         _gameOverRaised = source._gameOverRaised;
+        _anchorBonus = source._anchorBonus;
 
         foreach (var entry in source._values)
             _values[entry.Key] = entry.Value;
@@ -80,6 +84,8 @@ public class CityStats
     {
         return new CityStats(this);
     }
+
+    public float AnchorBonus => _anchorBonus;
 
     public float GetValue(CityParameterType parameter)
     {
@@ -136,6 +142,9 @@ public class CityStats
         if (_values.ContainsKey(modifier.Parameter) == false)
             return;
 
+        if (modifier.Parameter == AnchorParameter)
+            _anchorBonus += modifier.Amount;
+
         SetValue(modifier.Parameter, _values[modifier.Parameter] + modifier.Amount);
     }
 
@@ -156,7 +165,7 @@ public class CityStats
         var populacaoBaseline = (_minValues[CityParameterType.Populacao] + _maxValues[CityParameterType.Populacao]) / 2f;
         var adensamentoPopulacional = Math.Max(0f, GetValue(CityParameterType.Populacao) - populacaoBaseline);
 
-        SetValue(CityParameterType.BemEstar, mediaPositivos - adensamentoPopulacional);
+        SetValue(CityParameterType.BemEstar, mediaPositivos - adensamentoPopulacional + _anchorBonus);
     }
 
     // Fase de resolucao do turno inteira: interacoes, deriva, Bem-estar e penalidade de colapso.
@@ -167,14 +176,9 @@ public class CityStats
         _interactions?.Resolve(this);
         RecomputeDerivedParameters();
 
+        // Penalidade so do turno, fora do bonus persistente, senao se acumularia a cada turno em colapso.
         if (colapsosAntes > 0)
-        {
-            ApplyModifier(new StatModifier
-            {
-                Parameter = AnchorParameter,
-                Amount = -_colapsoPenaltyPerParameter * colapsosAntes,
-            });
-        }
+            SetValue(AnchorParameter, GetValue(AnchorParameter) - _colapsoPenaltyPerParameter * colapsosAntes);
     }
 
     private void SetValue(CityParameterType parameter, float rawValue)

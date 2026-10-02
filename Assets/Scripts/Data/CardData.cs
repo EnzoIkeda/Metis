@@ -13,6 +13,7 @@ public class CardData : ScriptableObject, ICardDefinition
     [SerializeField] private CardArchetype _archetype;
     [SerializeField] private float _requiredPesquisa;
     [SerializeField] private StatModifier[] _statEffects;
+    [SerializeField] private CardAbility _ability;
     [SerializeField] private StructureData _structureToPlace;
 
     // Arte opcional da carta, mostrada no espaco reservado de imagem quando definida.
@@ -38,6 +39,8 @@ public class CardData : ScriptableObject, ICardDefinition
     public float RequiredPesquisa => _requiredPesquisa;
 
     public IReadOnlyList<StatModifier> StatEffects => _statEffects;
+
+    public CardAbility Ability => _ability;
 
     public StructureData StructureToPlace => _structureToPlace;
 

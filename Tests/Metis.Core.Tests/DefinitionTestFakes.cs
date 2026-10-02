@@ -11,6 +11,7 @@ internal sealed class FakeCard : ICardDefinition
     public CardArchetype Archetype { get; init; } = CardArchetype.Geral;
     public float RequiredPesquisa { get; init; }
     public IReadOnlyList<StatModifier> StatEffects { get; init; } = new StatModifier[0];
+    public CardAbility Ability { get; init; }
 }
 
 internal sealed class FakeEvent : IRandomEventDefinition

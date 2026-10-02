@@ -18,6 +18,14 @@ public enum CardArchetype
     Automacao
 }
 
+// Habilidade especial jogada como acao livre, sem encerrar a fase de acao. So acrescentar valores no fim.
+public enum CardAbility
+{
+    None,
+    SearchDeck,
+    RevealHand
+}
+
 // Regras de jogo de uma carta, sem nada de apresentacao, pra mesma logica rodar no jogo e no simulador.
 public interface ICardDefinition
 {
@@ -28,4 +36,14 @@ public interface ICardDefinition
     CardArchetype Archetype { get; }
     float RequiredPesquisa { get; }
     IReadOnlyList<StatModifier> StatEffects { get; }
+    CardAbility Ability { get; }
+}
+
+public static class CardRules
+{
+    // Carta com habilidade nao gasta a jogada do turno.
+    public static bool IsFreeAction(ICardDefinition card)
+    {
+        return card.Ability != CardAbility.None;
+    }
 }

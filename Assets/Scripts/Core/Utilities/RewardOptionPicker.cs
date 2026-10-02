@@ -16,4 +16,40 @@ public static class RewardOptionPicker
         }
         return options;
     }
+
+    // Cartas que ainda acrescentam algo: fora do baralho atual, que ja ignoraria a repetida.
+    public static List<TCard> CardPool<TCard>(IReadOnlyList<TCard> allCards, IReadOnlyList<TCard> currentDeck)
+        where TCard : class, ICardDefinition
+    {
+        var pool = new List<TCard>();
+        foreach (var card in allCards)
+        {
+            if (Contains(currentDeck, card) == false)
+                pool.Add(card);
+        }
+        return pool;
+    }
+
+    // Vantagens ainda nao carregadas, ja que a meta-progressao ignora a repetida.
+    public static List<TAdvantage> AdvantagePool<TAdvantage>(IReadOnlyList<TAdvantage> allAdvantages, IReadOnlyList<string> loadedIds)
+        where TAdvantage : class, IAdvantageDefinition
+    {
+        var pool = new List<TAdvantage>();
+        foreach (var advantage in allAdvantages)
+        {
+            if (Contains(loadedIds, advantage.Id) == false)
+                pool.Add(advantage);
+        }
+        return pool;
+    }
+
+    private static bool Contains<T>(IReadOnlyList<T> items, T value)
+    {
+        foreach (var item in items)
+        {
+            if (EqualityComparer<T>.Default.Equals(item, value))
+                return true;
+        }
+        return false;
+    }
 }

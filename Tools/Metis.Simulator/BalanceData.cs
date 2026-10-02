@@ -13,6 +13,7 @@ public sealed class SimCard : ICardDefinition
     public float RequiredPesquisa { get; init; }
     public bool PlacesStructure { get; init; }
     public IReadOnlyList<StatModifier> StatEffects { get; init; } = Array.Empty<StatModifier>();
+    public CardAbility Ability { get; init; }
 }
 
 public sealed class SimEvent : IRandomEventDefinition
@@ -145,6 +146,7 @@ public sealed class BalanceData
                 RequiredPesquisa = card.RequiredPesquisa,
                 PlacesStructure = card.PlacesStructure,
                 StatEffects = ToModifiers(card.Effects),
+                Ability = string.IsNullOrEmpty(card.Ability) ? CardAbility.None : ParseEnum<CardAbility>(card.Ability),
             }).ToList(),
             Events = dto.Events.Select(randomEvent => new SimEvent
             {
@@ -237,6 +239,7 @@ public sealed class BalanceData
         public float Cost { get; set; }
         public float RequiredPesquisa { get; set; }
         public bool PlacesStructure { get; set; }
+        public string Ability { get; set; } = "";
         public List<ModifierDto> Effects { get; set; } = new();
     }
 

@@ -12,13 +12,27 @@ public sealed class BalancedPolicy : IPlayerPolicy
     {
         var weights = BuildWeights(context.Stats, context.Data);
         var candidates = PolicyHelpers.DistinctById(context.PlayableCards);
-        return PolicyHelpers.PickBest(candidates, card =>
-        {
-            double score = -card.Cost * Weight(weights, CityParameterType.Renda);
-            foreach (var effect in card.StatEffects)
-                score += effect.Amount * Weight(weights, effect.Parameter);
-            return score;
-        }, context.Random);
+        return PolicyHelpers.PickBest(candidates, card => PolicyHelpers.ScoreWithAbilities(
+            card, context, plain => Score(plain, weights), ability => CostScore(ability, weights)), context.Random);
+    }
+
+    public SimCard ChooseSearch(DecisionContext context, IReadOnlyList<SimCard> candidates)
+    {
+        var weights = BuildWeights(context.Stats, context.Data);
+        return PolicyHelpers.PickBest(PolicyHelpers.DistinctById(candidates), card => Score(card, weights), context.Random);
+    }
+
+    public static double Score(SimCard card, Dictionary<CityParameterType, double> weights)
+    {
+        var score = CostScore(card, weights);
+        foreach (var effect in card.StatEffects)
+            score += effect.Amount * Weight(weights, effect.Parameter);
+        return score;
+    }
+
+    private static double CostScore(SimCard card, Dictionary<CityParameterType, double> weights)
+    {
+        return -card.Cost * Weight(weights, CityParameterType.Renda);
     }
 
     // Bem-estar fica de fora: e recalculado a partir dos outros na resolucao, efeito direto nele nao dura.

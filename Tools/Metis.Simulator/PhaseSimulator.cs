@@ -17,6 +17,9 @@ public sealed class PhaseSetup
     public int? HandSizeOverride { get; init; }
     public int? VictoryTurnCountOverride { get; init; }
 
+    // Baralho finito com pilha de compra e descarte (D2), em vez de compra com reposicao.
+    public bool FiniteDeck { get; init; }
+
     public int HandSize => HandSizeOverride ?? Data.Rules.HandSize;
     public int VictoryTurnCount => VictoryTurnCountOverride ?? Data.Rules.VictoryTurnCount;
 }
@@ -60,6 +63,10 @@ public sealed class TurnRecord
     // Ids das cartas jogaveis na mao naquele turno, com repeticao, pra medir taxa de escolha.
     public IReadOnlyList<string> PlayableIds { get; init; } = Array.Empty<string>();
 
+    // Cartas de acao livre jogadas antes da jogada do turno, e o que a busca trouxe.
+    public IReadOnlyList<string> FreeActionIds { get; init; } = Array.Empty<string>();
+    public IReadOnlyList<string> SearchedIds { get; init; } = Array.Empty<string>();
+
     // Vazio quando nenhum evento era elegivel.
     public string EventId { get; init; } = "";
 
@@ -76,6 +83,9 @@ public sealed class GameRecord
 
     // Primeiro turno em que cada limiar de tier foi alcancado, 0 se nunca.
     public IReadOnlyList<int> TierReachedTurn { get; init; } = Array.Empty<int>();
+
+    // Bonus persistente de Bem-estar acumulado no fim da fase (D7).
+    public float FinalAnchorBonus { get; init; }
 }
 
 public static class PhaseSimulator
@@ -96,7 +106,7 @@ public static class PhaseSimulator
 
         var machine = new TurnMachine(stats, setup.VictoryTurnCount);
         var deck = DeckBuilder.Build(data.Cards, setup.Archetype, setup.LoadedCardIds);
-        var hand = new CardHand<SimCard>(deck, new Random(seeds.Hand));
+        var hand = new CardHand<SimCard>(deck, new Random(seeds.Hand), setup.FiniteDeck);
         var events = new RandomEventPool<SimEvent>(data.Events, new Random(seeds.Events));
         var policyRandom = new Random(seeds.Policy);
 
@@ -116,14 +126,19 @@ public static class PhaseSimulator
         while (machine.Outcome == GameOutcome.None)
         {
             var turn = machine.TurnIndex;
-            var playable = hand.Cards.Where(card => hand.CanPlay(card, stats)).ToList();
+            var firstPlayable = Playable(hand, stats);
+            var playable = firstPlayable;
             var cardId = "";
-            if (playable.Count > 0)
+            var freeActions = new List<string>();
+            var searched = new List<string>();
+
+            // Acoes livres podem vir antes da jogada do turno; o laco termina quando uma carta comum e jogada ou nada mais e jogavel.
+            while (playable.Count > 0)
             {
-                var chosen = policy.Choose(new DecisionContext
+                DecisionContext Context(IReadOnlyList<SimCard> cards) => new DecisionContext
                 {
                     Stats = stats,
-                    PlayableCards = playable,
+                    PlayableCards = cards,
                     TurnIndex = turn,
                     Data = data,
                     Random = policyRandom,
@@ -131,12 +146,36 @@ public static class PhaseSimulator
                     Events = data.Events,
                     HandSize = setup.HandSize,
                     VictoryTurnCount = setup.VictoryTurnCount,
-                });
+                    IsRevealed = hand.IsRevealed,
+                    SearchCandidates = playable.Any(card => card.Ability == CardAbility.SearchDeck) ? hand.SearchCandidates(stats) : Array.Empty<SimCard>(),
+                };
+
+                var chosen = policy.Choose(Context(playable));
                 if (chosen.PlacesStructure)
                     throw new NotSupportedException($"Carta '{chosen.Id}' coloca estrutura no grid, o simulador nao modela o grid.");
                 if (hand.TryPlay(chosen, stats) == false)
                     throw new InvalidOperationException($"Politica '{policy.Name}' escolheu '{chosen.Id}', que nao era jogavel.");
-                cardId = chosen.Id;
+
+                if (CardRules.IsFreeAction(chosen) == false)
+                {
+                    cardId = chosen.Id;
+                    break;
+                }
+
+                freeActions.Add(chosen.Id);
+                if (chosen.Ability == CardAbility.RevealHand)
+                {
+                    hand.Reveal();
+                }
+                else if (chosen.Ability == CardAbility.SearchDeck)
+                {
+                    var candidates = hand.SearchCandidates(stats);
+                    var pick = policy.ChooseSearch(Context(playable), candidates);
+                    if (hand.TakeFromDeck(pick, stats) == false)
+                        throw new InvalidOperationException($"Politica '{policy.Name}' buscou '{pick?.Id}', que nao era candidata.");
+                    searched.Add(pick.Id);
+                }
+                playable = Playable(hand, stats);
             }
 
             machine.EndActionPhase();
@@ -153,8 +192,10 @@ public static class PhaseSimulator
             {
                 Turn = turn,
                 CardId = cardId,
-                PlayableCount = playable.Count,
-                PlayableIds = playable.Select(card => card.Id).ToList(),
+                PlayableCount = firstPlayable.Count,
+                PlayableIds = firstPlayable.Select(card => card.Id).ToList(),
+                FreeActionIds = freeActions,
+                SearchedIds = searched,
                 EventId = triggered?.Id ?? "",
                 Values = values,
                 Collapsed = stats.CountCollapsedParameters(),
@@ -169,6 +210,16 @@ public static class PhaseSimulator
             TurnsPlayed = turns.Count,
             Turns = turns,
             TierReachedTurn = tierReached,
+            FinalAnchorBonus = stats.AnchorBonus,
         };
+    }
+
+    // Mesma regra do jogo: carta precisa estar liberada e paga, e busca sem nada pra trazer nao conta como jogavel.
+    public static List<SimCard> Playable(CardHand<SimCard> hand, CityStats stats)
+    {
+        return hand.Cards
+            .Where(card => hand.CanPlay(card, stats))
+            .Where(card => card.Ability != CardAbility.SearchDeck || hand.SearchCandidates(stats).Count > 0)
+            .ToList();
     }
 }

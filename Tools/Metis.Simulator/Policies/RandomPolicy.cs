@@ -9,4 +9,9 @@ public sealed class RandomPolicy : IPlayerPolicy
     {
         return context.PlayableCards[context.Random.Next(context.PlayableCards.Count)];
     }
+
+    public SimCard ChooseSearch(DecisionContext context, IReadOnlyList<SimCard> candidates)
+    {
+        return candidates[context.Random.Next(candidates.Count)];
+    }
 }

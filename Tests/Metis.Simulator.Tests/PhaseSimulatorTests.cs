@@ -83,14 +83,15 @@ public class PhaseSimulatorTests
     }
 
     [Test]
-    public void Run_WellBeingEffectOfCard_IsOverwrittenByResolution()
+    public void Run_WellBeingEffectOfCard_PersistsThroughResolution()
     {
-        var card = TestData.Card("SoBemEstar", (CityParameterType.BemEstar, 30f));
-        var setup = TestData.Setup(TestData.Build(cards: new[] { card }), CardArchetype.Geral);
+        var card = TestData.Card("SoBemEstar", (CityParameterType.BemEstar, 10f));
+        var setup = new PhaseSetup { Data = TestData.Build(cards: new[] { card }), Archetype = CardArchetype.Geral, VictoryTurnCountOverride = 2 };
 
         var game = PhaseSimulator.Run(setup, new RandomPolicy(), new GameSeeds(1, 0));
 
-        Assert.That(game.Turns[0].Values[(int)CityParameterType.BemEstar], Is.EqualTo(TestData.NeutralValue));
+        Assert.That(game.Turns[0].Values[(int)CityParameterType.BemEstar], Is.EqualTo(TestData.NeutralValue + 10f));
+        Assert.That(game.Turns[1].Values[(int)CityParameterType.BemEstar], Is.EqualTo(TestData.NeutralValue + 20f));
     }
 
     [Test]

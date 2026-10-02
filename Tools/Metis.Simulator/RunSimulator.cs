@@ -69,6 +69,7 @@ public sealed class RolloutRewardPolicy : IRewardPolicy
                     Preset = data.Presets.Count > 0 ? data.Presets[random.Next(data.Presets.Count)] : null,
                     LoadedCardIds = cards,
                     LoadedAdvantageIds = advantages,
+                    FiniteDeck = context.Setup.FiniteDeck,
                     HandSizeOverride = context.Setup.HandSizeOverride,
                     VictoryTurnCountOverride = context.Setup.VictoryTurnCountOverride,
                 };
@@ -85,6 +86,7 @@ public sealed class RunSetup
     public BalanceData Data { get; init; } = null!;
     public CardArchetype Archetype { get; init; }
     public int PhaseCount { get; init; } = 3;
+    public bool FiniteDeck { get; init; }
     public int? HandSizeOverride { get; init; }
     public int? VictoryTurnCountOverride { get; init; }
 }
@@ -133,6 +135,7 @@ public static class RunSimulator
                 Preset = preset,
                 LoadedCardIds = loadedCards.ToList(),
                 LoadedAdvantageIds = loadedAdvantages.ToList(),
+                FiniteDeck = setup.FiniteDeck,
                 HandSizeOverride = setup.HandSizeOverride,
                 VictoryTurnCountOverride = setup.VictoryTurnCountOverride,
             };
@@ -146,8 +149,16 @@ public static class RunSimulator
             }
 
             won++;
-            var options = DrawOptions(data, runRandom);
             var deck = DeckBuilder.Build(data.Cards, setup.Archetype, loadedCards);
+            var options = DrawOptions(data, deck, loadedAdvantages, runRandom);
+
+            // Tudo ja pego: o jogo pula a recompensa e segue pra proxima fase.
+            if (options.Count == 0)
+            {
+                phases.Add(new PhaseRunRecord { Phase = phase, PresetId = presetId, Game = game });
+                continue;
+            }
+
             bool IsRedundant(RewardOption option) => option.IsCard
                 ? deck.Any(card => card.Id == option.Id)
                 : loadedAdvantages.Contains(option.Id);
@@ -184,11 +195,11 @@ public static class RunSimulator
         return new RunRecord { PhasesWon = won, Phases = phases };
     }
 
-    // Mesmo pool do popup de recompensa do jogo: todas as cartas cadastradas e todas as vantagens.
-    public static List<RewardOption> DrawOptions(BalanceData data, Random random)
+    // Mesmo pool do popup de recompensa do jogo: cartas fora do baralho atual e vantagens ainda nao carregadas (D8).
+    public static List<RewardOption> DrawOptions(BalanceData data, IReadOnlyList<SimCard> deck, IReadOnlyList<string> loadedAdvantageIds, Random random)
     {
-        var pool = data.Cards.Select(card => new RewardOption { Id = card.Id, IsCard = true })
-            .Concat(data.Advantages.Select(advantage => new RewardOption { Id = advantage.Id, IsCard = false }))
+        var pool = RewardOptionPicker.CardPool(data.Cards, deck).Select(card => new RewardOption { Id = card.Id, IsCard = true })
+            .Concat(RewardOptionPicker.AdvantagePool(data.Advantages, loadedAdvantageIds).Select(advantage => new RewardOption { Id = advantage.Id, IsCard = false }))
             .ToList();
         return RewardOptionPicker.Draw(pool, data.Rules.RewardOptionCount, random);
     }

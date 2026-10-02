@@ -12,6 +12,9 @@ public sealed class MctsOptions
 
     // Desinformado planeja so com a direcao de cada efeito, como quem le o texto da carta sem os numeros.
     public bool Informed { get; init; } = true;
+
+    // Desinformado que joga a carta de revelacao sempre que ela esta jogavel, pra medir o valor dela ja descontado o custo.
+    public bool RevealWhenUninformed { get; init; }
 }
 
 // MCTS por conjunto de informacao: cada simulacao sorteia mao e eventos futuros, e cada no conta quantas vezes cada carta estava disponivel.
@@ -40,18 +43,26 @@ public sealed class MctsPolicy : IPlayerPolicy
         _options = options ?? new MctsOptions();
     }
 
-    public string Name => _options.Informed ? "mcts" : "mcts_desinformado";
+    public string Name => _options.Informed ? "mcts" : _options.RevealWhenUninformed ? "mcts_desinformado_revela" : "mcts_desinformado";
 
     public MctsOptions Options => _options;
 
     public SimCard Choose(DecisionContext context)
     {
-        var rootActions = PolicyHelpers.DistinctById(context.PlayableCards);
+        // Revelacao fica fora da arvore: pra quem ja sabe os numeros nao vale nada, e pro desinformado e uma regra fixa.
+        var knowsHand = _options.Informed || context.IsRevealed;
+        var reveal = context.PlayableCards.FirstOrDefault(card => card.Ability == CardAbility.RevealHand);
+        if (knowsHand == false && _options.RevealWhenUninformed && reveal != null)
+            return reveal;
+
+        var rootActions = PolicyHelpers.DistinctById(WithoutReveal(context.PlayableCards));
+        if (rootActions.Count == 0)
+            return context.PlayableCards[0];
         if (rootActions.Count == 1)
             return rootActions[0];
 
-        var planningDeck = context.Deck.Select(card => Planned(card, context.Data)).ToList();
-        var plannedRoot = rootActions.Select(card => Planned(card, context.Data)).ToList();
+        var planningDeck = context.Deck.Select(card => Planned(card, context.Data, _options.Informed)).ToList();
+        var plannedRoot = rootActions.Select(card => Planned(card, context.Data, knowsHand)).ToList();
         var root = new Node();
 
         for (int iteration = 0; iteration < _options.Iterations; iteration++)
@@ -62,6 +73,29 @@ public sealed class MctsPolicy : IPlayerPolicy
             .ThenByDescending(entry => entry.Value.TotalReward)
             .First().Key;
         return rootActions.First(card => card.Id == bestId);
+    }
+
+    // Traz a carta que o proprio MCTS jogaria se pudesse escolher qualquer uma das candidatas.
+    public SimCard ChooseSearch(DecisionContext context, IReadOnlyList<SimCard> candidates)
+    {
+        return Choose(new DecisionContext
+        {
+            Stats = context.Stats,
+            PlayableCards = candidates,
+            TurnIndex = context.TurnIndex,
+            Data = context.Data,
+            Random = context.Random,
+            Deck = context.Deck,
+            Events = context.Events,
+            HandSize = context.HandSize,
+            VictoryTurnCount = context.VictoryTurnCount,
+            IsRevealed = true,
+        });
+    }
+
+    private static List<SimCard> WithoutReveal(IReadOnlyList<SimCard> cards)
+    {
+        return cards.Where(card => card.Ability != CardAbility.RevealHand).ToList();
     }
 
     private void RunIteration(Node root, List<SimCard> rootActions, List<SimCard> planningDeck, DecisionContext context)
@@ -105,11 +139,11 @@ public sealed class MctsPolicy : IPlayerPolicy
                 path.Add(node);
             }
 
-            outcome = ForwardModel.StepTurn(stats, chosen, turn, context.VictoryTurnCount, events);
+            outcome = ForwardModel.StepTurnWithAbilities(stats, chosen, hand, turn, context.VictoryTurnCount, events, context.Data);
             if (outcome == GameOutcome.None)
             {
                 turn++;
-                actions = ForwardModel.DrawPlayable(hand, context.HandSize, stats);
+                actions = WithoutReveal(ForwardModel.DrawPlayable(hand, context.HandSize, stats));
             }
         }
 
@@ -119,10 +153,11 @@ public sealed class MctsPolicy : IPlayerPolicy
             SimCard chosen = null;
             if (actions.Count > 0)
             {
-                chosen = _rollout.Choose(new DecisionContext
+                var plain = PolicyHelpers.PlainCards(actions);
+                chosen = plain.Count == 0 ? null : _rollout.Choose(new DecisionContext
                 {
                     Stats = stats,
-                    PlayableCards = actions,
+                    PlayableCards = plain,
                     TurnIndex = turn,
                     Data = context.Data,
                     Random = random,
@@ -174,9 +209,9 @@ public sealed class MctsPolicy : IPlayerPolicy
         return DefeatShaping * turn / context.VictoryTurnCount;
     }
 
-    private SimCard Planned(SimCard card, BalanceData data)
+    private static SimCard Planned(SimCard card, BalanceData data, bool informed)
     {
-        if (_options.Informed)
+        if (informed)
             return card;
         return PerceivedCache.GetValue(data, BuildPerceived)[card.Id];
     }
@@ -195,6 +230,7 @@ public sealed class MctsPolicy : IPlayerPolicy
             Archetype = card.Archetype,
             RequiredPesquisa = card.RequiredPesquisa,
             PlacesStructure = card.PlacesStructure,
+            Ability = card.Ability,
             StatEffects = card.StatEffects
                 .Select(effect => new StatModifier { Parameter = effect.Parameter, Amount = Math.Sign(effect.Amount) * average })
                 .ToList(),

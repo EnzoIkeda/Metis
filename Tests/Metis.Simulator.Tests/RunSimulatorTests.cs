@@ -32,17 +32,19 @@ public class RunSimulatorTests
         Assert.That(run.PhasesWon, Is.EqualTo(3));
         Assert.That(run.Phases, Has.Count.EqualTo(3));
         Assert.That(run.Phases[0].PresetId, Is.EqualTo(SimulationRunner.BaseSetupName));
-        Assert.That(run.Phases, Has.All.Property(nameof(PhaseRunRecord.OfferedIds)).Count.EqualTo(3));
+        Assert.That(run.Phases[0].OfferedIds, Has.Count.EqualTo(2), "so as 2 vantagens: a unica carta ja esta no baralho");
     }
 
     [Test]
-    public void Run_OfferedCardAlreadyInDeck_IsCountedAsRedundant()
+    public void Run_NeverOffersCardsAlreadyInDeckOrLoadedAdvantages()
     {
-        var setup = new RunSetup { Data = DataWithRewards(), Archetype = CardArchetype.Industria, PhaseCount = 1 };
+        var setup = new RunSetup { Data = DataWithRewards(), Archetype = CardArchetype.Industria, PhaseCount = 3 };
 
         var run = RunSimulator.Run(setup, new RandomPolicy(), new RandomRewardPolicy(), 1, 0);
 
-        Assert.That(run.Phases[0].RedundantOffered, Is.EqualTo(1), "a carta Neutra e Basica, ja esta no baralho");
+        Assert.That(run.Phases[0].OfferedIds, Has.No.Member("Neutra"), "a carta Neutra e Basica, ja esta no baralho");
+        Assert.That(run.Phases, Has.All.Property(nameof(PhaseRunRecord.RedundantOffered)).EqualTo(0));
+        Assert.That(run.Phases[1].OfferedIds, Has.No.Member(run.Phases[0].ChosenId), "vantagem ja carregada nao volta a ser oferecida");
     }
 
     [Test]

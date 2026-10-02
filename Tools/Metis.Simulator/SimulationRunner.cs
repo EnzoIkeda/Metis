@@ -29,6 +29,7 @@ public sealed class SimulationOptions
     public List<string> Setups { get; set; } = new();
     public int? HandSize { get; set; }
     public int? VictoryTurnCount { get; set; }
+    public bool FiniteDeck { get; set; }
     // "fase" simula fases avulsas; "rodada" simula rodadas inteiras com recompensa entre as fases.
     public string Mode { get; set; } = "fase";
     public int PhaseCount { get; set; } = 3;
@@ -51,6 +52,7 @@ public static class SimulationRunner
             "equilibrada" => new BalancedPolicy(),
             "mcts" => new MctsPolicy(new MctsOptions { Iterations = options.MctsIterations, Exploration = options.MctsExploration, Informed = true }),
             "mcts_desinformado" => new MctsPolicy(new MctsOptions { Iterations = options.MctsIterations, Exploration = options.MctsExploration, Informed = false }),
+            "mcts_desinformado_revela" => new MctsPolicy(new MctsOptions { Iterations = options.MctsIterations, Exploration = options.MctsExploration, Informed = false, RevealWhenUninformed = true }),
             _ => throw new ArgumentException($"Politica desconhecida: '{name}'."),
         };
     }
@@ -85,6 +87,7 @@ public static class SimulationRunner
                             Preset = preset,
                             HandSizeOverride = options.HandSize,
                             VictoryTurnCountOverride = options.VictoryTurnCount,
+                            FiniteDeck = options.FiniteDeck,
                         },
                     });
                 }
@@ -125,6 +128,7 @@ public static class SimulationRunner
                 Data = data,
                 Archetype = jobs[jobIndex].Archetype,
                 PhaseCount = options.PhaseCount,
+                FiniteDeck = options.FiniteDeck,
                 HandSizeOverride = options.HandSize,
                 VictoryTurnCountOverride = options.VictoryTurnCount,
             };
@@ -207,7 +211,7 @@ public static class SimulationRunner
         var header = new List<string> { "game_id", "setup", "archetype", "policy", "game_index", "hand_size", "victory_turns", "outcome", "turns_played" };
         header.AddRange(PhaseSimulator.Parameters.Select(parameter => $"final_{parameter}"));
         header.AddRange(Enumerable.Range(1, tiers).Select(tier => $"tier{tier}_turn"));
-        header.AddRange(new[] { "max_collapsed", "turns_with_collapse", "turns_no_play" });
+        header.AddRange(new[] { "max_collapsed", "turns_with_collapse", "turns_no_play", "free_actions", "anchor_bonus_final" });
         writer.WriteLine(string.Join(',', header));
 
         for (int index = 0; index < results.Length; index++)
@@ -231,7 +235,10 @@ public static class SimulationRunner
             row.AddRange(game.TierReachedTurn.Select(turn => turn.ToString(CultureInfo.InvariantCulture)));
             row.Add(game.Turns.Max(turn => turn.Collapsed).ToString(CultureInfo.InvariantCulture));
             row.Add(game.Turns.Count(turn => turn.Collapsed > 0).ToString(CultureInfo.InvariantCulture));
-            row.Add(game.Turns.Count(turn => turn.PlayableCount == 0).ToString(CultureInfo.InvariantCulture));
+            // Turno sem jogada comum: nada jogavel, ou so acao livre.
+            row.Add(game.Turns.Count(turn => turn.CardId.Length == 0).ToString(CultureInfo.InvariantCulture));
+            row.Add(game.Turns.Sum(turn => turn.FreeActionIds.Count).ToString(CultureInfo.InvariantCulture));
+            row.Add(Format(game.FinalAnchorBonus));
             writer.WriteLine(string.Join(',', row));
         }
     }
@@ -239,7 +246,7 @@ public static class SimulationRunner
     private static void WriteTurns(string path, GameRecord[] results)
     {
         using var writer = new StreamWriter(path, false, new UTF8Encoding(false));
-        var header = new List<string> { "game_id", "turn", "card_id", "playable_count", "playable_ids", "event_id" };
+        var header = new List<string> { "game_id", "turn", "card_id", "playable_count", "playable_ids", "free_actions", "searched", "event_id" };
         header.AddRange(PhaseSimulator.Parameters.Select(parameter => parameter.ToString()));
         header.Add("collapsed");
         writer.WriteLine(string.Join(',', header));
@@ -255,6 +262,8 @@ public static class SimulationRunner
                     turn.CardId,
                     turn.PlayableCount.ToString(CultureInfo.InvariantCulture),
                     string.Join('|', turn.PlayableIds),
+                    string.Join('|', turn.FreeActionIds),
+                    string.Join('|', turn.SearchedIds),
                     turn.EventId,
                 };
                 row.AddRange(turn.Values.Select(Format));
@@ -279,6 +288,7 @@ public static class SimulationRunner
             ["setups"] = options.Setups.Count > 0 ? options.Setups : new[] { BaseSetupName }.Concat(data.Presets.Select(preset => preset.Id)).ToList(),
             ["hand_size"] = options.HandSize ?? data.Rules.HandSize,
             ["victory_turns"] = options.VictoryTurnCount ?? data.Rules.VictoryTurnCount,
+            ["finite_deck"] = options.FiniteDeck,
             ["mode"] = options.Mode,
             ["phase_count"] = options.PhaseCount,
             ["reward_rollouts"] = options.RewardRollouts,

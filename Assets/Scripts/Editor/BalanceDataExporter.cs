@@ -37,6 +37,7 @@ public static class BalanceDataExporter
         public float Cost;
         public float RequiredPesquisa;
         public bool PlacesStructure;
+        public string Ability;
         public List<ModifierDto> Effects = new List<ModifierDto>();
     }
 
@@ -181,6 +182,7 @@ public static class BalanceDataExporter
                 Cost = card.Cost,
                 RequiredPesquisa = card.RequiredPesquisa,
                 PlacesStructure = card.StructureToPlace != null,
+                Ability = card.Ability.ToString(),
                 Effects = ToDtos(card.StatEffects),
             });
         }

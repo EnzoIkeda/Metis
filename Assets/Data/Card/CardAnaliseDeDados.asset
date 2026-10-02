@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39c804f1a5f690765908711b18576891, type: 3}
+  m_Name: CardAnaliseDeDados
+  m_EditorClassIdentifier: Metis.Runtime::CardData
+  _cardName: "An\xE1lise de Dados"
+  _description: "A\xE7\xE3o livre: revela o efeito exato das cartas na m\xE3o at\xE9
+    o fim do turno. N\xE3o gasta a jogada do turno."
+  _cardNameEn: Data Analysis
+  _descriptionEn: 'Free action: reveals the exact effects of the cards in your hand
+    until the end of the turn. Does not use up your play for the turn.'
+  _cost: 3
+  _tier: 0
+  _archetype: 0
+  _requiredPesquisa: 0
+  _statEffects: []
+  _ability: 2
+  _structureToPlace: {fileID: 0}
+  _artwork: {fileID: 0}

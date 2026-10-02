@@ -12,7 +12,8 @@ public static class TestDataFactory
         float requiredPesquisa = 0f,
         float cost = 0f,
         StatModifier[] statEffects = null,
-        StructureData structureToPlace = null)
+        StructureData structureToPlace = null,
+        CardAbility ability = CardAbility.None)
     {
         var card = ScriptableObject.CreateInstance<CardData>();
         card.name = name;
@@ -22,6 +23,7 @@ public static class TestDataFactory
         SetField(card, "_cost", cost);
         SetField(card, "_statEffects", statEffects ?? new StatModifier[0]);
         SetField(card, "_structureToPlace", structureToPlace);
+        SetField(card, "_ability", ability);
         return card;
     }
 

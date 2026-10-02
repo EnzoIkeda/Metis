@@ -17,12 +17,18 @@ public class TurnManager : MonoBehaviour
     [SerializeField, Min(1)] private int _handSize = 5;
     [SerializeField, Min(1)] private int _victoryTurnCount = TurnMachine.DefaultVictoryTurnCount;
 
+    // Baralho finito com pilha de compra e descarte, em vez de comprar com reposicao do pool inteiro.
+    [SerializeField] private bool _finiteDeck;
+
     private RandomEventPool<RandomEventData> _events;
     private RandomEventData _pendingEvent;
 
     // Guardas de reentrancia contra jogar carta ou confirmar evento duas vezes durante a animacao atrasada.
     private bool _actionEffectPending;
     private bool _eventEffectPending;
+
+    // Carta de busca ja paga, esperando o jogador escolher o que trazer do baralho.
+    private bool _searchPending;
 
     public TurnMachine Machine { get; private set; }
     public CardHand<CardData> Hand { get; private set; }
@@ -35,6 +41,9 @@ public class TurnManager : MonoBehaviour
 
     public event Action<RandomEventData> OnRandomEventTriggered;
 
+    // Carta de busca jogada: lista o que pode vir do baralho, a escolha volta por CompleteSearch.
+    public event Action<IReadOnlyList<CardData>> OnSearchRequested;
+
     private void Start()
     {
         ApplyLoadedAdvantages();
@@ -45,7 +54,7 @@ public class TurnManager : MonoBehaviour
         Machine.OnGameEnded += HandleGameEnded;
 
         var pool = DeckBuilder.Build(_cardPool, MetaProgressionManager.Archetype, MetaProgressionManager.LoadedCardNames);
-        Hand = new CardHand<CardData>(pool);
+        Hand = new CardHand<CardData>(pool, null, _finiteDeck);
         Hand.OnHandChanged += HandleHandChanged;
 
         _events = new RandomEventPool<RandomEventData>(_eventPool);
@@ -79,17 +88,27 @@ public class TurnManager : MonoBehaviour
 
     public bool CanPlay(CardData card)
     {
-        return card != null && Hand.CanPlay(card, _cityStatsManager.Stats);
+        if (card == null || Hand.CanPlay(card, _cityStatsManager.Stats) == false)
+            return false;
+
+        // Busca sem nada pra trazer so gastaria Renda.
+        if (card.Ability == CardAbility.SearchDeck && Hand.SearchCandidates(_cityStatsManager.Stats).Count == 0)
+            return false;
+
+        return true;
     }
 
     public bool PlayCard(CardData card)
     {
-        if (_actionEffectPending)
+        if (_actionEffectPending || _searchPending)
             return false;
         if (Machine == null || Machine.CurrentPhase != TurnPhase.Action)
             return false;
-        if (card == null || Hand.CanPlay(card, _cityStatsManager.Stats) == false)
+        if (CanPlay(card) == false)
             return false;
+
+        if (CardRules.IsFreeAction(card))
+            return PlayFreeAction(card);
 
         bool played;
         if (card.StructureToPlace == null)
@@ -127,6 +146,37 @@ public class TurnManager : MonoBehaviour
         }
 
         return played;
+    }
+
+    // Acao livre: paga o custo e resolve a habilidade, sem encerrar a fase de acao nem tocar o efeito de impacto.
+    private bool PlayFreeAction(CardData card)
+    {
+        var stats = _cityStatsManager.Stats;
+        if (Hand.TryPlay(card, stats) == false)
+            return false;
+
+        if (card.Ability == CardAbility.RevealHand)
+        {
+            Hand.Reveal();
+        }
+        else if (card.Ability == CardAbility.SearchDeck)
+        {
+            _searchPending = true;
+            OnSearchRequested?.Invoke(Hand.SearchCandidates(stats));
+        }
+        return true;
+    }
+
+    // Fecha a busca trazendo a carta escolhida pra mao.
+    public bool CompleteSearch(CardData card)
+    {
+        if (_searchPending == false)
+            return false;
+        if (Hand.TakeFromDeck(card, _cityStatsManager.Stats) == false)
+            return false;
+
+        _searchPending = false;
+        return true;
     }
 
     public void AcknowledgeEvent()
@@ -244,6 +294,19 @@ public class TurnManager : MonoBehaviour
         Debug.Log(success
             ? $"[CardHand] Jogou '{_debugCardToPlay.CardName}'"
             : $"[CardHand] Não foi possível jogar '{_debugCardToPlay?.CardName}' (fase errada, fora da mão, Pesquisa/Renda insuficientes, ou grid cheio?)");
+    }
+
+    [ContextMenu("Debug: Abrir Busca no Baralho (sem custo)")]
+    private void DebugOpenSearch()
+    {
+        _searchPending = true;
+        OnSearchRequested?.Invoke(Hand.SearchCandidates(_cityStatsManager.Stats));
+    }
+
+    [ContextMenu("Debug: Revelar Mao")]
+    private void DebugRevealHand()
+    {
+        Hand.Reveal();
     }
 
     [ContextMenu("Debug: Finalizar Jogo com Vitoria")]

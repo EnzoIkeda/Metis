@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-// Uma carta na mao, com nome, imagem e requisitos, que abre um popup de detalhe ao ser clicada.
+// Uma carta na mao, com nome, imagem e requisitos, que abre um popup de detalhe ao ser clicada. Com a mao revelada, mostra os efeitos exatos no lugar da imagem.
 public class CardView : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     private static readonly Color PlayableColor = Color.white;
@@ -14,6 +14,7 @@ public class CardView : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, 
     [SerializeField] private Image _artworkImage;
     [SerializeField] private GameObject _artworkPlaceholder;
     [SerializeField] private TMP_Text _requirementsText;
+    [SerializeField] private TMP_Text _effectsText;
     [SerializeField] private RectTransform _rectTransform;
     [SerializeField] private float _swipeUpThreshold = 100f;
     [SerializeField] private float _dragDirectionThreshold = 12f;
@@ -30,7 +31,7 @@ public class CardView : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, 
         _scrollRect = GetComponentInParent<ScrollRect>();
     }
 
-    public void Bind(CardData card, Action<CardData> onPlay, Action<CardData> onExpand, bool isPlayable)
+    public void Bind(CardData card, Action<CardData> onPlay, Action<CardData> onExpand, bool isPlayable, bool isRevealed = false)
     {
         _card = card;
         _onPlay = onPlay;
@@ -39,14 +40,21 @@ public class CardView : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, 
         if (_nameText != null)
             _nameText.text = card.CardName;
 
+        var showEffects = isRevealed && _effectsText != null;
         var hasArtwork = card.Artwork != null;
         if (_artworkImage != null)
         {
             _artworkImage.sprite = card.Artwork;
-            _artworkImage.gameObject.SetActive(hasArtwork);
+            _artworkImage.gameObject.SetActive(hasArtwork && showEffects == false);
         }
         if (_artworkPlaceholder != null)
-            _artworkPlaceholder.SetActive(hasArtwork == false);
+            _artworkPlaceholder.SetActive(hasArtwork == false && showEffects == false);
+        if (_effectsText != null)
+        {
+            _effectsText.gameObject.SetActive(showEffects);
+            if (showEffects)
+                _effectsText.text = UIStrings.CardEffects(card);
+        }
 
         if (_requirementsText != null)
         {

@@ -60,6 +60,20 @@ public static class UIStrings
         ? $"Pesquisa mín.: {requiredResearch:0} · Custo: {cost:0}"
         : $"Research min.: {requiredResearch:0} · Cost: {cost:0}";
 
+    // Efeitos exatos da carta, um parametro por linha, mostrados quando a mao foi revelada.
+    public static string CardEffects(CardData card)
+    {
+        if (card.StatEffects == null || card.StatEffects.Count == 0)
+            return IsPt ? "Sem efeito direto" : "No direct effect";
+
+        var lines = new System.Collections.Generic.List<string>();
+        foreach (var effect in card.StatEffects)
+            lines.Add($"{effect.Parameter.GetDisplayName()} {effect.Amount:+0;-0;0}");
+        return string.Join("\n", lines);
+    }
+
+    public static string SearchTitle => IsPt ? "Buscar no baralho" : "Search the deck";
+
     public static string TurnCounter(int turnIndex, int totalTurns) => IsPt
         ? $"Turno {turnIndex}/{totalTurns}"
         : $"Turn {turnIndex}/{totalTurns}";

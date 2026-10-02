@@ -40,14 +40,14 @@ public class CardDetailPopupView : MonoBehaviour
         Hide();
     }
 
-    public void Show(CardData card, Action onPlay)
+    public void Show(CardData card, Action onPlay, bool isRevealed = false)
     {
         _onPlay = onPlay;
 
         if (_titleText != null)
             _titleText.text = card.CardName;
         if (_descriptionText != null)
-            _descriptionText.text = card.Description;
+            _descriptionText.text = isRevealed ? $"{card.Description}\n\n{UIStrings.CardEffects(card)}" : card.Description;
         if (_costText != null)
             _costText.text = UIStrings.CardRequirementsFull(card.RequiredPesquisa, card.Cost);
 

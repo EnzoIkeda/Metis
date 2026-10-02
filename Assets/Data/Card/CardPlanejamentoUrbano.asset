@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39c804f1a5f690765908711b18576891, type: 3}
+  m_Name: CardPlanejamentoUrbano
+  m_EditorClassIdentifier: Metis.Runtime::CardData
+  _cardName: Planejamento Urbano
+  _description: "A\xE7\xE3o livre: escolha uma carta j\xE1 liberada do baralho e
+    coloque na m\xE3o. N\xE3o gasta a jogada do turno."
+  _cardNameEn: Urban Planning
+  _descriptionEn: 'Free action: pick any unlocked card from your deck and add it
+    to your hand. Does not use up your play for the turn.'
+  _cost: 5
+  _tier: 0
+  _archetype: 0
+  _requiredPesquisa: 0
+  _statEffects: []
+  _ability: 1
+  _structureToPlace: {fileID: 0}
+  _artwork: {fileID: 0}

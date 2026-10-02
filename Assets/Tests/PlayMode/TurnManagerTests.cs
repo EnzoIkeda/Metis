@@ -23,7 +23,7 @@ public class TurnManagerTests
 
     // CityEffectsController fica sem nenhum prefab de particula atribuido; PlayOneShot lida com isso
     // direto (so pula o Instantiate), entao a espera calibrada continua rodando de verdade.
-    private TurnManager CreateTurnManager(CardData[] cardPool)
+    private TurnManager CreateTurnManager(CardData[] cardPool, int handSize = 5)
     {
         _host = new GameObject("TurnManagerHost");
         _host.SetActive(false);
@@ -39,6 +39,7 @@ public class TurnManagerTests
         TestDataFactory.SetField(turnManager, "_eventPool", new RandomEventData[0]);
         TestDataFactory.SetField(turnManager, "_advantagePool", new PassiveAdvantageData[0]);
         TestDataFactory.SetField(turnManager, "_effects", effects);
+        TestDataFactory.SetField(turnManager, "_handSize", handSize);
 
         _host.SetActive(true);
         return turnManager;
@@ -75,5 +76,50 @@ public class TurnManagerTests
 
         Assert.That(turnManager.Machine.TurnIndex, Is.EqualTo(2));
         Assert.That(turnManager.Machine.CurrentPhase, Is.EqualTo(TurnPhase.Action));
+    }
+
+    // Carta de revelacao e acao livre: paga o custo, revela a mao e o turno continua esperando a jogada.
+    [UnityTest]
+    public IEnumerator PlayCard_RevealCard_IsAFreeActionThatRevealsTheHand()
+    {
+        var reveal = TestDataFactory.CreateCard("Revelar", cost: 3f, ability: CardAbility.RevealHand);
+        var turnManager = CreateTurnManager(new[] { reveal });
+        yield return null;
+        var handCount = turnManager.Hand.Cards.Count;
+
+        var played = turnManager.PlayCard(reveal);
+
+        Assert.That(played, Is.True);
+        Assert.That(turnManager.Hand.IsRevealed, Is.True);
+        Assert.That(turnManager.Machine.CurrentPhase, Is.EqualTo(TurnPhase.Action));
+        Assert.That(turnManager.Machine.TurnIndex, Is.EqualTo(1));
+        Assert.That(turnManager.Hand.Cards.Count, Is.EqualTo(handCount - 1));
+    }
+
+    // Busca e acao livre: pede a escolha, bloqueia outras jogadas ate ela chegar, e a escolhida entra na mao.
+    [UnityTest]
+    public IEnumerator PlayCard_SearchCard_WaitsForChoiceThenAddsTheCard()
+    {
+        var search = TestDataFactory.CreateCard("Buscar", ability: CardAbility.SearchDeck);
+        var target = TestDataFactory.CreateCard("Alvo");
+        // Mao grande pra compra sorteada trazer as duas cartas com probabilidade de falha ~1 em um milhao.
+        var turnManager = CreateTurnManager(new[] { search, target }, handSize: 20);
+        yield return null;
+        Assume.That(turnManager.Hand.Cards, Has.Member(search));
+        Assume.That(turnManager.Hand.Cards, Has.Member(target));
+        System.Collections.Generic.IReadOnlyList<CardData> offered = null;
+        turnManager.OnSearchRequested += candidates => offered = candidates;
+        var otherCard = target;
+
+        Assert.That(turnManager.PlayCard(search), Is.True);
+        Assert.That(offered, Is.EquivalentTo(new[] { target }), "a propria busca nao pode ser trazida");
+        Assert.That(turnManager.PlayCard(otherCard), Is.False, "nada mais pode ser jogado enquanto a busca espera a escolha");
+
+        var countBefore = turnManager.Hand.Cards.Count;
+        Assert.That(turnManager.CompleteSearch(target), Is.True);
+
+        Assert.That(turnManager.Hand.Cards.Count, Is.EqualTo(countBefore + 1));
+        Assert.That(turnManager.Machine.CurrentPhase, Is.EqualTo(TurnPhase.Action));
+        Assert.That(turnManager.PlayCard(target), Is.True, "depois da busca a jogada normal do turno continua disponivel");
     }
 }

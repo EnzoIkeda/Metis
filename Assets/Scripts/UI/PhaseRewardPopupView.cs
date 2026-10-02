@@ -43,6 +43,13 @@ public class PhaseRewardPopupView : MonoBehaviour
             return;
 
         _currentOptions = DrawOptions();
+
+        // Sem nada novo pra oferecer, segue direto pro mapa em vez de abrir um popup sem opcao.
+        if (_currentOptions.Length == 0)
+        {
+            SceneManager.LoadScene("PhaseMap");
+            return;
+        }
         for (int i = 0; i < _optionButtons.Length; i++)
         {
             var hasOption = i < _currentOptions.Length;
@@ -58,12 +65,13 @@ public class PhaseRewardPopupView : MonoBehaviour
             _panelRoot.SetActive(true);
     }
 
-    // Sorteia entre o pool inteiro de cartas e as vantagens passivas cadastradas.
+    // Sorteia so entre o que ainda acrescenta algo: cartas fora do baralho atual e vantagens nao carregadas.
     private UnityEngine.Object[] DrawOptions()
     {
+        var deck = DeckBuilder.Build(_turnManager.CardPool, MetaProgressionManager.Archetype, MetaProgressionManager.LoadedCardNames);
         var pool = new List<UnityEngine.Object>();
-        pool.AddRange(_turnManager.CardPool);
-        pool.AddRange(_turnManager.AdvantagePool);
+        pool.AddRange(RewardOptionPicker.CardPool(_turnManager.CardPool, deck));
+        pool.AddRange(RewardOptionPicker.AdvantagePool(_turnManager.AdvantagePool, MetaProgressionManager.LoadedAdvantageNames));
 
         var count = Math.Min(_optionCount, _optionButtons.Length);
         return RewardOptionPicker.Draw(pool, count, _random).ToArray();

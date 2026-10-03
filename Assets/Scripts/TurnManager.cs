@@ -148,6 +148,34 @@ public class TurnManager : MonoBehaviour
         return played;
     }
 
+    // So da pra passar a vez quando nenhuma carta comum e jogavel, senao o turno ficaria preso na fase de acao.
+    public bool CanPassTurn
+    {
+        get
+        {
+            if (Machine == null || Machine.CurrentPhase != TurnPhase.Action || _actionEffectPending || _searchPending)
+                return false;
+
+            foreach (var card in Hand.Cards)
+            {
+                if (CardRules.IsFreeAction(card) == false && CanPlay(card))
+                    return false;
+            }
+            return true;
+        }
+    }
+
+    // Encerra a fase de acao sem jogar carta comum: o turno segue pra resolucao e evento normalmente.
+    public bool PassTurn()
+    {
+        if (CanPassTurn == false)
+            return false;
+
+        _effects?.SetAmbientGlowsVisible(false);
+        Machine.EndActionPhase();
+        return true;
+    }
+
     // Acao livre: paga o custo e resolve a habilidade, sem encerrar a fase de acao nem tocar o efeito de impacto.
     private bool PlayFreeAction(CardData card)
     {

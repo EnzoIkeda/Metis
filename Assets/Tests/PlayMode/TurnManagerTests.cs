@@ -122,4 +122,30 @@ public class TurnManagerTests
         Assert.That(turnManager.Machine.CurrentPhase, Is.EqualTo(TurnPhase.Action));
         Assert.That(turnManager.PlayCard(target), Is.True, "depois da busca a jogada normal do turno continua disponivel");
     }
+
+    // Passar a vez so existe quando nada comum e jogavel: aqui a unica carta custa mais que a Renda inicial.
+    [UnityTest]
+    public IEnumerator PassTurn_OnlyAllowedWhenNoPlainCardIsPlayable()
+    {
+        var expensive = TestDataFactory.CreateCard("Cara", cost: 1000f);
+        var turnManager = CreateTurnManager(new[] { expensive });
+        yield return null;
+
+        Assert.That(turnManager.CanPassTurn, Is.True);
+        Assert.That(turnManager.PassTurn(), Is.True);
+        Assert.That(turnManager.Machine.TurnIndex, Is.EqualTo(2), "sem eventos, passar a vez fecha o turno direto");
+        Assert.That(turnManager.Machine.CurrentPhase, Is.EqualTo(TurnPhase.Action));
+    }
+
+    [UnityTest]
+    public IEnumerator PassTurn_RefusedWhileAPlainCardIsPlayable()
+    {
+        var card = TestDataFactory.CreateCard();
+        var turnManager = CreateTurnManager(new[] { card });
+        yield return null;
+
+        Assert.That(turnManager.CanPassTurn, Is.False);
+        Assert.That(turnManager.PassTurn(), Is.False);
+        Assert.That(turnManager.Machine.TurnIndex, Is.EqualTo(1));
+    }
 }

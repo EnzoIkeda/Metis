@@ -74,6 +74,8 @@ public static class UIStrings
 
     public static string SearchTitle => IsPt ? "Buscar no baralho" : "Search the deck";
 
+    public static string PassTurnButton => IsPt ? "Passar a vez" : "Pass turn";
+
     public static string TurnCounter(int turnIndex, int totalTurns) => IsPt
         ? $"Turno {turnIndex}/{totalTurns}"
         : $"Turn {turnIndex}/{totalTurns}";

@@ -7,7 +7,7 @@ public class CardHand<TCard> where TCard : class, ICardDefinition
     private readonly IReadOnlyList<TCard> _pool;
     private readonly List<TCard> _cards = new List<TCard>();
     private readonly Random _random;
-    private readonly bool _finiteDeck;
+    private bool _finiteDeck;
     private readonly List<TCard> _drawPile = new List<TCard>();
     private readonly List<TCard> _discardPile = new List<TCard>();
 
@@ -36,6 +36,17 @@ public class CardHand<TCard> where TCard : class, ICardDefinition
             _drawPile.AddRange(pool);
             Shuffle(_drawPile);
         }
+    }
+
+    // Baralho finito com pilhas ja conhecidas: a pilha de compra e embaralhada (a ordem e o que nao se sabe), o descarte fica como esta.
+    public static CardHand<TCard> FromPiles(IReadOnlyList<TCard> pool, IEnumerable<TCard> drawPile, IEnumerable<TCard> discardPile, Random random)
+    {
+        var hand = new CardHand<TCard>(pool, random, finiteDeck: false);
+        hand._finiteDeck = true;
+        hand._drawPile.AddRange(drawPile);
+        hand._discardPile.AddRange(discardPile);
+        hand.Shuffle(hand._drawPile);
+        return hand;
     }
 
     // So compra carta cujo RequiredPesquisa ja foi atingido, senao a mao vem cheia de carta travada.

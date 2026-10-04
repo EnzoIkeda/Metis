@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -100,13 +101,18 @@ public class TurnManagerTests
     [UnityTest]
     public IEnumerator PlayCard_SearchCard_WaitsForChoiceThenAddsTheCard()
     {
+        // Baralho finito: 1 busca + 3 copias do alvo, mao de 2. O baralho passa inteiro antes de repetir, entao em ate 2 compras a busca
+        // vem pra mao, e sempre sobra copia do alvo fora da mao pra ser buscada.
         var search = TestDataFactory.CreateCard("Buscar", ability: CardAbility.SearchDeck);
-        var target = TestDataFactory.CreateCard("Alvo");
-        // Mao grande pra compra sorteada trazer as duas cartas com probabilidade de falha ~1 em um milhao.
-        var turnManager = CreateTurnManager(new[] { search, target }, handSize: 20);
+        var target = TestDataFactory.CreateCard("Alvo", copies: 3);
+        var turnManager = CreateTurnManager(new[] { search, target }, handSize: 2);
         yield return null;
-        Assume.That(turnManager.Hand.Cards, Has.Member(search));
-        Assume.That(turnManager.Hand.Cards, Has.Member(target));
+        for (int redraw = 0; redraw < 3 && turnManager.Hand.Cards.Contains(search) == false; redraw++)
+        {
+            turnManager.Hand.DiscardAll();
+            turnManager.Hand.Draw(2, Object.FindFirstObjectByType<CityStatsManager>().Stats);
+        }
+        Assert.That(turnManager.Hand.Cards, Has.Member(search));
         System.Collections.Generic.IReadOnlyList<CardData> offered = null;
         turnManager.OnSearchRequested += candidates => offered = candidates;
         var otherCard = target;

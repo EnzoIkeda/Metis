@@ -47,15 +47,7 @@ public class CityStatsManager : MonoBehaviour
             return _initialParameters;
 
         var preset = _phasePresets[UnityEngine.Random.Range(0, _phasePresets.Length)];
-        var parameters = (CityParameterConfig[])_initialParameters.Clone();
-        for (int i = 0; i < parameters.Length; i++)
-        {
-            foreach (var overrideValue in preset.Overrides)
-            {
-                if (parameters[i].Parameter == overrideValue.Parameter)
-                    parameters[i].InitialValue = overrideValue.InitialValue;
-            }
-        }
+        var parameters = CityPresetRules.Apply(_initialParameters, preset.Overrides, preset.DerivaMultiplier);
 
         Debug.Log($"[CityStatsManager] Fase nova, preset '{preset.PresetName}' aplicado.");
         return parameters;

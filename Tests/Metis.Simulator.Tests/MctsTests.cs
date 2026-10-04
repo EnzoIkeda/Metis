@@ -125,4 +125,25 @@ public class MctsTests
         Assert.That(MctsPolicy.Reward(GameOutcome.Victory, stats, data.Rules.VictoryTurnCount, context), Is.GreaterThanOrEqualTo(worstVictory));
         Assert.That(bestDefeat, Is.LessThan(worstVictory));
     }
+
+    [Test]
+    public void Mcts_FiniteDeck_PlansFromTheKnownPilesDeterministically()
+    {
+        var cards = Enumerable.Range(0, 6)
+            .Select(i => new SimCard
+            {
+                Id = $"C{i}",
+                Copies = 1 + i % 2,
+                StatEffects = new[] { new StatModifier { Parameter = CityParameterType.Saude, Amount = i - 2 } },
+            })
+            .ToList();
+        var setup = new PhaseSetup { Data = TestData.Build(cards), Archetype = CardArchetype.Geral, FiniteDeck = true, VictoryTurnCountOverride = 5 };
+        var policy = new MctsPolicy(new MctsOptions { Iterations = 40 });
+
+        var first = PhaseSimulator.Run(setup, policy, new GameSeeds(6, 1));
+        var second = PhaseSimulator.Run(setup, policy, new GameSeeds(6, 1));
+
+        Assert.That(second.Turns.Select(turn => turn.CardId), Is.EqualTo(first.Turns.Select(turn => turn.CardId)));
+        Assert.That(first.Turns.SelectMany(turn => turn.PlayableIds).Take(9), Has.Exactly(2).EqualTo("C1"), "C1 tem 2 copias e o baralho de 9 cartas sai inteiro antes de repetir");
+    }
 }

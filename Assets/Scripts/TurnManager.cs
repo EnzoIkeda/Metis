@@ -17,9 +17,6 @@ public class TurnManager : MonoBehaviour
     [SerializeField, Min(1)] private int _handSize = 5;
     [SerializeField, Min(1)] private int _victoryTurnCount = TurnMachine.DefaultVictoryTurnCount;
 
-    // Baralho finito com pilha de compra e descarte, em vez de comprar com reposicao do pool inteiro.
-    [SerializeField] private bool _finiteDeck;
-
     private RandomEventPool<RandomEventData> _events;
     private RandomEventData _pendingEvent;
 
@@ -54,7 +51,8 @@ public class TurnManager : MonoBehaviour
         Machine.OnGameEnded += HandleGameEnded;
 
         var pool = DeckBuilder.Build(_cardPool, MetaProgressionManager.Archetype, MetaProgressionManager.LoadedCardNames);
-        Hand = new CardHand<CardData>(pool, null, _finiteDeck);
+        // Baralho sempre finito: compra sem reposicao e reembaralha o baralho inteiro quando acaba.
+        Hand = new CardHand<CardData>(pool, null, finiteDeck: true);
         Hand.OnHandChanged += HandleHandChanged;
 
         _events = new RandomEventPool<RandomEventData>(_eventPool);

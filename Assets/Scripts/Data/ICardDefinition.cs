@@ -37,6 +37,9 @@ public interface ICardDefinition
     float RequiredPesquisa { get; }
     IReadOnlyList<StatModifier> StatEffects { get; }
     CardAbility Ability { get; }
+
+    // Quantas vezes a carta entra no baralho.
+    int Copies { get; }
 }
 
 public static class CardRules

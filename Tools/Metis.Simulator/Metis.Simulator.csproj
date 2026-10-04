@@ -21,6 +21,7 @@
     <Compile Include="../../Assets/Scripts/Core/Utilities/CardHand.cs" Link="Game/CardHand.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/RandomEventPool.cs" Link="Game/RandomEventPool.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/DeckBuilder.cs" Link="Game/DeckBuilder.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/CityPresetRules.cs" Link="Game/CityPresetRules.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/RewardOptionPicker.cs" Link="Game/RewardOptionPicker.cs" />
   </ItemGroup>
 

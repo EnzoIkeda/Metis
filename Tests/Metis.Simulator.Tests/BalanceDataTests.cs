@@ -74,4 +74,19 @@ public class BalanceDataTests
 
         Assert.That(data.TierThresholds, Is.EqualTo(new[] { 25f, 50f }));
     }
+
+    [Test]
+    public void BuildParameterConfigs_PresetDerivaMultiplier_ScalesOnlyNegativeDrifts()
+    {
+        var json = MinimalJson
+            .Replace("\"Deriva\": 1 }", "\"Deriva\": 1 }, { \"Parameter\": \"Energia\", \"InitialValue\": 50, \"MinValue\": 0, \"MaxValue\": 100, \"CriticalLevel\": 10, \"Deriva\": -2 }")
+            .Replace("\"Overrides\": [ { \"Parameter\": \"Renda\", \"InitialValue\": 25 } ]", "\"Overrides\": [ { \"Parameter\": \"Renda\", \"InitialValue\": 25 } ], \"DerivaMultiplier\": 1.5");
+        var data = BalanceData.Parse(json);
+
+        var configs = data.BuildParameterConfigs(data.Presets.Single());
+
+        Assert.That(configs.Single(config => config.Parameter == CityParameterType.Energia).Deriva, Is.EqualTo(-3f));
+        Assert.That(configs.Single(config => config.Parameter == CityParameterType.Renda).Deriva, Is.EqualTo(1f), "deriva positiva nao muda");
+        Assert.That(data.BuildParameterConfigs(null).Single(config => config.Parameter == CityParameterType.Energia).Deriva, Is.EqualTo(-2f), "fase 1 sem preset nao muda");
+    }
 }

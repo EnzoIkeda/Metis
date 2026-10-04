@@ -20,6 +20,12 @@ public sealed class DecisionContext
 
     // O que a carta de busca traria agora, vazio se nao houver busca jogavel na mao.
     public IReadOnlyList<SimCard> SearchCandidates { get; init; } = Array.Empty<SimCard>();
+
+    // Baralho finito: o que resta pra comprar, o descarte e a mao inteira, pra quem planeja poder contar cartas.
+    public bool FiniteDeck { get; init; }
+    public IReadOnlyList<SimCard> DrawPile { get; init; } = Array.Empty<SimCard>();
+    public IReadOnlyList<SimCard> DiscardPile { get; init; } = Array.Empty<SimCard>();
+    public IReadOnlyList<SimCard> HandCards { get; init; } = Array.Empty<SimCard>();
 }
 
 // Jogador simulado: escolhe uma das cartas jogaveis da mao.

@@ -148,6 +148,10 @@ public static class PhaseSimulator
                     VictoryTurnCount = setup.VictoryTurnCount,
                     IsRevealed = hand.IsRevealed,
                     SearchCandidates = playable.Any(card => card.Ability == CardAbility.SearchDeck) ? hand.SearchCandidates(stats) : Array.Empty<SimCard>(),
+                    FiniteDeck = hand.FiniteDeck,
+                    DrawPile = hand.FiniteDeck ? hand.DrawPile.ToList() : Array.Empty<SimCard>(),
+                    DiscardPile = hand.FiniteDeck ? hand.DiscardPile.ToList() : Array.Empty<SimCard>(),
+                    HandCards = hand.Cards.ToList(),
                 };
 
                 var chosen = policy.Choose(Context(playable));

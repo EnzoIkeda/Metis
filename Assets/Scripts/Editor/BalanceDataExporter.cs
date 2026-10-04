@@ -38,6 +38,7 @@ public static class BalanceDataExporter
         public float RequiredPesquisa;
         public bool PlacesStructure;
         public string Ability;
+        public int Copies;
         public List<ModifierDto> Effects = new List<ModifierDto>();
     }
 
@@ -73,6 +74,7 @@ public static class BalanceDataExporter
         public string Id;
         public string Name;
         public List<OverrideDto> Overrides = new List<OverrideDto>();
+        public float DerivaMultiplier;
     }
 
     [Serializable]
@@ -183,6 +185,7 @@ public static class BalanceDataExporter
                 RequiredPesquisa = card.RequiredPesquisa,
                 PlacesStructure = card.StructureToPlace != null,
                 Ability = card.Ability.ToString(),
+                Copies = card.Copies,
                 Effects = ToDtos(card.StatEffects),
             });
         }
@@ -224,7 +227,7 @@ public static class BalanceDataExporter
 
         foreach (var preset in ReadObjectArray<CityParameterPresetData>(stats.FindProperty("_phasePresets")))
         {
-            var dto = new PresetDto { Id = preset.name, Name = PortugueseText(preset, "_presetName") };
+            var dto = new PresetDto { Id = preset.name, Name = PortugueseText(preset, "_presetName"), DerivaMultiplier = preset.DerivaMultiplier };
             foreach (var overrideValue in preset.Overrides)
                 dto.Overrides.Add(new OverrideDto { Parameter = overrideValue.Parameter.ToString(), InitialValue = overrideValue.InitialValue });
             data.Presets.Add(dto);

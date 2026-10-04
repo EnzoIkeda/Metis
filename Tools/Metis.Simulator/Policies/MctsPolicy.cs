@@ -90,7 +90,23 @@ public sealed class MctsPolicy : IPlayerPolicy
             HandSize = context.HandSize,
             VictoryTurnCount = context.VictoryTurnCount,
             IsRevealed = true,
+            FiniteDeck = context.FiniteDeck,
+            DrawPile = context.DrawPile,
+            DiscardPile = context.DiscardPile,
+            HandCards = context.HandCards,
         });
+    }
+
+    // Com baralho finito, conta cartas: os futuros saem das cartas que de fato restam na pilha (so a ordem e sorteada),
+    // e a mao atual vai pro descarte, que e onde ela termina no fim do turno.
+    private CardHand<SimCard> PlanningHand(List<SimCard> planningDeck, DecisionContext context, Random random)
+    {
+        if (context.FiniteDeck == false)
+            return new CardHand<SimCard>(planningDeck, random);
+
+        SimCard Plan(SimCard card) => Planned(card, context.Data, _options.Informed);
+        var discard = context.DiscardPile.Concat(context.HandCards).Select(Plan);
+        return CardHand<SimCard>.FromPiles(planningDeck, context.DrawPile.Select(Plan), discard, random);
     }
 
     private static List<SimCard> WithoutReveal(IReadOnlyList<SimCard> cards)
@@ -102,7 +118,7 @@ public sealed class MctsPolicy : IPlayerPolicy
     {
         var random = new Random(context.Random.Next());
         var stats = context.Stats.Clone();
-        var hand = new CardHand<SimCard>(planningDeck, random);
+        var hand = PlanningHand(planningDeck, context, random);
         var events = new RandomEventPool<SimEvent>(context.Events, random);
         var path = new List<Node> { root };
         var node = root;
@@ -231,6 +247,7 @@ public sealed class MctsPolicy : IPlayerPolicy
             RequiredPesquisa = card.RequiredPesquisa,
             PlacesStructure = card.PlacesStructure,
             Ability = card.Ability,
+            Copies = card.Copies,
             StatEffects = card.StatEffects
                 .Select(effect => new StatModifier { Parameter = effect.Parameter, Amount = Math.Sign(effect.Amount) * average })
                 .ToList(),

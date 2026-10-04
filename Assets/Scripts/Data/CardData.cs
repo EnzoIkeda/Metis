@@ -14,6 +14,7 @@ public class CardData : ScriptableObject, ICardDefinition
     [SerializeField] private float _requiredPesquisa;
     [SerializeField] private StatModifier[] _statEffects;
     [SerializeField] private CardAbility _ability;
+    [SerializeField, Min(1)] private int _copies = 1;
     [SerializeField] private StructureData _structureToPlace;
 
     // Arte opcional da carta, mostrada no espaco reservado de imagem quando definida.
@@ -41,6 +42,8 @@ public class CardData : ScriptableObject, ICardDefinition
     public IReadOnlyList<StatModifier> StatEffects => _statEffects;
 
     public CardAbility Ability => _ability;
+
+    public int Copies => _copies;
 
     public StructureData StructureToPlace => _structureToPlace;
 

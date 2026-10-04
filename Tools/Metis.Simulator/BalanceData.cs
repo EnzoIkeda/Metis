@@ -14,6 +14,7 @@ public sealed class SimCard : ICardDefinition
     public bool PlacesStructure { get; init; }
     public IReadOnlyList<StatModifier> StatEffects { get; init; } = Array.Empty<StatModifier>();
     public CardAbility Ability { get; init; }
+    public int Copies { get; init; } = 1;
 }
 
 public sealed class SimEvent : IRandomEventDefinition
@@ -38,6 +39,9 @@ public sealed class SimPreset
     public string Id { get; init; } = "";
     public string Name { get; init; } = "";
     public IReadOnlyDictionary<CityParameterType, float> Overrides { get; init; } = new Dictionary<CityParameterType, float>();
+
+    // Multiplica as derivas negativas na fase com este preset, pra fases 2+ poderem ser mais duras que a fase 1.
+    public float DerivaMultiplier { get; init; } = 1f;
 }
 
 public sealed class SimRules
@@ -87,16 +91,12 @@ public sealed class BalanceData
     // Valores iniciais da fase, com os overrides do preset aplicados por cima quando houver um.
     public CityParameterConfig[] BuildParameterConfigs(SimPreset preset)
     {
-        var configs = Parameters.ToArray();
         if (preset == null)
-            return configs;
+            return Parameters.ToArray();
 
-        for (int i = 0; i < configs.Length; i++)
-        {
-            if (preset.Overrides.TryGetValue(configs[i].Parameter, out var initialValue))
-                configs[i].InitialValue = initialValue;
-        }
-        return configs;
+        // Mesma regra do jogo, do mesmo arquivo.
+        var overrides = preset.Overrides.Select(entry => new CityParameterOverride { Parameter = entry.Key, InitialValue = entry.Value });
+        return CityPresetRules.Apply(Parameters, overrides, preset.DerivaMultiplier);
     }
 
     public InteractionMatrix BuildInteractionMatrix()
@@ -147,6 +147,7 @@ public sealed class BalanceData
                 PlacesStructure = card.PlacesStructure,
                 StatEffects = ToModifiers(card.Effects),
                 Ability = string.IsNullOrEmpty(card.Ability) ? CardAbility.None : ParseEnum<CardAbility>(card.Ability),
+                Copies = card.Copies ?? 1,
             }).ToList(),
             Events = dto.Events.Select(randomEvent => new SimEvent
             {
@@ -175,6 +176,7 @@ public sealed class BalanceData
                 Overrides = preset.Overrides.ToDictionary(
                     overrideValue => ParseEnum<CityParameterType>(overrideValue.Parameter),
                     overrideValue => overrideValue.InitialValue),
+                DerivaMultiplier = preset.DerivaMultiplier ?? 1f,
             }).ToList(),
         };
     }
@@ -240,6 +242,7 @@ public sealed class BalanceData
         public float RequiredPesquisa { get; set; }
         public bool PlacesStructure { get; set; }
         public string Ability { get; set; } = "";
+        public int? Copies { get; set; }
         public List<ModifierDto> Effects { get; set; } = new();
     }
 
@@ -271,5 +274,6 @@ public sealed class BalanceData
         public string Id { get; set; } = "";
         public string Name { get; set; } = "";
         public List<OverrideDto> Overrides { get; set; } = new();
+        public float? DerivaMultiplier { get; set; }
     }
 }

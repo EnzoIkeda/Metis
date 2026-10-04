@@ -36,6 +36,7 @@
     <Compile Include="../../Assets/Scripts/Core/Utilities/CardHand.cs" Link="Source/CardHand.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/RandomEventPool.cs" Link="Source/RandomEventPool.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/DeckBuilder.cs" Link="Source/DeckBuilder.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/CityPresetRules.cs" Link="Source/CityPresetRules.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/RewardOptionPicker.cs" Link="Source/RewardOptionPicker.cs" />
   </ItemGroup>
 

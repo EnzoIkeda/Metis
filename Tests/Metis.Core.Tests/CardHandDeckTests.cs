@@ -107,6 +107,20 @@ public class CardHandDeckTests
     }
 
     [Test]
+    public void RevealUntilPhaseEnd_SurvivesDiscardAndNewDraws()
+    {
+        var hand = new CardHand<FakeCard>(NumberedPool(6), new Random(1), finiteDeck: true);
+        var stats = CityStatsTestFactory.Build();
+        hand.Draw(3, stats);
+
+        hand.Reveal(untilPhaseEnd: true);
+        hand.DiscardAll();
+        hand.Draw(3, stats);
+
+        Assert.That(hand.IsRevealed, Is.True);
+    }
+
+    [Test]
     public void SearchCandidates_SkipLockedCardsAndAbilityCards()
     {
         var open = new FakeCard { Id = "Aberta" };

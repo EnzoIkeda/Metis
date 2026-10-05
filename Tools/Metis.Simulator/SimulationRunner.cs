@@ -30,6 +30,7 @@ public sealed class SimulationOptions
     public int? HandSize { get; set; }
     public int? VictoryTurnCount { get; set; }
     public bool FiniteDeck { get; set; }
+    public bool PermanentReveal { get; set; }
     // "fase" simula fases avulsas; "rodada" simula rodadas inteiras com recompensa entre as fases.
     public string Mode { get; set; } = "fase";
     public int PhaseCount { get; set; } = 3;
@@ -88,6 +89,7 @@ public static class SimulationRunner
                             HandSizeOverride = options.HandSize,
                             VictoryTurnCountOverride = options.VictoryTurnCount,
                             FiniteDeck = options.FiniteDeck,
+                            PermanentReveal = options.PermanentReveal,
                         },
                     });
                 }
@@ -289,6 +291,7 @@ public static class SimulationRunner
             ["hand_size"] = options.HandSize ?? data.Rules.HandSize,
             ["victory_turns"] = options.VictoryTurnCount ?? data.Rules.VictoryTurnCount,
             ["finite_deck"] = options.FiniteDeck,
+            ["permanent_reveal"] = options.PermanentReveal,
             ["mode"] = options.Mode,
             ["phase_count"] = options.PhaseCount,
             ["reward_rollouts"] = options.RewardRollouts,

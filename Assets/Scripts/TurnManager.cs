@@ -183,7 +183,7 @@ public class TurnManager : MonoBehaviour
 
         if (card.Ability == CardAbility.RevealHand)
         {
-            Hand.Reveal();
+            Hand.Reveal(untilPhaseEnd: true);
         }
         else if (card.Ability == CardAbility.SearchDeck)
         {
@@ -332,7 +332,7 @@ public class TurnManager : MonoBehaviour
     [ContextMenu("Debug: Revelar Mao")]
     private void DebugRevealHand()
     {
-        Hand.Reveal();
+        Hand.Reveal(untilPhaseEnd: true);
     }
 
     [ContextMenu("Debug: Finalizar Jogo com Vitoria")]

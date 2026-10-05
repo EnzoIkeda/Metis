@@ -23,6 +23,7 @@ for (int i = 0; i < args.Length; i++)
         case "--turns": options.VictoryTurnCount = NextInt(); break;
         case "--no-turns": options.WriteTurns = false; break;
         case "--finite-deck": options.FiniteDeck = true; break;
+        case "--permanent-reveal": options.PermanentReveal = true; break;
         case "--mode": options.Mode = Next(); break;
         case "--phases": options.PhaseCount = NextInt(); break;
         case "--reward-rollouts": options.RewardRollouts = NextInt(); break;
@@ -34,7 +35,7 @@ for (int i = 0; i < args.Length; i++)
 
 if (string.IsNullOrEmpty(options.DataPath) || string.IsNullOrEmpty(options.OutputDirectory))
 {
-    Console.Error.WriteLine("Uso: --data <balance_data.json> --out <pasta> [--games N] [--seed S] [--threads N] [--policies a,b] [--archetypes a,b] [--setups fase1,PresetX] [--hand-size N] [--turns N] [--no-turns] [--mcts-iterations N] [--mcts-c C] [--mode fase|rodada] [--phases N] [--reward-rollouts N] [--finite-deck]");
+    Console.Error.WriteLine("Uso: --data <balance_data.json> --out <pasta> [--games N] [--seed S] [--threads N] [--policies a,b] [--archetypes a,b] [--setups fase1,PresetX] [--hand-size N] [--turns N] [--no-turns] [--mcts-iterations N] [--mcts-c C] [--mode fase|rodada] [--phases N] [--reward-rollouts N] [--finite-deck] [--permanent-reveal]");
     return 1;
 }
 

@@ -18,6 +18,9 @@ public sealed class DecisionContext
     // Mao revelada neste turno pela carta de revelacao.
     public bool IsRevealed { get; init; }
 
+    // Revelacao permanente ja jogada nesta fase: os numeros de todas as cartas, mao e baralho, sao conhecidos.
+    public bool RevealedForPhase { get; init; }
+
     // O que a carta de busca traria agora, vazio se nao houver busca jogavel na mao.
     public IReadOnlyList<SimCard> SearchCandidates { get; init; } = Array.Empty<SimCard>();
 

@@ -61,7 +61,8 @@ public sealed class MctsPolicy : IPlayerPolicy
         if (rootActions.Count == 1)
             return rootActions[0];
 
-        var planningDeck = context.Deck.Select(card => Planned(card, context.Data, _options.Informed)).ToList();
+        var knowsDeck = _options.Informed || context.RevealedForPhase;
+        var planningDeck = context.Deck.Select(card => Planned(card, context.Data, knowsDeck)).ToList();
         var plannedRoot = rootActions.Select(card => Planned(card, context.Data, knowsHand)).ToList();
         var root = new Node();
 
@@ -90,6 +91,7 @@ public sealed class MctsPolicy : IPlayerPolicy
             HandSize = context.HandSize,
             VictoryTurnCount = context.VictoryTurnCount,
             IsRevealed = true,
+            RevealedForPhase = context.RevealedForPhase,
             FiniteDeck = context.FiniteDeck,
             DrawPile = context.DrawPile,
             DiscardPile = context.DiscardPile,
@@ -104,7 +106,7 @@ public sealed class MctsPolicy : IPlayerPolicy
         if (context.FiniteDeck == false)
             return new CardHand<SimCard>(planningDeck, random);
 
-        SimCard Plan(SimCard card) => Planned(card, context.Data, _options.Informed);
+        SimCard Plan(SimCard card) => Planned(card, context.Data, _options.Informed || context.RevealedForPhase);
         var discard = context.DiscardPile.Concat(context.HandCards).Select(Plan);
         return CardHand<SimCard>.FromPiles(planningDeck, context.DrawPile.Select(Plan), discard, random);
     }

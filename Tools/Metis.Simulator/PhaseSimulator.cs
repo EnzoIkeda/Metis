@@ -20,6 +20,9 @@ public sealed class PhaseSetup
     // Baralho finito com pilha de compra e descarte (D2), em vez de compra com reposicao.
     public bool FiniteDeck { get; init; }
 
+    // Variante da carta de revelacao: depois de jogada, os numeros de todas as cartas ficam conhecidos ate o fim da fase.
+    public bool PermanentReveal { get; init; }
+
     public int HandSize => HandSizeOverride ?? Data.Rules.HandSize;
     public int VictoryTurnCount => VictoryTurnCountOverride ?? Data.Rules.VictoryTurnCount;
 }
@@ -122,6 +125,7 @@ public static class PhaseSimulator
         var tierReached = new int[thresholds.Count];
         var turns = new List<TurnRecord>();
 
+        var revealedForPhase = false;
         machine.StartGame();
         while (machine.Outcome == GameOutcome.None)
         {
@@ -146,7 +150,8 @@ public static class PhaseSimulator
                     Events = data.Events,
                     HandSize = setup.HandSize,
                     VictoryTurnCount = setup.VictoryTurnCount,
-                    IsRevealed = hand.IsRevealed,
+                    IsRevealed = hand.IsRevealed || revealedForPhase,
+                    RevealedForPhase = revealedForPhase,
                     SearchCandidates = playable.Any(card => card.Ability == CardAbility.SearchDeck) ? hand.SearchCandidates(stats) : Array.Empty<SimCard>(),
                     FiniteDeck = hand.FiniteDeck,
                     DrawPile = hand.FiniteDeck ? hand.DrawPile.ToList() : Array.Empty<SimCard>(),
@@ -169,7 +174,9 @@ public static class PhaseSimulator
                 freeActions.Add(chosen.Id);
                 if (chosen.Ability == CardAbility.RevealHand)
                 {
-                    hand.Reveal();
+                    hand.Reveal(setup.PermanentReveal);
+                    if (setup.PermanentReveal)
+                        revealedForPhase = true;
                 }
                 else if (chosen.Ability == CardAbility.SearchDeck)
                 {

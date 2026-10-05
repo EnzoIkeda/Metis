@@ -95,4 +95,32 @@ public class AbilityTests
         Assert.That(game.Turns, Has.All.Property(nameof(TurnRecord.CardId)).Empty);
         Assert.That(game.Turns[0].FreeActionIds, Has.Member("Revela"));
     }
+
+    [Test]
+    public void PermanentReveal_IsPlayedOnlyOncePerPhase()
+    {
+        var cards = new[]
+        {
+            new SimCard { Id = "Revela", Ability = CardAbility.RevealHand, Copies = 2 },
+            TestData.Card("A", (CityParameterType.Saude, 2f)),
+            TestData.Card("B", (CityParameterType.Mobilidade, 3f)),
+        };
+        var data = TestData.Build(cards: cards);
+        var policy = SimulationRunner.CreatePolicy("mcts_desinformado_revela", new SimulationOptions { MctsIterations = 20 });
+        PhaseSetup Setup(bool permanent) => new PhaseSetup
+        {
+            Data = data,
+            Archetype = CardArchetype.Geral,
+            FiniteDeck = true,
+            VictoryTurnCountOverride = 6,
+            HandSizeOverride = 2,
+            PermanentReveal = permanent,
+        };
+
+        var permanent = PhaseSimulator.Run(Setup(true), policy, new GameSeeds(3, 0));
+        var perTurn = PhaseSimulator.Run(Setup(false), policy, new GameSeeds(3, 0));
+
+        Assert.That(permanent.Turns.Sum(turn => turn.FreeActionIds.Count(id => id == "Revela")), Is.EqualTo(1));
+        Assert.That(perTurn.Turns.Sum(turn => turn.FreeActionIds.Count(id => id == "Revela")), Is.GreaterThan(1));
+    }
 }

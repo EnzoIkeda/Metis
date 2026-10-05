@@ -19,8 +19,10 @@ public class CardHand<TCard> where TCard : class, ICardDefinition
 
     public IReadOnlyList<TCard> DiscardPile => _discardPile;
 
-    // Efeito exato das cartas da mao visivel, ate a mao ser descartada.
+    // Efeito exato das cartas visivel: so ate o descarte, ou ate o fim da fase quando a revelacao e permanente.
     public bool IsRevealed { get; private set; }
+
+    private bool _revealedUntilPhaseEnd;
 
     public event Action OnHandChanged;
 
@@ -60,8 +62,8 @@ public class CardHand<TCard> where TCard : class, ICardDefinition
     public void DiscardAll()
     {
         var wasRevealed = IsRevealed;
-        IsRevealed = false;
-        if (_cards.Count == 0 && wasRevealed == false)
+        IsRevealed = _revealedUntilPhaseEnd;
+        if (_cards.Count == 0 && wasRevealed == IsRevealed)
             return;
 
         if (_finiteDeck)
@@ -95,13 +97,14 @@ public class CardHand<TCard> where TCard : class, ICardDefinition
         return true;
     }
 
-    public void Reveal()
+    // A mao vive uma fase so, entao "ate o fim da fase" e simplesmente nao desfazer no descarte.
+    public void Reveal(bool untilPhaseEnd = false)
     {
-        if (IsRevealed)
-            return;
-
+        var changed = IsRevealed == false;
         IsRevealed = true;
-        OnHandChanged?.Invoke();
+        _revealedUntilPhaseEnd |= untilPhaseEnd;
+        if (changed)
+            OnHandChanged?.Invoke();
     }
 
     // Cartas que a busca pode trazer: liberadas pela Pesquisa, sem habilidade, e fora da mao quando o baralho e finito.

@@ -13,16 +13,18 @@ MonoBehaviour:
   m_Name: CardAnaliseDeDados
   m_EditorClassIdentifier: Metis.Runtime::CardData
   _cardName: "An\xE1lise de Dados"
-  _description: "A\xE7\xE3o livre: revela o efeito exato das cartas na m\xE3o at\xE9
-    o fim do turno. N\xE3o gasta a jogada do turno."
+  _description: "A\xE7\xE3o livre: at\xE9 o fim da fase, as cartas na m\xE3o (e as
+    que voc\xEA comprar) mostram o efeito exato. N\xE3o gasta a jogada do turno."
   _cardNameEn: Data Analysis
-  _descriptionEn: 'Free action: reveals the exact effects of the cards in your hand
-    until the end of the turn. Does not use up your play for the turn.'
-  _cost: 3
+  _descriptionEn: 'Free action: until the end of the phase, the cards in your hand
+    (and the ones you draw) show their exact effects. Does not use up your play for
+    the turn.'
+  _cost: 6
   _tier: 0
   _archetype: 0
   _requiredPesquisa: 0
   _statEffects: []
   _ability: 2
+  _copies: 1
   _structureToPlace: {fileID: 0}
   _artwork: {fileID: 0}

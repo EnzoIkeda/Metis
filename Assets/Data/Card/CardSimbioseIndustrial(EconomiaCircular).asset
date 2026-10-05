@@ -22,22 +22,22 @@ MonoBehaviour:
     in a closed loop. Real model: the Kalundborg industrial district in Denmark,
     the most studied industrial symbiosis in the world \u2014 decades running without
     losing waste."
-  _cost: 0
+  _cost: 3
   _tier: 3
   _archetype: 1
-  _requiredPesquisa: 75
+  _requiredPesquisa: 45
   _statEffects:
   - Parameter: 0
     Amount: -3
   - Parameter: 1
     Amount: 3
   - Parameter: 4
-    Amount: 5
+    Amount: 8
   - Parameter: 5
     Amount: 9
-  - Parameter: 6
-    Amount: 2
   - Parameter: 7
     Amount: 1
+  _ability: 0
+  _copies: 1
   _structureToPlace: {fileID: 0}
   _artwork: {fileID: 21300000, guid: d67c6687651e6aedb990ef9f33bded1a, type: 3}

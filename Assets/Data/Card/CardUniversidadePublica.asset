@@ -16,10 +16,10 @@ MonoBehaviour:
   _description: Motor de pesquisa de longo prazo.
   _cardNameEn: Public University
   _descriptionEn: Long-term research engine.
-  _cost: 0
+  _cost: 2
   _tier: 2
   _archetype: 3
-  _requiredPesquisa: 50
+  _requiredPesquisa: 30
   _statEffects:
   - Parameter: 0
     Amount: -6
@@ -30,12 +30,12 @@ MonoBehaviour:
   - Parameter: 3
     Amount: 3
   - Parameter: 4
-    Amount: 8
+    Amount: 12
   - Parameter: 5
     Amount: 1
-  - Parameter: 6
-    Amount: 4
   - Parameter: 7
     Amount: 2
+  _ability: 0
+  _copies: 1
   _structureToPlace: {fileID: 0}
   _artwork: {fileID: 21300000, guid: 1febec4649904f6f8882ef6a61f15640, type: 3}

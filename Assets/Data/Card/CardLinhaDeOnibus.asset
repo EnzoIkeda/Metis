@@ -16,7 +16,7 @@ MonoBehaviour:
   _description: "Corredor de \xF4nibus conecta a periferia ao centro."
   _cardNameEn: Bus Line
   _descriptionEn: Bus corridor connects the outskirts to downtown.
-  _cost: 0
+  _cost: 1
   _tier: 0
   _archetype: 0
   _requiredPesquisa: 0
@@ -29,9 +29,9 @@ MonoBehaviour:
     Amount: 1
   - Parameter: 5
     Amount: -1
-  - Parameter: 6
-    Amount: 2
   - Parameter: 8
     Amount: 7
+  _ability: 0
+  _copies: 1
   _structureToPlace: {fileID: 0}
   _artwork: {fileID: 21300000, guid: 92085a61e60dd5d9c847d7ad11e8225b, type: 3}

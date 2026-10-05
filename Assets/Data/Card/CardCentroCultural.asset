@@ -19,7 +19,7 @@ MonoBehaviour:
   _cost: 0
   _tier: 1
   _archetype: 1
-  _requiredPesquisa: 25
+  _requiredPesquisa: 15
   _statEffects:
   - Parameter: 0
     Amount: -3
@@ -30,10 +30,10 @@ MonoBehaviour:
   - Parameter: 3
     Amount: 2
   - Parameter: 4
-    Amount: 2
-  - Parameter: 6
-    Amount: 6
+    Amount: 4
   - Parameter: 7
     Amount: 1
+  _ability: 0
+  _copies: 1
   _structureToPlace: {fileID: 0}
   _artwork: {fileID: 21300000, guid: 9c610741fac56cc2f9790a6d4efe1c55, type: 3}

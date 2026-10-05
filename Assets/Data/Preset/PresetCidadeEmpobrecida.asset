@@ -16,4 +16,5 @@ MonoBehaviour:
   _presetNameEn: Impoverished City
   _overrides:
   - Parameter: 0
-    InitialValue: 25
+    InitialValue: 32
+  _derivaMultiplier: 1.25

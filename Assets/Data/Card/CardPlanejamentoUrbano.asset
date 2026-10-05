@@ -24,5 +24,6 @@ MonoBehaviour:
   _requiredPesquisa: 0
   _statEffects: []
   _ability: 1
+  _copies: 1
   _structureToPlace: {fileID: 0}
   _artwork: {fileID: 0}

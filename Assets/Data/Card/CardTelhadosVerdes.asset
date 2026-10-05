@@ -20,22 +20,22 @@ MonoBehaviour:
   _descriptionEn: Roofs covered in vegetation reduce heat, absorb rain and insulate
     buildings better. Real policy adopted by cities like Toronto (Green Roof Bylaw)
     and much of the European Union.
-  _cost: 0
+  _cost: 1
   _tier: 1
   _archetype: 1
-  _requiredPesquisa: 25
+  _requiredPesquisa: 15
   _statEffects:
   - Parameter: 0
     Amount: -3
   - Parameter: 1
     Amount: 1
   - Parameter: 4
-    Amount: 3
+    Amount: 5
   - Parameter: 5
     Amount: 6
-  - Parameter: 6
-    Amount: 2
   - Parameter: 7
     Amount: 1
+  _ability: 0
+  _copies: 1
   _structureToPlace: {fileID: 0}
   _artwork: {fileID: 21300000, guid: 91117e98ce234bee09d529507ff79c57, type: 3}

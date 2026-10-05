@@ -16,10 +16,10 @@ MonoBehaviour:
   _description: "\xC1gua e esgoto tratados em toda a cidade."
   _cardNameEn: Integrated Sanitation
   _descriptionEn: Water and sewage treated across the whole city.
-  _cost: 0
+  _cost: 3
   _tier: 2
   _archetype: 1
-  _requiredPesquisa: 50
+  _requiredPesquisa: 30
   _statEffects:
   - Parameter: 0
     Amount: -6
@@ -28,12 +28,12 @@ MonoBehaviour:
   - Parameter: 3
     Amount: 2
   - Parameter: 4
-    Amount: 4
+    Amount: 6
   - Parameter: 5
     Amount: 6
-  - Parameter: 6
-    Amount: 3
   - Parameter: 7
     Amount: 8
+  _ability: 0
+  _copies: 1
   _structureToPlace: {fileID: 0}
   _artwork: {fileID: 21300000, guid: cf58e6cdda6fafce1a5f93a921ca447b, type: 3}

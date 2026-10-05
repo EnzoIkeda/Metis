@@ -28,12 +28,12 @@ MonoBehaviour:
   - Parameter: 2
     Amount: -2
   - Parameter: 3
-    Amount: 8
+    Amount: 14
   - Parameter: 5
     Amount: -1
-  - Parameter: 6
-    Amount: 2
   - Parameter: 8
     Amount: -2
+  _ability: 0
+  _copies: 1
   _structureToPlace: {fileID: 0}
   _artwork: {fileID: 21300000, guid: f0328923ea281ecae9c00fd2cee103a9, type: 3}

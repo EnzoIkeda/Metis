@@ -18,7 +18,7 @@ MonoBehaviour:
   _cardNameEn: Urban Tree Planting
   _descriptionEn: "Trees along sidewalks give shade, cool the city and clean the
     air \u2014 a direct answer to the urban heat island effect."
-  _cost: 0
+  _cost: 2
   _tier: 0
   _archetype: 0
   _requiredPesquisa: 0
@@ -29,11 +29,11 @@ MonoBehaviour:
     Amount: 2
   - Parameter: 5
     Amount: 5
-  - Parameter: 6
-    Amount: 2
   - Parameter: 7
     Amount: 2
   - Parameter: 8
     Amount: 1
+  _ability: 0
+  _copies: 1
   _structureToPlace: {fileID: 0}
   _artwork: {fileID: 21300000, guid: 5c0ebea52b0d26887a33f08fce000773, type: 3}

@@ -22,24 +22,24 @@ MonoBehaviour:
     for a long-term contract. Real public-private partnership (PPP) model, widely
     used for highways, ports and sanitation \u2014 speeds up investment, but the
     profit logic pressures the contract's environmental and social side."
-  _cost: 0
+  _cost: 2
   _tier: 2
   _archetype: 2
-  _requiredPesquisa: 50
+  _requiredPesquisa: 30
   _statEffects:
   - Parameter: 0
     Amount: 11
   - Parameter: 3
     Amount: 1
   - Parameter: 4
-    Amount: 2
+    Amount: 6
   - Parameter: 5
     Amount: -4
-  - Parameter: 6
-    Amount: -1
   - Parameter: 7
     Amount: -3
   - Parameter: 8
     Amount: 1
+  _ability: 0
+  _copies: 1
   _structureToPlace: {fileID: 0}
   _artwork: {fileID: 21300000, guid: dfb62ec0aa165814c8f5b359deb36ce7, type: 3}

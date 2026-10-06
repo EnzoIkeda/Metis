@@ -26557,6 +26557,7 @@ MonoBehaviour:
   _rowsContainer: {fileID: 1437564696}
   _rowSpacing: 8
   _rowCount: 3
+  _displayData: {fileID: 11400000, guid: 4835a3e5e9fc5e547b26fc69bd0c373b, type: 2}
 --- !u!114 &1061829973
 MonoBehaviour:
   m_ObjectHideFlags: 0

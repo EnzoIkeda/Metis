@@ -11,6 +11,7 @@ public class TopBarView : MonoBehaviour
     [SerializeField] private RectTransform _rowsContainer;
     [SerializeField] private float _rowSpacing = 4f;
     [SerializeField] private int _rowCount = 3;
+    [SerializeField] private ParameterDisplayData _displayData;
 
     private readonly Dictionary<CityParameterType, StatRowView> _rows = new Dictionary<CityParameterType, StatRowView>();
     private CityStats _stats;
@@ -42,6 +43,7 @@ public class TopBarView : MonoBehaviour
 
             var row = Instantiate(_rowPrefab, currentRow);
             row.SetLabel(parameters[i].GetDisplayName());
+            row.SetIcon(_displayData != null ? _displayData.GetIcon(parameters[i]) : null);
             _rows[parameters[i]] = row;
             Refresh(parameters[i]);
         }

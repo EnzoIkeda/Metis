@@ -16,10 +16,10 @@ MonoBehaviour:
   _description: "Moradia r\xE1pida, barata e de baixo impacto."
   _cardNameEn: Green Modular Housing
   _descriptionEn: Fast, cheap, low-impact housing.
-  _cost: 0
+  _cost: 4
   _tier: 3
   _archetype: 1
-  _requiredPesquisa: 75
+  _requiredPesquisa: 45
   _statEffects:
   - Parameter: 0
     Amount: -3
@@ -28,14 +28,14 @@ MonoBehaviour:
   - Parameter: 3
     Amount: 9
   - Parameter: 4
-    Amount: 5
+    Amount: 8
   - Parameter: 5
-    Amount: 5
-  - Parameter: 6
     Amount: 5
   - Parameter: 7
     Amount: 2
   - Parameter: 8
     Amount: 1
+  _ability: 0
+  _copies: 1
   _structureToPlace: {fileID: 0}
   _artwork: {fileID: 21300000, guid: ac5ad3220a8a7d2bd93f3506e4aee80d, type: 3}

@@ -22,10 +22,10 @@ MonoBehaviour:
     grid or pavement before it happens. Real predictive-maintenance-with-AI practice,
     increasingly used by water and power utilities \u2014 saves on emergency repairs,
     but cuts manual maintenance jobs."
-  _cost: 0
+  _cost: 3
   _tier: 2
   _archetype: 3
-  _requiredPesquisa: 50
+  _requiredPesquisa: 30
   _statEffects:
   - Parameter: 0
     Amount: -3
@@ -36,12 +36,12 @@ MonoBehaviour:
   - Parameter: 3
     Amount: -1
   - Parameter: 4
-    Amount: 6
+    Amount: 9
   - Parameter: 5
     Amount: 2
-  - Parameter: 6
-    Amount: 1
   - Parameter: 8
     Amount: 1
+  _ability: 0
+  _copies: 1
   _structureToPlace: {fileID: 0}
   _artwork: {fileID: 21300000, guid: 7f0f63ef64e8c67ff9aac739575c41fc, type: 3}

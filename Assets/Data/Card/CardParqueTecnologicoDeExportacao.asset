@@ -22,10 +22,10 @@ MonoBehaviour:
     Real model: Porto Digital in Recife, a Brazilian reference for an innovation
     hub \u2014 generates income and research, but the surrounding area appreciates
     fast and pressures those who already lived there."
-  _cost: 0
+  _cost: 3
   _tier: 2
   _archetype: 2
-  _requiredPesquisa: 50
+  _requiredPesquisa: 30
   _statEffects:
   - Parameter: 0
     Amount: 8
@@ -34,12 +34,12 @@ MonoBehaviour:
   - Parameter: 3
     Amount: -2
   - Parameter: 4
-    Amount: 6
+    Amount: 18
   - Parameter: 5
     Amount: -2
-  - Parameter: 6
-    Amount: -1
   - Parameter: 7
     Amount: -1
+  _ability: 0
+  _copies: 1
   _structureToPlace: {fileID: 0}
   _artwork: {fileID: 21300000, guid: 593ec27dbc5209d1e9d3403f792c0e24, type: 3}

@@ -16,10 +16,10 @@ MonoBehaviour:
   _description: "C\xE2meras integradas e resposta r\xE1pida."
   _cardNameEn: Monitoring Center
   _descriptionEn: Integrated cameras and fast response.
-  _cost: 0
+  _cost: 2
   _tier: 2
   _archetype: 0
-  _requiredPesquisa: 50
+  _requiredPesquisa: 30
   _statEffects:
   - Parameter: 0
     Amount: -3
@@ -28,10 +28,10 @@ MonoBehaviour:
   - Parameter: 2
     Amount: 8
   - Parameter: 4
-    Amount: 3
-  - Parameter: 6
-    Amount: 1
+    Amount: 5
   - Parameter: 8
     Amount: 1
+  _ability: 0
+  _copies: 1
   _structureToPlace: {fileID: 0}
   _artwork: {fileID: 21300000, guid: 4c76239e341af6eb281c88afe75a64c0, type: 3}

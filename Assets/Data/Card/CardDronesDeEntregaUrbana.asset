@@ -22,10 +22,10 @@ MonoBehaviour:
     needed. Real technology: the Wing (Alphabet) and Amazon Prime Air programs, already
     running commercial deliveries \u2014 but noise, privacy and urban airspace safety
     still divide opinion."
-  _cost: 0
+  _cost: 3
   _tier: 3
   _archetype: 3
-  _requiredPesquisa: 75
+  _requiredPesquisa: 45
   _statEffects:
   - Parameter: 0
     Amount: 4
@@ -36,10 +36,12 @@ MonoBehaviour:
   - Parameter: 3
     Amount: -1
   - Parameter: 4
-    Amount: 3
+    Amount: 5
   - Parameter: 5
     Amount: 1
   - Parameter: 8
     Amount: 6
+  _ability: 0
+  _copies: 1
   _structureToPlace: {fileID: 0}
   _artwork: {fileID: 21300000, guid: ce5e2937305d750a4b515ed49d72736f, type: 3}

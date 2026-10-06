@@ -29,9 +29,9 @@ MonoBehaviour:
     Amount: 1
   - Parameter: 5
     Amount: 2
-  - Parameter: 6
-    Amount: 4
   - Parameter: 7
     Amount: 1
+  _ability: 0
+  _copies: 1
   _structureToPlace: {fileID: 0}
   _artwork: {fileID: 21300000, guid: 454fcbf8d6b911cf7bd4dfdcf500e0c6, type: 3}

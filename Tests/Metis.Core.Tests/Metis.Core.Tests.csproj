@@ -30,6 +30,14 @@
     <Compile Include="../../Assets/Scripts/Core/Utilities/RoadNetwork.cs" Link="Source/RoadNetwork.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/PhaseMapProvider.cs" Link="Source/PhaseMapProvider.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/MusicRotation.cs" Link="Source/MusicRotation.cs" />
+    <Compile Include="../../Assets/Scripts/Data/ICardDefinition.cs" Link="Source/ICardDefinition.cs" />
+    <Compile Include="../../Assets/Scripts/Data/IRandomEventDefinition.cs" Link="Source/IRandomEventDefinition.cs" />
+    <Compile Include="../../Assets/Scripts/Data/IAdvantageDefinition.cs" Link="Source/IAdvantageDefinition.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/CardHand.cs" Link="Source/CardHand.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/RandomEventPool.cs" Link="Source/RandomEventPool.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/DeckBuilder.cs" Link="Source/DeckBuilder.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/CityPresetRules.cs" Link="Source/CityPresetRules.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/RewardOptionPicker.cs" Link="Source/RewardOptionPicker.cs" />
   </ItemGroup>
 
 </Project>

@@ -16,10 +16,10 @@ MonoBehaviour:
   _description: Ruas mais claras gastando menos energia.
   _cardNameEn: LED Lighting
   _descriptionEn: Brighter streets using less energy.
-  _cost: 0
+  _cost: 2
   _tier: 1
   _archetype: 1
-  _requiredPesquisa: 25
+  _requiredPesquisa: 15
   _statEffects:
   - Parameter: 0
     Amount: -2
@@ -28,12 +28,12 @@ MonoBehaviour:
   - Parameter: 2
     Amount: 4
   - Parameter: 4
-    Amount: 2
+    Amount: 3
   - Parameter: 5
-    Amount: 2
-  - Parameter: 6
     Amount: 2
   - Parameter: 8
     Amount: 1
+  _ability: 0
+  _copies: 1
   _structureToPlace: {fileID: 0}
   _artwork: {fileID: 21300000, guid: a6f7821d2dd3c882e881a13e71fa04f7, type: 3}

@@ -16,4 +16,5 @@ MonoBehaviour:
   _presetNameEn: Energy Crisis
   _overrides:
   - Parameter: 1
-    InitialValue: 22
+    InitialValue: 32
+  _derivaMultiplier: 1.25

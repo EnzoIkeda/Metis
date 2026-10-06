@@ -16,10 +16,10 @@ MonoBehaviour:
   _description: "Frota aut\xF4noma sob demanda integrada ao VLT."
   _cardNameEn: Autonomous Mobility
   _descriptionEn: On-demand autonomous fleet integrated with the LRT.
-  _cost: 0
+  _cost: 7
   _tier: 3
   _archetype: 3
-  _requiredPesquisa: 75
+  _requiredPesquisa: 45
   _statEffects:
   - Parameter: 0
     Amount: 2
@@ -30,14 +30,14 @@ MonoBehaviour:
   - Parameter: 3
     Amount: 2
   - Parameter: 4
-    Amount: 5
+    Amount: 8
   - Parameter: 5
-    Amount: 4
-  - Parameter: 6
     Amount: 4
   - Parameter: 7
     Amount: 2
   - Parameter: 8
     Amount: 10
+  _ability: 0
+  _copies: 1
   _structureToPlace: {fileID: 0}
   _artwork: {fileID: 21300000, guid: b1133149a57d1f63d9ca4c70b91e5b3f, type: 3}

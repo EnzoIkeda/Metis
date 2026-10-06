@@ -16,10 +16,10 @@ MonoBehaviour:
   _description: "Reforma de \xE1rea degradada do centro."
   _cardNameEn: Urban Renewal
   _descriptionEn: Renovation of a blighted downtown area.
-  _cost: 0
+  _cost: 2
   _tier: 1
   _archetype: 1
-  _requiredPesquisa: 25
+  _requiredPesquisa: 15
   _statEffects:
   - Parameter: 0
     Amount: -4
@@ -28,14 +28,14 @@ MonoBehaviour:
   - Parameter: 3
     Amount: 3
   - Parameter: 4
-    Amount: 1
+    Amount: 2
   - Parameter: 5
     Amount: 2
-  - Parameter: 6
-    Amount: 4
   - Parameter: 7
     Amount: 1
   - Parameter: 8
     Amount: 3
+  _ability: 0
+  _copies: 1
   _structureToPlace: {fileID: 0}
   _artwork: {fileID: 21300000, guid: e08bc1c7e0d596b3f9c856390e8d0630, type: 3}

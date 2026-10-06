@@ -22,10 +22,10 @@ MonoBehaviour:
     phase. Real technology (vehicles like the Navya Autonom Shuttle), already tested
     in cities like Lyon and Singapore \u2014 but the safety of running without a
     human driver still sparks debate."
-  _cost: 0
+  _cost: 2
   _tier: 2
   _archetype: 3
-  _requiredPesquisa: 50
+  _requiredPesquisa: 30
   _statEffects:
   - Parameter: 0
     Amount: -4
@@ -36,12 +36,12 @@ MonoBehaviour:
   - Parameter: 3
     Amount: -1
   - Parameter: 4
-    Amount: 4
+    Amount: 6
   - Parameter: 5
-    Amount: 1
-  - Parameter: 6
     Amount: 1
   - Parameter: 8
     Amount: 9
+  _ability: 0
+  _copies: 1
   _structureToPlace: {fileID: 0}
   _artwork: {fileID: 21300000, guid: f1d832ef68ed0d6458030546decb5b83, type: 3}

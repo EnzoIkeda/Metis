@@ -20,10 +20,10 @@ MonoBehaviour:
   _descriptionEn: 'Sewage treated to potable standard is returned to the supply network.
     Real technology: Singapore''s NEWater program, one of the world''s references
     in potable water reuse.'
-  _cost: 0
+  _cost: 1
   _tier: 2
   _archetype: 1
-  _requiredPesquisa: 50
+  _requiredPesquisa: 30
   _statEffects:
   - Parameter: 0
     Amount: -4
@@ -32,12 +32,12 @@ MonoBehaviour:
   - Parameter: 3
     Amount: 1
   - Parameter: 4
-    Amount: 4
+    Amount: 6
   - Parameter: 5
     Amount: 8
-  - Parameter: 6
-    Amount: 1
   - Parameter: 7
     Amount: 4
+  _ability: 0
+  _copies: 1
   _structureToPlace: {fileID: 0}
   _artwork: {fileID: 21300000, guid: 5eb29a732efc715cf8b29354ea4612f8, type: 3}

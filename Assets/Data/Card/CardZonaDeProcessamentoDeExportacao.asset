@@ -20,10 +20,10 @@ MonoBehaviour:
   _descriptionEn: "An area with special tax rules attracts industry and exports.
     Real free-trade zone model, like the Manaus Free Trade Zone \u2014 income rises,
     but so does environmental and health pressure."
-  _cost: 0
+  _cost: 3
   _tier: 1
   _archetype: 2
-  _requiredPesquisa: 25
+  _requiredPesquisa: 15
   _statEffects:
   - Parameter: 0
     Amount: 9
@@ -32,12 +32,12 @@ MonoBehaviour:
   - Parameter: 3
     Amount: 1
   - Parameter: 4
-    Amount: 5
+    Amount: 15
   - Parameter: 5
     Amount: -4
-  - Parameter: 6
-    Amount: -1
   - Parameter: 7
     Amount: -2
+  _ability: 0
+  _copies: 1
   _structureToPlace: {fileID: 0}
   _artwork: {fileID: 21300000, guid: 1e2a4bbd804d6f47fb329a99d921e02b, type: 3}

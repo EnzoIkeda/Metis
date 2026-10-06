@@ -22,10 +22,10 @@ MonoBehaviour:
     the production line. Real concept: Germany's Industrie 4.0 initiative, a world
     reference in advanced manufacturing \u2014 high productivity, with environmental
     pressure alongside it."
-  _cost: 0
+  _cost: 3
   _tier: 3
   _archetype: 2
-  _requiredPesquisa: 75
+  _requiredPesquisa: 45
   _statEffects:
   - Parameter: 0
     Amount: 14
@@ -34,12 +34,12 @@ MonoBehaviour:
   - Parameter: 3
     Amount: 1
   - Parameter: 4
-    Amount: 5
+    Amount: 15
   - Parameter: 5
     Amount: -5
-  - Parameter: 6
-    Amount: -1
   - Parameter: 7
     Amount: -2
+  _ability: 0
+  _copies: 1
   _structureToPlace: {fileID: 0}
   _artwork: {fileID: 21300000, guid: 836648a0ba89d2af6be24244f6fdbe19, type: 3}

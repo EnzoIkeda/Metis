@@ -26,7 +26,7 @@ public class CardHandTests
     {
         var locked = Card("Locked", requiredPesquisa: 80f); // Pesquisa neutro do factory e 50, fica de fora do pool elegivel
         var unlocked = Card("Unlocked");
-        var hand = new CardHand(new List<CardData> { locked, unlocked });
+        var hand = new CardHand<CardData>(new List<CardData> { locked, unlocked });
         var stats = EditModeCityStatsFactory.Build();
 
         hand.Draw(10, stats);
@@ -39,7 +39,7 @@ public class CardHandTests
     public void Draw_NoEligibleCards_LeavesHandEmpty()
     {
         var locked = Card("Locked", requiredPesquisa: 80f);
-        var hand = new CardHand(new List<CardData> { locked });
+        var hand = new CardHand<CardData>(new List<CardData> { locked });
         var stats = EditModeCityStatsFactory.Build();
 
         hand.Draw(5, stats);
@@ -53,8 +53,8 @@ public class CardHandTests
         var locked = Card("Locked", requiredPesquisa: 80f);
         var unlocked = Card("Unlocked");
         var stats = EditModeCityStatsFactory.Build();
-        var lockedHand = new CardHand(new List<CardData> { locked });
-        var unlockedHand = new CardHand(new List<CardData> { unlocked });
+        var lockedHand = new CardHand<CardData>(new List<CardData> { locked });
+        var unlockedHand = new CardHand<CardData>(new List<CardData> { unlocked });
         var lockedFired = false;
         var unlockedFired = false;
         lockedHand.OnHandChanged += () => lockedFired = true;
@@ -71,7 +71,7 @@ public class CardHandTests
     public void CanPlay_AffordableCardInHand_ReturnsTrue()
     {
         var card = Card("Affordable", cost: 10f);
-        var hand = new CardHand(new List<CardData> { card }); // pool com 1 carta so, Draw sempre pega ela
+        var hand = new CardHand<CardData>(new List<CardData> { card }); // pool com 1 carta so, Draw sempre pega ela
         var stats = EditModeCityStatsFactory.Build(); // Renda neutro = 50
         hand.Draw(1, stats);
 
@@ -82,7 +82,7 @@ public class CardHandTests
     public void CanPlay_CostAboveAvailableRenda_ReturnsFalse()
     {
         var card = Card("Expensive", cost: 1000f);
-        var hand = new CardHand(new List<CardData> { card });
+        var hand = new CardHand<CardData>(new List<CardData> { card });
         var stats = EditModeCityStatsFactory.Build();
         hand.Draw(1, stats);
 
@@ -93,7 +93,7 @@ public class CardHandTests
     public void CanPlay_CardNotInHand_ReturnsFalse()
     {
         var card = Card("NotDrawn");
-        var hand = new CardHand(new List<CardData> { card }); // nunca chamou Draw
+        var hand = new CardHand<CardData>(new List<CardData> { card }); // nunca chamou Draw
 
         Assert.That(hand.CanPlay(card, EditModeCityStatsFactory.Build()), Is.False);
     }
@@ -103,7 +103,7 @@ public class CardHandTests
     {
         var statEffects = new[] { new StatModifier { Parameter = CityParameterType.Sustentabilidade, Amount = 5f } };
         var card = Card("Effectful", cost: 10f, statEffects: statEffects);
-        var hand = new CardHand(new List<CardData> { card });
+        var hand = new CardHand<CardData>(new List<CardData> { card });
         var stats = EditModeCityStatsFactory.Build();
         hand.Draw(1, stats);
 
@@ -119,7 +119,7 @@ public class CardHandTests
     public void TryPlay_WhenCanPlayFails_DoesNothingAndReturnsFalse()
     {
         var card = Card("Expensive", cost: 1000f);
-        var hand = new CardHand(new List<CardData> { card });
+        var hand = new CardHand<CardData>(new List<CardData> { card });
         var stats = EditModeCityStatsFactory.Build();
         hand.Draw(1, stats);
         var rendaAntes = stats.GetValue(CityParameterType.Renda);
@@ -135,7 +135,7 @@ public class CardHandTests
     public void DiscardAll_ClearsHand_FiresEventOnlyWhenNotAlreadyEmpty()
     {
         var card = Card("Any");
-        var hand = new CardHand(new List<CardData> { card });
+        var hand = new CardHand<CardData>(new List<CardData> { card });
         var stats = EditModeCityStatsFactory.Build();
         hand.Draw(1, stats);
         var fireCount = 0;

@@ -22,10 +22,10 @@ MonoBehaviour:
     no lines or paperwork. Real technology: New York's MyCity chatbot \u2014 a real,
     documented case of the AI giving wrong legal guidance to small business owners,
     a reminder that automating service delivery carries risk."
-  _cost: 0
+  _cost: 3
   _tier: 3
   _archetype: 3
-  _requiredPesquisa: 75
+  _requiredPesquisa: 45
   _statEffects:
   - Parameter: 0
     Amount: 3
@@ -34,10 +34,10 @@ MonoBehaviour:
   - Parameter: 3
     Amount: -1
   - Parameter: 4
-    Amount: 6
-  - Parameter: 6
-    Amount: -1
+    Amount: 9
   - Parameter: 8
     Amount: 1
+  _ability: 0
+  _copies: 1
   _structureToPlace: {fileID: 0}
   _artwork: {fileID: 21300000, guid: 07e62d5a071518d5894170c7ea335afd, type: 3}

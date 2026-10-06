@@ -3,7 +3,7 @@ using UnityEngine;
 
 // Vantagem passiva carregada de uma fase pra outra, aplicada uma unica vez no inicio da fase.
 [CreateAssetMenu(fileName = "New Advantage", menuName = "Metis/Passive Advantage Data")]
-public class PassiveAdvantageData : ScriptableObject
+public class PassiveAdvantageData : ScriptableObject, IAdvantageDefinition
 {
     [SerializeField] private string _advantageName;
     [SerializeField] private string _advantageNameEn;
@@ -18,6 +18,8 @@ public class PassiveAdvantageData : ScriptableObject
     public string Description => LocalizationManager.Current == Language.English && string.IsNullOrEmpty(_descriptionEn) == false
         ? _descriptionEn
         : _description;
+
+    string IAdvantageDefinition.Id => name;
 
     public IReadOnlyList<StatModifier> StatEffects => _statEffects;
 }

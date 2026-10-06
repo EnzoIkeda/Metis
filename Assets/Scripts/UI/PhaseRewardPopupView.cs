@@ -8,12 +8,13 @@ using UnityEngine.UI;
 // Popup de recompensa de fim de fase, mostrado so na vitoria: sorteia opcoes entre cartas e vantagens passivas.
 public class PhaseRewardPopupView : MonoBehaviour
 {
-    private const int OptionCount = 3;
-
     [SerializeField] private TurnManager _turnManager;
     [SerializeField] private GameObject _panelRoot;
     [SerializeField] private Button[] _optionButtons;
     [SerializeField] private TMP_Text[] _optionTexts;
+
+    // Limitado pela quantidade de botoes de opcao montados no painel.
+    [SerializeField, Min(1)] private int _optionCount = 3;
 
     private readonly System.Random _random = new System.Random();
     private UnityEngine.Object[] _currentOptions = Array.Empty<UnityEngine.Object>();
@@ -42,6 +43,13 @@ public class PhaseRewardPopupView : MonoBehaviour
             return;
 
         _currentOptions = DrawOptions();
+
+        // Sem nada novo pra oferecer, segue direto pro mapa em vez de abrir um popup sem opcao.
+        if (_currentOptions.Length == 0)
+        {
+            SceneManager.LoadScene("PhaseMap");
+            return;
+        }
         for (int i = 0; i < _optionButtons.Length; i++)
         {
             var hasOption = i < _currentOptions.Length;
@@ -57,22 +65,16 @@ public class PhaseRewardPopupView : MonoBehaviour
             _panelRoot.SetActive(true);
     }
 
-    // Sorteia entre o pool inteiro de cartas e as vantagens passivas cadastradas.
+    // Sorteia so entre o que ainda acrescenta algo: cartas fora do baralho atual e vantagens nao carregadas.
     private UnityEngine.Object[] DrawOptions()
     {
+        var deck = DeckBuilder.Build(_turnManager.CardPool, MetaProgressionManager.Archetype, MetaProgressionManager.LoadedCardNames);
         var pool = new List<UnityEngine.Object>();
-        pool.AddRange(_turnManager.CardPool);
-        pool.AddRange(_turnManager.AdvantagePool);
+        pool.AddRange(RewardOptionPicker.CardPool(_turnManager.CardPool, deck));
+        pool.AddRange(RewardOptionPicker.AdvantagePool(_turnManager.AdvantagePool, MetaProgressionManager.LoadedAdvantageNames));
 
-        var options = new List<UnityEngine.Object>();
-        while (options.Count < OptionCount && pool.Count > 0)
-        {
-            var index = _random.Next(pool.Count);
-            options.Add(pool[index]);
-            pool.RemoveAt(index);
-        }
-
-        return options.ToArray();
+        var count = Math.Min(_optionCount, _optionButtons.Length);
+        return RewardOptionPicker.Draw(pool, count, _random).ToArray();
     }
 
     private static string DescribeOption(UnityEngine.Object option)

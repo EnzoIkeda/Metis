@@ -18,4 +18,4 @@ MonoBehaviour:
   _descriptionEn: Increases the next phase's starting Income.
   _statEffects:
   - Parameter: 0
-    Amount: 8
+    Amount: 16

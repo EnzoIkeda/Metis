@@ -1,26 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// 4 tiers, alinhados aos limiares de Pesquisa e aos tiers da planilha de balanceamento.
-public enum CardTier
-{
-    Basica,
-    CidadeDigital,
-    CidadeConectada,
-    SmartCity
-}
-
-// Baralho tematico da carta na planilha. Geral cobre tanto as cartas sem baralho proprio quanto o tier 0 compartilhado.
-public enum CardArchetype
-{
-    Geral,
-    Sustentabilidade,
-    Industria,
-    Automacao
-}
-
 [CreateAssetMenu(fileName = "New Card", menuName = "Metis/Card Data")]
-public class CardData : ScriptableObject
+public class CardData : ScriptableObject, ICardDefinition
 {
     [SerializeField] private string _cardName;
     [SerializeField] private string _description;
@@ -31,6 +13,8 @@ public class CardData : ScriptableObject
     [SerializeField] private CardArchetype _archetype;
     [SerializeField] private float _requiredPesquisa;
     [SerializeField] private StatModifier[] _statEffects;
+    [SerializeField] private CardAbility _ability;
+    [SerializeField, Min(1)] private int _copies = 1;
     [SerializeField] private StructureData _structureToPlace;
 
     // Arte opcional da carta, mostrada no espaco reservado de imagem quando definida.
@@ -45,6 +29,8 @@ public class CardData : ScriptableObject
         ? _descriptionEn
         : _description;
 
+    string ICardDefinition.Id => name;
+
     public float Cost => _cost;
 
     public CardTier Tier => _tier;
@@ -54,6 +40,10 @@ public class CardData : ScriptableObject
     public float RequiredPesquisa => _requiredPesquisa;
 
     public IReadOnlyList<StatModifier> StatEffects => _statEffects;
+
+    public CardAbility Ability => _ability;
+
+    public int Copies => _copies;
 
     public StructureData StructureToPlace => _structureToPlace;
 

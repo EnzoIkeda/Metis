@@ -139,6 +139,10 @@ $RECYCLE.BIN/
 !/Tests/**/*.csproj
 /Tests/**/obj/
 /Tests/**/bin/
+# Simulador de balanceamento: mesmo caso dos projetos de teste acima.
+!/Tools/**/*.csproj
+/Tools/**/obj/
+/Tools/**/bin/
 
 # Saida de 'unity test' (Camada 2, disparado pelo hook .githooks/pre-push)
 /test-results.xml

@@ -6,19 +6,26 @@ public static class UIStrings
     public static string WelcomeTitle => IsPt ? "Bem-vindo(a) a Metis!" : "Welcome to Metis!";
 
     public static string WelcomeMessage => IsPt
-        ? "Você é o responsável por gerenciar esta cidade ao longo de 20 turnos.\n\n" +
-          "A cada turno você pode jogar uma carta da sua mão. Cada carta altera parâmetros da " +
-          "cidade — Renda, Energia, Segurança, População, Pesquisa, Sustentabilidade, Bem-Estar, " +
-          "Saúde e Mobilidade — e algumas também constroem algo na cidade.\n\n" +
-          "Fique de olho nos parâmetros: se algum deles zerar ou estourar o limite, é Game Over. " +
-          "Sobreviva aos 20 turnos com a cidade equilibrada para vencer e construir uma verdadeira " +
-          "Smart City!"
-        : "You are responsible for managing this city over 20 turns.\n\n" +
-          "Each turn you may play one card from your hand. Every card changes the city's " +
-          "parameters — Income, Energy, Security, Population, Research, Sustainability, " +
-          "Wellbeing, Health and Mobility — and some also build something in the city.\n\n" +
-          "Keep an eye on the parameters: if any of them hits zero or maxes out, it's Game Over. " +
-          "Survive all 20 turns with the city balanced to win and build a true Smart City!";
+        ? "Você administra esta cidade por 20 turnos.\n\n" +
+          "A cada turno, jogue uma carta da mão: toque nela para ver os detalhes e arraste-a para " +
+          "fora da mão para jogá-la. As cartas custam Renda e mudam os parâmetros da cidade, que " +
+          "também se influenciam entre si. Depois de cada jogada, um evento pode mudar a situação. " +
+          "Se nenhuma carta puder ser jogada, passe a vez.\n\n" +
+          "Um parâmetro que chega ao nível crítico entra em colapso e derruba o Bem-estar (o " +
+          "coração) a cada turno. Se o Bem-estar chegar ao nível crítico, a população perde a " +
+          "confiança na gestão e é fim de jogo.\n\n" +
+          "Invista em Pesquisa para liberar tecnologias mais avançadas e transformar a cidade numa " +
+          "Smart City. Sobreviva aos 20 turnos para vencer!"
+        : "You manage this city for 20 turns.\n\n" +
+          "Each turn, play one card from your hand: tap it to see its details and drag it out of " +
+          "your hand to play it. Cards cost Income and change the city's parameters, which also " +
+          "affect one another. After each play, an event may change the situation. If no card can " +
+          "be played, pass your turn.\n\n" +
+          "A parameter that reaches its critical level collapses and drags Wellbeing (the heart) " +
+          "down every turn. If Wellbeing reaches its critical level, the population loses " +
+          "confidence in your administration and the game is over.\n\n" +
+          "Invest in Research to unlock more advanced technologies and turn the city into a Smart " +
+          "City. Survive all 20 turns to win!";
 
     public static string GameOverTitle => IsPt ? "Fim de Jogo" : "Game Over";
 

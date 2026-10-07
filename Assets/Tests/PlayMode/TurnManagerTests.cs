@@ -79,6 +79,43 @@ public class TurnManagerTests
         Assert.That(turnManager.Machine.CurrentPhase, Is.EqualTo(TurnPhase.Action));
     }
 
+    // Desativar o controlador de efeitos no meio do impacto parava a corrotina e o turno travava pra sempre;
+    // agora o callback pendente dispara no OnDisable e o turno avanca uma vez so.
+    [UnityTest]
+    public IEnumerator PlayCard_EffectsDisabledMidAnimation_TurnStillAdvancesOnce()
+    {
+        var card = TestDataFactory.CreateCard();
+        var turnManager = CreateTurnManager(new[] { card });
+        yield return null;
+
+        Assert.That(turnManager.PlayCard(card), Is.True);
+        Assert.That(turnManager.Machine.TurnIndex, Is.EqualTo(1));
+
+        _host.GetComponent<CityEffectsController>().enabled = false;
+
+        Assert.That(turnManager.Machine.TurnIndex, Is.EqualTo(2));
+        Assert.That(turnManager.Machine.CurrentPhase, Is.EqualTo(TurnPhase.Action));
+
+        yield return new WaitForSeconds(2f);
+
+        Assert.That(turnManager.Machine.TurnIndex, Is.EqualTo(2), "a corrotina interrompida nao pode avancar o turno de novo");
+    }
+
+    // Com o controlador ja desativado nao da pra rodar corrotina: a animacao e pulada e o turno segue na hora.
+    [UnityTest]
+    public IEnumerator PlayCard_EffectsAlreadyDisabled_TurnAdvancesImmediately()
+    {
+        var card = TestDataFactory.CreateCard();
+        var turnManager = CreateTurnManager(new[] { card });
+        yield return null;
+        _host.GetComponent<CityEffectsController>().enabled = false;
+
+        Assert.That(turnManager.PlayCard(card), Is.True);
+
+        Assert.That(turnManager.Machine.TurnIndex, Is.EqualTo(2));
+        Assert.That(turnManager.Machine.CurrentPhase, Is.EqualTo(TurnPhase.Action));
+    }
+
     // Carta de revelacao e acao livre: paga o custo, revela a mao e o turno continua esperando a jogada.
     [UnityTest]
     public IEnumerator PlayCard_RevealCard_IsAFreeActionThatRevealsTheHand()

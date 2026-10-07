@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 
@@ -13,6 +14,7 @@ public class CameraZoomController : MonoBehaviour
     [SerializeField] private float _buttonZoomStep = 2f;
 
     private float? _previousPinchDistance;
+    private bool _pinchStartedOverUi;
 
     private void Reset()
     {
@@ -34,6 +36,10 @@ public class CameraZoomController : MonoBehaviour
 
         var scroll = Mouse.current.scroll.ReadValue().y;
         if (Mathf.Approximately(scroll, 0f))
+            return;
+
+        // Scroll em cima da mao de cartas ou de um popup rola a UI, nao a camera.
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
             return;
 
         // Scroll pra cima aproxima a camera.
@@ -62,8 +68,15 @@ public class CameraZoomController : MonoBehaviour
         if (activeCount < 2 || first == null || second == null)
         {
             _previousPinchDistance = null;
+            _pinchStartedOverUi = false;
             return;
         }
+
+        // Pinch que comeca com algum dedo sobre a UI fica ignorado ate os dedos sairem da tela.
+        if (_previousPinchDistance.HasValue == false && _pinchStartedOverUi == false)
+            _pinchStartedOverUi = IsTouchOverUi(first) || IsTouchOverUi(second);
+        if (_pinchStartedOverUi)
+            return;
 
         var distance = Vector2.Distance(first.position.ReadValue(), second.position.ReadValue());
         if (_previousPinchDistance.HasValue)
@@ -74,6 +87,11 @@ public class CameraZoomController : MonoBehaviour
         }
 
         _previousPinchDistance = distance;
+    }
+
+    private static bool IsTouchOverUi(TouchControl touch)
+    {
+        return EventSystem.current != null && EventSystem.current.IsPointerOverGameObject(touch.touchId.ReadValue());
     }
 
     // Botao de aproximar a camera.

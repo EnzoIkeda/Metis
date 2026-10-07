@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 344438685}
   - component: {fileID: 344438684}
   - component: {fileID: 344438686}
+  - component: {fileID: 344438687}
   m_Layer: 0
   m_Name: NodeButtonTemplate
   m_TagString: Untagged
@@ -240,6 +241,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &344438687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344438682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
 --- !u!1 &357223035
 GameObject:
   m_ObjectHideFlags: 0

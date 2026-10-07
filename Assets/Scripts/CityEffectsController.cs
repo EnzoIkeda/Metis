@@ -54,19 +54,19 @@ public class CityEffectsController : MonoBehaviour
     // Toca ao jogar uma carta, atrasando o popup de evento ate o efeito terminar.
     public void PlayImpactGlowing(Action onComplete)
     {
-        StartEffect(_impactGlowingPrefab, _impactGlowingDuration, onComplete);
+        StartEffect(_impactGlowingPrefab, _impactGlowingDuration, SoundEffect.CardImpact, onComplete);
     }
 
     // Toca ao fechar um popup de evento positivo ou misto, atrasando o inicio do proximo turno.
     public void PlayMagicPoof(Action onComplete)
     {
-        StartEffect(_magicPoofPrefab, _magicPoofDuration, onComplete);
+        StartEffect(_magicPoofPrefab, _magicPoofDuration, SoundEffect.EventPositive, onComplete);
     }
 
     // Toca ao fechar um popup de evento negativo, atrasando o inicio do proximo turno.
     public void PlayExplosion(Action onComplete)
     {
-        StartEffect(_explosionPrefab, _explosionDuration, onComplete);
+        StartEffect(_explosionPrefab, _explosionDuration, SoundEffect.EventNegative, onComplete);
     }
 
     // Liga ou desliga o loop ambiente, visivel durante a fase de acao.
@@ -98,7 +98,7 @@ public class CityEffectsController : MonoBehaviour
     }
 
     // Inativo nao consegue rodar corrotina, entao pula a animacao e segue o turno na hora.
-    private void StartEffect(ParticleSystem prefab, float duration, Action onComplete)
+    private void StartEffect(ParticleSystem prefab, float duration, SoundEffect sound, Action onComplete)
     {
         if (isActiveAndEnabled == false)
         {
@@ -106,6 +106,7 @@ public class CityEffectsController : MonoBehaviour
             return;
         }
 
+        SfxPlayer.Play(sound);
         _pendingCallbacks.Add(onComplete);
         StartCoroutine(PlayOneShot(prefab, duration, onComplete));
     }

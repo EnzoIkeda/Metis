@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3495757629616349192}
   - component: {fileID: 7655941787493073606}
   - component: {fileID: 346868514880246783}
+  - component: {fileID: 7887293008916853277}
   m_Layer: 0
   m_Name: MusicPlayer
   m_TagString: Untagged
@@ -157,3 +158,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Metis.Runtime::AudioSettingsApplier
   _mixer: {fileID: 24100000, guid: 4c2e07e32e21e62d98f9123cc5423bab, type: 2}
+--- !u!114 &7887293008916853277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5140110234994748152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c73c57f8a8669eb4b0a9d6bb1823bf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::SfxPlayer
+  _library: {fileID: 11400000, guid: 2e6305758b650f2fbb8fcd5be4650b54, type: 2}
+  _outputGroup: {fileID: -2173601408326282834, guid: 4c2e07e32e21e62d98f9123cc5423bab, type: 2}
+  _sourceCount: 6
+  _fadeOutDuration: 0.25

@@ -44,6 +44,33 @@ public static class TestDataFactory
         return clip;
     }
 
+    // Biblioteca de sons com uma entrada por efeito, campos privados preenchidos por reflection.
+    public static SoundEffectLibraryData CreateSoundLibrary(params (SoundEffect effect, AudioClip clip, float maxDuration, float minInterval)[] entries)
+    {
+        var library = ScriptableObject.CreateInstance<SoundEffectLibraryData>();
+        var built = new SoundEffectEntry[entries.Length];
+        for (int i = 0; i < entries.Length; i++)
+        {
+            var entry = new SoundEffectEntry();
+            SetObjectField(entry, "_effect", entries[i].effect);
+            SetObjectField(entry, "_clips", new[] { entries[i].clip });
+            SetObjectField(entry, "_volume", 1f);
+            SetObjectField(entry, "_maxDuration", entries[i].maxDuration);
+            SetObjectField(entry, "_minInterval", entries[i].minInterval);
+            built[i] = entry;
+        }
+        SetField(library, "_entries", built);
+        return library;
+    }
+
+    private static void SetObjectField(object target, string fieldName, object value)
+    {
+        var field = target.GetType().GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Instance);
+        if (field == null)
+            throw new MissingFieldException(target.GetType().Name, fieldName);
+        field.SetValue(target, value);
+    }
+
     public static void SetField<T>(UnityEngine.Object target, string fieldName, T value)
     {
         var field = target.GetType().GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Instance);

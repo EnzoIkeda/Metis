@@ -31,6 +31,7 @@
     <Compile Include="../../Assets/Scripts/Core/Utilities/PhaseMapProvider.cs" Link="Source/PhaseMapProvider.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/MusicRotation.cs" Link="Source/MusicRotation.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/VolumeConversion.cs" Link="Source/VolumeConversion.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/CollapseTracker.cs" Link="Source/CollapseTracker.cs" />
     <Compile Include="../../Assets/Scripts/Data/ICardDefinition.cs" Link="Source/ICardDefinition.cs" />
     <Compile Include="../../Assets/Scripts/Data/IRandomEventDefinition.cs" Link="Source/IRandomEventDefinition.cs" />
     <Compile Include="../../Assets/Scripts/Data/IAdvantageDefinition.cs" Link="Source/IAdvantageDefinition.cs" />

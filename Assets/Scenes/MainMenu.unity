@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 19702611}
   - component: {fileID: 19702610}
   - component: {fileID: 19702609}
+  - component: {fileID: 19702612}
   m_Layer: 5
   m_Name: ButtonLanguage
   m_TagString: Untagged
@@ -252,6 +253,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 19702607}
   m_CullTransparentMesh: 1
+--- !u!114 &19702612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19702607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
 --- !u!1 &187424657
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,6 +355,7 @@ GameObject:
   - component: {fileID: 347261764}
   - component: {fileID: 347261763}
   - component: {fileID: 347261762}
+  - component: {fileID: 347261765}
   m_Layer: 5
   m_Name: ButtonJogar
   m_TagString: Untagged
@@ -463,6 +477,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 347261760}
   m_CullTransparentMesh: 1
+--- !u!114 &347261765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347261760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
 --- !u!1 &454878437
 GameObject:
   m_ObjectHideFlags: 0
@@ -1134,6 +1160,7 @@ GameObject:
   - component: {fileID: 1310615364}
   - component: {fileID: 1310615363}
   - component: {fileID: 1310615362}
+  - component: {fileID: 1310615365}
   m_Layer: 5
   m_Name: "ButtonConfigura\xE7\xF5es"
   m_TagString: Untagged
@@ -1255,6 +1282,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1310615360}
   m_CullTransparentMesh: 1
+--- !u!114 &1310615365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310615360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
 --- !u!1 &1432251005
 GameObject:
   m_ObjectHideFlags: 0
@@ -2145,6 +2184,7 @@ GameObject:
   - component: {fileID: 1874741962}
   - component: {fileID: 1874741961}
   - component: {fileID: 1874741960}
+  - component: {fileID: 1874741963}
   m_Layer: 5
   m_Name: ButtonVoltar
   m_TagString: Untagged
@@ -2266,6 +2306,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1874741958}
   m_CullTransparentMesh: 1
+--- !u!114 &1874741963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1874741958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
 --- !u!1 &2014688179
 GameObject:
   m_ObjectHideFlags: 0
@@ -2278,6 +2330,7 @@ GameObject:
   - component: {fileID: 2014688183}
   - component: {fileID: 2014688182}
   - component: {fileID: 2014688181}
+  - component: {fileID: 2014688184}
   m_Layer: 5
   m_Name: ButtonQuit
   m_TagString: Untagged
@@ -2399,6 +2452,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2014688179}
   m_CullTransparentMesh: 1
+--- !u!114 &2014688184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2014688179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
 --- !u!1001 &4239331984185651819
 PrefabInstance:
   m_ObjectHideFlags: 0

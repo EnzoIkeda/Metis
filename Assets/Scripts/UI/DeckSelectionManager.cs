@@ -42,6 +42,8 @@ public class DeckSelectionManager : MonoBehaviour
 
     private static void SelectArchetype(CardArchetype archetype)
     {
+        // Escolher o baralho comeca uma rodada nova, entao nada de uma rodada abandonada pode vazar pra ela.
+        MetaProgressionManager.ResetRun();
         MetaProgressionManager.SetArchetype(archetype);
         SceneManager.LoadScene("City_Scene");
     }

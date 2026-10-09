@@ -15,11 +15,11 @@ MonoBehaviour:
   _cardName: "Rob\xF3tica na Coleta de Res\xEDduos"
   _description: "Rob\xF4s que separam material recicl\xE1vel automaticamente, mais
     r\xE1pido e com menos erro que a triagem manual. Tecnologia real (ex. AMP Robotics),
-    mas reduz postos de trabalho na coleta \u2014 o dilema cl\xE1ssico da automa\xE7\xE3o."
+    mas reduz postos de trabalho na coleta, o dilema cl\xE1ssico da automa\xE7\xE3o."
   _cardNameEn: Waste Collection Robotics
-  _descriptionEn: "Robots that automatically sort recyclable material, faster and
+  _descriptionEn: Robots that automatically sort recyclable material, faster and
     with fewer errors than manual sorting. Real technology (e.g. AMP Robotics), but
-    it cuts collection jobs \u2014 the classic dilemma of automation."
+    it cuts collection jobs, the classic dilemma of automation.
   _cost: 0
   _tier: 1
   _archetype: 3

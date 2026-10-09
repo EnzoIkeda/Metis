@@ -99,8 +99,7 @@ public sealed class MctsPolicy : IPlayerPolicy
         });
     }
 
-    // Com baralho finito, conta cartas: os futuros saem das cartas que de fato restam na pilha (so a ordem e sorteada),
-    // e a mao atual vai pro descarte, que e onde ela termina no fim do turno.
+    // Baralho finito: os futuros saem das cartas que restam na pilha (so a ordem e sorteada); a mao atual vai pro descarte.
     private CardHand<SimCard> PlanningHand(List<SimCard> planningDeck, DecisionContext context, Random random)
     {
         if (context.FiniteDeck == false)

@@ -7,8 +7,7 @@ public struct PhaseMapNode
     public bool IsAvailable;
 }
 
-// Fonte dos nos do mapa de fase, pura e sem dependencia de UnityEngine.
-// No Beta so existe 1 no (avancar direto), mas o formato de lista ja suporta mais rotas no futuro.
+// Nos do mapa entre fases; hoje so 1 (avancar), mas a lista ja comporta mais rotas.
 public static class PhaseMapProvider
 {
     public static IReadOnlyList<PhaseMapNode> GetNodes()

@@ -43,7 +43,7 @@ public class Grid
         return x >= 0 && x < _width && z >= 0 && z < _height;
     }
 
-    // Sorteia uma celula livre (CellType.Empty); false se nao houver nenhuma.
+    // Sorteia uma celula vazia; false se nao houver nenhuma.
     public bool TryGetRandomFreePosition(System.Random random, out int x, out int z)
     {
         var freePositions = new System.Collections.Generic.List<(int X, int Z)>();

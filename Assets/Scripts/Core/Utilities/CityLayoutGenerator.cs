@@ -10,8 +10,7 @@ public struct CityLayoutCell
     public float FacingDegrees;
 }
 
-// Gera o conteudo dos quarteiroes (celulas Structure/SpecialStructure) de uma fase nova.
-// A malha de ruas em si nunca muda, so o que e sorteado em cima dela.
+// Sorteia o conteudo dos quarteiroes de uma fase nova; a malha de ruas nunca muda.
 public class CityLayoutGenerator
 {
     // Mesma proporcao de hoje: cerca de 1 em cada 9 celulas de quarteirao vira lote verde.

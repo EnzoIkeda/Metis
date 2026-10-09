@@ -2,7 +2,7 @@ using System;
 using System.Reflection;
 using UnityEngine;
 
-// Constroi CardData/MusicPlaylistData de teste via reflection, ja que os campos sao [SerializeField] private sem setter publico. So pra PlayMode.
+// Monta assets de teste via reflection, ja que os campos sao privados e sem setter. So pra PlayMode.
 public static class TestDataFactory
 {
     public static CardData CreateCard(

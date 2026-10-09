@@ -22,8 +22,7 @@ public class TurnManagerTests
             Object.DestroyImmediate(_host);
     }
 
-    // CityEffectsController fica sem nenhum prefab de particula atribuido; PlayOneShot lida com isso
-    // direto (so pula o Instantiate), entao a espera calibrada continua rodando de verdade.
+    // Sem prefab de particula atribuido, o efeito so pula a instancia e a espera calibrada continua valendo.
     private TurnManager CreateTurnManager(CardData[] cardPool, int handSize = 5)
     {
         _host = new GameObject("TurnManagerHost");
@@ -56,9 +55,7 @@ public class TurnManagerTests
         Assert.That(turnManager.Hand.Cards, Is.Not.Empty);
     }
 
-    // Pendencia documentada no ARCHITECTURE.md: joga uma carta (dispara o efeito de impacto, que atrasa
-    // o fim da fase de acao) e tenta jogar de novo antes do efeito terminar; a segunda jogada tem que
-    // ser bloqueada, e o turno so pode avancar uma vez quando o efeito atrasado finalmente completa.
+    // Jogar de novo durante o efeito de impacto e bloqueado, e o turno avanca uma vez so quando o efeito termina.
     [UnityTest]
     public IEnumerator PlayCard_WhileImpactAnimationPending_SecondCallIsBlockedAndTurnAdvancesOnlyOnce()
     {
@@ -101,8 +98,7 @@ public class TurnManagerTests
     [UnityTest]
     public IEnumerator PlayCard_SearchCard_WaitsForChoiceThenAddsTheCard()
     {
-        // Baralho finito: 1 busca + 3 copias do alvo, mao de 2. O baralho passa inteiro antes de repetir, entao em ate 2 compras a busca
-        // vem pra mao, e sempre sobra copia do alvo fora da mao pra ser buscada.
+        // Baralho finito com 1 busca + 3 copias do alvo e mao de 2: a busca vem em ate 2 compras e sempre sobra alvo pra buscar.
         var search = TestDataFactory.CreateCard("Buscar", ability: CardAbility.SearchDeck);
         var target = TestDataFactory.CreateCard("Alvo", copies: 3);
         var turnManager = CreateTurnManager(new[] { search, target }, handSize: 2);

@@ -8,8 +8,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-// Aplica nos assets e na cena da fase os numeros de um JSON no formato do exportador, vindos do simulador de balanceamento.
-// So mexe em numeros (custo, gate, efeitos, copias, condicoes, derivas, presets, matriz, regras); textos, arte e tipos nao mudam.
+// Aplica nos assets e na cena os numeros de um JSON do simulador; textos, arte e tipos nao mudam.
 public static class BalanceDataImporter
 {
     private const float Tolerance = 1e-4f;

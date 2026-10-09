@@ -15,13 +15,13 @@ MonoBehaviour:
   _cardName: "Manufatura Avan\xE7ada 4.0"
   _description: "F\xE1bricas conectadas por sensores se ajustam sozinhas, sem parar
     a linha de produ\xE7\xE3o. Conceito real: a iniciativa alem\xE3 Industrie 4.0,
-    refer\xEAncia mundial de manufatura avan\xE7ada \u2014 produtividade alta, press\xE3o
+    refer\xEAncia mundial de manufatura avan\xE7ada, produtividade alta, press\xE3o
     ambiental junto."
   _cardNameEn: Advanced Manufacturing 4.0
-  _descriptionEn: "Factories connected by sensors adjust themselves without stopping
-    the production line. Real concept: Germany's Industrie 4.0 initiative, a world
-    reference in advanced manufacturing \u2014 high productivity, with environmental
-    pressure alongside it."
+  _descriptionEn: 'Factories connected by sensors adjust themselves without stopping
+    the production line. Real concept: Germany''s Industrie 4.0 initiative, a world
+    reference in advanced manufacturing, high productivity, with environmental pressure
+    alongside it.'
   _cost: 3
   _tier: 3
   _archetype: 2

@@ -14,8 +14,7 @@ public static class ForwardModel
         return Resolve(stats, turnIndex, victoryTurnCount, events);
     }
 
-    // Planejamento simplificado de acao livre: busca e revelacao pagam o custo e o turno segue com a melhor carta comum
-    // pela politica equilibrada (a trazida pela busca, ou a melhor da mao). Carta comum segue o passo normal.
+    // Acao livre simplificada: paga o custo e segue com a melhor carta comum pela politica equilibrada.
     public static GameOutcome StepTurnWithAbilities(CityStats stats, SimCard card, CardHand<SimCard> hand, int turnIndex, int victoryTurnCount,
         RandomEventPool<SimEvent> events, BalanceData data)
     {

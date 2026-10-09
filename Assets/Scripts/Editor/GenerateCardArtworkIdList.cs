@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-// Gera a lista de IDs usados pra nomear as imagens de Art/Cards, a partir dos CardData existentes.
+// Gera a lista de IDs das cartas, usada pra nomear as imagens de Art/Cards.
 public static class GenerateCardArtworkIdList
 {
     private const string CardDataFolder = "Assets/Data/Card";

@@ -25,19 +25,19 @@ public class PedestrianTrafficController : MonoBehaviour
     {
         if (_placementManager == null || _placementManager.Grid == null)
         {
-            Debug.LogWarning("[PedestrianTrafficController] Sem PlacementManager/Grid configurado — nenhum pedestre spawnado.");
+            Debug.LogWarning("[PedestrianTrafficController] Sem PlacementManager/Grid configurado, nenhum pedestre spawnado.");
             return;
         }
         if (_pedestrianPrefabs == null || _pedestrianPrefabs.Length == 0)
         {
-            Debug.LogWarning("[PedestrianTrafficController] Nenhum prefab de pedestre configurado — nenhum pedestre spawnado.");
+            Debug.LogWarning("[PedestrianTrafficController] Nenhum prefab de pedestre configurado, nenhum pedestre spawnado.");
             return;
         }
 
         _roadNetwork = new RoadNetwork(_placementManager.Grid);
         if (_roadNetwork.RoadCells.Count == 0)
         {
-            Debug.LogWarning("[PedestrianTrafficController] Grid sem nenhuma célula CellType.Road — nenhum pedestre spawnado.");
+            Debug.LogWarning("[PedestrianTrafficController] Grid sem nenhuma célula CellType.Road, nenhum pedestre spawnado.");
             return;
         }
 

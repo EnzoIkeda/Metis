@@ -120,8 +120,8 @@ public class CityStatsManager : MonoBehaviour
 
     private void HandleParameterCritical(CityParameterType parameter)
     {
-        var papel = parameter == CityStats.AnchorParameter ? "ÂNCORA — Game Over" : "Colapso — pressiona a âncora";
-        Debug.LogWarning($"[CityStats] {parameter} em nível crítico ({Stats.GetValue(parameter)}) — {papel}");
+        var papel = parameter == CityStats.AnchorParameter ? "ÂNCORA, Game Over" : "Colapso, pressiona a âncora";
+        Debug.LogWarning($"[CityStats] {parameter} em nível crítico ({Stats.GetValue(parameter)}), {papel}");
     }
 
     private void HandleGameOver()

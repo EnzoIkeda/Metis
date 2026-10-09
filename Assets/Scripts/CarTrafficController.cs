@@ -21,19 +21,19 @@ public class CarTrafficController : MonoBehaviour
     {
         if (_placementManager == null || _placementManager.Grid == null)
         {
-            Debug.LogWarning("[CarTrafficController] Sem PlacementManager/Grid configurado — nenhum carro spawnado.");
+            Debug.LogWarning("[CarTrafficController] Sem PlacementManager/Grid configurado, nenhum carro spawnado.");
             return;
         }
         if (_carPrefabs == null || _carPrefabs.Length == 0)
         {
-            Debug.LogWarning("[CarTrafficController] Nenhum prefab de carro configurado — nenhum carro spawnado.");
+            Debug.LogWarning("[CarTrafficController] Nenhum prefab de carro configurado, nenhum carro spawnado.");
             return;
         }
 
         _roadNetwork = new RoadNetwork(_placementManager.Grid);
         if (_roadNetwork.RoadCells.Count == 0)
         {
-            Debug.LogWarning("[CarTrafficController] Grid sem nenhuma célula CellType.Road — nenhum carro spawnado.");
+            Debug.LogWarning("[CarTrafficController] Grid sem nenhuma célula CellType.Road, nenhum carro spawnado.");
             return;
         }
 

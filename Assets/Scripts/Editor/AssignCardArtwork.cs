@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-// Varre Art/Cards por imagens nomeadas com o ID da carta e atribui cada uma ao CardData correspondente.
+// Atribui a cada carta a imagem de Art/Cards nomeada com o ID dela.
 public static class AssignCardArtwork
 {
     private const string ArtworkFolder = "Assets/Art/Cards";

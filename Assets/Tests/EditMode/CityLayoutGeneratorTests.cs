@@ -23,7 +23,7 @@ public class CityLayoutGeneratorTests
         return structure;
     }
 
-    // Retorna sempre os valores dados, na ordem, ignorando maxValue (os testes ja escolhem valores validos pra cada chamada), pra controlar exatamente qual ramo a geracao segue.
+    // Devolve os valores dados, na ordem, pra controlar qual ramo a geracao segue (o teste ja escolhe valores validos).
     private class SequenceRandom : System.Random
     {
         private readonly Queue<int> _values;

@@ -80,8 +80,7 @@ public static class PolicyHelpers
         return cards.Where(card => CardRules.IsFreeAction(card) == false).ToList();
     }
 
-    // Avaliacao de jogada pra politicas que pontuam carta a carta: busca vale a melhor carta que ela traz, revelacao vale a melhor
-    // carta comum da mao (pra quem ja sabe os numeros a revelacao nao acrescenta nada), ambas descontado o custo.
+    // Busca vale a melhor carta que traz; revelacao, a melhor carta comum da mao; ambas descontado o custo.
     public static double ScoreWithAbilities(SimCard card, DecisionContext context, Func<SimCard, double> plainScore, Func<SimCard, double> costScore)
     {
         if (card.Ability == CardAbility.SearchDeck)

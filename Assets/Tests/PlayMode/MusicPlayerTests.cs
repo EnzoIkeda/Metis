@@ -12,7 +12,7 @@ public class MusicPlayerTests
     {
         Time.timeScale = 1f;
 
-        // MusicPlayer.Instance e estatico e sobrevive normalmente entre cenas, entao limpa entre testes pra nao vazar pro proximo.
+        // A instancia unica e estatica e sobrevive entre cenas, entao e destruida entre testes.
         if (MusicPlayer.Instance != null)
             Object.DestroyImmediate(MusicPlayer.Instance.gameObject);
         if (_extraHost != null)
@@ -29,8 +29,7 @@ public class MusicPlayerTests
         return player;
     }
 
-    // Start() e chamado so no proximo ciclo de Update do Unity, entao um unico yield return null nao garante
-    // que ja rodou; espera ate PlayNextTrack ja ter atribuido um clipe (ou desiste depois de alguns frames).
+    // O Start so roda no proximo Update: espera o primeiro clipe ser atribuido, com limite de frames.
     private static IEnumerator WaitUntilClipAssigned(AudioSource audioSource, int maxFrames = 10)
     {
         var frames = 0;
@@ -54,8 +53,7 @@ public class MusicPlayerTests
         Assert.That(audioSource.clip == clipA || audioSource.clip == clipB, Is.True);
     }
 
-    // Recria o cenario do bug original: a instancia duplicada e destruida no fim do frame,
-    // mas o Start() dela ainda roda antes disso; sem a guarda isso lancava NullReferenceException.
+    // Bug original: a duplicata so e destruida no fim do frame, mas o Start dela ainda rodava e lancava excecao.
     [UnityTest]
     public IEnumerator DuplicateInstance_ActivatedRightAfterTheFirst_DoesNotThrowAndOnlyOneSurvives()
     {
@@ -92,8 +90,8 @@ public class MusicPlayerTests
         Assert.That(player.GetComponent<AudioSource>().clip, Is.SameAs(newClip));
     }
 
-    // Regressao do bug de pausa: com WaitForSeconds (escalado) a musica silenciava porque o AudioSource
-    // ignora Time.timeScale mas a coroutine ficava travada; com WaitForSecondsRealtime ela acompanha.
+    // Regressao da pausa: a espera escalada travava com o tempo zerado e a musica silenciava.
+    // Observa a troca a cada frame; checar num instante fixo falhava quando a faixa trocava duas vezes.
     [UnityTest]
     public IEnumerator WhilePausedWithZeroTimeScale_StillAdvancesToNextTrackInRealTime()
     {
@@ -105,8 +103,10 @@ public class MusicPlayerTests
         var initialClip = audioSource.clip;
 
         Time.timeScale = 0f;
-        yield return new WaitForSecondsRealtime(0.5f);
+        var deadline = Time.realtimeSinceStartup + 2f;
+        while (audioSource.clip == initialClip && Time.realtimeSinceStartup < deadline)
+            yield return null;
 
-        Assert.That(audioSource.clip, Is.Not.SameAs(initialClip));
+        Assert.That(audioSource.clip, Is.Not.SameAs(initialClip), "a faixa nao trocou em 2 s de tempo real com o jogo pausado");
     }
 }

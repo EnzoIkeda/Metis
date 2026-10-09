@@ -14,12 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   _cardName: Zoneamento de Uso Misto
   _description: "Com\xE9rcio, moradia e servi\xE7o no mesmo quarteir\xE3o: mais gente
-    na rua olhando pra rua reduz o crime \u2014 a ideia de Jane Jacobs sobre a vida
-    urbana."
+    na rua olhando pra rua reduz o crime, a ideia de Jane Jacobs sobre a vida urbana."
   _cardNameEn: Mixed-Use Zoning
-  _descriptionEn: "Shops, housing and services on the same block: more people on
-    the street watching the street reduces crime \u2014 Jane Jacobs' idea about urban
-    life."
+  _descriptionEn: 'Shops, housing and services on the same block: more people on
+    the street watching the street reduces crime, Jane Jacobs'' idea about urban
+    life.'
   _cost: 2
   _tier: 0
   _archetype: 0

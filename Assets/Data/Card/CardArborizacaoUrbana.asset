@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   _cardName: "Arboriza\xE7\xE3o Urbana"
   _description: "\xC1rvores nas cal\xE7adas d\xE3o sombra, esfriam a cidade e purificam
-    o ar \u2014 resposta direta \xE0 ilha de calor urbana."
+    o ar, resposta direta \xE0 ilha de calor urbana."
   _cardNameEn: Urban Tree Planting
-  _descriptionEn: "Trees along sidewalks give shade, cool the city and clean the
-    air \u2014 a direct answer to the urban heat island effect."
+  _descriptionEn: Trees along sidewalks give shade, cool the city and clean the air,
+    a direct answer to the urban heat island effect.
   _cost: 2
   _tier: 0
   _archetype: 0

@@ -1,9 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
-// Toca a trilha de fundo do jogo, rotacionando entre as faixas da playlist ativa.
-// Singleton persistente entre cenas (DontDestroyOnLoad); uma instancia em cada cena garante que sempre exista uma, sem duplicar.
-// A playlist ativa pode ser trocada em runtime, ponto de extensao pra usar uma trilha especifica numa aba/cena no futuro.
+// Toca a trilha de fundo, alternando as faixas da playlist ativa, que pode ser trocada em runtime.
+// Persistente entre cenas; cada cena tem uma instancia pra garantir que sempre exista uma, sem duplicar.
 [RequireComponent(typeof(AudioSource))]
 public class MusicPlayer : MonoBehaviour
 {

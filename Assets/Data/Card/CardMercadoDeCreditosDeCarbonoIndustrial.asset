@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   _cardName: "Mercado de Cr\xE9ditos de Carbono Industrial"
   _description: "Empresas compram e vendem permiss\xE3o de emitir carbono entre si.
-    Modelo real: o mercado europeu EU ETS e o de Calif\xF3rnia \u2014 move muito
-    dinheiro, mas a cr\xEDtica documentada e conhecida: cr\xE9dito de compensa\xE7\xE3o
-    nem sempre significa polui\xE7\xE3o a menos de verdade."
+    Modelo real: o mercado europeu EU ETS e o de Calif\xF3rnia, move muito dinheiro,
+    mas a cr\xEDtica documentada e conhecida: cr\xE9dito de compensa\xE7\xE3o nem
+    sempre significa polui\xE7\xE3o a menos de verdade."
   _cardNameEn: Industrial Carbon Credit Market
-  _descriptionEn: "Companies buy and sell permission to emit carbon among themselves.
-    Real model: the European EU ETS and California's market \u2014 moves a lot of
-    money, but the documented, well-known criticism stands: an offset credit doesn't
-    always mean real pollution reduction."
+  _descriptionEn: 'Companies buy and sell permission to emit carbon among themselves.
+    Real model: the European EU ETS and California''s market, moves a lot of money,
+    but the documented, well-known criticism stands: an offset credit doesn''t always
+    mean real pollution reduction.'
   _cost: 1
   _tier: 3
   _archetype: 2

@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: CardOrcamentoParticipativo
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   _cardName: "Or\xE7amento Participativo"
-  _description: "A popula\xE7\xE3o decide parte do or\xE7amento da cidade \u2014
-    modelo nascido em Porto Alegre e hoje replicado no mundo todo."
+  _description: "A popula\xE7\xE3o decide parte do or\xE7amento da cidade, modelo
+    nascido em Porto Alegre e hoje replicado no mundo todo."
   _cardNameEn: Participatory Budgeting
-  _descriptionEn: "The population decides part of the city's budget \u2014 a model
-    born in Porto Alegre and now replicated worldwide."
+  _descriptionEn: The population decides part of the city's budget, a model born
+    in Porto Alegre and now replicated worldwide.
   _cost: 0
   _tier: 0
   _archetype: 0

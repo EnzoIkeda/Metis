@@ -1,7 +1,7 @@
 using System.Globalization;
 using Metis.Simulator;
 
-// Uso: dotnet run --project Tools/Metis.Simulator -c Release -- --data <balance_data.json> --out <pasta> [opcoes]
+// Uso, na pasta do simulador: dotnet run -c Release -- --data <balance_data.json> --out <pasta> [opcoes]
 var options = new SimulationOptions();
 for (int i = 0; i < args.Length; i++)
 {

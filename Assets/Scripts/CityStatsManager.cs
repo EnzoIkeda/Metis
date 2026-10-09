@@ -25,6 +25,9 @@ public class CityStatsManager : MonoBehaviour
 
     public CityStats Stats { get; private set; }
 
+    // Nome do asset do preset aplicado nesta fase, vazio na cidade calibrada.
+    public string PresetName { get; private set; } = string.Empty;
+
     private void Awake()
     {
         var interactions = new InteractionMatrix(
@@ -37,20 +40,57 @@ public class CityStatsManager : MonoBehaviour
             _interactionConfig.MultiplicadorApoioExcesso,
             _interactionConfig.DerivaCorrecaoExcesso);
 
-        Stats = new CityStats(BuildInitialParameters(), interactions, _interactionConfig.PenalidadeColapso);
+        var savedPhase = MetaProgressionManager.SavedPhase;
+        CityParameterPresetData savedPreset = null;
+        if (savedPhase != null && TryFindPreset(savedPhase.PresetName, out savedPreset) == false)
+        {
+            Debug.LogWarning($"[CityStatsManager] Preset salvo '{savedPhase.PresetName}' não existe mais, a fase recomeça do zero.");
+            MetaProgressionManager.DiscardSavedPhase();
+            savedPhase = null;
+        }
+
+        var preset = savedPhase != null ? savedPreset : DrawPreset();
+        Stats = new CityStats(BuildInitialParameters(preset), interactions, _interactionConfig.PenalidadeColapso);
+
+        if (savedPhase != null)
+            RunSaveRules.RestoreStats(savedPhase, Stats);
     }
 
-    // Fase 1 de uma rodada usa a cidade calibrada padrao; da fase 2 em diante sorteia um preset e aplica por cima.
-    private CityParameterConfig[] BuildInitialParameters()
+    // Fase 1 de uma rodada usa a cidade calibrada padrao; da fase 2 em diante sorteia um preset.
+    private CityParameterPresetData DrawPreset()
     {
         if (MetaProgressionManager.IsNewPhase == false || _phasePresets.Length == 0)
+            return null;
+
+        return _phasePresets[UnityEngine.Random.Range(0, _phasePresets.Length)];
+    }
+
+    // Nome vazio e a cidade calibrada, sem preset.
+    private bool TryFindPreset(string presetName, out CityParameterPresetData preset)
+    {
+        preset = null;
+        if (string.IsNullOrEmpty(presetName))
+            return true;
+
+        foreach (var candidate in _phasePresets)
+        {
+            if (candidate != null && candidate.name == presetName)
+            {
+                preset = candidate;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private CityParameterConfig[] BuildInitialParameters(CityParameterPresetData preset)
+    {
+        if (preset == null)
             return _initialParameters;
 
-        var preset = _phasePresets[UnityEngine.Random.Range(0, _phasePresets.Length)];
-        var parameters = CityPresetRules.Apply(_initialParameters, preset.Overrides, preset.DerivaMultiplier);
-
-        Debug.Log($"[CityStatsManager] Fase nova, preset '{preset.PresetName}' aplicado.");
-        return parameters;
+        PresetName = preset.name;
+        Debug.Log($"[CityStatsManager] Preset '{preset.PresetName}' aplicado.");
+        return CityPresetRules.Apply(_initialParameters, preset.Overrides, preset.DerivaMultiplier);
     }
 
     private void OnEnable()

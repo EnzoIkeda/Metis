@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 2125597}
   - component: {fileID: 2125596}
   - component: {fileID: 2125600}
+  - component: {fileID: 2125601}
   m_Layer: 5
   m_Name: CloseButton
   m_TagString: Untagged
@@ -261,6 +262,18 @@ MonoBehaviour:
   m_FlexibleWidth: 0
   m_FlexibleHeight: 0
   m_LayoutPriority: 1
+--- !u!114 &2125601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
 --- !u!1001 &5793314
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1661,6 +1674,7 @@ GameObject:
   - component: {fileID: 55835821}
   - component: {fileID: 55835820}
   - component: {fileID: 55835819}
+  - component: {fileID: 55835822}
   m_Layer: 0
   m_Name: ButtonZoomOut
   m_TagString: Untagged
@@ -1782,6 +1796,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 55835817}
   m_CullTransparentMesh: 1
+--- !u!114 &55835822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55835817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
 --- !u!1001 &67346505
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3009,6 +3035,7 @@ GameObject:
   - component: {fileID: 109512832}
   - component: {fileID: 109512831}
   - component: {fileID: 109512830}
+  - component: {fileID: 109512834}
   m_Layer: 5
   m_Name: Option3
   m_TagString: Untagged
@@ -3138,6 +3165,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 109512828}
   m_CullTransparentMesh: 1
+--- !u!114 &109512834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109512828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
 --- !u!1001 &116200592
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6396,6 +6435,7 @@ GameObject:
   - component: {fileID: 271482996}
   - component: {fileID: 271482995}
   - component: {fileID: 271482997}
+  - component: {fileID: 271483000}
   m_Layer: 5
   m_Name: CloseButton
   m_TagString: Untagged
@@ -6525,6 +6565,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 35}
   m_SizeDelta: {x: -90, y: 110}
   m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &271483000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271482994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
 --- !u!1001 &271558178
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6703,6 +6755,7 @@ GameObject:
   m_Component:
   - component: {fileID: 278176691}
   - component: {fileID: 278176690}
+  - component: {fileID: 278176692}
   m_Layer: 0
   m_Name: CityStatsManager
   m_TagString: Untagged
@@ -6806,6 +6859,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &278176692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 278176689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19ce44701ed8a9b33a95a7e4a5bf617e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::CollapseAlertSound
+  _cityStatsManager: {fileID: 278176690}
 --- !u!1001 &280716169
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7549,6 +7615,7 @@ GameObject:
   - component: {fileID: 303722490}
   - component: {fileID: 303722489}
   - component: {fileID: 303722488}
+  - component: {fileID: 303722492}
   m_Layer: 5
   m_Name: Option2
   m_TagString: Untagged
@@ -7678,6 +7745,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 303722486}
   m_CullTransparentMesh: 1
+--- !u!114 &303722492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303722486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
 --- !u!1001 &309697696
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9654,6 +9733,82 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InitialGridOccupant
   _cellType: 1
   _structureData: {fileID: 0}
+--- !u!1 &411770635
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 411770636}
+  - component: {fileID: 411770638}
+  - component: {fileID: 411770637}
+  m_Layer: 5
+  m_Name: WelcomeBackdrop
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &411770636
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 411770635}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1575728841}
+  m_Father: {fileID: 1293635773}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &411770637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 411770635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.55}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &411770638
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 411770635}
+  m_CullTransparentMesh: 1
 --- !u!1001 &414611014
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13640,7 +13795,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &567816939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13720,7 +13875,7 @@ RectTransform:
   - {fileID: 694878587}
   - {fileID: 1347000649}
   - {fileID: 1316326741}
-  m_Father: {fileID: 1293635773}
+  m_Father: {fileID: 818391608}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -18362,6 +18517,7 @@ GameObject:
   - component: {fileID: 759973910}
   - component: {fileID: 759973909}
   - component: {fileID: 759973908}
+  - component: {fileID: 759973912}
   m_Layer: 5
   m_Name: CloseButton
   m_TagString: Untagged
@@ -18491,6 +18647,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 759973906}
   m_CullTransparentMesh: 1
+--- !u!114 &759973912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759973906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
 --- !u!1001 &772463893
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19098,6 +19266,82 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Metis.Runtime::BackgroundZoomScaler
   _referenceOrthographicSize: 19
+--- !u!1 &818391605
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 818391608}
+  - component: {fileID: 818391607}
+  - component: {fileID: 818391606}
+  m_Layer: 5
+  m_Name: PauseBackdrop
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &818391606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 818391605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.55}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &818391607
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 818391605}
+  m_CullTransparentMesh: 1
+--- !u!224 &818391608
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 818391605}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 567816942}
+  m_Father: {fileID: 1293635773}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &819486715
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19643,6 +19887,7 @@ GameObject:
   - component: {fileID: 835878519}
   - component: {fileID: 835878518}
   - component: {fileID: 835878517}
+  - component: {fileID: 835878521}
   m_Layer: 0
   m_Name: CardDetailPopup
   m_TagString: Untagged
@@ -19752,6 +19997,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &835878521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 835878516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
 --- !u!1001 &836165533
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24035,6 +24292,7 @@ GameObject:
   - component: {fileID: 965636859}
   - component: {fileID: 965636858}
   - component: {fileID: 965636860}
+  - component: {fileID: 965636863}
   m_Layer: 5
   m_Name: CloseButton
   m_TagString: Untagged
@@ -24164,6 +24422,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 35}
   m_SizeDelta: {x: -90, y: 110}
   m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &965636863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 965636857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
 --- !u!1 &965732099
 GameObject:
   m_ObjectHideFlags: 0
@@ -29963,6 +30233,7 @@ GameObject:
   - component: {fileID: 1156948105}
   - component: {fileID: 1156948104}
   - component: {fileID: 1156948103}
+  - component: {fileID: 1156948106}
   m_Layer: 0
   m_Name: ButtonZoomIn
   m_TagString: Untagged
@@ -30084,6 +30355,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1156948101}
   m_CullTransparentMesh: 1
+--- !u!114 &1156948106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156948101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
 --- !u!1001 &1161207727
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32584,6 +32867,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d9ea5077165d25182bd7a5cf2dd39d0c, type: 2}
   - {fileID: 11400000, guid: 3aacedde821637dbaa3a15e4d258db00, type: 2}
   _effects: {fileID: 529777303}
+  _background: {fileID: 815776291}
   _handSize: 6
   _victoryTurnCount: 20
 --- !u!4 &1238303806
@@ -32843,6 +33127,7 @@ GameObject:
   - component: {fileID: 1243658361}
   - component: {fileID: 1243658360}
   - component: {fileID: 1243658362}
+  - component: {fileID: 1243658363}
   m_Layer: 0
   m_Name: PlayButton
   m_TagString: Untagged
@@ -32952,6 +33237,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1243658363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243658358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
 --- !u!1001 &1251882757
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34098,9 +34395,8 @@ RectTransform:
   - {fileID: 1695067325}
   - {fileID: 1911820546}
   - {fileID: 999380170}
-  - {fileID: 1575728841}
+  - {fileID: 411770636}
   - {fileID: 188612090}
-  - {fileID: 567816942}
   - {fileID: 1810021325}
   - {fileID: 1254989246}
   - {fileID: 1187724190}
@@ -34111,6 +34407,7 @@ RectTransform:
   - {fileID: 1443206989}
   - {fileID: 1156948102}
   - {fileID: 55835818}
+  - {fileID: 818391608}
   - {fileID: 684628231}
   - {fileID: 159604473}
   - {fileID: 1871395221}
@@ -36863,6 +37160,7 @@ GameObject:
   - component: {fileID: 1369374953}
   - component: {fileID: 1369374955}
   - component: {fileID: 1369374952}
+  - component: {fileID: 1369374956}
   m_Layer: 5
   m_Name: LanguageButton
   m_TagString: Untagged
@@ -36992,6 +37290,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1369374956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369374950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
 --- !u!1001 &1371259832
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38298,6 +38608,7 @@ GameObject:
   - component: {fileID: 1443206988}
   - component: {fileID: 1443206987}
   - component: {fileID: 1443206986}
+  - component: {fileID: 1443206990}
   m_Layer: 0
   m_Name: ButtonPause
   m_TagString: Untagged
@@ -38407,6 +38718,18 @@ RectTransform:
   m_AnchoredPosition: {x: -16, y: -408}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 1, y: 1}
+--- !u!114 &1443206990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443206985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
 --- !u!1001 &1445566708
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42720,7 +43043,7 @@ RectTransform:
   - {fileID: 967109101}
   - {fileID: 1394966362}
   - {fileID: 759973907}
-  m_Father: {fileID: 1293635773}
+  m_Father: {fileID: 411770636}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -42739,7 +43062,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffaf7e7b65026b9d4b07bcb33ac1be25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WelcomePopupView
-  _panelRoot: {fileID: 1575728840}
+  _turnManager: {fileID: 1238303805}
+  _panelRoot: {fileID: 411770635}
   _titleText: {fileID: 1316192792}
   _messageText: {fileID: 1394966364}
   _startButton: {fileID: 759973909}
@@ -45084,6 +45408,7 @@ GameObject:
   - component: {fileID: 1655181261}
   - component: {fileID: 1655181263}
   - component: {fileID: 1655181260}
+  - component: {fileID: 1655181264}
   m_Layer: 5
   m_Name: SettingsButton
   m_TagString: Untagged
@@ -45213,6 +45538,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1655181264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655181258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
 --- !u!1001 &1661616857
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46095,6 +46432,7 @@ GameObject:
   - component: {fileID: 1695067324}
   - component: {fileID: 1695067323}
   - component: {fileID: 1695067322}
+  - component: {fileID: 1695067326}
   m_Layer: 5
   m_Name: ButtonPassTurn
   m_TagString: Untagged
@@ -46204,6 +46542,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 506}
   m_SizeDelta: {x: 420, y: 96}
   m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &1695067326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695067321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
 --- !u!1001 &1701263861
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46727,6 +47077,7 @@ GameObject:
   - component: {fileID: 1735312603}
   - component: {fileID: 1735312605}
   - component: {fileID: 1735312602}
+  - component: {fileID: 1735312606}
   m_Layer: 5
   m_Name: SettingsBackButton
   m_TagString: Untagged
@@ -46856,6 +47207,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1735312606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735312600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
 --- !u!1001 &1738784535
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51124,7 +51487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03db70368034194329d51a7c2b3b091a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PausePopupView
-  _panelRoot: {fileID: 567816938}
+  _panelRoot: {fileID: 818391605}
   _mainView: {fileID: 1347000648}
   _settingsView: {fileID: 1316326740}
   _pauseButton: {fileID: 1443206986}
@@ -52102,6 +52465,7 @@ GameObject:
   - component: {fileID: 1899579684}
   - component: {fileID: 1899579683}
   - component: {fileID: 1899579682}
+  - component: {fileID: 1899579686}
   m_Layer: 0
   m_Name: BackButton
   m_TagString: Untagged
@@ -52211,6 +52575,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1899579686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899579681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
 --- !u!1001 &1902230262
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53064,6 +53440,7 @@ GameObject:
   - component: {fileID: 1928155304}
   - component: {fileID: 1928155306}
   - component: {fileID: 1928155303}
+  - component: {fileID: 1928155307}
   m_Layer: 5
   m_Name: MainMenuButton
   m_TagString: Untagged
@@ -53193,6 +53570,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1928155307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1928155301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
 --- !u!1001 &1930894248
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53586,6 +53975,7 @@ GameObject:
   - component: {fileID: 1946251791}
   - component: {fileID: 1946251793}
   - component: {fileID: 1946251790}
+  - component: {fileID: 1946251794}
   m_Layer: 5
   m_Name: ResumeButton
   m_TagString: Untagged
@@ -53715,6 +54105,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1946251794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1946251788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
 --- !u!1001 &1947410023
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56694,6 +57096,7 @@ GameObject:
   - component: {fileID: 2068676221}
   - component: {fileID: 2068676220}
   - component: {fileID: 2068676219}
+  - component: {fileID: 2068676223}
   m_Layer: 5
   m_Name: Option1
   m_TagString: Untagged
@@ -56823,6 +57226,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2068676217}
   m_CullTransparentMesh: 1
+--- !u!114 &2068676223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068676217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
 --- !u!1001 &2068833333
 PrefabInstance:
   m_ObjectHideFlags: 0

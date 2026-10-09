@@ -1,4 +1,5 @@
 using System.Collections;
+using System.IO;
 using System.Linq;
 using NUnit.Framework;
 using UnityEngine;
@@ -7,23 +8,53 @@ using UnityEngine.TestTools;
 public class TurnManagerTests
 {
     private GameObject _host;
+    private string _saveDirectory;
 
     [SetUp]
     public void SetUp()
     {
+        // O TurnManager grava o save a cada turno; numa pasta temporaria, pra nunca tocar na rodada de verdade.
+        _saveDirectory = Path.Combine(Path.GetTempPath(), "metis-playmode-" + System.Guid.NewGuid().ToString("N"));
+        TestDataFactory.SetStaticField(typeof(MetaProgressionManager), "_savePathOverride", Path.Combine(_saveDirectory, "run_save.json"));
         MetaProgressionManager.ResetRun();
     }
 
     [TearDown]
     public void TearDown()
     {
-        MetaProgressionManager.ResetRun();
+        // Destruir primeiro: o efeito pendente dispara no OnDisable, avanca o turno e grava o save, que ainda tem de cair na pasta temporaria.
         if (_host != null)
             Object.DestroyImmediate(_host);
+        MetaProgressionManager.ResetRun();
+        TestDataFactory.SetStaticField(typeof(MetaProgressionManager), "_savePathOverride", null);
+        TestDataFactory.SetStaticField(typeof(MetaProgressionManager), "_save", null);
+        if (Directory.Exists(_saveDirectory))
+            Directory.Delete(_saveDirectory, true);
+    }
+
+    // Simula fechar o app: some a cena e o cache em memoria, so o arquivo sobrevive.
+    private void CloseAndForgetInMemoryState()
+    {
+        Object.DestroyImmediate(_host);
+        _host = null;
+        TestDataFactory.SetStaticField(typeof(MetaProgressionManager), "_save", null);
+    }
+
+    private static CardData[] DistinctCards(int count)
+    {
+        var cards = new CardData[count];
+        for (int i = 0; i < count; i++)
+            cards[i] = TestDataFactory.CreateCard($"Carta{i}");
+        return cards;
+    }
+
+    private static string[] Ids(System.Collections.Generic.IEnumerable<CardData> cards)
+    {
+        return cards.Select(card => card.name).ToArray();
     }
 
     // Sem prefab de particula atribuido, o efeito so pula a instancia e a espera calibrada continua valendo.
-    private TurnManager CreateTurnManager(CardData[] cardPool, int handSize = 5)
+    private TurnManager CreateTurnManager(CardData[] cardPool, int handSize = 5, RandomEventData[] eventPool = null)
     {
         _host = new GameObject("TurnManagerHost");
         _host.SetActive(false);
@@ -36,7 +67,7 @@ public class TurnManagerTests
         var turnManager = _host.AddComponent<TurnManager>();
         TestDataFactory.SetField(turnManager, "_cityStatsManager", statsManager);
         TestDataFactory.SetField(turnManager, "_cardPool", cardPool);
-        TestDataFactory.SetField(turnManager, "_eventPool", new RandomEventData[0]);
+        TestDataFactory.SetField(turnManager, "_eventPool", eventPool ?? new RandomEventData[0]);
         TestDataFactory.SetField(turnManager, "_advantagePool", new PassiveAdvantageData[0]);
         TestDataFactory.SetField(turnManager, "_effects", effects);
         TestDataFactory.SetField(turnManager, "_handSize", handSize);
@@ -186,5 +217,104 @@ public class TurnManagerTests
         Assert.That(turnManager.CanPassTurn, Is.False);
         Assert.That(turnManager.PassTurn(), Is.False);
         Assert.That(turnManager.Machine.TurnIndex, Is.EqualTo(1));
+    }
+
+    // Fechar o app e continuar volta ao comeco da fase de acao do mesmo turno: mesma mao, mesmas pilhas, mesmos parametros.
+    [UnityTest]
+    public IEnumerator Resume_AfterClosing_RestoresTurnHandPilesAndParameters()
+    {
+        var pool = DistinctCards(12);
+        var turnManager = CreateTurnManager(pool, handSize: 4);
+        yield return null;
+        Assert.That(turnManager.PlayCard(turnManager.Hand.Cards[0]), Is.True);
+        yield return new WaitForSeconds(2f);
+        Assert.That(turnManager.Machine.TurnIndex, Is.EqualTo(2));
+
+        var stats = _host.GetComponent<CityStatsManager>().Stats;
+        var expectedHand = Ids(turnManager.Hand.Cards);
+        var expectedDraw = Ids(turnManager.Hand.DrawPile);
+        var expectedDiscard = Ids(turnManager.Hand.DiscardPile);
+        var expectedRenda = stats.GetValue(CityParameterType.Renda);
+        var expectedBemEstar = stats.GetValue(CityParameterType.BemEstar);
+
+        CloseAndForgetInMemoryState();
+        Assert.That(MetaProgressionManager.HasRunInProgress, Is.True);
+        var resumed = CreateTurnManager(pool, handSize: 4);
+        yield return null;
+
+        var resumedStats = _host.GetComponent<CityStatsManager>().Stats;
+        Assert.That(resumed.ResumedFromSave, Is.True);
+        Assert.That(resumed.Machine.TurnIndex, Is.EqualTo(2));
+        Assert.That(resumed.Machine.CurrentPhase, Is.EqualTo(TurnPhase.Action));
+        Assert.That(Ids(resumed.Hand.Cards), Is.EqualTo(expectedHand));
+        Assert.That(Ids(resumed.Hand.DrawPile), Is.EqualTo(expectedDraw));
+        Assert.That(Ids(resumed.Hand.DiscardPile), Is.EqualTo(expectedDiscard));
+        Assert.That(resumedStats.GetValue(CityParameterType.Renda), Is.EqualTo(expectedRenda));
+        Assert.That(resumedStats.GetValue(CityParameterType.BemEstar), Is.EqualTo(expectedBemEstar));
+    }
+
+    // Com o popup de evento aberto o evento ja foi aplicado: continuar mostra o mesmo evento em vez de sortear outro ou desfazer a jogada.
+    [UnityTest]
+    public IEnumerator Resume_WithEventPopupOpen_AnnouncesTheSameEventWithoutReapplyingIt()
+    {
+        var pool = DistinctCards(8);
+        var eventData = TestDataFactory.CreateEvent("EventoRenda", new[] { new StatModifier { Parameter = CityParameterType.Renda, Amount = -5f } });
+        var turnManager = CreateTurnManager(pool, handSize: 3, eventPool: new[] { eventData });
+        yield return null;
+        Assert.That(turnManager.PlayCard(turnManager.Hand.Cards[0]), Is.True);
+        yield return new WaitForSeconds(2f);
+        Assert.That(turnManager.Machine.CurrentPhase, Is.EqualTo(TurnPhase.Event));
+        var expectedRenda = _host.GetComponent<CityStatsManager>().Stats.GetValue(CityParameterType.Renda);
+        var expectedHand = Ids(turnManager.Hand.Cards);
+
+        CloseAndForgetInMemoryState();
+        var resumed = CreateTurnManager(pool, handSize: 3, eventPool: new[] { eventData });
+        RandomEventData announced = null;
+        resumed.OnRandomEventTriggered += triggered => announced = triggered;
+        for (int frame = 0; frame < 10 && announced == null; frame++)
+            yield return null;
+
+        Assert.That(announced, Is.SameAs(eventData));
+        Assert.That(resumed.Machine.CurrentPhase, Is.EqualTo(TurnPhase.Event));
+        Assert.That(resumed.Machine.TurnIndex, Is.EqualTo(1));
+        Assert.That(Ids(resumed.Hand.Cards), Is.EqualTo(expectedHand));
+        Assert.That(_host.GetComponent<CityStatsManager>().Stats.GetValue(CityParameterType.Renda), Is.EqualTo(expectedRenda), "o evento nao pode ser aplicado de novo");
+
+        resumed.AcknowledgeEvent();
+        yield return new WaitForSeconds(3f);
+        Assert.That(resumed.Machine.TurnIndex, Is.EqualTo(2));
+        Assert.That(resumed.Machine.CurrentPhase, Is.EqualTo(TurnPhase.Action));
+    }
+
+    // Save com carta que nao existe mais no jogo: a fase recomeca do zero, mas a rodada continua.
+    [UnityTest]
+    public IEnumerator Resume_WithUnknownCard_StartsThePhaseFresh()
+    {
+        MetaProgressionManager.SetArchetype(CardArchetype.Industria);
+        var phase = new PhaseSaveData { TurnIndex = 9 };
+        phase.Hand.Add("CartaRemovida");
+        MetaProgressionManager.SavePhase(phase);
+
+        var turnManager = CreateTurnManager(DistinctCards(6));
+        yield return null;
+
+        Assert.That(turnManager.ResumedFromSave, Is.False);
+        Assert.That(turnManager.Machine.TurnIndex, Is.EqualTo(1));
+        Assert.That(turnManager.Hand.Cards, Is.Not.Empty);
+        Assert.That(MetaProgressionManager.Archetype, Is.EqualTo(CardArchetype.Industria));
+    }
+
+    // Derrota apaga o save na hora, senao continuar repetiria o turno perdido.
+    [UnityTest]
+    public IEnumerator GameOver_DeletesTheSavedRun()
+    {
+        var turnManager = CreateTurnManager(DistinctCards(4));
+        yield return null;
+        Assert.That(MetaProgressionManager.HasRunInProgress, Is.True);
+
+        turnManager.Machine.DebugForceGameOver();
+
+        Assert.That(MetaProgressionManager.HasRunInProgress, Is.False);
+        Assert.That(MetaProgressionManager.SavedPhase, Is.Null);
     }
 }

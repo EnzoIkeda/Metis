@@ -48,6 +48,20 @@ public static class UIStrings
     public static string MainMenuSettings => IsPt ? "Configurações" : "Settings";
     public static string MainMenuQuit => IsPt ? "Sair" : "Quit";
     public static string MainMenuSettingsBack => IsPt ? "Voltar" : "Back";
+    public static string MainMenuContinue => IsPt ? "Continuar" : "Continue";
+
+    public static string NewRunConfirmTitle => IsPt ? "Nova rodada" : "New run";
+    public static string NewRunConfirmMessage => IsPt
+        ? "Você tem uma rodada em andamento. Começar uma nova apaga o progresso salvo."
+        : "You have a run in progress. Starting a new one erases your saved progress.";
+    public static string NewRunConfirmButton => IsPt ? "Começar nova" : "Start new";
+    public static string CancelButton => IsPt ? "Cancelar" : "Cancel";
+
+    public static string SaveDiscardedTitle => IsPt ? "Progresso descartado" : "Progress discarded";
+    public static string SaveDiscardedMessage => IsPt
+        ? "O progresso salvo era de uma versão antiga do jogo e não pôde ser carregado."
+        : "The saved progress was from an older version of the game and could not be loaded.";
+    public static string OkButton => "OK";
 
     public static string SettingsMusicVolume => IsPt ? "Música" : "Music";
     public static string SettingsSfxVolume => IsPt ? "Efeitos" : "Effects";

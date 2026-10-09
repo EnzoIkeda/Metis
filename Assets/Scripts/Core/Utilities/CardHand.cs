@@ -24,6 +24,8 @@ public class CardHand<TCard> where TCard : class, ICardDefinition
 
     private bool _revealedUntilPhaseEnd;
 
+    public bool RevealedUntilPhaseEnd => _revealedUntilPhaseEnd;
+
     public event Action OnHandChanged;
 
     // random e opcional, passar um com seed fixa deixa a compra reproduzivel.
@@ -48,6 +50,24 @@ public class CardHand<TCard> where TCard : class, ICardDefinition
         hand._drawPile.AddRange(drawPile);
         hand._discardPile.AddRange(discardPile);
         hand.Shuffle(hand._drawPile);
+        return hand;
+    }
+
+    // Baralho finito retomado de um save: mao e pilhas exatamente como estavam, sem embaralhar de novo.
+    public static CardHand<TCard> FromSavedState(IEnumerable<TCard> cards, IEnumerable<TCard> drawPile, IEnumerable<TCard> discardPile, bool isRevealed, bool revealedUntilPhaseEnd, Random random)
+    {
+        var pool = new List<TCard>();
+        pool.AddRange(cards);
+        pool.AddRange(drawPile);
+        pool.AddRange(discardPile);
+
+        var hand = new CardHand<TCard>(pool, random, finiteDeck: false);
+        hand._finiteDeck = true;
+        hand._cards.AddRange(cards);
+        hand._drawPile.AddRange(drawPile);
+        hand._discardPile.AddRange(discardPile);
+        hand.IsRevealed = isRevealed;
+        hand._revealedUntilPhaseEnd = revealedUntilPhaseEnd;
         return hand;
     }
 

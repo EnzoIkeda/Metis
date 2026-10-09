@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8129491f34ad157c698210109c57d02a, type: 3}
+  m_Name: SoundEffectLibrary
+  m_EditorClassIdentifier: Metis.Runtime::SoundEffectLibraryData
+  _entries:
+  - _effect: 0
+    _clips:
+    - {fileID: 8300000, guid: 67910a050ef05074bbddb1fc193635f7, type: 3}
+    _volume: 0.6
+    _maxDuration: 0
+    _minInterval: 0.05
+  - _effect: 1
+    _clips:
+    - {fileID: 8300000, guid: 7ac4b7e96788e144da0ffa96efa77c84, type: 3}
+    _volume: 0.7
+    _maxDuration: 0
+    _minInterval: 0
+  - _effect: 2
+    _clips:
+    - {fileID: 8300000, guid: 8df3e6ecd725bb642b7ad91dc85340cb, type: 3}
+    _volume: 0.7
+    _maxDuration: 0
+    _minInterval: 0
+  - _effect: 3
+    _clips:
+    - {fileID: 8300000, guid: d047614f826bd5b439d5a7c1df578d97, type: 3}
+    - {fileID: 8300000, guid: 57fd38b20a876d940aa6e6604a4eaf64, type: 3}
+    - {fileID: 8300000, guid: a260837287bd6004187ff002b498ed5c, type: 3}
+    _volume: 0.75
+    _maxDuration: 0
+    _minInterval: 0
+  - _effect: 4
+    _clips:
+    - {fileID: 8300000, guid: 343d385070e5feb4b8b6b3eda987ea2b, type: 3}
+    _volume: 0.9
+    _maxDuration: 0
+    _minInterval: 0
+  - _effect: 5
+    _clips:
+    - {fileID: 8300000, guid: 77b38bc0616494b49b27972033633713, type: 3}
+    _volume: 1
+    _maxDuration: 0
+    _minInterval: 0
+  - _effect: 6
+    _clips:
+    - {fileID: 8300000, guid: 4ddd973a1a20afd40adc877e34fc259f, type: 3}
+    _volume: 1
+    _maxDuration: 2.8
+    _minInterval: 0
+  - _effect: 7
+    _clips:
+    - {fileID: 8300000, guid: a44c8edf108d5704dac267834479a971, type: 3}
+    _volume: 0.8
+    _maxDuration: 4
+    _minInterval: 0
+  - _effect: 8
+    _clips:
+    - {fileID: 8300000, guid: c28c992e006e0104d928eee9e19de066, type: 3}
+    _volume: 0.55
+    _maxDuration: 3.5
+    _minInterval: 0
+  - _effect: 9
+    _clips:
+    - {fileID: 8300000, guid: 74aa8ff4436443b4c8147ddc4e5ee661, type: 3}
+    _volume: 0.5
+    _maxDuration: 1.6
+    _minInterval: 1.5

@@ -40,6 +40,7 @@ public class GameOutcomePopupView : MonoBehaviour
 
         if (_panelRoot != null)
             _panelRoot.SetActive(true);
+        SfxPlayer.Play(outcome == GameOutcome.Victory ? SoundEffect.Victory : SoundEffect.Defeat);
     }
 
     // Derrota encerra a rodada inteira; vitoria so fecha o popup e segue pro fluxo de recompensa.

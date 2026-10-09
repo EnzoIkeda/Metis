@@ -34,6 +34,7 @@ public class EventPopupView : MonoBehaviour
             _descriptionText.text = triggeredEvent.Description;
         if (_panelRoot != null)
             _panelRoot.SetActive(true);
+        SfxPlayer.Play(SoundEffect.EventPopup);
     }
 
     private void HandleCloseClicked()

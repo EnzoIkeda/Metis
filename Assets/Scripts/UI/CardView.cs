@@ -119,8 +119,11 @@ public class CardView : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
         var releasedOverHand = IsOverHand(eventData.position);
         ReturnToHand();
 
+        // Jogar a carta ja toca o impacto; soltar de volta na mao tem som proprio de desistencia.
         if (releasedOverHand == false)
             _onPlay?.Invoke(_card);
+        else
+            SfxPlayer.Play(SoundEffect.CardCancel);
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -190,6 +193,7 @@ public class CardView : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
             return;
 
         _isCarrying = true;
+        SfxPlayer.Play(SoundEffect.CardPickup);
         _originalParent = transform.parent;
         _originalSiblingIndex = transform.GetSiblingIndex();
         _originalScale = transform.localScale;

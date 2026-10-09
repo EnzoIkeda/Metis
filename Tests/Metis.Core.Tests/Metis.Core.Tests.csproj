@@ -31,6 +31,7 @@
     <Compile Include="../../Assets/Scripts/Core/Utilities/PhaseMapProvider.cs" Link="Source/PhaseMapProvider.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/MusicRotation.cs" Link="Source/MusicRotation.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/VolumeConversion.cs" Link="Source/VolumeConversion.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/CollapseTracker.cs" Link="Source/CollapseTracker.cs" />
     <Compile Include="../../Assets/Scripts/Data/ICardDefinition.cs" Link="Source/ICardDefinition.cs" />
     <Compile Include="../../Assets/Scripts/Data/IRandomEventDefinition.cs" Link="Source/IRandomEventDefinition.cs" />
     <Compile Include="../../Assets/Scripts/Data/IAdvantageDefinition.cs" Link="Source/IAdvantageDefinition.cs" />
@@ -39,6 +40,9 @@
     <Compile Include="../../Assets/Scripts/Core/Utilities/DeckBuilder.cs" Link="Source/DeckBuilder.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/CityPresetRules.cs" Link="Source/CityPresetRules.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/RewardOptionPicker.cs" Link="Source/RewardOptionPicker.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/SeededRandom.cs" Link="Source/SeededRandom.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/RunSaveData.cs" Link="Source/RunSaveData.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/RunSaveFile.cs" Link="Source/RunSaveFile.cs" />
   </ItemGroup>
 
 </Project>

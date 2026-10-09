@@ -105,11 +105,10 @@ public class PausePopupView : MonoBehaviour
         RefreshTexts();
     }
 
-    // Botao 'Menu Principal', desiste da rodada como um Game Over, ja que nao ha fase em andamento pra retomar.
+    // Botao 'Menu Principal': a rodada continua salva no comeco do turno atual e pode ser retomada em 'Continuar'.
     public void ReturnToMainMenu()
     {
         Time.timeScale = 1f;
-        MetaProgressionManager.ResetRun();
         SceneManager.LoadScene("MainMenu");
     }
 

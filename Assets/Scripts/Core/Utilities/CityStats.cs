@@ -87,6 +87,18 @@ public class CityStats
 
     public float AnchorBonus => _anchorBonus;
 
+    // Volta a um estado salvo sem disparar eventos; parametros fora da configuracao sao ignorados.
+    public void RestoreState(IReadOnlyDictionary<CityParameterType, float> values, float anchorBonus)
+    {
+        foreach (var entry in values)
+        {
+            if (_values.ContainsKey(entry.Key))
+                _values[entry.Key] = Clamp(entry.Key, entry.Value);
+        }
+        _anchorBonus = anchorBonus;
+        _gameOverRaised = false;
+    }
+
     public float GetValue(CityParameterType parameter)
     {
         return _values.TryGetValue(parameter, out var value) ? value : 0f;

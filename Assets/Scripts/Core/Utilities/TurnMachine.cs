@@ -49,6 +49,22 @@ public class TurnMachine
         BeginTurn();
     }
 
+    // Retoma uma fase salva direto na fase de acao do turno, com a mao ja restaurada (sem comprar de novo).
+    public void ResumeAtAction(int turnIndex)
+    {
+        TurnIndex = Math.Max(1, turnIndex);
+        Outcome = GameOutcome.None;
+        SetPhase(TurnPhase.Action);
+    }
+
+    // Retoma uma fase salva com o evento do turno ja sorteado e aplicado, esperando a confirmacao.
+    public void ResumeAtEvent(int turnIndex)
+    {
+        TurnIndex = Math.Max(1, turnIndex);
+        Outcome = GameOutcome.None;
+        SetPhase(TurnPhase.Event);
+    }
+
     private void BeginTurn()
     {
         SetPhase(TurnPhase.StartOfTurn);

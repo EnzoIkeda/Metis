@@ -1312,6 +1312,7 @@ GameObject:
   - component: {fileID: 803494441}
   - component: {fileID: 803494440}
   - component: {fileID: 803494442}
+  - component: {fileID: 803494443}
   m_Layer: 0
   m_Name: ButtonIndustria
   m_TagString: Untagged
@@ -1421,6 +1422,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &803494443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803494438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
 --- !u!1 &844882569
 GameObject:
   m_ObjectHideFlags: 0
@@ -1838,6 +1851,7 @@ GameObject:
   - component: {fileID: 1516103362}
   - component: {fileID: 1516103361}
   - component: {fileID: 1516103363}
+  - component: {fileID: 1516103364}
   m_Layer: 0
   m_Name: ButtonAutomacao
   m_TagString: Untagged
@@ -1947,6 +1961,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1516103364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1516103359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
 --- !u!1 &1524161071
 GameObject:
   m_ObjectHideFlags: 0
@@ -1959,6 +1985,7 @@ GameObject:
   - component: {fileID: 1524161074}
   - component: {fileID: 1524161073}
   - component: {fileID: 1524161075}
+  - component: {fileID: 1524161076}
   m_Layer: 0
   m_Name: ButtonSustentabilidade
   m_TagString: Untagged
@@ -2068,6 +2095,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1524161076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524161071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
 --- !u!1 &1875622097
 GameObject:
   m_ObjectHideFlags: 0

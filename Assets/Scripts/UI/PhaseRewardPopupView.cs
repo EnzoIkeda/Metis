@@ -100,6 +100,8 @@ public class PhaseRewardPopupView : MonoBehaviour
         else if (option is PassiveAdvantageData advantage)
             MetaProgressionManager.AddAdvantageReward(advantage.name);
 
+        // Ja marca o mapa como ponto de retomada, pra recompensa nao poder ser escolhida de novo.
+        MetaProgressionManager.EnterPhaseMap();
         Hide();
         SceneManager.LoadScene("PhaseMap");
     }

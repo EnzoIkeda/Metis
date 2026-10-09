@@ -12,6 +12,9 @@ public class PhaseMapView : MonoBehaviour
 
     private void Start()
     {
+        // Continuar a rodada a partir daqui volta pro mapa, nao pra fase ja vencida.
+        MetaProgressionManager.EnterPhaseMap();
+
         if (_titleText != null)
             _titleText.text = UIStrings.PhaseMapTitle;
 

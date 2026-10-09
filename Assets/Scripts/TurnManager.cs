@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -14,10 +15,21 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private RandomEventData[] _eventPool;
     [SerializeField] private PassiveAdvantageData[] _advantagePool;
     [SerializeField] private CityEffectsController _effects;
+    [SerializeField] private PhaseBackgroundRandomizer _background;
     [SerializeField, Min(1)] private int _handSize = 5;
     [SerializeField, Min(1)] private int _victoryTurnCount = TurnMachine.DefaultVictoryTurnCount;
 
     private RandomEventPool<RandomEventData> _events;
+
+    // Geradores com estado salvo, pra compra e evento seguirem a mesma sequencia ao continuar a rodada.
+    private SeededRandom _handRandom;
+    private SeededRandom _eventRandom;
+
+    // Evento salvo com o popup aberto, mostrado de novo ao retomar em vez de sortear outro.
+    private RandomEventData _restoredEvent;
+
+    // A fase veio de um save, e nao comecou do zero.
+    public bool ResumedFromSave { get; private set; }
     private RandomEventData _pendingEvent;
 
     // Guardas de reentrancia contra jogar carta ou confirmar evento duas vezes durante a animacao atrasada.
@@ -30,7 +42,7 @@ public class TurnManager : MonoBehaviour
     public TurnMachine Machine { get; private set; }
     public CardHand<CardData> Hand { get; private set; }
 
-    // Pool completo de 54 cartas, exposto pro popup de recompensa de fim de fase sortear opcoes.
+    // Pool completo de cartas, exposto pro popup de recompensa de fim de fase sortear opcoes.
     public IReadOnlyList<CardData> CardPool => _cardPool;
 
     // Todas as vantagens passivas cadastradas, exposto pro popup de recompensa sortear opcoes.
@@ -41,23 +53,100 @@ public class TurnManager : MonoBehaviour
     // Carta de busca jogada: lista o que pode vir do baralho, a escolha volta por CompleteSearch.
     public event Action<IReadOnlyList<CardData>> OnSearchRequested;
 
+    // Roda antes do Awake dos outros componentes da cena (ordem de execucao -100), entao uma carta salva que
+    // nao existe mais descarta a fase antes de parametros, cidade e fundo lerem o save.
+    private void Awake()
+    {
+        var savedPhase = MetaProgressionManager.SavedPhase;
+        if (savedPhase == null)
+            return;
+
+        if (TryRestoreHand(savedPhase) == false || TryRestoreEvent(savedPhase) == false)
+        {
+            Debug.LogWarning("[TurnManager] Save com carta ou evento desconhecido, a fase recomeça do zero.");
+            Hand = null;
+            _restoredEvent = null;
+            MetaProgressionManager.DiscardSavedPhase();
+        }
+    }
+
     private void Start()
     {
-        ApplyLoadedAdvantages();
+        // O save ainda pode ter sido descartado depois do Awake daqui, por um preset que nao existe mais.
+        var savedPhase = MetaProgressionManager.SavedPhase;
+        if (savedPhase != null && Hand != null)
+        {
+            ResumedFromSave = true;
+            _eventRandom = new SeededRandom(savedPhase.EventRandomState);
+        }
+        else
+        {
+            savedPhase = null;
+            _restoredEvent = null;
+            ApplyLoadedAdvantages();
+
+            var pool = DeckBuilder.Build(_cardPool, MetaProgressionManager.Archetype, MetaProgressionManager.LoadedCardNames);
+            _handRandom = new SeededRandom(SeededRandom.NewSeed());
+            // Baralho sempre finito: compra sem reposicao e reembaralha o baralho inteiro quando acaba.
+            Hand = new CardHand<CardData>(pool, _handRandom, finiteDeck: true);
+            _eventRandom = new SeededRandom(SeededRandom.NewSeed());
+        }
+
+        Hand.OnHandChanged += HandleHandChanged;
+        _events = new RandomEventPool<RandomEventData>(_eventPool, _eventRandom);
 
         Machine = new TurnMachine(_cityStatsManager.Stats, _victoryTurnCount);
         Machine.OnPhaseChanged += HandlePhaseChanged;
         Machine.OnTurnAdvanced += HandleTurnAdvanced;
         Machine.OnGameEnded += HandleGameEnded;
 
-        var pool = DeckBuilder.Build(_cardPool, MetaProgressionManager.Archetype, MetaProgressionManager.LoadedCardNames);
-        // Baralho sempre finito: compra sem reposicao e reembaralha o baralho inteiro quando acaba.
-        Hand = new CardHand<CardData>(pool, null, finiteDeck: true);
-        Hand.OnHandChanged += HandleHandChanged;
+        if (savedPhase == null)
+            Machine.StartGame();
+        else if (_restoredEvent != null)
+            Machine.ResumeAtEvent(Math.Min(savedPhase.TurnIndex, _victoryTurnCount));
+        else
+            Machine.ResumeAtAction(Math.Min(savedPhase.TurnIndex, _victoryTurnCount));
+    }
 
-        _events = new RandomEventPool<RandomEventData>(_eventPool);
+    private bool TryRestoreEvent(PhaseSaveData savedPhase)
+    {
+        _restoredEvent = null;
+        if (savedPhase.AtEvent == false)
+            return true;
 
-        Machine.StartGame();
+        _restoredEvent = _eventPool.FirstOrDefault(candidate => candidate != null && candidate.name == savedPhase.PendingEventId);
+        return _restoredEvent != null;
+    }
+
+    private bool TryRestoreHand(PhaseSaveData savedPhase)
+    {
+        var cardsById = new Dictionary<string, CardData>();
+        foreach (var card in _cardPool)
+        {
+            if (card != null)
+                cardsById[card.name] = card;
+        }
+
+        var random = new SeededRandom(savedPhase.HandRandomState);
+        CardData FindCard(string id) => cardsById.TryGetValue(id, out var card) ? card : null;
+        if (RunSaveRules.TryRestoreHand<CardData>(savedPhase, FindCard, random, out var hand) == false)
+            return false;
+
+        _handRandom = random;
+        Hand = hand;
+        return true;
+    }
+
+    // Ponto de retomada num momento estavel do turno; com evento, o popup dele abre de novo ao continuar.
+    private void SaveCheckpoint(RandomEventData pendingEvent = null)
+    {
+        var phase = RunSaveRules.CapturePhase(Machine.TurnIndex, _cityStatsManager.Stats, Hand, _handRandom, _eventRandom);
+        phase.AtEvent = pendingEvent != null;
+        phase.PendingEventId = pendingEvent != null ? pendingEvent.name : string.Empty;
+        phase.PresetName = _cityStatsManager.PresetName;
+        phase.LayoutSeed = _placementManager != null ? _placementManager.LayoutSeed : 0UL;
+        phase.BackgroundIndex = _background != null ? _background.BackgroundIndex : -1;
+        MetaProgressionManager.SavePhase(phase);
     }
 
     private void OnDisable()
@@ -184,6 +273,7 @@ public class TurnManager : MonoBehaviour
         if (card.Ability == CardAbility.RevealHand)
         {
             Hand.Reveal(untilPhaseEnd: true);
+            SaveCheckpoint();
         }
         else if (card.Ability == CardAbility.SearchDeck)
         {
@@ -202,6 +292,7 @@ public class TurnManager : MonoBehaviour
             return false;
 
         _searchPending = false;
+        SaveCheckpoint();
         return true;
     }
 
@@ -250,6 +341,10 @@ public class TurnManager : MonoBehaviour
 
         if (phase == TurnPhase.StartOfTurn)
             Hand.Draw(_handSize, _cityStatsManager.Stats);
+        else if (phase == TurnPhase.Action)
+            SaveCheckpoint();
+        else if (phase == TurnPhase.Event && _restoredEvent != null)
+            StartCoroutine(AnnounceRestoredEvent());
         else if (phase == TurnPhase.Event)
             HandleEventPhase();
         else if (phase == TurnPhase.Advance)
@@ -267,7 +362,19 @@ public class TurnManager : MonoBehaviour
         }
 
         Debug.Log($"[RandomEvent] '{triggeredEvent.Title}': {triggeredEvent.Description}");
+        SaveCheckpoint(triggeredEvent);
         OnRandomEventTriggered?.Invoke(triggeredEvent);
+    }
+
+    // Espera um frame pro popup de evento, que se inscreve no proprio Start, ja estar ouvindo.
+    private IEnumerator AnnounceRestoredEvent()
+    {
+        _pendingEvent = _restoredEvent;
+        _restoredEvent = null;
+        yield return null;
+
+        Debug.Log($"[RandomEvent] Retomado: '{_pendingEvent.Title}'");
+        OnRandomEventTriggered?.Invoke(_pendingEvent);
     }
 
     private void HandleTurnAdvanced(int turnIndex)
@@ -278,6 +385,10 @@ public class TurnManager : MonoBehaviour
     private void HandleGameEnded(GameOutcome outcome)
     {
         Debug.LogWarning($"[TurnMachine] Fim de jogo: {outcome} (turno {Machine.TurnIndex})");
+
+        // Derrota apaga o save na hora, senao fechar o app no popup e continuar repetiria o turno perdido.
+        if (outcome == GameOutcome.GameOver)
+            MetaProgressionManager.ResetRun();
     }
 
     private void HandleHandChanged()

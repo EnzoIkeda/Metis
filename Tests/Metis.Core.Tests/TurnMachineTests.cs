@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Metis.Core.Tests;
 
 public class TurnMachineTests
@@ -168,5 +170,44 @@ public class TurnMachineTests
         machine.DebugJumpToTurn(-5);
 
         Assert.That(machine.TurnIndex, Is.EqualTo(1));
+    }
+
+    [Test]
+    public void ResumeAtAction_GoesStraightToActionWithoutStartOfTurn()
+    {
+        var machine = BuildMachine();
+        var phases = new List<TurnPhase>();
+        machine.OnPhaseChanged += phases.Add;
+
+        machine.ResumeAtAction(7);
+
+        Assert.That(machine.TurnIndex, Is.EqualTo(7));
+        Assert.That(machine.CurrentPhase, Is.EqualTo(TurnPhase.Action));
+        Assert.That(phases, Is.EqualTo(new[] { TurnPhase.Action }), "retomar nao pode comprar outra mao");
+    }
+
+    [Test]
+    public void ResumeAtEvent_WaitsForAcknowledgeThenAdvances()
+    {
+        var machine = BuildMachine();
+
+        machine.ResumeAtEvent(3);
+        Assert.That(machine.CurrentPhase, Is.EqualTo(TurnPhase.Event));
+
+        machine.AcknowledgeEvent();
+
+        Assert.That(machine.TurnIndex, Is.EqualTo(4));
+        Assert.That(machine.CurrentPhase, Is.EqualTo(TurnPhase.Action));
+    }
+
+    [Test]
+    public void ResumeAtEvent_OnLastTurn_EndsInVictory()
+    {
+        var machine = BuildMachine();
+
+        machine.ResumeAtEvent(TurnMachine.DefaultVictoryTurnCount);
+        machine.AcknowledgeEvent();
+
+        Assert.That(machine.Outcome, Is.EqualTo(GameOutcome.Victory));
     }
 }

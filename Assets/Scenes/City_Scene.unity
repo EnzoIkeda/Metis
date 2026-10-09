@@ -32866,6 +32866,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d9ea5077165d25182bd7a5cf2dd39d0c, type: 2}
   - {fileID: 11400000, guid: 3aacedde821637dbaa3a15e4d258db00, type: 2}
   _effects: {fileID: 529777303}
+  _background: {fileID: 815776291}
   _handSize: 6
   _victoryTurnCount: 20
 --- !u!4 &1238303806
@@ -43060,6 +43061,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffaf7e7b65026b9d4b07bcb33ac1be25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WelcomePopupView
+  _turnManager: {fileID: 1238303805}
   _panelRoot: {fileID: 411770635}
   _titleText: {fileID: 1316192792}
   _messageText: {fileID: 1394966364}

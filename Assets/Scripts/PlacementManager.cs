@@ -15,6 +15,9 @@ public class PlacementManager : MonoBehaviour
 
     private Grid _placementGrid;
 
+    // Semente do tracado sorteado nas fases 2+, salva pra reconstruir a mesma cidade ao continuar.
+    public ulong LayoutSeed { get; private set; }
+
     // Instancia pura do grid, exposta pra outros sistemas consultarem o layout.
     public Grid Grid => _placementGrid;
 
@@ -64,7 +67,10 @@ public class PlacementManager : MonoBehaviour
     // Sorteia de novo o conteudo dos quarteiroes (nunca a malha de ruas) pras fases 2+ de uma rodada.
     private void RegenerateBlocks()
     {
-        var generator = new CityLayoutGenerator(_proceduralBuildingOptions, _proceduralGreenLotOptions);
+        var savedPhase = MetaProgressionManager.SavedPhase;
+        LayoutSeed = savedPhase != null ? savedPhase.LayoutSeed : SeededRandom.NewSeed();
+
+        var generator = new CityLayoutGenerator(_proceduralBuildingOptions, _proceduralGreenLotOptions, new SeededRandom(LayoutSeed));
         foreach (var cell in generator.Generate(_placementGrid))
         {
             var position = new Vector3Int(cell.X, 0, cell.Z);

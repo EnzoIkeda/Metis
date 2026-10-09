@@ -2,7 +2,7 @@ using System;
 using System.Reflection;
 using UnityEngine;
 
-// Constroi CardData/MusicPlaylistData de teste via reflection, ja que os campos sao [SerializeField] private sem setter publico. So pra PlayMode.
+// Constroi CardData/RandomEventData/MusicPlaylistData de teste via reflection, ja que os campos sao [SerializeField] private sem setter publico. So pra PlayMode.
 public static class TestDataFactory
 {
     public static CardData CreateCard(
@@ -27,6 +27,26 @@ public static class TestDataFactory
         SetField(card, "_ability", ability);
         SetField(card, "_copies", copies);
         return card;
+    }
+
+    public static RandomEventData CreateEvent(string name = "TestEvent", StatModifier[] statEffects = null)
+    {
+        var eventData = ScriptableObject.CreateInstance<RandomEventData>();
+        eventData.name = name;
+        SetField(eventData, "_title", name);
+        SetField(eventData, "_minTurn", 1);
+        SetField(eventData, "_maxTurn", 999);
+        SetField(eventData, "_triggerConditions", new TriggerCondition[0]);
+        SetField(eventData, "_statEffects", statEffects ?? new StatModifier[0]);
+        return eventData;
+    }
+
+    public static void SetStaticField(Type type, string fieldName, object value)
+    {
+        var field = type.GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Static);
+        if (field == null)
+            throw new MissingFieldException(type.Name, fieldName);
+        field.SetValue(null, value);
     }
 
     public static MusicPlaylistData CreatePlaylist(params AudioClip[] tracks)

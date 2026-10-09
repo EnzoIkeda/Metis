@@ -15,13 +15,13 @@ MonoBehaviour:
   _cardName: Drones de Entrega Urbana
   _description: "Frota de drones entrega encomenda pela cidade, sem caminh\xE3o nem
     motorista. Tecnologia real: os programas Wing (Alphabet) e Amazon Prime Air,
-    j\xE1 operando entregas comerciais \u2014 mas ru\xEDdo, privacidade e seguran\xE7a
+    j\xE1 operando entregas comerciais, mas ru\xEDdo, privacidade e seguran\xE7a
     do espa\xE7o a\xE9reo urbano ainda dividem opini\xE3o."
   _cardNameEn: Urban Delivery Drones
-  _descriptionEn: "A drone fleet delivers packages across the city, no truck or driver
+  _descriptionEn: 'A drone fleet delivers packages across the city, no truck or driver
     needed. Real technology: the Wing (Alphabet) and Amazon Prime Air programs, already
-    running commercial deliveries \u2014 but noise, privacy and urban airspace safety
-    still divide opinion."
+    running commercial deliveries, but noise, privacy and urban airspace safety still
+    divide opinion.'
   _cost: 3
   _tier: 3
   _archetype: 3

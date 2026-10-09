@@ -191,7 +191,7 @@ public class CityStatsTests
         var bemEstarAntes = stats.GetValue(CityParameterType.BemEstar);
         stats.ResolveTurn();
 
-        // Recomputo de BemEstar roda antes da penalidade e nao muda nada aqui (os 4 positivos seguem neutros); a unica diferenca esperada e a penalidade: -5 * 2 parametros colapsados = -10.
+        // Os 4 positivos seguem neutros, entao so muda a penalidade: -5 * 2 parametros colapsados = -10.
         Assert.That(stats.GetValue(CityParameterType.BemEstar), Is.EqualTo(bemEstarAntes - 10f).Within(0.001f));
     }
 

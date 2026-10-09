@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   _cardName: "Zona de Processamento de Exporta\xE7\xE3o"
   _description: "\xC1rea com regras fiscais especiais atrai ind\xFAstria e exporta\xE7\xE3o.
-    Modelo real de zona de livre com\xE9rcio, como a Zona Franca de Manaus \u2014
-    a renda sobe, mas a press\xE3o ambiental e sobre a sa\xFAde sobe junto."
+    Modelo real de zona de livre com\xE9rcio, como a Zona Franca de Manaus, a renda
+    sobe, mas a press\xE3o ambiental e sobre a sa\xFAde sobe junto."
   _cardNameEn: Export Processing Zone
-  _descriptionEn: "An area with special tax rules attracts industry and exports.
-    Real free-trade zone model, like the Manaus Free Trade Zone \u2014 income rises,
-    but so does environmental and health pressure."
+  _descriptionEn: An area with special tax rules attracts industry and exports. Real
+    free-trade zone model, like the Manaus Free Trade Zone, income rises, but so
+    does environmental and health pressure.
   _cost: 3
   _tier: 1
   _archetype: 2

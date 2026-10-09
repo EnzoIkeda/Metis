@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-// Uma carta na mao, com nome, imagem e requisitos, que abre um popup de detalhe ao ser clicada. Com a mao revelada, mostra os efeitos exatos no lugar da imagem.
-// Arrastar na horizontal rola a mao; segurar parado ou arrastar em outra direcao solta a carta pra ser carregada pela tela, e soltar fora da mao joga, sobre a mao cancela.
+// Carta da mao: toque abre o detalhe; com a mao revelada, mostra os efeitos no lugar da imagem.
+// Arrastar na horizontal rola a mao; segurar ou arrastar em outra direcao carrega a carta: soltar fora da mao joga, sobre ela cancela.
 public class CardView : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     private static readonly Color PlayableColor = Color.white;

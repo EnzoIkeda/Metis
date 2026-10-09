@@ -3,7 +3,7 @@ public static class UIStrings
 {
     private static bool IsPt => LocalizationManager.Current == Language.Portuguese;
 
-    public static string WelcomeTitle => IsPt ? "Bem-vindo(a) a Metis!" : "Welcome to Metis!";
+    public static string WelcomeTitle => IsPt ? "Bem-vindo(a) a Métis!" : "Welcome to Métis!";
 
     public static string WelcomeMessage => IsPt
         ? "Você administra esta cidade por 20 turnos.\n\n" +
@@ -31,13 +31,15 @@ public static class UIStrings
 
     public static string GameOverMessage => IsPt
         ? "A cidade entrou em crise, final da simulação!"
-        : "The city has fallen into crisis — simulation over!";
+        : "The city has fallen into crisis, simulation over!";
 
     public static string VictoryTitle => IsPt ? "Vitória!" : "Victory!";
 
     public static string VictoryMessage => IsPt
-        ? "Você governou com sucesso por 20 anos, parabéns! "
-        : "You successfully governed for 20 years, congratulations!";
+        ? "Você governou com sucesso por 20 turnos, parabéns!"
+        : "You successfully governed for 20 turns, congratulations!";
+
+    public static string RewardTitle => IsPt ? "Recompensa" : "Reward";
 
     public static string PlayButton => IsPt ? "Jogar" : "Play";
     public static string BackButton => IsPt ? "Voltar" : "Back";

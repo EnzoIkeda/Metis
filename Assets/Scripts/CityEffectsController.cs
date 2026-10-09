@@ -128,8 +128,7 @@ public class CityEffectsController : MonoBehaviour
             onComplete?.Invoke();
     }
 
-    // CFXR usa alignment View por padrao (mesh sempre de frente pra camera), errado nessa camera isometrica fixa.
-    // So corrige mesh achatado (bounds.z == 0); faisca/fumaca/brilho ficam de frente pra camera como antes.
+    // Os efeitos vem virados pra camera; nesta camera isometrica so o mesh achatado precisa deitar no chao.
     private static void AlignFlatMeshParticlesToGround(GameObject root)
     {
         foreach (var renderer in root.GetComponentsInChildren<ParticleSystemRenderer>(true))

@@ -5,7 +5,7 @@ namespace Metis.Core.Tests;
 
 public class RoadNetworkTests
 {
-    // Grid 3x3 em formato de cruz: so a linha e a coluna do meio sao Road, o resto e Structure.
+    // Grade 3x3 em cruz: so a linha e a coluna do meio sao rua (R), o resto e estrutura (S).
     //   S R S
     //   R R R
     //   S R S

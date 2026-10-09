@@ -1,6 +1,8 @@
 namespace Metis.Core.Tests;
 
-// Valores esperados calculados a mao pela formula: efeito = soma_fontes[(valorFonte - valorNeutro) / valorNeutro * coeficiente * fatorZona], delta = efeito * escalaGlobal + deriva + correcaoExcesso; cada teste isola um unico termo, deixando o resto no valor neutro (contribuicao zero) pra prever o resultado exato.
+// Valores esperados calculados a mao; cada teste isola um termo, com o resto no valor neutro (contribuicao zero).
+// efeito = soma_fontes[(valorFonte - valorNeutro) / valorNeutro * coeficiente * fatorZona]
+// delta = efeito * escalaGlobal + deriva + correcaoExcesso
 public class InteractionMatrixTests
 {
     private const float ValorNeutro = 50f;
@@ -94,7 +96,7 @@ public class InteractionMatrixTests
     [Test]
     public void Resolve_IsGaussSeidel_LaterTargetsSeeEarlierTargetsAlreadyUpdatedThisPass()
     {
-        // Renda (indice 0) tem deriva propria e muda antes de Energia (indice 1, coeficiente +0.3), que sob Gauss-Seidel deve reagir ao valor de Renda ja atualizado nesta mesma passada, nao ao snapshot do inicio do turno.
+        // Renda resolve antes de Energia (coeficiente +0.3), que deve reagir a Renda ja atualizada nesta passada (Gauss-Seidel).
         var matrix = BuildMatrix();
         var stats = CityStatsTestFactory.Build(matrix, customize: configs =>
         {

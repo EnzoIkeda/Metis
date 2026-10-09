@@ -3964,6 +3964,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PhaseRewardPopupView
   _turnManager: {fileID: 1238303805}
   _panelRoot: {fileID: 684628230}
+  _titleText: {fileID: 376495188}
   _optionButtons:
   - {fileID: 2068676220}
   - {fileID: 303722489}

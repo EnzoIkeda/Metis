@@ -15,13 +15,13 @@ MonoBehaviour:
   _cardName: "Parceria P\xFAblico-Privada de Infraestrutura"
   _description: "Capital privado financia e opera a obra p\xFAblica, em troca de
     um contrato de longo prazo. Modelo real de parceria p\xFAblico-privada (PPP),
-    amplamente usado em rodovias, portos e saneamento \u2014 acelera o investimento,
-    mas a l\xF3gica de lucro pressiona o lado ambiental e social do contrato."
+    amplamente usado em rodovias, portos e saneamento, acelera o investimento, mas
+    a l\xF3gica de lucro pressiona o lado ambiental e social do contrato."
   _cardNameEn: Infrastructure Public-Private Partnership
-  _descriptionEn: "Private capital finances and operates the public works, in exchange
+  _descriptionEn: Private capital finances and operates the public works, in exchange
     for a long-term contract. Real public-private partnership (PPP) model, widely
-    used for highways, ports and sanitation \u2014 speeds up investment, but the
-    profit logic pressures the contract's environmental and social side."
+    used for highways, ports and sanitation, speeds up investment, but the profit
+    logic pressures the contract's environmental and social side.
   _cost: 2
   _tier: 2
   _archetype: 2

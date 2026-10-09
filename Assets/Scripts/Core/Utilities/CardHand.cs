@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-// Mao de cartas do turno atual. Com baralho finito compra de uma pilha embaralhada e descarta numa pilha propria; sem ele, compra com reposicao do pool inteiro.
+// Mao do turno. Com baralho finito compra de uma pilha embaralhada e tem descarte proprio; sem ele, compra com reposicao.
 public class CardHand<TCard> where TCard : class, ICardDefinition
 {
     private readonly IReadOnlyList<TCard> _pool;

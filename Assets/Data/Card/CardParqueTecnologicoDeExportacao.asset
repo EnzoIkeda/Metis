@@ -15,13 +15,13 @@ MonoBehaviour:
   _cardName: "Parque Tecnol\xF3gico de Exporta\xE7\xE3o"
   _description: "Parque tecnol\xF3gico com incentivo fiscal atrai empresas de exporta\xE7\xE3o
     de tecnologia. Modelo real: o Porto Digital de Recife, refer\xEAncia brasileira
-    de polo de inova\xE7\xE3o \u2014 gera renda e pesquisa, mas o entorno valoriza
-    r\xE1pido e pressiona quem j\xE1 morava ali."
+    de polo de inova\xE7\xE3o, gera renda e pesquisa, mas o entorno valoriza r\xE1pido
+    e pressiona quem j\xE1 morava ali."
   _cardNameEn: Export Technology Park
-  _descriptionEn: "A tech park with tax incentives attracts technology export companies.
+  _descriptionEn: 'A tech park with tax incentives attracts technology export companies.
     Real model: Porto Digital in Recife, a Brazilian reference for an innovation
-    hub \u2014 generates income and research, but the surrounding area appreciates
-    fast and pressures those who already lived there."
+    hub, generates income and research, but the surrounding area appreciates fast
+    and pressures those who already lived there.'
   _cost: 3
   _tier: 2
   _archetype: 2

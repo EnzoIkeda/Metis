@@ -10,6 +10,7 @@ public class PhaseRewardPopupView : MonoBehaviour
 {
     [SerializeField] private TurnManager _turnManager;
     [SerializeField] private GameObject _panelRoot;
+    [SerializeField] private TMP_Text _titleText;
     [SerializeField] private Button[] _optionButtons;
     [SerializeField] private TMP_Text[] _optionTexts;
 
@@ -22,6 +23,8 @@ public class PhaseRewardPopupView : MonoBehaviour
     private void Start()
     {
         _turnManager.Machine.OnGameEnded += HandleGameEnded;
+        if (_titleText != null)
+            _titleText.text = UIStrings.RewardTitle;
         for (int i = 0; i < _optionButtons.Length; i++)
         {
             var index = i;

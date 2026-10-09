@@ -94,6 +94,7 @@ public class MusicPlayerTests
 
     // Regressao do bug de pausa: com WaitForSeconds (escalado) a musica silenciava porque o AudioSource
     // ignora Time.timeScale mas a coroutine ficava travada; com WaitForSecondsRealtime ela acompanha.
+    // Observa a troca frame a frame: checar num instante fixo falhava quando a faixa trocava duas vezes e voltava a inicial.
     [UnityTest]
     public IEnumerator WhilePausedWithZeroTimeScale_StillAdvancesToNextTrackInRealTime()
     {
@@ -105,8 +106,10 @@ public class MusicPlayerTests
         var initialClip = audioSource.clip;
 
         Time.timeScale = 0f;
-        yield return new WaitForSecondsRealtime(0.5f);
+        var deadline = Time.realtimeSinceStartup + 2f;
+        while (audioSource.clip == initialClip && Time.realtimeSinceStartup < deadline)
+            yield return null;
 
-        Assert.That(audioSource.clip, Is.Not.SameAs(initialClip));
+        Assert.That(audioSource.clip, Is.Not.SameAs(initialClip), "a faixa nao trocou em 2 s de tempo real com o jogo pausado");
     }
 }

@@ -29,6 +29,9 @@ public class CityEffectsController : MonoBehaviour
     [Tooltip("Duração total do CFXR Explosion 1 (duration + lifetime das partículas).")]
     [SerializeField] private float _explosionDuration = 2.1f;
 
+    // Callbacks de animacoes ainda em andamento, disparados no OnDisable pra o turno nao travar.
+    private readonly List<Action> _pendingCallbacks = new List<Action>();
+
     private void Awake()
     {
         // AmbientGlows e persistente na cena (so liga/desliga), os outros 3 sao corrigidos a cada Instantiate em PlayOneShot.
@@ -36,22 +39,34 @@ public class CityEffectsController : MonoBehaviour
             AlignFlatMeshParticlesToGround(_ambientGlows);
     }
 
+    // Desativar no meio de uma animacao para a corrotina, entao os callbacks pendentes sao chamados aqui.
+    private void OnDisable()
+    {
+        if (_pendingCallbacks.Count == 0)
+            return;
+
+        var callbacks = _pendingCallbacks.ToArray();
+        _pendingCallbacks.Clear();
+        foreach (var callback in callbacks)
+            callback?.Invoke();
+    }
+
     // Toca ao jogar uma carta, atrasando o popup de evento ate o efeito terminar.
     public void PlayImpactGlowing(Action onComplete)
     {
-        StartCoroutine(PlayOneShot(_impactGlowingPrefab, _impactGlowingDuration, onComplete));
+        StartEffect(_impactGlowingPrefab, _impactGlowingDuration, onComplete);
     }
 
     // Toca ao fechar um popup de evento positivo ou misto, atrasando o inicio do proximo turno.
     public void PlayMagicPoof(Action onComplete)
     {
-        StartCoroutine(PlayOneShot(_magicPoofPrefab, _magicPoofDuration, onComplete));
+        StartEffect(_magicPoofPrefab, _magicPoofDuration, onComplete);
     }
 
     // Toca ao fechar um popup de evento negativo, atrasando o inicio do proximo turno.
     public void PlayExplosion(Action onComplete)
     {
-        StartCoroutine(PlayOneShot(_explosionPrefab, _explosionDuration, onComplete));
+        StartEffect(_explosionPrefab, _explosionDuration, onComplete);
     }
 
     // Liga ou desliga o loop ambiente, visivel durante a fase de acao.
@@ -82,6 +97,19 @@ public class CityEffectsController : MonoBehaviour
         return EventTone.Neutral;
     }
 
+    // Inativo nao consegue rodar corrotina, entao pula a animacao e segue o turno na hora.
+    private void StartEffect(ParticleSystem prefab, float duration, Action onComplete)
+    {
+        if (isActiveAndEnabled == false)
+        {
+            onComplete?.Invoke();
+            return;
+        }
+
+        _pendingCallbacks.Add(onComplete);
+        StartCoroutine(PlayOneShot(prefab, duration, onComplete));
+    }
+
     private IEnumerator PlayOneShot(ParticleSystem prefab, float duration, Action onComplete)
     {
         if (prefab != null)
@@ -95,7 +123,8 @@ public class CityEffectsController : MonoBehaviour
         }
 
         yield return new WaitForSeconds(duration);
-        onComplete?.Invoke();
+        if (_pendingCallbacks.Remove(onComplete))
+            onComplete?.Invoke();
     }
 
     // CFXR usa alignment View por padrao (mesh sempre de frente pra camera), errado nessa camera isometrica fixa.

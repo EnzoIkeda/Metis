@@ -69,7 +69,7 @@ public static class MetaProgressionManager
         Save();
     }
 
-    // Encerra a rodada inteira, usado no Game Over.
+    // Encerra a rodada inteira, usado no Game Over, ao sair pela pausa e ao escolher o baralho de uma rodada nova.
     public static void ResetRun()
     {
         _state = new MetaProgressionState();

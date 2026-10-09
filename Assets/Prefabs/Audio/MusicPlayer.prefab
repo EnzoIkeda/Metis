@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7241523312420191451}
   - component: {fileID: 3495757629616349192}
   - component: {fileID: 7655941787493073606}
+  - component: {fileID: 346868514880246783}
   m_Layer: 0
   m_Name: MusicPlayer
   m_TagString: Untagged
@@ -42,7 +43,7 @@ AudioSource:
   m_GameObject: {fileID: 5140110234994748152}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 767388446836372523, guid: 4c2e07e32e21e62d98f9123cc5423bab, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
@@ -143,3 +144,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Metis.Runtime::MusicPlayer
   _defaultPlaylist: {fileID: 11400000, guid: a3a0ba3a39cefcb96a22b41a7f13535c, type: 2}
+--- !u!114 &346868514880246783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5140110234994748152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 636b6fb037723bdce840eb5c95e56e0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::AudioSettingsApplier
+  _mixer: {fileID: 24100000, guid: 4c2e07e32e21e62d98f9123cc5423bab, type: 2}

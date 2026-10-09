@@ -49,6 +49,12 @@ public static class UIStrings
     public static string MainMenuQuit => IsPt ? "Sair" : "Quit";
     public static string MainMenuSettingsBack => IsPt ? "Voltar" : "Back";
 
+    public static string SettingsMusicVolume => IsPt ? "Música" : "Music";
+    public static string SettingsSfxVolume => IsPt ? "Efeitos" : "Effects";
+
+    // Nome do controle seguido do volume em porcentagem, ex. "Música: 80%".
+    public static string VolumeLabel(string name, float volume) => $"{name}: {UnityEngine.Mathf.RoundToInt(volume * 100f)}%";
+
     public static string PauseTitle => IsPt ? "Pausado" : "Paused";
     public static string PauseResumeButton => IsPt ? "Continuar" : "Resume";
     public static string PauseMainMenuButton => IsPt ? "Menu Principal" : "Main Menu";

@@ -16,6 +16,9 @@ public class CardHandView : MonoBehaviour
     private void Start()
     {
         _turnManager.Hand.OnHandChanged += Refresh;
+        // Custo e exigencia seguem a unidade e o idioma escolhidos, mesmo trocados com a mao aberta.
+        UnitDisplaySettings.OnChanged += Refresh;
+        LocalizationManager.OnLanguageChanged += Refresh;
         Refresh();
     }
 
@@ -23,6 +26,8 @@ public class CardHandView : MonoBehaviour
     {
         if (_turnManager != null && _turnManager.Hand != null)
             _turnManager.Hand.OnHandChanged -= Refresh;
+        UnitDisplaySettings.OnChanged -= Refresh;
+        LocalizationManager.OnLanguageChanged -= Refresh;
     }
 
     private void Refresh()

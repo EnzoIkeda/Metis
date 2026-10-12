@@ -43,6 +43,7 @@
     <Compile Include="../../Assets/Scripts/Core/Utilities/SeededRandom.cs" Link="Source/SeededRandom.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/RunSaveData.cs" Link="Source/RunSaveData.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/RunSaveFile.cs" Link="Source/RunSaveFile.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/RealUnitConversion.cs" Link="Source/RealUnitConversion.cs" />
   </ItemGroup>
 
 </Project>

@@ -16,6 +16,9 @@ public class CardDetailPopupView : MonoBehaviour
     [SerializeField] private Button _backButton;
     [SerializeField] private Button _scrimButton;
 
+    // Unidades da barra superior, pra exigencia e custo baterem com ela.
+    [SerializeField] private ParameterDisplayData _displayData;
+
     private Action _onPlay;
 
     private void Start()
@@ -49,7 +52,7 @@ public class CardDetailPopupView : MonoBehaviour
         if (_descriptionText != null)
             _descriptionText.text = isRevealed ? $"{card.Description}\n\n{UIStrings.CardEffects(card)}" : card.Description;
         if (_costText != null)
-            _costText.text = UIStrings.CardRequirementsFull(card.RequiredPesquisa, card.Cost);
+            _costText.text = UIStrings.CardRequirementsFull(_displayData, card.RequiredPesquisa, card.Cost);
 
         // Mostra a arte se a carta tiver uma, senao so o placeholder.
         var hasArtwork = card.Artwork != null;

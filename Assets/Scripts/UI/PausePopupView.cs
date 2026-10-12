@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-// Botao de pause do HUD: pausa o tempo e abre acesso a Configuracoes (idioma) ou saida pro menu principal.
+// Botao de pause do HUD: pausa o tempo e abre acesso a Configuracoes (idioma, unidades) ou saida pro menu principal.
 public class PausePopupView : MonoBehaviour
 {
     [SerializeField] private GameObject _panelRoot;
@@ -15,6 +15,7 @@ public class PausePopupView : MonoBehaviour
     [SerializeField] private Button _settingsButton;
     [SerializeField] private Button _mainMenuButton;
     [SerializeField] private Button _languageButton;
+    [SerializeField] private Button _unitsButton;
     [SerializeField] private Button _settingsBackButton;
 
     [SerializeField] private TMP_Text _titleText;
@@ -22,6 +23,7 @@ public class PausePopupView : MonoBehaviour
     [SerializeField] private TMP_Text _settingsButtonText;
     [SerializeField] private TMP_Text _mainMenuButtonText;
     [SerializeField] private TMP_Text _languageButtonText;
+    [SerializeField] private TMP_Text _unitsButtonText;
     [SerializeField] private TMP_Text _settingsBackButtonText;
 
     private void Start()
@@ -36,6 +38,8 @@ public class PausePopupView : MonoBehaviour
             _mainMenuButton.onClick.AddListener(ReturnToMainMenu);
         if (_languageButton != null)
             _languageButton.onClick.AddListener(ToggleLanguage);
+        if (_unitsButton != null)
+            _unitsButton.onClick.AddListener(ToggleUnits);
         if (_settingsBackButton != null)
             _settingsBackButton.onClick.AddListener(CloseSettings);
 
@@ -61,6 +65,8 @@ public class PausePopupView : MonoBehaviour
             _mainMenuButtonText.text = UIStrings.PauseMainMenuButton;
         if (_languageButtonText != null)
             _languageButtonText.text = UIStrings.LanguageButtonLabel;
+        if (_unitsButtonText != null)
+            _unitsButtonText.text = UIStrings.UnitsButtonLabel;
         if (_settingsBackButtonText != null)
             _settingsBackButtonText.text = UIStrings.MainMenuSettingsBack;
     }
@@ -102,6 +108,13 @@ public class PausePopupView : MonoBehaviour
         LocalizationManager.Current = LocalizationManager.Current == Language.English
             ? Language.Portuguese
             : Language.English;
+        RefreshTexts();
+    }
+
+    // Botao de unidades dentro de Configuracoes: alterna entre unidade real e indice.
+    public void ToggleUnits()
+    {
+        UnitDisplaySettings.ShowRealUnits = UnitDisplaySettings.ShowRealUnits == false;
         RefreshTexts();
     }
 

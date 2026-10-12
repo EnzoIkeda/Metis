@@ -16,6 +16,9 @@ public class CardView : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     [SerializeField] private GameObject _artworkPlaceholder;
     [SerializeField] private TMP_Text _requirementsText;
     [SerializeField] private TMP_Text _effectsText;
+
+    // Unidades da barra superior, pra exigencia e custo baterem com ela.
+    [SerializeField] private ParameterDisplayData _displayData;
     [SerializeField] private RectTransform _rectTransform;
     [SerializeField] private float _dragDirectionThreshold = 12f;
 
@@ -82,7 +85,7 @@ public class CardView : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
 
         if (_requirementsText != null)
         {
-            _requirementsText.text = UIStrings.CardRequirementsShort(card.RequiredPesquisa, card.Cost);
+            _requirementsText.text = UIStrings.CardRequirementsShort(_displayData, card.RequiredPesquisa, card.Cost);
             // Fica vermelho se a carta nao puder ser jogada agora, so como aviso visual antecipado.
             _requirementsText.color = isPlayable ? PlayableColor : UnplayableColor;
         }

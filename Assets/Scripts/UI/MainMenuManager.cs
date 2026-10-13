@@ -16,6 +16,8 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private TMP_Text _quitButtonText;
     [SerializeField] private TMP_Text _settingsBackButtonText;
     [SerializeField] private TMP_Text _languageButtonText;
+    [SerializeField] private Button _unitsButton;
+    [SerializeField] private TMP_Text _unitsButtonText;
 
     [Header("Rodada salva")]
     [SerializeField] private Button _continueButton;
@@ -36,6 +38,8 @@ public class MainMenuManager : MonoBehaviour
     {
         if (_continueButton != null)
             _continueButton.onClick.AddListener(ContinueGame);
+        if (_unitsButton != null)
+            _unitsButton.onClick.AddListener(ToggleUnits);
         if (_dialogConfirmButton != null)
             _dialogConfirmButton.onClick.AddListener(ConfirmDialog);
         if (_dialogCancelButton != null)
@@ -63,6 +67,8 @@ public class MainMenuManager : MonoBehaviour
             _settingsBackButtonText.text = UIStrings.MainMenuSettingsBack;
         if (_languageButtonText != null)
             _languageButtonText.text = UIStrings.LanguageButtonLabel;
+        if (_unitsButtonText != null)
+            _unitsButtonText.text = UIStrings.UnitsButtonLabel;
         if (_continueButtonText != null)
             _continueButtonText.text = UIStrings.MainMenuContinue;
         if (_dialogCancelButtonText != null)
@@ -75,6 +81,13 @@ public class MainMenuManager : MonoBehaviour
         LocalizationManager.Current = LocalizationManager.Current == Language.English
             ? Language.Portuguese
             : Language.English;
+        RefreshTexts();
+    }
+
+    // Botao de unidades nas Configuracoes: alterna entre unidade real e indice.
+    public void ToggleUnits()
+    {
+        UnitDisplaySettings.ShowRealUnits = UnitDisplaySettings.ShowRealUnits == false;
         RefreshTexts();
     }
 

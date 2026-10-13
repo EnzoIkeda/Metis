@@ -21,12 +21,16 @@ public class TopBarView : MonoBehaviour
         _stats = _cityStatsManager.Stats;
         BuildRows();
         _stats.OnParameterChanged += HandleParameterChanged;
+        UnitDisplaySettings.OnChanged += RefreshAll;
+        LocalizationManager.OnLanguageChanged += RefreshAll;
     }
 
     private void OnDisable()
     {
         if (_stats != null)
             _stats.OnParameterChanged -= HandleParameterChanged;
+        UnitDisplaySettings.OnChanged -= RefreshAll;
+        LocalizationManager.OnLanguageChanged -= RefreshAll;
     }
 
     private void BuildRows()
@@ -72,11 +76,20 @@ public class TopBarView : MonoBehaviour
         Refresh(parameter);
     }
 
+    // Troca de unidade ou de idioma redesenha todas as linhas na hora.
+    private void RefreshAll()
+    {
+        foreach (var parameter in _rows.Keys)
+            Refresh(parameter);
+    }
+
     private void Refresh(CityParameterType parameter)
     {
         if (_rows.TryGetValue(parameter, out var row) == false)
             return;
 
-        row.SetValue(_stats.GetValue(parameter), _stats.IsCritical(parameter));
+        var value = _stats.GetValue(parameter);
+        var text = _displayData != null ? _displayData.FormatValue(parameter, value, smallUnit: true) : value.ToString("0");
+        row.SetValue(text, _stats.IsCritical(parameter));
     }
 }

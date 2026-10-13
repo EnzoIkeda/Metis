@@ -33,10 +33,11 @@ public class StatRowView : MonoBehaviour
             _labelText.gameObject.SetActive(hasIcon == false);
     }
 
-    public void SetValue(float value, bool isCritical)
+    // Recebe o valor ja formatado (unidade real ou indice).
+    public void SetValue(string formattedValue, bool isCritical)
     {
         if (_valueText != null)
-            _valueText.text = value.ToString("0");
+            _valueText.text = formattedValue;
         if (_criticalHighlight != null)
             _criticalHighlight.enabled = isCritical;
     }

@@ -79,15 +79,30 @@ public static class UIStrings
     public static string LanguageButtonLabel =>
         (IsPt ? "Idioma: " : "Language: ") + LanguageName(LocalizationManager.Current);
 
-    // Formato curto, usado no espaco reduzido da carta recolhida.
-    public static string CardRequirementsShort(float requiredResearch, float cost) => IsPt
-        ? $"Pesq {requiredResearch:0} · Custo {cost:0}"
-        : $"Res {requiredResearch:0} · Cost {cost:0}";
+    // Formato curto, usado no espaco reduzido da carta recolhida: icone de Pesquisa com a exigencia, icone de Renda com o custo.
+    public static string CardRequirementsShort(ParameterDisplayData display, float requiredResearch, float cost) =>
+        $"{ParameterIcon(CityParameterType.Pesquisa)} {ResearchText(display, requiredResearch, withUnit: false)} · {ParameterIcon(CityParameterType.Renda)} {CostText(display, cost)}";
 
     // Formato completo, usado no popup de detalhe da carta.
-    public static string CardRequirementsFull(float requiredResearch, float cost) => IsPt
-        ? $"Pesquisa mín.: {requiredResearch:0} · Custo: {cost:0}"
-        : $"Research min.: {requiredResearch:0} · Cost: {cost:0}";
+    public static string CardRequirementsFull(ParameterDisplayData display, float requiredResearch, float cost) => IsPt
+        ? $"{ParameterIcon(CityParameterType.Pesquisa)} mín.: {ResearchText(display, requiredResearch)} · {ParameterIcon(CityParameterType.Renda)} {CostText(display, cost)}"
+        : $"{ParameterIcon(CityParameterType.Pesquisa)} min.: {ResearchText(display, requiredResearch)} · {ParameterIcon(CityParameterType.Renda)} {CostText(display, cost)}";
+
+    // Icone do parametro dentro do texto, do atlas de sprites ligado ao texto da carta.
+    public static string ParameterIcon(CityParameterType parameter) => $"<sprite name=\"{parameter}\">";
+
+    // Exigencia e custo na mesma unidade que a barra superior mostra.
+    private static string ResearchText(ParameterDisplayData display, float requiredResearch, bool withUnit = true) => display != null
+        ? display.FormatValue(CityParameterType.Pesquisa, requiredResearch, smallUnit: false, withUnit)
+        : requiredResearch.ToString("0");
+
+    private static string CostText(ParameterDisplayData display, float cost) => display != null
+        ? display.FormatAmount(CityParameterType.Renda, cost, smallUnit: false)
+        : cost.ToString("0");
+
+    public static string UnitsButtonLabel => IsPt
+        ? (UnitDisplaySettings.ShowRealUnits ? "Valores: unidades reais" : "Valores: índice")
+        : (UnitDisplaySettings.ShowRealUnits ? "Values: real units" : "Values: index");
 
     // Efeitos exatos da carta, um parametro por linha, mostrados quando a mao foi revelada.
     public static string CardEffects(CardData card)
@@ -97,7 +112,7 @@ public static class UIStrings
 
         var lines = new System.Collections.Generic.List<string>();
         foreach (var effect in card.StatEffects)
-            lines.Add($"{effect.Parameter.GetDisplayName()} {effect.Amount:+0;-0;0}");
+            lines.Add($"{ParameterIcon(effect.Parameter)} {effect.Amount:+0;-0;0}");
         return string.Join("\n", lines);
     }
 

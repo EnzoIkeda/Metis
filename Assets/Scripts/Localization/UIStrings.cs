@@ -116,6 +116,64 @@ public static class UIStrings
         return string.Join("\n", lines);
     }
 
+    // Popup "Por que mudou?" de um parametro.
+    public static string BreakdownTitle(CityParameterType parameter) => IsPt
+        ? $"Por que mudou: {parameter.GetFullName()}?"
+        : $"Why did {parameter.GetFullName()} change?";
+
+    public static string BreakdownTurnHeader(int turnIndex, string from, string to) => IsPt
+        ? $"No turno {turnIndex}, de {from} a {to}"
+        : $"On turn {turnIndex}, from {from} to {to}";
+
+    public static string BreakdownTotalChange => IsPt ? "Variação no turno" : "Change this turn";
+
+    public static string BreakdownNoData => IsPt
+        ? "A explicação aparece depois que um turno termina."
+        : "The breakdown appears once a turn has ended.";
+
+    public static string BreakdownNoChange => IsPt ? "Nada mudou neste turno." : "Nothing changed this turn.";
+
+    public static string ContributionLabel(ContributionSource source, CityParameterType from, int collapsedCount)
+    {
+        switch (source)
+        {
+            case ContributionSource.Card: return IsPt ? "Efeito das cartas" : "Card effects";
+            case ContributionSource.CardCost: return IsPt ? "Custo das cartas" : "Card costs";
+            case ContributionSource.Event: return IsPt ? "Evento" : "Event";
+            case ContributionSource.Interaction: return IsPt
+                ? $"Efeito de {ParameterIcon(from)} {from.GetFullName()}"
+                : $"Effect of {ParameterIcon(from)} {from.GetFullName()}";
+            case ContributionSource.Deriva: return IsPt ? "Manutenção (desgaste do turno)" : "Upkeep (wear each turn)";
+            case ContributionSource.ExcessCorrection: return IsPt ? "Correção do excesso" : "Excess correction";
+            case ContributionSource.CollapsePenalty: return IsPt
+                ? $"Colapso de {collapsedCount} parâmetro(s)"
+                : $"Collapse of {collapsedCount} parameter(s)";
+            case ContributionSource.Clamp: return IsPt ? "Limite da escala" : "Scale limit";
+            default: return source.ToString();
+        }
+    }
+
+    public static string BreakdownOthers => IsPt ? "Outras influências" : "Other influences";
+
+    // Composicao do Bem-estar, que e recalculado do zero a cada turno.
+    public static string WellbeingAverage => IsPt
+        ? $"Média de {ParameterIcon(CityParameterType.Mobilidade)}{ParameterIcon(CityParameterType.Saude)}{ParameterIcon(CityParameterType.Seguranca)}{ParameterIcon(CityParameterType.Sustentabilidade)}"
+        : $"Average of {ParameterIcon(CityParameterType.Mobilidade)}{ParameterIcon(CityParameterType.Saude)}{ParameterIcon(CityParameterType.Seguranca)}{ParameterIcon(CityParameterType.Sustentabilidade)}";
+
+    public static string WellbeingCrowding => IsPt
+        ? $"Adensamento ({ParameterIcon(CityParameterType.Populacao)} acima da metade)"
+        : $"Crowding ({ParameterIcon(CityParameterType.Populacao)} above half)";
+
+    public static string WellbeingBonus => IsPt ? "Cartas e eventos acumulados" : "Cards and events so far";
+
+    public static string WellbeingAfterResolution => IsPt ? "Depois da resolução" : "After resolution";
+
+    public static string WellbeingEventThisTurn => IsPt ? "Evento deste turno" : "Event this turn";
+
+    public static string WellbeingExplanation => IsPt
+        ? "O Bem-estar é recalculado a cada turno a partir dos outros parâmetros."
+        : "Well-being is recalculated every turn from the other parameters.";
+
     public static string SearchTitle => IsPt ? "Buscar no baralho" : "Search the deck";
 
     public static string PassTurnButton => IsPt ? "Passar a vez" : "Pass turn";

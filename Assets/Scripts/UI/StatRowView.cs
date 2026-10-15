@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,42 @@ public class StatRowView : MonoBehaviour
 
     // Fundo claro atras do icone, pra icones escuros nao sumirem no painel azul.
     [SerializeField] private GameObject _iconRoot;
+
+    // Toque na linha abre a explicacao da variacao.
+    [SerializeField] private Button _button;
+
+    // Seta de variacao do ultimo turno, apontando pra cima por padrao.
+    [SerializeField] private Image _deltaArrow;
+
+    private Action _onClick;
+
+    private void Awake()
+    {
+        if (_button != null)
+            _button.onClick.AddListener(HandleClicked);
+        SetDelta(0, Color.white);
+    }
+
+    public void SetClickHandler(Action onClick)
+    {
+        _onClick = onClick;
+    }
+
+    // direction: 1 subiu, -1 caiu, 0 esconde a seta.
+    public void SetDelta(int direction, Color color)
+    {
+        if (_deltaArrow == null)
+            return;
+
+        _deltaArrow.gameObject.SetActive(direction != 0);
+        _deltaArrow.color = color;
+        _deltaArrow.rectTransform.localEulerAngles = new Vector3(0f, 0f, direction < 0 ? 180f : 0f);
+    }
+
+    private void HandleClicked()
+    {
+        _onClick?.Invoke();
+    }
 
     public void SetLabel(string label)
     {

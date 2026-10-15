@@ -87,6 +87,9 @@ public class CityStats
 
     public float AnchorBonus => _anchorBonus;
 
+    // Registro opcional do turno pra mostrar o que mudou cada parametro; nao muda nenhuma conta e nao e copiado no clone.
+    public TurnBreakdown Recorder { get; set; }
+
     // Volta a um estado salvo sem disparar eventos; parametros fora da configuracao sao ignorados.
     public void RestoreState(IReadOnlyDictionary<CityParameterType, float> values, float anchorBonus)
     {
@@ -154,10 +157,25 @@ public class CityStats
         if (_values.ContainsKey(modifier.Parameter) == false)
             return;
 
-        if (modifier.Parameter == AnchorParameter)
-            _anchorBonus += modifier.Amount;
+        Recorder?.Add(modifier.Parameter, Recorder.CurrentSource, modifier.Amount);
+        ApplyAmount(modifier.Parameter, modifier.Amount);
+    }
 
-        SetValue(modifier.Parameter, _values[modifier.Parameter] + modifier.Amount);
+    // Variacao da resolucao, cujas parcelas a matriz ja registrou uma a uma.
+    internal void ApplyResolvedDelta(CityParameterType parameter, float amount)
+    {
+        if (_values.ContainsKey(parameter) == false)
+            return;
+
+        ApplyAmount(parameter, amount);
+    }
+
+    private void ApplyAmount(CityParameterType parameter, float amount)
+    {
+        if (parameter == AnchorParameter)
+            _anchorBonus += amount;
+
+        SetValue(parameter, _values[parameter] + amount);
     }
 
     public void ApplyModifiers(IEnumerable<StatModifier> modifiers)
@@ -169,15 +187,19 @@ public class CityStats
     // Recalcula Bem-estar a partir dos outros parametros, chamado na fase de resolucao do turno.
     public void RecomputeDerivedParameters()
     {
-        var mediaPositivos = (GetValue(CityParameterType.Mobilidade)
+        ComputeWellbeingParts(out var mediaPositivos, out var adensamentoPopulacional);
+        SetValue(CityParameterType.BemEstar, mediaPositivos - adensamentoPopulacional + _anchorBonus);
+    }
+
+    private void ComputeWellbeingParts(out float mediaPositivos, out float adensamentoPopulacional)
+    {
+        mediaPositivos = (GetValue(CityParameterType.Mobilidade)
             + GetValue(CityParameterType.Saude)
             + GetValue(CityParameterType.Seguranca)
             + GetValue(CityParameterType.Sustentabilidade)) / 4f;
 
         var populacaoBaseline = (_minValues[CityParameterType.Populacao] + _maxValues[CityParameterType.Populacao]) / 2f;
-        var adensamentoPopulacional = Math.Max(0f, GetValue(CityParameterType.Populacao) - populacaoBaseline);
-
-        SetValue(CityParameterType.BemEstar, mediaPositivos - adensamentoPopulacional + _anchorBonus);
+        adensamentoPopulacional = Math.Max(0f, GetValue(CityParameterType.Populacao) - populacaoBaseline);
     }
 
     // Fase de resolucao do turno inteira: interacoes, deriva, Bem-estar e penalidade de colapso.
@@ -191,6 +213,27 @@ public class CityStats
         // Penalidade so do turno, fora do bonus persistente, senao se acumularia a cada turno em colapso.
         if (colapsosAntes > 0)
             SetValue(AnchorParameter, GetValue(AnchorParameter) - _colapsoPenaltyPerParameter * colapsosAntes);
+
+        if (Recorder != null)
+            RecordWellbeing(colapsosAntes);
+    }
+
+    // Composicao do Bem-estar ao fim da resolucao, com os mesmos termos da conta acima.
+    private void RecordWellbeing(int colapsosAntes)
+    {
+        ComputeWellbeingParts(out var mediaPositivos, out var adensamentoPopulacional);
+        var penalty = colapsosAntes > 0 ? _colapsoPenaltyPerParameter * colapsosAntes : 0f;
+        var composition = new WellbeingComposition
+        {
+            PositiveAverage = mediaPositivos,
+            Crowding = adensamentoPopulacional,
+            AnchorBonus = _anchorBonus,
+            CollapsePenalty = penalty,
+            CollapsedCount = colapsosAntes,
+        };
+        composition.Clamp = GetValue(AnchorParameter) - composition.Total;
+        Recorder.SetWellbeing(composition);
+        Recorder.Add(AnchorParameter, ContributionSource.CollapsePenalty, -penalty);
     }
 
     private void SetValue(CityParameterType parameter, float rawValue)
@@ -199,6 +242,9 @@ public class CityStats
             return;
 
         var clamped = Clamp(parameter, rawValue);
+        // Bem-estar e recalculado do zero, entao o limite dele entra na composicao, nao aqui.
+        if (Recorder != null && parameter != AnchorParameter && clamped != rawValue)
+            Recorder.Add(parameter, ContributionSource.Clamp, clamped - rawValue);
         _values[parameter] = clamped;
         OnParameterChanged?.Invoke(parameter, clamped);
 

@@ -39,6 +39,14 @@ public class TurnManager : MonoBehaviour
     // Carta de busca ja paga, esperando o jogador escolher o que trazer do baralho.
     private bool _searchPending;
 
+    // Registro do turno em andamento, pra mostrar depois o que mudou cada parametro.
+    private TurnBreakdown _currentBreakdown;
+
+    // Ultimo turno completo; nulo ate o primeiro turno terminar (ou logo depois de continuar a rodada).
+    public TurnBreakdown LastBreakdown { get; private set; }
+
+    public event Action<TurnBreakdown> OnTurnBreakdownReady;
+
     public TurnMachine Machine { get; private set; }
     public CardHand<CardData> Hand { get; private set; }
 
@@ -151,6 +159,8 @@ public class TurnManager : MonoBehaviour
 
     private void OnDisable()
     {
+        StopRecording();
+
         if (Machine != null)
         {
             Machine.OnPhaseChanged -= HandlePhaseChanged;
@@ -340,9 +350,19 @@ public class TurnManager : MonoBehaviour
         _effects?.SetAmbientGlowsVisible(phase == TurnPhase.Action);
 
         if (phase == TurnPhase.StartOfTurn)
+        {
             Hand.Draw(_handSize, _cityStatsManager.Stats);
+            StartRecording();
+        }
         else if (phase == TurnPhase.Action)
+        {
+            // Ao continuar a rodada o turno entra direto na acao, sem passar pelo comeco.
+            if (_currentBreakdown == null)
+                StartRecording();
             SaveCheckpoint();
+        }
+        else if (phase == TurnPhase.EndCheck)
+            FinishRecording();
         else if (phase == TurnPhase.Event && _restoredEvent != null)
             StartCoroutine(AnnounceRestoredEvent());
         else if (phase == TurnPhase.Event)
@@ -353,6 +373,8 @@ public class TurnManager : MonoBehaviour
 
     private void HandleEventPhase()
     {
+        if (_currentBreakdown != null)
+            _currentBreakdown.CurrentSource = ContributionSource.Event;
         var triggeredEvent = _events.TryTriggerEvent(_cityStatsManager.Stats, Machine.TurnIndex);
         _pendingEvent = triggeredEvent;
         if (triggeredEvent == null)
@@ -375,6 +397,34 @@ public class TurnManager : MonoBehaviour
 
         Debug.Log($"[RandomEvent] Retomado: '{_pendingEvent.Title}'");
         OnRandomEventTriggered?.Invoke(_pendingEvent);
+    }
+
+    private void StartRecording()
+    {
+        var stats = _cityStatsManager.Stats;
+        _currentBreakdown = new TurnBreakdown(Machine.TurnIndex);
+        _currentBreakdown.CaptureStart(stats);
+        stats.Recorder = _currentBreakdown;
+    }
+
+    // Fecha o registro antes do fim de jogo ou do proximo turno, com o evento ja aplicado.
+    private void FinishRecording()
+    {
+        if (_currentBreakdown == null)
+            return;
+
+        var finished = _currentBreakdown;
+        finished.CaptureEnd(_cityStatsManager.Stats);
+        StopRecording();
+        LastBreakdown = finished;
+        OnTurnBreakdownReady?.Invoke(finished);
+    }
+
+    private void StopRecording()
+    {
+        if (_cityStatsManager != null && _cityStatsManager.Stats != null && _cityStatsManager.Stats.Recorder == _currentBreakdown)
+            _cityStatsManager.Stats.Recorder = null;
+        _currentBreakdown = null;
     }
 
     private void HandleTurnAdvanced(int turnIndex)

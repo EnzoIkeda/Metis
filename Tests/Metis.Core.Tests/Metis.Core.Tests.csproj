@@ -44,6 +44,7 @@
     <Compile Include="../../Assets/Scripts/Core/Utilities/RunSaveData.cs" Link="Source/RunSaveData.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/RunSaveFile.cs" Link="Source/RunSaveFile.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/RealUnitConversion.cs" Link="Source/RealUnitConversion.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/SpriteFrameTiming.cs" Link="Source/SpriteFrameTiming.cs" />
   </ItemGroup>
 
 </Project>

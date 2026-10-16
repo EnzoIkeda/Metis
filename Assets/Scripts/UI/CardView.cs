@@ -13,6 +13,7 @@ public class CardView : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
 
     [SerializeField] private TMP_Text _nameText;
     [SerializeField] private Image _artworkImage;
+    [SerializeField] private ImageFrameAnimator _artworkAnimator;
     [SerializeField] private GameObject _artworkPlaceholder;
     [SerializeField] private TMP_Text _requirementsText;
     [SerializeField] private TMP_Text _effectsText;
@@ -72,6 +73,8 @@ public class CardView : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
         if (_artworkImage != null)
         {
             _artworkImage.sprite = card.Artwork;
+            if (_artworkAnimator != null)
+                _artworkAnimator.Play(card.ArtworkFrames, card.ArtworkFrameRate);
             _artworkImage.gameObject.SetActive(hasArtwork && showEffects == false);
         }
         if (_artworkPlaceholder != null)

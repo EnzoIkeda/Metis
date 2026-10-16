@@ -11,6 +11,7 @@ public class CardDetailPopupView : MonoBehaviour
     [SerializeField] private TMP_Text _descriptionText;
     [SerializeField] private TMP_Text _costText;
     [SerializeField] private Image _artworkImage;
+    [SerializeField] private ImageFrameAnimator _artworkAnimator;
     [SerializeField] private GameObject _artworkPlaceholder;
     [SerializeField] private Button _playButton;
     [SerializeField] private Button _backButton;
@@ -59,6 +60,8 @@ public class CardDetailPopupView : MonoBehaviour
         if (_artworkImage != null)
         {
             _artworkImage.sprite = card.Artwork;
+            if (_artworkAnimator != null)
+                _artworkAnimator.Play(card.ArtworkFrames, card.ArtworkFrameRate);
             _artworkImage.gameObject.SetActive(hasArtwork);
         }
         if (_artworkPlaceholder != null)

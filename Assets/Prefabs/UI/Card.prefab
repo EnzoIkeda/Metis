@@ -557,6 +557,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardView
   _nameText: {fileID: 8674180545214748278}
   _artworkImage: {fileID: 116047879068047118}
+  _artworkAnimator: {fileID: 2581788428955521551}
   _artworkPlaceholder: {fileID: 3344476881481509733}
   _requirementsText: {fileID: 890592404690962416}
   _effectsText: {fileID: 2319432655591196357}
@@ -577,6 +578,7 @@ GameObject:
   - component: {fileID: 4356874167942805596}
   - component: {fileID: 116047879068047118}
   - component: {fileID: 7600136180668105341}
+  - component: {fileID: 2581788428955521551}
   m_Layer: 0
   m_Name: Artwork
   m_TagString: Untagged
@@ -661,6 +663,19 @@ MonoBehaviour:
   m_FlexibleWidth: 0
   m_FlexibleHeight: 0
   m_LayoutPriority: 1
+--- !u!114 &2581788428955521551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8433683697286184367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 823bef0c0904d639f9566550ccffd916, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::ImageFrameAnimator
+  _image: {fileID: 116047879068047118}
 --- !u!1 &8723122413976070916
 GameObject:
   m_ObjectHideFlags: 0

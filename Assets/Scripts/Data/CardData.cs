@@ -20,6 +20,10 @@ public class CardData : ScriptableObject, ICardDefinition
     // Arte opcional da carta, mostrada no espaco reservado de imagem quando definida.
     [SerializeField] private Sprite _artwork;
 
+    // Quadros opcionais da arte animada; sem eles a carta mostra so a arte estatica.
+    [SerializeField] private Sprite[] _artworkFrames;
+    [SerializeField, Min(1f)] private float _artworkFrameRate = 15f;
+
     // Nome no idioma atual, com fallback pro portugues se a traducao em ingles nao existir.
     public string CardName => LocalizationManager.Current == Language.English && string.IsNullOrEmpty(_cardNameEn) == false
         ? _cardNameEn
@@ -48,4 +52,8 @@ public class CardData : ScriptableObject, ICardDefinition
     public StructureData StructureToPlace => _structureToPlace;
 
     public Sprite Artwork => _artwork;
+
+    public Sprite[] ArtworkFrames => _artworkFrames;
+
+    public float ArtworkFrameRate => _artworkFrameRate;
 }

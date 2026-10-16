@@ -100,29 +100,54 @@ public class SfxPlayerTests
     [UnityTest]
     public IEnumerator Play_WithMaxDuration_IsCutEvenWhilePaused()
     {
+        yield return AssertCutWhilePaused(-1);
+    }
+
+    // Com poucos quadros por segundo (Editor fora de foco) o corte atrasa um quadro, mas termina.
+    [UnityTest]
+    public IEnumerator Play_WithMaxDuration_IsCutEvenAtLowFrameRate()
+    {
+        yield return AssertCutWhilePaused(4);
+    }
+
+    // O limite folgado nao depende da taxa de quadros: com tempo escalado o corte nunca terminaria.
+    private IEnumerator AssertCutWhilePaused(int targetFrameRate)
+    {
+        const float maxDuration = 0.3f;
         var defeat = TestDataFactory.CreateSilentClip("Defeat", 3f);
-        var player = CreatePlayer(TestDataFactory.CreateSoundLibrary((SoundEffect.Defeat, defeat, 0.3f, 0f)));
+        var player = CreatePlayer(TestDataFactory.CreateSoundLibrary((SoundEffect.Defeat, defeat, maxDuration, 0f)));
         yield return null;
+
+        var previousVSync = QualitySettings.vSyncCount;
+        var previousFrameRate = Application.targetFrameRate;
+        if (targetFrameRate > 0)
+        {
+            QualitySettings.vSyncCount = 0;
+            Application.targetFrameRate = targetFrameRate;
+            yield return null;
+        }
 
         Time.timeScale = 0f;
         try
         {
+            var start = Time.realtimeSinceStartup;
             SfxPlayer.Play(SoundEffect.Defeat);
             var cuts = (System.Collections.IDictionary)typeof(SfxPlayer)
                 .GetField("_cutRoutines", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
                 .GetValue(player);
             Assert.That(cuts.Count, Is.EqualTo(1));
 
-            var start = Time.realtimeSinceStartup;
-            while (cuts.Count > 0 && Time.realtimeSinceStartup - start < 2f)
+            while (cuts.Count > 0 && Time.realtimeSinceStartup - start < 5f)
                 yield return null;
 
             Assert.That(cuts.Count, Is.EqualTo(0), "o corte terminou mesmo com timeScale 0");
-            Assert.That(Time.realtimeSinceStartup - start, Is.LessThan(1f));
+            Assert.That(Time.realtimeSinceStartup - start, Is.GreaterThanOrEqualTo(maxDuration - 0.01f), "o corte nao veio antes do tempo");
         }
         finally
         {
             Time.timeScale = 1f;
+            QualitySettings.vSyncCount = previousVSync;
+            Application.targetFrameRate = previousFrameRate;
         }
     }
 

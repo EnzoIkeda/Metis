@@ -59,13 +59,21 @@ public class ParameterDisplayData : ScriptableObject
     }
 
     // Quantidade que muda o parametro (custo, efeito), sem o deslocamento do minimo real.
-    public string FormatAmount(CityParameterType parameter, float amount, bool smallUnit)
+    // extraDecimals acrescenta casas, pra parcelas pequenas de uma variacao nao virarem zero.
+    public string FormatAmount(CityParameterType parameter, float amount, bool smallUnit, int extraDecimals = 0)
     {
         if (UsesRealUnit(parameter, out var entry) == false)
-            return amount.ToString("0");
+            return extraDecimals > 0 ? FormatIndexDecimals(amount, extraDecimals) : amount.ToString("0");
 
         var real = RealUnitConversion.ToRealDelta(amount, entry.RealMin, entry.RealMax);
-        return ApplyUnit(entry, RealUnitConversion.FormatNumber(real, entry.Decimals, false, IsPortuguese, entry.NoAbbreviation == false), smallUnit);
+        var number = RealUnitConversion.FormatNumber(real, entry.Decimals + extraDecimals, false, IsPortuguese, entry.NoAbbreviation == false);
+        return ApplyUnit(entry, number, smallUnit);
+    }
+
+    private static string FormatIndexDecimals(float amount, int decimals)
+    {
+        var number = amount.ToString("F" + decimals, System.Globalization.CultureInfo.InvariantCulture);
+        return IsPortuguese ? number.Replace('.', ',') : number;
     }
 
     private static bool IsPortuguese => LocalizationManager.Current == Language.Portuguese;

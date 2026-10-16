@@ -107,7 +107,14 @@ public class CardHand<TCard> where TCard : class, ICardDefinition
         if (CanPlay(card, stats) == false)
             return false;
 
+        // Com registro ligado, o custo aparece separado do efeito da carta.
+        var recorder = stats.Recorder;
+        var source = recorder != null ? recorder.CurrentSource : ContributionSource.Card;
+        if (recorder != null)
+            recorder.CurrentSource = ContributionSource.CardCost;
         stats.ApplyModifier(new StatModifier { Parameter = CityParameterType.Renda, Amount = -card.Cost });
+        if (recorder != null)
+            recorder.CurrentSource = source;
         stats.ApplyModifiers(card.StatEffects);
 
         _cards.Remove(card);

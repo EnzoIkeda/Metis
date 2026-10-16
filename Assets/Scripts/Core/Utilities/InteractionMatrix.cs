@@ -70,6 +70,9 @@ public class InteractionMatrix
         foreach (CityParameterType parameter in Enum.GetValues(typeof(CityParameterType)))
             valoresAntes[(int)parameter] = stats.GetValue(parameter);
 
+        // Registro opcional: cada termo vai separado, mas o delta aplicado e o mesmo de sempre.
+        var recorder = stats.Recorder;
+
         foreach (var alvo in ResolutionOrder)
         {
             float efeito = 0f;
@@ -82,12 +85,19 @@ public class InteractionMatrix
                 // Le o valor ja atualizado nesta mesma passada, se a fonte for um alvo anterior.
                 var valorFonte = stats.GetValue(fonte);
                 var fator = FatorZona(valorFonte, coeficiente);
-                efeito += (valorFonte - _valorNeutro) / _valorNeutro * coeficiente * fator;
+                var termo = (valorFonte - _valorNeutro) / _valorNeutro * coeficiente * fator;
+                efeito += termo;
+                recorder?.Add(alvo, ContributionSource.Interaction, termo * _escalaGlobal, fonte);
             }
 
             var correcaoExcesso = DerivaCorrecaoExcesso(valoresAntes[(int)alvo]);
             var delta = efeito * _escalaGlobal + stats.GetDeriva(alvo) + correcaoExcesso;
-            stats.ApplyModifier(new StatModifier { Parameter = alvo, Amount = delta });
+            if (recorder != null)
+            {
+                recorder.Add(alvo, ContributionSource.Deriva, stats.GetDeriva(alvo));
+                recorder.Add(alvo, ContributionSource.ExcessCorrection, correcaoExcesso);
+            }
+            stats.ApplyResolvedDelta(alvo, delta);
         }
     }
 

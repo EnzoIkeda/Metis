@@ -13,6 +13,15 @@ public class TopBarView : MonoBehaviour
     [SerializeField] private int _rowCount = 3;
     [SerializeField] private ParameterDisplayData _displayData;
 
+    // Fonte do registro do ultimo turno e popup que explica a variacao de cada parametro.
+    [SerializeField] private TurnManager _turnManager;
+    [SerializeField] private ChangeBreakdownPopupView _breakdownPopup;
+
+    // Variacoes menores que isso (no indice) nao mostram seta.
+    [SerializeField] private float _deltaThreshold = 0.05f;
+    [SerializeField] private Color _riseColor = new Color(0.36f, 0.85f, 0.38f);
+    [SerializeField] private Color _fallColor = new Color(0.95f, 0.33f, 0.3f);
+
     private readonly Dictionary<CityParameterType, StatRowView> _rows = new Dictionary<CityParameterType, StatRowView>();
     private CityStats _stats;
 
@@ -23,6 +32,12 @@ public class TopBarView : MonoBehaviour
         _stats.OnParameterChanged += HandleParameterChanged;
         UnitDisplaySettings.OnChanged += RefreshAll;
         LocalizationManager.OnLanguageChanged += RefreshAll;
+        if (_turnManager != null)
+        {
+            _turnManager.OnTurnBreakdownReady += HandleBreakdownReady;
+            if (_turnManager.LastBreakdown != null)
+                HandleBreakdownReady(_turnManager.LastBreakdown);
+        }
     }
 
     private void OnDisable()
@@ -31,6 +46,8 @@ public class TopBarView : MonoBehaviour
             _stats.OnParameterChanged -= HandleParameterChanged;
         UnitDisplaySettings.OnChanged -= RefreshAll;
         LocalizationManager.OnLanguageChanged -= RefreshAll;
+        if (_turnManager != null)
+            _turnManager.OnTurnBreakdownReady -= HandleBreakdownReady;
     }
 
     private void BuildRows()
@@ -48,6 +65,8 @@ public class TopBarView : MonoBehaviour
             var row = Instantiate(_rowPrefab, currentRow);
             row.SetLabel(parameters[i].GetDisplayName());
             row.SetIcon(_displayData != null ? _displayData.GetIcon(parameters[i]) : null);
+            var parameter = parameters[i];
+            row.SetClickHandler(() => ShowBreakdown(parameter));
             _rows[parameters[i]] = row;
             Refresh(parameters[i]);
         }
@@ -69,6 +88,23 @@ public class TopBarView : MonoBehaviour
         group.childControlHeight = true;
 
         return go.transform;
+    }
+
+    private void ShowBreakdown(CityParameterType parameter)
+    {
+        if (_breakdownPopup != null)
+            _breakdownPopup.Show(parameter);
+    }
+
+    // Seta de cada linha com a direcao da variacao do turno que acabou.
+    private void HandleBreakdownReady(TurnBreakdown breakdown)
+    {
+        foreach (var entry in _rows)
+        {
+            var delta = breakdown.GetDelta(entry.Key);
+            var direction = Mathf.Abs(delta) < _deltaThreshold ? 0 : (delta > 0f ? 1 : -1);
+            entry.Value.SetDelta(direction, direction > 0 ? _riseColor : _fallColor);
+        }
     }
 
     private void HandleParameterChanged(CityParameterType parameter, float value)

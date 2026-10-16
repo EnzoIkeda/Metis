@@ -219,6 +219,47 @@ public class TurnManagerTests
         Assert.That(turnManager.Machine.TurnIndex, Is.EqualTo(1));
     }
 
+    // O registro do turno separa custo, carta e evento, e as parcelas fecham com a variacao real.
+    [UnityTest]
+    public IEnumerator FinishedTurn_PublishesABreakdownThatAddsUp()
+    {
+        var card = TestDataFactory.CreateCard("Posto", cost: 3f, statEffects: new[] { new StatModifier { Parameter = CityParameterType.Saude, Amount = 5f } });
+        var evento = TestDataFactory.CreateEvent("Surto", new[] { new StatModifier { Parameter = CityParameterType.Saude, Amount = -2f } });
+        var turnManager = CreateTurnManager(new[] { card }, eventPool: new[] { evento });
+        TurnBreakdown published = null;
+        turnManager.OnTurnBreakdownReady += breakdown => published = breakdown;
+        yield return null;
+
+        Assert.That(turnManager.LastBreakdown, Is.Null);
+        Assert.That(turnManager.PlayCard(card), Is.True);
+        var start = Time.realtimeSinceStartup;
+        while (turnManager.Machine.CurrentPhase != TurnPhase.Event && Time.realtimeSinceStartup - start < 5f)
+            yield return null;
+        Assert.That(turnManager.Machine.CurrentPhase, Is.EqualTo(TurnPhase.Event));
+
+        turnManager.AcknowledgeEvent();
+        start = Time.realtimeSinceStartup;
+        while (turnManager.LastBreakdown == null && Time.realtimeSinceStartup - start < 5f)
+            yield return null;
+
+        var last = turnManager.LastBreakdown;
+        Assert.That(last, Is.Not.Null);
+        Assert.That(published, Is.SameAs(last));
+        Assert.That(last.TurnIndex, Is.EqualTo(1));
+        Assert.That(last.Sum(CityParameterType.Renda, ContributionSource.CardCost), Is.EqualTo(-3f).Within(0.001f));
+        Assert.That(last.Sum(CityParameterType.Saude, ContributionSource.Card), Is.EqualTo(5f).Within(0.001f));
+        Assert.That(last.Sum(CityParameterType.Saude, ContributionSource.Event), Is.EqualTo(-2f).Within(0.001f));
+        Assert.That(last.HasWellbeing, Is.True);
+        foreach (CityParameterType parameter in System.Enum.GetValues(typeof(CityParameterType)))
+        {
+            if (parameter != CityStats.AnchorParameter)
+                Assert.That(last.Sum(parameter), Is.EqualTo(last.GetDelta(parameter)).Within(0.001f), parameter.ToString());
+        }
+
+        var stats = _host.GetComponent<CityStatsManager>().Stats;
+        Assert.That(stats.Recorder, Is.Not.Null.And.Not.SameAs(last), "o turno seguinte ja tem registro proprio");
+    }
+
     // Fechar o app e continuar volta ao comeco da fase de acao do mesmo turno: mesma mao, mesmas pilhas, mesmos parametros.
     [UnityTest]
     public IEnumerator Resume_AfterClosing_RestoresTurnHandPilesAndParameters()

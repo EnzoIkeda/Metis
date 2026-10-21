@@ -1,0 +1,275 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f804c3dff224b208c9cb13ae00344ad, type: 3}
+  m_Name: InteractionNotes
+  m_EditorClassIdentifier: Metis.Runtime::InteractionNotesData
+  _notes:
+  - Source: 1
+    Target: 0
+    TextPt: "Energia confiável e barata reduz o custo de produzir e atrai empresas, o que aumenta a arrecadação."
+    TextEn: "Reliable, affordable energy lowers production costs and attracts businesses, which raises revenue."
+    Reference: ""
+  - Source: 8
+    Target: 0
+    TextPt: "Trânsito fluido leva trabalhadores e mercadorias aonde precisam ir; congestionamento custa horas de trabalho e frete."
+    TextEn: "Smooth traffic gets workers and goods where they need to go; congestion costs work hours and freight."
+    Reference: ""
+  - Source: 2
+    Target: 0
+    TextPt: "Com segurança, o comércio abre até mais tarde e investidores confiam na cidade; com violência, negócios fecham ou vão embora."
+    TextEn: "When the city is safe, shops stay open later and investors trust it; with violence, businesses close or leave."
+    Reference: ""
+  - Source: 7
+    Target: 0
+    TextPt: "Uma população saudável falta menos ao trabalho e produz mais."
+    TextEn: "A healthy population misses less work and produces more."
+    Reference: ""
+  - Source: 5
+    Target: 0
+    TextPt: "No curto prazo, regras ambientais e a troca por tecnologias limpas custam caro para empresas e para o orçamento."
+    TextEn: "In the short term, environmental rules and the switch to clean technology are costly for businesses and for the budget."
+    Reference: ""
+  - Source: 3
+    Target: 0
+    TextPt: "Mais moradores são mais trabalhadores, consumidores e contribuintes: é o maior motor da economia local."
+    TextEn: "More residents means more workers, consumers and taxpayers: the biggest engine of the local economy."
+    Reference: ""
+  - Source: 4
+    Target: 0
+    TextPt: "Universidades e centros de pesquisa dão origem a empresas de tecnologia e empregos qualificados."
+    TextEn: "Universities and research centers give rise to technology companies and skilled jobs."
+    Reference: ""
+  - Source: 6
+    Target: 0
+    TextPt: "Quem está satisfeito com a cidade fica nela, compra no comércio local e atrai visitantes."
+    TextEn: "People who are happy with their city stay, shop locally and attract visitors."
+    Reference: ""
+  - Source: 0
+    Target: 1
+    TextPt: "A arrecadação paga a manutenção e a expansão da rede elétrica."
+    TextEn: "Revenue pays for maintaining and expanding the power grid."
+    Reference: ""
+  - Source: 8
+    Target: 1
+    TextPt: "Carros elétricos, metrô e ônibus elétricos aumentam a demanda por eletricidade; recarregar a frota pressiona a rede."
+    TextEn: "Electric cars, subways and electric buses raise demand for electricity; charging the fleet strains the grid."
+    Reference: "MDPI Smart Cities, \"Impact of Electrical Vehicle Charging Stations on the Electric Grid\""
+  - Source: 5
+    Target: 1
+    TextPt: "Painéis solares, eficiência energética e fontes renováveis aumentam a energia disponível."
+    TextEn: "Solar panels, energy efficiency and renewable sources increase the energy available."
+    Reference: "Ratti e Claudel, The City of Tomorrow, cap. 8"
+  - Source: 3
+    Target: 1
+    TextPt: "Cada novo morador consome energia em casa, no trabalho e no transporte; crescer sem investir na rede leva a apagões."
+    TextEn: "Every new resident uses energy at home, at work and in transit; growing without investing in the grid leads to blackouts."
+    Reference: ""
+  - Source: 4
+    Target: 1
+    TextPt: "A pesquisa traz redes inteligentes e equipamentos mais eficientes, que entregam mais com a mesma geração."
+    TextEn: "Research brings smart grids and more efficient equipment, delivering more from the same generation."
+    Reference: ""
+  - Source: 0
+    Target: 8
+    TextPt: "Dinheiro em caixa paga asfalto, ônibus, metrô e ciclovias."
+    TextEn: "Money in the budget pays for paving, buses, subways and bike lanes."
+    Reference: ""
+  - Source: 1
+    Target: 8
+    TextPt: "Semáforos, metrô e ônibus elétricos dependem de energia estável."
+    TextEn: "Traffic lights, subways and electric buses depend on a stable power supply."
+    Reference: ""
+  - Source: 5
+    Target: 8
+    TextPt: "Cidades mais verdes costumam dar prioridade ao transporte público, às calçadas e à bicicleta."
+    TextEn: "Greener cities tend to prioritize public transit, sidewalks and cycling."
+    Reference: ""
+  - Source: 3
+    Target: 8
+    TextPt: "Mais gente na cidade, mais carros nas ruas e ônibus lotados: o trânsito satura."
+    TextEn: "More people in the city means more cars on the streets and crowded buses: traffic saturates."
+    Reference: ""
+  - Source: 4
+    Target: 8
+    TextPt: "Dados de tráfego e semáforos inteligentes ajudam a organizar o fluxo."
+    TextEn: "Traffic data and smart traffic lights help organize the flow."
+    Reference: ""
+  - Source: 6
+    Target: 8
+    TextPt: "Uma população satisfeita apoia e usa projetos de transporte coletivo, de caminhada e de bicicleta."
+    TextEn: "A satisfied population supports and uses public transit, walking and cycling projects."
+    Reference: ""
+  - Source: 0
+    Target: 2
+    TextPt: "A arrecadação paga iluminação pública, policiamento e defesa civil."
+    TextEn: "Revenue pays for street lighting, policing and civil defense."
+    Reference: ""
+  - Source: 7
+    Target: 2
+    TextPt: "Atendimento de saúde, inclusive de saúde mental e dependência química, reduz situações de risco."
+    TextEn: "Health care, including mental health and addiction treatment, reduces risky situations."
+    Reference: ""
+  - Source: 3
+    Target: 2
+    TextPt: "Crescer rápido sem infraestrutura aumenta a desigualdade e sobrecarrega o policiamento e a defesa civil."
+    TextEn: "Growing fast without infrastructure increases inequality and overloads policing and civil defense."
+    Reference: ""
+  - Source: 4
+    Target: 2
+    TextPt: "A tecnologia ajuda a prever riscos, com alertas de enchente e mapas de ocorrências."
+    TextEn: "Technology helps anticipate risks, with flood alerts and incident maps."
+    Reference: ""
+  - Source: 6
+    Target: 2
+    TextPt: "Coesão social e satisfação reduzem a criminalidade: vizinhos que confiam uns nos outros cuidam do bairro."
+    TextEn: "Social cohesion and satisfaction reduce crime: neighbors who trust each other look after the neighborhood."
+    Reference: ""
+  - Source: 0
+    Target: 7
+    TextPt: "A arrecadação paga postos de saúde, hospitais e profissionais."
+    TextEn: "Revenue pays for clinics, hospitals and health workers."
+    Reference: ""
+  - Source: 8
+    Target: 7
+    TextPt: "Caminhar e pedalar fazem bem à saúde, e um bom transporte leva as pessoas até o atendimento."
+    TextEn: "Walking and cycling are good for health, and good transit gets people to care."
+    Reference: "MIT Senseable City Lab, Copenhagen Wheel"
+  - Source: 5
+    Target: 7
+    TextPt: "Ar e água limpos e saneamento básico reduzem doenças respiratórias e infecciosas."
+    TextEn: "Clean air and water and basic sanitation reduce respiratory and infectious diseases."
+    Reference: ""
+  - Source: 3
+    Target: 7
+    TextPt: "Mais gente na fila: o sistema de saúde fica sobrecarregado e as doenças se espalham mais rápido."
+    TextEn: "Longer lines: the health system is overloaded and diseases spread faster."
+    Reference: ""
+  - Source: 4
+    Target: 7
+    TextPt: "A pesquisa traz diagnósticos melhores, telemedicina e prevenção."
+    TextEn: "Research brings better diagnosis, telemedicine and prevention."
+    Reference: ""
+  - Source: 6
+    Target: 7
+    TextPt: "Quem está satisfeito sofre menos estresse e cuida mais de si."
+    TextEn: "Satisfied people suffer less stress and take better care of themselves."
+    Reference: ""
+  - Source: 0
+    Target: 5
+    TextPt: "Mais atividade econômica consome mais recursos e gera mais resíduos, e o crescimento costuma vir antes da regulação ambiental."
+    TextEn: "More economic activity uses more resources and produces more waste, and growth usually comes before environmental regulation."
+    Reference: "Green, The Smart Enough City"
+  - Source: 1
+    Target: 5
+    TextPt: "Gerar mais energia polui e emite gases de efeito estufa enquanto a matriz depende de fontes fósseis."
+    TextEn: "Generating more energy pollutes and emits greenhouse gases while the energy mix depends on fossil fuels."
+    Reference: ""
+  - Source: 8
+    Target: 5
+    TextPt: "Mais deslocamentos, mais emissões, enquanto a frota depender de combustível; até o lixo viaja longe pela cadeia logística."
+    TextEn: "More trips mean more emissions while the fleet runs on fuel; even trash travels far through the logistics chain."
+    Reference: "MIT Senseable City Lab, Trash Track"
+  - Source: 3
+    Target: 5
+    TextPt: "Mais moradores produzem mais lixo e esgoto e ocupam áreas verdes."
+    TextEn: "More residents produce more trash and sewage and take over green areas."
+    Reference: ""
+  - Source: 4
+    Target: 5
+    TextPt: "A pesquisa traz tecnologias limpas, reciclagem e monitoramento ambiental."
+    TextEn: "Research brings clean technology, recycling and environmental monitoring."
+    Reference: ""
+  - Source: 0
+    Target: 3
+    TextPt: "Empregos e salários atraem gente de outras cidades."
+    TextEn: "Jobs and wages attract people from other cities."
+    Reference: ""
+  - Source: 1
+    Target: 3
+    TextPt: "Ninguém quer morar onde falta luz."
+    TextEn: "Nobody wants to live where the power keeps going out."
+    Reference: ""
+  - Source: 8
+    Target: 3
+    TextPt: "Morar onde é fácil chegar ao trabalho e à escola atrai novos moradores."
+    TextEn: "Being able to get to work and school easily attracts new residents."
+    Reference: ""
+  - Source: 2
+    Target: 3
+    TextPt: "Famílias escolhem bairros seguros; a violência expulsa moradores."
+    TextEn: "Families choose safe neighborhoods; violence drives residents away."
+    Reference: ""
+  - Source: 7
+    Target: 3
+    TextPt: "Um bom atendimento de saúde atrai e mantém moradores, e menos gente adoece ou morre cedo."
+    TextEn: "Good health care attracts and keeps residents, and fewer people fall ill or die early."
+    Reference: ""
+  - Source: 5
+    Target: 3
+    TextPt: "Parques, ar limpo e natureza por perto tornam a cidade mais desejada."
+    TextEn: "Parks, clean air and nearby nature make the city more desirable."
+    Reference: ""
+  - Source: 6
+    Target: 3
+    TextPt: "Qualidade de vida é o principal motivo para alguém escolher uma cidade e ficar nela."
+    TextEn: "Quality of life is the main reason people choose a city and stay there."
+    Reference: "MDPI Smart Cities, \"Perceived City Sustainability and Tourist Behavioural Intentions\""
+  - Source: 0
+    Target: 4
+    TextPt: "A arrecadação financia universidades, laboratórios e bolsas."
+    TextEn: "Revenue funds universities, laboratories and scholarships."
+    Reference: ""
+  - Source: 1
+    Target: 4
+    TextPt: "Laboratórios e centros de dados precisam de energia estável."
+    TextEn: "Laboratories and data centers need a stable power supply."
+    Reference: ""
+  - Source: 5
+    Target: 4
+    TextPt: "A agenda ambiental puxa pesquisa em energia limpa, clima e gestão de recursos."
+    TextEn: "The environmental agenda drives research on clean energy, climate and resource management."
+    Reference: ""
+  - Source: 3
+    Target: 4
+    TextPt: "Mais moradores, mais talentos e estudantes para a pesquisa."
+    TextEn: "More residents, more talent and students for research."
+    Reference: ""
+  - Source: 6
+    Target: 4
+    TextPt: "Cidades com boa qualidade de vida retêm pesquisadores e atraem estudantes."
+    TextEn: "Cities with a good quality of life keep researchers and attract students."
+    Reference: ""
+  - Source: 8
+    Target: 6
+    TextPt: "Tempo perdido no trânsito pesa na qualidade de vida. Mobilidade é um quarto da média que forma o Bem-estar."
+    TextEn: "Time lost in traffic weighs on quality of life. Mobility is a quarter of the average that makes up Well-being."
+    Reference: ""
+  - Source: 7
+    Target: 6
+    TextPt: "Ter saúde e ser bem atendido é parte central da qualidade de vida. Saúde é um quarto da média que forma o Bem-estar."
+    TextEn: "Being healthy and well cared for is central to quality of life. Health is a quarter of the average that makes up Well-being."
+    Reference: ""
+  - Source: 2
+    Target: 6
+    TextPt: "Sentir-se seguro em casa e na rua é parte da qualidade de vida. Segurança é um quarto da média que forma o Bem-estar."
+    TextEn: "Feeling safe at home and on the street is part of quality of life. Safety is a quarter of the average that makes up Well-being."
+    Reference: ""
+  - Source: 5
+    Target: 6
+    TextPt: "Ar limpo, áreas verdes e saneamento fazem parte da qualidade de vida. Sustentabilidade é um quarto da média que forma o Bem-estar."
+    TextEn: "Clean air, green spaces and sanitation are part of quality of life. Sustainability is a quarter of the average that makes up Well-being."
+    Reference: ""
+  - Source: 3
+    Target: 6
+    TextPt: "Quando a População passa da metade da escala, o adensamento (filas, lotação, moradia cara) desconta ponto a ponto do Bem-estar."
+    TextEn: "When Population goes past half of its scale, crowding (lines, packed transit, expensive housing) takes points off Well-being one by one."
+    Reference: ""

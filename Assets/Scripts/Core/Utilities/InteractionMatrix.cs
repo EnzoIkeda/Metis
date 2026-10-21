@@ -1,4 +1,13 @@
 using System;
+using System.Collections.Generic;
+
+// Zona de um parametro como fonte da matriz: muda a forca do que ele emite.
+public enum InteractionZone
+{
+    Crise,
+    Saudavel,
+    Excesso,
+}
 
 // Matriz de interacao entre os 9 parametros da cidade, com zonas dinamicas e ordem de resolucao fixa.
 public class InteractionMatrix
@@ -60,6 +69,49 @@ public class InteractionMatrix
         _multiplicadorApoioCrise = multiplicadorApoioCrise;
         _multiplicadorApoioExcesso = multiplicadorApoioExcesso;
         _derivaCorrecaoExcesso = derivaCorrecaoExcesso;
+    }
+
+    // Ordem de resolucao, so leitura, pra quem mostra a matriz.
+    public static IReadOnlyList<CityParameterType> Order => ResolutionOrder;
+
+    public float CrisisThreshold => _zonaCrise;
+    public float ExcessThreshold => _zonaExcesso;
+
+    // Pontos por turno no alvo com a fonte em 100, antes do fator de zona.
+    public static float GetCoefficient(CityParameterType alvo, CityParameterType fonte)
+    {
+        return Coefficients[(int)alvo, (int)fonte];
+    }
+
+    public InteractionZone GetZone(float valor)
+    {
+        if (valor <= _zonaCrise)
+            return InteractionZone.Crise;
+        if (valor >= _zonaExcesso)
+            return InteractionZone.Excesso;
+        return InteractionZone.Saudavel;
+    }
+
+    // Multiplicador que a zona atual da fonte aplica a este coeficiente.
+    public float GetZoneFactor(float valorFonte, float coeficiente)
+    {
+        return FatorZona(valorFonte, coeficiente);
+    }
+
+    // Parcela que a fonte, neste valor, soma ao alvo num turno; mesma conta da resolucao.
+    public float GetTerm(CityParameterType alvo, CityParameterType fonte, float valorFonte)
+    {
+        var coeficiente = Coefficients[(int)alvo, (int)fonte];
+        if (coeficiente == 0f)
+            return 0f;
+        var termo = (valorFonte - _valorNeutro) / _valorNeutro * coeficiente * FatorZona(valorFonte, coeficiente);
+        return termo * _escalaGlobal;
+    }
+
+    // Autocorrecao que o proprio parametro sofre neste valor, so em excesso.
+    public float GetExcessCorrection(float valor)
+    {
+        return DerivaCorrecaoExcesso(valor);
     }
 
     // Aplica interacoes e deriva de manutencao em cada um dos 8 alvos, na ordem fixa de resolucao.

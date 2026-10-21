@@ -27,6 +27,7 @@
     <Compile Include="../../Assets/Scripts/Core/Utilities/CityStats.cs" Link="Source/CityStats.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/TurnBreakdown.cs" Link="Source/TurnBreakdown.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/InteractionMatrix.cs" Link="Source/InteractionMatrix.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/RelationGraph.cs" Link="Source/RelationGraph.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/TurnMachine.cs" Link="Source/TurnMachine.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/RoadNetwork.cs" Link="Source/RoadNetwork.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/PhaseMapProvider.cs" Link="Source/PhaseMapProvider.cs" />

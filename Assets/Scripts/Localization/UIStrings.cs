@@ -330,6 +330,57 @@ public static class UIStrings
         }
     }
 
+    public static string KnowledgeButton => IsPt ? "Saiba mais" : "Learn more";
+    public static string KnowledgeSummaryHeader => IsPt ? "O que é" : "What it is";
+    public static string KnowledgeRealWorldHeader => IsPt ? "Onde existe de verdade" : "In the real world";
+    public static string KnowledgeTradeOffsHeader => IsPt ? "Custos e riscos" : "Costs and risks";
+    public static string KnowledgeSourcesHeader => IsPt ? "Fontes" : "Sources";
+    public static string KnowledgeRelatedHeader => IsPt ? "Veja também" : "See also";
+    public static string KnowledgeLockedEntry => "???";
+
+    public static string KnowledgeCategoryName(KnowledgeCategory category)
+    {
+        switch (category)
+        {
+            case KnowledgeCategory.Card:
+                return IsPt ? "Carta" : "Card";
+            case KnowledgeCategory.Event:
+                return IsPt ? "Evento" : "Event";
+            case KnowledgeCategory.Parameter:
+                return IsPt ? "Parâmetro da cidade" : "City parameter";
+            default:
+                return IsPt ? "Conceito" : "Concept";
+        }
+    }
+
+    public static string AlmanacTitle => IsPt ? "Almanaque" : "Almanac";
+    public static string AlmanacButton => IsPt ? "Almanaque" : "Almanac";
+    public static string AlmanacTabCards => IsPt ? "Cartas" : "Cards";
+    public static string AlmanacTabEvents => IsPt ? "Eventos" : "Events";
+    public static string AlmanacTabConcepts => IsPt ? "Conceitos" : "Concepts";
+
+    public static string AlmanacCounter(int unlocked, int total) => IsPt
+        ? $"{unlocked}/{total} fichas descobertas"
+        : $"{unlocked}/{total} entries found";
+
+    public static string AlmanacRevealSetting => IsPt ? "Revelar almanaque" : "Reveal almanac";
+    public static string AlmanacResetSetting => IsPt ? "Zerar almanaque" : "Reset almanac";
+    public static string AlmanacConfirmSetting => IsPt ? "Toque de novo para confirmar" : "Tap again to confirm";
+    public static string AlmanacRevealedSetting => IsPt ? "Almanaque revelado" : "Almanac revealed";
+    public static string AlmanacResetDoneSetting => IsPt ? "Almanaque zerado" : "Almanac reset";
+
+    public static string AlmanacHint => IsPt
+        ? "Jogue cartas, enfrente eventos e explore a cidade para descobrir novas fichas."
+        : "Play cards, face events and explore the city to find new entries.";
+
+    public static string AlmanacNewEntry(string title) => IsPt
+        ? $"Nova ficha no almanaque: {title}"
+        : $"New almanac entry: {title}";
+
+    public static string AlmanacNewEntries(int count) => IsPt
+        ? $"{count} novas fichas no almanaque"
+        : $"{count} new almanac entries";
+
     public static string ArchetypeDescription(CardArchetype archetype)
     {
         switch (archetype)

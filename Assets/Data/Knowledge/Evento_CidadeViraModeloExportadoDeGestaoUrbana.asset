@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_CidadeViraModeloExportadoDeGestaoUrbana
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Cidade Vira Modelo Exportado de Gest\xE3o Urbana"
+  _titleEn: City Becomes an Exported Model of Urban Management
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Cidades que resolvem bem um problema viram refer\xEAncia e recebem visitas,
+    pr\xEAmios e parcerias."
+  _summaryEn: Cities that solve a problem well become a reference and receive visits,
+    awards and partnerships.
+  _realWorld: "Medell\xEDn inaugurou em 2004 o Metrocable, telef\xE9rico integrado
+    ao metr\xF4 que liga bairros pobres nas encostas, e virou exemplo mundial de
+    urbanismo social."
+  _realWorldEn: "Medell\xEDn opened the Metrocable in 2004, a cable car integrated
+    with the metro connecting poor hillside neighborhoods, and became a global example
+    of social urbanism."
+  _tradeOffs: "Solu\xE7\xF5es copiadas sem adaptar ao contexto local costumam dar
+    errado."
+  _tradeOffsEn: Solutions copied without adapting to local context often fail.
+  _sources:
+  - Label: "Metrocable (Medell\xEDn) (Wikipedia)"
+    Url: https://en.wikipedia.org/wiki/Metrocable_(Medell%C3%ADn)
+  _relatedEntries:
+  - {fileID: 11400000, guid: ccef5318de85cad5c8f11ca3671fa1c4, type: 2}
+  - {fileID: 11400000, guid: ed9959bf382f857698f4b3e1b5d46617, type: 2}

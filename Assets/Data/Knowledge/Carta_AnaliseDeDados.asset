@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_AnaliseDeDados
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "An\xE1lise de Dados"
+  _titleEn: Data Analysis
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Cruzar os dados que a prefeitura j\xE1 tem ajuda a decidir onde agir
+    primeiro, em vez de esperar a reclama\xE7\xE3o chegar."
+  _summaryEn: Cross-referencing the data the city already has helps decide where
+    to act first, instead of waiting for complaints to arrive.
+  _realWorld: "Chicago passou a usar um modelo estat\xEDstico para escolher quais
+    restaurantes inspecionar primeiro e publicou o c\xF3digo aberto do projeto; as
+    infra\xE7\xF5es graves passaram a ser encontradas dias antes."
+  _realWorldEn: Chicago began using a statistical model to choose which restaurants
+    to inspect first and published the project's code openly; serious violations
+    started being found days earlier.
+  _tradeOffs: "Dados incompletos ou enviesados levam a decis\xF5es injustas, e a
+    equipe t\xE9cnica para analisar custa caro."
+  _tradeOffsEn: Incomplete or biased data leads to unfair decisions, and the technical
+    staff to analyze it is expensive.
+  _sources:
+  - Label: Chicago, food-inspections-evaluation (GitHub)
+    Url: https://github.com/Chicago/food-inspections-evaluation
+  _relatedEntries:
+  - {fileID: 11400000, guid: 0afb947232cd57d63b1fdd6c8c4f2158, type: 2}
+  - {fileID: 11400000, guid: 44578aa9bad3d15bf9400867016fb4c8, type: 2}
+  _image: {fileID: 21300000, guid: 79952e6e166fbe822b50a1c7fee61516, type: 3}

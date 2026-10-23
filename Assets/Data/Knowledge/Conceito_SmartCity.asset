@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Conceito_SmartCity
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Smart City
+  _titleEn: Smart City
+  _category: 2
+  _unlockTrigger: 9
+  _summary: "Smart city \xE9 a cidade que usa dados e tecnologia para planejar e
+    operar seus servi\xE7os de forma integrada. O termo \xE9 disputado: para alguns,
+    \xE9 efici\xEAncia; para outros, deve servir antes de tudo \xE0s pessoas."
+  _summaryEn: 'A smart city uses data and technology to plan and run its services
+    in an integrated way. The term is contested: for some it means efficiency; for
+    others it must serve people first.'
+  _realWorld: "O Centro de Opera\xE7\xF5es Rio, inaugurado em 2010, integra dezenas
+    de \xF3rg\xE3os da prefeitura numa sala s\xF3; j\xE1 Songdo, na Coreia do Sul,
+    foi constru\xEDda do zero como cidade inteligente e demorou a atrair moradores."
+  _realWorldEn: Rio de Janeiro's Operations Center, opened in 2010, brings dozens
+    of city agencies into a single room; Songdo, in South Korea, was built from scratch
+    as a smart city and was slow to attract residents.
+  _tradeOffs: "Tecnologia sem participa\xE7\xE3o pode virar vigil\xE2ncia ou vitrine;
+    o resultado depende de para quem ela \xE9 desenhada."
+  _tradeOffsEn: Technology without participation can turn into surveillance or a
+    showcase; the outcome depends on who it is designed for.
+  _sources:
+  - Label: Smart city (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Smart_city
+  - Label: "Centro de Opera\xE7\xF5es Rio (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Centro_de_Opera%C3%A7%C3%B5es_Rio
+  - Label: Songdo (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Songdo_International_Business_District
+  _relatedEntries:
+  - {fileID: 11400000, guid: c9e048a50a5c337e6bcfdbc255764319, type: 2}
+  - {fileID: 11400000, guid: bf1d5ea5ff3d13bf88f3504e73b0d2f2, type: 2}

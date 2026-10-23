@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_FazendaVerticalUrbana
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Fazenda Vertical Urbana
+  _titleEn: Urban Vertical Farm
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Fazendas verticais cultivam verduras em prateleiras empilhadas, com
+    luz artificial e pouca \xE1gua, dentro da cidade."
+  _summaryEn: Vertical farms grow greens on stacked shelves with artificial light
+    and little water, inside the city.
+  _realWorld: "A AeroFarms, nos Estados Unidos, foi uma das maiores do setor e pediu
+    recupera\xE7\xE3o judicial em 2023, pressionada pelo custo de energia."
+  _realWorldEn: AeroFarms, in the United States, was one of the largest in the sector
+    and filed for bankruptcy in 2023, squeezed by energy costs.
+  _tradeOffs: "A luz artificial gasta muita eletricidade, e o modelo s\xF3 se paga
+    com produtos de alto valor."
+  _tradeOffsEn: Artificial lighting uses a lot of electricity, and the model only
+    pays off with high-value crops.
+  _sources:
+  - Label: AeroFarms (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/AeroFarms
+  _relatedEntries:
+  - {fileID: 11400000, guid: c339ba29da16de56c8910a8e65b146ce, type: 2}
+  - {fileID: 11400000, guid: a1e63f6a131133cb2ba5a447f0a97420, type: 2}
+  _image: {fileID: 21300000, guid: c34b7156600d34636b825b0bdd955e46, type: 3}

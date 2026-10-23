@@ -105,3 +105,4 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 6ca5a93799bd31d1d8cd753e7a002c11, type: 3}
   - {fileID: 21300000, guid: 3342f20bcbee36339adef8e67ef194f6, type: 3}
   _artworkFrameRate: 15
+  _knowledgeEntry: {fileID: 11400000, guid: 869bb8833c317e750a18b02bfd03d44d, type: 2}

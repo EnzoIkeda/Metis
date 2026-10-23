@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Conceito_Excesso
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Retornos decrescentes
+  _titleEn: Diminishing returns
+  _category: 2
+  _unlockTrigger: 3
+  _summary: "Investir sempre no mesmo setor rende cada vez menos: a cent\xE9sima
+    c\xE2mera de seguran\xE7a protege muito menos que a primeira. No jogo, um par\xE2metro
+    em excesso apoia menos os outros e tende a voltar ao normal."
+  _summaryEn: 'Investing again and again in the same sector yields less each time:
+    the hundredth security camera protects far less than the first. In the game,
+    a parameter in excess helps the others less and tends to drift back.'
+  _realWorld: "A lei dos rendimentos decrescentes \xE9 um dos princ\xEDpios mais
+    antigos da economia, descrita desde o s\xE9culo XVIII para a agricultura."
+  _realWorldEn: The law of diminishing returns is one of the oldest principles in
+    economics, described since the 18th century for agriculture.
+  _tradeOffs: "Concentrar recursos onde a cidade j\xE1 vai bem deixa de investir
+    onde cada real faria mais diferen\xE7a."
+  _tradeOffsEn: Concentrating resources where the city is already doing well means
+    not investing where each coin would make more difference.
+  _sources:
+  - Label: Diminishing returns (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Diminishing_returns
+  _relatedEntries:
+  - {fileID: 11400000, guid: 7d7c93231d69b0dcb9d57f23e3e9d7c8, type: 2}

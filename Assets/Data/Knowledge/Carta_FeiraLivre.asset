@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_FeiraLivre
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Feira Livre
+  _titleEn: Street Market
+  _category: 0
+  _unlockTrigger: 0
+  _summary: A feira livre leva comida fresca ao bairro, apoia pequenos produtores
+    e movimenta a rua.
+  _summaryEn: Street markets bring fresh food to the neighborhood, support small
+    farmers and bring life to the street.
+  _realWorld: "As feiras de rua fazem parte da rotina de cidades brasileiras como
+    S\xE3o Paulo, onde ocupam ruas diferentes em cada dia da semana."
+  _realWorldEn: "Street markets are part of daily life in Brazilian cities such as
+    S\xE3o Paulo, where they take over different streets each day of the week."
+  _tradeOffs: "A feira fecha a rua, gera lixo e exige limpeza logo depois, e pode
+    competir com o com\xE9rcio fixo."
+  _tradeOffsEn: Markets close the street, produce waste that must be cleaned up right
+    after, and can compete with local shops.
+  _sources:
+  - Label: "Feira livre (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Feira_livre
+  _relatedEntries:
+  - {fileID: 11400000, guid: f48972625365c336cbe6248f56c412da, type: 2}
+  _image: {fileID: 21300000, guid: b96c27902b1befe799817af7389cc798, type: 3}

@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Conceito_Crise
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Ciclos viciosos
+  _titleEn: Vicious circles
+  _category: 2
+  _unlockTrigger: 2
+  _summary: "Quando um setor est\xE1 muito fragilizado, os problemas se alimentam:
+    um servi\xE7o ruim afasta quem paga impostos, o que piora o servi\xE7o. No jogo,
+    um par\xE2metro em crise sofre mais com as press\xF5es e recebe menos ajuda dos
+    outros."
+  _summaryEn: 'When a sector is badly weakened, problems feed on each other: a poor
+    service drives away taxpayers, which makes the service worse. In the game, a
+    parameter in crisis suffers more from pressure and gets less help from the others.'
+  _realWorld: "Detroit perdeu mais da metade da popula\xE7\xE3o desde 1950; com menos
+    arrecada\xE7\xE3o e servi\xE7os piores, a cidade decretou fal\xEAncia em 2013."
+  _realWorldEn: Detroit lost more than half its population after 1950; with less
+    revenue and worse services, the city filed for bankruptcy in 2013.
+  _tradeOffs: "Sair de um ciclo vicioso custa muito mais do que evit\xE1-lo; agir
+    cedo \xE9 mais barato."
+  _tradeOffsEn: Escaping a vicious circle costs far more than avoiding it; acting
+    early is cheaper.
+  _sources:
+  - Label: Vicious circle (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Vicious_circle
+  - Label: Detroit bankruptcy (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Detroit_bankruptcy
+  _relatedEntries:
+  - {fileID: 11400000, guid: ed88fd7c4313a9b05847320c9075b27c, type: 2}
+  - {fileID: 11400000, guid: 3dc4ee9e524a6f138bf829d4e2cd1c01, type: 2}

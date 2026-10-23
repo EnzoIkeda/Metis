@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_EpidemiaSazonal
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Epidemia Sazonal
+  _titleEn: Seasonal Epidemic
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Algumas doen\xE7as voltam todo ano na mesma esta\xE7\xE3o e lotam postos
+    e hospitais."
+  _summaryEn: Some diseases return every year in the same season and overcrowd clinics
+    and hospitals.
+  _realWorld: "A dengue, transmitida pelo mosquito Aedes aegypti, tem picos no ver\xE3o
+    chuvoso brasileiro, e 2024 teve o maior n\xFAmero de casos j\xE1 registrado no
+    pa\xEDs."
+  _realWorldEn: Dengue, spread by the Aedes aegypti mosquito, peaks in Brazil's rainy
+    summer, and 2024 had the highest number of cases ever recorded in the country.
+  _tradeOffs: Eliminar criadouros, vacinar e preparar os postos antes do pico custa
+    menos que socorrer durante a epidemia.
+  _tradeOffsEn: Removing breeding sites, vaccinating and preparing clinics before
+    the peak costs less than responding during the epidemic.
+  _sources:
+  - Label: "Dengue (Minist\xE9rio da Sa\xFAde)"
+    Url: https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/d/dengue
+  - Label: "Hist\xF3ria da dengue no Brasil (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Hist%C3%B3ria_da_dengue_no_Brasil
+  _relatedEntries:
+  - {fileID: 11400000, guid: 8c51b9210a1e67375bf6524c541f4ad3, type: 2}
+  - {fileID: 11400000, guid: 17b7ffccb5578d4ceb4650c05802105d, type: 2}

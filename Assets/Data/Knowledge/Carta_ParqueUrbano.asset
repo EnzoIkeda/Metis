@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_ParqueUrbano
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Parque Urbano
+  _titleEn: Urban Park
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Parques d\xE3o lazer, sombra e contato com a natureza, e muitos tamb\xE9m
+    guardam a \xE1gua da chuva e evitam enchentes."
+  _summaryEn: Parks offer leisure, shade and contact with nature, and many also hold
+    rainwater and prevent floods.
+  _realWorld: O Parque Barigui, em Curitiba, criado em 1972, tem um lago que ajuda
+    a controlar as cheias do rio Barigui.
+  _realWorldEn: Barigui Park in Curitiba, created in 1972, has a lake that helps
+    control the floods of the Barigui River.
+  _tradeOffs: "Parques custam manuten\xE7\xE3o e seguran\xE7a, e podem valorizar
+    tanto o entorno que expulsam moradores antigos."
+  _tradeOffsEn: Parks require upkeep and security, and can raise nearby property
+    values so much that long-time residents are pushed out.
+  _sources:
+  - Label: "Parque Barigui (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Parque_Barigui
+  - Label: OMS, Urban green spaces and health (2016)
+    Url: https://www.who.int/europe/publications/i/item/WHO-EURO-2016-3352-43111-60341
+  _relatedEntries:
+  - {fileID: 11400000, guid: 77acdd2f916c0d35ebe14215b5c0bcbc, type: 2}
+  - {fileID: 11400000, guid: 6210d0737898ce1a2adbc493dd66b326, type: 2}
+  _image: {fileID: 21300000, guid: 511b062ffec624e64b04c7cb699dcc8f, type: 3}

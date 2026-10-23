@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_RedeSolarDistribuida
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Rede Solar Distribu\xEDda"
+  _titleEn: Distributed Solar Network
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Pain\xE9is solares em telhados de casas, escolas e pr\xE9dios p\xFAblicos
+    geram energia perto de onde ela \xE9 usada."
+  _summaryEn: Solar panels on the roofs of homes, schools and public buildings generate
+    power close to where it is used.
+  _realWorld: "No Brasil, a gera\xE7\xE3o distribu\xEDda cresceu r\xE1pido e ganhou
+    um marco legal com a Lei 14.300, de 2022, que define como a energia excedente
+    \xE9 compensada na conta."
+  _realWorldEn: In Brazil, distributed generation grew fast and gained a legal framework
+    with Law 14,300 of 2022, which sets how surplus power is credited on the bill.
+  _tradeOffs: "Quem n\xE3o tem telhado ou dinheiro para instalar fica de fora, e
+    muita gera\xE7\xE3o ao meio-dia sobrecarrega a rede."
+  _tradeOffsEn: People without a roof or money to install are left out, and too much
+    midday generation strains the grid.
+  _sources:
+  - Label: Lei 14.300/2022 (Planalto)
+    Url: https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2022/lei/l14300.htm
+  _relatedEntries:
+  - {fileID: 11400000, guid: f0bfc489cf504c3c2a38fd4a53a57c3a, type: 2}
+  - {fileID: 11400000, guid: a1e63f6a131133cb2ba5a447f0a97420, type: 2}
+  _image: {fileID: 21300000, guid: 827aaa7db500037ce8206b81003dd0ef, type: 3}

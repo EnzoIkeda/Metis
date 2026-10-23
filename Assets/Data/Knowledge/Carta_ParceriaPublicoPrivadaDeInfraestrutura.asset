@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_ParceriaPublicoPrivadaDeInfraestrutura
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Parceria P\xFAblico-Privada de Infraestrutura"
+  _titleEn: Public-Private Infrastructure Partnership
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Na PPP, uma empresa privada constr\xF3i e opera uma obra p\xFAblica
+    por d\xE9cadas e \xE9 paga pelo governo, pelos usu\xE1rios ou pelos dois."
+  _summaryEn: In a public-private partnership, a private company builds and runs
+    a public work for decades and is paid by the government, users or both.
+  _realWorld: "A Linha 4 Amarela do Metr\xF4 de S\xE3o Paulo foi a primeira PPP do
+    pa\xEDs, contratada com base na Lei 11.079 de 2004."
+  _realWorldEn: "S\xE3o Paulo Metro's Line 4 Yellow was Brazil's first public-private
+    partnership, contracted under Law 11,079 of 2004."
+  _tradeOffs: "Contratos longos e complexos podem favorecer a empresa, e o governo
+    continua respons\xE1vel se o servi\xE7o falhar."
+  _tradeOffsEn: Long, complex contracts can favor the company, and the government
+    remains responsible if the service fails.
+  _sources:
+  - Label: "Linha 4 do Metr\xF4 de S\xE3o Paulo (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Linha_4_do_Metr%C3%B4_de_S%C3%A3o_Paulo
+  - Label: Lei 11.079/2004 (Planalto)
+    Url: https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2004/lei/l11079.htm
+  _relatedEntries:
+  - {fileID: 11400000, guid: f46480b9d76c1934296b8619096de254, type: 2}
+  - {fileID: 11400000, guid: cc8f4c6214603774283e4cefd1d8c358, type: 2}
+  _image: {fileID: 21300000, guid: dfb62ec0aa165814c8f5b359deb36ce7, type: 3}

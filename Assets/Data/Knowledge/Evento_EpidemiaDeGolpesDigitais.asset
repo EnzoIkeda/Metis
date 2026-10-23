@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_EpidemiaDeGolpesDigitais
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Epidemia de Golpes Digitais
+  _titleEn: Digital Scam Epidemic
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Com mais servi\xE7os e pagamentos pela internet, cresce tamb\xE9m a
+    fraude digital, que atinge principalmente quem tem menos experi\xEAncia com tecnologia."
+  _summaryEn: With more services and payments online, digital fraud also grows, hitting
+    mostly those with less experience with technology.
+  _realWorld: "O Banco Central criou mecanismos de seguran\xE7a no Pix, como o de
+    devolu\xE7\xE3o em caso de fraude, depois do aumento de golpes com transfer\xEAncias
+    instant\xE2neas."
+  _realWorldEn: Brazil's Central Bank added safeguards to Pix, its instant payment
+    system, such as a refund mechanism for fraud, after scams with instant transfers
+    increased.
+  _tradeOffs: "Educa\xE7\xE3o digital, alertas e canais r\xE1pidos de den\xFAncia
+    reduzem os danos."
+  _tradeOffsEn: Digital literacy, alerts and fast reporting channels reduce the harm.
+  _sources:
+  - Label: Banco Central, Pix
+    Url: https://www.bcb.gov.br/estabilidadefinanceira/pix
+  _relatedEntries:
+  - {fileID: 11400000, guid: a0c42ca281c6d41c6880a4208cf2d460, type: 2}
+  - {fileID: 11400000, guid: a423de8c2aefd454d884124f12adfce3, type: 2}

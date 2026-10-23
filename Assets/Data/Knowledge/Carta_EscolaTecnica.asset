@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_EscolaTecnica
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Escola T\xE9cnica"
+  _titleEn: Technical School
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "O ensino t\xE9cnico forma profissionais em poucos anos para as fun\xE7\xF5es
+    que a economia local procura."
+  _summaryEn: Technical education trains professionals in a few years for the jobs
+    the local economy needs.
+  _realWorld: "O Centro Paula Souza, criado em 1969, mant\xE9m as Etecs e Fatecs
+    de S\xE3o Paulo; desde 2008, os Institutos Federais levam ensino t\xE9cnico gratuito
+    a centenas de cidades."
+  _realWorldEn: "S\xE3o Paulo state's Centro Paula Souza, created in 1969, runs its
+    technical schools and colleges; since 2008, Brazil's Federal Institutes have
+    offered free technical education in hundreds of cities."
+  _tradeOffs: "Os cursos precisam acompanhar o mercado de trabalho, e sem emprego
+    local os formados v\xE3o embora."
+  _tradeOffsEn: Courses must keep up with the job market, and without local jobs
+    the graduates leave.
+  _sources:
+  - Label: "Centro Paula Souza (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Centro_Paula_Souza
+  - Label: Lei 11.892/2008, Institutos Federais (Planalto)
+    Url: https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2008/lei/l11892.htm
+  _relatedEntries:
+  - {fileID: 11400000, guid: ecf51ed645655f64d84bbb932f21ab75, type: 2}
+  - {fileID: 11400000, guid: d76f59c850d038c608373277f673a9b8, type: 2}
+  _image: {fileID: 21300000, guid: ef6d3496a8dd719ca8eac246d9b11fe7, type: 3}

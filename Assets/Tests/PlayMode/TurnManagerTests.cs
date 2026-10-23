@@ -233,13 +233,14 @@ public class TurnManagerTests
         Assert.That(turnManager.LastBreakdown, Is.Null);
         Assert.That(turnManager.PlayCard(card), Is.True);
         var start = Time.realtimeSinceStartup;
-        while (turnManager.Machine.CurrentPhase != TurnPhase.Event && Time.realtimeSinceStartup - start < 5f)
+        // O impacto conta em tempo de jogo; com o Editor fora de foco cada quadro avanca no maximo 0,33 s.
+        while (turnManager.Machine.CurrentPhase != TurnPhase.Event && Time.realtimeSinceStartup - start < 20f)
             yield return null;
         Assert.That(turnManager.Machine.CurrentPhase, Is.EqualTo(TurnPhase.Event));
 
         turnManager.AcknowledgeEvent();
         start = Time.realtimeSinceStartup;
-        while (turnManager.LastBreakdown == null && Time.realtimeSinceStartup - start < 5f)
+        while (turnManager.LastBreakdown == null && Time.realtimeSinceStartup - start < 20f)
             yield return null;
 
         var last = turnManager.LastBreakdown;

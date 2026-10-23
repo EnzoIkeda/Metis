@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_ChuvasFortesEAlagamentos
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Chuvas Fortes e Alagamentos
+  _titleEn: Heavy Rains and Flooding
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Chuvas extremas sobrecarregam a drenagem; quanto mais solo impermeabilizado,
+    mais a \xE1gua corre para as ruas."
+  _summaryEn: Extreme rainfall overwhelms drainage; the more paved-over the ground,
+    the more water runs into the streets.
+  _realWorld: "Em maio de 2024, enchentes atingiram a maior parte dos munic\xEDpios
+    do Rio Grande do Sul; em Porto Alegre, falhas no sistema de prote\xE7\xE3o contra
+    cheias deixaram bairros inteiros debaixo d'\xE1gua."
+  _realWorldEn: In May 2024, floods hit most of Rio Grande do Sul's municipalities;
+    in Porto Alegre, failures in the flood protection system left whole neighborhoods
+    under water.
+  _tradeOffs: "Manuten\xE7\xE3o de diques e bombas, \xE1reas verdes que absorvem
+    \xE1gua e alerta antecipado custam menos que a reconstru\xE7\xE3o."
+  _tradeOffsEn: Maintaining levees and pumps, green areas that absorb water and early
+    warning cost less than rebuilding.
+  _sources:
+  - Label: "Enchentes no Rio Grande do Sul em 2024 (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Enchentes_no_Rio_Grande_do_Sul_em_2024
+  _relatedEntries:
+  - {fileID: 11400000, guid: 66f77601779bb77f6a9573bcd079d788, type: 2}
+  - {fileID: 11400000, guid: 6154e0a377c7bc759b376966fb85eb91, type: 2}

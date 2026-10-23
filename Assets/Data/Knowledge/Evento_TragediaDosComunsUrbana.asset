@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_TragediaDosComunsUrbana
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Trag\xE9dia dos Comuns Urbana"
+  _titleEn: Urban Tragedy of the Commons
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Garrett Hardin descreveu em 1968 a trag\xE9dia dos comuns: quando cada
+    um usa um recurso compartilhado pensando s\xF3 em si, o recurso se esgota para
+    todos."
+  _summaryEn: 'Garrett Hardin described the tragedy of the commons in 1968: when
+    everyone uses a shared resource thinking only of themselves, it runs out for
+    all.'
+  _realWorld: "Elinor Ostrom, Nobel de Economia em 2009, mostrou que comunidades
+    conseguem gerir bens comuns com regras pr\xF3prias, sem depender s\xF3 do governo
+    ou do mercado."
+  _realWorldEn: Elinor Ostrom, winner of the 2009 Nobel Prize in Economics, showed
+    that communities can manage common goods with their own rules, without relying
+    only on government or markets.
+  _tradeOffs: "Regras claras, fiscaliza\xE7\xE3o e participa\xE7\xE3o dos usu\xE1rios
+    protegem os bens comuns."
+  _tradeOffsEn: Clear rules, monitoring and user participation protect common goods.
+  _sources:
+  - Label: Tragedy of the commons (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Tragedy_of_the_commons
+  - Label: Nobel, Elinor Ostrom (2009)
+    Url: https://www.nobelprize.org/prizes/economic-sciences/2009/ostrom/facts/
+  _relatedEntries:
+  - {fileID: 11400000, guid: 2b192f000624e013aa9fad842858b5a7, type: 2}
+  - {fileID: 11400000, guid: f8957300cb8f45694a60f8dfe5a5134e, type: 2}

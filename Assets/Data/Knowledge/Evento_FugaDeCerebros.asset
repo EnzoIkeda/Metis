@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_FugaDeCerebros
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Fuga de C\xE9rebros"
+  _titleEn: Brain Drain
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Profissionais qualificados v\xE3o embora quando encontram melhores sal\xE1rios
+    e condi\xE7\xF5es de pesquisa em outro lugar."
+  _summaryEn: Skilled professionals leave when they find better pay and research
+    conditions elsewhere.
+  _realWorld: "Docquier e Rapoport revisaram as evid\xEAncias sobre a emigra\xE7\xE3o
+    de pessoas qualificadas e seus efeitos, que podem ser negativos ou positivos
+    para o pa\xEDs de origem."
+  _realWorldEn: Docquier and Rapoport reviewed the evidence on skilled emigration
+    and its effects, which can be negative or positive for the country of origin.
+  _tradeOffs: "Investir em forma\xE7\xE3o sem criar oportunidades locais acaba exportando
+    talentos."
+  _tradeOffsEn: Investing in training without creating local opportunities ends up
+    exporting talent.
+  _sources:
+  - Label: Brain drain (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Brain_drain
+  _relatedEntries:
+  - {fileID: 11400000, guid: 3bb4c72dfbd0ad2a09251e50ca4524d6, type: 2}
+  - {fileID: 11400000, guid: ecf51ed645655f64d84bbb932f21ab75, type: 2}

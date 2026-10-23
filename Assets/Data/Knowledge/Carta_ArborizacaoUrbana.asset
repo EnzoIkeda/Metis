@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_ArborizacaoUrbana
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Arboriza\xE7\xE3o Urbana"
+  _titleEn: Urban Tree Planting
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "\xC1rvores sombreiam ruas, reduzem as ilhas de calor e filtram parte
+    da polui\xE7\xE3o do ar. Uma rua arborizada pode ficar v\xE1rios graus mais fresca
+    que uma rua sem sombra."
+  _summaryEn: Trees shade streets, reduce heat islands and filter part of the air
+    pollution. A tree-lined street can be several degrees cooler than one without
+    shade.
+  _realWorld: "Estudos reunidos sobre florestas urbanas estimam que cada 1% a mais
+    de cobertura de copas reduz a temperatura do ar entre 0,04 \xB0C e 0,2 \xB0C."
+  _realWorldEn: "Studies on urban forests estimate that each extra 1% of tree canopy
+    cover lowers air temperature by 0.04 \xB0C to 0.2 \xB0C."
+  _tradeOffs: "\xC1rvores levam anos para crescer, pedem poda e manuten\xE7\xE3o,
+    e a esp\xE9cie errada quebra cal\xE7adas e fios."
+  _tradeOffsEn: Trees take years to grow, need pruning and care, and the wrong species
+    breaks sidewalks and power lines.
+  _sources:
+  - Label: Urban forest (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Urban_forest
+  - Label: Urban heat island (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Urban_heat_island
+  _relatedEntries:
+  - {fileID: 11400000, guid: 6154e0a377c7bc759b376966fb85eb91, type: 2}
+  - {fileID: 11400000, guid: 1c354c380745372f39057271c625b5b0, type: 2}
+  _image: {fileID: 21300000, guid: 5c0ebea52b0d26887a33f08fce000773, type: 3}

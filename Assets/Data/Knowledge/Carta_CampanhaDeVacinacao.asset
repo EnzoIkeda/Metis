@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_CampanhaDeVacinacao
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Campanha de Vacina\xE7\xE3o"
+  _titleEn: Vaccination Campaign
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Vacinar em massa protege quem toma a vacina e tamb\xE9m quem n\xE3o
+    pode tomar, porque o v\xEDrus passa a circular menos."
+  _summaryEn: Mass vaccination protects those who get the vaccine and also those
+    who cannot, because the virus circulates less.
+  _realWorld: "O Programa Nacional de Imuniza\xE7\xF5es, criado em 1973, levou o
+    Brasil a eliminar a poliomielite e oferece dezenas de vacinas de gra\xE7a pelo
+    SUS."
+  _realWorldEn: Brazil's National Immunization Program, created in 1973, led the
+    country to eliminate polio and offers dozens of vaccines for free through the
+    public health system.
+  _tradeOffs: "Campanhas exigem cadeia de frio, equipes e comunica\xE7\xE3o cont\xEDnua;
+    a desinforma\xE7\xE3o faz a cobertura cair."
+  _tradeOffsEn: Campaigns require cold chains, staff and constant communication;
+    misinformation makes coverage drop.
+  _sources:
+  - Label: "Programa Nacional de Imuniza\xE7\xF5es (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Programa_Nacional_de_Imuniza%C3%A7%C3%B5es
+  - Label: "Vacina\xE7\xE3o (Minist\xE9rio da Sa\xFAde)"
+    Url: https://www.gov.br/saude/pt-br/vacinacao
+  _relatedEntries:
+  - {fileID: 11400000, guid: bf831178cac7ea990b92856e7cbb7d4f, type: 2}
+  - {fileID: 11400000, guid: 17b7ffccb5578d4ceb4650c05802105d, type: 2}
+  _image: {fileID: 21300000, guid: 4b6b85d7e26bf35cab28d869fe8f52ca, type: 3}

@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_RepasseFederal
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Repasse Federal
+  _titleEn: Federal Transfer
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Parte dos impostos arrecadados pela Uni\xE3o volta aos munic\xEDpios
+    em repasses obrigat\xF3rios e volunt\xE1rios."
+  _summaryEn: Part of the taxes collected by the federal government returns to municipalities
+    through mandatory and discretionary transfers.
+  _realWorld: "O Fundo de Participa\xE7\xE3o dos Munic\xEDpios, previsto na Constitui\xE7\xE3o,
+    \xE9 a principal fonte de receita de grande parte das cidades pequenas brasileiras."
+  _realWorldEn: The Municipal Participation Fund, set out in Brazil's Constitution,
+    is the main source of revenue for many small Brazilian cities.
+  _tradeOffs: "Depender de repasses deixa a cidade sem controle sobre o pr\xF3prio
+    or\xE7amento."
+  _tradeOffsEn: Depending on transfers leaves the city without control over its own
+    budget.
+  _sources:
+  - Label: "Fundo de Participa\xE7\xE3o dos Munic\xEDpios (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Fundo_de_Participa%C3%A7%C3%A3o_dos_Munic%C3%ADpios
+  - Label: "Constitui\xE7\xE3o Federal (Planalto)"
+    Url: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
+  _relatedEntries:
+  - {fileID: 11400000, guid: a16497e74769f0066b65644f094d7002, type: 2}
+  - {fileID: 11400000, guid: 7b1f1485f028b7361ba5abb3194b45a7, type: 2}

@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_AuditoriaRevelaViesAlgoritmico
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Auditoria Revela Vi\xE9s Algor\xEDtmico"
+  _titleEn: Audit Reveals Algorithmic Bias
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Algoritmos treinados com dados do passado podem repetir e ampliar discrimina\xE7\xF5es,
+    sem que ningu\xE9m perceba."
+  _summaryEn: Algorithms trained on past data can repeat and amplify discrimination
+    without anyone noticing.
+  _realWorld: "Na Holanda, um sistema usado para apontar fraudes em aux\xEDlios para
+    creche acusou injustamente milhares de fam\xEDlias, muitas de origem estrangeira;
+    o esc\xE2ndalo derrubou o governo em 2021."
+  _realWorldEn: In the Netherlands, a system used to flag childcare benefit fraud
+    wrongly accused thousands of families, many of foreign origin; the scandal brought
+    down the government in 2021.
+  _tradeOffs: "Auditar os algoritmos, explicar as decis\xF5es e manter uma pessoa
+    respons\xE1vel pela revis\xE3o evita injusti\xE7as."
+  _tradeOffsEn: Auditing algorithms, explaining decisions and keeping a person accountable
+    for review prevents injustice.
+  _sources:
+  - Label: Dutch childcare benefits scandal (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Dutch_childcare_benefits_scandal
+  _relatedEntries:
+  - {fileID: 11400000, guid: 869bb8833c317e750a18b02bfd03d44d, type: 2}
+  - {fileID: 11400000, guid: bd0396398a587aace8b915c5a4ed9995, type: 2}

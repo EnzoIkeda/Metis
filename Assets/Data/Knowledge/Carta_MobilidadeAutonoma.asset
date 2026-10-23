@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_MobilidadeAutonoma
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Mobilidade Aut\xF4noma"
+  _titleEn: Autonomous Mobility
+  _category: 0
+  _unlockTrigger: 0
+  _summary: Carros que dirigem sozinhos prometem menos acidentes por falha humana
+    e mais tempo livre para os passageiros.
+  _summaryEn: Self-driving cars promise fewer crashes caused by human error and more
+    free time for passengers.
+  _realWorld: "A Waymo come\xE7ou em 2020 a oferecer em Phoenix, nos Estados Unidos,
+    corridas de t\xE1xi sem motorista abertas ao p\xFAblico."
+  _realWorldEn: In 2020 Waymo began offering driverless taxi rides open to the public
+    in Phoenix, in the United States.
+  _tradeOffs: "Acidentes ainda acontecem, motoristas perdem emprego, e viagens mais
+    f\xE1ceis podem aumentar o tr\xE2nsito."
+  _tradeOffsEn: Crashes still happen, drivers lose jobs, and easier trips can increase
+    traffic.
+  _sources:
+  - Label: Waymo (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Waymo
+  _relatedEntries:
+  - {fileID: 11400000, guid: 19f56f1e635e020e3a124a679864577a, type: 2}
+  - {fileID: 11400000, guid: 1d59a0a4a3e4a856c9d3899a9107da9c, type: 2}
+  _image: {fileID: 21300000, guid: b1133149a57d1f63d9ca4c70b91e5b3f, type: 3}

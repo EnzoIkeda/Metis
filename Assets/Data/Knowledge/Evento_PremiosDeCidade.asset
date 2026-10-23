@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_PremiosDeCidade
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Pr\xEAmios e Rankings de Cidades"
+  _titleEn: City Awards and Rankings
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Pr\xEAmios e rankings comparam cidades em sustentabilidade, tecnologia
+    e qualidade de vida e d\xE3o visibilidade a quem se destaca."
+  _summaryEn: Awards and rankings compare cities on sustainability, technology and
+    quality of life and give visibility to those that stand out.
+  _realWorld: "O IMD Smart City Index avalia como os moradores percebem a tecnologia
+    na sua cidade; a Uni\xE3o Europeia escolhe todo ano uma Capital Verde Europeia."
+  _realWorldEn: The IMD Smart City Index assesses how residents perceive technology
+    in their city; the European Union picks a European Green Capital every year.
+  _tradeOffs: "Rankings medem s\xF3 parte da realidade, e perseguir a posi\xE7\xE3o
+    pode desviar recursos do que a popula\xE7\xE3o mais precisa."
+  _tradeOffsEn: Rankings measure only part of reality, and chasing a position can
+    divert resources from what residents need most.
+  _sources:
+  - Label: IMD Smart City Observatory
+    Url: https://www.imd.org/smart-city-observatory/home/
+  - Label: European Green Capital Award
+    Url: https://environment.ec.europa.eu/topics/urban-environment/european-green-capital-award_en
+  _relatedEntries:
+  - {fileID: 11400000, guid: 76acf99e7c5e11ac28cc5cd829808818, type: 2}
+  - {fileID: 11400000, guid: 129c6e618e980d5f3a6dcf18c110e3cb, type: 2}

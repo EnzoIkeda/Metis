@@ -34,6 +34,8 @@ public class ChangeBreakdownPopupView : MonoBehaviour
 
     private CityParameterType _shownParameter;
 
+    public event Action Opened;
+
     private void Start()
     {
         if (_closeButton != null)
@@ -69,6 +71,7 @@ public class ChangeBreakdownPopupView : MonoBehaviour
             _bodyText.text = BuildBody(parameter);
         if (_panelRoot != null)
             _panelRoot.SetActive(true);
+        Opened?.Invoke();
     }
 
     private void Hide()

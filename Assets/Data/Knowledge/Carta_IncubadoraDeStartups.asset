@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_IncubadoraDeStartups
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Incubadora de Startups
+  _titleEn: Startup Incubator
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Incubadoras oferecem espa\xE7o, mentoria e contatos para empresas nascentes
+    de tecnologia nos primeiros anos."
+  _summaryEn: Incubators provide space, mentoring and contacts for young technology
+    companies in their first years.
+  _realWorld: "O Cietec, incubadora ligada \xE0 USP em S\xE3o Paulo, j\xE1 apoiou
+    centenas de empresas de base tecnol\xF3gica."
+  _realWorldEn: "Cietec, an incubator linked to the University of S\xE3o Paulo, has
+    supported hundreds of technology-based companies."
+  _tradeOffs: A maioria das startups fecha, e o retorno em empregos e impostos demora
+    anos.
+  _tradeOffsEn: Most startups close, and the payoff in jobs and taxes takes years.
+  _sources:
+  - Label: Cietec
+    Url: https://www.cietec.org.br/
+  _relatedEntries:
+  - {fileID: 11400000, guid: 9b6e9ab52af9bf92e8e3a0da3193ce60, type: 2}
+  - {fileID: 11400000, guid: 7d31edbc82f4d2e9fa80d2c13adc1e75, type: 2}
+  _image: {fileID: 21300000, guid: abc510de56e8a24a68e25c79eb3178de, type: 3}

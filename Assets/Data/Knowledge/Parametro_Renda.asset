@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Parametro_Renda
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Renda
+  _titleEn: Income
+  _category: 3
+  _unlockTrigger: 1
+  _summary: "A Renda \xE9 o dinheiro que a prefeitura arrecada para pagar obras e
+    servi\xE7os: impostos municipais como IPTU e ISS, mais repasses do estado e da
+    Uni\xE3o. Sem caixa, nenhuma pol\xEDtica sai do papel."
+  _summaryEn: 'Income is the money the city government collects to pay for works
+    and services: local taxes such as property and service taxes, plus transfers
+    from the state and federal governments. Without cash, no policy leaves the paper.'
+  _realWorld: "No Brasil, muitos munic\xEDpios pequenos dependem mais dos repasses
+    federais, como o Fundo de Participa\xE7\xE3o dos Munic\xEDpios, do que da pr\xF3pria
+    arrecada\xE7\xE3o."
+  _realWorldEn: In Brazil, many small municipalities depend more on federal transfers,
+    such as the Municipal Participation Fund, than on their own tax collection.
+  _tradeOffs: "Aumentar a arrecada\xE7\xE3o costuma ser impopular, e depender de
+    repasses deixa a cidade vulner\xE1vel a crises fora do seu controle."
+  _tradeOffsEn: Raising revenue is usually unpopular, and depending on transfers
+    leaves the city exposed to crises outside its control.
+  _sources:
+  - Label: "Fundo de Participa\xE7\xE3o dos Munic\xEDpios (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Fundo_de_Participa%C3%A7%C3%A3o_dos_Munic%C3%ADpios
+  _relatedEntries:
+  - {fileID: 11400000, guid: 431f00ebf129b83b69c60865218b081a, type: 2}
+  - {fileID: 11400000, guid: 7b1f1485f028b7361ba5abb3194b45a7, type: 2}
+  _image: {fileID: 21300000, guid: eebf01c403ad1467aa3c2f43dfa1bc81, type: 3}

@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_GreveDosTransportes
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Greve dos Transportes
+  _titleEn: Transport Strike
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Uma paralisa\xE7\xE3o no transporte atinge toda a cadeia: trabalhadores
+    n\xE3o chegam, mercadorias n\xE3o circulam."
+  _summaryEn: 'A transport stoppage hits the whole chain: workers cannot get to work
+    and goods stop moving.'
+  _realWorld: "A greve dos caminhoneiros de maio de 2018 causou falta de combust\xEDvel,
+    alimentos e rem\xE9dios em todo o Brasil."
+  _realWorldEn: The truck drivers' strike of May 2018 caused shortages of fuel, food
+    and medicine across Brazil.
+  _tradeOffs: "Depender de um s\xF3 modo de transporte deixa a cidade vulner\xE1vel;
+    negocia\xE7\xE3o e planos de conting\xEAncia reduzem o impacto."
+  _tradeOffsEn: Depending on a single mode of transport leaves the city vulnerable;
+    negotiation and contingency plans reduce the impact.
+  _sources:
+  - Label: "Greve dos caminhoneiros no Brasil em 2018 (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Greve_dos_caminhoneiros_no_Brasil_em_2018
+  _relatedEntries:
+  - {fileID: 11400000, guid: 08a29032f637300b381c2a5ef818b2a7, type: 2}
+  - {fileID: 11400000, guid: 31b7a623f4288a386bedc39b0de9ab3b, type: 2}

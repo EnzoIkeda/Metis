@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_EfeitoNIMBY
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Efeito NIMBY
+  _titleEn: NIMBY Effect
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "NIMBY, do ingl\xEAs n\xE3o no meu quintal, \xE9 a oposi\xE7\xE3o de
+    moradores a obras que todos acham necess\xE1rias, desde que fiquem em outro bairro."
+  _summaryEn: NIMBY, short for not in my backyard, is residents' opposition to projects
+    everyone agrees are needed, as long as they go somewhere else.
+  _realWorld: "Esta\xE7\xF5es de transporte, abrigos, aterros e moradia popular s\xE3o
+    alvos frequentes de oposi\xE7\xE3o organizada, que atrasa ou muda de lugar as
+    obras."
+  _realWorldEn: Transit stations, shelters, landfills and affordable housing are
+    frequent targets of organized opposition, which delays or relocates projects.
+  _tradeOffs: Ouvir os moradores cedo e compensar os impactos ajuda; ceder sempre
+    empurra os projetos para bairros sem voz.
+  _tradeOffsEn: Listening to residents early and offsetting impacts helps; always
+    giving in pushes projects into neighborhoods with no voice.
+  _sources:
+  - Label: NIMBY (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/NIMBY
+  _relatedEntries:
+  - {fileID: 11400000, guid: f82e5a0d834ec4341a55243f4bf22386, type: 2}
+  - {fileID: 11400000, guid: cb80dcfddda669ed6b20ede7cc8618b8, type: 2}

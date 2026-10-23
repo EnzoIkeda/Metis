@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_ConjuntoHabitacional
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Conjunto Habitacional
+  _titleEn: Housing Project
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Construir moradia popular em escala reduz o d\xE9ficit habitacional
+    e tira fam\xEDlias de \xE1reas de risco."
+  _summaryEn: Building affordable housing at scale reduces the housing shortage and
+    moves families out of risk areas.
+  _realWorld: "O programa Minha Casa, Minha Vida, lan\xE7ado em 2009, financiou milh\xF5es
+    de moradias no Brasil."
+  _realWorldEn: Brazil's Minha Casa, Minha Vida program, launched in 2009, financed
+    millions of homes.
+  _tradeOffs: "Conjuntos longe do centro, sem emprego, transporte e servi\xE7os por
+    perto, criam periferias isoladas."
+  _tradeOffsEn: Projects far from the center, without nearby jobs, transport and
+    services, create isolated outskirts.
+  _sources:
+  - Label: "Programa Minha Casa, Minha Vida (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Programa_Minha_Casa,_Minha_Vida
+  _relatedEntries:
+  - {fileID: 11400000, guid: 08cdbf2ee468763b7864300c69bfa9ce, type: 2}
+  - {fileID: 11400000, guid: f22ff8e40f4d6cc359421b2af6be199e, type: 2}
+  _image: {fileID: 21300000, guid: f0328923ea281ecae9c00fd2cee103a9, type: 3}

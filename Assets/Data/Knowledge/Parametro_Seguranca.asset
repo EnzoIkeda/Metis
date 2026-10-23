@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Parametro_Seguranca
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Seguran\xE7a"
+  _titleEn: Security
+  _category: 3
+  _unlockTrigger: 1
+  _summary: "A Seguran\xE7a mede a capacidade da cidade de proteger as pessoas: policiamento,
+    guarda municipal, defesa civil, ilumina\xE7\xE3o e espa\xE7os p\xFAblicos cuidados."
+  _summaryEn: 'Security measures the city''s ability to protect people: policing,
+    municipal guards, civil defense, street lighting and well-kept public spaces.'
+  _realWorld: "O Anu\xE1rio Brasileiro de Seguran\xE7a P\xFAblica, publicado todo
+    ano pelo F\xF3rum Brasileiro de Seguran\xE7a P\xFAblica, re\xFAne os dados de
+    viol\xEAncia de todos os estados."
+  _realWorldEn: The Brazilian Public Security Yearbook, published every year by the
+    Brazilian Public Security Forum, gathers violence data from every state.
+  _tradeOffs: "Mais pol\xEDcia n\xE3o basta sozinha: sem preven\xE7\xE3o, urbanismo
+    e servi\xE7os sociais, o crime muda de lugar, e abordagens duras podem gerar
+    abusos."
+  _tradeOffsEn: 'More police alone is not enough: without prevention, urban design
+    and social services, crime moves elsewhere, and heavy-handed approaches can lead
+    to abuse.'
+  _sources:
+  - Label: "Anu\xE1rio Brasileiro de Seguran\xE7a P\xFAblica"
+    Url: https://forumseguranca.org.br/anuario-brasileiro-seguranca-publica/
+  _relatedEntries:
+  - {fileID: 11400000, guid: 8fc9cf09b084f90d5aeb82aec5724cbe, type: 2}
+  - {fileID: 11400000, guid: 08cdbf2ee468763b7864300c69bfa9ce, type: 2}
+  _image: {fileID: 21300000, guid: 14f1b4637a8131ef2af8316c5d113788, type: 3}

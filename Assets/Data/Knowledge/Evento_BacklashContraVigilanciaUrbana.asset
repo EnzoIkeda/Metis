@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_BacklashContraVigilanciaUrbana
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Backlash contra Vigil\xE2ncia Urbana"
+  _titleEn: Backlash against Urban Surveillance
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Sensores e c\xE2meras espalhados pela cidade coletam dados sobre as
+    pessoas; sem debate p\xFAblico, a rea\xE7\xE3o pode travar projetos."
+  _summaryEn: Sensors and cameras across the city collect data about people; without
+    public debate, the backlash can stall projects.
+  _realWorld: "O bairro inteligente que a Sidewalk Labs, empresa do Google, planejava
+    em Toronto foi cancelado em 2020 depois de cr\xEDticas sobre privacidade e controle
+    dos dados."
+  _realWorldEn: The smart neighborhood that Sidewalk Labs, a Google sister company,
+    planned in Toronto was canceled in 2020 after criticism over privacy and data
+    control.
+  _tradeOffs: "Transpar\xEAncia sobre o que \xE9 coletado, limites claros de uso
+    e participa\xE7\xE3o dos moradores desde o in\xEDcio."
+  _tradeOffsEn: Transparency about what is collected, clear limits on use and resident
+    participation from the start.
+  _sources:
+  - Label: Sidewalk Toronto (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Sidewalk_Toronto
+  _relatedEntries:
+  - {fileID: 11400000, guid: 129c6e618e980d5f3a6dcf18c110e3cb, type: 2}
+  - {fileID: 11400000, guid: c9e048a50a5c337e6bcfdbc255764319, type: 2}

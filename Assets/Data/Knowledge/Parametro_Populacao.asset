@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Parametro_Populacao
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Popula\xE7\xE3o"
+  _titleEn: Population
+  _category: 3
+  _unlockTrigger: 1
+  _summary: "A Popula\xE7\xE3o \xE9 o n\xFAmero de moradores. Mais gente traz mais
+    trabalhadores e impostos, mas tamb\xE9m mais demanda por moradia, transporte,
+    energia e servi\xE7os."
+  _summaryEn: Population is the number of residents. More people bring more workers
+    and taxes, but also more demand for housing, transport, energy and services.
+  _realWorld: "O IBGE publica a popula\xE7\xE3o de cada munic\xEDpio brasileiro;
+    cidades entre cerca de 100 mil e 500 mil habitantes, a faixa usada no jogo, costumam
+    ser chamadas de cidades m\xE9dias."
+  _realWorldEn: Brazil's statistics office (IBGE) publishes the population of every
+    municipality; cities between roughly 100,000 and 500,000 people, the range used
+    in the game, are usually called medium-sized.
+  _tradeOffs: "Crescer r\xE1pido demais sem planejamento gera adensamento, periferias
+    sem servi\xE7o e tr\xE2nsito; perder popula\xE7\xE3o esvazia a economia."
+  _tradeOffsEn: Growing too fast without planning brings crowding, unserved outskirts
+    and traffic; losing population drains the economy.
+  _sources:
+  - Label: "Mobilidade urbana (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Mobilidade_urbana
+  - Label: "Plano diretor (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Plano_diretor
+  _relatedEntries:
+  - {fileID: 11400000, guid: 7540b699f19d878e486ba848539b0e11, type: 2}
+  - {fileID: 11400000, guid: e0e059a830b06de019028c5ae7788080, type: 2}
+  _image: {fileID: 21300000, guid: fba383fbf1bb3b7a4b642c053c2d3823, type: 3}

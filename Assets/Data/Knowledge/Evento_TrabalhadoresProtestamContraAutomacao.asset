@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_TrabalhadoresProtestamContraAutomacao
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Trabalhadores Protestam contra Automa\xE7\xE3o"
+  _titleEn: Workers Protest against Automation
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "M\xE1quinas e algoritmos substituem tarefas repetitivas, e os trabalhadores
+    afetados reagem ao risco de perder o emprego."
+  _summaryEn: Machines and algorithms replace repetitive tasks, and affected workers
+    push back against the risk of losing their jobs.
+  _realWorld: "Em outubro de 2024, estivadores dos portos da costa leste e do Golfo
+    dos Estados Unidos fizeram greve, e limites \xE0 automa\xE7\xE3o foram um dos
+    pontos centrais da negocia\xE7\xE3o."
+  _realWorldEn: In October 2024, dockworkers at US East and Gulf Coast ports went
+    on strike, and limits on automation were a central point of the negotiation.
+  _tradeOffs: "Requalifica\xE7\xE3o, transi\xE7\xE3o gradual e divis\xE3o dos ganhos
+    de produtividade reduzem o conflito."
+  _tradeOffsEn: Retraining, gradual transition and sharing productivity gains reduce
+    the conflict.
+  _sources:
+  - Label: 2024 United States port strike (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/2024_United_States_port_strike
+  _relatedEntries:
+  - {fileID: 11400000, guid: 5c64d69f710e07a90a85a684c673892c, type: 2}
+  - {fileID: 11400000, guid: a67185eb2bdb2a17496c6c75920806d0, type: 2}

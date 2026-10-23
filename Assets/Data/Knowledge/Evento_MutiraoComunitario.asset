@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_MutiraoComunitario
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Mutir\xE3o Comunit\xE1rio"
+  _titleEn: Community Work Party
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "No mutir\xE3o, moradores se organizam para construir ou melhorar algo
+    juntos, como casas, pra\xE7as ou hortas."
+  _summaryEn: "In a mutir\xE3o, residents organize to build or improve something
+    together, such as homes, squares or gardens."
+  _realWorld: "Movimentos de moradia de S\xE3o Paulo constru\xEDram milhares de casas
+    em mutir\xF5es autogeridos, com apoio p\xFAblico, a partir dos anos 1980 e 1990."
+  _realWorldEn: "Housing movements in S\xE3o Paulo built thousands of homes in self-managed
+    work parties, with public support, starting in the 1980s and 1990s."
+  _tradeOffs: "Depende de tempo livre dos moradores e de apoio t\xE9cnico e material
+    para dar certo."
+  _tradeOffsEn: It depends on residents' free time and on technical and material
+    support to succeed.
+  _sources:
+  - Label: "Mutir\xE3o (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Mutir%C3%A3o
+  _relatedEntries:
+  - {fileID: 11400000, guid: f8957300cb8f45694a60f8dfe5a5134e, type: 2}
+  - {fileID: 11400000, guid: f82e5a0d834ec4341a55243f4bf22386, type: 2}

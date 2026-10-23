@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_RedeDeFibraOptica
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Rede de Fibra \xD3ptica"
+  _titleEn: Fiber Optic Network
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Internet r\xE1pida e est\xE1vel \xE9 a base de servi\xE7os digitais,
+    trabalho remoto e sensores na cidade."
+  _summaryEn: Fast, reliable internet is the foundation for digital services, remote
+    work and sensors in the city.
+  _realWorld: "A companhia de energia municipal de Chattanooga, nos Estados Unidos,
+    montou uma rede de fibra pr\xF3pria e passou a oferecer internet de 1 gigabit
+    em 2010."
+  _realWorldEn: Chattanooga's municipal power company, in the United States, built
+    its own fiber network and began offering 1-gigabit internet in 2010.
+  _tradeOffs: "Instalar fibra custa caro, e bairros pobres costumam ser os \xFAltimos
+    a receber."
+  _tradeOffsEn: Laying fiber is expensive, and poor neighborhoods are often the last
+    to get it.
+  _sources:
+  - Label: EPB (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/EPB
+  _relatedEntries:
+  - {fileID: 11400000, guid: fdbaaae7083cd5beda7c9ab0b6468ee1, type: 2}
+  - {fileID: 11400000, guid: a0c42ca281c6d41c6880a4208cf2d460, type: 2}
+  _image: {fileID: 21300000, guid: de6865c91bfb77da0b3c449f7d733eff, type: 3}

@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_AssistenteMunicipalPorIA
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Assistente Municipal por IA
+  _titleEn: AI City Assistant
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Assistentes com intelig\xEAncia artificial respondem d\xFAvidas dos
+    moradores a qualquer hora e aliviam o atendimento."
+  _summaryEn: AI assistants answer residents' questions at any hour and ease the
+    load on service desks.
+  _realWorld: "Em 2024, o jornal The Markup mostrou que o chatbot MyCity, de Nova
+    York, orientava empres\xE1rios a descumprir leis da pr\xF3pria cidade."
+  _realWorldEn: In 2024 The Markup showed that New York's MyCity chatbot was advising
+    business owners to break the city's own laws.
+  _tradeOffs: "Respostas erradas podem prejudicar quem confia nelas, e \xE9 preciso
+    definir quem responde pelo erro."
+  _tradeOffsEn: Wrong answers can harm people who rely on them, and someone must
+    be accountable for the error.
+  _sources:
+  - Label: The Markup (2024)
+    Url: https://themarkup.org/news/2024/03/29/nycs-ai-chatbot-tells-businesses-to-break-the-law
+  _relatedEntries:
+  - {fileID: 11400000, guid: 0afb947232cd57d63b1fdd6c8c4f2158, type: 2}
+  - {fileID: 11400000, guid: a0c42ca281c6d41c6880a4208cf2d460, type: 2}
+  _image: {fileID: 21300000, guid: 07e62d5a071518d5894170c7ea335afd, type: 3}

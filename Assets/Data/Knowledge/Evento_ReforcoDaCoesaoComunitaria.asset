@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_ReforcoDaCoesaoComunitaria
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Refor\xE7o da Coes\xE3o Comunit\xE1ria"
+  _titleEn: Stronger Community Ties
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Associa\xE7\xF5es de bairro e redes de vizinhos criam capital social:
+    confian\xE7a e ajuda m\xFAtua que tornam a comunidade mais segura e resistente."
+  _summaryEn: 'Neighborhood associations and networks build social capital: trust
+    and mutual aid that make the community safer and more resilient.'
+  _realWorld: "O cientista pol\xEDtico Robert Putnam mostrou em Bowling Alone, de
+    2000, que a queda da participa\xE7\xE3o em associa\xE7\xF5es nos Estados Unidos
+    veio junto com a perda de confian\xE7a entre vizinhos."
+  _realWorldEn: Political scientist Robert Putnam showed in Bowling Alone, from 2000,
+    that falling participation in associations in the United States came along with
+    declining trust between neighbors.
+  _tradeOffs: "Coes\xE3o n\xE3o se decreta; o governo pode apoiar, mas depende da
+    iniciativa dos moradores."
+  _tradeOffsEn: Cohesion cannot be decreed; government can support it, but it depends
+    on residents' initiative.
+  _sources:
+  - Label: Bowling Alone (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Bowling_Alone
+  _relatedEntries:
+  - {fileID: 11400000, guid: a25b1e31239122135ba59901588d23e5, type: 2}
+  - {fileID: 11400000, guid: cb80dcfddda669ed6b20ede7cc8618b8, type: 2}

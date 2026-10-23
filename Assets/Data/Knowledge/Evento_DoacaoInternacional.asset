@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_DoacaoInternacional
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Doa\xE7\xE3o Internacional"
+  _titleEn: International Donation
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Fundos e governos estrangeiros \xE0s vezes financiam projetos locais,
+    principalmente ambientais e sociais."
+  _summaryEn: Foreign funds and governments sometimes finance local projects, mainly
+    environmental and social ones.
+  _realWorld: "O Fundo Amaz\xF4nia, criado em 2008 e gerido pelo BNDES, recebeu doa\xE7\xF5es
+    principalmente da Noruega e da Alemanha para combater o desmatamento."
+  _realWorldEn: The Amazon Fund, created in 2008 and managed by Brazil's development
+    bank BNDES, received donations mainly from Norway and Germany to fight deforestation.
+  _tradeOffs: "A doa\xE7\xE3o vem com condi\xE7\xF5es e pode ser suspensa; projetos
+    que dependem dela precisam de plano para continuar."
+  _tradeOffsEn: Donations come with conditions and can be suspended; projects that
+    depend on them need a plan to continue.
+  _sources:
+  - Label: "Fundo Amaz\xF4nia (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Fundo_Amaz%C3%B4nia
+  _relatedEntries:
+  - {fileID: 11400000, guid: 431f00ebf129b83b69c60865218b081a, type: 2}
+  - {fileID: 11400000, guid: a16497e74769f0066b65644f094d7002, type: 2}

@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_PoloLogistico
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Polo Log\xEDstico"
+  _titleEn: Logistics Hub
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Galp\xF5es de distribui\xE7\xE3o perto das rodovias atraem empresas
+    e empregos e encurtam o caminho das mercadorias."
+  _summaryEn: Distribution warehouses near highways attract companies and jobs and
+    shorten the path of goods.
+  _realWorld: "Cajamar, na Grande S\xE3o Paulo, virou um dos maiores polos log\xEDsticos
+    do pa\xEDs, com centros de distribui\xE7\xE3o de grandes varejistas \xE0 beira
+    das rodovias."
+  _realWorldEn: "Cajamar, in Greater S\xE3o Paulo, has become one of Brazil's largest
+    logistics hubs, with major retailers' distribution centers along the highways."
+  _tradeOffs: "O tr\xE1fego de caminh\xF5es desgasta as vias, polui e congestiona,
+    e muitos dos empregos pagam pouco."
+  _tradeOffsEn: Truck traffic wears down roads, pollutes and congests, and many of
+    the jobs pay little.
+  _sources:
+  - Label: "Cajamar (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Cajamar
+  _relatedEntries:
+  - {fileID: 11400000, guid: 9ef4a10f8a57aa8d782a7bc741314b74, type: 2}
+  - {fileID: 11400000, guid: ed68defe1474b737187ccaba27688735, type: 2}
+  _image: {fileID: 21300000, guid: 38733df02870b8277829eac2daef032b, type: 3}

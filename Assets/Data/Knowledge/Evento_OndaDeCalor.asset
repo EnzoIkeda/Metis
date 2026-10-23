@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_OndaDeCalor
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Onda de Calor
+  _titleEn: Heat Wave
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "V\xE1rios dias de calor extremo sobrecarregam hospitais e a rede el\xE9trica
+    e matam principalmente idosos."
+  _summaryEn: Several days of extreme heat overload hospitals and the power grid
+    and kill mostly older people.
+  _realWorld: "A onda de calor de 2003 na Europa causou dezenas de milhares de mortes;
+    depois dela, a Fran\xE7a criou um plano nacional de alerta e cuidado com idosos."
+  _realWorldEn: The 2003 European heat wave caused tens of thousands of deaths; afterward,
+    France created a national alert and elderly care plan.
+  _tradeOffs: "\xC1rvores, telhados claros ou verdes, abrigos refrigerados e alertas
+    reduzem as mortes."
+  _tradeOffsEn: Trees, light or green roofs, cooling shelters and alerts reduce deaths.
+  _sources:
+  - Label: 2003 European heat wave (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/2003_European_heat_wave
+  _relatedEntries:
+  - {fileID: 11400000, guid: 77acdd2f916c0d35ebe14215b5c0bcbc, type: 2}
+  - {fileID: 11400000, guid: 6f25da8b692c4d821b8771d449991572, type: 2}

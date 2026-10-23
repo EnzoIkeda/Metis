@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_IncendioIndustrial
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Inc\xEAndio Industrial"
+  _titleEn: Industrial Fire
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Ind\xFAstrias e dep\xF3sitos de produtos qu\xEDmicos perto de \xE1reas
+    urbanas podem causar desastres que atingem a cidade inteira."
+  _summaryEn: Industries and chemical depots near urban areas can cause disasters
+    that affect the whole city.
+  _realWorld: "Em abril de 2015, um inc\xEAndio em tanques de combust\xEDvel da Ultracargo,
+    no porto de Santos, durou mais de uma semana e poluiu o ar e o estu\xE1rio."
+  _realWorldEn: In April 2015, a fire in Ultracargo's fuel tanks at the port of Santos
+    lasted more than a week and polluted the air and the estuary.
+  _tradeOffs: "Fiscaliza\xE7\xE3o, dist\xE2ncia entre ind\xFAstria e moradia e planos
+    de emerg\xEAncia s\xE3o a defesa."
+  _tradeOffsEn: Inspections, distance between industry and housing and emergency
+    plans are the defense.
+  _sources:
+  - Label: "Inc\xEAndio no Porto de Santos em 2015 (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Inc%C3%AAndio_no_Porto_de_Santos_em_2015
+  _relatedEntries:
+  - {fileID: 11400000, guid: 14be096fad035950ea7e99eb87a18593, type: 2}
+  - {fileID: 11400000, guid: 6d6097358666b495990301d3df8cebe7, type: 2}

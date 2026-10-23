@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Conceito_Resiliencia
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Resili\xEAncia urbana"
+  _titleEn: Urban resilience
+  _category: 2
+  _unlockTrigger: 6
+  _summary: "Resili\xEAncia \xE9 a capacidade de uma cidade de aguentar choques,
+    como enchentes, apag\xF5es e crises econ\xF4micas, e se recuperar deles. Sobreviver
+    aos 20 turnos com eventos imprevis\xEDveis \xE9 um exerc\xEDcio de resili\xEAncia."
+  _summaryEn: Resilience is a city's ability to withstand shocks, such as floods,
+    blackouts and economic crises, and recover from them. Surviving 20 turns of unpredictable
+    events is an exercise in resilience.
+  _realWorld: "A rede 100 Resilient Cities, criada pela Funda\xE7\xE3o Rockefeller
+    em 2013, ajudou cidades de v\xE1rios continentes a montar planos de resili\xEAncia."
+  _realWorldEn: The 100 Resilient Cities network, launched by the Rockefeller Foundation
+    in 2013, helped cities on several continents build resilience plans.
+  _tradeOffs: "Ter folga e redund\xE2ncia custa dinheiro em tempos normais; o retorno
+    s\xF3 aparece na crise."
+  _tradeOffsEn: Keeping slack and redundancy costs money in normal times; the payoff
+    only shows during a crisis.
+  _sources:
+  - Label: 100 Resilient Cities (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/100_Resilient_Cities
+  - Label: Urban resilience (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Urban_resilience
+  _relatedEntries:
+  - {fileID: 11400000, guid: 6210d0737898ce1a2adbc493dd66b326, type: 2}
+  - {fileID: 11400000, guid: 3dc4ee9e524a6f138bf829d4e2cd1c01, type: 2}

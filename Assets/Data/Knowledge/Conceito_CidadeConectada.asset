@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Conceito_CidadeConectada
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Cidade Conectada
+  _titleEn: Connected City
+  _category: 2
+  _unlockTrigger: 8
+  _summary: "Na cidade conectada, sensores e redes de comunica\xE7\xE3o medem em
+    tempo real o tr\xE2nsito, a energia, a \xE1gua e o ar, e os sistemas reagem a
+    esses dados. \xC9 a chamada internet das coisas aplicada \xE0 cidade."
+  _summaryEn: In the connected city, sensors and communication networks measure traffic,
+    energy, water and air in real time, and systems respond to that data. It is the
+    internet of things applied to the city.
+  _realWorld: "A plataforma InterSCity, desenvolvida na USP e em parceria com outras
+    universidades, \xE9 um software aberto para integrar dados e servi\xE7os de cidades
+    inteligentes."
+  _realWorldEn: "The InterSCity platform, developed at the University of S\xE3o Paulo
+    with partner universities, is open-source software for integrating smart city
+    data and services."
+  _tradeOffs: "Cada sensor a mais \xE9 um ponto a mais para manter e proteger contra
+    ataques, e levanta perguntas sobre quem controla os dados."
+  _tradeOffsEn: Each extra sensor is one more point to maintain and protect against
+    attacks, and raises questions about who controls the data.
+  _sources:
+  - Label: Del Esposte et al. (2017), InterSCity
+    Url: https://doi.org/10.5220/0006306200350046
+  _relatedEntries:
+  - {fileID: 11400000, guid: 54c599e431ece84fbbe2c7b5882ea87f, type: 2}
+  - {fileID: 11400000, guid: 802bc9730755cda1ba4d858c6814cbd8, type: 2}

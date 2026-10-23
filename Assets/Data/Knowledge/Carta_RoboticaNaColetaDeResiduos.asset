@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_RoboticaNaColetaDeResiduos
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Rob\xF3tica na Coleta de Res\xEDduos"
+  _titleEn: Robotics in Waste Collection
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Rob\xF4s com vis\xE3o computacional separam recicl\xE1veis nas esteiras
+    de triagem mais r\xE1pido e com menos erros."
+  _summaryEn: Robots with computer vision sort recyclables on sorting lines faster
+    and with fewer errors.
+  _realWorld: "Usinas de triagem na Europa e nos Estados Unidos j\xE1 usam rob\xF4s
+    com intelig\xEAncia artificial para separar pl\xE1stico, papel e metal."
+  _realWorldEn: Sorting plants in Europe and the United States already use AI-powered
+    robots to separate plastic, paper and metal.
+  _tradeOffs: "A automa\xE7\xE3o reduz postos de trabalho de triagem, e no Brasil
+    boa parte da reciclagem depende de catadores."
+  _tradeOffsEn: Automation cuts sorting jobs, and in Brazil much of recycling depends
+    on waste pickers.
+  _sources:
+  - Label: Wilts et al. (2021), Resources
+    Url: https://doi.org/10.3390/resources10040028
+  _relatedEntries:
+  - {fileID: 11400000, guid: 742a6f2a31717aa9fb7089be2285be12, type: 2}
+  - {fileID: 11400000, guid: 5eac0d9a84029ba20be25e13b1a7e669, type: 2}
+  _image: {fileID: 21300000, guid: ca089a1f4a92aba8fa805560f9815d28, type: 3}

@@ -25,8 +25,14 @@ public class ChangeBreakdownPopupView : MonoBehaviour
     [SerializeField] private Button _backdropButton;
     [SerializeField] private ParameterDisplayData _displayData;
 
+    // Abre o mapa de relacoes ja focado no parametro mostrado.
+    [SerializeField] private Button _mapButton;
+    [SerializeField] private RelationMapView _relationMap;
+
     [Tooltip("Quantas parcelas aparecem antes de agrupar o resto em outras influencias.")]
     [SerializeField, Min(1)] private int _maxLines = 6;
+
+    private CityParameterType _shownParameter;
 
     private void Start()
     {
@@ -39,12 +45,24 @@ public class ChangeBreakdownPopupView : MonoBehaviour
         }
         if (_backdropButton != null)
             _backdropButton.onClick.AddListener(Hide);
+        if (_mapButton != null)
+        {
+            _mapButton.onClick.AddListener(OpenRelationMap);
+            _mapButton.gameObject.SetActive(_relationMap != null);
+        }
 
         Hide();
     }
 
     public void Show(CityParameterType parameter)
     {
+        _shownParameter = parameter;
+        if (_mapButton != null)
+        {
+            var mapText = _mapButton.GetComponentInChildren<TMP_Text>();
+            if (mapText != null)
+                mapText.text = UIStrings.BreakdownMapButton;
+        }
         if (_titleText != null)
             _titleText.text = UIStrings.BreakdownTitle(parameter);
         if (_bodyText != null)
@@ -57,6 +75,12 @@ public class ChangeBreakdownPopupView : MonoBehaviour
     {
         if (_panelRoot != null)
             _panelRoot.SetActive(false);
+    }
+
+    private void OpenRelationMap()
+    {
+        Hide();
+        _relationMap.Show(_shownParameter);
     }
 
     private string BuildBody(CityParameterType parameter)

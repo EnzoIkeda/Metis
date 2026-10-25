@@ -174,6 +174,124 @@ public static class UIStrings
         ? "O Bem-estar é recalculado a cada turno a partir dos outros parâmetros."
         : "Well-being is recalculated every turn from the other parameters.";
 
+    public static string BreakdownMapButton => IsPt ? "Ver no mapa" : "See on map";
+
+    public static string RelationMapTitle => IsPt ? "Mapa de relações" : "Relationship map";
+
+    public static string RelationMapIntro => IsPt
+        ? "Cada seta é um parâmetro influenciando outro a cada turno. Verde apoia, vermelho pressiona; " +
+          "a espessura mostra a força agora. Toque num parâmetro para ver o que o afeta.\n\n" +
+          "<size=80%>Uma relação de apoio puxa o alvo para cima quando a fonte está acima da metade da " +
+          "escala, e para baixo quando está abaixo; a pressão faz o contrário. O anel de cada parâmetro " +
+          "fica vermelho na crise e laranja no excesso, zonas que mudam a força do que ele exerce. " +
+          "O tracejado dourado mostra o que forma o Bem-estar.</size>"
+        : "Each arrow is a parameter influencing another every turn. Green supports, red pressures; " +
+          "thickness shows the strength right now. Tap a parameter to see what affects it.\n\n" +
+          "<size=80%>A supporting link pulls its target up when the source is above half of its scale, " +
+          "and down when it is below; pressure does the opposite. Each parameter's ring turns red in " +
+          "crisis and orange in excess, zones that change the strength of what it exerts. " +
+          "The dashed gold lines show what makes up Well-being.</size>";
+
+    public static string RelationModeIncoming => IsPt ? "O que afeta" : "What affects it";
+    public static string RelationModeOutgoing => IsPt ? "O que influencia" : "What it affects";
+
+    public static string RelationIncomingHeader(CityParameterType parameter) => IsPt
+        ? $"O que afeta {parameter.GetFullName()} a cada turno:"
+        : $"What affects {parameter.GetFullName()} each turn:";
+
+    public static string RelationOutgoingHeader(CityParameterType parameter) => IsPt
+        ? $"O que {parameter.GetFullName()} influencia a cada turno:"
+        : $"What {parameter.GetFullName()} affects each turn:";
+
+    public static string RelationWellbeingHeader => IsPt
+        ? "O Bem-estar é recalculado a cada turno a partir de:"
+        : "Well-being is recalculated every turn from:";
+
+    public static string RelationNoLinks => IsPt ? "Nenhuma relação nesta direção." : "No links in this direction.";
+
+    public static string RelationReversedHint => IsPt
+        ? "Apoio negativo ou pressão positiva: a fonte está abaixo da metade da escala."
+        : "Negative support or positive pressure: the source is below half of its scale.";
+
+    public static string RelationReversedNote(CityParameterType source, bool support) => IsPt
+        ? $"{source.GetFullName()} está abaixo da metade da escala, então {(support ? "este apoio está puxando para baixo" : "esta pressão está aliviando")}."
+        : $"{source.GetFullName()} is below half of its scale, so {(support ? "this support is pulling down" : "this pressure is easing off")}.";
+
+    public static string RelationPairHint => IsPt
+        ? "Toque em outro parâmetro para ver por que eles se afetam."
+        : "Tap another parameter to see why they affect each other.";
+
+    public static string RelationLabel(bool support, RelationStrength strength)
+    {
+        if (IsPt)
+        {
+            var word = support ? "apoio" : "pressão";
+            switch (strength)
+            {
+                case RelationStrength.Fraca: return $"{word} fraco{(support ? "" : "a")}";
+                case RelationStrength.Media: return $"{word} médi{(support ? "o" : "a")}";
+                default: return $"{word} forte";
+            }
+        }
+        var kind = support ? "support" : "pressure";
+        switch (strength)
+        {
+            case RelationStrength.Fraca: return $"weak {kind}";
+            case RelationStrength.Media: return $"moderate {kind}";
+            default: return $"strong {kind}";
+        }
+    }
+
+    public static string WellbeingPartAverage => IsPt ? "¼ da média" : "¼ of the average";
+    public static string WellbeingPartCrowding => IsPt ? "adensamento" : "crowding";
+
+    public static string ZoneName(InteractionZone zone)
+    {
+        switch (zone)
+        {
+            case InteractionZone.Crise: return IsPt ? "crise" : "crisis";
+            case InteractionZone.Excesso: return IsPt ? "excesso" : "excess";
+            default: return IsPt ? "saudável" : "healthy";
+        }
+    }
+
+    public static string RelationNodeHeader(CityParameterType parameter, string level, InteractionZone zone) => IsPt
+        ? $"{ParameterIcon(parameter)} <b>{parameter.GetFullName()}</b>: {level}, zona {ZoneName(zone)}"
+        : $"{ParameterIcon(parameter)} <b>{parameter.GetFullName()}</b>: {level}, {ZoneName(zone)} zone";
+
+    public static string RelationPairTitle(CityParameterType from, CityParameterType to) =>
+        $"{ParameterIcon(from)} <b>{from.GetFullName()}</b> » {ParameterIcon(to)} <b>{to.GetFullName()}</b>";
+
+    public static string RelationNone(CityParameterType a, CityParameterType b) => IsPt
+        ? $"{a.GetFullName()} e {b.GetFullName()} não se afetam diretamente. Toque de novo para voltar."
+        : $"{a.GetFullName()} and {b.GetFullName()} do not affect each other directly. Tap again to go back.";
+
+    public static string RelationNow(string amount, CityParameterType target) => IsPt
+        ? $"Agora: {amount} por turno em {target.GetFullName()}"
+        : $"Now: {amount} per turn on {target.GetFullName()}";
+
+    public static string RelationPartNow(string amount) => IsPt
+        ? $"Agora: {amount} no Bem-estar"
+        : $"Now: {amount} on Well-being";
+
+    public static string RelationReference(string reference) => IsPt ? $"Fonte: {reference}" : $"Source: {reference}";
+
+    // Como a zona da fonte muda a forca da relacao, com o fator em porcentagem.
+    public static string RelationZoneNote(CityParameterType source, InteractionZone zone, float factor, bool support)
+    {
+        var percent = (int)System.Math.Round(factor * 100f);
+        var name = source.GetFullName();
+        if (IsPt)
+        {
+            var kind = support ? "o apoio que exerce" : "a pressão que exerce";
+            var change = factor > 1f ? $"fica {percent - 100}% mais forte" : $"cai para {percent}% do normal";
+            return $"{name} está em {ZoneName(zone)}: {kind} {change}.";
+        }
+        var kindEn = support ? "the support it gives" : "the pressure it exerts";
+        var changeEn = factor > 1f ? $"is {percent - 100}% stronger" : $"drops to {percent}% of normal";
+        return $"{name} is in {ZoneName(zone)}: {kindEn} {changeEn}.";
+    }
+
     public static string SearchTitle => IsPt ? "Buscar no baralho" : "Search the deck";
 
     public static string PassTurnButton => IsPt ? "Passar a vez" : "Pass turn";

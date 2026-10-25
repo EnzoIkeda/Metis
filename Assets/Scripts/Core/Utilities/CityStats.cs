@@ -37,6 +37,9 @@ public class CityStats
     // Soma dos efeitos diretos de carta e evento em Bem-estar, que persiste por cima do valor derivado dos outros parametros.
     private float _anchorBonus;
 
+    // Matriz usada na resolucao, nula quando a cidade nao tem interacoes.
+    public InteractionMatrix Interactions => _interactions;
+
     public event Action<CityParameterType, float> OnParameterChanged;
     public event Action<CityParameterType> OnParameterCritical;
     public event Action OnGameOver;
@@ -189,6 +192,12 @@ public class CityStats
     {
         ComputeWellbeingParts(out var mediaPositivos, out var adensamentoPopulacional);
         SetValue(CityParameterType.BemEstar, mediaPositivos - adensamentoPopulacional + _anchorBonus);
+    }
+
+    // Partes do Bem-estar com os valores atuais, a mesma conta da resolucao.
+    public void GetWellbeingParts(out float mediaPositivos, out float adensamentoPopulacional)
+    {
+        ComputeWellbeingParts(out mediaPositivos, out adensamentoPopulacional);
     }
 
     private void ComputeWellbeingParts(out float mediaPositivos, out float adensamentoPopulacional)

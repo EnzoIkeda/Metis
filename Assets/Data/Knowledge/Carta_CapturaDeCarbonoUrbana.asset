@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_CapturaDeCarbonoUrbana
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Captura de Carbono Urbana
+  _titleEn: Urban Carbon Capture
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "A captura direta do ar usa filtros e energia para tirar g\xE1s carb\xF4nico
+    da atmosfera e guard\xE1-lo no subsolo."
+  _summaryEn: Direct air capture uses filters and energy to pull carbon dioxide out
+    of the atmosphere and store it underground.
+  _realWorld: "A usina Orca, da Climeworks, ligada em 2021 na Isl\xE2ndia, captura
+    at\xE9 cerca de 4 mil toneladas de CO2 por ano, uma fra\xE7\xE3o m\xEDnima das
+    emiss\xF5es mundiais."
+  _realWorldEn: Climeworks' Orca plant, switched on in Iceland in 2021, captures
+    up to about 4,000 tonnes of CO2 a year, a tiny fraction of global emissions.
+  _tradeOffs: "O custo por tonelada \xE9 muito alto, a tecnologia gasta muita energia,
+    e ela n\xE3o substitui cortar as emiss\xF5es."
+  _tradeOffsEn: The cost per tonne is very high, the technology uses a lot of energy,
+    and it does not replace cutting emissions.
+  _sources:
+  - Label: Orca (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Orca_(carbon_capture_plant)
+  - Label: Climeworks (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Climeworks
+  _relatedEntries:
+  - {fileID: 11400000, guid: e1dd4b6bf3561f724a1e9eb603d22853, type: 2}
+  - {fileID: 11400000, guid: 2b192f000624e013aa9fad842858b5a7, type: 2}
+  _image: {fileID: 21300000, guid: 798f468eda240910ba15cedb71b7b4d0, type: 3}

@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_DescobertaCientificaLocal
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Descoberta Cient\xEDfica Local"
+  _titleEn: Local Scientific Discovery
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Centros de pesquisa de ponta atraem cientistas, empresas e investimentos
+    para a cidade onde est\xE3o."
+  _summaryEn: Cutting-edge research centers attract scientists, companies and investment
+    to the city where they are.
+  _realWorld: "O Sirius, acelerador de part\xEDculas inaugurado em Campinas em 2018,
+    \xE9 uma das fontes de luz s\xEDncrotron mais avan\xE7adas do mundo e j\xE1 foi
+    usado em pesquisas sobre o coronav\xEDrus."
+  _realWorldEn: Sirius, a particle accelerator opened in Campinas in 2018, is one
+    of the most advanced synchrotron light sources in the world and has been used
+    in coronavirus research.
+  _tradeOffs: "Equipamentos assim custam muito para construir e operar e dependem
+    de financiamento est\xE1vel por d\xE9cadas."
+  _tradeOffsEn: Facilities like this are very expensive to build and run and depend
+    on stable funding for decades.
+  _sources:
+  - Label: "Sirius (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Sirius_(acelerador_de_part%C3%ADculas)
+  _relatedEntries:
+  - {fileID: 11400000, guid: ecf51ed645655f64d84bbb932f21ab75, type: 2}
+  - {fileID: 11400000, guid: 3bb4c72dfbd0ad2a09251e50ca4524d6, type: 2}

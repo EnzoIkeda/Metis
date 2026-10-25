@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_EmpresaDeTecnologiaSeInstala
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Empresa de Tecnologia se Instala
+  _titleEn: Tech Company Moves In
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "A chegada de uma grande empresa traz empregos qualificados e arrecada\xE7\xE3o,
+    e as cidades disputam essas sedes com incentivos."
+  _summaryEn: A large company's arrival brings skilled jobs and revenue, and cities
+    compete for these offices with incentives.
+  _realWorld: "Em 2018, centenas de cidades disputaram a segunda sede da Amazon;
+    o plano de instala\xE7\xE3o em Nova York foi abandonado em 2019 depois da oposi\xE7\xE3o
+    aos incentivos."
+  _realWorldEn: In 2018, hundreds of cities competed for Amazon's second headquarters;
+    the plan for New York was dropped in 2019 after opposition to the incentives.
+  _tradeOffs: "Incentivos generosos demais podem custar mais que o retorno, e a valoriza\xE7\xE3o
+    encarece a moradia."
+  _tradeOffsEn: Overly generous incentives can cost more than they return, and rising
+    values make housing more expensive.
+  _sources:
+  - Label: Amazon HQ2 (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Amazon_HQ2
+  _relatedEntries:
+  - {fileID: 11400000, guid: 9b6e9ab52af9bf92e8e3a0da3193ce60, type: 2}
+  - {fileID: 11400000, guid: f22ff8e40f4d6cc359421b2af6be199e, type: 2}

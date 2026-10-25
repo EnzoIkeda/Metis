@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_InfraestruturaUrbanaObsoleta
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Infraestrutura Urbana Obsoleta
+  _titleEn: Aging Urban Infrastructure
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Pontes, redes de \xE1gua e pr\xE9dios p\xFAblicos se desgastam; sem
+    manuten\xE7\xE3o, o risco de falha cresce at\xE9 virar trag\xE9dia."
+  _summaryEn: Bridges, water networks and public buildings wear out; without maintenance,
+    the risk of failure grows until it becomes a tragedy.
+  _realWorld: "A ponte Morandi, em G\xEAnova, na It\xE1lia, desabou em agosto de
+    2018 e matou 43 pessoas; investiga\xE7\xF5es apontaram falhas de manuten\xE7\xE3o."
+  _realWorldEn: The Morandi bridge in Genoa, Italy, collapsed in August 2018 and
+    killed 43 people; investigations pointed to maintenance failures.
+  _tradeOffs: "Manuten\xE7\xE3o n\xE3o aparece em placa de inaugura\xE7\xE3o, por
+    isso costuma ser adiada."
+  _tradeOffsEn: Maintenance never gets a ribbon-cutting ceremony, so it tends to
+    be postponed.
+  _sources:
+  - Label: Ponte Morandi (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Ponte_Morandi
+  _relatedEntries:
+  - {fileID: 11400000, guid: 1b08e724c7cf344af949741a0541f44f, type: 2}
+  - {fileID: 11400000, guid: 1397ecda6c5e2dd0c8224a71c78f6107, type: 2}

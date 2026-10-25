@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_DadosAbertosImpulsionamInovacaoLocal
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Dados Abertos Impulsionam Inova\xE7\xE3o Local"
+  _titleEn: Open Data Boosts Local Innovation
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Publicar os dados p\xFAblicos em formato aberto permite que empresas,
+    jornalistas e cidad\xE3os criem aplicativos e an\xE1lises."
+  _summaryEn: Publishing public data in open formats lets companies, journalists
+    and citizens build apps and analyses.
+  _realWorld: "A Lei de Acesso \xE0 Informa\xE7\xE3o, de 2011, obriga \xF3rg\xE3os
+    p\xFAblicos brasileiros a divulgar dados, e o portal dados.gov.br re\xFAne milhares
+    de conjuntos."
+  _realWorldEn: Brazil's 2011 Access to Information Law requires public bodies to
+    disclose data, and the dados.gov.br portal gathers thousands of datasets.
+  _tradeOffs: "Dados abertos precisam de qualidade e atualiza\xE7\xE3o, e dados pessoais
+    t\xEAm de ser protegidos."
+  _tradeOffsEn: Open data needs quality and updates, and personal data must be protected.
+  _sources:
+  - Label: Lei 12.527/2011 (Planalto)
+    Url: https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12527.htm
+  - Label: Portal dados.gov.br
+    Url: https://dados.gov.br/
+  _relatedEntries:
+  - {fileID: 11400000, guid: 201f7154992a7a7c0a92fcd424de6b63, type: 2}
+  - {fileID: 11400000, guid: 969f7b5e0821bedd4ba4e8ba66fea5c9, type: 2}

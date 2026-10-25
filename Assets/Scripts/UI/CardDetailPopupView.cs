@@ -20,6 +20,12 @@ public class CardDetailPopupView : MonoBehaviour
     // Unidades da barra superior, pra exigencia e custo baterem com ela.
     [SerializeField] private ParameterDisplayData _displayData;
 
+    // Abre a ficha da carta; some quando a carta ainda nao tem ficha.
+    [SerializeField] private Button _knowledgeButton;
+    [SerializeField] private KnowledgePopupView _knowledgePopup;
+
+    private KnowledgeEntryData _shownEntry;
+
     private Action _onPlay;
 
     private void Start()
@@ -40,6 +46,8 @@ public class CardDetailPopupView : MonoBehaviour
         }
         if (_scrimButton != null)
             _scrimButton.onClick.AddListener(Hide);
+        if (_knowledgeButton != null)
+            _knowledgeButton.onClick.AddListener(OpenKnowledge);
 
         Hide();
     }
@@ -67,8 +75,17 @@ public class CardDetailPopupView : MonoBehaviour
         if (_artworkPlaceholder != null)
             _artworkPlaceholder.SetActive(hasArtwork == false);
 
+        _shownEntry = card.KnowledgeEntry;
+        KnowledgeButtonRules.Refresh(_knowledgeButton, _knowledgePopup, _shownEntry);
+
         if (_panelRoot != null)
             _panelRoot.SetActive(true);
+    }
+
+    private void OpenKnowledge()
+    {
+        if (_knowledgePopup != null && _shownEntry != null)
+            _knowledgePopup.Show(_shownEntry);
     }
 
     private void HandlePlayClicked()

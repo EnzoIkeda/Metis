@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_ZonaDeProcessamentoDeExportacao
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Zona de Processamento de Exporta\xE7\xE3o"
+  _titleEn: Export Processing Zone
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Zonas com impostos reduzidos atraem f\xE1bricas que produzem para exportar
+    ou para o mercado nacional."
+  _summaryEn: Zones with reduced taxes attract factories that produce for export
+    or for the domestic market.
+  _realWorld: "A Zona Franca de Manaus, criada pelo Decreto-Lei 288 de 1967, formou
+    o Polo Industrial de Manaus, com f\xE1bricas de eletr\xF4nicos e motocicletas."
+  _realWorldEn: The Manaus Free Trade Zone, created by Decree-Law 288 of 1967, gave
+    rise to the Manaus Industrial Hub, with electronics and motorcycle factories.
+  _tradeOffs: "A ren\xFAncia de impostos tem custo para todo o pa\xEDs, e as empresas
+    podem ir embora quando o incentivo acaba."
+  _tradeOffsEn: Tax breaks have a cost for the whole country, and companies may leave
+    when the incentive ends.
+  _sources:
+  - Label: "Zona Franca de Manaus (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Zona_Franca_de_Manaus
+  - Label: Decreto-Lei 288/1967 (Planalto)
+    Url: https://www.planalto.gov.br/ccivil_03/decreto-lei/del0288.htm
+  _relatedEntries:
+  - {fileID: 11400000, guid: 9b6e9ab52af9bf92e8e3a0da3193ce60, type: 2}
+  - {fileID: 11400000, guid: ed88fd7c4313a9b05847320c9075b27c, type: 2}
+  _image: {fileID: 21300000, guid: 1e2a4bbd804d6f47fb329a99d921e02b, type: 3}

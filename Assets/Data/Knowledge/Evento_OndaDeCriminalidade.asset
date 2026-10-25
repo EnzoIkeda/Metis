@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_OndaDeCriminalidade
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Onda de Criminalidade
+  _titleEn: Crime Wave
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Uma onda de viol\xEAncia paralisa a cidade: com\xE9rcio fecha, transporte
+    para e as pessoas evitam sair."
+  _summaryEn: 'A wave of violence paralyzes the city: shops close, transport stops
+    and people avoid going out.'
+  _realWorld: "Em maio de 2006, ataques coordenados pelo PCC contra for\xE7as de
+    seguran\xE7a e \xF4nibus pararam S\xE3o Paulo por dias."
+  _realWorldEn: "In May 2006, coordinated attacks by the PCC gang against security
+    forces and buses brought S\xE3o Paulo to a halt for days."
+  _tradeOffs: "Respostas s\xF3 de for\xE7a tendem a escalar a viol\xEAncia; intelig\xEAncia
+    e preven\xE7\xE3o atacam as causas."
+  _tradeOffsEn: Responses based only on force tend to escalate violence; intelligence
+    and prevention tackle the causes.
+  _sources:
+  - Label: "Ataques do PCC (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Ataques_do_PCC
+  _relatedEntries:
+  - {fileID: 11400000, guid: 8fc9cf09b084f90d5aeb82aec5724cbe, type: 2}
+  - {fileID: 11400000, guid: 6d6097358666b495990301d3df8cebe7, type: 2}

@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Conceito_Colapso
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Colapso e efeito cascata
+  _titleEn: Collapse and cascading failure
+  _category: 2
+  _unlockTrigger: 4
+  _summary: "Quando um servi\xE7o essencial para de funcionar, ele derruba outros
+    que dependem dele. No jogo, um par\xE2metro em Colapso tira Bem-estar todo turno
+    at\xE9 ser recuperado."
+  _summaryEn: When an essential service stops working, it brings down others that
+    depend on it. In the game, a parameter in Collapse drains Wellbeing every turn
+    until it recovers.
+  _realWorld: "Em novembro de 2020, um inc\xEAndio numa subesta\xE7\xE3o deixou quase
+    todo o Amap\xE1 sem luz por dias; sem energia, faltou \xE1gua, comunica\xE7\xE3o
+    e conserva\xE7\xE3o de alimentos e rem\xE9dios."
+  _realWorldEn: "In November 2020, a fire at a substation left almost all of Amap\xE1,
+    in Brazil, without power for days; without electricity, water, communications
+    and food and medicine storage failed too."
+  _tradeOffs: "Sistemas interligados s\xE3o eficientes, mas sem redund\xE2ncia uma
+    \xFAnica falha se espalha."
+  _tradeOffsEn: Interconnected systems are efficient, but without redundancy a single
+    failure spreads.
+  _sources:
+  - Label: "Apag\xE3o no Amap\xE1 em 2020 (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Apag%C3%A3o_no_Amap%C3%A1_em_2020
+  - Label: Cascading failure (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Cascading_failure
+  _relatedEntries:
+  - {fileID: 11400000, guid: 100cd042802f98b84acd95e16e2a5354, type: 2}
+  - {fileID: 11400000, guid: 622c30a788a08bbde8d1a0e3b0eaa1f5, type: 2}

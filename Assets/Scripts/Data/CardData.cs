@@ -24,6 +24,9 @@ public class CardData : ScriptableObject, ICardDefinition
     [SerializeField] private Sprite[] _artworkFrames;
     [SerializeField, Min(1f)] private float _artworkFrameRate = 15f;
 
+    // Ficha "Saiba mais" da carta; so conteudo educativo, fora das regras de jogo.
+    [SerializeField] private KnowledgeEntryData _knowledgeEntry;
+
     // Nome no idioma atual, com fallback pro portugues se a traducao em ingles nao existir.
     public string CardName => LocalizationManager.Current == Language.English && string.IsNullOrEmpty(_cardNameEn) == false
         ? _cardNameEn
@@ -56,4 +59,6 @@ public class CardData : ScriptableObject, ICardDefinition
     public Sprite[] ArtworkFrames => _artworkFrames;
 
     public float ArtworkFrameRate => _artworkFrameRate;
+
+    public KnowledgeEntryData KnowledgeEntry => _knowledgeEntry;
 }

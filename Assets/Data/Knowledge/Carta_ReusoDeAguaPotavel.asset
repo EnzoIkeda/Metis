@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_ReusoDeAguaPotavel
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Re\xFAso de \xC1gua Pot\xE1vel"
+  _titleEn: Potable Water Reuse
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Esgoto tratado com filtros de membrana e luz ultravioleta pode voltar
+    a ser \xE1gua de alta qualidade."
+  _summaryEn: Wastewater treated with membrane filters and ultraviolet light can
+    become high-quality water again.
+  _realWorld: "Singapura produz desde 2003 a NEWater, \xE1gua de re\xFAso que abastece
+    principalmente a ind\xFAstria e refor\xE7a os reservat\xF3rios."
+  _realWorldEn: Since 2003 Singapore has produced NEWater, reclaimed water that mainly
+    supplies industry and tops up reservoirs.
+  _tradeOffs: "O tratamento gasta bastante energia, e a popula\xE7\xE3o precisa confiar
+    que a \xE1gua \xE9 segura."
+  _tradeOffsEn: Treatment uses a lot of energy, and people need to trust that the
+    water is safe.
+  _sources:
+  - Label: NEWater (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/NEWater
+  - Label: PUB Singapura, NEWater
+    Url: https://www.pub.gov.sg/Public/WaterLoop/OurWaterStory/NEWater
+  _relatedEntries:
+  - {fileID: 11400000, guid: 42f230c3b381a81d4be25bf60adcd609, type: 2}
+  - {fileID: 11400000, guid: 0e7cd90400462a46cbb56536a03b1907, type: 2}
+  _image: {fileID: 21300000, guid: 5eb29a732efc715cf8b29354ea4612f8, type: 3}

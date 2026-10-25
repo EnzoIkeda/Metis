@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_CongestionamentoRecorde
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Congestionamento Recorde
+  _titleEn: Record Traffic Jam
+  _category: 1
+  _unlockTrigger: 0
+  _summary: Quando muita gente depende do carro, um acidente ou uma chuva bastam
+    para travar a cidade inteira.
+  _summaryEn: When many people depend on cars, one accident or a rainstorm is enough
+    to gridlock the whole city.
+  _realWorld: "S\xE3o Paulo criou em 1997 o rod\xEDzio municipal de ve\xEDculos,
+    que pro\xEDbe parte da frota de circular no centro expandido nos hor\xE1rios
+    de pico conforme o final da placa."
+  _realWorldEn: "In 1997 S\xE3o Paulo created its vehicle rotation scheme, which
+    bans part of the fleet from the expanded center at peak hours according to the
+    license plate's last digit."
+  _tradeOffs: "Medidas que s\xF3 limitam o carro aliviam por pouco tempo; sem transporte
+    coletivo bom, o tr\xE2nsito volta."
+  _tradeOffsEn: Measures that only restrict cars help for a short time; without good
+    public transport, traffic comes back.
+  _sources:
+  - Label: "Rod\xEDzio de ve\xEDculos de S\xE3o Paulo (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Rod%C3%ADzio_de_ve%C3%ADculos_de_S%C3%A3o_Paulo
+  _relatedEntries:
+  - {fileID: 11400000, guid: 1d59a0a4a3e4a856c9d3899a9107da9c, type: 2}
+  - {fileID: 11400000, guid: 08a29032f637300b381c2a5ef818b2a7, type: 2}

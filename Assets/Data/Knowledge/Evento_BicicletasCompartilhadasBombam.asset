@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_BicicletasCompartilhadasBombam
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Bicicletas Compartilhadas Bombam
+  _titleEn: Bike Sharing Takes Off
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Sistemas de bicicleta compartilhada permitem pegar uma bicicleta numa
+    esta\xE7\xE3o e devolver em outra, completando viagens curtas."
+  _summaryEn: Bike sharing lets people pick up a bike at one station and drop it
+    at another, covering short trips.
+  _realWorld: "O Citi Bike, de Nova York, come\xE7ou em 2013 e virou um dos maiores
+    sistemas do mundo; v\xE1rias capitais brasileiras t\xEAm sistemas parecidos."
+  _realWorldEn: New York's Citi Bike started in 2013 and became one of the largest
+    systems in the world; several Brazilian capitals have similar systems.
+  _tradeOffs: "Sem ciclovias, o uso cai; esta\xE7\xF5es concentradas nas \xE1reas
+    ricas deixam a periferia de fora."
+  _tradeOffsEn: Without bike lanes, use drops; stations concentrated in wealthy areas
+    leave the outskirts out.
+  _sources:
+  - Label: Citi Bike (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Citi_Bike
+  - Label: "Sistema de bicicletas compartilhadas (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Sistema_de_bicicletas_compartilhadas
+  _relatedEntries:
+  - {fileID: 11400000, guid: 8183435f9b7e9e593ad6531671e7873e, type: 2}
+  - {fileID: 11400000, guid: ce4f74b0f684cddfab353af48126b8d8, type: 2}

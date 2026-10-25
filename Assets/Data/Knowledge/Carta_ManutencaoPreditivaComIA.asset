@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_ManutencaoPreditivaComIA
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Manuten\xE7\xE3o Preditiva com IA"
+  _titleEn: AI Predictive Maintenance
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Sensores medem vibra\xE7\xE3o, temperatura e desgaste, e algoritmos
+    avisam antes de uma bomba, ponte ou trem falhar."
+  _summaryEn: Sensors measure vibration, temperature and wear, and algorithms warn
+    before a pump, bridge or train fails.
+  _realWorld: "A manuten\xE7\xE3o preditiva j\xE1 \xE9 comum em ferrovias, avia\xE7\xE3o
+    e redes de \xE1gua, e pesquisas recentes a combinam com g\xEAmeos digitais para
+    log\xEDstica urbana."
+  _realWorldEn: Predictive maintenance is already common in railways, aviation and
+    water networks, and recent research combines it with digital twins for urban
+    logistics.
+  _tradeOffs: "Exige sensores, dados hist\xF3ricos e equipe especializada, e alarmes
+    falsos geram desconfian\xE7a."
+  _tradeOffsEn: It requires sensors, historical data and specialized staff, and false
+    alarms breed distrust.
+  _sources:
+  - Label: Predictive maintenance (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Predictive_maintenance
+  - Label: Fatorachian et al. (2025), Smart Cities
+    Url: https://doi.org/10.3390/smartcities8020056
+  _relatedEntries:
+  - {fileID: 11400000, guid: 03764b192d43fb68ca19c0e94fa003e8, type: 2}
+  - {fileID: 11400000, guid: 44578aa9bad3d15bf9400867016fb4c8, type: 2}
+  _image: {fileID: 21300000, guid: 7f0f63ef64e8c67ff9aac739575c41fc, type: 3}

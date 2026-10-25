@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Conceito_Tendencias
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Efeitos diretos e indiretos
+  _titleEn: Direct and indirect effects
+  _category: 2
+  _unlockTrigger: 11
+  _summary: "A varia\xE7\xE3o de um indicador mistura v\xE1rias causas: o efeito
+    direto de uma decis\xE3o, o efeito indireto de outros indicadores e tend\xEAncias
+    que continuam mesmo sem ningu\xE9m mexer, como o desgaste da infraestrutura."
+  _summaryEn: 'A change in an indicator mixes several causes: the direct effect of
+    a decision, the indirect effect of other indicators, and trends that continue
+    even when nobody acts, such as infrastructure wear.'
+  _realWorld: "Separar essas parcelas \xE9 o que fazem as avalia\xE7\xF5es de pol\xEDticas
+    p\xFAblicas, que comparam o que aconteceu com o que teria acontecido sem a pol\xEDtica."
+  _realWorldEn: Separating these parts is what public policy evaluations do, comparing
+    what happened with what would have happened without the policy.
+  _tradeOffs: "Atribuir um resultado s\xF3 \xE0 \xFAltima decis\xE3o leva a conclus\xF5es
+    erradas, tanto para elogiar quanto para culpar."
+  _tradeOffsEn: Crediting a result only to the latest decision leads to wrong conclusions,
+    both for praise and for blame.
+  _sources:
+  - Label: Systems thinking (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Systems_thinking
+  - Label: Thinking in Systems, de Donella Meadows (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Thinking_In_Systems:_A_Primer
+  _relatedEntries:
+  - {fileID: 11400000, guid: b5b486b78494627a798be52bc54b3d22, type: 2}

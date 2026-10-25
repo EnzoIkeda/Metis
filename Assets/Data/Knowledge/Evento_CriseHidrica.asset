@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_CriseHidrica
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Crise H\xEDdrica"
+  _titleEn: Water Crisis
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Secas longas esvaziam os reservat\xF3rios, e a cidade precisa racionar
+    \xE1gua e buscar novas fontes."
+  _summaryEn: Long droughts drain reservoirs, and the city must ration water and
+    look for new sources.
+  _realWorld: "Na seca de 2014 a 2015, o Sistema Cantareira, que abastece boa parte
+    da Grande S\xE3o Paulo, chegou a operar com o volume morto, a reserva abaixo
+    das bombas."
+  _realWorldEn: "During the 2014 to 2015 drought, the Cantareira System, which supplies
+    much of Greater S\xE3o Paulo, had to draw on its dead volume, the reserve below
+    the intake pumps."
+  _tradeOffs: "Reduzir vazamentos, diversificar fontes e reusar \xE1gua protegem
+    melhor que esperar a chuva."
+  _tradeOffsEn: Reducing leaks, diversifying sources and reusing water protect better
+    than waiting for rain.
+  _sources:
+  - Label: "Sistema Cantareira (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Sistema_Cantareira
+  _relatedEntries:
+  - {fileID: 11400000, guid: 21f07eec813fe28db891cbf3e67b759e, type: 2}
+  - {fileID: 11400000, guid: 0e7cd90400462a46cbb56536a03b1907, type: 2}

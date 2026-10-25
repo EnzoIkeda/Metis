@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_ZonaComercial
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Zona Comercial
+  _titleEn: Commercial Zone
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Reservar \xE1reas para com\xE9rcio concentra lojas e servi\xE7os, gera
+    empregos e arrecada\xE7\xE3o."
+  _summaryEn: Setting aside areas for commerce concentrates shops and services, creating
+    jobs and tax revenue.
+  _realWorld: "O zoneamento por uso come\xE7ou em Nova York em 1916 e se espalhou
+    pelo mundo; as cidades brasileiras definem as zonas na lei de uso e ocupa\xE7\xE3o
+    do solo."
+  _realWorldEn: Zoning by use began in New York in 1916 and spread worldwide; Brazilian
+    cities define zones in their land use laws.
+  _tradeOffs: "Separar demais os usos esvazia o bairro \xE0 noite e obriga as pessoas
+    a se deslocar de carro para tudo."
+  _tradeOffsEn: Separating uses too much empties neighborhoods at night and forces
+    people to drive for everything.
+  _sources:
+  - Label: "Zoneamento (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Zoneamento
+  - Label: Euclidean zoning (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Euclidean_zoning
+  _relatedEntries:
+  - {fileID: 11400000, guid: 08cdbf2ee468763b7864300c69bfa9ce, type: 2}
+  - {fileID: 11400000, guid: eb066e44aecdd033f9c3ccc15f04e80c, type: 2}
+  _image: {fileID: 21300000, guid: 81479c85d8f419e0196bb62925325777, type: 3}

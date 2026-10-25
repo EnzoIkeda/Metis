@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_CidadeViraPoloDeDataCenters
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Cidade Vira Polo de Data Centers
+  _titleEn: City Becomes a Data Center Hub
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Data centers trazem investimento e impostos, mas consomem muita eletricidade
+    e \xE1gua para resfriamento."
+  _summaryEn: Data centers bring investment and taxes, but consume a lot of electricity
+    and water for cooling.
+  _realWorld: "Na Irlanda, os data centers j\xE1 consumiam mais de 20% da eletricidade
+    do pa\xEDs em 2023, segundo o escrit\xF3rio nacional de estat\xEDstica."
+  _realWorldEn: In Ireland, data centers already used more than 20% of the country's
+    electricity in 2023, according to the national statistics office.
+  _tradeOffs: "Geram poucos empregos para o tamanho do investimento e disputam energia
+    e \xE1gua com a popula\xE7\xE3o."
+  _tradeOffsEn: They create few jobs for the size of the investment and compete with
+    residents for power and water.
+  _sources:
+  - Label: CSO Irlanda, consumo de eletricidade de data centers em 2023
+    Url: https://www.cso.ie/en/releasesandpublications/ep/p-dcmec/datacentresmeteredelectricityconsumption2023/
+  _relatedEntries:
+  - {fileID: 11400000, guid: a1e63f6a131133cb2ba5a447f0a97420, type: 2}
+  - {fileID: 11400000, guid: f0bfc489cf504c3c2a38fd4a53a57c3a, type: 2}

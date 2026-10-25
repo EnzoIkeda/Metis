@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_FalhaEmCascataDeSistemasInterconectados
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Falha em Cascata de Sistemas Interconectados
+  _titleEn: Cascading Failure of Interconnected Systems
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Charles Perrow chamou de acidentes normais as falhas inevit\xE1veis
+    em sistemas complexos e muito acoplados, em que um problema pequeno se espalha
+    r\xE1pido demais para ser contido."
+  _summaryEn: Charles Perrow called normal accidents the inevitable failures of complex,
+    tightly coupled systems, where a small problem spreads too fast to be contained.
+  _realWorld: "Em agosto de 2003, uma falha de software e linhas encostando em \xE1rvores
+    derrubaram em cascata a rede el\xE9trica do nordeste dos Estados Unidos e de
+    parte do Canad\xE1, deixando cerca de 55 milh\xF5es de pessoas sem luz."
+  _realWorldEn: In August 2003, a software bug and power lines touching trees set
+    off a cascade that brought down the grid in the northeastern United States and
+    part of Canada, leaving about 55 million people without power.
+  _tradeOffs: Separar os sistemas em partes que podem falhar sozinhas limita o estrago.
+  _tradeOffsEn: Dividing systems into parts that can fail on their own limits the
+    damage.
+  _sources:
+  - Label: Northeast blackout of 2003 (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Northeast_blackout_of_2003
+  - Label: Normal Accidents (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Normal_Accidents
+  _relatedEntries:
+  - {fileID: 11400000, guid: 3dc4ee9e524a6f138bf829d4e2cd1c01, type: 2}
+  - {fileID: 11400000, guid: f0c888ec33e47a441a596bdfe764ce02, type: 2}

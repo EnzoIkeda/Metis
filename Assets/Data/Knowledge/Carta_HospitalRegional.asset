@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_HospitalRegional
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Hospital Regional
+  _titleEn: Regional Hospital
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Um hospital regional concentra cirurgias, UTI e especialistas que munic\xEDpios
+    pequenos n\xE3o conseguiriam manter sozinhos."
+  _summaryEn: A regional hospital concentrates surgery, intensive care and specialists
+    that small municipalities could not maintain alone.
+  _realWorld: "A Lei 8.080, de 1990, organiza o SUS de forma regionalizada: cidades
+    vizinhas dividem hospitais e se organizam, muitas vezes, em cons\xF3rcios."
+  _realWorldEn: 'Law 8,080 of 1990 organizes Brazil''s public health system by region:
+    neighboring cities share hospitals and often form consortiums.'
+  _tradeOffs: "Manter um hospital custa por ano boa parte do que custou constru\xED-lo,
+    e pacientes de longe dependem de transporte."
+  _tradeOffsEn: Running a hospital costs, every year, a large share of what it cost
+    to build, and distant patients depend on transport.
+  _sources:
+  - Label: Lei 8.080/1990 (Planalto)
+    Url: https://www.planalto.gov.br/ccivil_03/leis/l8080.htm
+  _relatedEntries:
+  - {fileID: 11400000, guid: 17b7ffccb5578d4ceb4650c05802105d, type: 2}
+  - {fileID: 11400000, guid: b8aab7e8547084218a359436b90d5578, type: 2}
+  _image: {fileID: 21300000, guid: bcd7391c2726eafd7bc066d003c72875, type: 3}

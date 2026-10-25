@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_ApagaoGeral
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Apag\xE3o Geral"
+  _titleEn: Citywide Blackout
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Sem energia, param sem\xE1foros, bombas de \xE1gua, comunica\xE7\xE3o
+    e a conserva\xE7\xE3o de alimentos e rem\xE9dios."
+  _summaryEn: Without power, traffic lights, water pumps, communications and the
+    storage of food and medicine all stop.
+  _realWorld: "Em novembro de 2020, um inc\xEAndio numa subesta\xE7\xE3o em Macap\xE1
+    deixou quase todo o Amap\xE1 sem luz, com rod\xEDzio de energia por semanas."
+  _realWorldEn: "In November 2020, a fire at a substation in Macap\xE1 left almost
+    all of Amap\xE1 without power, with rotating outages for weeks."
+  _tradeOffs: "Depender de uma \xFAnica linha ou subesta\xE7\xE3o deixa a cidade
+    sem alternativa; geradores em hospitais e redund\xE2ncia na rede s\xE3o essenciais."
+  _tradeOffsEn: Relying on a single line or substation leaves the city with no alternative;
+    generators in hospitals and grid redundancy are essential.
+  _sources:
+  - Label: "Apag\xE3o no Amap\xE1 em 2020 (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Apag%C3%A3o_no_Amap%C3%A1_em_2020
+  _relatedEntries:
+  - {fileID: 11400000, guid: 3dc4ee9e524a6f138bf829d4e2cd1c01, type: 2}
+  - {fileID: 11400000, guid: a1e63f6a131133cb2ba5a447f0a97420, type: 2}

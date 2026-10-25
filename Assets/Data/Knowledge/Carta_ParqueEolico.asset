@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_ParqueEolico
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Parque E\xF3lico"
+  _titleEn: Wind Farm
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Turbinas e\xF3licas geram eletricidade com o vento, sem queimar combust\xEDvel."
+  _summaryEn: Wind turbines generate electricity from the wind without burning fuel.
+  _realWorld: "A energia e\xF3lica cresceu r\xE1pido no Brasil, com a maior parte
+    dos parques no Nordeste, onde os ventos s\xE3o fortes e constantes."
+  _realWorldEn: Wind power has grown fast in Brazil, with most wind farms in the
+    Northeast, where winds are strong and steady.
+  _tradeOffs: "O vento varia, ent\xE3o \xE9 preciso outra fonte de reserva; parques
+    mal planejados afetam comunidades vizinhas e aves."
+  _tradeOffsEn: Wind varies, so a backup source is needed; poorly planned farms affect
+    nearby communities and birds.
+  _sources:
+  - Label: "Energia e\xF3lica no Brasil (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Energia_e%C3%B3lica_no_Brasil
+  _relatedEntries:
+  - {fileID: 11400000, guid: ab630eb18b59b0c288eb2587f3971bf6, type: 2}
+  - {fileID: 11400000, guid: f0bfc489cf504c3c2a38fd4a53a57c3a, type: 2}
+  _image: {fileID: 21300000, guid: b4a04616cffb68b0fb44c0440460a5b0, type: 3}

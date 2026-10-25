@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_PostoDeSaude
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Posto de Sa\xFAde"
+  _titleEn: Health Clinic
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "A aten\xE7\xE3o b\xE1sica resolve a maior parte dos problemas de sa\xFAde
+    perto de casa e evita que eles cheguem ao hospital."
+  _summaryEn: Primary care solves most health problems close to home and keeps them
+    from reaching the hospital.
+  _realWorld: "A Estrat\xE9gia Sa\xFAde da Fam\xEDlia, iniciada em 1994, leva equipes
+    com m\xE9dico, enfermagem e agentes comunit\xE1rios \xE0s Unidades B\xE1sicas
+    de Sa\xFAde de todo o pa\xEDs."
+  _realWorldEn: Brazil's Family Health Strategy, started in 1994, sends teams with
+    a doctor, nurses and community health agents to basic health units across the
+    country.
+  _tradeOffs: "Falta de m\xE9dicos em regi\xF5es afastadas e o custo de manter as
+    equipes s\xE3o os maiores desafios."
+  _tradeOffsEn: Doctor shortages in remote areas and the cost of keeping the teams
+    running are the biggest challenges.
+  _sources:
+  - Label: "Estrat\xE9gia Sa\xFAde da Fam\xEDlia (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Estrat%C3%A9gia_Sa%C3%BAde_da_Fam%C3%ADlia
+  _relatedEntries:
+  - {fileID: 11400000, guid: b054017a871e6ef47b006a016a55064c, type: 2}
+  - {fileID: 11400000, guid: 32a5e2a4f5e9fdb48b56ec46ee629076, type: 2}
+  _image: {fileID: 21300000, guid: e2e25ad0a1064b1afa3ca8c927f4da8d, type: 3}

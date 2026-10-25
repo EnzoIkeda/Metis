@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_OnibusAutonomosEmCorredorPiloto
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "\xD4nibus Aut\xF4nomos em Corredor Piloto"
+  _titleEn: Autonomous Buses on a Pilot Route
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Micro-\xF4nibus sem motorista circulam devagar em trajetos curtos e
+    controlados, como testes para o transporte aut\xF4nomo."
+  _summaryEn: Driverless shuttles run slowly on short, controlled routes as trials
+    for autonomous transport.
+  _realWorld: "A francesa Navya colocou micro-\xF4nibus aut\xF4nomos em teste em
+    Lyon a partir de 2016 e depois em v\xE1rias outras cidades."
+  _realWorldEn: French company Navya began trialing autonomous shuttles in Lyon in
+    2016 and later in many other cities.
+  _tradeOffs: "Os ve\xEDculos ainda andam devagar, muitas vezes com um operador a
+    bordo, e o custo por passageiro \xE9 alto."
+  _tradeOffsEn: The vehicles still run slowly, often with an operator on board, and
+    the cost per passenger is high.
+  _sources:
+  - Label: Navya (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Navya
+  _relatedEntries:
+  - {fileID: 11400000, guid: 391c01fd740124fa08ffec84700b7f02, type: 2}
+  - {fileID: 11400000, guid: 08a29032f637300b381c2a5ef818b2a7, type: 2}
+  _image: {fileID: 21300000, guid: f1d832ef68ed0d6458030546decb5b83, type: 3}

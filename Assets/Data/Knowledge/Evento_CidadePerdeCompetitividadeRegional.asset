@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_CidadePerdeCompetitividadeRegional
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Cidade Perde Competitividade Regional
+  _titleEn: City Loses Regional Competitiveness
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Quando empresas e moradores trocam a cidade por vizinhas mais atraentes,
+    a arrecada\xE7\xE3o cai e fica mais dif\xEDcil manter os servi\xE7os."
+  _summaryEn: When companies and residents leave for more attractive neighboring
+    cities, revenue falls and services become harder to maintain.
+  _realWorld: "Detroit, que dependia da ind\xFAstria automobil\xEDstica, perdeu mais
+    da metade da popula\xE7\xE3o desde 1950 e decretou fal\xEAncia em 2013."
+  _realWorldEn: Detroit, which depended on the auto industry, lost more than half
+    its population after 1950 and filed for bankruptcy in 2013.
+  _tradeOffs: "Diversificar a economia e manter a qualidade dos servi\xE7os evita
+    o ciclo de esvaziamento."
+  _tradeOffsEn: Diversifying the economy and keeping service quality high prevents
+    the cycle of decline.
+  _sources:
+  - Label: Detroit bankruptcy (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Detroit_bankruptcy
+  _relatedEntries:
+  - {fileID: 11400000, guid: 7d7c93231d69b0dcb9d57f23e3e9d7c8, type: 2}
+  - {fileID: 11400000, guid: e0e059a830b06de019028c5ae7788080, type: 2}

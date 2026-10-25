@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Parametro_Sustentabilidade
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Sustentabilidade
+  _titleEn: Sustainability
+  _category: 3
+  _unlockTrigger: 1
+  _summary: "A Sustentabilidade mede a sa\xFAde ambiental da cidade: \xE1reas verdes,
+    qualidade do ar e da \xE1gua, res\xEDduos e emiss\xF5es. No jogo ela aparece
+    em metros quadrados de \xE1rea verde por habitante."
+  _summaryEn: 'Sustainability measures the city''s environmental health: green areas,
+    air and water quality, waste and emissions. In the game it is shown as square
+    meters of green area per person.'
+  _realWorld: "A Organiza\xE7\xE3o Mundial da Sa\xFAde reuniu em 2016 as evid\xEAncias
+    de que \xE1reas verdes urbanas reduzem calor, polui\xE7\xE3o e estresse."
+  _realWorldEn: In 2016 the World Health Organization gathered the evidence that
+    urban green spaces reduce heat, pollution and stress.
+  _tradeOffs: "No curto prazo, proteger o ambiente custa caro e restringe atividades
+    econ\xF4micas; o retorno costuma vir em prazos mais longos que um mandato."
+  _tradeOffsEn: In the short term, protecting the environment is costly and restricts
+    economic activity; the payoff usually comes over periods longer than a term in
+    office.
+  _sources:
+  - Label: OMS, Urban green spaces and health (2016)
+    Url: https://www.who.int/europe/publications/i/item/WHO-EURO-2016-3352-43111-60341
+  _relatedEntries:
+  - {fileID: 11400000, guid: 77acdd2f916c0d35ebe14215b5c0bcbc, type: 2}
+  - {fileID: 11400000, guid: 6154e0a377c7bc759b376966fb85eb91, type: 2}
+  _image: {fileID: 21300000, guid: d86aca6efdc4c1081a9ac2ad846f1cac, type: 3}

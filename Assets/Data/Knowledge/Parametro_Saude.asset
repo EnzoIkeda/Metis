@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Parametro_Saude
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Sa\xFAde"
+  _titleEn: Health
+  _category: 3
+  _unlockTrigger: 1
+  _summary: "A Sa\xFAde mede a capacidade de prevenir e tratar doen\xE7as: postos,
+    hospitais, vacina\xE7\xE3o, saneamento e ar limpo. No jogo ela aparece em leitos
+    por mil habitantes."
+  _summaryEn: 'Health measures the ability to prevent and treat disease: clinics,
+    hospitals, vaccination, sanitation and clean air. In the game it is shown as
+    hospital beds per thousand people.'
+  _realWorld: "O SUS, criado pela Constitui\xE7\xE3o de 1988 e organizado pela Lei
+    8.080 de 1990, atende de gra\xE7a toda a popula\xE7\xE3o brasileira."
+  _realWorldEn: Brazil's public health system (SUS), created by the 1988 Constitution
+    and organized by Law 8,080 of 1990, serves the whole population free of charge.
+  _tradeOffs: "Sa\xFAde depende de muito mais que hospitais: polui\xE7\xE3o, tr\xE2nsito,
+    moradia e renda pesam tanto quanto o atendimento."
+  _tradeOffsEn: 'Health depends on much more than hospitals: pollution, traffic,
+    housing and income matter as much as medical care.'
+  _sources:
+  - Label: Lei 8.080/1990 (Planalto)
+    Url: https://www.planalto.gov.br/ccivil_03/leis/l8080.htm
+  _relatedEntries:
+  - {fileID: 11400000, guid: 17b7ffccb5578d4ceb4650c05802105d, type: 2}
+  - {fileID: 11400000, guid: 0e7cd90400462a46cbb56536a03b1907, type: 2}
+  _image: {fileID: 21300000, guid: 1905a75dc622c8125bc9a23f7730c1cf, type: 3}

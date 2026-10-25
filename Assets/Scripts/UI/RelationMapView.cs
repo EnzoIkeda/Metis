@@ -77,6 +77,8 @@ public class RelationMapView : MonoBehaviour
 
     public bool IsOpen => _panelRoot != null && _panelRoot.activeSelf;
 
+    public event Action Opened;
+
     private void Start()
     {
         _stats = _cityStatsManager != null ? _cityStatsManager.Stats : null;
@@ -123,6 +125,7 @@ public class RelationMapView : MonoBehaviour
         if (_panelRoot != null)
             _panelRoot.SetActive(true);
         Redraw();
+        Opened?.Invoke();
     }
 
     public void Hide()

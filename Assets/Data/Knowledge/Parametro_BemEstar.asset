@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Parametro_BemEstar
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Bem-estar
+  _titleEn: Wellbeing
+  _category: 3
+  _unlockTrigger: 1
+  _summary: "O Bem-estar resume como a popula\xE7\xE3o avalia a vida na cidade. No
+    jogo ele vem da m\xE9dia de Mobilidade, Sa\xFAde, Seguran\xE7a e Sustentabilidade,
+    menos o adensamento, e aparece na escada de Cantril, de 0 a 10."
+  _summaryEn: Wellbeing sums up how residents rate life in the city. In the game
+    it comes from the average of Mobility, Health, Security and Sustainability, minus
+    crowding, and is shown on the Cantril ladder, from 0 to 10.
+  _realWorld: "A escada de Cantril pede que a pessoa d\xEA uma nota de 0 a 10 para
+    a pr\xF3pria vida; \xE9 a pergunta usada pelo World Happiness Report para comparar
+    pa\xEDses."
+  _realWorldEn: The Cantril ladder asks people to rate their own life from 0 to 10;
+    it is the question the World Happiness Report uses to compare countries.
+  _tradeOffs: "Bem-estar n\xE3o se compra direto: ele reage ao conjunto dos servi\xE7os,
+    e uma \xE1rea esquecida puxa a nota de todas as outras para baixo."
+  _tradeOffsEn: 'Wellbeing cannot be bought directly: it responds to services as
+    a whole, and one neglected area drags all the others down.'
+  _sources:
+  - Label: Cantril ladder (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Cantril_ladder
+  - Label: World Happiness Report
+    Url: https://worldhappiness.report/
+  _relatedEntries:
+  - {fileID: 11400000, guid: 56f10281a0f268b7887cf4574cc6f810, type: 2}
+  _image: {fileID: 21300000, guid: 32ffe03f2451930d2bff978321d2b4b3, type: 3}

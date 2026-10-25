@@ -41,3 +41,6 @@ MonoBehaviour:
   _copies: 1
   _structureToPlace: {fileID: 0}
   _artwork: {fileID: 21300000, guid: 5eb29a732efc715cf8b29354ea4612f8, type: 3}
+  _artworkFrames: []
+  _artworkFrameRate: 15
+  _knowledgeEntry: {fileID: 11400000, guid: 21f07eec813fe28db891cbf3e67b759e, type: 2}

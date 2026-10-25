@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_SemaforosAdaptativos
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Sem\xE1foros Adaptativos"
+  _titleEn: Adaptive Traffic Lights
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Sem\xE1foros adaptativos mudam o tempo de verde conforme o fluxo medido
+    por sensores, em vez de seguir um ciclo fixo."
+  _summaryEn: Adaptive traffic lights change green times according to traffic measured
+    by sensors, instead of following a fixed cycle.
+  _realWorld: "O sistema SCATS, criado na Austr\xE1lia nos anos 1970, controla hoje
+    sem\xE1foros em mais de 200 cidades pelo mundo."
+  _realWorldEn: The SCATS system, created in Australia in the 1970s, now controls
+    traffic lights in more than 200 cities worldwide.
+  _tradeOffs: "Os sensores precisam de manuten\xE7\xE3o constante, e um tr\xE2nsito
+    mais fluido pode atrair mais carros."
+  _tradeOffsEn: Sensors need constant maintenance, and smoother traffic can attract
+    more cars.
+  _sources:
+  - Label: SCATS (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Sydney_Coordinated_Adaptive_Traffic_System
+  _relatedEntries:
+  - {fileID: 11400000, guid: 1d59a0a4a3e4a856c9d3899a9107da9c, type: 2}
+  - {fileID: 11400000, guid: fdbaaae7083cd5beda7c9ab0b6468ee1, type: 2}
+  _image: {fileID: 21300000, guid: ed748740fce72c4759717735c99e76f4, type: 3}

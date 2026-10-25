@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_FraturaDigital
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Fratura Digital
+  _titleEn: Digital Divide
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Quando os servi\xE7os passam para a internet, quem n\xE3o tem acesso
+    ou n\xE3o sabe usar fica de fora."
+  _summaryEn: When services move online, people without access or skills are left
+    out.
+  _realWorld: "A pesquisa TIC Domic\xEDlios, do Cetic.br, mede todo ano quem usa
+    a internet no Brasil e mostra diferen\xE7as por renda, idade e regi\xE3o."
+  _realWorldEn: "The TIC Domic\xEDlios survey by Cetic.br measures internet use in
+    Brazil every year and shows gaps by income, age and region."
+  _tradeOffs: "Manter atendimento presencial, oferecer acesso p\xFAblico e ensinar
+    a usar a tecnologia evita excluir parte da popula\xE7\xE3o."
+  _tradeOffsEn: Keeping in-person service, offering public access and teaching people
+    to use technology avoids excluding part of the population.
+  _sources:
+  - Label: "Cetic.br, TIC Domic\xEDlios"
+    Url: https://cetic.br/pt/pesquisa/domicilios/
+  _relatedEntries:
+  - {fileID: 11400000, guid: 201f7154992a7a7c0a92fcd424de6b63, type: 2}
+  - {fileID: 11400000, guid: c102840dff96090b4a63c596037b8a9e, type: 2}

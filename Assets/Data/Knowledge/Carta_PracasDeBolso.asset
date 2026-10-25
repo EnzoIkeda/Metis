@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_PracasDeBolso
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Pra\xE7as de Bolso"
+  _titleEn: Pocket Parks
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Pequenos espa\xE7os p\xFAblicos bem desenhados, com bancos, sombra e
+    algo para ver, atraem gente e conviv\xEAncia muito al\xE9m do seu tamanho, como
+    mostrou William Whyte."
+  _summaryEn: Small, well-designed public spaces with seating, shade and something
+    to watch attract people and social life far beyond their size, as William Whyte
+    showed.
+  _realWorld: "O Paley Park, em Nova York, aberto em 1967 num terreno do tamanho
+    de um lote, com uma cascata ao fundo, \xE9 o exemplo cl\xE1ssico de pra\xE7a
+    de bolso."
+  _realWorldEn: Paley Park in New York, opened in 1967 on a single building lot with
+    a waterfall at the back, is the classic example of a pocket park.
+  _tradeOffs: "Sem cuidado e uso constante, o espa\xE7o se degrada; a escolha do
+    lugar decide se ele vai ser usado."
+  _tradeOffsEn: Without care and constant use, the space decays; the choice of location
+    decides whether it will be used.
+  _sources:
+  - Label: Paley Park (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Paley_Park
+  _relatedEntries:
+  - {fileID: 11400000, guid: 6154e0a377c7bc759b376966fb85eb91, type: 2}
+  - {fileID: 11400000, guid: 6279f69e244b41f6dbe6dff280ad710f, type: 2}
+  _image: {fileID: 21300000, guid: 454fcbf8d6b911cf7bd4dfdcf500e0c6, type: 3}

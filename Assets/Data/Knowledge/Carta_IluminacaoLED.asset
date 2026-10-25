@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_IluminacaoLED
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Ilumina\xE7\xE3o LED"
+  _titleEn: LED Street Lighting
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "L\xE2mpadas LED gastam menos energia e duram muito mais que as de vapor
+    de s\xF3dio da ilumina\xE7\xE3o p\xFAblica antiga, e ruas bem iluminadas parecem
+    e s\xE3o mais seguras."
+  _summaryEn: LED lamps use less energy and last much longer than the old sodium-vapor
+    street lights, and well-lit streets feel and are safer.
+  _realWorld: "Muitas cidades brasileiras contrataram parcerias p\xFAblico-privadas
+    para trocar a ilumina\xE7\xE3o por LED, pagando a troca com a economia de energia."
+  _realWorldEn: Many Brazilian cities have signed public-private partnerships to
+    switch to LED lighting, paying for it with the energy savings.
+  _tradeOffs: "A troca exige investimento alto no come\xE7o, e luz branca forte demais
+    aumenta a polui\xE7\xE3o luminosa."
+  _tradeOffsEn: The switch requires a large upfront investment, and overly bright
+    white light increases light pollution.
+  _sources:
+  - Label: US DOE, Solid-State Lighting
+    Url: https://www.energy.gov/eere/ssl/solid-state-lighting
+  - Label: Lei 11.079/2004, PPPs (Planalto)
+    Url: https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2004/lei/l11079.htm
+  _relatedEntries:
+  - {fileID: 11400000, guid: 3fc32179efc556e15a4ab1509a077104, type: 2}
+  - {fileID: 11400000, guid: a1e63f6a131133cb2ba5a447f0a97420, type: 2}
+  _image: {fileID: 21300000, guid: a6f7821d2dd3c882e881a13e71fa04f7, type: 3}

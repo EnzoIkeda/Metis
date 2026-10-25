@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_HackathonCivicoDaCidade
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Hackathon C\xEDvico da Cidade"
+  _titleEn: Civic Hackathon
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Num hackathon, programadores, designers e moradores passam um ou dois
+    dias criando solu\xE7\xF5es para problemas p\xFAblicos."
+  _summaryEn: In a hackathon, programmers, designers and residents spend a day or
+    two building solutions to public problems.
+  _realWorld: "O Laborat\xF3rio Hacker da C\xE2mara dos Deputados, criado em 2013,
+    promove hackathons e ferramentas para aproximar o cidad\xE3o do Legislativo."
+  _realWorldEn: The Hacker Lab of Brazil's Chamber of Deputies, created in 2013,
+    runs hackathons and tools that bring citizens closer to the legislature.
+  _tradeOffs: "Muitas solu\xE7\xF5es morrem depois do evento se n\xE3o houver quem
+    as mantenha."
+  _tradeOffsEn: Many solutions die after the event if nobody maintains them.
+  _sources:
+  - Label: "LabHacker, C\xE2mara dos Deputados"
+    Url: https://labhackercd.leg.br/
+  _relatedEntries:
+  - {fileID: 11400000, guid: d277a90bc907decd19b3de6bab9fed08, type: 2}
+  - {fileID: 11400000, guid: ed9959bf382f857698f4b3e1b5d46617, type: 2}

@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Conceito_Interdependencia
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Uma cidade \xE9 um sistema"
+  _titleEn: A city is a system
+  _category: 2
+  _unlockTrigger: 10
+  _summary: "Em uma cidade, nada muda sozinho: mais empregos trazem mais moradores,
+    que pedem mais transporte, que consome mais energia. O pensamento sist\xEAmico
+    estuda essas cadeias de causa e efeito e os ciclos que refor\xE7am ou freiam
+    uma mudan\xE7a."
+  _summaryEn: 'In a city, nothing changes on its own: more jobs bring more residents,
+    who need more transport, which uses more energy. Systems thinking studies these
+    chains of cause and effect and the loops that reinforce or slow down a change.'
+  _realWorld: "Pesquisadores descrevem as cidades como sistemas socioecol\xF3gico-tecnol\xF3gicos
+    (SETS), em que pessoas, natureza e infraestrutura se influenciam o tempo todo."
+  _realWorldEn: Researchers describe cities as social-ecological-technological systems
+    (SETS), in which people, nature and infrastructure constantly shape one another.
+  _tradeOffs: "Uma pol\xEDtica que resolve um problema pode criar outro em outro
+    lugar; olhar s\xF3 o efeito direto engana."
+  _tradeOffsEn: A policy that fixes one problem can create another somewhere else;
+    looking only at the direct effect is misleading.
+  _sources:
+  - Label: McPhearson et al. (2022), One Earth
+    Url: https://doi.org/10.1016/j.oneear.2022.04.007
+  - Label: Systems thinking (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Systems_thinking
+  _relatedEntries:
+  - {fileID: 11400000, guid: 1397ecda6c5e2dd0c8224a71c78f6107, type: 2}
+  - {fileID: 11400000, guid: 3dc4ee9e524a6f138bf829d4e2cd1c01, type: 2}

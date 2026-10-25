@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_DronesDeEntregaUrbana
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Drones de Entrega Urbana
+  _titleEn: Urban Delivery Drones
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Drones entregam pacotes pequenos pelo ar, sem enfrentar o tr\xE2nsito."
+  _summaryEn: Drones deliver small packages by air without facing traffic.
+  _realWorld: "A Zipline come\xE7ou em 2016 a levar bolsas de sangue por drone a
+    hospitais de Ruanda e depois expandiu para outros pa\xEDses."
+  _realWorldEn: Zipline began flying blood supplies by drone to hospitals in Rwanda
+    in 2016 and later expanded to other countries.
+  _tradeOffs: "Drones fazem barulho, levantam quest\xF5es de privacidade e seguran\xE7a
+    a\xE9rea e tiram empregos de entregadores."
+  _tradeOffsEn: Drones are noisy, raise privacy and air safety concerns and take
+    jobs from delivery workers.
+  _sources:
+  - Label: Zipline (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Zipline_(drone_delivery)
+  _relatedEntries:
+  - {fileID: 11400000, guid: 31b7a623f4288a386bedc39b0de9ab3b, type: 2}
+  - {fileID: 11400000, guid: 5eac0d9a84029ba20be25e13b1a7e669, type: 2}
+  _image: {fileID: 21300000, guid: ce5e2937305d750a4b515ed49d72736f, type: 3}

@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_EfeitoDeDemandaInduzida
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Efeito de Demanda Induzida
+  _titleEn: Induced Demand Effect
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Alargar ruas para acabar com o congestionamento atrai mais carros, e
+    em poucos anos o tr\xE2nsito volta ao mesmo n\xEDvel."
+  _summaryEn: Widening roads to end congestion attracts more cars, and within a few
+    years traffic returns to the same level.
+  _realWorld: "Duranton e Turner mostraram em 2011, com dados de cidades americanas,
+    que a quilometragem rodada cresce quase na mesma propor\xE7\xE3o das vias constru\xEDdas."
+  _realWorldEn: Duranton and Turner showed in 2011, using data from US cities, that
+    vehicle kilometers traveled grow almost in proportion to the roads built.
+  _tradeOffs: "Transporte coletivo, cobran\xE7a pelo uso da via e bairros mistos
+    reduzem a necessidade de viagens de carro."
+  _tradeOffsEn: Public transport, road pricing and mixed neighborhoods reduce the
+    need for car trips.
+  _sources:
+  - Label: Duranton e Turner (2011), American Economic Review
+    Url: https://doi.org/10.1257/aer.101.6.2616
+  - Label: Induced demand (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Induced_demand
+  _relatedEntries:
+  - {fileID: 11400000, guid: ce4f74b0f684cddfab353af48126b8d8, type: 2}
+  - {fileID: 11400000, guid: 802bc9730755cda1ba4d858c6814cbd8, type: 2}

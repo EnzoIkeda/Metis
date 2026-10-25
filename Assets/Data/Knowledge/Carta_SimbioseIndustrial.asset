@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_SimbioseIndustrial
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Simbiose Industrial (Economia Circular)
+  _titleEn: Industrial Symbiosis (Circular Economy)
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Na simbiose industrial, o res\xEDduo ou o calor que sobra de uma f\xE1brica
+    vira insumo da vizinha."
+  _summaryEn: In industrial symbiosis, the waste or surplus heat from one factory
+    becomes input for its neighbor.
+  _realWorld: "Em Kalundborg, na Dinamarca, empresas trocam vapor, \xE1gua, gesso
+    e outros res\xEDduos entre si desde os anos 1970."
+  _realWorldEn: In Kalundborg, Denmark, companies have exchanged steam, water, gypsum
+    and other by-products since the 1970s.
+  _tradeOffs: "As empresas ficam dependentes umas das outras, e a troca exige proximidade
+    e confian\xE7a."
+  _tradeOffsEn: Companies become dependent on each other, and the exchange requires
+    proximity and trust.
+  _sources:
+  - Label: Kalundborg Eco-industrial Park (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Kalundborg_Eco-industrial_Park
+  - Label: "Economia circular (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Economia_circular
+  _relatedEntries:
+  - {fileID: 11400000, guid: 9e42c249b92698688afcdb90cc733be0, type: 2}
+  - {fileID: 11400000, guid: 5c64d69f710e07a90a85a684c673892c, type: 2}
+  _image: {fileID: 21300000, guid: d67c6687651e6aedb990ef9f33bded1a, type: 3}

@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_ExportacaoDeTecnologiaCivica
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Exporta\xE7\xE3o de Tecnologia C\xEDvica"
+  _titleEn: Civic Technology Export
+  _category: 1
+  _unlockTrigger: 0
+  _summary: Ferramentas digitais criadas por uma cidade podem ser abertas e reaproveitadas
+    por outras.
+  _summaryEn: Digital tools created by one city can be opened up and reused by others.
+  _realWorld: "O Decidim, plataforma de participa\xE7\xE3o cidad\xE3 criada em Barcelona
+    em 2016 com c\xF3digo aberto, \xE9 usado hoje por governos e organiza\xE7\xF5es
+    de v\xE1rios pa\xEDses."
+  _realWorldEn: Decidim, an open-source citizen participation platform created in
+    Barcelona in 2016, is now used by governments and organizations in many countries.
+  _tradeOffs: "Software aberto precisa de comunidade e manuten\xE7\xE3o para continuar
+    vivo."
+  _tradeOffsEn: Open-source software needs a community and maintenance to stay alive.
+  _sources:
+  - Label: Decidim
+    Url: https://decidim.org/
+  _relatedEntries:
+  - {fileID: 11400000, guid: 76acf99e7c5e11ac28cc5cd829808818, type: 2}
+  - {fileID: 11400000, guid: cb80dcfddda669ed6b20ede7cc8618b8, type: 2}

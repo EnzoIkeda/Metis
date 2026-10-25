@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_Ciclovias
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Ciclovias
+  _titleEn: Bike Lanes
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Ciclovias protegidas tornam a bicicleta segura para o dia a dia, um
+    transporte barato, sem emiss\xE3o e bom para a sa\xFAde."
+  _summaryEn: Protected bike lanes make cycling safe for daily trips, a cheap, emission-free
+    and healthy way to travel.
+  _realWorld: "Bogot\xE1 fecha ruas para carros aos domingos desde 1974 na Ciclov\xEDa,
+    que re\xFAne centenas de milhares de pessoas, e construiu uma grande rede de
+    ciclorrotas."
+  _realWorldEn: "Bogot\xE1 has closed streets to cars on Sundays since 1974 for its
+    Ciclov\xEDa, which draws hundreds of thousands of people, and built a large network
+    of bike routes."
+  _tradeOffs: "Ciclovias tiram espa\xE7o de carros e vagas, o que gera resist\xEAncia,
+    e trechos soltos sem rede cont\xEDnua s\xE3o pouco usados."
+  _tradeOffsEn: Bike lanes take space from cars and parking, which draws resistance,
+    and disconnected stretches without a continuous network see little use.
+  _sources:
+  - Label: "Ciclov\xEDa (Wikipedia)"
+    Url: https://en.wikipedia.org/wiki/Ciclov%C3%ADa
+  _relatedEntries:
+  - {fileID: 11400000, guid: 6279f69e244b41f6dbe6dff280ad710f, type: 2}
+  - {fileID: 11400000, guid: 7a871854c0089473da395cf12ee42dfe, type: 2}

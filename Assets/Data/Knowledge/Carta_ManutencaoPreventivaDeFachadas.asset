@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_ManutencaoPreventivaDeFachadas
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Manuten\xE7\xE3o Preventiva de Fachadas"
+  _titleEn: Preventive Facade Maintenance
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Pela teoria das janelas quebradas, de Wilson e Kelling (1982), sinais
+    de abandono, como picha\xE7\xE3o e vidros quebrados, estimulam mais desordem
+    e pequenos crimes."
+  _summaryEn: According to Wilson and Kelling's broken windows theory (1982), signs
+    of neglect such as graffiti and broken glass invite more disorder and petty crime.
+  _realWorld: Nova York adotou a ideia nos anos 1990; os estudos posteriores mostram
+    efeito modesto e discutem quanto da queda do crime veio dela.
+  _realWorldEn: New York adopted the idea in the 1990s; later studies show a modest
+    effect and debate how much of the drop in crime came from it.
+  _tradeOffs: "A evid\xEAncia \xE9 mista, e quando a teoria vira policiamento agressivo
+    de pequenas infra\xE7\xF5es gera abusos contra os mais pobres."
+  _tradeOffsEn: The evidence is mixed, and when the theory becomes aggressive policing
+    of minor offenses it leads to abuses against the poorest.
+  _sources:
+  - Label: "Teoria das janelas quebradas (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Teoria_das_janelas_quebradas
+  - Label: Broken windows theory (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Broken_windows_theory
+  _relatedEntries:
+  - {fileID: 11400000, guid: 6d6097358666b495990301d3df8cebe7, type: 2}
+  - {fileID: 11400000, guid: 8fc9cf09b084f90d5aeb82aec5724cbe, type: 2}

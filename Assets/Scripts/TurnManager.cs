@@ -58,6 +58,9 @@ public class TurnManager : MonoBehaviour
 
     public event Action<RandomEventData> OnRandomEventTriggered;
 
+    // Carta paga e jogada, comum ou acao livre.
+    public event Action<CardData> OnCardPlayed;
+
     // Carta de busca jogada: lista o que pode vir do baralho, a escolha volta por CompleteSearch.
     public event Action<IReadOnlyList<CardData>> OnSearchRequested;
 
@@ -224,6 +227,8 @@ public class TurnManager : MonoBehaviour
 
         if (played)
         {
+            OnCardPlayed?.Invoke(card);
+
             // O ambiente some ja nesse instante, antes mesmo do efeito de impacto.
             _effects?.SetAmbientGlowsVisible(false);
 
@@ -279,6 +284,7 @@ public class TurnManager : MonoBehaviour
         var stats = _cityStatsManager.Stats;
         if (Hand.TryPlay(card, stats) == false)
             return false;
+        OnCardPlayed?.Invoke(card);
 
         if (card.Ability == CardAbility.RevealHand)
         {

@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_BoomEconomico
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Boom Econ\xF4mico"
+  _titleEn: Economic Boom
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Um ciclo de crescimento traz empregos e arrecada\xE7\xE3o, mas tamb\xE9m
+    atrai gente mais r\xE1pido do que a cidade consegue receber."
+  _summaryEn: A growth cycle brings jobs and revenue, but also attracts people faster
+    than the city can absorb them.
+  _realWorld: "Maca\xE9, no norte fluminense, cresceu muito com o petr\xF3leo da
+    Bacia de Campos e virou conhecida como capital nacional do petr\xF3leo, com a
+    press\xE3o sobre moradia e servi\xE7os que veio junto."
+  _realWorldEn: "Maca\xE9, in Rio de Janeiro state, grew rapidly with oil from the
+    Campos Basin and became known as Brazil's oil capital, with the pressure on housing
+    and services that came with it."
+  _tradeOffs: "Depender de um s\xF3 setor deixa a cidade exposta quando o ciclo acaba;
+    guardar parte da receita ajuda na queda."
+  _tradeOffsEn: Depending on a single sector leaves the city exposed when the cycle
+    ends; saving part of the revenue helps in the downturn.
+  _sources:
+  - Label: "Maca\xE9 (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Maca%C3%A9
+  _relatedEntries:
+  - {fileID: 11400000, guid: ed88fd7c4313a9b05847320c9075b27c, type: 2}
+  - {fileID: 11400000, guid: a16497e74769f0066b65644f094d7002, type: 2}

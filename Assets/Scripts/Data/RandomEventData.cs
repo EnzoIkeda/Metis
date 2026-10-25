@@ -15,6 +15,9 @@ public class RandomEventData : ScriptableObject, IRandomEventDefinition
     [SerializeField] private int _minTurn = 1;
     [SerializeField] private int _maxTurn = 999;
 
+    // Ficha "Saiba mais" do evento; so conteudo educativo, fora das regras de jogo.
+    [SerializeField] private KnowledgeEntryData _knowledgeEntry;
+
     // Titulo no idioma atual, com fallback pro portugues se a traducao em ingles nao existir.
     public string Title => LocalizationManager.Current == Language.English && string.IsNullOrEmpty(_titleEn) == false
         ? _titleEn
@@ -32,4 +35,6 @@ public class RandomEventData : ScriptableObject, IRandomEventDefinition
     // Turno minimo e maximo, inclusive, em que o evento pode ser sorteado.
     public int MinTurn => _minTurn;
     public int MaxTurn => _maxTurn;
+
+    public KnowledgeEntryData KnowledgeEntry => _knowledgeEntry;
 }

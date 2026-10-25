@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_DelegacaoInternacionalVisitaACidade
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Delega\xE7\xE3o Internacional Visita a Cidade"
+  _titleEn: International Delegation Visits the City
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Visitas de outros governos trocam experi\xEAncias e podem render parcerias
+    e investimentos."
+  _summaryEn: Visits from other governments exchange experience and can lead to partnerships
+    and investment.
+  _realWorld: "O BRT, que Curitiba montou completo em 1974, se espalhou pelo mundo;
+    o TransMilenio, aberto em Bogot\xE1 em 2000, levou o modelo a uma metr\xF3pole
+    de milh\xF5es de passageiros."
+  _realWorldEn: "BRT, which Curitiba fully built in 1974, spread around the world;
+    TransMilenio, opened in Bogot\xE1 in 2000, brought the model to a metropolis
+    of millions of riders."
+  _tradeOffs: "Receber bem d\xE1 visibilidade, mas o que conta \xE9 o que a cidade
+    entrega no dia a dia."
+  _tradeOffsEn: Hosting well brings visibility, but what counts is what the city
+    delivers every day.
+  _sources:
+  - Label: Bus rapid transit (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Bus_rapid_transit
+  - Label: TransMilenio (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/TransMilenio
+  _relatedEntries:
+  - {fileID: 11400000, guid: 76acf99e7c5e11ac28cc5cd829808818, type: 2}
+  - {fileID: 11400000, guid: 08a29032f637300b381c2a5ef818b2a7, type: 2}

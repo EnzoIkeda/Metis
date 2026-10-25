@@ -41,3 +41,4 @@ MonoBehaviour:
     Amount: -3
   _minTurn: 10
   _maxTurn: 999
+  _knowledgeEntry: {fileID: 11400000, guid: 622c30a788a08bbde8d1a0e3b0eaa1f5, type: 2}

@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Conceito_Ancora
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Confian\xE7a na gest\xE3o"
+  _titleEn: Trust in government
+  _category: 2
+  _unlockTrigger: 5
+  _summary: "Uma gest\xE3o depende da confian\xE7a da popula\xE7\xE3o. Quando a vida
+    na cidade piora demais, a popula\xE7\xE3o deixa de apoiar a administra\xE7\xE3o;
+    no jogo, \xE9 isso que acontece quando o Bem-estar chega ao n\xEDvel cr\xEDtico."
+  _summaryEn: A government depends on the trust of its residents. When life in the
+    city gets too bad, people stop supporting the administration; in the game, that
+    is what happens when Wellbeing reaches its critical level.
+  _realWorld: "As Jornadas de Junho de 2013 come\xE7aram com protestos contra o aumento
+    da tarifa de \xF4nibus em S\xE3o Paulo e cresceram para uma insatisfa\xE7\xE3o
+    ampla com os servi\xE7os p\xFAblicos."
+  _realWorldEn: "Brazil's June 2013 protests began against a bus fare increase in
+    S\xE3o Paulo and grew into broad dissatisfaction with public services."
+  _tradeOffs: "Indicadores bons em m\xE9dia podem esconder grupos muito insatisfeitos;
+    ouvir a popula\xE7\xE3o faz parte da gest\xE3o."
+  _tradeOffsEn: Good average indicators can hide very dissatisfied groups; listening
+    to residents is part of governing.
+  _sources:
+  - Label: "Jornadas de Junho (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Jornadas_de_Junho
+  - Label: World Happiness Report
+    Url: https://worldhappiness.report/
+  _relatedEntries:
+  - {fileID: 11400000, guid: 52c9c2cd6411d52f4adf183ed297f0a7, type: 2}
+  - {fileID: 11400000, guid: cb80dcfddda669ed6b20ede7cc8618b8, type: 2}

@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_ManufaturaAvancada40
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Manufatura Avan\xE7ada 4.0"
+  _titleEn: Advanced Manufacturing 4.0
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Na Ind\xFAstria 4.0, m\xE1quinas conectadas trocam dados e se ajustam
+    sozinhas, produzindo mais com menos desperd\xEDcio."
+  _summaryEn: In Industry 4.0, connected machines exchange data and adjust themselves,
+    producing more with less waste.
+  _realWorld: "O termo Industrie 4.0 surgiu na Alemanha, apresentado na feira de
+    Hannover em 2011, como estrat\xE9gia industrial do pa\xEDs."
+  _realWorldEn: The term Industrie 4.0 emerged in Germany, presented at the Hannover
+    fair in 2011 as the country's industrial strategy.
+  _tradeOffs: "Exige investimento alto, reduz vagas de baixa qualifica\xE7\xE3o e
+    aumenta o risco de ataques cibern\xE9ticos \xE0s f\xE1bricas."
+  _tradeOffsEn: It requires heavy investment, cuts low-skill jobs and increases the
+    risk of cyberattacks on factories.
+  _sources:
+  - Label: Fourth Industrial Revolution (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Fourth_Industrial_Revolution
+  _relatedEntries:
+  - {fileID: 11400000, guid: 5eac0d9a84029ba20be25e13b1a7e669, type: 2}
+  - {fileID: 11400000, guid: c37c4eb862d593bd9be9841688d90228, type: 2}
+  _image: {fileID: 21300000, guid: 836648a0ba89d2af6be24244f6fdbe19, type: 3}

@@ -45,6 +45,17 @@ public class PhaseSaveData
 
     public ulong HandRandomState;
     public ulong EventRandomState;
+
+    // Historico do relatorio de fim de fase: valores iniciais, turnos fechados e o turno em andamento.
+    public float[] HistoryStart = Array.Empty<float>();
+    public List<PhaseTurnRecord> History = new List<PhaseTurnRecord>();
+    public bool HasHistoryCurrent;
+    public PhaseTurnRecord HistoryCurrent = new PhaseTurnRecord();
+
+    // Jornal da fase: semente das edicoes, as edicoes publicadas e o ultimo turno lido.
+    public ulong NewsSeed;
+    public List<NewsEdition> NewsEditions = new List<NewsEdition>();
+    public int NewsLastReadTurn = -1;
 }
 
 // Arquivo de save inteiro: meta-progressao e, quando houver, a fase em andamento.
@@ -93,6 +104,35 @@ public static class RunSaveRules
         AddIds(phase.DrawPile, hand.DrawPile);
         AddIds(phase.DiscardPile, hand.DiscardPile);
         return phase;
+    }
+
+    public static void CaptureHistory(PhaseSaveData phase, PhaseHistory history)
+    {
+        phase.HistoryStart = history.StartValues;
+        phase.History = new List<PhaseTurnRecord>(history.Turns);
+        phase.HasHistoryCurrent = history.Current != null;
+        phase.HistoryCurrent = history.Current ?? new PhaseTurnRecord();
+    }
+
+    // Save sem historico, de antes do relatorio, volta vazio: o relatorio mostra so os turnos dali em diante.
+    public static PhaseHistory RestoreHistory(PhaseSaveData phase)
+    {
+        var current = phase.HasHistoryCurrent ? phase.HistoryCurrent : null;
+        return new PhaseHistory(phase.HistoryStart, phase.History, current);
+    }
+
+    public static void CaptureNews(PhaseSaveData phase, NewsArchive news)
+    {
+        phase.NewsSeed = news.Seed;
+        phase.NewsEditions = new List<NewsEdition>(news.Editions);
+        phase.NewsLastReadTurn = news.LastReadTurn;
+    }
+
+    // Save de antes do jornal vem sem semente; fresh da a semente nova nesse caso.
+    public static NewsArchive RestoreNews(PhaseSaveData phase, ulong freshSeed)
+    {
+        var seed = phase.NewsSeed != 0UL ? phase.NewsSeed : freshSeed;
+        return new NewsArchive(seed, phase.NewsEditions, phase.NewsLastReadTurn);
     }
 
     public static void RestoreStats(PhaseSaveData phase, CityStats stats)

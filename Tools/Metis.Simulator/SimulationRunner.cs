@@ -31,7 +31,8 @@ public sealed class SimulationOptions
     public int? VictoryTurnCount { get; set; }
     public bool FiniteDeck { get; set; }
     public bool PermanentReveal { get; set; }
-    // "fase" simula fases avulsas; "rodada" simula rodadas inteiras com recompensa entre as fases.
+    // "fase" simula fases avulsas; "rodada" simula rodadas inteiras com recompensa entre as fases;
+    // "relatorio" compara os criterios de decisao de maior impacto do relatorio de fim de fase.
     public string Mode { get; set; } = "fase";
     public int PhaseCount { get; set; } = 3;
     public int RewardRollouts { get; set; } = 40;

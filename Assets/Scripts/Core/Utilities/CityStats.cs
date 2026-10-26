@@ -90,6 +90,9 @@ public class CityStats
 
     public float AnchorBonus => _anchorBonus;
 
+    // Quanto cada parametro em Colapso tira do Bem-estar por turno.
+    public float CollapsePenaltyPerParameter => _colapsoPenaltyPerParameter;
+
     // Registro opcional do turno pra mostrar o que mudou cada parametro; nao muda nenhuma conta e nao e copiado no clone.
     public TurnBreakdown Recorder { get; set; }
 

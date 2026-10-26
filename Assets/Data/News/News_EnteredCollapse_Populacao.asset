@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_EnteredCollapse_Populacao
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 4
+  _parameter: 3
+  _headline: "\xCAxodo urbano: Popula\xE7\xE3o em Colapso"
+  _headlineEn: 'Urban exodus: Population collapses'
+  _body: "Com {valor}, sobram im\xF3veis vazios e falta gente para tocar a cidade.
+    O Bem-estar sente a cada turno."
+  _bodyEn: At {valor}, there are empty homes everywhere and not enough people to
+    run the city. Well-being feels it every turn.

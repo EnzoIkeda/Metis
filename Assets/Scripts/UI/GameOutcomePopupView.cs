@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class GameOutcomePopupView : MonoBehaviour
 {
     [SerializeField] private TurnManager _turnManager;
+
+    [Tooltip("Abre depois do relatorio de fim de fase; vazio, abre direto no fim de jogo.")]
+    [SerializeField] private PhaseEndFlow _endFlow;
     [SerializeField] private GameOutcome _outcomeToShowFor;
     [SerializeField] private GameObject _panelRoot;
     [SerializeField] private TMP_Text _titleText;
@@ -15,7 +18,10 @@ public class GameOutcomePopupView : MonoBehaviour
 
     private void Start()
     {
-        _turnManager.Machine.OnGameEnded += HandleGameEnded;
+        if (_endFlow != null)
+            _endFlow.OnContinue += HandleGameEnded;
+        else
+            _turnManager.Machine.OnGameEnded += HandleGameEnded;
         if (_closeButton != null)
             _closeButton.onClick.AddListener(HandleCloseClicked);
 
@@ -29,6 +35,8 @@ public class GameOutcomePopupView : MonoBehaviour
 
     private void OnDisable()
     {
+        if (_endFlow != null)
+            _endFlow.OnContinue -= HandleGameEnded;
         if (_turnManager != null && _turnManager.Machine != null)
             _turnManager.Machine.OnGameEnded -= HandleGameEnded;
     }
@@ -40,7 +48,10 @@ public class GameOutcomePopupView : MonoBehaviour
 
         if (_panelRoot != null)
             _panelRoot.SetActive(true);
-        SfxPlayer.Play(outcome == GameOutcome.Victory ? SoundEffect.Victory : SoundEffect.Defeat);
+
+        // Com o relatorio, o som ja tocou quando a fase acabou.
+        if (_endFlow == null)
+            SfxPlayer.Play(outcome == GameOutcome.Victory ? SoundEffect.Victory : SoundEffect.Defeat);
     }
 
     // Derrota encerra a rodada inteira; vitoria so fecha o popup e segue pro fluxo de recompensa.

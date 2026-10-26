@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Inauguration_2
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 1
+  _parameter: 0
+  _headline: "Posse com pompa e desconfian\xE7a"
+  _headlineEn: Pomp, snacks and skepticism
+  _body: "Entre discursos e salgadinhos, a cidade come\xE7a com Bem-estar em {valor}.
+    Seu Arnaldo apostou que o tr\xE2nsito n\xE3o muda. Veremos."
+  _bodyEn: Between speeches and snacks, the city starts with Well-being at {valor}.
+    Arnaldo bet that traffic will never change. We shall see.

@@ -47,8 +47,7 @@ public static class PolicyHelpers
     // Aplica a carta como a mao aplicaria ao jogar: custo em Renda, depois os efeitos.
     public static void ApplyCard(CityStats stats, SimCard card)
     {
-        stats.ApplyModifier(new StatModifier { Parameter = CityParameterType.Renda, Amount = -card.Cost });
-        stats.ApplyModifiers(card.StatEffects);
+        GreedyLookahead.ApplyCard(stats, card);
     }
 
     // Maior pontuacao vence; empate e sorteado com o gerador da politica, pra nao favorecer a ordem da mao.

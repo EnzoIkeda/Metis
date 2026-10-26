@@ -79,6 +79,8 @@ public class RelationMapView : MonoBehaviour
 
     public event Action Opened;
 
+    public event Action Closed;
+
     private void Start()
     {
         _stats = _cityStatsManager != null ? _cityStatsManager.Stats : null;
@@ -130,8 +132,11 @@ public class RelationMapView : MonoBehaviour
 
     public void Hide()
     {
+        var wasOpen = IsOpen;
         if (_panelRoot != null)
             _panelRoot.SetActive(false);
+        if (wasOpen)
+            Closed?.Invoke();
     }
 
     private void HandleParameterChanged(CityParameterType parameter, float value)

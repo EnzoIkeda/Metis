@@ -1,0 +1,1600 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 833db36ae8a446268b23e1c71241128b, type: 3}
+  m_Name: ModelReport
+  m_EditorClassIdentifier: Metis.Runtime::ModelReportData
+  _file:
+    Version: 1
+    ModelVersion: 1.0
+    Fingerprint: P:55.000/0.000/100.000/10.000/1.000;50.000/0.000/100.000/10.000/-1.100;50.000/0.000/100.000/10.000/-1.100;40.000/0.000/100.000/10.000/0.000;10.000/0.000/100.000/-1.000/0.000;45.000/0.000/100.000/10.000/-1.100;50.000/0.000/100.000/10.000/0.000;50.000/0.000/100.000/10.000/-1.100;45.000/0.000/100.000/10.000/-1.100|Z:50.000/1.000/25.000/75.000/1.600/0.500/0.600/0.100/12.000|M:0.000,0.400,0.600,1.200,0.500,-0.200,0.300,0.300,0.800,0.300,0.000,0.000,-1.300,0.400,0.700,0.000,0.000,-0.600,0.400,0.000,0.000,-0.700,0.200,0.000,0.800,0.200,0.000,0.300,0.300,0.700,0.000,0.000,0.200,1.000,0.400,0.500,0.500,0.200,0.000,0.200,0.000,0.300,0.300,0.000,0.000,-0.200,-0.600,0.000,-1.000,0.800,0.000,0.000,0.000,-0.500,0.000,0.000,0.000,0.000,0.000,0.000,0.000,0.000,0.000,0.400,0.000,0.000,-0.600,0.400,0.700,0.500,0.000,0.200,0.500,0.300,0.000,-0.900,0.300,0.200,0.400,0.000,0.000|R:0.000/1200000000.000;-2000000.000/2000000.000;5.000/60.000;50000.000/600000.000;0.000/9000.000;2.000/60.000;0.000/10.000;0.500/6.000;8.000/35.000|T:6/20|C:20/14/12/10|E:50/24
+    Sheets:
+    - Id: LeiaMe
+      Tab:
+        Pt: Leia-me
+        En: Read me
+        Tag: 
+      Title:
+        Pt: "Relat\xF3rio t\xE9cnico 01: o modelo da cidade"
+        En: 'Technical report 01: the city model'
+        Tag: 
+      Intro:
+        Pt: "Seja bem-vindo(a) \xE0 administra\xE7\xE3o. Antes da primeira decis\xE3o,
+          a equipe t\xE9cnica preparou este relat\xF3rio sobre o modelo que usamos
+          para prever a cidade: o que ele mede, como os n\xFAmeros conversam entre
+          si e at\xE9 onde d\xE1 para confiar neles. Cada aba trata de um assunto."
+        En: 'Welcome to the administration. Before your first decision, the technical
+          team prepared this report on the model we use to forecast the city: what
+          it measures, how the numbers affect each other and how far they can be
+          trusted. Each tab covers one topic.'
+        Tag: 
+      Auto: 
+      Header:
+      - Field:
+          Pt: Para
+          En: To
+          Tag: 
+        Value:
+          Pt: "Gabinete da administra\xE7\xE3o"
+          En: Office of the city administration
+          Tag: 
+      - Field:
+          Pt: De
+          En: From
+          Tag: 
+        Value:
+          Pt: "N\xFAcleo de Planejamento e Dados"
+          En: Planning and Data Unit
+          Tag: 
+      - Field:
+          Pt: Assunto
+          En: Subject
+          Tag: 
+        Value:
+          Pt: "Como funciona o modelo que prev\xEA a cidade"
+          En: How the model that forecasts the city works
+          Tag: 
+      - Field:
+          Pt: "Per\xEDodo"
+          En: Period
+          Tag: 
+        Value:
+          Pt: Uma fase de 20 turnos
+          En: One phase of 20 turns
+          Tag: 
+      - Field:
+          Pt: "Vers\xE3o do modelo"
+          En: Model version
+          Tag: 
+        Value:
+          Pt: 1.0
+          En: 1.0
+          Tag: 
+      - Field:
+          Pt: "Classifica\xE7\xE3o"
+          En: Classification
+          Tag: 
+        Value:
+          Pt: "Modelo simplificado, para comparar decis\xF5es"
+          En: Simplified model, for comparing decisions
+          Tag: 
+      Columns:
+      - Pt: Aba
+        En: Tab
+        Tag: 
+      - Pt: "O que voc\xEA encontra"
+        En: What you will find
+        Tag: 
+      Rows:
+      - Cells:
+        - Pt: Indicadores
+          En: Indicators
+          Tag: 
+        - Pt: "Os 9 n\xFAmeros que a equipe acompanha e em que unidade"
+          En: The 9 numbers the team tracks and their units
+          Tag: 
+      - Cells:
+        - Pt: Turno
+          En: Turn
+          Tag: 
+        - Pt: A ordem em que as coisas acontecem a cada turno
+          En: The order in which things happen each turn
+          Tag: 
+      - Cells:
+        - Pt: "Rela\xE7\xF5es"
+          En: Links
+          Tag: 
+        - Pt: Quanto cada indicador empurra os outros
+          En: How much each indicator pushes the others
+          Tag: 
+      - Cells:
+        - Pt: Faixas
+          En: Ranges
+          Tag: 
+        - Pt: O que muda quando um indicador fica muito baixo ou muito alto
+          En: What changes when an indicator gets very low or very high
+          Tag: 
+      - Cells:
+        - Pt: Bem-estar
+          En: Well-being
+          Tag: 
+        - Pt: "Como a satisfa\xE7\xE3o da popula\xE7\xE3o \xE9 calculada e o que
+            \xE9 Colapso"
+          En: How residents' satisfaction is calculated and what Collapse is
+          Tag: 
+      - Cells:
+        - Pt: Tecnologia
+          En: Technology
+          Tag: 
+        - Pt: "Os n\xEDveis at\xE9 a Smart City"
+          En: The levels up to the Smart City
+          Tag: 
+      - Cells:
+        - Pt: Origem
+          En: Sources
+          Tag: 
+        - Pt: "De onde vem cada n\xFAmero e quanto confiar nele"
+          En: Where each number comes from and how much to trust it
+          Tag: 
+      - Cells:
+        - Pt: Testes
+          En: Tests
+          Tag: 
+        - Pt: Como a equipe testou o modelo antes de entregar
+          En: How the team tested the model before delivery
+          Tag: 
+      - Cells:
+        - Pt: Limites
+          En: Limits
+          Tag: 
+        - Pt: O que o modelo deixa de fora
+          En: What the model leaves out
+          Tag: 
+      Notes:
+      - Pt: "Um modelo \xE9 uma vers\xE3o simplificada da realidade. Ele deixa muita
+          coisa de fora de prop\xF3sito, para que as decis\xF5es mais importantes
+          fiquem f\xE1ceis de ver."
+        En: A model is a simplified version of reality. It leaves a lot out on purpose,
+          so that the most important decisions are easy to see.
+        Tag: 
+      - Pt: "Por dentro, todo indicador vai de 0 a 100. Reais, habitantes e km/h
+          s\xE3o s\xF3 uma r\xE9gua para mostrar esses n\xFAmeros; d\xE1 para trocar
+          em \"Valores: unidades reais\" nas configura\xE7\xF5es."
+        En: 'Inside the model, every indicator goes from 0 to 100. Reais, residents
+          and km/h are only a ruler for showing those numbers; you can switch it
+          under "Values: real units" in the settings.'
+        Tag: 
+      - Pt: "No meio da fase, toque em um indicador para ver por que ele mudou no
+          \xFAltimo turno."
+        En: During the phase, tap an indicator to see why it changed last turn.
+        Tag: 
+      SeeAlso:
+      - Conceito_Interdependencia
+    - Id: Indicadores
+      Tab:
+        Pt: Indicadores
+        En: Indicators
+        Tag: 
+      Title:
+        Pt: Os 9 indicadores da cidade
+        En: The city's 9 indicators
+        Tag: 
+      Intro:
+        Pt: "A equipe acompanha 9 indicadores. Cada um vai de 0 a 100 no modelo;
+          a coluna \"R\xE9gua\" mostra a que valor real correspondem o 0 e o 100."
+        En: The team tracks 9 indicators. Each one goes from 0 to 100 in the model;
+          the "Ruler" column shows which real value 0 and 100 stand for.
+        Tag: 
+      Auto: Parameters
+      Header: []
+      Columns:
+      - Pt: Indicador
+        En: Indicator
+        Tag: 
+      - Pt: O que mede
+        En: What it measures
+        Tag: 
+      - Pt: "R\xE9gua (0 a 100)"
+        En: Ruler (0 to 100)
+        Tag: 
+      - Pt: "In\xEDcio"
+        En: Start
+        Tag: 
+      - Pt: "Cr\xEDtico"
+        En: Critical
+        Tag: 
+      - Pt: Sozinho, por turno
+        En: On its own, per turn
+        Tag: 
+      Rows:
+      - Cells:
+        - Pt: Renda
+          En: Income
+          Tag: 
+        - Pt: Dinheiro em caixa da prefeitura
+          En: City Hall's cash on hand
+          Tag: 
+        - Pt: R$ 0 a R$ 1,2 bi
+          En: R$ 0 to R$ 1.2B
+          Tag: 
+        - Pt: 55 (R$ 660 mi)
+          En: 55 (R$ 660M)
+          Tag: 
+        - Pt: 10 (R$ 120 mi)
+          En: 10 (R$ 120M)
+          Tag: 
+        - Pt: +1 (+R$ 12 mi)
+          En: +1 (+R$ 12M)
+          Tag: 
+      - Cells:
+        - Pt: Energia
+          En: Energy
+          Tag: 
+        - Pt: Sobra ou falta de eletricidade
+          En: Electricity surplus or shortfall
+          Tag: 
+        - Pt: -2 mi a 2 mi kWh/dia
+          En: -2M to 2M kWh/day
+          Tag: 
+        - Pt: 50 (0 kWh/dia)
+          En: 50 (0 kWh/day)
+          Tag: 
+        - Pt: 10 (-1,6 mi kWh/dia)
+          En: 10 (-1.6M kWh/day)
+          Tag: 
+        - Pt: -1,1 (-44 mil kWh/dia)
+          En: -1.1 (-44k kWh/day)
+          Tag: 
+      - Cells:
+        - Pt: "Popula\xE7\xE3o"
+          En: Population
+          Tag: 
+        - Pt: Moradores
+          En: Residents
+          Tag: 
+        - Pt: 50 mil a 600 mil hab.
+          En: 50k to 600k people
+          Tag: 
+        - Pt: 40 (270 mil hab.)
+          En: 40 (270k people)
+          Tag: 
+        - Pt: 10 (105 mil hab.)
+          En: 10 (105k people)
+          Tag: 
+        - Pt: 0
+          En: 0
+          Tag: 
+      - Cells:
+        - Pt: Mobilidade
+          En: Mobility
+          Tag: 
+        - Pt: "Velocidade m\xE9dia no tr\xE2nsito"
+          En: Average traffic speed
+          Tag: 
+        - Pt: 8 a 35 km/h
+          En: 8 to 35 km/h
+          Tag: 
+        - Pt: 45 (20,2 km/h)
+          En: 45 (20.2 km/h)
+          Tag: 
+        - Pt: 10 (10,7 km/h)
+          En: 10 (10.7 km/h)
+          Tag: 
+        - Pt: -1,1 (-0,3 km/h)
+          En: -1.1 (-0.3 km/h)
+          Tag: 
+      - Cells:
+        - Pt: "Sa\xFAde"
+          En: Health
+          Tag: 
+        - Pt: Leitos de hospital
+          En: Hospital beds
+          Tag: 
+        - Pt: 0,5 a 6 leitos/mil
+          En: 0.5 to 6 beds/1k
+          Tag: 
+        - Pt: 50 (3,25 leitos/mil)
+          En: 50 (3.25 beds/1k)
+          Tag: 
+        - Pt: 10 (1,05 leitos/mil)
+          En: 10 (1.05 beds/1k)
+          Tag: 
+        - Pt: -1,1 (-0,06 leitos/mil)
+          En: -1.1 (-0.06 beds/1k)
+          Tag: 
+      - Cells:
+        - Pt: "Seguran\xE7a"
+          En: Safety
+          Tag: 
+        - Pt: "Agentes de seguran\xE7a p\xFAblica"
+          En: Public safety officers
+          Tag: 
+        - Pt: 5 a 60 ag./10 mil
+          En: 5 to 60 officers/10k
+          Tag: 
+        - Pt: 50 (32,5 ag./10 mil)
+          En: 50 (32.5 officers/10k)
+          Tag: 
+        - Pt: 10 (10,5 ag./10 mil)
+          En: 10 (10.5 officers/10k)
+          Tag: 
+        - Pt: -1,1 (-0,61 ag./10 mil)
+          En: -1.1 (-0.61 officers/10k)
+          Tag: 
+      - Cells:
+        - Pt: Sustentabilidade
+          En: Sustainability
+          Tag: 
+        - Pt: "\xC1rea verde por morador"
+          En: Green space per resident
+          Tag: 
+        - Pt: "2 a 60 m\xB2/hab."
+          En: "2 to 60 m\xB2/person"
+          Tag: 
+        - Pt: "45 (28,1 m\xB2/hab.)"
+          En: "45 (28.1 m\xB2/person)"
+          Tag: 
+        - Pt: "10 (7,8 m\xB2/hab.)"
+          En: "10 (7.8 m\xB2/person)"
+          Tag: 
+        - Pt: "-1,1 (-0,64 m\xB2/hab.)"
+          En: "-1.1 (-0.64 m\xB2/person)"
+          Tag: 
+      - Cells:
+        - Pt: Pesquisa
+          En: Research
+          Tag: 
+        - Pt: Pesquisadores na cidade
+          En: Researchers in the city
+          Tag: 
+        - Pt: 0 a 9.000/mi hab.
+          En: 0 to 9,000/M pop.
+          Tag: 
+        - Pt: 10 (900/mi hab.)
+          En: 10 (900/M pop.)
+          Tag: 
+        - Pt: "N\xE3o tem"
+          En: None
+          Tag: 
+        - Pt: 0
+          En: 0
+          Tag: 
+      - Cells:
+        - Pt: Bem-estar
+          En: Well-being
+          Tag: 
+        - Pt: "Satisfa\xE7\xE3o com a vida (0 a 10)"
+          En: Life satisfaction (0 to 10)
+          Tag: 
+        - Pt: 0 a 10
+          En: 0 to 10
+          Tag: 
+        - Pt: 50 (5/10)
+          En: 50 (5/10)
+          Tag: 
+        - Pt: 10 (1/10)
+          En: 10 (1/10)
+          Tag: 
+        - Pt: Recalculado todo turno
+          En: Recalculated every turn
+          Tag: 
+      Notes:
+      - Pt: "\"Sozinho, por turno\" \xE9 o quanto o indicador muda sem nenhuma decis\xE3o.
+          Cinco servi\xE7os se desgastam 1,1 ponto por turno, como uma rua que precisa
+          de manuten\xE7\xE3o; a Renda cresce 1 ponto com a arrecada\xE7\xE3o normal."
+        En: '"On its own, per turn" is how much the indicator changes with no decision
+          at all. Five services wear down 1.1 points per turn, like a street that
+          needs upkeep; Income grows 1 point from regular tax collection.'
+        Tag: 
+      - Pt: "Energia \xE9 um saldo: 0 kWh/dia quer dizer que a cidade gera o mesmo
+          que consome. Abaixo de zero, falta energia."
+        En: 'Energy is a balance: 0 kWh/day means the city generates as much as it
+          uses. Below zero, there is a shortfall.'
+        Tag: 
+      - Pt: "Chegar ao n\xEDvel cr\xEDtico (10) faz o indicador entrar em Colapso.
+          Pesquisa n\xE3o tem n\xEDvel cr\xEDtico: ela s\xF3 acumula e libera tecnologia."
+        En: 'Reaching the critical level (10) puts the indicator in Collapse. Research
+          has no critical level: it only builds up and unlocks technology.'
+        Tag: 
+      - Pt: "Bem-estar n\xE3o muda sozinho: ele \xE9 recalculado a partir dos outros
+          todo turno (aba Bem-estar)."
+        En: 'Well-being does not change on its own: it is recalculated from the others
+          every turn (Well-being tab).'
+        Tag: 
+      SeeAlso:
+      - Parametro_Renda
+      - Parametro_Energia
+      - Parametro_Populacao
+      - Parametro_Mobilidade
+      - Parametro_Saude
+      - Parametro_Seguranca
+      - Parametro_Sustentabilidade
+      - Parametro_Pesquisa
+      - Parametro_BemEstar
+      - Conceito_Tendencias
+    - Id: Turno
+      Tab:
+        Pt: Turno
+        En: Turn
+        Tag: 
+      Title:
+        Pt: O que acontece em um turno
+        En: What happens in a turn
+        Tag: 
+      Intro:
+        Pt: "A fase tem 20 turnos. Cada turno segue sempre a mesma ordem, e a ordem
+          importa: o que voc\xEA faz na a\xE7\xE3o j\xE1 entra nas contas da resolu\xE7\xE3o
+          do mesmo turno."
+        En: 'A phase has 20 turns. Every turn follows the same order, and the order
+          matters: what you do in the action step already counts in the same turn''s
+          resolution.'
+        Tag: 
+      Auto: 
+      Header: []
+      Columns:
+      - Pt: Etapa
+        En: Step
+        Tag: 
+      - Pt: O que acontece
+        En: What happens
+        Tag: 
+      - Pt: Quem decide
+        En: Who decides
+        Tag: 
+      Rows:
+      - Cells:
+        - Pt: "1. In\xEDcio"
+          En: 1. Start
+          Tag: 
+        - Pt: "Voc\xEA recebe at\xE9 6 cartas do seu baralho. S\xF3 v\xEAm cartas
+            de um n\xEDvel de tecnologia que a cidade j\xE1 alcan\xE7ou."
+          En: You get up to 6 cards from your deck. Only cards from a technology
+            level the city has already reached are drawn.
+          Tag: 
+        - Pt: Sorteio
+          En: Draw
+          Tag: 
+      - Cells:
+        - Pt: "2. A\xE7\xE3o"
+          En: 2. Action
+          Tag: 
+        - Pt: "Voc\xEA joga uma carta. Ela custa Renda e muda indicadores na hora.
+            Buscar ou revelar cartas n\xE3o gasta a jogada. Sem nenhuma carta poss\xEDvel,
+            voc\xEA passa a vez."
+          En: You play one card. It costs Income and changes indicators right away.
+            Searching for or revealing cards does not use up your play. With no playable
+            card, you pass.
+          Tag: 
+        - Pt: "Voc\xEA"
+          En: You
+          Tag: 
+      - Cells:
+        - Pt: "3. Resolu\xE7\xE3o"
+          En: 3. Resolution
+          Tag: 
+        - Pt: "Os indicadores se influenciam (aba Rela\xE7\xF5es), cada um muda sozinho
+            o quanto muda por turno, e o Bem-estar \xE9 recalculado."
+          En: The indicators affect each other (Links tab), each one changes on its
+            own by its per-turn amount, and Well-being is recalculated.
+          Tag: 
+        - Pt: Modelo
+          En: Model
+          Tag: 
+      - Cells:
+        - Pt: 4. Evento
+          En: 4. Event
+          Tag: 
+        - Pt: Um acontecimento, sorteado entre os que podem ocorrer naquele momento,
+            muda alguns indicadores.
+          En: An occurrence, drawn from those that can happen at that moment, changes
+            some indicators.
+          Tag: 
+        - Pt: Sorteio
+          En: Draw
+          Tag: 
+      - Cells:
+        - Pt: "5. Verifica\xE7\xE3o"
+          En: 5. Check
+          Tag: 
+        - Pt: "Se o Bem-estar chegou ao n\xEDvel cr\xEDtico, a gest\xE3o termina.
+            Se era o \xFAltimo turno, a fase est\xE1 vencida."
+          En: If Well-being reached the critical level, the administration ends.
+            If it was the last turn, the phase is won.
+          Tag: 
+        - Pt: Modelo
+          En: Model
+          Tag: 
+      - Cells:
+        - Pt: "6. Pr\xF3ximo turno"
+          En: 6. Next turn
+          Tag: 
+        - Pt: "As cartas que sobraram na m\xE3o v\xE3o para o descarte."
+          En: Cards left in your hand go to the discard pile.
+          Tag: 
+        - Pt: Modelo
+          En: Model
+          Tag: 
+      Notes:
+      - Pt: "H\xE1 50 eventos poss\xEDveis. Todos t\xEAm uma janela de turnos e 24
+          dependem do n\xEDvel de Pesquisa: uma cidade muito tecnol\xF3gica atrai
+          pr\xEAmios e tamb\xE9m ataques cibern\xE9ticos; uma cidade que n\xE3o investe
+          sofre com fuga de c\xE9rebros."
+        En: 'There are 50 possible events. All of them have a turn window and 24
+          depend on the Research level: a highly technological city attracts awards
+          and also cyberattacks; a city that does not invest suffers from brain drain.'
+        Tag: 
+      - Pt: "Entre os eventos poss\xEDveis no momento, o sorteio \xE9 por igual:
+          nenhum \xE9 mais prov\xE1vel que outro."
+        En: 'Among the events possible at that moment, the draw is even: none is
+          more likely than another.'
+        Tag: 
+      - Pt: "Vencer a fase \xE9 chegar ao fim dos 20 turnos com o Bem-estar acima
+          do cr\xEDtico. A Smart City \xE9 uma meta, n\xE3o a condi\xE7\xE3o de vit\xF3ria."
+        En: Winning the phase means reaching the end of the 20 turns with Well-being
+          above critical. The Smart City is a goal, not the victory condition.
+        Tag: 
+      SeeAlso:
+      - Conceito_Resiliencia
+    - Id: Relacoes
+      Tab:
+        Pt: "Rela\xE7\xF5es"
+        En: Links
+        Tag: 
+      Title:
+        Pt: Quem empurra quem
+        En: Who pushes whom
+        Tag: 
+      Intro:
+        Pt: "Na cidade nada muda sozinho. Cada n\xFAmero da tabela diz quantos pontos
+          por turno o indicador da coluna empurra o da linha quando est\xE1 em 100.
+          Em 50 ele n\xE3o empurra nada; abaixo de 50, empurra para o lado contr\xE1rio."
+        En: In the city nothing changes alone. Each number in the table says how
+          many points per turn the column's indicator pushes the row's indicator
+          when it is at 100. At 50 it pushes nothing; below 50, it pushes the opposite
+          way.
+        Tag: 
+      Auto: Matrix
+      Header: []
+      Columns:
+      - Pt: Recebe / Vem de
+        En: Receives / From
+        Tag: 
+      - Pt: Renda
+        En: Income
+        Tag: 
+      - Pt: Energia
+        En: Energy
+        Tag: 
+      - Pt: "Popula\xE7\xE3o"
+        En: Population
+        Tag: 
+      - Pt: Mobilidade
+        En: Mobility
+        Tag: 
+      - Pt: "Sa\xFAde"
+        En: Health
+        Tag: 
+      - Pt: "Seguran\xE7a"
+        En: Safety
+        Tag: 
+      - Pt: Sustentabilidade
+        En: Sustainability
+        Tag: 
+      - Pt: Pesquisa
+        En: Research
+        Tag: 
+      - Pt: Bem-estar
+        En: Well-being
+        Tag: 
+      Rows:
+      - Cells:
+        - Pt: Renda
+          En: Income
+          Tag: 
+        - Pt: 
+          En: 
+          Tag: 
+        - Pt: +0,4
+          En: +0.4
+          Tag: 
+        - Pt: +1,2
+          En: +1.2
+          Tag: 
+        - Pt: +0,8
+          En: +0.8
+          Tag: 
+        - Pt: +0,3
+          En: +0.3
+          Tag: 
+        - Pt: +0,6
+          En: +0.6
+          Tag: 
+        - Pt: -0,2
+          En: -0.2
+          Tag: 
+        - Pt: +0,5
+          En: +0.5
+          Tag: 
+        - Pt: +0,3
+          En: +0.3
+          Tag: 
+      - Cells:
+        - Pt: Energia
+          En: Energy
+          Tag: 
+        - Pt: +0,3
+          En: +0.3
+          Tag: 
+        - Pt: 
+          En: 
+          Tag: 
+        - Pt: -1,3
+          En: -1.3
+          Tag: 
+        - Pt: -0,6
+          En: -0.6
+          Tag: 
+        - Pt: 
+          En: 
+          Tag: 
+        - Pt: 
+          En: 
+          Tag: 
+        - Pt: +0,7
+          En: +0.7
+          Tag: 
+        - Pt: +0,4
+          En: +0.4
+          Tag: 
+        - Pt: 
+          En: 
+          Tag: 
+      - Cells:
+        - Pt: "Popula\xE7\xE3o"
+          En: Population
+          Tag: 
+        - Pt: +0,3
+          En: +0.3
+          Tag: 
+        - Pt: +0,3
+          En: +0.3
+          Tag: 
+        - Pt: 
+          En: 
+          Tag: 
+        - Pt: +0,5
+          En: +0.5
+          Tag: 
+        - Pt: +0,4
+          En: +0.4
+          Tag: 
+        - Pt: +0,7
+          En: +0.7
+          Tag: 
+        - Pt: +0,2
+          En: +0.2
+          Tag: 
+        - Pt: 
+          En: 
+          Tag: 
+        - Pt: +1,0
+          En: +1.0
+          Tag: 
+      - Cells:
+        - Pt: Mobilidade
+          En: Mobility
+          Tag: 
+        - Pt: +0,5
+          En: +0.5
+          Tag: 
+        - Pt: +0,3
+          En: +0.3
+          Tag: 
+        - Pt: -0,9
+          En: -0.9
+          Tag: 
+        - Pt: 
+          En: 
+          Tag: 
+        - Pt: 
+          En: 
+          Tag: 
+        - Pt: 
+          En: 
+          Tag: 
+        - Pt: +0,2
+          En: +0.2
+          Tag: 
+        - Pt: +0,3
+          En: +0.3
+          Tag: 
+        - Pt: +0,4
+          En: +0.4
+          Tag: 
+      - Cells:
+        - Pt: "Sa\xFAde"
+          En: Health
+          Tag: 
+        - Pt: +0,4
+          En: +0.4
+          Tag: 
+        - Pt: 
+          En: 
+          Tag: 
+        - Pt: -0,6
+          En: -0.6
+          Tag: 
+        - Pt: +0,2
+          En: +0.2
+          Tag: 
+        - Pt: 
+          En: 
+          Tag: 
+        - Pt: 
+          En: 
+          Tag: 
+        - Pt: +0,7
+          En: +0.7
+          Tag: 
+        - Pt: +0,4
+          En: +0.4
+          Tag: 
+        - Pt: +0,5
+          En: +0.5
+          Tag: 
+      - Cells:
+        - Pt: "Seguran\xE7a"
+          En: Safety
+          Tag: 
+        - Pt: +0,4
+          En: +0.4
+          Tag: 
+        - Pt: 
+          En: 
+          Tag: 
+        - Pt: -0,7
+          En: -0.7
+          Tag: 
+        - Pt: 
+          En: 
+          Tag: 
+        - Pt: +0,2
+          En: +0.2
+          Tag: 
+        - Pt: 
+          En: 
+          Tag: 
+        - Pt: 
+          En: 
+          Tag: 
+        - Pt: +0,2
+          En: +0.2
+          Tag: 
+        - Pt: +0,8
+          En: +0.8
+          Tag: 
+      - Cells:
+        - Pt: Sustentabilidade
+          En: Sustainability
+          Tag: 
+        - Pt: -0,2
+          En: -0.2
+          Tag: 
+        - Pt: -0,6
+          En: -0.6
+          Tag: 
+        - Pt: -1,0
+          En: -1.0
+          Tag: 
+        - Pt: -0,5
+          En: -0.5
+          Tag: 
+        - Pt: 
+          En: 
+          Tag: 
+        - Pt: 
+          En: 
+          Tag: 
+        - Pt: 
+          En: 
+          Tag: 
+        - Pt: +0,8
+          En: +0.8
+          Tag: 
+        - Pt: 
+          En: 
+          Tag: 
+      - Cells:
+        - Pt: Pesquisa
+          En: Research
+          Tag: 
+        - Pt: +0,5
+          En: +0.5
+          Tag: 
+        - Pt: +0,2
+          En: +0.2
+          Tag: 
+        - Pt: +0,2
+          En: +0.2
+          Tag: 
+        - Pt: 
+          En: 
+          Tag: 
+        - Pt: 
+          En: 
+          Tag: 
+        - Pt: 
+          En: 
+          Tag: 
+        - Pt: +0,3
+          En: +0.3
+          Tag: 
+        - Pt: 
+          En: 
+          Tag: 
+        - Pt: +0,3
+          En: +0.3
+          Tag: 
+      Notes:
+      - Pt: "Exemplo: com a Popula\xE7\xE3o em 100, a Energia perde 1,3 ponto por
+          turno; em 75, perde 0,65; em 50, nada; em 30, ganha 0,52."
+        En: 'Example: with Population at 100, Energy loses 1.3 points per turn; at
+          75, it loses 0.65; at 50, nothing; at 30, it gains 0.52.'
+        Tag: 
+      - Pt: "As liga\xE7\xF5es mais fortes: mais moradores pesam sobre Energia (-1,3),
+          Sustentabilidade (-1,0) e Mobilidade (-0,9) e aumentam a Renda (+1,2);
+          Bem-estar alto atrai moradores (+1,0)."
+        En: 'The strongest links: more residents weigh on Energy (-1.3), Sustainability
+          (-1.0) and Mobility (-0.9) and raise Income (+1.2); high Well-being attracts
+          residents (+1.0).'
+        Tag: 
+      - Pt: "A conta segue sempre a mesma ordem: Renda, Energia, Mobilidade, Seguran\xE7a,
+          Sa\xFAde, Sustentabilidade, Popula\xE7\xE3o, Pesquisa. Quem vem depois
+          j\xE1 sente o que mudou em quem veio antes, no mesmo turno."
+        En: 'The calculation always follows the same order: Income, Energy, Mobility,
+          Safety, Health, Sustainability, Population, Research. Indicators later
+          in the list already feel what changed in earlier ones, in the same turn.'
+        Tag: 
+      - Pt: "S\xE3o 47 liga\xE7\xF5es. Bem-estar influencia os outros, mas n\xE3o
+          recebe nada desta tabela: ele tem uma conta pr\xF3pria (aba Bem-estar)."
+        En: 'There are 47 links. Well-being affects the others but receives nothing
+          from this table: it has its own calculation (Well-being tab).'
+        Tag: 
+      - Pt: "O mapa de rela\xE7\xF5es mostra as mesmas liga\xE7\xF5es como setas,
+          com o motivo de cada uma."
+        En: The relation map shows the same links as arrows, with the reason behind
+          each one.
+        Tag: 
+      SeeAlso:
+      - RelationMap
+      - Conceito_Interdependencia
+    - Id: Faixas
+      Tab:
+        Pt: Faixas
+        En: Ranges
+        Tag: 
+      Title:
+        Pt: "Faixas de opera\xE7\xE3o"
+        En: Operating ranges
+        Tag: 
+      Intro:
+        Pt: "A for\xE7a com que um indicador empurra os outros depende da faixa em
+          que ele est\xE1. Muito baixo, ele vira um problema que se espalha; muito
+          alto, rende cada vez menos."
+        En: How hard an indicator pushes the others depends on the range it is in.
+          Very low, it becomes a problem that spreads; very high, it yields less
+          and less.
+        Tag: 
+      Auto: Zones
+      Header: []
+      Columns:
+      - Pt: Faixa
+        En: Range
+        Tag: 
+      - Pt: Valores
+        En: Values
+        Tag: 
+      - Pt: Efeito nos outros
+        En: Effect on the others
+        Tag: 
+      - Pt: Efeito nele mesmo
+        En: Effect on itself
+        Tag: 
+      Rows:
+      - Cells:
+        - Pt: Crise
+          En: Crisis
+          Tag: crisis
+        - Pt: 0 a 25
+          En: 0 to 25
+          Tag: 
+        - Pt: "Os n\xFAmeros negativos da coluna dele (aba Rela\xE7\xF5es) valem
+            1,6 vez; os positivos valem 50%."
+          En: The negative numbers in its column (Links tab) count 1.6 times; the
+            positive ones count 50%.
+          Tag: 
+        - Pt: "Nenhum: ele n\xE3o se recupera sozinho."
+          En: 'None: it does not recover on its own.'
+          Tag: 
+      - Cells:
+        - Pt: Normal
+          En: Normal
+          Tag: normal
+        - Pt: 25 a 75
+          En: 25 to 75
+          Tag: 
+        - Pt: "Vale a tabela como est\xE1."
+          En: The table applies as is.
+          Tag: 
+        - Pt: Nenhum.
+          En: None.
+          Tag: 
+      - Cells:
+        - Pt: Excesso
+          En: Excess
+          Tag: excess
+        - Pt: 75 a 100
+          En: 75 to 100
+          Tag: 
+        - Pt: "Os n\xFAmeros positivos da coluna dele valem 60%; os negativos n\xE3o
+            mudam."
+          En: The positive numbers in its column count 60%; the negative ones do
+            not change.
+          Tag: 
+        - Pt: Perde 0,1 ponto por turno para cada ponto acima de 75.
+          En: Loses 0.1 point per turn for each point above 75.
+          Tag: 
+      - Cells:
+        - Pt: "Cr\xEDtico"
+          En: Critical
+          Tag: critical
+        - Pt: 10 ou menos
+          En: 10 or less
+          Tag: 
+        - Pt: Entra em Colapso e passa a derrubar o Bem-estar (aba Bem-estar).
+          En: Goes into Collapse and starts dragging Well-being down (Well-being
+            tab).
+          Tag: 
+        - Pt: Continua valendo a Crise.
+          En: Crisis rules still apply.
+          Tag: 
+      Notes:
+      - Pt: "A Crise \xE9 um ciclo vicioso: um servi\xE7o ruim afasta quem paga impostos,
+          o que piora o servi\xE7o. O modelo n\xE3o d\xE1 ajuda autom\xE1tica para
+          sair dela."
+        En: 'Crisis is a vicious cycle: a poor service drives away taxpayers, which
+          makes the service worse. The model gives no automatic help to get out of
+          it.'
+        Tag: 
+      - Pt: "O Excesso segue a ideia de retornos decrescentes: a cent\xE9sima c\xE2mera
+          protege bem menos que a primeira. Sem novas decis\xF5es, o indicador volta
+          aos poucos para a faixa normal."
+        En: 'Excess follows the idea of diminishing returns: the hundredth camera
+          protects far less than the first. Without new decisions, the indicator
+          slowly returns to the normal range.'
+        Tag: 
+      - Pt: "A faixa \xE9 sempre a de quem empurra, n\xE3o a de quem recebe."
+        En: The range is always that of the indicator doing the pushing, not the
+          one receiving.
+        Tag: 
+      SeeAlso:
+      - Conceito_Crise
+      - Conceito_Excesso
+    - Id: BemEstar
+      Tab:
+        Pt: Bem-estar
+        En: Well-being
+        Tag: 
+      Title:
+        Pt: Bem-estar e Colapso
+        En: Well-being and Collapse
+        Tag: 
+      Intro:
+        Pt: "O Bem-estar resume como a popula\xE7\xE3o avalia a vida na cidade. \xC9
+          o \xFAnico indicador que encerra a gest\xE3o: se ele chegar ao n\xEDvel
+          cr\xEDtico, a popula\xE7\xE3o deixa de apoiar a administra\xE7\xE3o."
+        En: 'Well-being sums up how residents rate life in the city. It is the only
+          indicator that ends the administration: if it reaches the critical level,
+          residents stop supporting it.'
+        Tag: 
+      Auto: Wellbeing
+      Header: []
+      Columns:
+      - Pt: Parte da conta
+        En: Part of the calculation
+        Tag: 
+      - Pt: Como entra
+        En: How it counts
+        Tag: 
+      - Pt: "No in\xEDcio"
+        En: At the start
+        Tag: 
+      Rows:
+      - Cells:
+        - Pt: "Servi\xE7os"
+          En: Services
+          Tag: 
+        - Pt: "M\xE9dia de Mobilidade, Sa\xFAde, Seguran\xE7a e Sustentabilidade"
+          En: Average of Mobility, Health, Safety and Sustainability
+          Tag: 
+        - Pt: 47,5
+          En: 47.5
+          Tag: 
+      - Cells:
+        - Pt: Adensamento
+          En: Crowding
+          Tag: 
+        - Pt: "Tira o quanto a Popula\xE7\xE3o passa de 50"
+          En: Subtracts how far Population goes above 50
+          Tag: 
+        - Pt: 0
+          En: 0
+          Tag: 
+      - Cells:
+        - Pt: Efeitos diretos
+          En: Direct effects
+          Tag: 
+        - Pt: Soma do que cartas e eventos deram ou tiraram do Bem-estar; fica guardada
+            de um turno para o outro
+          En: Sum of what cards and events added to or took from Well-being; it carries
+            over from turn to turn
+          Tag: 
+        - Pt: 0
+          En: 0
+          Tag: 
+      - Cells:
+        - Pt: Colapso
+          En: Collapse
+          Tag: 
+        - Pt: "Tira 12 pontos por indicador em Colapso, a cada turno em que ele continuar
+            l\xE1"
+          En: Subtracts 12 points per indicator in Collapse, every turn it stays
+            there
+          Tag: 
+        - Pt: 0
+          En: 0
+          Tag: 
+      - Cells:
+        - Pt: Resultado
+          En: Result
+          Tag: 
+        - Pt: "Servi\xE7os - adensamento + efeitos diretos - Colapso"
+          En: Services - crowding + direct effects - Collapse
+          Tag: 
+        - Pt: 47,5 (4,75/10)
+          En: 47.5 (4.75/10)
+          Tag: 
+      Notes:
+      - Pt: "Colapso \xE9 quando um indicador chega a 10 ou menos. Ele n\xE3o encerra
+          a gest\xE3o sozinho, mas cada um tira 12 pontos do Bem-estar por turno.
+          Dois ao mesmo tempo tiram 24."
+        En: Collapse is when an indicator reaches 10 or less. It does not end the
+          administration on its own, but each one takes 12 points from Well-being
+          per turn. Two at once take 24.
+        Tag: 
+      - Pt: "Renda e Energia n\xE3o aparecem na conta dos servi\xE7os, mas chegam
+          ao Bem-estar pelo Colapso e pelas rela\xE7\xF5es com os outros indicadores."
+        En: Income and Energy are not part of the services average, but they reach
+          Well-being through Collapse and through their links to the other indicators.
+        Tag: 
+      - Pt: Pesquisa nunca entra em Colapso.
+        En: Research never goes into Collapse.
+        Tag: 
+      - Pt: "O painel come\xE7a mostrando 50; a partir da primeira resolu\xE7\xE3o,
+          o Bem-estar passa a seguir a conta acima."
+        En: The panel starts at 50; from the first resolution on, Well-being follows
+          the calculation above.
+        Tag: 
+      SeeAlso:
+      - Parametro_BemEstar
+      - Conceito_Colapso
+      - Conceito_Ancora
+    - Id: Tecnologia
+      Tab:
+        Pt: Tecnologia
+        En: Technology
+        Tag: 
+      Title:
+        Pt: "N\xEDveis de tecnologia"
+        En: Technology levels
+        Tag: 
+      Intro:
+        Pt: "Investir em Pesquisa libera cartas mais avan\xE7adas, em quatro n\xEDveis,
+          at\xE9 a Smart City. A Pesquisa n\xE3o se desgasta: o que voc\xEA acumula
+          fica."
+        En: 'Investing in Research unlocks more advanced cards, in four levels, up
+          to the Smart City. Research does not wear down: what you build up stays.'
+        Tag: 
+      Auto: Tiers
+      Header: []
+      Columns:
+      - Pt: "N\xEDvel"
+        En: Level
+        Tag: 
+      - Pt: "Pesquisa m\xEDnima"
+        En: Minimum Research
+        Tag: 
+      - Pt: Em pesquisadores
+        En: In researchers
+        Tag: 
+      - Pt: "Cartas do n\xEDvel"
+        En: Cards at this level
+        Tag: 
+      Rows:
+      - Cells:
+        - Pt: "B\xE1sica"
+          En: Basic
+          Tag: 
+        - Pt: 0
+          En: 0
+          Tag: 
+        - Pt: 0/mi hab.
+          En: 0/M pop.
+          Tag: 
+        - Pt: 20
+          En: 20
+          Tag: 
+      - Cells:
+        - Pt: Cidade Digital
+          En: Digital City
+          Tag: 
+        - Pt: 15
+          En: 15
+          Tag: 
+        - Pt: 1.350/mi hab.
+          En: 1,350/M pop.
+          Tag: 
+        - Pt: 14
+          En: 14
+          Tag: 
+      - Cells:
+        - Pt: Cidade Conectada
+          En: Connected City
+          Tag: 
+        - Pt: 30
+          En: 30
+          Tag: 
+        - Pt: 2.700/mi hab.
+          En: 2,700/M pop.
+          Tag: 
+        - Pt: 12
+          En: 12
+          Tag: 
+      - Cells:
+        - Pt: Smart City
+          En: Smart City
+          Tag: 
+        - Pt: 45
+          En: 45
+          Tag: 
+        - Pt: 4.050/mi hab.
+          En: 4,050/M pop.
+          Tag: 
+        - Pt: 10
+          En: 10
+          Tag: 
+      Notes:
+      - Pt: "Para comparar: o Brasil tinha cerca de 900 pesquisadores por milh\xE3o
+          de habitantes em 2014, a m\xE9dia da OCDE fica perto de 3.500 e a Dinamarca
+          chegou a 8.736 em 2022. A cidade come\xE7a no patamar brasileiro."
+        En: 'For comparison: Brazil had about 900 researchers per million inhabitants
+          in 2014, the OECD average is close to 3,500 and Denmark reached 8,736 in
+          2022. The city starts at the Brazilian level.'
+        Tag: 
+      - Pt: "A contagem de cartas \xE9 a do jogo inteiro, somando os tr\xEAs baralhos."
+        En: The card count covers the whole game, adding up all three decks.
+        Tag: 
+      - Pt: "Tecnologia tamb\xE9m traz riscos: a partir de certos n\xEDveis surgem
+          eventos como ataques cibern\xE9ticos e protestos contra a automa\xE7\xE3o."
+        En: 'Technology also brings risks: from certain levels on, events such as
+          cyberattacks and protests against automation appear.'
+        Tag: 
+      SeeAlso:
+      - Conceito_CidadeDigital
+      - Conceito_CidadeConectada
+      - Conceito_SmartCity
+      - Parametro_Pesquisa
+    - Id: Origem
+      Tab:
+        Pt: Origem
+        En: Sources
+        Tag: 
+      Title:
+        Pt: "De onde v\xEAm os n\xFAmeros"
+        En: Where the numbers come from
+        Tag: 
+      Intro:
+        Pt: "Nem todo n\xFAmero do modelo tem o mesmo peso. Alguns foram conferidos
+          em fontes p\xFAblicas, outros s\xE3o estimativas da equipe e outros foram
+          escolhidos para o jogo funcionar. A coluna \"Confian\xE7a\" diz qual \xE9
+          qual."
+        En: Not every number in the model carries the same weight. Some were checked
+          against public sources, others are team estimates and others were chosen
+          so the game works. The "Confidence" column says which is which.
+        Tag: 
+      Auto: 
+      Header: []
+      Columns:
+      - Pt: Item
+        En: Item
+        Tag: 
+      - Pt: De onde vem
+        En: Where it comes from
+        Tag: 
+      - Pt: "Confian\xE7a"
+        En: Confidence
+        Tag: 
+      Rows:
+      - Cells:
+        - Pt: "Dire\xE7\xE3o das rela\xE7\xF5es"
+          En: Direction of the links
+          Tag: 
+        - Pt: "Literatura de planejamento urbano; o motivo de cada seta est\xE1 no
+            mapa de rela\xE7\xF5es"
+          En: Urban planning literature; the reason for each arrow is in the relation
+            map
+          Tag: 
+        - Pt: Apoiado em fontes
+          En: Backed by sources
+          Tag: source
+      - Cells:
+        - Pt: "For\xE7a das rela\xE7\xF5es"
+          En: Strength of the links
+          Tag: 
+        - Pt: Planilha de balanceamento da equipe, testada no simulador
+          En: The team's balancing spreadsheet, tested in the simulator
+          Tag: 
+        - Pt: "Ajustado por simula\xE7\xE3o"
+          En: Tuned by simulation
+          Tag: simulation
+      - Cells:
+        - Pt: Faixas de Crise e Excesso
+          En: Crisis and Excess ranges
+          Tag: 
+        - Pt: Ideias de ciclo vicioso e retornos decrescentes, como no livro Game
+            Balance (Schreiber e Romero)
+          En: Ideas of vicious cycles and diminishing returns, as in the book Game
+            Balance (Schreiber and Romero)
+          Tag: 
+        - Pt: "Decis\xE3o de projeto"
+          En: Design decision
+          Tag: design
+      - Cells:
+        - Pt: "In\xEDcio, cr\xEDtico e desgaste"
+          En: Start, critical and wear
+          Tag: 
+        - Pt: Planilha de balanceamento, testada no simulador
+          En: Balancing spreadsheet, tested in the simulator
+          Tag: 
+        - Pt: "Ajustado por simula\xE7\xE3o"
+          En: Tuned by simulation
+          Tag: simulation
+      - Cells:
+        - Pt: Efeitos das cartas e eventos
+          En: Card and event effects
+          Tag: 
+        - Pt: "Cada carta e evento tem lastro em uma pol\xEDtica, tecnologia ou caso
+            real (veja a ficha); o tamanho do efeito foi ajustado para o jogo"
+          En: Each card and event is based on a real policy, technology or case (see
+            its entry); the size of the effect was tuned for the game
+          Tag: 
+        - Pt: "Dire\xE7\xE3o com fonte, n\xFAmero ajustado"
+          En: Direction sourced, number tuned
+          Tag: simulation
+      - Cells:
+        - Pt: "R\xE9gua da Energia"
+          En: Energy ruler
+          Tag: 
+        - Pt: "Consumo m\xE9dio de eletricidade no Brasil em 2022, segundo a EPE
+            (cerca de 2.360 kWh por habitante ao ano)"
+          En: Average electricity use in Brazil in 2022, according to EPE (about
+            2,360 kWh per person per year)
+          Tag: 
+        - Pt: Conferido em fonte
+          En: Checked against a source
+          Tag: source
+      - Cells:
+        - Pt: "R\xE9gua da Pesquisa"
+          En: Research ruler
+          Tag: 
+        - Pt: "Pesquisadores por milh\xE3o de habitantes, indicador 9.5.2 dos ODS
+            (UNESCO)"
+          En: Researchers per million inhabitants, SDG indicator 9.5.2 (UNESCO)
+          Tag: 
+        - Pt: Conferido em fonte
+          En: Checked against a source
+          Tag: source
+      - Cells:
+        - Pt: "R\xE9gua do Bem-estar"
+          En: Well-being ruler
+          Tag: 
+        - Pt: Escada de Cantril, de 0 a 10, usada pelo World Happiness Report
+          En: Cantril ladder, from 0 to 10, used by the World Happiness Report
+          Tag: 
+        - Pt: Conferido em fonte
+          En: Checked against a source
+          Tag: source
+      - Cells:
+        - Pt: "R\xE9gua da Popula\xE7\xE3o"
+          En: Population ruler
+          Tag: 
+        - Pt: "Faixa das cidades m\xE9dias brasileiras (cerca de 100 mil a 500 mil
+            habitantes), com folga"
+          En: Range of Brazilian mid-sized cities (about 100,000 to 500,000 people),
+            with margin
+          Tag: 
+        - Pt: Ordem de grandeza
+          En: Order of magnitude
+          Tag: magnitude
+      - Cells:
+        - Pt: "R\xE9guas de Renda, Seguran\xE7a, Sa\xFAde, Mobilidade e Sustentabilidade"
+          En: Income, Safety, Health, Mobility and Sustainability rulers
+          Tag: 
+        - Pt: "Valores t\xEDpicos de cidades brasileiras de porte m\xE9dio, estimados
+            pela equipe"
+          En: Typical values for mid-sized Brazilian cities, estimated by the team
+          Tag: 
+        - Pt: Estimativa da equipe
+          En: Team estimate
+          Tag: estimate
+      Notes:
+      - Pt: "A r\xE9gua s\xF3 muda a forma de mostrar: o 0 do modelo vira o m\xEDnimo
+          da faixa, o 100 vira o m\xE1ximo, em linha reta. Nenhuma conta muda quando
+          voc\xEA troca \xEDndice por unidade real."
+        En: 'The ruler only changes how numbers are shown: the model''s 0 becomes
+          the bottom of the range and 100 the top, in a straight line. No calculation
+          changes when you switch between index and real units.'
+        Tag: 
+      - Pt: "Por isso os n\xFAmeros reais servem para ter no\xE7\xE3o de tamanho,
+          n\xE3o para comparar com uma cidade de verdade."
+        En: That is why real numbers give a sense of scale, but should not be compared
+          with an actual city.
+        Tag: 
+      SeeAlso:
+      - RelationMap
+    - Id: Testes
+      Tab:
+        Pt: Testes
+        En: Tests
+        Tag: 
+      Title:
+        Pt: Como o modelo foi testado
+        En: How the model was tested
+        Tag: 
+      Intro:
+        Pt: "Antes de entregar o modelo, a equipe fez jogadores autom\xE1ticos disputarem
+          milhares de fases, cada um com um jeito de decidir. Se o jeito de jogar
+          n\xE3o fizesse diferen\xE7a, as decis\xF5es n\xE3o teriam import\xE2ncia."
+        En: Before delivering the model, the team had automatic players run thousands
+          of phases, each with its own way of deciding. If the way of playing made
+          no difference, decisions would not matter.
+        Tag: 
+      Auto: 
+      Header: []
+      Columns:
+      - Pt: "Jogador autom\xE1tico"
+        En: Automatic player
+        Tag: 
+      - Pt: Como decide
+        En: How it decides
+        Tag: 
+      - Pt: "Vence a 1\xAA fase"
+        En: Wins phase 1
+        Tag: 
+      - Pt: "Vence com come\xE7o dif\xEDcil"
+        En: Wins with a hard start
+        Tag: 
+      Rows:
+      - Cells:
+        - Pt: Ao acaso
+          En: Random
+          Tag: 
+        - Pt: "Joga qualquer carta poss\xEDvel"
+          En: Plays any playable card
+          Tag: 
+        - Pt: 30%
+          En: 30%
+          Tag: 
+        - Pt: 15%
+          En: 15%
+          Tag: 
+      - Cells:
+        - Pt: Guloso
+          En: Greedy
+          Tag: 
+        - Pt: Escolhe a carta que deixa a cidade melhor logo depois do turno
+          En: Picks the card that leaves the city best right after the turn
+          Tag: 
+        - Pt: 68%
+          En: 68%
+          Tag: 
+        - Pt: 41%
+          En: 41%
+          Tag: 
+      - Cells:
+        - Pt: Cauteloso
+          En: Cautious
+          Tag: 
+        - Pt: "D\xE1 mais peso ao indicador que est\xE1 mais perto do cr\xEDtico"
+          En: Gives more weight to the indicator closest to critical
+          Tag: 
+        - Pt: 65%
+          En: 65%
+          Tag: 
+        - Pt: 49%
+          En: 49%
+          Tag: 
+      - Cells:
+        - Pt: Planejador
+          En: Planner
+          Tag: 
+        - Pt: "Testa muitos futuros poss\xEDveis antes de escolher, sabendo os n\xFAmeros
+            exatos das cartas"
+          En: Tries out many possible futures before choosing, knowing the cards'
+            exact numbers
+          Tag: 
+        - Pt: 80%
+          En: 80%
+          Tag: 
+        - Pt: 64%
+          En: 64%
+          Tag: 
+      Notes:
+      - Pt: "Foram 3.000 fases por jogador (300 para o planejador, que \xE9 mais
+          lento), com os tr\xEAs baralhos. \"Come\xE7o dif\xEDcil\" s\xE3o as cidades
+          que j\xE1 come\xE7am com caixa, energia ou seguran\xE7a baixos e se desgastam
+          mais r\xE1pido."
+        En: Each player ran 3,000 phases (300 for the planner, which is slower),
+          with all three decks. "Hard start" means cities that begin with low cash,
+          energy or safety and wear down faster.
+        Tag: 
+      - Pt: "Planejar rende bem mais que jogar ao acaso, e os tr\xEAs baralhos ficaram
+          pr\xF3ximos entre si (entre 64% e 72% de vit\xF3rias na 1\xAA fase com
+          os jogadores guloso e cauteloso)."
+        En: Planning pays off far more than playing at random, and the three decks
+          ended up close to each other (between 64% and 72% wins in phase 1 with
+          the greedy and cautious players).
+        Tag: 
+      - Pt: "Os testes mostram que o modelo \xE9 coerente como jogo. Eles n\xE3o
+          mostram como uma cidade real responderia \xE0s mesmas decis\xF5es."
+        En: The tests show the model holds together as a game. They do not show how
+          a real city would respond to the same decisions.
+        Tag: 
+      SeeAlso: []
+    - Id: Limites
+      Tab:
+        Pt: Limites
+        En: Limits
+        Tag: 
+      Title:
+        Pt: O que o modelo deixa de fora
+        En: What the model leaves out
+        Tag: 
+      Intro:
+        Pt: "Todo modelo escolhe o que mostrar. Estes s\xE3o os cortes mais importantes
+          que a equipe fez, e o que eles mudam na hora de ler os resultados."
+        En: Every model chooses what to show. These are the most important cuts the
+          team made, and what they change when you read the results.
+        Tag: 
+      Auto: 
+      Header: []
+      Columns:
+      - Pt: O que ficou de fora
+        En: What was left out
+        Tag: 
+      - Pt: Como o modelo trata
+        En: How the model handles it
+        Tag: 
+      - Pt: O que isso muda
+        En: What this changes
+        Tag: 
+      Rows:
+      - Cells:
+        - Pt: "Bairros e territ\xF3rio"
+          En: Neighborhoods and territory
+          Tag: 
+        - Pt: "A cidade \xE9 um ponto s\xF3, com um valor para cada indicador"
+          En: The city is a single point, with one value per indicator
+          Tag: 
+        - Pt: "Diferen\xE7as entre centro e periferia n\xE3o aparecem"
+          En: Differences between downtown and outskirts do not show up
+          Tag: 
+      - Cells:
+        - Pt: Grupos de pessoas
+          En: Groups of people
+          Tag: 
+        - Pt: "O Bem-estar \xE9 uma m\xE9dia da cidade inteira"
+          En: Well-being is an average for the whole city
+          Tag: 
+        - Pt: "Uma decis\xE3o pode agradar a m\xE9dia e prejudicar um grupo sem que
+            o n\xFAmero mostre"
+          En: A decision can please the average and hurt one group without the number
+            showing it
+          Tag: 
+      - Cells:
+        - Pt: "Pol\xEDtica"
+          En: Politics
+          Tag: 
+        - Pt: "N\xE3o h\xE1 c\xE2mara, elei\xE7\xE3o, lei nem licita\xE7\xE3o: a
+            carta vale no mesmo turno"
+          En: 'There is no council, election, law or bidding process: a card takes
+            effect the same turn'
+          Tag: 
+        - Pt: "Na vida real, uma pol\xEDtica leva tempo e negocia\xE7\xE3o para sair
+            do papel"
+          En: In real life, a policy takes time and negotiation to get off the ground
+          Tag: 
+      - Cells:
+        - Pt: "Or\xE7amento detalhado"
+          En: Detailed budget
+          Tag: 
+        - Pt: "A Renda \xE9 um caixa \xFAnico, sem d\xEDvida, folha de pagamento
+            ou verba por \xE1rea"
+          En: Income is a single cash pool, with no debt, payroll or budget per area
+          Tag: 
+        - Pt: "N\xE3o d\xE1 para ver de onde sai cada real gasto"
+          En: You cannot see where each real spent comes from
+          Tag: 
+      - Cells:
+        - Pt: "Dura\xE7\xE3o real"
+          En: Real duration
+          Tag: 
+        - Pt: "O turno \xE9 um passo do modelo, sem dura\xE7\xE3o definida"
+          En: A turn is a step of the model, with no set duration
+          Tag: 
+        - Pt: "N\xE3o d\xE1 para dizer em quantos meses uma mudan\xE7a aconteceria"
+          En: You cannot tell how many months a change would take
+          Tag: 
+      - Cells:
+        - Pt: "Rela\xE7\xF5es fixas"
+          En: Fixed links
+          Tag: 
+        - Pt: "A for\xE7a das rela\xE7\xF5es \xE9 a mesma do primeiro ao \xFAltimo
+            turno"
+          En: The strength of the links is the same from the first turn to the last
+          Tag: 
+        - Pt: "Na vida real, uma tecnologia nova pode mudar como as \xE1reas se afetam"
+          En: In real life, a new technology can change how areas affect each other
+          Tag: 
+      - Cells:
+        - Pt: Probabilidade dos eventos
+          En: Event likelihood
+          Tag: 
+        - Pt: "Os eventos poss\xEDveis t\xEAm todos a mesma chance"
+          En: All possible events have the same chance
+          Tag: 
+        - Pt: "Uma enchente n\xE3o fica mais prov\xE1vel na esta\xE7\xE3o de chuvas,
+            por exemplo"
+          En: A flood does not become more likely in the rainy season, for example
+          Tag: 
+      - Cells:
+        - Pt: Outras cidades e governos
+          En: Other cities and governments
+          Tag: 
+        - Pt: "Estado, pa\xEDs e vizinhos s\xF3 aparecem nos eventos"
+          En: State, country and neighbors only appear in events
+          Tag: 
+        - Pt: "A cidade n\xE3o negocia nem disputa com ningu\xE9m"
+          En: The city does not negotiate or compete with anyone
+          Tag: 
+      Notes:
+      - Pt: "Use o modelo para entender trocas: o que melhora de um lado e piora
+          de outro, e o que demora a aparecer. N\xE3o use para prever o futuro de
+          uma cidade real."
+        En: 'Use the model to understand trade-offs: what improves on one side and
+          gets worse on another, and what takes time to show. Do not use it to predict
+          the future of a real city.'
+        Tag: 
+      - Pt: "Boa gest\xE3o."
+        En: Good luck with your administration.
+        Tag: 
+      SeeAlso:
+      - Conceito_Interdependencia

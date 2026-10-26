@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_EnteredCrisis_Populacao
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 2
+  _parameter: 3
+  _headline: "Cidade fantasma? Popula\xE7\xE3o cai para {valor}"
+  _headlineEn: Ghost town? Population down to {valor}
+  _body: "J\xFAlia, da escola t\xE9cnica, diz que a turma ficou t\xE3o pequena que
+    d\xE1 para fazer a chamada de cabe\xE7a."
+  _bodyEn: "J\xFAlia from the technical school says her class is so small the teacher
+    takes attendance by heart."

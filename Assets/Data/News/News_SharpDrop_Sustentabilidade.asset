@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_SharpDrop_Sustentabilidade
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 7
+  _parameter: 5
+  _headline: 'Verde em queda: Sustentabilidade cai {variacao}'
+  _headlineEn: 'Green in retreat: Sustainability down {variacao}'
+  _body: "Agora s\xE3o {valor}. O \xFAltimo canteiro da avenida pediu prote\xE7\xE3o
+    \xE0 testemunha."
+  _bodyEn: It is down to {valor}. The avenue's last flower bed has asked for witness
+    protection.

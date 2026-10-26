@@ -50,6 +50,14 @@
     <Compile Include="../../Assets/Scripts/Core/Utilities/RunSaveFile.cs" Link="Source/RunSaveFile.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/RealUnitConversion.cs" Link="Source/RealUnitConversion.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/SpriteFrameTiming.cs" Link="Source/SpriteFrameTiming.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/StateScore.cs" Link="Source/StateScore.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/PhaseHistory.cs" Link="Source/PhaseHistory.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/PhaseReport.cs" Link="Source/PhaseReport.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/NewsEditor.cs" Link="Source/NewsEditor.cs" />
+    <Compile Include="../../Assets/Scripts/Editor/NewsImportFormat.cs" Link="Source/NewsImportFormat.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/ModelReport.cs" Link="Source/ModelReport.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/PaperZoom.cs" Link="Source/PaperZoom.cs" />
+    <Compile Include="../../Assets/Scripts/Editor/ModelReportImportFormat.cs" Link="Source/ModelReportImportFormat.cs" />
   </ItemGroup>
 
 </Project>

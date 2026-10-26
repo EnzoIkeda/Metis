@@ -13,17 +13,22 @@ public static class BalanceDataExporter
     [MenuItem("Tools/Metis/Balanceamento/Exportar Dados do Simulador")]
     public static void Export()
     {
-        var data = BalanceDataFormat.WithCityScene(scene =>
+        var data = Collect();
+        var outputPath = Path.GetFullPath(Path.Combine(Application.dataPath, "..", OutputRelativePath));
+        Directory.CreateDirectory(Path.GetDirectoryName(outputPath));
+        File.WriteAllText(outputPath, JsonUtility.ToJson(data, true));
+        Debug.Log($"[BalanceDataExporter] {data.Cards.Count} cartas, {data.Events.Count} eventos, {data.Advantages.Count} vantagens e {data.Presets.Count} presets exportados pra '{outputPath}'.");
+    }
+
+    // Os mesmos dados do export, sem gravar arquivo.
+    public static BalanceDataFormat.BalanceDataDto Collect()
+    {
+        return BalanceDataFormat.WithCityScene(scene =>
         {
             if (scene.isDirty)
                 Debug.LogWarning("[BalanceDataExporter] City_Scene tem mudancas nao salvas, exportando os valores atuais em memoria.");
             return BuildData(scene);
         });
-
-        var outputPath = Path.GetFullPath(Path.Combine(Application.dataPath, "..", OutputRelativePath));
-        Directory.CreateDirectory(Path.GetDirectoryName(outputPath));
-        File.WriteAllText(outputPath, JsonUtility.ToJson(data, true));
-        Debug.Log($"[BalanceDataExporter] {data.Cards.Count} cartas, {data.Events.Count} eventos, {data.Advantages.Count} vantagens e {data.Presets.Count} presets exportados pra '{outputPath}'.");
     }
 
     private static BalanceDataFormat.BalanceDataDto BuildData(Scene scene)

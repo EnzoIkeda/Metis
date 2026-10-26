@@ -401,4 +401,166 @@ public static class UIStrings
                 return string.Empty;
         }
     }
+
+    // Relatorio de gestao no fim da fase.
+    public static string ReportTitle => IsPt ? "Relatório de gestão" : "Management report";
+
+    public static string ReportSummary(GameOutcome outcome, int turnsPlayed, int totalTurns)
+    {
+        if (outcome == GameOutcome.Victory)
+            return IsPt
+                ? $"Vitória: a cidade atravessou os {totalTurns} turnos."
+                : $"Victory: the city made it through all {totalTurns} turns.";
+        return IsPt
+            ? $"Derrota no turno {turnsPlayed} de {totalTurns}."
+            : $"Defeat on turn {turnsPlayed} of {totalTurns}.";
+    }
+
+    public static string ReportChartHint => IsPt
+        ? "Toque nos ícones para mostrar ou esconder cada parâmetro. Os números no eixo marcam as decisões abaixo."
+        : "Tap the icons to show or hide each parameter. The numbers on the axis mark the decisions below.";
+
+    public static string ReportDecisionsHeader => IsPt ? "Decisões de maior impacto" : "Most important decisions";
+
+    public static string ReportNoDecisions => IsPt
+        ? "Nenhuma carta foi jogada nesta fase."
+        : "No card was played in this phase.";
+
+    public static string ReportDecisionLine(int rank, int turnIndex, string cardName, bool helped) => IsPt
+        ? $"{rank}. Turno {turnIndex}, <b>{cardName}</b>: {(helped ? "ajudou" : "atrapalhou")}"
+        : $"{rank}. Turn {turnIndex}, <b>{cardName}</b>: {(helped ? "helped" : "hurt")}";
+
+    public static string ReportCollapseHeader(GameOutcome outcome) => outcome == GameOutcome.GameOver
+        ? (IsPt ? "O que levou ao fim" : "What led to the end")
+        : (IsPt ? "Colapsos na fase" : "Collapses in this phase");
+
+    public static string ReportNoCollapse => IsPt
+        ? "Nenhum parâmetro entrou em Colapso."
+        : "No parameter collapsed.";
+
+    public static string ReportCollapseLine(CityParameterType parameter, int firstTurn, int turnsPenalized, string penalty)
+    {
+        var name = $"{ParameterIcon(parameter)} {parameter.GetFullName()}";
+        if (turnsPenalized == 0)
+            return IsPt
+                ? $"{name} entrou em Colapso no turno {firstTurn}."
+                : $"{name} collapsed on turn {firstTurn}.";
+        return IsPt
+            ? $"{name} entrou em Colapso no turno {firstTurn} e tirou {penalty} do {CityStats.AnchorParameter.GetFullName()} em {turnsPenalized} turno(s)."
+            : $"{name} collapsed on turn {firstTurn} and took {penalty} from {CityStats.AnchorParameter.GetFullName()} over {turnsPenalized} turn(s).";
+    }
+
+    public static string ReportAnchorCritical(int turnIndex) => IsPt
+        ? $"{ParameterIcon(CityStats.AnchorParameter)} {CityStats.AnchorParameter.GetFullName()} chegou ao nível crítico no turno {turnIndex}."
+        : $"{ParameterIcon(CityStats.AnchorParameter)} {CityStats.AnchorParameter.GetFullName()} reached its critical level on turn {turnIndex}.";
+
+    public static string ReportAlternativeHeader => IsPt ? "Outra jogada possível" : "Another possible play";
+
+    public static string ReportAlternative(int turnIndex, string betterCard, string playedCard, bool avoidsGameOver)
+    {
+        if (avoidsGameOver)
+            return IsPt
+                ? $"No turno {turnIndex}, <b>{betterCard}</b> teria evitado que {playedCard} levasse o {CityStats.AnchorParameter.GetFullName()} ao nível crítico."
+                : $"On turn {turnIndex}, <b>{betterCard}</b> would have kept {playedCard} from pushing {CityStats.AnchorParameter.GetFullName()} to its critical level.";
+        return IsPt
+            ? $"No turno {turnIndex}, <b>{betterCard}</b> deixaria a cidade em situação melhor que {playedCard}."
+            : $"On turn {turnIndex}, <b>{betterCard}</b> would have left the city better off than {playedCard}.";
+    }
+
+    public static string ReportNoAlternative => IsPt
+        ? "Em nenhum turno outra carta da mão faria uma diferença clara."
+        : "On no turn would another card in hand have made a clear difference.";
+
+    public static string ReportExplanation => IsPt
+        ? "O impacto de uma jogada compara a cidade no fim do turno com a carta e sem ela, a partir do mesmo estado, " +
+          "contando as relações entre os parâmetros e os Colapsos, mas não o evento. A outra jogada usa a mesma conta com as outras cartas que estavam na mão."
+        : "A play's impact compares the city at the end of the turn with and without the card, from the same state, " +
+          "counting the relationships between parameters and Collapses, but not the event. The other play uses the same reckoning with the other cards in hand.";
+
+    public static string ReportContinueButton => IsPt ? "Continuar" : "Continue";
+
+    // Jornal "A Tribuna do Turno".
+    public static string NewsMasthead => IsPt ? "A Tribuna do Turno" : "The Turn Tribune";
+
+    public static string NewsSlogan => IsPt
+        ? "Sai a cada turno, faça chuva ou faça Colapso"
+        : "Out every turn, come rain or Collapse";
+
+    public static string NewsEditionLabel(int turnIndex) => turnIndex <= 0
+        ? (IsPt ? "Edição de posse" : "Inauguration issue")
+        : (IsPt ? $"Edição do turno {turnIndex}" : $"Turn {turnIndex} edition");
+
+    public static string NewsMood(float wellbeing)
+    {
+        string mood;
+        if (wellbeing >= 70f)
+            mood = IsPt ? "eufórica" : "ecstatic";
+        else if (wellbeing >= 55f)
+            mood = IsPt ? "satisfeita" : "pleased";
+        else if (wellbeing >= 40f)
+            mood = IsPt ? "desconfiada" : "suspicious";
+        else if (wellbeing >= 25f)
+            mood = IsPt ? "irritada" : "grumpy";
+        else
+            mood = IsPt ? "em pé de guerra" : "up in arms";
+        return IsPt
+            ? $"{ParameterIcon(CityStats.AnchorParameter)} Humor da população: <b>{mood}</b>"
+            : $"{ParameterIcon(CityStats.AnchorParameter)} Public mood: <b>{mood}</b>";
+    }
+
+    // Por que o parametro da noticia mudou, no tom do jornal.
+    public static string NewsCause(ContributionSource source, CityParameterType from, bool positive)
+    {
+        switch (source)
+        {
+            case ContributionSource.Interaction:
+                return IsPt
+                    ? $"Segundo nossos analistas, {(positive ? "mérito" : "culpa")} de {ParameterIcon(from)} {from.GetFullName()}."
+                    : $"According to our analysts, {(positive ? "credit goes to" : "blame goes to")} {ParameterIcon(from)} {from.GetFullName()}.";
+            case ContributionSource.Card:
+                return IsPt
+                    ? (positive ? "O gabinete do prefeito jura que foi tudo planejado." : "Decisão da prefeitura, para desgosto de muita gente.")
+                    : (positive ? "The mayor's office swears it was all part of the plan." : "A City Hall decision, much to everyone's dismay.");
+            case ContributionSource.CardCost:
+                return IsPt ? "A conta da última decisão chegou ao caixa." : "The bill for the latest decision has hit the coffers.";
+            case ContributionSource.Event:
+                return IsPt
+                    ? (positive ? "Sorte grande: obra do acaso do turno." : "Culpa do imprevisto do turno, ninguém viu chegando.")
+                    : (positive ? "Pure luck: this turn's surprise did it." : "Blame this turn's surprise, nobody saw it coming.");
+            case ContributionSource.Deriva:
+                return IsPt ? "Desgaste natural, explicam os técnicos, pela vigésima vez." : "Natural wear and tear, the experts explain, for the twentieth time.";
+            case ContributionSource.ExcessCorrection:
+                return IsPt ? "O excesso está se acomodando sozinho, como sempre acontece." : "The excess is settling down on its own, as it always does.";
+            default:
+                return string.Empty;
+        }
+    }
+
+    public static string NewsEmpty => IsPt
+        ? "A redação ainda está tomando café. A primeira edição sai em breve."
+        : "The newsroom is still having coffee. The first issue is coming soon.";
+
+    public static string NewsPreviousButton => IsPt ? "Anterior" : "Previous";
+    public static string NewsNextButton => IsPt ? "Próxima" : "Next";
+    public static string NewsCloseButton => IsPt ? "Fechar" : "Close";
+    public static string NewsWhyButton => IsPt ? "Por que mudou?" : "Why did it change?";
+
+    public static string ModelReportTitle => IsPt ? "RELATÓRIO TÉCNICO 01" : "TECHNICAL REPORT 01";
+    public static string ModelReportButton => IsPt ? "Relatório técnico" : "Technical report";
+    public static string ModelReportWelcomeButton => IsPt ? "Ler o relatório técnico" : "Read the technical report";
+
+    public static string ModelReportFile(string modelVersion) => IsPt
+        ? $"Modelo da cidade, versão {modelVersion}"
+        : $"City model, version {modelVersion}";
+
+    public static string ModelReportPage(int page, int total) => IsPt ? $"Folha {page} de {total}" : $"Sheet {page} of {total}";
+
+    public static string ModelReportNotes => IsPt ? "Observações" : "Notes";
+
+    // Formato com {0} pro numero da observacao.
+    public static string ModelReportNoteFormat => IsPt ? "Obs. {0}" : "Note {0}";
+    public static string ModelReportSeeAlso => IsPt ? "Ver também" : "See also";
+    public static string ModelReportAutoTag => IsPt ? "Tabela montada com os dados do modelo" : "Table built from the model's data";
+    public static string ModelReportMapLink => IsPt ? "Mapa de relações" : "Relation map";
+    public static string ModelReportLockedLink => IsPt ? "??? (ficha não descoberta)" : "??? (entry not found yet)";
 }

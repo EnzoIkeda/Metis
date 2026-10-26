@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 // Constantes globais da matriz de interacoes, incluindo zonas dinamicas e escala.
@@ -25,6 +26,9 @@ public class CityStatsManager : MonoBehaviour
 
     public CityStats Stats { get; private set; }
 
+    // Configuracao com que a fase comecou, ja com o preset aplicado.
+    public IReadOnlyList<CityParameterConfig> ParameterConfigs { get; private set; } = Array.Empty<CityParameterConfig>();
+
     // Nome do asset do preset aplicado nesta fase, vazio na cidade calibrada.
     public string PresetName { get; private set; } = string.Empty;
 
@@ -50,7 +54,9 @@ public class CityStatsManager : MonoBehaviour
         }
 
         var preset = savedPhase != null ? savedPreset : DrawPreset();
-        Stats = new CityStats(BuildInitialParameters(preset), interactions, _interactionConfig.PenalidadeColapso);
+        var parameters = BuildInitialParameters(preset);
+        ParameterConfigs = parameters;
+        Stats = new CityStats(parameters, interactions, _interactionConfig.PenalidadeColapso);
 
         if (savedPhase != null)
             RunSaveRules.RestoreStats(savedPhase, Stats);

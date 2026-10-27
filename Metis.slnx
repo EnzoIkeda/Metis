@@ -1,9 +1,9 @@
 ﻿<Solution>
   <Project Path="Assembly-CSharp.csproj" />
   <Project Path="Metis.Runtime.csproj" />
-  <Project Path="CFXRRuntime.csproj" />
-  <Project Path="CFXREditor.csproj" />
   <Project Path="Metis.Editor.csproj" />
-  <Project Path="Metis.EditModeTests.csproj" />
+  <Project Path="CFXRRuntime.csproj" />
   <Project Path="Metis.PlayModeTests.csproj" />
+  <Project Path="CFXREditor.csproj" />
+  <Project Path="Metis.EditModeTests.csproj" />
 </Solution>

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_ResearchTier_2
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 8
+  _parameter: 0
+  _headline: "Laborat\xF3rios destravam o futuro"
+  _headlineEn: Labs unlock the future
+  _body: "Pesquisa chega a {valor} e novas tecnologias entram no card\xE1pio da gest\xE3o.
+    O prefeito promete n\xE3o apertar nenhum bot\xE3o vermelho."
+  _bodyEn: Research reaches {valor} and new technologies join the menu. The mayor
+    promises not to press any red buttons.

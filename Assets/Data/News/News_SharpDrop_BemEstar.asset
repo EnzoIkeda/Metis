@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_SharpDrop_BemEstar
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 7
+  _parameter: 6
+  _headline: 'Mau humor geral: Bem-estar despenca {variacao}'
+  _headlineEn: 'Bad mood all around: Well-being plunges {variacao}'
+  _body: "A nota da popula\xE7\xE3o agora \xE9 {valor}. O vereador Josu\xE9 j\xE1
+    marcou uma entrevista coletiva."
+  _bodyEn: "The public's rating is now {valor}. Councilman Josu\xE9 has already called
+    a press conference."

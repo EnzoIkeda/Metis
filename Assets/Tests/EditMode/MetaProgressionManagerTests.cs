@@ -1,4 +1,5 @@
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using NUnit.Framework;
 using UnityEngine;
@@ -178,6 +179,36 @@ public class MetaProgressionManagerTests
         Assert.That(loaded.Hand, Is.EqualTo(new[] { "A", "B" }));
         Assert.That(loaded.DrawPile, Is.EqualTo(new[] { "C", "A", "D" }));
         Assert.That(loaded.DiscardPile, Is.EqualTo(new[] { "E" }));
+    }
+
+    // Historico do relatorio de fim de fase: turnos fechados e o turno em andamento sobrevivem ao arquivo.
+    [Test]
+    public void SavedPhase_RoundTripsTheReportHistoryThroughFile()
+    {
+        var phase = new PhaseSaveData { TurnIndex = 3, HistoryStart = new[] { 1f, 2f, 3f } };
+        var closed = new PhaseTurnRecord { TurnIndex = 1, CardId = "Ciclovia", HasPlayState = true, ValuesBeforePlay = new[] { 4f, 5f }, CollapsePenalty = 12f, EventId = "Chuva", EndValues = new[] { 6f, 7f } };
+        closed.PlayableCardIds.AddRange(new[] { "Ciclovia", "Usina" });
+        closed.CollapsedAtResolution.Add(CityParameterType.Energia);
+        phase.History.Add(closed);
+        phase.HasHistoryCurrent = true;
+        phase.HistoryCurrent = new PhaseTurnRecord { TurnIndex = 3 };
+        phase.HistoryCurrent.FreeActionIds.Add("Busca");
+
+        MetaProgressionManager.SavePhase(phase);
+        ForceReloadFromFile();
+        var history = RunSaveRules.RestoreHistory(MetaProgressionManager.SavedPhase);
+
+        Assert.That(history.StartValues, Is.EqualTo(new[] { 1f, 2f, 3f }));
+        var turn = history.Turns.Single();
+        Assert.That(turn.CardId, Is.EqualTo("Ciclovia"));
+        Assert.That(turn.PlayableCardIds, Is.EqualTo(new[] { "Ciclovia", "Usina" }));
+        Assert.That(turn.ValuesBeforePlay, Is.EqualTo(new[] { 4f, 5f }));
+        Assert.That(turn.CollapsedAtResolution, Is.EqualTo(new[] { CityParameterType.Energia }));
+        Assert.That(turn.CollapsePenalty, Is.EqualTo(12f));
+        Assert.That(turn.EventId, Is.EqualTo("Chuva"));
+        Assert.That(turn.EndValues, Is.EqualTo(new[] { 6f, 7f }));
+        Assert.That(history.Current.TurnIndex, Is.EqualTo(3));
+        Assert.That(history.Current.FreeActionIds, Is.EqualTo(new[] { "Busca" }));
     }
 
     [Test]

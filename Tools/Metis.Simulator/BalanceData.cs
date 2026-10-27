@@ -83,6 +83,11 @@ public sealed class BalanceData
         .OrderBy(value => value)
         .ToList();
 
+    private ScoreRules _scoreRules;
+
+    // Criticos e ultimo limiar de Pesquisa pra nota do estado, montados uma vez so.
+    public ScoreRules ScoreRules => _scoreRules ??= new ScoreRules(Parameters, TierThresholds.Count > 0 ? TierThresholds[^1] : 0f);
+
     public CityParameterConfig GetParameterConfig(CityParameterType parameter)
     {
         return Parameters.First(config => config.Parameter == parameter);

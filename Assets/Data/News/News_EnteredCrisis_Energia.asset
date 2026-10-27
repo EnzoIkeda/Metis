@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_EnteredCrisis_Energia
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 2
+  _parameter: 1
+  _headline: "Apag\xE3o vira rotina: Energia cai para {valor}"
+  _headlineEn: 'Blackouts become routine: Energy down to {valor}'
+  _body: "A padaria da Dona Cida passou a assar p\xE3o no forno a lenha do vizinho.
+    As velas esgotaram no com\xE9rcio."
+  _bodyEn: Mrs. Cida's bakery now bakes bread in the neighbor's wood oven. Candles
+    are sold out all over town.

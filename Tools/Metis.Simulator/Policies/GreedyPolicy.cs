@@ -21,11 +21,6 @@ public sealed class GreedyPolicy : IPlayerPolicy
     // Busca e revelacao entram pelo custo pago antes da carta comum, por isso o custo e aplicado no mesmo estado simulado.
     private static double Evaluate(DecisionContext context, SimCard paidFirst, SimCard card)
     {
-        var future = context.Stats.Clone();
-        if (paidFirst != null)
-            PolicyHelpers.ApplyCard(future, paidFirst);
-        PolicyHelpers.ApplyCard(future, card);
-        future.ResolveTurn();
-        return StateScore.Evaluate(future, context.Data);
+        return GreedyLookahead.Score(context.Stats, card, context.Data.ScoreRules, paidFirst);
     }
 }

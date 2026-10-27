@@ -9,6 +9,9 @@ using UnityEngine.UI;
 public class PhaseRewardPopupView : MonoBehaviour
 {
     [SerializeField] private TurnManager _turnManager;
+
+    [Tooltip("Abre depois do relatorio de fim de fase; vazio, abre direto no fim de jogo.")]
+    [SerializeField] private PhaseEndFlow _endFlow;
     [SerializeField] private GameObject _panelRoot;
     [SerializeField] private TMP_Text _titleText;
     [SerializeField] private Button[] _optionButtons;
@@ -22,7 +25,10 @@ public class PhaseRewardPopupView : MonoBehaviour
 
     private void Start()
     {
-        _turnManager.Machine.OnGameEnded += HandleGameEnded;
+        if (_endFlow != null)
+            _endFlow.OnContinue += HandleGameEnded;
+        else
+            _turnManager.Machine.OnGameEnded += HandleGameEnded;
         if (_titleText != null)
             _titleText.text = UIStrings.RewardTitle;
         for (int i = 0; i < _optionButtons.Length; i++)
@@ -36,6 +42,8 @@ public class PhaseRewardPopupView : MonoBehaviour
 
     private void OnDisable()
     {
+        if (_endFlow != null)
+            _endFlow.OnContinue -= HandleGameEnded;
         if (_turnManager != null && _turnManager.Machine != null)
             _turnManager.Machine.OnGameEnded -= HandleGameEnded;
     }

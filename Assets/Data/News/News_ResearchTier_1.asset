@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_ResearchTier_1
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 8
+  _parameter: 0
+  _headline: "Cidade sobe de n\xEDvel: novas tecnologias liberadas"
+  _headlineEn: 'City levels up: new technologies unlocked'
+  _body: "Com Pesquisa em {valor}, a prefeitura ganha acesso a cartas mais avan\xE7adas.
+    J\xFAlia j\xE1 pediu um rob\xF4 para a escola t\xE9cnica."
+  _bodyEn: "With Research at {valor}, City Hall gets access to more advanced cards.
+    J\xFAlia has already asked for a robot at the technical school."

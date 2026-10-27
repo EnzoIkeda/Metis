@@ -47,6 +47,15 @@ public class TurnManager : MonoBehaviour
 
     public event Action<TurnBreakdown> OnTurnBreakdownReady;
 
+    // Historico da fase pro relatorio de fim de fase, salvo junto com a fase.
+    public PhaseHistory History { get; private set; }
+
+    // Edicoes do jornal da fase, salvas junto com a fase.
+    public NewsArchive News { get; private set; }
+
+    // Turno fechado, com o evento ja aplicado, antes da checagem de fim de jogo.
+    public event Action<PhaseTurnRecord> OnTurnFinished;
+
     public TurnMachine Machine { get; private set; }
     public CardHand<CardData> Hand { get; private set; }
 
@@ -89,6 +98,8 @@ public class TurnManager : MonoBehaviour
         {
             ResumedFromSave = true;
             _eventRandom = new SeededRandom(savedPhase.EventRandomState);
+            History = RunSaveRules.RestoreHistory(savedPhase);
+            News = RunSaveRules.RestoreNews(savedPhase, SeededRandom.NewSeed());
         }
         else
         {
@@ -101,6 +112,9 @@ public class TurnManager : MonoBehaviour
             // Baralho sempre finito: compra sem reposicao e reembaralha o baralho inteiro quando acaba.
             Hand = new CardHand<CardData>(pool, _handRandom, finiteDeck: true);
             _eventRandom = new SeededRandom(SeededRandom.NewSeed());
+            History = new PhaseHistory();
+            History.CaptureStart(_cityStatsManager.Stats);
+            News = new NewsArchive(SeededRandom.NewSeed());
         }
 
         Hand.OnHandChanged += HandleHandChanged;
@@ -157,6 +171,8 @@ public class TurnManager : MonoBehaviour
         phase.PresetName = _cityStatsManager.PresetName;
         phase.LayoutSeed = _placementManager != null ? _placementManager.LayoutSeed : 0UL;
         phase.BackgroundIndex = _background != null ? _background.BackgroundIndex : -1;
+        RunSaveRules.CaptureHistory(phase, History);
+        RunSaveRules.CaptureNews(phase, News);
         MetaProgressionManager.SavePhase(phase);
     }
 
@@ -186,6 +202,32 @@ public class TurnManager : MonoBehaviour
         }
     }
 
+    // Le cada turno do historico a partir do estado de antes da jogada, pra comparar com as outras cartas da mao.
+    public TurnEvaluator CreateEvaluator()
+    {
+        var cardsById = new Dictionary<string, CardData>();
+        foreach (var card in _cardPool)
+        {
+            if (card != null)
+                cardsById[card.name] = card;
+        }
+
+        var rules = ScoreRules.FromCards(_cityStatsManager.ParameterConfigs, _cardPool.Where(card => card != null));
+        return new TurnEvaluator(_cityStatsManager.Stats.Clone(), rules, id => cardsById.TryGetValue(id, out var card) ? card : null);
+    }
+
+    // Cartas comuns que dava pra jogar agora, as alternativas que o relatorio compara com a jogada.
+    private List<string> PlayableCommonCardIds()
+    {
+        var ids = new List<string>();
+        foreach (var card in Hand.Cards)
+        {
+            if (CardRules.IsFreeAction(card) == false && CanPlay(card))
+                ids.Add(card.name);
+        }
+        return ids;
+    }
+
     public bool CanPlay(CardData card)
     {
         if (card == null || Hand.CanPlay(card, _cityStatsManager.Stats) == false)
@@ -210,9 +252,11 @@ public class TurnManager : MonoBehaviour
         if (CardRules.IsFreeAction(card))
             return PlayFreeAction(card);
 
+        var playable = PlayableCommonCardIds();
         bool played;
         if (card.StructureToPlace == null)
         {
+            History.RecordPlay(Machine.TurnIndex, card.name, _cityStatsManager.Stats, playable);
             played = Hand.TryPlay(card, _cityStatsManager.Stats);
         }
         else
@@ -222,6 +266,7 @@ public class TurnManager : MonoBehaviour
             if (_placementManager.PlaceStructure(position, card.StructureToPlace) == false)
                 return false;
 
+            History.RecordPlay(Machine.TurnIndex, card.name, _cityStatsManager.Stats, playable);
             played = Hand.TryPlay(card, _cityStatsManager.Stats);
         }
 
@@ -274,6 +319,7 @@ public class TurnManager : MonoBehaviour
             return false;
 
         _effects?.SetAmbientGlowsVisible(false);
+        History.RecordPlay(Machine.TurnIndex, string.Empty, _cityStatsManager.Stats, null);
         Machine.EndActionPhase();
         return true;
     }
@@ -284,6 +330,7 @@ public class TurnManager : MonoBehaviour
         var stats = _cityStatsManager.Stats;
         if (Hand.TryPlay(card, stats) == false)
             return false;
+        History.RecordFreeAction(Machine.TurnIndex, card.name);
         OnCardPlayed?.Invoke(card);
 
         if (card.Ability == CardAbility.RevealHand)
@@ -358,17 +405,25 @@ public class TurnManager : MonoBehaviour
         if (phase == TurnPhase.StartOfTurn)
         {
             Hand.Draw(_handSize, _cityStatsManager.Stats);
+            History.BeginTurn(Machine.TurnIndex);
             StartRecording();
         }
         else if (phase == TurnPhase.Action)
         {
             // Ao continuar a rodada o turno entra direto na acao, sem passar pelo comeco.
+            History.BeginTurn(Machine.TurnIndex);
             if (_currentBreakdown == null)
                 StartRecording();
             SaveCheckpoint();
         }
+        else if (phase == TurnPhase.Resolution)
+            History.RecordResolutionStart(Machine.TurnIndex, _cityStatsManager.Stats);
         else if (phase == TurnPhase.EndCheck)
+        {
+            History.FinishTurn(Machine.TurnIndex, _cityStatsManager.Stats);
             FinishRecording();
+            OnTurnFinished?.Invoke(History.Turns[History.Turns.Count - 1]);
+        }
         else if (phase == TurnPhase.Event && _restoredEvent != null)
             StartCoroutine(AnnounceRestoredEvent());
         else if (phase == TurnPhase.Event)
@@ -383,6 +438,7 @@ public class TurnManager : MonoBehaviour
             _currentBreakdown.CurrentSource = ContributionSource.Event;
         var triggeredEvent = _events.TryTriggerEvent(_cityStatsManager.Stats, Machine.TurnIndex);
         _pendingEvent = triggeredEvent;
+        History.RecordEvent(Machine.TurnIndex, triggeredEvent != null ? triggeredEvent.name : string.Empty);
         if (triggeredEvent == null)
         {
             Machine.AcknowledgeEvent();

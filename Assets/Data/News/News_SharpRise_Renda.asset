@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_SharpRise_Renda
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 6
+  _parameter: 0
+  _headline: 'Dinheiro novo: Renda sobe {variacao}'
+  _headlineEn: 'Fresh money: Income up {variacao}'
+  _body: "Economistas se dividem entre \"boa gest\xE3o\" e \"sorte de principiante\".
+    Seu Arnaldo, o taxista, s\xF3 quer saber se o asfalto vem junto."
+  _bodyEn: Economists are split between "good management" and "beginner's luck".
+    Arnaldo the cab driver just wants to know if new asphalt comes with it.

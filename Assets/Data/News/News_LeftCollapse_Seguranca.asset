@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_LeftCollapse_Seguranca
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 5
+  _parameter: 2
+  _headline: "Ruas voltam a ter gente: Seguran\xE7a sai do Colapso"
+  _headlineEn: 'People are back on the streets: Security out of Collapse'
+  _body: "Com {valor}, a pra\xE7a voltou a ter pipoqueiro. Dona Cida reabriu o turno
+    da noite."
+  _bodyEn: At {valor}, the popcorn cart is back in the square. Mrs. Cida reopened
+    the night shift.

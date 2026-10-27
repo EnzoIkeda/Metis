@@ -96,7 +96,8 @@ public static class PhaseSimulator
     public static readonly CityParameterType[] Parameters = (CityParameterType[])Enum.GetValues(typeof(CityParameterType));
 
     // Mesma ordem do jogo: vantagens carregadas, mao comprada no inicio do turno, jogada, resolucao, evento, checagem de fim.
-    public static GameRecord Run(PhaseSetup setup, IPlayerPolicy policy, GameSeeds seeds)
+    // history, quando passado, recebe o mesmo registro que o relatorio de fim de fase usa no jogo.
+    public static GameRecord Run(PhaseSetup setup, IPlayerPolicy policy, GameSeeds seeds, PhaseHistory history = null)
     {
         var data = setup.Data;
         var stats = new CityStats(data.BuildParameterConfigs(setup.Preset), data.BuildInteractionMatrix(), data.Interaction.PenalidadeColapso);
@@ -112,11 +113,14 @@ public static class PhaseSimulator
         var hand = new CardHand<SimCard>(deck, new Random(seeds.Hand), setup.FiniteDeck);
         var events = new RandomEventPool<SimEvent>(data.Events, new Random(seeds.Events));
         var policyRandom = new Random(seeds.Policy);
+        history?.CaptureStart(stats);
 
         machine.OnPhaseChanged += phase =>
         {
             if (phase == TurnPhase.StartOfTurn)
                 hand.Draw(setup.HandSize, stats);
+            else if (phase == TurnPhase.Resolution)
+                history?.RecordResolutionStart(machine.TurnIndex, stats);
             else if (phase == TurnPhase.Advance)
                 hand.DiscardAll();
         };
@@ -162,6 +166,8 @@ public static class PhaseSimulator
                 var chosen = policy.Choose(Context(playable));
                 if (chosen.PlacesStructure)
                     throw new NotSupportedException($"Carta '{chosen.Id}' coloca estrutura no grid, o simulador nao modela o grid.");
+                if (history != null && CardRules.IsFreeAction(chosen) == false)
+                    history.RecordPlay(turn, chosen.Id, stats, PolicyHelpers.PlainCards(playable).Select(card => card.Id));
                 if (hand.TryPlay(chosen, stats) == false)
                     throw new InvalidOperationException($"Politica '{policy.Name}' escolheu '{chosen.Id}', que nao era jogavel.");
 
@@ -172,6 +178,7 @@ public static class PhaseSimulator
                 }
 
                 freeActions.Add(chosen.Id);
+                history?.RecordFreeAction(turn, chosen.Id);
                 if (chosen.Ability == CardAbility.RevealHand)
                 {
                     hand.Reveal(setup.PermanentReveal);
@@ -189,8 +196,12 @@ public static class PhaseSimulator
                 playable = Playable(hand, stats);
             }
 
+            if (history != null && cardId.Length == 0)
+                history.RecordPlay(turn, "", stats, null);
             machine.EndActionPhase();
             var triggered = events.TryTriggerEvent(stats, turn);
+            history?.RecordEvent(turn, triggered?.Id);
+            history?.FinishTurn(turn, stats);
 
             var values = Parameters.Select(stats.GetValue).ToArray();
             for (int i = 0; i < thresholds.Count; i++)

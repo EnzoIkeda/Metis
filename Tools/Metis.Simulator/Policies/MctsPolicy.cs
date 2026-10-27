@@ -220,7 +220,7 @@ public sealed class MctsPolicy : IPlayerPolicy
     {
         if (outcome == GameOutcome.Victory)
         {
-            var normalized = Math.Clamp(StateScore.Evaluate(stats, context.Data) / StateScore.MaxScore(context.Data), 0.0, 1.0);
+            var normalized = Math.Clamp(StateScore.Evaluate(stats, context.Data.ScoreRules) / StateScore.MaxScore(context.Data.ScoreRules), 0.0, 1.0);
             return VictoryBase + VictoryShaping * normalized;
         }
         return DefeatShaping * turn / context.VictoryTurnCount;

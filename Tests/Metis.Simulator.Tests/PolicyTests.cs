@@ -67,6 +67,6 @@ public class PolicyTests
         foreach (var parameter in PhaseSimulator.Parameters)
             collapsed.ApplyModifier(new StatModifier { Parameter = parameter, Amount = -39f });
 
-        Assert.That(StateScore.Evaluate(dead, data), Is.LessThan(StateScore.Evaluate(collapsed, data)));
+        Assert.That(StateScore.Evaluate(dead, data.ScoreRules), Is.LessThan(StateScore.Evaluate(collapsed, data.ScoreRules)));
     }
 }

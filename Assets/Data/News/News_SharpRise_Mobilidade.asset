@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_SharpRise_Mobilidade
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 6
+  _parameter: 8
+  _headline: "P\xE9 na estrada: Mobilidade sobe {variacao}"
+  _headlineEn: 'On the move: Mobility up {variacao}'
+  _body: "\xD4nibus no hor\xE1rio, bicicletas na ciclovia e um taxista desconfiado
+    de tanta efici\xEAncia."
+  _bodyEn: Buses on time, bikes in the bike lanes and one cab driver suspicious of
+    all this efficiency.

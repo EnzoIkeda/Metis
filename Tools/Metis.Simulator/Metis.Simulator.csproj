@@ -24,6 +24,9 @@
     <Compile Include="../../Assets/Scripts/Core/Utilities/DeckBuilder.cs" Link="Game/DeckBuilder.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/CityPresetRules.cs" Link="Game/CityPresetRules.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/RewardOptionPicker.cs" Link="Game/RewardOptionPicker.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/StateScore.cs" Link="Game/StateScore.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/PhaseReport.cs" Link="Game/PhaseReport.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/PhaseHistory.cs" Link="Game/PhaseHistory.cs" />
   </ItemGroup>
 
 </Project>

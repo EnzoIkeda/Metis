@@ -37,6 +37,44 @@ public class PhaseSimulatorTests
         Assert.That(second.Turns.Last().Values, Is.EqualTo(first.Turns.Last().Values));
     }
 
+    // O historico do relatorio so le o estado: a partida fica igual com ou sem ele, e ele bate com o registro do simulador.
+    [TestCase("aleatoria")]
+    [TestCase("gulosa")]
+    public void Run_WithPhaseHistory_SameGameAndMatchingTurns(string policyName)
+    {
+        var setup = TestData.Setup(VariedData());
+        var policy = SimulationRunner.CreatePolicy(policyName);
+        var history = new PhaseHistory();
+
+        var plain = PhaseSimulator.Run(setup, policy, new GameSeeds(3, 2));
+        var recorded = PhaseSimulator.Run(setup, policy, new GameSeeds(3, 2), history);
+
+        Assert.That(recorded.Turns.Select(turn => turn.CardId), Is.EqualTo(plain.Turns.Select(turn => turn.CardId)));
+        Assert.That(recorded.Turns.Last().Values, Is.EqualTo(plain.Turns.Last().Values));
+        Assert.That(history.Turns.Select(turn => turn.CardId), Is.EqualTo(plain.Turns.Select(turn => turn.CardId)));
+        Assert.That(history.Turns.Select(turn => turn.EventId), Is.EqualTo(plain.Turns.Select(turn => turn.EventId)));
+        Assert.That(history.Turns.Last().EndValues, Is.EqualTo(plain.Turns.Last().Values));
+        Assert.That(history.Current, Is.Null);
+    }
+
+    // A gulosa ja joga a melhor carta pela mesma nota, entao o relatorio nunca aponta alternativa melhor pra ela.
+    [Test]
+    public void Run_GreedyPolicy_ReportFindsNoBetterAlternative()
+    {
+        var data = VariedData();
+        var setup = TestData.Setup(data);
+        var cards = data.Cards.ToDictionary(card => card.Id, card => (ICardDefinition)card);
+        var template = new CityStats(data.BuildParameterConfigs(null), data.BuildInteractionMatrix(), data.Interaction.PenalidadeColapso);
+        var evaluator = new TurnEvaluator(template, data.ScoreRules, id => cards.TryGetValue(id, out var card) ? card : null);
+
+        for (var gameIndex = 0; gameIndex < 10; gameIndex++)
+        {
+            var history = new PhaseHistory();
+            PhaseSimulator.Run(setup, new GreedyPolicy(), new GameSeeds(5, gameIndex), history);
+            Assert.That(PhaseReport.BiggestMiss(history, evaluator, minimumGain: 1e-6).HasValue, Is.False, $"partida {gameIndex}");
+        }
+    }
+
     [Test]
     public void Run_DifferentGameIndexes_ProduceDifferentGames()
     {

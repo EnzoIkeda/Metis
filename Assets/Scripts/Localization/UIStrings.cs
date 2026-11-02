@@ -7,25 +7,13 @@ public static class UIStrings
 
     public static string WelcomeMessage => IsPt
         ? "Você administra esta cidade por 20 turnos.\n\n" +
-          "A cada turno, jogue uma carta da mão: toque nela para ver os detalhes e arraste-a para " +
-          "fora da mão para jogá-la. As cartas custam Renda e mudam os parâmetros da cidade, que " +
-          "também se influenciam entre si. Depois de cada jogada, um evento pode mudar a situação. " +
-          "Se nenhuma carta puder ser jogada, passe a vez.\n\n" +
-          "Um parâmetro que chega ao nível crítico entra em colapso e derruba o Bem-estar (o " +
-          "coração) a cada turno. Se o Bem-estar chegar ao nível crítico, a população perde a " +
-          "confiança na gestão e é fim de jogo.\n\n" +
-          "Invista em Pesquisa para liberar tecnologias mais avançadas e transformar a cidade numa " +
-          "Smart City. Sobreviva aos 20 turnos para vencer!"
+          "Sobreviva até o fim sem deixar o Bem-estar (o coração) chegar ao nível crítico: é ele " +
+          "que mede a confiança da população na gestão.\n\n" +
+          "As dicas aparecem aos poucos, conforme a cidade precisar. Boa gestão!"
         : "You manage this city for 20 turns.\n\n" +
-          "Each turn, play one card from your hand: tap it to see its details and drag it out of " +
-          "your hand to play it. Cards cost Income and change the city's parameters, which also " +
-          "affect one another. After each play, an event may change the situation. If no card can " +
-          "be played, pass your turn.\n\n" +
-          "A parameter that reaches its critical level collapses and drags Wellbeing (the heart) " +
-          "down every turn. If Wellbeing reaches its critical level, the population loses " +
-          "confidence in your administration and the game is over.\n\n" +
-          "Invest in Research to unlock more advanced technologies and turn the city into a Smart " +
-          "City. Survive all 20 turns to win!";
+          "Survive to the end without letting Wellbeing (the heart) reach its critical level: it " +
+          "measures how much the population trusts your administration.\n\n" +
+          "Tips will appear little by little, as the city needs them. Good luck!";
 
     public static string GameOverTitle => IsPt ? "Fim de Jogo" : "Game Over";
 
@@ -563,4 +551,65 @@ public static class UIStrings
     public static string ModelReportAutoTag => IsPt ? "Tabela montada com os dados do modelo" : "Table built from the model's data";
     public static string ModelReportMapLink => IsPt ? "Mapa de relações" : "Relation map";
     public static string ModelReportLockedLink => IsPt ? "??? (ficha não descoberta)" : "??? (entry not found yet)";
+
+    public static string TutorialOkButton => IsPt ? "Entendi" : "Got it";
+    public static string TutorialReplay => IsPt ? "Rever tutorial" : "Replay tutorial";
+    public static string TutorialReplayDone => IsPt ? "As dicas vão aparecer de novo" : "Tips will appear again";
+
+    public static string TutorialTitle(TutorialTip tip)
+    {
+        switch (tip)
+        {
+            case TutorialTip.Parameters: return IsPt ? "Os parâmetros da cidade" : "The city's parameters";
+            case TutorialTip.Cards: return IsPt ? "Uma carta por turno" : "One card per turn";
+            case TutorialTip.PassTurn: return IsPt ? "Sem carta para jogar" : "No card to play";
+            case TutorialTip.Event: return IsPt ? "Eventos" : "Events";
+            case TutorialTip.Crisis: return IsPt ? "Parâmetro em crise" : "Parameter in crisis";
+            case TutorialTip.Collapse: return IsPt ? "Colapso" : "Collapse";
+            case TutorialTip.Tier: return IsPt ? "Novas tecnologias" : "New technologies";
+            case TutorialTip.Newspaper: return IsPt ? "A Tribuna do Turno" : "The Turn Tribune";
+            default: return string.Empty;
+        }
+    }
+
+    public static string TutorialMessage(TutorialTip tip)
+    {
+        switch (tip)
+        {
+            case TutorialTip.Parameters:
+                return IsPt
+                    ? "Estes são os parâmetros da cidade. Eles influenciam uns aos outros, então mexer em um também mexe nos demais."
+                    : "These are the city's parameters. They affect one another, so changing one also changes the others.";
+            case TutorialTip.Cards:
+                return IsPt
+                    ? "Toque em uma carta para ver os detalhes e arraste-a para fora da mão para jogá-la. As cartas custam Renda."
+                    : "Tap a card to see its details and drag it out of your hand to play it. Cards cost Income.";
+            case TutorialTip.PassTurn:
+                return IsPt
+                    ? "Nenhuma carta da mão pode ser jogada agora. Use este botão para passar a vez."
+                    : "No card in your hand can be played right now. Use this button to pass your turn.";
+            case TutorialTip.Event:
+                return IsPt
+                    ? "Depois de cada jogada, um evento pode mudar a situação da cidade. Alguns só acontecem em certos momentos ou condições."
+                    : "After each play, an event may change the city's situation. Some only happen at certain moments or under certain conditions.";
+            case TutorialTip.Crisis:
+                return IsPt
+                    ? "Um parâmetro entrou na zona de crise. Nessa faixa, as influências dele sobre os outros mudam de força. Vale agir antes que piore."
+                    : "A parameter has entered the crisis zone. In this range, its influence on the others changes in strength. Act before it gets worse.";
+            case TutorialTip.Collapse:
+                return IsPt
+                    ? "Um parâmetro chegou ao nível crítico e entrou em Colapso: enquanto ele não se recuperar, o Bem-estar cai a cada turno. Se o Bem-estar chegar ao crítico, a fase termina."
+                    : "A parameter has reached its critical level and collapsed: until it recovers, Wellbeing drops every turn. If Wellbeing reaches its critical level, the phase ends.";
+            case TutorialTip.Tier:
+                return IsPt
+                    ? "O investimento em Pesquisa liberou um novo nível de tecnologia. Cartas mais avançadas já podem aparecer na sua mão."
+                    : "Investing in Research has unlocked a new technology level. More advanced cards can now appear in your hand.";
+            case TutorialTip.Newspaper:
+                return IsPt
+                    ? "O jornal da cidade comenta cada turno. O selo aceso no botão avisa que há uma edição nova."
+                    : "The city's newspaper covers every turn. The lit badge on the button means there is a new edition.";
+            default:
+                return string.Empty;
+        }
+    }
 }

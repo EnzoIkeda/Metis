@@ -19,7 +19,7 @@ public static class GameTextSaver
         public string Pt;
         public string En;
         public string Destination;
-        public string NewJson;
+        public string NewContent;
         public readonly List<string> Errors = new List<string>();
         public readonly List<string> Warnings = new List<string>();
         public bool CanCommit => Errors.Count == 0;
@@ -57,6 +57,9 @@ public static class GameTextSaver
             case GameTextEditKind.RelationNote:
                 PrepareRelation(plan);
                 break;
+            case GameTextEditKind.Interface:
+                PrepareInterface(plan);
+                break;
         }
 
         var preview = new GameTextItem
@@ -88,14 +91,18 @@ public static class GameTextSaver
                 ApplyToAsset(item.Location, item.PtField, item.EnField, plan.Pt, plan.En);
                 return true;
             case GameTextEditKind.News:
-                WriteJson(NewsPath, plan.NewJson);
+                WriteJson(NewsPath, plan.NewContent);
                 return Reported(NewsStoryImporter.Import(FullPath(NewsPath), apply: true).Errors, out error);
             case GameTextEditKind.Knowledge:
-                WriteJson(FichasPath, plan.NewJson);
+                WriteJson(FichasPath, plan.NewContent);
                 return Reported(KnowledgeEntryImporter.Import(FullPath(FichasPath), apply: true).Errors, out error);
             case GameTextEditKind.RelationNote:
-                WriteJson(RelationsPath, plan.NewJson);
+                WriteJson(RelationsPath, plan.NewContent);
                 ApplyToNote(item, plan.Pt, plan.En);
+                return true;
+            case GameTextEditKind.Interface:
+                File.WriteAllText(item.Location, plan.NewContent, EncodingOf(item.Location));
+                AssetDatabase.ImportAsset(item.Location);
                 return true;
             default:
                 error = "Este texto não pode ser editado aqui.";
@@ -150,7 +157,7 @@ public static class GameTextSaver
         {
             File.Delete(temp);
         }
-        plan.NewJson = edited;
+        plan.NewContent = edited;
         plan.Destination = $"{relativePath}, depois os assets pela importação";
     }
 
@@ -169,8 +176,28 @@ public static class GameTextSaver
             plan.Errors.Add(error);
             return;
         }
-        plan.NewJson = edited;
+        plan.NewContent = edited;
         plan.Destination = $"{RelationsPath} e {item.Location}";
+    }
+
+    private static void PrepareInterface(Plan plan)
+    {
+        var item = plan.Item;
+        if (InterfaceTextEditor.TryEdit(File.ReadAllText(item.Location), item.Location, item, plan.Pt, plan.En, out var edited, out var error) == false)
+        {
+            plan.Errors.Add(error);
+            return;
+        }
+        plan.NewContent = edited;
+        plan.Destination = $"{item.Location}; a Unity vai recompilar";
+    }
+
+    // Mantem a marca de ordem de bytes que o arquivo ja tinha, para o diff mostrar so o texto.
+    private static System.Text.Encoding EncodingOf(string path)
+    {
+        var bytes = File.ReadAllBytes(path);
+        var hasMark = bytes.Length >= 3 && bytes[0] == 0xEF && bytes[1] == 0xBB && bytes[2] == 0xBF;
+        return new System.Text.UTF8Encoding(hasMark);
     }
 
     private static bool TryReadSource(Plan plan, string relativePath, out string json)

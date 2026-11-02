@@ -64,8 +64,8 @@ public class GameTextSaverTests
 
         Assert.That(plan.Errors, Is.Empty);
         Assert.That(plan.Warnings.Where(w => w.StartsWith("A importação")), Is.Empty);
-        Assert.That(plan.NewJson, Does.Contain(" teste"));
-        Assert.That(plan.NewJson.Length, Is.EqualTo(before.Length + " teste".Length));
+        Assert.That(plan.NewContent, Does.Contain(" teste"));
+        Assert.That(plan.NewContent.Length, Is.EqualTo(before.Length + " teste".Length));
         Assert.That(File.ReadAllText(sourcePath), Is.EqualTo(before));
     }
 
@@ -77,6 +77,11 @@ public class GameTextSaverTests
             if (item.EditKind == GameTextEditKind.ReadOnly)
             {
                 Assert.That(item.ReadOnlyReason, Is.Not.Empty, item.Id);
+                continue;
+            }
+            if (item.EditKind == GameTextEditKind.Interface)
+            {
+                Assert.That(item.PtBranch.IsEditable, Is.True, item.Id);
                 continue;
             }
             Assert.That(item.PtField, Is.Not.Empty, item.Id);

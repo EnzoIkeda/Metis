@@ -34,6 +34,16 @@ public enum GameTextIssue
     AccentInTitleFont,
 }
 
+// Como um texto pode ser gravado; somente leitura quando a fonte ainda nao tem edicao segura.
+public enum GameTextEditKind
+{
+    ReadOnly,
+    Asset,
+    News,
+    Knowledge,
+    RelationNote,
+}
+
 // Um texto do jogo. Sem par quer dizer um campo unico, sem versao declarada nos dois idiomas.
 public class GameTextItem
 {
@@ -46,6 +56,16 @@ public class GameTextItem
     public bool UsesTitleFont;
     public string Location = string.Empty;
     public int Line;
+
+    public GameTextEditKind EditKind;
+    public string ReadOnlyReason = string.Empty;
+    public string PtField = string.Empty;
+    public string EnField = string.Empty;
+    public string JsonPtKey = string.Empty;
+    public string JsonEnKey = string.Empty;
+    public string NoteSource = string.Empty;
+    public string NoteTarget = string.Empty;
+    public int ArrayIndex;
 }
 
 // Regras de verificacao, sem dependencia da Unity pra poder ser testadas fora do Editor.
@@ -78,7 +98,7 @@ public static class GameTextRules
         }
 
         var both = pt + "\n" + en;
-        if (both.IndexOf('—') >= 0 || both.IndexOf('–') >= 0)
+        if (both.IndexOf('\u2014') >= 0 || both.IndexOf('\u2013') >= 0)
             issues.Add(GameTextIssue.Dash);
         if (Metis.IsMatch(both))
             issues.Add(GameTextIssue.MetisWithoutAccent);
@@ -221,6 +241,7 @@ public static class InterfaceTextParser
                     En = en,
                     Location = location,
                     Line = token.Line,
+                    ReadOnlyReason = "Edição da interface entra na próxima etapa; use Abrir origem.",
                 });
                 cursor = afterEn;
                 continue;
@@ -237,6 +258,7 @@ public static class InterfaceTextParser
                     IsPaired = false,
                     Location = location,
                     Line = token.Line,
+                    ReadOnlyReason = "Edição da interface entra na próxima etapa; use Abrir origem.",
                 });
             }
             cursor++;
@@ -483,6 +505,7 @@ public static class SceneTextParser
     {
         public string Text;
         public int Line;
+        public string ComponentId;
         public string OwnerId;
         public bool UsesTitleFont;
     }
@@ -526,6 +549,7 @@ public static class SceneTextParser
                 {
                     Text = DecodeScalar(line.Substring(TextKey.Length), extra),
                     Line = startLine,
+                    ComponentId = docId,
                     OwnerId = owner,
                 };
                 pending.Add(current);
@@ -545,7 +569,9 @@ public static class SceneTextParser
             {
                 Origin = GameTextOrigin.SceneOrPrefab,
                 Id = names.TryGetValue(entry.OwnerId, out var name) ? name : entry.OwnerId,
+                Field = entry.ComponentId,
                 Pt = entry.Text,
+                ReadOnlyReason = "Texto de cena ou prefab: edite no próprio arquivo pela Unity.",
                 IsPaired = false,
                 UsesTitleFont = entry.UsesTitleFont,
                 Location = location,

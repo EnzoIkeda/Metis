@@ -42,6 +42,32 @@ public enum GameTextEditKind
     News,
     Knowledge,
     RelationNote,
+    Interface,
+}
+
+// Trecho do codigo-fonte onde esta um ramo de idioma; so e editavel se for feito apenas de textos.
+public class InterfaceBranch
+{
+    public int Start = -1;
+    public int End = -1;
+    public bool LiteralsOnly = true;
+    public bool Interpolated;
+    public bool Verbatim;
+    public int Parts;
+    public readonly List<string> Holes = new List<string>();
+
+    public bool IsEditable => Start >= 0 && LiteralsOnly && Verbatim == false;
+
+    public void Add(int start, int end, bool interpolated, bool verbatim, IEnumerable<string> holes)
+    {
+        if (Start < 0)
+            Start = start;
+        End = end;
+        Parts++;
+        Interpolated |= interpolated;
+        Verbatim |= verbatim;
+        Holes.AddRange(holes);
+    }
 }
 
 // Um texto do jogo. Sem par quer dizer um campo unico, sem versao declarada nos dois idiomas.
@@ -66,6 +92,8 @@ public class GameTextItem
     public string NoteSource = string.Empty;
     public string NoteTarget = string.Empty;
     public int ArrayIndex;
+    public InterfaceBranch PtBranch;
+    public InterfaceBranch EnBranch;
 }
 
 // Regras de verificacao, sem dependencia da Unity pra poder ser testadas fora do Editor.
@@ -161,10 +189,16 @@ public static class InterfaceTextParser
         public TokenKind Kind;
         public string Value;
         public int Line;
+        public int Start;
+        public int End;
+        public bool Interpolated;
+        public bool Verbatim;
+        public List<string> Holes = new List<string>();
     }
 
     private const string LanguageTest = "IsPt";
     private const string CodePart = "{...}";
+    private const string MixedCodeReason = "Este texto mistura código: use Abrir origem.";
 
     public static List<GameTextItem> Parse(string source, string location)
     {
@@ -230,8 +264,9 @@ public static class InterfaceTextParser
 
             if (token.Value == LanguageTest && cursor + 1 < end && tokens[cursor + 1].Value == "?")
             {
-                var pt = ReadBranch(tokens, cursor + 2, end, out var afterPt);
-                var en = ReadBranch(tokens, afterPt + 1, end, out var afterEn);
+                var pt = ReadBranch(tokens, cursor + 2, end, out var afterPt, out var ptBranch);
+                var en = ReadBranch(tokens, afterPt + 1, end, out var afterEn, out var enBranch);
+                var editable = ptBranch.IsEditable && enBranch.IsEditable;
                 items.Add(new GameTextItem
                 {
                     Origin = GameTextOrigin.Interface,
@@ -241,7 +276,10 @@ public static class InterfaceTextParser
                     En = en,
                     Location = location,
                     Line = token.Line,
-                    ReadOnlyReason = "Edição da interface entra na próxima etapa; use Abrir origem.",
+                    EditKind = editable ? GameTextEditKind.Interface : GameTextEditKind.ReadOnly,
+                    ReadOnlyReason = editable ? string.Empty : MixedCodeReason,
+                    PtBranch = ptBranch,
+                    EnBranch = enBranch,
                 });
                 cursor = afterEn;
                 continue;
@@ -249,6 +287,8 @@ public static class InterfaceTextParser
 
             if (token.Kind == TokenKind.Text && GameTextRules.HasLetter(token.Value))
             {
+                var branch = new InterfaceBranch();
+                branch.Add(token.Start, token.End, token.Interpolated, token.Verbatim, token.Holes);
                 items.Add(new GameTextItem
                 {
                     Origin = GameTextOrigin.Interface,
@@ -258,7 +298,9 @@ public static class InterfaceTextParser
                     IsPaired = false,
                     Location = location,
                     Line = token.Line,
-                    ReadOnlyReason = "Edição da interface entra na próxima etapa; use Abrir origem.",
+                    EditKind = branch.IsEditable ? GameTextEditKind.Interface : GameTextEditKind.ReadOnly,
+                    ReadOnlyReason = branch.IsEditable ? string.Empty : MixedCodeReason,
+                    PtBranch = branch,
                 });
             }
             cursor++;
@@ -275,8 +317,9 @@ public static class InterfaceTextParser
     }
 
     // Junta as partes de um ramo do teste de idioma; para no separador do ramo ou no fim da expressao.
-    private static string ReadBranch(List<Token> tokens, int start, int end, out int stop)
+    private static string ReadBranch(List<Token> tokens, int start, int end, out int stop, out InterfaceBranch branch)
     {
+        branch = new InterfaceBranch();
         var builder = new StringBuilder();
         var depth = 0;
         var pendingTernaries = 0;
@@ -290,6 +333,7 @@ public static class InterfaceTextParser
             if (token.Kind == TokenKind.Text)
             {
                 builder.Append(token.Value);
+                branch.Add(token.Start, token.End, token.Interpolated, token.Verbatim, token.Holes);
                 inCode = false;
                 continue;
             }
@@ -307,6 +351,7 @@ public static class InterfaceTextParser
                 inCode = false;
                 continue;
             }
+            branch.LiteralsOnly = false;
             if (inCode == false)
             {
                 builder.Append(CodePart);
@@ -354,10 +399,11 @@ public static class InterfaceTextParser
                 i++;
                 tokens.Add(new Token { Kind = TokenKind.Symbol, Value = "'", Line = line });
             }
-            else if (TryReadString(source, ref i, out var text, out var lines))
+            else if (TryReadString(source, i, out var literal))
             {
-                tokens.Add(new Token { Kind = TokenKind.Text, Value = text, Line = line });
-                line += lines;
+                tokens.Add(new Token { Kind = TokenKind.Text, Value = literal.Text, Line = line, Start = i, End = literal.End, Interpolated = literal.Interpolated, Verbatim = literal.Verbatim, Holes = literal.Holes });
+                line += literal.Lines;
+                i = literal.End;
             }
             else if (char.IsLetterOrDigit(c) || c == '_')
             {
@@ -390,10 +436,20 @@ public static class InterfaceTextParser
         return tokens;
     }
 
-    private static bool TryReadString(string source, ref int i, out string text, out int lines)
+    private class Literal
     {
-        text = string.Empty;
-        lines = 0;
+        public string Text;
+        public int End;
+        public int Lines;
+        public bool Interpolated;
+        public bool Verbatim;
+        public readonly List<string> Holes = new List<string>();
+    }
+
+    private static bool TryReadString(string source, int i, out Literal literal)
+    {
+        literal = null;
+        var lines = 0;
         var start = i;
         var interpolated = false;
         var verbatim = false;
@@ -406,6 +462,7 @@ public static class InterfaceTextParser
         if (start >= source.Length || source[start] != '"')
             return false;
 
+        literal = new Literal { Interpolated = interpolated, Verbatim = verbatim };
         var builder = new StringBuilder();
         var cursor = start + 1;
         while (cursor < source.Length)
@@ -432,10 +489,16 @@ public static class InterfaceTextParser
                 builder.Append('{');
                 cursor += 2;
             }
+            else if (interpolated && c == '}' && cursor + 1 < source.Length && source[cursor + 1] == '}')
+            {
+                builder.Append('}');
+                cursor += 2;
+            }
             else if (interpolated && c == '{')
             {
                 var close = FindHoleEnd(source, cursor);
                 builder.Append(source, cursor, close - cursor + 1);
+                literal.Holes.Add(source.Substring(cursor, close - cursor + 1));
                 cursor = close + 1;
             }
             else
@@ -444,8 +507,9 @@ public static class InterfaceTextParser
                 cursor++;
             }
         }
-        text = builder.ToString();
-        i = cursor;
+        literal.Text = builder.ToString();
+        literal.End = cursor;
+        literal.Lines = lines;
         return true;
     }
 

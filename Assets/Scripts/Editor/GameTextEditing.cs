@@ -4,6 +4,154 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
+// Troca um texto dentro do codigo-fonte da interface e confere, relendo o resultado, que so ele mudou.
+public static class InterfaceTextEditor
+{
+    // Coluna a partir da qual um texto que ja vinha em varias linhas volta a quebrar.
+    private const int WrapColumn = 100;
+
+    public static bool TryEdit(string source, string location, GameTextItem item, string pt, string en, out string result, out string error)
+    {
+        result = source;
+        error = null;
+        var before = InterfaceTextParser.Parse(source, location);
+        var current = before.FirstOrDefault(other => other.Id == item.Id && other.Field == item.Field);
+        if (current == null)
+        {
+            error = $"{item.Id} não existe mais no arquivo. Atualize a lista.";
+            return false;
+        }
+        if (GameTextSaveRules.Normalize(current.Pt) != GameTextSaveRules.Normalize(item.Pt)
+            || GameTextSaveRules.Normalize(current.En) != GameTextSaveRules.Normalize(item.En))
+        {
+            error = $"{item.Id} mudou no arquivo depois de carregado. Atualize a lista.";
+            return false;
+        }
+        if (current.EditKind != GameTextEditKind.Interface)
+        {
+            error = current.ReadOnlyReason;
+            return false;
+        }
+
+        var splices = new List<(InterfaceBranch Branch, string Code)>();
+        if (TryPlan(source, current.PtBranch, current.Pt, pt, splices, out error) == false)
+            return false;
+        if (current.IsPaired && TryPlan(source, current.EnBranch, current.En, en, splices, out error) == false)
+            return false;
+
+        var edited = source;
+        foreach (var splice in splices.OrderByDescending(s => s.Branch.Start))
+            edited = edited.Substring(0, splice.Branch.Start) + splice.Code + edited.Substring(splice.Branch.End);
+
+        if (OnlyTargetChanged(before, InterfaceTextParser.Parse(edited, location), current, pt, en) == false)
+        {
+            error = "A conferência depois da troca falhou; nada foi mudado.";
+            return false;
+        }
+        result = edited;
+        return true;
+    }
+
+    private static bool TryPlan(string source, InterfaceBranch branch, string oldText, string newText, List<(InterfaceBranch, string)> splices, out string error)
+    {
+        error = null;
+        var value = GameTextSaveRules.Normalize(newText);
+        if (GameTextSaveRules.Normalize(oldText) == value)
+            return true;
+        if (TryEncode(value, branch, ColumnOf(source, branch.Start), source.Contains("\r\n") ? "\r\n" : "\n", out var code, out error) == false)
+            return false;
+        splices.Add((branch, code));
+        return true;
+    }
+
+    private static int ColumnOf(string source, int position)
+    {
+        var lineStart = source.LastIndexOf('\n', Math.Max(0, position - 1)) + 1;
+        return position - lineStart;
+    }
+
+    // Gera o literal; quebra de linha no texto vira uma nova linha concatenada no codigo.
+    private static bool TryEncode(string text, InterfaceBranch branch, int column, string newLine, out string code, out string error)
+    {
+        code = null;
+        error = null;
+        var prefix = branch.Interpolated ? "$\"" : "\"";
+        var builder = new StringBuilder(prefix);
+        var used = new HashSet<string>(StringComparer.Ordinal);
+        var separator = "\" +" + newLine + new string(' ', column) + prefix;
+        var wrap = branch.Parts > 1;
+        var lineStart = 0;
+
+        for (var i = 0; i < text.Length; i++)
+        {
+            var c = text[i];
+            if (branch.Interpolated && c == '{')
+            {
+                var hole = branch.Holes.FirstOrDefault(known => string.CompareOrdinal(text, i, known, 0, known.Length) == 0);
+                if (hole == null)
+                {
+                    error = "O texto usa uma variável que não existe neste trecho. Use só as originais, sem alterá-las.";
+                    return false;
+                }
+                used.Add(hole);
+                builder.Append(hole);
+                i += hole.Length - 1;
+                continue;
+            }
+            switch (c)
+            {
+                case '"': builder.Append("\\\""); break;
+                case '\\': builder.Append("\\\\"); break;
+                case '\t': builder.Append("\\t"); break;
+                case '\n':
+                    builder.Append("\\n");
+                    if (i < text.Length - 1 && text[i + 1] != '\n')
+                    {
+                        builder.Append(separator);
+                        lineStart = builder.Length;
+                    }
+                    break;
+                case ' ' when wrap && column + builder.Length - lineStart >= WrapColumn && i < text.Length - 1:
+                    builder.Append(' ').Append(separator);
+                    lineStart = builder.Length;
+                    break;
+                case '}':
+                    builder.Append(branch.Interpolated ? "}}" : "}");
+                    break;
+                default: builder.Append(c); break;
+            }
+        }
+
+        var missing = branch.Holes.FirstOrDefault(hole => used.Contains(hole) == false);
+        if (missing != null)
+        {
+            error = $"O texto perdeu a variável {missing}.";
+            return false;
+        }
+        code = builder.Append('"').ToString();
+        return true;
+    }
+
+    private static bool OnlyTargetChanged(List<GameTextItem> before, List<GameTextItem> after, GameTextItem target, string pt, string en)
+    {
+        if (before.Count != after.Count)
+            return false;
+        for (var i = 0; i < before.Count; i++)
+        {
+            var old = before[i];
+            var now = after[i];
+            if (old.Id != now.Id || old.Field != now.Field || old.IsPaired != now.IsPaired)
+                return false;
+            var isTarget = old.Id == target.Id && old.Field == target.Field;
+            var wantedPt = GameTextSaveRules.Normalize(isTarget ? pt : old.Pt);
+            var wantedEn = GameTextSaveRules.Normalize(isTarget && old.IsPaired ? en : old.En);
+            if (GameTextSaveRules.Normalize(now.Pt) != wantedPt || GameTextSaveRules.Normalize(now.En) != wantedEn)
+                return false;
+        }
+        return true;
+    }
+}
+
 // Regras de salvamento de um texto editado.
 public static class GameTextSaveRules
 {

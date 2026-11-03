@@ -15,6 +15,7 @@ public class GameTextWindow : EditorWindow
     private const string AnyReview = "Qualquer revisão";
     private const string PendingReview = "Pendentes";
     private const string DoneReview = "Revisados";
+    private const string SelectedKeyState = "Metis.GameText.Selected";
 
     private static readonly Dictionary<GameTextOrigin, string> OriginNames = new Dictionary<GameTextOrigin, string>
     {
@@ -114,6 +115,12 @@ public class GameTextWindow : EditorWindow
         rootVisualElement.Add(split);
 
         Reload();
+
+        // Salvar um texto da interface recompila e recria a janela: volta para o mesmo texto.
+        var restored = SessionState.GetString(SelectedKeyState, string.Empty);
+        SessionState.EraseString(SelectedKeyState);
+        if (restored.Length > 0)
+            SelectByKey(restored);
     }
 
     private void Reload()
@@ -293,6 +300,8 @@ public class GameTextWindow : EditorWindow
             return;
         }
         hasUnsavedChanges = false;
+        if (item.EditKind == GameTextEditKind.Interface)
+            SessionState.SetString(SelectedKeyState, GameTextReview.KeyOf(item));
         Reload();
     }
 

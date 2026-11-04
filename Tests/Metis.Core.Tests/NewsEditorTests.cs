@@ -13,6 +13,15 @@ public class NewsEditorTests
         public string Id { get; init; } = "Story";
         public NewsTrigger Trigger { get; init; }
         public CityParameterType Parameter { get; init; }
+        public string TargetId { get; init; } = string.Empty;
+    }
+
+    private sealed class FakeColumn : INewsColumnDefinition
+    {
+        public string Id { get; init; } = "Column";
+        public NewsColumnKind Kind { get; init; }
+        public NewsCitizen Citizen { get; init; }
+        public NewsMoodBand Mood { get; init; }
     }
 
     // Critico 10 em todos menos Pesquisa, crise em 25, excesso em 75, tiers em 15 e 30.
@@ -258,6 +267,357 @@ public class NewsEditorTests
         Assert.That(restored.Seed, Is.EqualTo(999UL));
         Assert.That(restored.Editions, Is.Empty);
         Assert.That(restored.HasUnread, Is.False);
+    }
+
+    [TestCase("Ar em {valor}. Fim", "26 m²/hab.", "Ar em 26 m²/hab. Fim")]
+    [TestCase("Ar em {valor}. Fim", "26 km", "Ar em 26 km. Fim")]
+    [TestCase("{valor} e {valor}", "26 m²/hab.", "26 m²/hab. e 26 m²/hab.")]
+    [TestCase("Ar em {valor}. Fim", "26<size=60%> m²/hab.</size>", "Ar em 26<size=60%> m²/hab.</size> Fim")]
+    [TestCase("Ar em {valor}. Fim", "26<size=60%> km</size>", "Ar em 26<size=60%> km</size>. Fim")]
+    public void FillMarker_DoesNotDoubleTheFinalPeriod(string text, string value, string expected)
+    {
+        Assert.That(NewsEditor.FillMarker(text, "{valor}", value), Is.EqualTo(expected));
+    }
+
+    private static float[][] Series(CityParameterType parameter, params float[] values)
+    {
+        return values.Select(value => Values(50f, (parameter, value))).ToArray();
+    }
+
+    [Test]
+    public void DetectTrends_ThreeTurnsSameDirection_IsATrendWithTheTotalChange()
+    {
+        var signals = NewsEditor.DetectTrends(Series(CityParameterType.Renda, 40f, 43f, 46f, 49f), Rules(), null);
+
+        Assert.That(signals, Has.Count.EqualTo(1));
+        Assert.That(signals[0].Trigger, Is.EqualTo(NewsTrigger.TrendUp));
+        Assert.That(signals[0].Parameter, Is.EqualTo(CityParameterType.Renda));
+        Assert.That(signals[0].Delta, Is.EqualTo(9f));
+        Assert.That(signals[0].Value, Is.EqualTo(49f));
+    }
+
+    [Test]
+    public void DetectTrends_FallingSeries_IsTrendDown()
+    {
+        var signals = NewsEditor.DetectTrends(Series(CityParameterType.Saude, 60f, 57f, 54f, 51f), Rules(), null);
+
+        Assert.That(signals.Single().Trigger, Is.EqualTo(NewsTrigger.TrendDown));
+        Assert.That(signals.Single().Delta, Is.EqualTo(-9f));
+    }
+
+    [TestCase(40f, 43f, 41f, 49f)]
+    [TestCase(40f, 43f, 43f, 49f)]
+    [TestCase(40f, 42f, 44f, 47f)]
+    public void DetectTrends_BrokenOrSmallSeries_IsNotATrend(float a, float b, float c, float d)
+    {
+        Assert.That(NewsEditor.DetectTrends(Series(CityParameterType.Renda, a, b, c, d), Rules(), null), Is.Empty);
+    }
+
+    [Test]
+    public void DetectTrends_TooFewTurns_IsNotATrend()
+    {
+        Assert.That(NewsEditor.DetectTrends(Series(CityParameterType.Renda, 40f, 45f, 50f), Rules(), null), Is.Empty);
+    }
+
+    [Test]
+    public void DetectTrends_SameParameterRecentlyPublished_WaitsFiveEditions()
+    {
+        var trendEdition = new NewsEdition { TurnIndex = 1 };
+        trendEdition.Items.Add(new NewsItem { Trigger = NewsTrigger.TrendDown, Parameter = CityParameterType.Renda });
+        var series = Series(CityParameterType.Renda, 40f, 43f, 46f, 49f);
+
+        Assert.That(NewsEditor.DetectTrends(series, Rules(), new[] { trendEdition }), Is.Empty);
+
+        var editions = new List<NewsEdition> { trendEdition };
+        editions.AddRange(Enumerable.Range(2, NewsEditor.RecentEditions).Select(turn => new NewsEdition { TurnIndex = turn }));
+        Assert.That(NewsEditor.DetectTrends(series, Rules(), editions), Has.Count.EqualTo(1));
+    }
+
+    [Test]
+    public void RecentSnapshots_UsesStartEarlyAndOnlyTheLastTurnsLater()
+    {
+        var start = new[] { 1f };
+        PhaseTurnRecord Turn(int index) => new PhaseTurnRecord { TurnIndex = index, EndValues = new[] { index * 10f } };
+        var turns = Enumerable.Range(1, 5).Select(Turn).ToList();
+
+        Assert.That(NewsEditor.RecentSnapshots(start, turns, turns[0]).Select(values => values[0]), Is.EqualTo(new[] { 1f, 10f }));
+        Assert.That(NewsEditor.RecentSnapshots(start, turns, turns[2]).Select(values => values[0]), Is.EqualTo(new[] { 1f, 10f, 20f, 30f }));
+        Assert.That(NewsEditor.RecentSnapshots(start, turns, turns[4]).Select(values => values[0]), Is.EqualTo(new[] { 20f, 30f, 40f, 50f }));
+    }
+
+    [Test]
+    public void BuildSignals_TurnSignalBeatsTrendOfTheSameParameter_AndTargetsComeLast()
+    {
+        var signals = NewsEditor.BuildSignals(Series(CityParameterType.Renda, 60f, 55f, 50f, 40f), Rules(), null, "CardX", "EventY");
+
+        Assert.That(signals.Select(signal => signal.Trigger), Is.EqualTo(new[] { NewsTrigger.SharpDrop, NewsTrigger.EventHappened, NewsTrigger.CardPlayed }));
+        Assert.That(signals[1].TargetId, Is.EqualTo("EventY"));
+        Assert.That(signals[2].TargetId, Is.EqualTo("CardX"));
+    }
+
+    [Test]
+    public void BuildSignals_TrendOfAnotherParameterIsKept()
+    {
+        var snapshots = Series(CityParameterType.Renda, 40f, 43f, 46f, 49f);
+        snapshots[3][(int)CityParameterType.Saude] = 40f;
+
+        var signals = NewsEditor.BuildSignals(snapshots, Rules(), null, string.Empty, string.Empty);
+
+        Assert.That(signals.Select(signal => signal.Trigger), Is.EqualTo(new[] { NewsTrigger.SharpDrop, NewsTrigger.TrendUp }));
+    }
+
+    private static NewsEdition ComposeTargets(string cardId, string eventId, IReadOnlyList<NewsEdition> previous = null, params FakeStory[] stories)
+    {
+        var signals = NewsEditor.BuildSignals(new[] { Values(), Values() }, Rules(), previous, cardId, eventId);
+        return NewsEditor.Compose(1, signals, stories, previous, new Random(1), 50f, 0f);
+    }
+
+    [Test]
+    public void Compose_QuietTurn_HeadlineIsTheEventThenTheCard()
+    {
+        var card = new FakeStory { Id = "NCard", Trigger = NewsTrigger.CardPlayed, TargetId = "CardX" };
+        var ev = new FakeStory { Id = "NEvent", Trigger = NewsTrigger.EventHappened, TargetId = "EventY" };
+        var quiet = Story("Quiet", NewsTrigger.QuietTurn);
+
+        Assert.That(ComposeTargets("CardX", "EventY", null, card, ev, quiet).Items.Select(item => item.StoryId), Is.EqualTo(new[] { "NEvent", "NCard" }));
+        Assert.That(ComposeTargets("CardX", string.Empty, null, card, ev, quiet).Items.Single().StoryId, Is.EqualTo("NCard"));
+        Assert.That(ComposeTargets("CardX", "EventY", null, card, ev, quiet).Items[0].TargetId, Is.EqualTo("EventY"));
+    }
+
+    [Test]
+    public void Compose_TargetWithoutStory_FallsBackToTheQuietTurn()
+    {
+        var edition = ComposeTargets("CardSemTexto", "EventoSemTexto", null, Story("Quiet", NewsTrigger.QuietTurn));
+
+        Assert.That(edition.Items.Single().StoryId, Is.EqualTo("Quiet"));
+    }
+
+    [Test]
+    public void Compose_StoryOfAnotherCardIsNotUsed()
+    {
+        var other = new FakeStory { Id = "NOther", Trigger = NewsTrigger.CardPlayed, TargetId = "CardZ" };
+
+        Assert.That(ComposeTargets("CardX", string.Empty, null, other, Story("Quiet", NewsTrigger.QuietTurn)).Items.Single().StoryId, Is.EqualTo("Quiet"));
+    }
+
+    [Test]
+    public void Compose_TargetStoryPublishedRecently_DoesNotRepeat()
+    {
+        var card = new FakeStory { Id = "NCard", Trigger = NewsTrigger.CardPlayed, TargetId = "CardX" };
+        var last = new NewsEdition { TurnIndex = 0 };
+        last.Items.Add(new NewsItem { StoryId = "NCard" });
+
+        Assert.That(ComposeTargets("CardX", string.Empty, new[] { last }, card, Story("Quiet", NewsTrigger.QuietTurn)).Items.Single().StoryId, Is.EqualTo("Quiet"));
+    }
+
+    [TestCase(70f, 4, NewsMoodBand.Good)]
+    [TestCase(55f, 3, NewsMoodBand.Good)]
+    [TestCase(54f, 2, NewsMoodBand.Neutral)]
+    [TestCase(40f, 2, NewsMoodBand.Neutral)]
+    [TestCase(39f, 1, NewsMoodBand.Bad)]
+    [TestCase(10f, 0, NewsMoodBand.Bad)]
+    public void MoodLevelAndBand_FollowTheWellbeingRanges(float wellbeing, int level, NewsMoodBand band)
+    {
+        Assert.That(NewsRules.MoodLevel(wellbeing), Is.EqualTo(level));
+        Assert.That(NewsRules.MoodBand(wellbeing), Is.EqualTo(band));
+    }
+
+    [TestCase(25f, NewsMoodBand.Bad)]
+    [TestCase(26f, NewsMoodBand.Neutral)]
+    [TestCase(75f, NewsMoodBand.Good)]
+    public void ForecastBand_UsesTheZoneThresholds(float value, NewsMoodBand band)
+    {
+        Assert.That(Rules().ForecastBand(value), Is.EqualTo(band));
+    }
+
+    private static List<FakeColumn> AllColumns()
+    {
+        var columns = new List<FakeColumn> { new FakeColumn { Id = "Class", Kind = NewsColumnKind.Classified } };
+        foreach (NewsMoodBand band in Enum.GetValues(typeof(NewsMoodBand)))
+        {
+            columns.Add(new FakeColumn { Id = $"Horo{band}", Kind = NewsColumnKind.Horoscope, Mood = band });
+            columns.Add(new FakeColumn { Id = $"Fore{band}", Kind = NewsColumnKind.PollutionForecast, Mood = band });
+            foreach (NewsCitizen citizen in Enum.GetValues(typeof(NewsCitizen)))
+                columns.Add(new FakeColumn { Id = $"Quote{citizen}{band}", Kind = NewsColumnKind.CitizenQuote, Citizen = citizen, Mood = band });
+        }
+        return columns;
+    }
+
+    private static NewsEdition Edition(int turn, float wellbeing, NewsTrigger? trigger = null, CityParameterType parameter = default)
+    {
+        var edition = new NewsEdition { TurnIndex = turn, Wellbeing = wellbeing };
+        if (trigger.HasValue)
+            edition.Items.Add(new NewsItem { Trigger = trigger.Value, Parameter = parameter });
+        return edition;
+    }
+
+    [TestCase(CityParameterType.Saude, NewsCitizen.DonaCida)]
+    [TestCase(CityParameterType.Energia, NewsCitizen.SeuArnaldo)]
+    [TestCase(CityParameterType.Pesquisa, NewsCitizen.Julia)]
+    public void ComposeColumns_CitizenFollowsTheHeadlineParameter(CityParameterType parameter, NewsCitizen citizen)
+    {
+        var edition = Edition(1, 60f, NewsTrigger.SharpDrop, parameter);
+
+        NewsEditor.ComposeColumns(edition, AllColumns(), null, 7UL, 50f, Rules());
+
+        Assert.That(edition.QuoteId, Is.EqualTo($"Quote{citizen}Good"));
+    }
+
+    [Test]
+    public void ComposeColumns_WithoutExpert_CitizensTakeTurns()
+    {
+        var quotes = Enumerable.Range(1, 3).Select(turn =>
+        {
+            var edition = Edition(turn, 50f, NewsTrigger.QuietTurn);
+            NewsEditor.ComposeColumns(edition, AllColumns(), null, 7UL, 50f, Rules());
+            return edition.QuoteId;
+        }).ToList();
+
+        Assert.That(quotes.Distinct().Count(), Is.EqualTo(3));
+        Assert.That(quotes, Has.All.EndsWith("Neutral"));
+    }
+
+    [TestCase(3, 60f, 50f, "Class")]
+    [TestCase(4, 60f, 50f, "HoroGood")]
+    [TestCase(4, 30f, 50f, "HoroBad")]
+    [TestCase(5, 60f, 20f, "ForeBad")]
+    [TestCase(5, 30f, 80f, "ForeGood")]
+    public void ComposeColumns_RotatesKindsAndUsesTheRightBand(int turn, float wellbeing, float sustainability, string expected)
+    {
+        var edition = Edition(turn, wellbeing);
+
+        NewsEditor.ComposeColumns(edition, AllColumns(), null, 7UL, sustainability, Rules());
+
+        Assert.That(edition.ColumnId, Is.EqualTo(expected));
+        Assert.That(edition.ColumnValue, Is.EqualTo(sustainability));
+    }
+
+    [Test]
+    public void ComposeColumns_IsDeterministicAndAvoidsRecentTexts()
+    {
+        var columns = Enumerable.Range(0, 6).Select(i => new FakeColumn { Id = $"C{i}", Kind = NewsColumnKind.Classified }).ToList();
+        var first = Edition(3, 50f);
+        var again = Edition(3, 50f);
+        NewsEditor.ComposeColumns(first, columns, null, 11UL, 50f, Rules());
+        NewsEditor.ComposeColumns(again, columns, null, 11UL, 50f, Rules());
+        Assert.That(again.ColumnId, Is.EqualTo(first.ColumnId));
+
+        var previous = columns.Take(5).Select((column, i) => new NewsEdition { TurnIndex = i, ColumnId = column.Id }).ToList();
+        var next = Edition(6, 50f);
+        NewsEditor.ComposeColumns(next, columns, previous, 11UL, 50f, Rules());
+        Assert.That(next.ColumnId, Is.EqualTo("C5"));
+    }
+
+    [Test]
+    public void ComposeColumns_DoesNotChangeTheStories()
+    {
+        var edition = Edition(1, 50f, NewsTrigger.QuietTurn);
+        var before = edition.Items.Single();
+
+        NewsEditor.ComposeColumns(edition, AllColumns(), null, 7UL, 50f, Rules());
+
+        Assert.That(edition.Items.Single(), Is.SameAs(before));
+    }
+
+    [Test]
+    public void ComposeColumns_NoTexts_LeavesTheAreaEmpty()
+    {
+        var edition = Edition(1, 50f);
+
+        NewsEditor.ComposeColumns(edition, new List<FakeColumn>(), null, 7UL, 50f, Rules());
+
+        Assert.That(edition.QuoteId, Is.Empty);
+        Assert.That(edition.ColumnId, Is.Empty);
+    }
+
+    private static NewsImportFormat.StoryDto ValidStory(string id, string trigger, string target = null)
+    {
+        return new NewsImportFormat.StoryDto { Id = id, Trigger = trigger, HeadlinePt = "M", HeadlineEn = "H", BodyPt = "C", BodyEn = "B", Target = target };
+    }
+
+    private static List<string> ValidateColumn(NewsImportFormat.ColumnDto column)
+    {
+        var file = new NewsImportFormat.FileDto { Stories = new[] { ValidStory("S", "QuietTurn") }, Columns = new[] { column } };
+        return NewsImportFormat.Validate(file);
+    }
+
+    [Test]
+    public void Import_TargetStoryNeedsAKnownTarget()
+    {
+        var cards = new[] { "CardX" };
+        var events = new[] { "EventY" };
+        List<string> Check(NewsImportFormat.StoryDto story) => NewsImportFormat.Validate(new NewsImportFormat.FileDto { Stories = new[] { story } }, cards, events);
+
+        Assert.That(Check(ValidStory("A", "CardPlayed", "CardX")), Is.Empty);
+        Assert.That(Check(ValidStory("A", "EventHappened", "EventY")), Is.Empty);
+        Assert.That(Check(ValidStory("A", "CardPlayed")).Any(error => error.Contains("precisa citar")), Is.True);
+        Assert.That(Check(ValidStory("A", "CardPlayed", "EventY")).Any(error => error.Contains("alvo")), Is.True);
+        Assert.That(Check(ValidStory("A", "QuietTurn", "CardX")).Any(error => error.Contains("nao cita")), Is.True);
+    }
+
+    [Test]
+    public void Import_TrendUsesNoFixedParameterAndLimitsLength()
+    {
+        Assert.That(NewsImportFormat.Validate(new NewsImportFormat.FileDto { Stories = new[] { ValidStory("A", "TrendUp") } }), Is.Empty);
+        var tooLong = ValidStory("A", "TrendUp");
+        tooLong.HeadlinePt = new string('x', NewsImportFormat.MaxHeadlineLength + 1);
+        Assert.That(NewsImportFormat.Validate(new NewsImportFormat.FileDto { Stories = new[] { tooLong } }).Any(error => error.Contains("limite")), Is.True);
+    }
+
+    [Test]
+    public void Import_ValidColumnsPass()
+    {
+        Assert.That(ValidateColumn(new NewsImportFormat.ColumnDto { Id = "Q", Kind = "CitizenQuote", Citizen = "Julia", Mood = "Good", TextPt = "a", TextEn = "b" }), Is.Empty);
+        Assert.That(ValidateColumn(new NewsImportFormat.ColumnDto { Id = "C", Kind = "Classified", TextPt = "a", TextEn = "b" }), Is.Empty);
+        Assert.That(ValidateColumn(new NewsImportFormat.ColumnDto { Id = "F", Kind = "PollutionForecast", Mood = "Bad", TextPt = "em {valor}", TextEn = "at {valor}" }), Is.Empty);
+    }
+
+    [TestCase("Q", "CitizenQuote", "Ninguem", "Good", "a", "morador")]
+    [TestCase("Q", "CitizenQuote", "Julia", "Otimo", "a", "faixa")]
+    [TestCase("C", "Classified", "Julia", "", "a", "morador")]
+    [TestCase("C", "Classified", "", "Good", "a", "faixa")]
+    [TestCase("H", "Horoscope", "", "Good", "em {valor}", "marcador")]
+    [TestCase("F", "PollutionForecast", "", "Good", "em {turno}", "previsao")]
+    [TestCase("X", "Outro", "", "", "a", "tipo")]
+    [TestCase("D", "Classified", "", "", "a \u2014 b", "travessao")]
+    public void Import_InvalidColumnsAreReported(string id, string kind, string citizen, string mood, string text, string message)
+    {
+        var errors = ValidateColumn(new NewsImportFormat.ColumnDto { Id = id, Kind = kind, Citizen = citizen, Mood = mood, TextPt = text, TextEn = text });
+
+        Assert.That(errors.Any(error => error.Contains(message)), Is.True, string.Join("; ", errors));
+    }
+
+    [Test]
+    public void Import_ColumnLengthAndRepeatedIdAreReported()
+    {
+        var tooLong = new NewsImportFormat.ColumnDto { Id = "C", Kind = "Classified", TextPt = new string('x', NewsImportFormat.MaxColumnLength + 1), TextEn = "b" };
+        Assert.That(ValidateColumn(tooLong).Any(error => error.Contains("limite")), Is.True);
+
+        var sameAsStory = new NewsImportFormat.ColumnDto { Id = "S", Kind = "Classified", TextPt = "a", TextEn = "b" };
+        Assert.That(ValidateColumn(sameAsStory).Any(error => error.Contains("repetido")), Is.True);
+    }
+
+    [Test]
+    public void Import_MissingColumnCoverageListsEveryGap()
+    {
+        var file = new NewsImportFormat.FileDto { Stories = new[] { ValidStory("S", "QuietTurn") }, Columns = new[] { new NewsImportFormat.ColumnDto { Id = "C", Kind = "Classified", Citizen = null, Mood = null } } };
+
+        var missing = NewsImportFormat.MissingColumnCoverage(file);
+
+        Assert.That(missing, Does.Not.Contain("Classified"));
+        Assert.That(missing, Has.Member("CitizenQuote/Julia/Bad"));
+        Assert.That(missing, Has.Member("Horoscope/Good"));
+        Assert.That(missing, Has.Member("PollutionForecast/Neutral"));
+    }
+
+    [Test]
+    public void Import_CardAndEventStoriesAreNotRequiredByTheTriggerCoverage()
+    {
+        var missing = NewsImportFormat.MissingCoverage(new NewsImportFormat.FileDto());
+
+        Assert.That(missing, Does.Not.Contain("CardPlayed"));
+        Assert.That(missing, Does.Not.Contain("EventHappened"));
+        Assert.That(missing, Has.Member("TrendUp"));
     }
 }
 

@@ -43,6 +43,7 @@ public enum GameTextEditKind
     Knowledge,
     RelationNote,
     Interface,
+    NewsColumn,
 }
 
 // Trecho do codigo-fonte onde esta um ramo de idioma; so e editavel se for feito apenas de textos.

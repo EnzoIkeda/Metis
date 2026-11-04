@@ -49,6 +49,8 @@ public class NewsRoom : MonoBehaviour
 
     private IReadOnlyList<NewsStoryData> Stories => _library != null ? _library.Stories : Array.Empty<NewsStoryData>();
 
+    private IReadOnlyList<NewsColumnData> Columns => _library != null ? _library.Columns : Array.Empty<NewsColumnData>();
+
     private void PublishInauguration()
     {
         var start = _turnManager.History != null ? _turnManager.History.StartValues : Array.Empty<float>();
@@ -56,13 +58,20 @@ public class NewsRoom : MonoBehaviour
             ? PhaseHistory.Read(start, CityStats.AnchorParameter)
             : _cityStatsManager.Stats.GetValue(CityStats.AnchorParameter);
         var random = NewsEditor.EditionRandom(Archive.Seed, 0);
-        Archive.Add(NewsEditor.Inauguration(Stories, random, wellbeing));
+        var edition = NewsEditor.Inauguration(Stories, random, wellbeing);
+        var sustainability = start.Length == PhaseHistory.Parameters.Length
+            ? PhaseHistory.Read(start, CityParameterType.Sustentabilidade)
+            : _cityStatsManager.Stats.GetValue(CityParameterType.Sustentabilidade);
+        NewsEditor.ComposeColumns(edition, Columns, Archive.Editions, Archive.Seed, sustainability, _rules);
+        Archive.Add(edition);
     }
 
     private void HandleTurnFinished(PhaseTurnRecord turn)
     {
         var before = ValuesBefore(turn);
-        var signals = NewsEditor.DetectSignals(before, turn.EndValues, _rules);
+        var history = _turnManager.History;
+        var snapshots = NewsEditor.RecentSnapshots(history.StartValues, history.Turns, turn);
+        var signals = NewsEditor.BuildSignals(snapshots, _rules, Archive.Editions, turn.CardId, turn.EventId);
         var wellbeing = turn.GetEnd(CityStats.AnchorParameter);
         var wellbeingDelta = before.Length == PhaseHistory.Parameters.Length ? wellbeing - PhaseHistory.Read(before, CityStats.AnchorParameter) : 0f;
         var random = NewsEditor.EditionRandom(Archive.Seed, turn.TurnIndex);
@@ -83,6 +92,7 @@ public class NewsRoom : MonoBehaviour
             }
         }
 
+        NewsEditor.ComposeColumns(edition, Columns, Archive.Editions, Archive.Seed, turn.GetEnd(CityParameterType.Sustentabilidade), _rules);
         Archive.Add(edition);
     }
 

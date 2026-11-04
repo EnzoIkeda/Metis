@@ -10,6 +10,9 @@ public class NewsStoryData : ScriptableObject, INewsStoryDefinition
     // So vale nos gatilhos que dependem de um parametro.
     [SerializeField] private CityParameterType _parameter;
 
+    // Carta ou evento citado, pelo nome do asset; vazio nos outros gatilhos.
+    [SerializeField] private string _targetId;
+
     [SerializeField] private string _headline;
     [SerializeField] private string _headlineEn;
     [SerializeField, TextArea(2, 6)] private string _body;
@@ -20,6 +23,8 @@ public class NewsStoryData : ScriptableObject, INewsStoryDefinition
     public NewsTrigger Trigger => _trigger;
 
     public CityParameterType Parameter => _parameter;
+
+    public string TargetId => _targetId;
 
     public string Headline => Localized(_headline, _headlineEn);
 

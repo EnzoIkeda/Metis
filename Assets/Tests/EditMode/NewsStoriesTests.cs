@@ -17,7 +17,7 @@ public class NewsStoriesTests
             .Select(guid => AssetDatabase.LoadAssetAtPath<NewsStoryData>(AssetDatabase.GUIDToAssetPath(guid)));
     }
 
-    private static string Field(NewsStoryData story, string name)
+    private static string Field(UnityEngine.Object story, string name)
     {
         return new SerializedObject(story).FindProperty(name).stringValue;
     }
@@ -46,9 +46,35 @@ public class NewsStoriesTests
                 HeadlineEn = Field(story, "_headlineEn"),
                 BodyPt = Field(story, "_body"),
                 BodyEn = Field(story, "_bodyEn"),
+                Target = story.TargetId,
             };
             Assert.That(NewsImportFormat.Validate(new NewsImportFormat.FileDto { Stories = new[] { dto } }), Is.Empty, story.name);
         }
+    }
+
+    [Test]
+    public void EveryColumnAsset_IsInTheLibraryAndValidInBothLanguages()
+    {
+        var assets = AssetDatabase.FindAssets("t:NewsColumnData")
+            .Select(guid => AssetDatabase.LoadAssetAtPath<NewsColumnData>(AssetDatabase.GUIDToAssetPath(guid))).ToList();
+        Assert.That(Library.Columns, Is.EquivalentTo(assets));
+
+        var dtos = new List<NewsImportFormat.ColumnDto>();
+        foreach (var column in Library.Columns)
+        {
+            dtos.Add(new NewsImportFormat.ColumnDto
+            {
+                Id = column.name,
+                Kind = column.Kind.ToString(),
+                Citizen = column.Kind == NewsColumnKind.CitizenQuote ? column.Citizen.ToString() : string.Empty,
+                Mood = column.Kind == NewsColumnKind.Classified ? string.Empty : column.Mood.ToString(),
+                TextPt = Field(column, "_text"),
+                TextEn = Field(column, "_textEn"),
+            });
+        }
+        var file = new NewsImportFormat.FileDto { Stories = new[] { new NewsImportFormat.StoryDto { Id = "S", Trigger = "QuietTurn", HeadlinePt = "m", HeadlineEn = "h", BodyPt = "c", BodyEn = "b" } }, Columns = dtos.ToArray() };
+        Assert.That(NewsImportFormat.Validate(file), Is.Empty);
+        Assert.That(NewsImportFormat.MissingColumnCoverage(file), Is.Empty);
     }
 
     [Test]
@@ -57,6 +83,8 @@ public class NewsStoriesTests
         var stories = Library.Stories;
         foreach (NewsTrigger trigger in Enum.GetValues(typeof(NewsTrigger)))
         {
+            if (NewsRules.UsesTarget(trigger))
+                continue;
             if (NewsRules.UsesParameter(trigger) == false)
             {
                 Assert.That(stories.Any(story => story.Trigger == trigger), Is.True, trigger.ToString());

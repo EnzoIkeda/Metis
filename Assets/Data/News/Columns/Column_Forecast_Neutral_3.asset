@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc0deea8ee004ebaa891347377b0f40b, type: 3}
+  m_Name: Column_Forecast_Neutral_3
+  m_EditorClassIdentifier: Metis.Runtime::NewsColumnData
+  _kind: 3
+  _citizen: 0
+  _mood: 1
+  _text: "Sustentabilidade em {valor}, com pancadas isoladas de fuma\xE7a perto das
+    avenidas."
+  _textEn: Sustainability at {valor}, with scattered smoke showers near the avenues.

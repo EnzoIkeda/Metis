@@ -62,6 +62,8 @@ public class TurnManager : MonoBehaviour
     // Pool completo de cartas, exposto pro popup de recompensa de fim de fase sortear opcoes.
     public IReadOnlyList<CardData> CardPool => _cardPool;
 
+    public IReadOnlyList<RandomEventData> EventPool => _eventPool;
+
     // Todas as vantagens passivas cadastradas, exposto pro popup de recompensa sortear opcoes.
     public IReadOnlyList<PassiveAdvantageData> AdvantagePool => _advantagePool;
 

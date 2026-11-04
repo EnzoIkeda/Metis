@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc0deea8ee004ebaa891347377b0f40b, type: 3}
+  m_Name: Column_Horoscope_Bad_2
+  m_EditorClassIdentifier: Metis.Runtime::NewsColumnData
+  _kind: 2
+  _citizen: 0
+  _mood: 0
+  _text: "Marte em conflito com o or\xE7amento. N\xFAmeros da sorte: os que ainda
+    sobraram no caixa."
+  _textEn: 'Mars clashes with the budget. Lucky numbers: whichever are left in the
+    treasury.'

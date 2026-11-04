@@ -10,6 +10,7 @@ public static class NewsStoryImporter
 {
     public const string StoryFolder = "Assets/Data/News";
     public const string LibraryPath = StoryFolder + "/NewsLibrary.asset";
+    public const string ColumnFolder = StoryFolder + "/Columns";
 
     [MenuItem("Tools/Metis/Educacao/Importar Jornal...")]
     private static void ImportFromMenu()
@@ -42,7 +43,7 @@ public static class NewsStoryImporter
         var report = new Report();
         var file = JsonUtility.FromJson<NewsImportFormat.FileDto>(File.ReadAllText(jsonPath));
 
-        report.Errors.AddRange(NewsImportFormat.Validate(file));
+        report.Errors.AddRange(NewsImportFormat.Validate(file, AssetNames("t:CardData"), AssetNames("t:RandomEventData")));
         foreach (var error in report.Errors)
             Debug.LogError($"[Jornal] {error}");
         if (report.Errors.Count > 0)
@@ -50,6 +51,8 @@ public static class NewsStoryImporter
 
         foreach (var missing in NewsImportFormat.MissingCoverage(file))
             report.Warnings.Add($"sem noticia para {missing}");
+        foreach (var missing in NewsImportFormat.MissingColumnCoverage(file))
+            report.Warnings.Add($"sem secao para {missing}");
 
         if (apply && AssetDatabase.IsValidFolder(StoryFolder) == false)
             AssetDatabase.CreateFolder("Assets/Data", "News");
@@ -80,6 +83,7 @@ public static class NewsStoryImporter
         }
 
         ApplyLibrary(stories, file.Stories.Length, report, apply);
+        ApplyColumns(file.Columns ?? System.Array.Empty<NewsImportFormat.ColumnDto>(), report, apply);
 
         foreach (var warning in report.Warnings)
             Debug.LogWarning($"[Jornal] {warning}");
@@ -88,6 +92,64 @@ public static class NewsStoryImporter
         if (apply)
             AssetDatabase.SaveAssets();
         return report;
+    }
+
+    private static HashSet<string> AssetNames(string filter)
+    {
+        return new HashSet<string>(AssetDatabase.FindAssets(filter, new[] { "Assets/Data" })
+            .Select(guid => Path.GetFileNameWithoutExtension(AssetDatabase.GUIDToAssetPath(guid))));
+    }
+
+    private static void ApplyColumns(NewsImportFormat.ColumnDto[] dtos, Report report, bool apply)
+    {
+        if (apply && dtos.Length > 0 && AssetDatabase.IsValidFolder(ColumnFolder) == false)
+            AssetDatabase.CreateFolder(StoryFolder, "Columns");
+
+        var columns = new List<NewsColumnData>();
+        foreach (var dto in dtos)
+        {
+            var path = $"{ColumnFolder}/{dto.Id}.asset";
+            var asset = AssetDatabase.LoadAssetAtPath<NewsColumnData>(path);
+            if (asset == null)
+            {
+                report.Changes.Add($"nova secao {dto.Id}");
+                if (apply == false)
+                    continue;
+                asset = ScriptableObject.CreateInstance<NewsColumnData>();
+                AssetDatabase.CreateAsset(asset, path);
+            }
+
+            var so = new SerializedObject(asset);
+            KnowledgeImportFormat.TryParse<NewsColumnKind>(dto.Kind, out var kind);
+            KnowledgeImportFormat.TryParse<NewsCitizen>(dto.Citizen, out var citizen);
+            KnowledgeImportFormat.TryParse<NewsMoodBand>(dto.Mood, out var mood);
+            SetEnum(so, "_kind", (int)kind, dto.Id, report);
+            SetEnum(so, "_citizen", (int)citizen, dto.Id, report);
+            SetEnum(so, "_mood", (int)mood, dto.Id, report);
+            SetString(so, "_text", dto.TextPt, dto.Id, report);
+            SetString(so, "_textEn", dto.TextEn, dto.Id, report);
+            if (apply)
+                so.ApplyModifiedPropertiesWithoutUndo();
+            columns.Add(asset);
+        }
+
+        var library = AssetDatabase.LoadAssetAtPath<NewsLibraryData>(LibraryPath);
+        if (library == null)
+            return;
+        var libraryObject = new SerializedObject(library);
+        var property = libraryObject.FindProperty("_columns");
+        var differ = columns.Count != dtos.Length || property.arraySize != columns.Count;
+        for (var i = 0; i < columns.Count && differ == false; i++)
+            differ = property.GetArrayElementAtIndex(i).objectReferenceValue != columns[i];
+        if (differ == false)
+            return;
+
+        report.Changes.Add("biblioteca do jornal: lista de secoes");
+        property.arraySize = columns.Count;
+        for (var i = 0; i < columns.Count; i++)
+            property.GetArrayElementAtIndex(i).objectReferenceValue = columns[i];
+        if (apply)
+            libraryObject.ApplyModifiedPropertiesWithoutUndo();
     }
 
     private static void ApplyStory(NewsImportFormat.StoryDto dto, NewsStoryData asset, Report report, bool apply)
@@ -99,6 +161,7 @@ public static class NewsStoryImporter
         if (NewsRules.UsesParameter(trigger))
             KnowledgeImportFormat.TryParse(dto.Parameter, out parameter);
         SetEnum(so, "_parameter", (int)parameter, dto.Id, report);
+        SetString(so, "_targetId", dto.Target, dto.Id, report);
         SetString(so, "_headline", dto.HeadlinePt, dto.Id, report);
         SetString(so, "_headlineEn", dto.HeadlineEn, dto.Id, report);
         SetString(so, "_body", dto.BodyPt, dto.Id, report);

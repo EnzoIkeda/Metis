@@ -15,6 +15,9 @@ public class NewspaperView : MonoBehaviour
     // Abre o "Por que mudou?" do parametro da manchete, so na edicao mais recente.
     [SerializeField] private ChangeBreakdownPopupView _breakdownPopup;
 
+    // Abre a ficha da carta ou do evento citado na edicao.
+    [SerializeField] private KnowledgePopupView _knowledgePopup;
+
     [SerializeField] private Button _openButton;
     [SerializeField] private RectTransform _badge;
     [SerializeField] private float _pulseSpeed = 6f;
@@ -32,7 +35,13 @@ public class NewspaperView : MonoBehaviour
 
     // Linha entre a manchete e as notas, escondida quando a edicao nao tem nota.
     [SerializeField] private GameObject _notesDivider;
+    // Linha acima da fala e da secao, escondida quando a edicao nao tem nenhuma.
+    [SerializeField] private GameObject _columnsDivider;
+    [SerializeField] private TMP_Text _quoteText;
+    [SerializeField] private TMP_Text _columnTitleText;
+    [SerializeField] private TMP_Text _columnText;
     [SerializeField] private Button _whyButton;
+    [SerializeField] private Button _learnMoreButton;
     [SerializeField] private Button _previousButton;
     [SerializeField] private Button _nextButton;
     [SerializeField] private Button _closeButton;
@@ -57,6 +66,8 @@ public class NewspaperView : MonoBehaviour
             _nextButton.onClick.AddListener(() => ShowEdition(_shownIndex + 1));
         if (_whyButton != null)
             _whyButton.onClick.AddListener(OpenBreakdown);
+        if (_learnMoreButton != null)
+            _learnMoreButton.onClick.AddListener(OpenKnowledge);
         LocalizationManager.OnLanguageChanged += HandleLanguageChanged;
 
         Hide();
@@ -134,6 +145,8 @@ public class NewspaperView : MonoBehaviour
         SetButtonLabel(_nextButton, UIStrings.NewsNextButton);
         SetButtonLabel(_closeButton, UIStrings.NewsCloseButton);
         SetButtonLabel(_whyButton, UIStrings.NewsWhyButton);
+        SetButtonLabel(_learnMoreButton, UIStrings.NewsLearnMoreButton);
+        ShowColumns(edition);
         if (_previousButton != null)
             _previousButton.interactable = _shownIndex > 0;
         if (_nextButton != null)
@@ -150,6 +163,8 @@ public class NewspaperView : MonoBehaviour
                 _notesDivider.SetActive(false);
             if (_whyButton != null)
                 _whyButton.gameObject.SetActive(false);
+            if (_learnMoreButton != null)
+                _learnMoreButton.gameObject.SetActive(false);
             return;
         }
 
@@ -182,6 +197,67 @@ public class NewspaperView : MonoBehaviour
 
         if (_whyButton != null)
             _whyButton.gameObject.SetActive(CanExplain(edition, headline));
+        if (_learnMoreButton != null)
+            _learnMoreButton.gameObject.SetActive(_knowledgePopup != null && TargetEntry(edition) != null);
+    }
+
+    // Fala do morador e secao curta; save antigo vem sem elas, e a area some.
+    private void ShowColumns(NewsEdition edition)
+    {
+        var library = _newsRoom != null ? _newsRoom.Library : null;
+        var quote = edition != null && library != null ? library.FindColumn(edition.QuoteId) : null;
+        var column = edition != null && library != null ? library.FindColumn(edition.ColumnId) : null;
+
+        SetOptional(_quoteText, quote != null ? UIStrings.NewsCitizenQuote(quote.Citizen, quote.Text) : string.Empty);
+        SetOptional(_columnTitleText, column != null ? UIStrings.NewsColumnTitle(column.Kind) : string.Empty);
+        SetOptional(_columnText, column != null ? FillColumn(column, edition) : string.Empty);
+        if (_columnsDivider != null)
+            _columnsDivider.SetActive(quote != null || column != null);
+    }
+
+    private string FillColumn(NewsColumnData column, NewsEdition edition)
+    {
+        var value = _displayData != null
+            ? _displayData.FormatValue(CityParameterType.Sustentabilidade, edition.ColumnValue, smallUnit: true)
+            : edition.ColumnValue.ToString("0.0");
+        return NewsEditor.FillMarker(column.Text, "{valor}", value);
+    }
+
+    // Ficha da primeira carta ou evento citado na edicao.
+    private KnowledgeEntryData TargetEntry(NewsEdition edition)
+    {
+        if (_turnManager == null)
+            return null;
+        foreach (var item in edition.Items)
+        {
+            if (item.Trigger == NewsTrigger.CardPlayed)
+            {
+                foreach (var card in _turnManager.CardPool)
+                {
+                    if (card != null && card.name == item.TargetId)
+                        return card.KnowledgeEntry;
+                }
+            }
+            else if (item.Trigger == NewsTrigger.EventHappened)
+            {
+                foreach (var randomEvent in _turnManager.EventPool)
+                {
+                    if (randomEvent != null && randomEvent.name == item.TargetId)
+                        return randomEvent.KnowledgeEntry;
+                }
+            }
+        }
+        return null;
+    }
+
+    private void OpenKnowledge()
+    {
+        var edition = _shownIndex >= 0 ? Archive.Editions[_shownIndex] : null;
+        var entry = edition != null ? TargetEntry(edition) : null;
+        if (entry == null)
+            return;
+        Hide();
+        _knowledgePopup.Show(entry);
     }
 
     // O "Por que mudou?" so conhece o ultimo turno.
@@ -217,9 +293,7 @@ public class NewspaperView : MonoBehaviour
         var change = _displayData != null
             ? _displayData.FormatAmount(item.Parameter, Math.Abs(item.Delta), smallUnit: true, extraDecimals: 1)
             : Math.Abs(item.Delta).ToString("0.0");
-        return text
-            .Replace("{valor}", value)
-            .Replace("{variacao}", change)
+        return NewsEditor.FillMarker(NewsEditor.FillMarker(text, "{valor}", value), "{variacao}", change)
             .Replace("{turno}", turnIndex.ToString())
             .Replace("{parametro}", item.Parameter.GetFullName());
     }
@@ -228,6 +302,15 @@ public class NewspaperView : MonoBehaviour
     {
         if (target != null)
             target.text = text;
+    }
+
+    // Texto vazio esconde o campo, para o espaco nao ficar reservado.
+    private static void SetOptional(TMP_Text target, string text)
+    {
+        if (target == null)
+            return;
+        target.text = text;
+        target.gameObject.SetActive(string.IsNullOrEmpty(text) == false);
     }
 
     private static void SetButtonLabel(Button button, string text)

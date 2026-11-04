@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc0deea8ee004ebaa891347377b0f40b, type: 3}
+  m_Name: Column_Quote_DonaCida_Neutral_3
+  m_EditorClassIdentifier: Metis.Runtime::NewsColumnData
+  _kind: 0
+  _citizen: 0
+  _mood: 1
+  _text: "A cidade anda morna, igual p\xE3o de ontem. Ainda d\xE1 para aproveitar,
+    com um pouco de manteiga."
+  _textEn: The city feels lukewarm, like yesterday's bread. Still good, with a little
+    butter.

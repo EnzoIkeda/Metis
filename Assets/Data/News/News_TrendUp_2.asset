@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_TrendUp_2
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 10
+  _parameter: 0
+  _targetId: 
+  _headline: "Tr\xEAs turnos de alta em {parametro}"
+  _headlineEn: Three turns of gains in {parametro}
+  _body: "Subiu {variacao} em sequ\xEAncia, e a prefeitura j\xE1 estuda como levar
+    o cr\xE9dito."
+  _bodyEn: Up {variacao} in a row, and City Hall is already studying how to take
+    the credit.

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Card_ZonaDeProcessamentoDeExportacao
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 12
+  _parameter: 0
+  _targetId: CardZonaDeProcessamentoDeExportacao
+  _headline: "Zona de imposto baixo atrai f\xE1bricas exportadoras"
+  _headlineEn: Low-tax zone draws export factories
+  _body: "A mercadoria embarca e o benef\xEDcio fiscal fica no contrato. O vereador
+    Josu\xE9 exige um mapa de quem ganha o qu\xEA."
+  _bodyEn: "The goods ship out, the tax break stays in the contract. Councilman Josu\xE9
+    demands a map of who gets what."

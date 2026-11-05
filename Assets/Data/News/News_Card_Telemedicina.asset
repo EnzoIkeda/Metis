@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Card_Telemedicina
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 12
+  _parameter: 0
+  _targetId: CardTelemedicina
+  _headline: "Especialista atende por v\xEDdeo"
+  _headlineEn: Specialists now see patients by video
+  _body: "Consulta e laudo a dist\xE2ncia chegam aonde n\xE3o h\xE1 m\xE9dico da
+    \xE1rea. Dona Cida arrumou o cabelo antes de ligar a c\xE2mera."
+  _bodyEn: Remote visits and reports reach places without that specialty. Mrs. Cida
+    did her hair before turning on the camera.

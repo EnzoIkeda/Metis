@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Event_RepasseFederal
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 13
+  _parameter: 0
+  _targetId: EventRepasseFederal
+  _headline: "Repasse extraordin\xE1rio cai na conta da cidade"
+  _headlineEn: Special federal grant lands in the city's account
+  _body: "Verba federal para investimento urbano. O tesoureiro conferiu o extrato
+    tr\xEAs vezes antes de sorrir."
+  _bodyEn: Federal funds for urban investment. The treasurer checked the statement
+    three times before smiling.

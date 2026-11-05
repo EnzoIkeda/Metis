@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Card_IncubadoraDeStartups
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 12
+  _parameter: 0
+  _targetId: CardIncubadoraDeStartups
+  _headline: "Incubadora abriga empresas rec\xE9m-nascidas"
+  _headlineEn: Incubator takes in newborn companies
+  _body: "Espa\xE7o, mentoria e contatos para startups em seus primeiros passos.
+    J\xFAlia j\xE1 tem um plano de neg\xF3cios e nenhum neg\xF3cio."
+  _bodyEn: "Space, mentoring and contacts for startups taking first steps. J\xFAlia
+    already has a business plan, just no business."

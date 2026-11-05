@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Card_ParqueEolico
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 12
+  _parameter: 0
+  _targetId: CardParqueEolico
+  _headline: "Vento come\xE7a a trabalhar para a prefeitura"
+  _headlineEn: The wind goes to work for City Hall
+  _body: "Turbinas geram eletricidade sem queimar combust\xEDvel. O vereador Josu\xE9,
+    que fala ao vento h\xE1 tempos, ofereceu consultoria."
+  _bodyEn: "Turbines generate power without burning fuel. Councilman Josu\xE9, an
+    expert in hot air, offered to consult."

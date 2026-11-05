@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Card_SimbioseIndustrial
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 12
+  _parameter: 0
+  _targetId: CardSimbioseIndustrial(EconomiaCircular)
+  _headline: "O resto de uma f\xE1brica vira almo\xE7o da vizinha"
+  _headlineEn: One factory's leftovers become its neighbor's lunch
+  _body: "Res\xEDduo e calor que sobram viram insumo ao lado. Dona Cida quer saber
+    se o forno da padaria entra no acordo."
+  _bodyEn: Waste and spare heat become input next door. Mrs. Cida wants to know if
+    the bakery oven can join the deal.

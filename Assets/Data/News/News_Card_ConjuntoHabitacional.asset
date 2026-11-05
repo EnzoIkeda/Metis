@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Card_ConjuntoHabitacional
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 12
+  _parameter: 0
+  _targetId: CardConjuntoHabitacional
+  _headline: "Conjunto novo tira fam\xEDlias de \xE1reas de risco"
+  _headlineEn: New housing moves families out of risky areas
+  _body: "Moradia em escala reduz o d\xE9ficit, e a cidade ganha moradores e demanda.
+    A prefeitura j\xE1 procura mais \xF4nibus."
+  _bodyEn: Housing at scale shrinks the shortage, and the city gains residents and
+    demand. City Hall is now hunting for more buses.

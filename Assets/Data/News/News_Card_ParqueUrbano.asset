@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Card_ParqueUrbano
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 12
+  _parameter: 0
+  _targetId: CardParqueUrbano
+  _headline: "Parque novo d\xE1 sombra e segura a chuva"
+  _headlineEn: New park offers shade and holds the rain
+  _body: "Al\xE9m do lazer, muitos parques guardam \xE1gua e evitam enchentes. Os
+    pombos da cidade aprovaram por unanimidade."
+  _bodyEn: Besides leisure, many parks store water and prevent floods. The city's
+    pigeons approved it unanimously.

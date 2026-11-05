@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Card_UsinaTermica
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 12
+  _parameter: 0
+  _targetId: CardUsinaTermica
+  _headline: "T\xE9rmica garante a luz, e o c\xE9u paga a conta"
+  _headlineEn: Thermal plant keeps the lights on; the sky pays
+  _body: "Queimando g\xE1s, carv\xE3o ou \xF3leo, a usina liga a qualquer hora. J\xFAlia
+    p\xF4s o sensor na janela e depois fechou a janela."
+  _bodyEn: "Burning gas, coal or oil, it can start at any hour. J\xFAlia put her
+    sensor on the windowsill, then closed the window."

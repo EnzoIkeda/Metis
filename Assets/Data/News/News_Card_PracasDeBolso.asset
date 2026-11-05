@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Card_PracasDeBolso
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 12
+  _parameter: 0
+  _targetId: CardPracasDeBolso
+  _headline: "Pra\xE7a pequena, conversa grande"
+  _headlineEn: Small plaza, big conversations
+  _body: "Bancos, sombra e algo para ver atraem gente muito al\xE9m do tamanho. Seu
+    Arnaldo montou ali um ponto de t\xE1xi imagin\xE1rio."
+  _bodyEn: Benches, shade and something to watch draw people far beyond its size.
+    Arnaldo has set up an imaginary taxi stand there.

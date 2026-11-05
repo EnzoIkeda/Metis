@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Event_EpidemiaDeGolpesDigitais
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 13
+  _parameter: 0
+  _targetId: EventEpidemiaDeGolpesDigitais
+  _headline: "Golpes digitais se espalham pelos novos servi\xE7os"
+  _headlineEn: Digital scams spread through the new services
+  _body: "A fraude cresce junto com o servi\xE7o on-line, e a culpa n\xE3o \xE9 de
+    quem foi enganado. A prefeitura promete refor\xE7ar os avisos."
+  _bodyEn: Fraud grows along with online services, and victims aren't to blame. City
+    Hall promises stronger warnings.

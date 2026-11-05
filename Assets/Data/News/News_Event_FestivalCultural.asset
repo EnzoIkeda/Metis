@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Event_FestivalCultural
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 13
+  _parameter: 0
+  _targetId: EventFestivalCultural
+  _headline: Festival de rua lota o centro
+  _headlineEn: Street festival packs downtown
+  _body: "Turistas, com\xE9rcio e orgulho local em alta. Dona Cida acabou com o estoque
+    e seu Arnaldo, com a paci\xEAncia."
+  _bodyEn: Tourists, commerce and local pride on the rise. Mrs. Cida ran out of stock,
+    and Arnaldo out of patience.

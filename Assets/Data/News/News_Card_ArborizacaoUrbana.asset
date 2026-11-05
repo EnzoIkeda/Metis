@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Card_ArborizacaoUrbana
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 12
+  _parameter: 0
+  _targetId: CardArborizacaoUrbana
+  _headline: "\xC1rvores assumem o turno da sombra"
+  _headlineEn: Trees take over the shade shift
+  _body: "Rua arborizada fica v\xE1rios graus mais fresca. Seu Arnaldo j\xE1 planeja
+    uma rota para estacionar embaixo de cada uma."
+  _bodyEn: A tree-lined street runs several degrees cooler. Arnaldo is already plotting
+    a route to park under every one.

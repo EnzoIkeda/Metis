@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Card_HabitacaoModularVerde
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 12
+  _parameter: 0
+  _targetId: CardHabitacaoModularVerde
+  _headline: "Pr\xE9dio chega em pe\xE7as e sobe mais r\xE1pido"
+  _headlineEn: Building arrives in pieces, goes up faster
+  _body: "M\xF3dulos feitos em f\xE1brica desperdi\xE7am menos material que a obra
+    tradicional. Seu Arnaldo pergunta se vem com manual."
+  _bodyEn: Factory-made modules waste less material than traditional construction.
+    Arnaldo asks if it comes with a manual.

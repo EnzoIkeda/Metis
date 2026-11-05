@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Card_EscolaTecnica
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 12
+  _parameter: 0
+  _targetId: CardEscolaTecnica
+  _headline: "Escola t\xE9cnica forma gente para o que a cidade procura"
+  _headlineEn: Technical school trains people for jobs the city needs
+  _body: "O curso prepara profissionais para as fun\xE7\xF5es que a economia local
+    pede. J\xFAlia avisa que a frente da fila do laborat\xF3rio \xE9 dela."
+  _bodyEn: "Courses prepare workers for what the local economy asks for. J\xFAlia
+    warns that the front of the lab line is hers."

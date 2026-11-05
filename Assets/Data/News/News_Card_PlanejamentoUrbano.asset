@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Card_PlanejamentoUrbano
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 12
+  _parameter: 0
+  _targetId: CardPlanejamentoUrbano
+  _headline: Prefeitura decide planejar antes de correr
+  _headlineEn: City Hall decides to plan before it runs
+  _body: "Decidir com anteced\xEAncia onde morar, trabalhar e circular evita remendo.
+    A mesa da secretaria nunca viu tanto mapa."
+  _bodyEn: Deciding ahead where to live, work and move saves on patches. The department's
+    table has never seen so many maps.

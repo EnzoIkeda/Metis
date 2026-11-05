@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Card_AnaliseDeDados
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 12
+  _parameter: 0
+  _targetId: CardAnaliseDeDados
+  _headline: "Prefeitura descobre que j\xE1 tinha os dados"
+  _headlineEn: City Hall discovers it already had the data
+  _body: "Cruzando o que estava guardado, a gest\xE3o agora sabe onde agir antes
+    da reclama\xE7\xE3o chegar. J\xFAlia pede uma c\xF3pia da planilha."
+  _bodyEn: "By cross-checking what sat in storage, officials now know where to act
+    before complaints arrive. J\xFAlia wants a copy."

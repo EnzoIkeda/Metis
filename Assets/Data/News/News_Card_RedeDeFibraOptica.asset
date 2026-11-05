@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Card_RedeDeFibraOptica
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 12
+  _parameter: 0
+  _targetId: CardRedeDeFibraOptica
+  _headline: Fibra chega e a desculpa da internet acaba
+  _headlineEn: Fiber arrives, the internet excuse ends
+  _body: "Internet r\xE1pida sustenta servi\xE7os digitais e trabalho remoto. O vereador
+    Josu\xE9 agora precisa de outro motivo para cair da reuni\xE3o."
+  _bodyEn: "Fast internet underpins digital services and remote work. Councilman
+    Josu\xE9 needs a new reason to drop out of meetings."

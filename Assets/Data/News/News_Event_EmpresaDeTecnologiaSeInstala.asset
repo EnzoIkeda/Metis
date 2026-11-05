@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Event_EmpresaDeTecnologiaSeInstala
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 13
+  _parameter: 0
+  _targetId: EventEmpresaDeTecnologiaSeInstala
+  _headline: Grande empresa de tecnologia instala sede na cidade
+  _headlineEn: Big tech company sets up headquarters here
+  _body: "Chegam empregos qualificados e arrecada\xE7\xE3o. A placa na fachada \xE9
+    maior que a da prefeitura, e ningu\xE9m comenta."
+  _bodyEn: Skilled jobs and revenue arrive. The sign out front is bigger than City
+    Hall's, and nobody mentions it.

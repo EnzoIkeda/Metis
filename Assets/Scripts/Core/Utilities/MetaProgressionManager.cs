@@ -44,6 +44,8 @@ public static class MetaProgressionManager
 
     public static int PhasesCompleted => State.PhasesCompleted;
 
+    public static string CurrentTheme => State.CurrentTheme;
+
     // A primeira fase de uma rodada usa a cidade e os parametros calibrados fixos; da segunda em diante e semialeatorio.
     public static bool IsNewPhase => State.PhasesCompleted > 0;
 
@@ -89,6 +91,20 @@ public static class MetaProgressionManager
         if (State.LoadedAdvantageNames.Contains(advantageName) == false)
             State.LoadedAdvantageNames.Add(advantageName);
         Write();
+    }
+
+    // Destinos da parada atual, sorteados uma vez so.
+    public static IReadOnlyList<PhaseMapNode> GetMapOffer(IReadOnlyList<string> themeNames, System.Random random)
+    {
+        Save.MapOffer = PhaseMapProvider.ResolveOffer(Save.MapOffer, themeNames, State.PlayedThemes, random);
+        Write();
+        return Save.MapOffer;
+    }
+
+    public static void ChooseMapNode(PhaseMapNode node)
+    {
+        RunSaveRules.ApplyMapChoice(Save, node);
+        IncrementPhasesCompleted();
     }
 
     // Sai do mapa pra proxima fase, que comeca do zero.

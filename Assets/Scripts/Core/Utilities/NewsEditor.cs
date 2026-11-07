@@ -119,7 +119,7 @@ public class NewsEdition
 public sealed class NewsRules
 {
     // Variacao no turno, no indice, a partir da qual a alta ou a queda vira noticia.
-    public const float DefaultSharpChange = 6f;
+    public const float DefaultSharpChange = 8f;
 
     // Variacao total, no indice, a partir da qual uma sequencia de turnos vira tendencia.
     public const float DefaultTrendChange = 8f;
@@ -168,6 +168,12 @@ public sealed class NewsRules
     public static bool UsesTarget(NewsTrigger trigger)
     {
         return trigger == NewsTrigger.CardPlayed || trigger == NewsTrigger.EventHappened;
+    }
+
+    // O que precisa sair mesmo sem texto novo: o alerta forte e a edicao sem nenhum outro assunto.
+    public static bool MayRepeat(NewsTrigger trigger)
+    {
+        return IsStrong(trigger) || trigger == NewsTrigger.QuietTurn;
     }
 
     // Faixa de 0 (pior) a 4 (melhor) do humor da populacao.
@@ -374,7 +380,10 @@ public static class NewsEditor
             if (byPriority != 0)
                 return byPriority;
             var byDelta = Math.Abs(b.Delta).CompareTo(Math.Abs(a.Delta));
-            return byDelta != 0 ? byDelta : a.Parameter.CompareTo(b.Parameter);
+            if (byDelta != 0)
+                return byDelta;
+            var byParameter = a.Parameter.CompareTo(b.Parameter);
+            return byParameter != 0 ? byParameter : string.CompareOrdinal(a.TargetId, b.TargetId);
         });
     }
 
@@ -444,7 +453,7 @@ public static class NewsEditor
     }
 
     // Tudo o que pode virar noticia no turno: sinais do turno, tendencias de parametros ainda sem sinal, evento e carta.
-    public static List<NewsSignal> BuildSignals(IReadOnlyList<float[]> snapshots, NewsRules rules, IReadOnlyList<NewsEdition> previous, string cardId, string eventId)
+    public static List<NewsSignal> BuildSignals(IReadOnlyList<float[]> snapshots, NewsRules rules, IReadOnlyList<NewsEdition> previous, string cardId, string eventId, IReadOnlyList<string> freeActionIds = null)
     {
         var count = snapshots != null ? snapshots.Count : 0;
         var signals = count >= 2 ? DetectSignals(snapshots[count - 2], snapshots[count - 1], rules) : new List<NewsSignal>();
@@ -457,6 +466,16 @@ public static class NewsEditor
             signals.Add(new NewsSignal { Trigger = NewsTrigger.EventHappened, Priority = NewsRules.BasePriority(NewsTrigger.EventHappened), TargetId = eventId });
         if (string.IsNullOrEmpty(cardId) == false)
             signals.Add(new NewsSignal { Trigger = NewsTrigger.CardPlayed, Priority = NewsRules.BasePriority(NewsTrigger.CardPlayed), TargetId = cardId });
+
+        // Acao livre tambem e carta jogada, mas cede a vaga para a jogada do turno.
+        if (freeActionIds != null)
+        {
+            foreach (var freeAction in freeActionIds)
+            {
+                if (string.IsNullOrEmpty(freeAction) == false)
+                    signals.Add(new NewsSignal { Trigger = NewsTrigger.CardPlayed, Priority = NewsRules.BasePriority(NewsTrigger.CardPlayed) - 1, TargetId = freeAction });
+            }
+        }
         SortSignals(signals);
         return signals;
     }
@@ -492,6 +511,22 @@ public static class NewsEditor
         }
 
         edition.Strong = edition.Items.Count > 0 && NewsRules.IsStrong(edition.Items[0].Trigger);
+        return edition;
+    }
+
+    // Edicao de um turno encerrado: a mesma sequencia no jogo e no simulador.
+    public static NewsEdition EditionForTurn<TStory, TColumn>(PhaseHistory history, PhaseTurnRecord turn, NewsRules rules, NewsArchive archive,
+        IReadOnlyList<TStory> stories, IReadOnlyList<TColumn> columns)
+        where TStory : class, INewsStoryDefinition
+        where TColumn : class, INewsColumnDefinition
+    {
+        var snapshots = RecentSnapshots(history.StartValues, history.Turns, turn);
+        var signals = BuildSignals(snapshots, rules, archive.Editions, turn.CardId, turn.EventId, turn.FreeActionIds);
+        var before = snapshots.Count >= 2 ? snapshots[snapshots.Count - 2] : null;
+        var wellbeing = turn.GetEnd(CityStats.AnchorParameter);
+        var wellbeingDelta = before != null && before.Length == PhaseHistory.Parameters.Length ? wellbeing - PhaseHistory.Read(before, CityStats.AnchorParameter) : 0f;
+        var edition = Compose(turn.TurnIndex, signals, stories, archive.Editions, EditionRandom(archive.Seed, turn.TurnIndex), wellbeing, wellbeingDelta);
+        ComposeColumns(edition, columns, archive.Editions, archive.Seed, turn.GetEnd(CityParameterType.Sustentabilidade), rules);
         return edition;
     }
 
@@ -540,8 +575,8 @@ public static class NewsEditor
                 fresh.Add(story);
         }
 
-        // Carta ou evento tem texto proprio: repetido ha pouco, fica de fora e nao ocupa a vaga.
-        var pool = fresh.Count > 0 || NewsRules.UsesTarget(trigger) ? fresh : any;
+        // Noticia repetida ha pouco fica de fora e libera a vaga; so manchete forte e turno tranquilo repetem por falta de outra.
+        var pool = fresh.Count > 0 || NewsRules.MayRepeat(trigger) == false ? fresh : any;
         return pool.Count == 0 ? null : pool[random.Next(pool.Count)];
     }
 

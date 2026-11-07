@@ -10,5 +10,6 @@ public enum SoundEffect
     EventNegative,
     Victory,
     Defeat,
-    ParameterCollapse
+    ParameterCollapse,
+    NewspaperPage
 }

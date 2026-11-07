@@ -410,6 +410,67 @@ public class NewsEditorTests
         Assert.That(ComposeTargets("CardX", string.Empty, new[] { last }, card, Story("Quiet", NewsTrigger.QuietTurn)).Items.Single().StoryId, Is.EqualTo("Quiet"));
     }
 
+    [Test]
+    public void Compose_CommonStoryPublishedRecently_FreesTheSlot()
+    {
+        var rise = new FakeStory { Id = "Rise", Trigger = NewsTrigger.SharpRise, Parameter = CityParameterType.Pesquisa };
+        var card = new FakeStory { Id = "NCard", Trigger = NewsTrigger.CardPlayed, TargetId = "CardX" };
+        var last = new NewsEdition { TurnIndex = 1, Items = { new NewsItem { StoryId = "Rise" } } };
+        var signals = new List<NewsSignal>
+        {
+            new NewsSignal { Trigger = NewsTrigger.SharpRise, Parameter = CityParameterType.Pesquisa, Priority = 50 },
+            new NewsSignal { Trigger = NewsTrigger.CardPlayed, TargetId = "CardX", Priority = 30 },
+        };
+
+        var edition = NewsEditor.Compose(2, signals, new List<FakeStory> { rise, card }, new[] { last }, new Random(0), 50f, 0f);
+
+        Assert.That(edition.Items.Select(item => item.StoryId), Is.EqualTo(new[] { "NCard" }));
+    }
+
+    [Test]
+    public void Compose_StrongStoryPublishedRecently_StillRuns()
+    {
+        var crisis = new FakeStory { Id = "Crisis", Trigger = NewsTrigger.EnteredCrisis, Parameter = CityParameterType.Renda };
+        var last = new NewsEdition { TurnIndex = 1, Items = { new NewsItem { StoryId = "Crisis" } } };
+        var signals = new List<NewsSignal> { new NewsSignal { Trigger = NewsTrigger.EnteredCrisis, Parameter = CityParameterType.Renda, Priority = 70 } };
+
+        var edition = NewsEditor.Compose(2, signals, new List<FakeStory> { crisis }, new[] { last }, new Random(0), 50f, 0f);
+
+        Assert.That(edition.Items.Single().StoryId, Is.EqualTo("Crisis"));
+        Assert.That(edition.Strong, Is.True);
+    }
+
+    [Test]
+    public void BuildSignals_FreeActionComesAfterThePlayedCard()
+    {
+        var quiet = new[] { Values(), Values() };
+
+        var signals = NewsEditor.BuildSignals(quiet, Rules(), null, "CardX", string.Empty, new[] { "CardFree" });
+
+        Assert.That(signals.Select(signal => signal.TargetId), Is.EqualTo(new[] { "CardX", "CardFree" }));
+        Assert.That(signals.All(signal => signal.Trigger == NewsTrigger.CardPlayed), Is.True);
+    }
+
+    [TestCase(0)]
+    [TestCase(1)]
+    [TestCase(-1)]
+    public void NewspaperMotion_EndsFlatAndFullSize(int direction)
+    {
+        var start = NewspaperMotion.PoseAt(0f, direction);
+        var end = NewspaperMotion.PoseAt(NewspaperMotion.Duration(direction), direction);
+
+        Assert.That(start.Scale, Is.LessThan(1f));
+        Assert.That(start.Rotation, Is.Not.EqualTo(0f));
+        Assert.That(end.Scale, Is.EqualTo(1f));
+        Assert.That(end.Rotation, Is.EqualTo(0f));
+    }
+
+    [Test]
+    public void NewspaperMotion_PageTurnsLeanToOppositeSides()
+    {
+        Assert.That(Math.Sign(NewspaperMotion.PoseAt(0f, 1).Rotation), Is.EqualTo(-Math.Sign(NewspaperMotion.PoseAt(0f, -1).Rotation)));
+    }
+
     [TestCase(70f, 4, NewsMoodBand.Good)]
     [TestCase(55f, 3, NewsMoodBand.Good)]
     [TestCase(54f, 2, NewsMoodBand.Neutral)]

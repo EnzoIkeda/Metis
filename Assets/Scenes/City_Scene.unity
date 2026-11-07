@@ -40612,6 +40612,7 @@ MonoBehaviour:
   _pulseSpeed: 6
   _pulseScale: 0.3
   _panelRoot: {fileID: 1670827830}
+  _paper: {fileID: 730699450}
   _backdropButton: {fileID: 405814341}
   _mastheadText: {fileID: 1081570636}
   _sloganText: {fileID: 576219564}
@@ -57648,7 +57649,6 @@ GameObject:
   - component: {fileID: 1692114858}
   - component: {fileID: 1692114857}
   - component: {fileID: 1692114859}
-  - component: {fileID: 1692114856}
   m_Layer: 5
   m_Name: PreviousButton
   m_TagString: Untagged
@@ -57676,18 +57676,6 @@ RectTransform:
   m_AnchoredPosition: {x: -225, y: 170}
   m_SizeDelta: {x: 430, y: 100}
   m_Pivot: {x: 0.5, y: 0}
---- !u!114 &1692114856
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1692114854}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
 --- !u!114 &1692114857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70631,7 +70619,6 @@ GameObject:
   - component: {fileID: 2088438899}
   - component: {fileID: 2088438898}
   - component: {fileID: 2088438900}
-  - component: {fileID: 2088438897}
   m_Layer: 5
   m_Name: NextButton
   m_TagString: Untagged
@@ -70659,18 +70646,6 @@ RectTransform:
   m_AnchoredPosition: {x: 225, y: 170}
   m_SizeDelta: {x: 430, y: 100}
   m_Pivot: {x: 0.5, y: 0}
---- !u!114 &2088438897
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2088438895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
 --- !u!114 &2088438898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71017,7 +70992,6 @@ GameObject:
   - component: {fileID: 2102132081}
   - component: {fileID: 2102132079}
   - component: {fileID: 2102132078}
-  - component: {fileID: 2102132080}
   m_Layer: 0
   m_Name: ButtonNewspaper
   m_TagString: Untagged
@@ -71099,18 +71073,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2102132080
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2102132077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
 --- !u!222 &2102132081
 CanvasRenderer:
   m_ObjectHideFlags: 0

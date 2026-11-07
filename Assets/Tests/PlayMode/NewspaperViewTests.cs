@@ -160,6 +160,7 @@ public class NewspaperViewTests
         TestDataFactory.SetField(_view, "_openButton", _openButton);
         TestDataFactory.SetField(_view, "_badge", _badge);
         TestDataFactory.SetField(_view, "_panelRoot", _panel);
+        TestDataFactory.SetField(_view, "_paper", (RectTransform)_panel.transform);
         TestDataFactory.SetField(_view, "_headlineText", (TMP_Text)_headline);
         TestDataFactory.SetField(_view, "_previousButton", _previous);
 
@@ -211,6 +212,24 @@ public class NewspaperViewTests
         _previous.onClick.Invoke();
         Assert.That(_headline.text, Is.EqualTo("Manchete Posse"));
         Assert.That(_previous.interactable, Is.False);
+    }
+
+    [UnityTest]
+    public IEnumerator Open_PaperArrivesTurned_AndEndsFlatAtFullSize()
+    {
+        yield return Build(new[] { TestDataFactory.CreateCard() }, new RandomEventData[0]);
+        var paper = _panel.transform;
+
+        _view.Show();
+        Assert.That(paper.localScale.x, Is.LessThan(1f));
+        Assert.That(paper.localRotation, Is.Not.EqualTo(Quaternion.identity));
+
+        var limit = Time.realtimeSinceStartup + 5f;
+        while (paper.localScale.x < 1f && Time.realtimeSinceStartup < limit)
+            yield return null;
+
+        Assert.That(paper.localScale, Is.EqualTo(Vector3.one));
+        Assert.That(Quaternion.Angle(paper.localRotation, Quaternion.identity), Is.LessThan(0.01f));
     }
 
     [UnityTest]

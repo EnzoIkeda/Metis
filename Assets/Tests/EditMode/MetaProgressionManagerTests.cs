@@ -225,6 +225,31 @@ public class MetaProgressionManagerTests
     }
 
     [Test]
+    public void MapOffer_ComesBackTheSameAfterReloading()
+    {
+        var themes = new[] { "A", "B", "C", "D", "E", "F" };
+        var first = MetaProgressionManager.GetMapOffer(themes, new System.Random(1)).Select(node => node.Id).ToList();
+
+        ForceReloadFromFile();
+
+        Assert.That(MetaProgressionManager.GetMapOffer(themes, new System.Random(99)).Select(node => node.Id), Is.EqualTo(first));
+    }
+
+    [Test]
+    public void ChooseMapNode_SavesTheThemeAndDrawsANewOfferNextTime()
+    {
+        var themed = new PhaseMapNode { Id = "A", Type = PhaseMapNodeType.Themed, IsAvailable = true };
+        MetaProgressionManager.GetMapOffer(new[] { "A" }, new System.Random(1));
+
+        MetaProgressionManager.ChooseMapNode(themed);
+        ForceReloadFromFile();
+
+        Assert.That(MetaProgressionManager.CurrentTheme, Is.EqualTo("A"));
+        Assert.That(MetaProgressionManager.PhasesCompleted, Is.EqualTo(1));
+        Assert.That(MetaProgressionManager.GetMapOffer(new[] { "A" }, new System.Random(1)).Single().Type, Is.EqualTo(PhaseMapNodeType.Unknown), "tema jogado nao volta");
+    }
+
+    [Test]
     public void IncrementPhasesCompleted_LeavesTheMapForAFreshPhase()
     {
         MetaProgressionManager.EnterPhaseMap();

@@ -75,3 +75,9 @@ MonoBehaviour:
     _volume: 0.5
     _maxDuration: 1.6
     _minInterval: 1.5
+  - _effect: 10
+    _clips:
+    - {fileID: 8300000, guid: bc8ffd99f8089ed44b9b611af0370ac5, type: 3}
+    _volume: 0.8
+    _maxDuration: 0.9
+    _minInterval: 0.1

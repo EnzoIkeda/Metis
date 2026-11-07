@@ -34,6 +34,8 @@ public sealed class SimulationOptions
     // "fase" simula fases avulsas; "rodada" simula rodadas inteiras com recompensa entre as fases;
     // "relatorio" compara os criterios de decisao de maior impacto do relatorio de fim de fase.
     public string Mode { get; set; } = "fase";
+    // Textos do jornal, usados so no modo "jornal".
+    public string NewsPath { get; set; } = "";
     public int PhaseCount { get; set; } = 3;
     public int RewardRollouts { get; set; } = 40;
     public int MctsIterations { get; set; } = new MctsOptions().Iterations;

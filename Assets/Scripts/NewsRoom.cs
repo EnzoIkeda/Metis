@@ -68,14 +68,7 @@ public class NewsRoom : MonoBehaviour
 
     private void HandleTurnFinished(PhaseTurnRecord turn)
     {
-        var before = ValuesBefore(turn);
-        var history = _turnManager.History;
-        var snapshots = NewsEditor.RecentSnapshots(history.StartValues, history.Turns, turn);
-        var signals = NewsEditor.BuildSignals(snapshots, _rules, Archive.Editions, turn.CardId, turn.EventId);
-        var wellbeing = turn.GetEnd(CityStats.AnchorParameter);
-        var wellbeingDelta = before.Length == PhaseHistory.Parameters.Length ? wellbeing - PhaseHistory.Read(before, CityStats.AnchorParameter) : 0f;
-        var random = NewsEditor.EditionRandom(Archive.Seed, turn.TurnIndex);
-        var edition = NewsEditor.Compose(turn.TurnIndex, signals, Stories, Archive.Editions, random, wellbeing, wellbeingDelta);
+        var edition = NewsEditor.EditionForTurn(_turnManager.History, turn, _rules, Archive, Stories, Columns);
 
         // A causa so existe pro turno que acabou de ser registrado.
         var breakdown = _turnManager.LastBreakdown;
@@ -92,20 +85,6 @@ public class NewsRoom : MonoBehaviour
             }
         }
 
-        NewsEditor.ComposeColumns(edition, Columns, Archive.Editions, Archive.Seed, turn.GetEnd(CityParameterType.Sustentabilidade), _rules);
         Archive.Add(edition);
-    }
-
-    // Fim do turno anterior, ou o comeco da fase no primeiro turno.
-    private float[] ValuesBefore(PhaseTurnRecord turn)
-    {
-        var history = _turnManager.History;
-        PhaseTurnRecord previous = null;
-        foreach (var candidate in history.Turns)
-        {
-            if (candidate.TurnIndex < turn.TurnIndex)
-                previous = candidate;
-        }
-        return previous != null ? previous.EndValues : history.StartValues;
     }
 }

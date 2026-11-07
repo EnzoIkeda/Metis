@@ -24,6 +24,9 @@ public class NewspaperView : MonoBehaviour
     [SerializeField] private float _pulseScale = 0.3f;
 
     [SerializeField] private GameObject _panelRoot;
+
+    // Folha que gira ao abrir e balanca ao virar a pagina.
+    [SerializeField] private RectTransform _paper;
     [SerializeField] private Button _backdropButton;
     [SerializeField] private TMP_Text _mastheadText;
     [SerializeField] private TMP_Text _sloganText;
@@ -47,6 +50,9 @@ public class NewspaperView : MonoBehaviour
     [SerializeField] private Button _closeButton;
 
     private int _shownIndex = -1;
+    private bool _animating;
+    private float _animationElapsed;
+    private int _animationDirection;
 
     public bool IsOpen => _panelRoot != null && _panelRoot.activeSelf;
 
@@ -61,9 +67,9 @@ public class NewspaperView : MonoBehaviour
         if (_closeButton != null)
             _closeButton.onClick.AddListener(Hide);
         if (_previousButton != null)
-            _previousButton.onClick.AddListener(() => ShowEdition(_shownIndex - 1));
+            _previousButton.onClick.AddListener(() => TurnPage(-1));
         if (_nextButton != null)
-            _nextButton.onClick.AddListener(() => ShowEdition(_shownIndex + 1));
+            _nextButton.onClick.AddListener(() => TurnPage(1));
         if (_whyButton != null)
             _whyButton.onClick.AddListener(OpenBreakdown);
         if (_learnMoreButton != null)
@@ -96,6 +102,7 @@ public class NewspaperView : MonoBehaviour
             _openButton.interactable = CanOpen;
         if (IsOpen && CanOpen == false)
             Hide();
+        AdvanceAnimation();
 
         var archive = Archive;
         if (_badge == null)
@@ -117,11 +124,51 @@ public class NewspaperView : MonoBehaviour
             _panelRoot.SetActive(true);
         ShowEdition(archive.Editions.Count - 1);
         archive.MarkAllRead();
+        SfxPlayer.Play(SoundEffect.NewspaperPage);
+        StartAnimation(0);
         Opened?.Invoke();
+    }
+
+    private void TurnPage(int direction)
+    {
+        var previous = _shownIndex;
+        ShowEdition(_shownIndex + direction);
+        if (_shownIndex == previous)
+            return;
+        SfxPlayer.Play(SoundEffect.NewspaperPage);
+        StartAnimation(direction);
+    }
+
+    private void StartAnimation(int direction)
+    {
+        _animating = true;
+        _animationElapsed = 0f;
+        _animationDirection = direction;
+        ApplyPose(NewspaperMotion.PoseAt(0f, direction));
+    }
+
+    // Em tempo real, para funcionar com o jogo pausado.
+    private void AdvanceAnimation()
+    {
+        if (_animating == false)
+            return;
+        _animationElapsed += Time.unscaledDeltaTime;
+        ApplyPose(NewspaperMotion.PoseAt(_animationElapsed, _animationDirection));
+        _animating = _animationElapsed < NewspaperMotion.Duration(_animationDirection);
+    }
+
+    private void ApplyPose(NewspaperPose pose)
+    {
+        if (_paper == null)
+            return;
+        _paper.localScale = new Vector3(pose.Scale, pose.Scale, 1f);
+        _paper.localRotation = Quaternion.Euler(0f, 0f, pose.Rotation);
     }
 
     private void Hide()
     {
+        _animating = false;
+        ApplyPose(new NewspaperPose(1f, 0f));
         if (_panelRoot != null)
             _panelRoot.SetActive(false);
     }

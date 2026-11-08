@@ -307,19 +307,9 @@ public static class UIStrings
 
     public static string PhaseMapTitle => IsPt ? "Escolha o próximo destino" : "Choose your next destination";
 
-    public static string PhaseMapNodeTitle(PhaseMapNode node)
-    {
-        if (node.Type == PhaseMapNodeType.Themed)
-            return node.Id;
-        return IsPt ? "Cidade desconhecida" : "Unknown city";
-    }
+    public static string PhaseMapUnknownTitle => IsPt ? "Cidade desconhecida" : "Unknown city";
 
-    public static string PhaseMapNodeDescription(PhaseMapNode node)
-    {
-        if (node.Type == PhaseMapNodeType.Themed)
-            return string.Empty;
-        return IsPt ? "Uma cidade sorteada, com problemas próprios." : "A random city with troubles of its own.";
-    }
+    public static string PhaseMapUnknownDescription => IsPt ? "Uma cidade sorteada, com problemas próprios." : "A random city with troubles of its own.";
 
     public static string KnowledgeButton => IsPt ? "Saiba mais" : "Learn more";
     public static string KnowledgeSummaryHeader => IsPt ? "O que é" : "What it is";

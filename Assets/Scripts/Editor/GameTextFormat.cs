@@ -19,6 +19,7 @@ public enum GameTextOrigin
     Report,
     Interface,
     SceneOrPrefab,
+    Theme,
 }
 
 public enum GameTextIssue
@@ -44,6 +45,7 @@ public enum GameTextEditKind
     RelationNote,
     Interface,
     NewsColumn,
+    Theme,
 }
 
 // Trecho do codigo-fonte onde esta um ramo de idioma; so e editavel se for feito apenas de textos.

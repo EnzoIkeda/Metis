@@ -11,6 +11,7 @@ public static class GameTextSaver
     public const string FichasPath = "Resources/Conteudo/fichas.json";
     public const string NewsPath = "Resources/Conteudo/jornal.json";
     public const string RelationsPath = "Resources/Conteudo/mapa_relacoes.json";
+    public const string ThemesPath = "Resources/Conteudo/temas.json";
     public const string BackupFolder = "Resources/Conteudo/arquivo/backups_textos";
 
     public class Plan
@@ -50,6 +51,13 @@ public static class GameTextSaver
                 PrepareImported(plan, FichasPath, "Entries", path =>
                 {
                     var report = KnowledgeEntryImporter.Import(path, apply: false);
+                    return (report.Errors, report.Changes);
+                });
+                break;
+            case GameTextEditKind.Theme:
+                PrepareImported(plan, ThemesPath, "Themes", path =>
+                {
+                    var report = ThemedPhaseImporter.Import(path, apply: false);
                     return (report.Errors, report.Changes);
                 });
                 break;
@@ -96,6 +104,9 @@ public static class GameTextSaver
             case GameTextEditKind.Knowledge:
                 WriteJson(FichasPath, plan.NewContent);
                 return Reported(KnowledgeEntryImporter.Import(FullPath(FichasPath), apply: true).Errors, out error);
+            case GameTextEditKind.Theme:
+                WriteJson(ThemesPath, plan.NewContent);
+                return Reported(ThemedPhaseImporter.Import(FullPath(ThemesPath), apply: true).Errors, out error);
             case GameTextEditKind.RelationNote:
                 WriteJson(RelationsPath, plan.NewContent);
                 ApplyToNote(item, plan.Pt, plan.En);

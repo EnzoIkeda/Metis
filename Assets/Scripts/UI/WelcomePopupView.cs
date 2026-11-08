@@ -17,10 +17,11 @@ public class WelcomePopupView : MonoBehaviour
 
     private void Start()
     {
+        var theme = _turnManager != null ? _turnManager.Theme : null;
         if (_titleText != null)
-            _titleText.text = UIStrings.WelcomeTitle;
+            _titleText.text = theme != null ? theme.ThemeName : UIStrings.WelcomeTitle;
         if (_messageText != null)
-            _messageText.text = UIStrings.WelcomeMessage;
+            _messageText.text = theme != null ? $"{theme.Opening}\n\n<i>{theme.Inspiration}</i>" : UIStrings.WelcomeMessage;
         if (_startButton != null)
             _startButton.onClick.AddListener(Hide);
         if (_reportButton != null)

@@ -64,6 +64,8 @@ public class TurnManager : MonoBehaviour
 
     public IReadOnlyList<RandomEventData> EventPool => _eventPool;
 
+    public ThemedPhaseData Theme => _cityStatsManager != null ? _cityStatsManager.Theme : null;
+
     // Todas as vantagens passivas cadastradas, exposto pro popup de recompensa sortear opcoes.
     public IReadOnlyList<PassiveAdvantageData> AdvantagePool => _advantagePool;
 
@@ -120,7 +122,8 @@ public class TurnManager : MonoBehaviour
         }
 
         Hand.OnHandChanged += HandleHandChanged;
-        _events = new RandomEventPool<RandomEventData>(_eventPool, _eventRandom);
+        var theme = Theme;
+        _events = new RandomEventPool<RandomEventData>(CityPresetRules.AllowedEvents(_eventPool, theme != null ? theme.AllowedEventIds as IReadOnlyCollection<string> : null), _eventRandom);
 
         Machine = new TurnMachine(_cityStatsManager.Stats, _victoryTurnCount);
         Machine.OnPhaseChanged += HandlePhaseChanged;

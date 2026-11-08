@@ -18,6 +18,7 @@ public class PhaseMapView : MonoBehaviour
     [SerializeField] private Sprite _unknownPin;
     [SerializeField] private Sprite _themedPin;
     [SerializeField] private Sprite _unavailablePin;
+    [SerializeField] private ThemedPhaseLibraryData _themes;
 
     private readonly List<PhaseMapNodeView> _nodes = new List<PhaseMapNodeView>();
 
@@ -31,7 +32,8 @@ public class PhaseMapView : MonoBehaviour
         if (_mapAnimator != null)
             _mapAnimator.Play(_mapFrames, _mapFramesPerSecond);
 
-        ShowNodes(MetaProgressionManager.GetMapOffer(Array.Empty<string>(), new System.Random()));
+        var themeNames = _themes != null ? _themes.Names() : new List<string>();
+        ShowNodes(MetaProgressionManager.GetMapOffer(themeNames, new System.Random()));
     }
 
     public void ShowNodes(IReadOnlyList<PhaseMapNode> nodes)
@@ -46,7 +48,10 @@ public class PhaseMapView : MonoBehaviour
             var view = Instantiate(_nodeTemplate, _nodeContainer);
             view.gameObject.SetActive(true);
             var chosen = node;
-            view.Bind(UIStrings.PhaseMapNodeTitle(node), UIStrings.PhaseMapNodeDescription(node), PinFor(node), node.IsAvailable, () => SelectNode(chosen));
+            var theme = _themes != null && node.Type == PhaseMapNodeType.Themed ? _themes.Find(node.Id) : null;
+            var title = theme != null ? theme.ThemeName : node.Type == PhaseMapNodeType.Themed ? node.Id : UIStrings.PhaseMapUnknownTitle;
+            var description = theme != null ? theme.Summary : node.Type == PhaseMapNodeType.Themed ? string.Empty : UIStrings.PhaseMapUnknownDescription;
+            view.Bind(title, description, PinFor(node), node.IsAvailable, () => SelectNode(chosen));
             _nodes.Add(view);
         }
     }

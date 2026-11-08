@@ -1341,6 +1341,7 @@ MonoBehaviour:
   _unknownPin: {fileID: 21300000, guid: 67a8908b5ddb778bcbc3a1a68f8e8546, type: 3}
   _themedPin: {fileID: 21300000, guid: 1fe02455027ebf084a700f5b2e024675, type: 3}
   _unavailablePin: {fileID: 21300000, guid: 97994121cfeb98d4e8955787295006e0, type: 3}
+  _themes: {fileID: 11400000, guid: df519f783a4f0fc4fba5555b9642eee8, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PhaseBackgroundRandomizer : MonoBehaviour
 {
     [SerializeField] private Sprite[] _backgrounds;
+    [SerializeField] private ThemedPhaseLibraryData _themes;
 
     // Indice do fundo sorteado, salvo pra fase retomada mostrar o mesmo fundo; -1 sem fundo.
     public int BackgroundIndex { get; private set; } = -1;
@@ -16,6 +17,9 @@ public class PhaseBackgroundRandomizer : MonoBehaviour
 
         var savedPhase = MetaProgressionManager.SavedPhase;
         var savedIndex = savedPhase != null ? savedPhase.BackgroundIndex : -1;
+        var theme = _themes != null ? _themes.Find(MetaProgressionManager.CurrentTheme) : null;
+        if (savedIndex < 0 && theme != null)
+            savedIndex = theme.BackgroundIndex;
         BackgroundIndex = savedIndex >= 0 && savedIndex < _backgrounds.Length
             ? savedIndex
             : Random.Range(0, _backgrounds.Length);

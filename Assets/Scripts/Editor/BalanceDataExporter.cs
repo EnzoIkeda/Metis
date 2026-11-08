@@ -125,6 +125,19 @@ public static class BalanceDataExporter
             data.Presets.Add(dto);
         }
 
+        var library = stats.FindProperty("_themes").objectReferenceValue as ThemedPhaseLibraryData;
+        if (library != null)
+        {
+            foreach (var theme in library.Themes)
+            {
+                var dto = new BalanceDataFormat.ThemeDto { Id = theme.name, Name = PortugueseText(theme, "_themeName"), DerivaMultiplier = theme.DerivaMultiplier };
+                foreach (var overrideValue in theme.Overrides)
+                    dto.Overrides.Add(new BalanceDataFormat.OverrideDto { Parameter = overrideValue.Parameter.ToString(), InitialValue = overrideValue.InitialValue });
+                dto.AllowedEvents.AddRange(theme.AllowedEventIds);
+                data.Themes.Add(dto);
+            }
+        }
+
         return data;
     }
 

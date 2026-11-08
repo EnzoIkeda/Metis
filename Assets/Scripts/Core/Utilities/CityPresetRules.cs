@@ -35,4 +35,21 @@ public static class CityPresetRules
         }
         return configs;
     }
+
+    // Eventos que podem sair na fase; lista vazia ou nula libera todos.
+    public static IReadOnlyList<TEvent> AllowedEvents<TEvent>(IReadOnlyList<TEvent> pool, IReadOnlyCollection<string> allowedIds)
+        where TEvent : class, IRandomEventDefinition
+    {
+        if (allowedIds == null || allowedIds.Count == 0)
+            return pool;
+
+        var allowed = new HashSet<string>(allowedIds, StringComparer.Ordinal);
+        var filtered = new List<TEvent>();
+        foreach (var candidate in pool)
+        {
+            if (candidate != null && allowed.Contains(candidate.Id))
+                filtered.Add(candidate);
+        }
+        return filtered;
+    }
 }

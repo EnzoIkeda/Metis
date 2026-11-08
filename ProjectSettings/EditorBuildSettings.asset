@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PhaseMap.unity
     guid: 53e28ad89b312c66fa97235a983d8299
+  - enabled: 1
+    path: Assets/Scenes/ScenarioSelection.unity
+    guid: b7ca6da24413065d29c8d7e4d13b97ee
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

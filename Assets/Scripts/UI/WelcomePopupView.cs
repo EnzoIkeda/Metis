@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +16,12 @@ public class WelcomePopupView : MonoBehaviour
     [SerializeField] private Button _reportButton;
     [SerializeField] private ModelReportView _reportView;
 
+    // Abre a ficha da cidade tematica no lugar do relatorio.
+    [SerializeField] private KnowledgePopupView _knowledgePopup;
+
+    // O jogador fechou as boas-vindas.
+    public event Action Closed;
+
     private void Start()
     {
         var theme = _turnManager != null ? _turnManager.Theme : null;
@@ -23,14 +30,17 @@ public class WelcomePopupView : MonoBehaviour
         if (_messageText != null)
             _messageText.text = theme != null ? $"{theme.Opening}\n\n<i>{theme.Inspiration}</i>" : UIStrings.WelcomeMessage;
         if (_startButton != null)
-            _startButton.onClick.AddListener(Hide);
+            _startButton.onClick.AddListener(Close);
         if (_reportButton != null)
         {
+            var entry = theme != null && _knowledgePopup != null ? theme.KnowledgeEntry : null;
             var label = _reportButton.GetComponentInChildren<TMP_Text>();
             if (label != null)
-                label.text = UIStrings.ModelReportWelcomeButton;
-            _reportButton.gameObject.SetActive(_reportView != null);
-            if (_reportView != null)
+                label.text = entry != null ? UIStrings.ThemeLearnMoreButton : UIStrings.ModelReportWelcomeButton;
+            _reportButton.gameObject.SetActive(entry != null || _reportView != null);
+            if (entry != null)
+                _reportButton.onClick.AddListener(() => _knowledgePopup.Show(entry));
+            else if (_reportView != null)
                 _reportButton.onClick.AddListener(_reportView.Show);
         }
 
@@ -40,9 +50,10 @@ public class WelcomePopupView : MonoBehaviour
             _panelRoot.SetActive(resumed == false);
     }
 
-    private void Hide()
+    private void Close()
     {
         if (_panelRoot != null)
             _panelRoot.SetActive(false);
+        Closed?.Invoke();
     }
 }

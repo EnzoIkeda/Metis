@@ -60,6 +60,9 @@
     <Compile Include="../../Assets/Scripts/Core/Utilities/NewspaperMotion.cs" Link="Source/NewspaperMotion.cs" />
     <Compile Include="../../Assets/Scripts/Editor/NewsImportFormat.cs" Link="Source/NewsImportFormat.cs" />
     <Compile Include="../../Assets/Scripts/Editor/ThemedPhaseImportFormat.cs" Link="Source/ThemedPhaseImportFormat.cs" />
+    <Compile Include="../../Assets/Scripts/Editor/ScenarioImportFormat.cs" Link="Source/ScenarioImportFormat.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/ScenarioObjectiveEvaluator.cs" Link="Source/ScenarioObjectiveEvaluator.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/SessionMode.cs" Link="Source/SessionMode.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/ModelReport.cs" Link="Source/ModelReport.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/PaperZoom.cs" Link="Source/PaperZoom.cs" />
     <Compile Include="../../Assets/Scripts/Editor/ModelReportImportFormat.cs" Link="Source/ModelReportImportFormat.cs" />

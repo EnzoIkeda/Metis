@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f30f256477e994bb799d21f73719a34e, type: 3}
+  m_Name: ScenarioLibrary
+  m_EditorClassIdentifier: Metis.Runtime::ScenarioLibraryData
+  _scenarios:
+  - {fileID: 11400000, guid: cdf79fcc7f947fdb48327f5ca8cca9f8, type: 2}
+  - {fileID: 11400000, guid: da925d560ab38a1c6be77e72c07ed47b, type: 2}
+  - {fileID: 11400000, guid: e417bcb46fa8d5a20a2f0ff265a0ad0d, type: 2}

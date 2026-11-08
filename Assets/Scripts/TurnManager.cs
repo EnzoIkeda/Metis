@@ -16,6 +16,7 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private PassiveAdvantageData[] _advantagePool;
     [SerializeField] private CityEffectsController _effects;
     [SerializeField] private PhaseBackgroundRandomizer _background;
+    [SerializeField] private ScenarioLibraryData _scenarios;
     [SerializeField, Min(1)] private int _handSize = 5;
     [SerializeField, Min(1)] private int _victoryTurnCount = TurnMachine.DefaultVictoryTurnCount;
 
@@ -66,6 +67,9 @@ public class TurnManager : MonoBehaviour
 
     public ThemedPhaseData Theme => _cityStatsManager != null ? _cityStatsManager.Theme : null;
 
+    // Cenario em jogo; nulo na rodada normal.
+    public ScenarioData Scenario { get; private set; }
+
     // Todas as vantagens passivas cadastradas, exposto pro popup de recompensa sortear opcoes.
     public IReadOnlyList<PassiveAdvantageData> AdvantagePool => _advantagePool;
 
@@ -81,6 +85,9 @@ public class TurnManager : MonoBehaviour
     // nao existe mais descarta a fase antes de parametros, cidade e fundo lerem o save.
     private void Awake()
     {
+        if (SessionMode.IsScenario && _scenarios != null)
+            Scenario = _scenarios.Find(SessionMode.ScenarioId);
+
         var savedPhase = MetaProgressionManager.SavedPhase;
         if (savedPhase == null)
             return;
@@ -503,8 +510,15 @@ public class TurnManager : MonoBehaviour
     {
         Debug.LogWarning($"[TurnMachine] Fim de jogo: {outcome} (turno {Machine.TurnIndex})");
 
+        if (Scenario != null)
+        {
+            var states = ScenarioObjectiveEvaluator.EvaluateAll(Scenario.Objectives, History.Turns, outcome);
+            ScenarioProgress.Record(Scenario.name, ScenarioObjectiveEvaluator.Stars(outcome, states));
+        }
+
         // Derrota apaga o save na hora, senao fechar o app no popup e continuar repetiria o turno perdido.
-        if (outcome == GameOutcome.GameOver)
+        // Cenario nao tem fase seguinte, entao termina do mesmo jeito na vitoria.
+        if (outcome == GameOutcome.GameOver || SessionMode.IsScenario)
             MetaProgressionManager.ResetRun();
     }
 

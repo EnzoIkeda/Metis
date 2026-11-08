@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Tema_PortoDaTemporada
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Popula\xE7\xE3o flutuante"
+  _titleEn: Floating population
+  _category: 2
+  _unlockTrigger: 12
+  _summary: "Popula\xE7\xE3o flutuante \xE9 quem n\xE3o mora na cidade, mas usa a
+    \xE1gua, o esgoto, as ruas e o hospital dela durante a temporada. A rede precisa
+    dar conta do pico e fica ociosa no resto do ano."
+  _summaryEn: The floating population is made up of people who do not live in a city
+    but use its water, sewers, streets and hospital during the season. The network
+    must handle the peak and sits idle the rest of the year.
+  _realWorld: "No ver\xE3o de 2023 para 2024, a falta de \xE1gua chegou a durar cerca
+    de uma semana em pontos do litoral paulista. Em Bertioga, 40,9% da popula\xE7\xE3o
+    vivia sem coleta de esgoto."
+  _realWorldEn: "In the summer of 2023 to 2024, water outages lasted about a week
+    in parts of the S\xE3o Paulo coast. In Bertioga, 40.9% of residents had no sewage
+    collection."
+  _tradeOffs: "Dimensionar a rede para o pico custa caro o ano inteiro; dimensionar
+    para a m\xE9dia falha justo na alta temporada."
+  _tradeOffsEn: Sizing the network for the peak is costly all year; sizing it for
+    the average fails right in high season.
+  _sources:
+  - Label: "Gazeta do Povo, falta de \xE1gua no litoral (2024)"
+    Url: https://www.gazetadopovo.com.br/sao-paulo/turismo-alta-temperatura-expoem-falta-planejamento-investimento-rede-abastecimento/
+  - Label: "Alesp, abastecimento no litoral no ver\xE3o (2012)"
+    Url: https://www.saopaulo.sp.leg.br/blog/galeria-de-audios/sabesp-intensifica-acoes-para-garantir-abastecimento-no-litoral-neste-verao/
+  _relatedEntries:
+  - {fileID: 11400000, guid: 4450a7aac01ec1ce6a7eb616fdd26afe, type: 2}
+  - {fileID: 11400000, guid: 2b192f000624e013aa9fad842858b5a7, type: 2}
+  _image: {fileID: 0}

@@ -568,6 +568,73 @@ public static class UIStrings
     public static string ModelReportButton => IsPt ? "Relatório técnico" : "Technical report";
     public static string ModelReportWelcomeButton => IsPt ? "Ler o relatório técnico" : "Read the technical report";
 
+    public static string MainMenuScenarios => IsPt ? "Cenários" : "Scenarios";
+
+    public static string ScenarioSelectionTitle => IsPt ? "Cenários" : "Scenarios";
+
+    public static string ScenarioSelectionHint => IsPt
+        ? "Cidades inspiradas em dados reais. Sobreviva e cumpra os objetivos para ganhar estrelas."
+        : "Cities inspired by real data. Survive and meet the objectives to earn stars.";
+
+    public static string ScenarioPlayButton => IsPt ? "Jogar" : "Play";
+
+    public static string ScenarioRestartButton => IsPt ? "Recomeçar" : "Restart";
+
+    public static string ScenarioBackButton => IsPt ? "Voltar" : "Back";
+
+    public static string ScenarioFreeDeck => IsPt ? "Baralho à sua escolha" : "Deck of your choice";
+
+    public static string ScenarioFixedDeck(CardArchetype archetype) => IsPt
+        ? $"Baralho: {ArchetypeName(archetype)}"
+        : $"Deck: {ArchetypeName(archetype)}";
+
+    public static string ScenarioBestStars(int stars, int maxStars) => IsPt
+        ? $"Melhor resultado: {stars} de {maxStars} estrelas"
+        : $"Best result: {stars} of {maxStars} stars";
+
+    public static string ScenarioObjectivesTitle => IsPt ? "Objetivos" : "Objectives";
+
+    public static string ScenarioObjectivesHint => IsPt
+        ? "Sobreviver aos 20 turnos vale 1 estrela, e cada objetivo cumprido vale mais 1."
+        : "Surviving the 20 turns is worth 1 star, and each objective met is worth 1 more.";
+
+    public static string ScenarioCurrentValue(string value) => IsPt ? $"Agora: {value}" : $"Now: {value}";
+
+    public static string ScenarioStateLabel(ObjectiveState state)
+    {
+        switch (state)
+        {
+            case ObjectiveState.Achieved: return IsPt ? "Cumprido" : "Met";
+            case ObjectiveState.Failed: return IsPt ? "Não cumprido" : "Missed";
+            default: return IsPt ? "Em andamento" : "In progress";
+        }
+    }
+
+    public static string ScenarioObjectiveLine(ParameterDisplayData display, ScenarioObjective objective)
+    {
+        var name = $"{ParameterIcon(objective.Parameter)} {objective.Parameter.GetFullName()}";
+        var value = display != null ? display.FormatValue(objective.Parameter, objective.Threshold, smallUnit: false) : objective.Threshold.ToString("0");
+        var atLeast = objective.Comparison == ObjectiveComparison.AtLeast;
+        if (objective.MustHold)
+            return IsPt
+                ? $"{name}: manter em {value} ou {(atLeast ? "mais" : "menos")} do turno {objective.ByTurn} até o fim"
+                : $"{name}: stay at {value} or {(atLeast ? "more" : "less")} from turn {objective.ByTurn} to the end";
+        return IsPt
+            ? $"{name}: {(atLeast ? "chegar a" : "baixar para")} {value} ou {(atLeast ? "mais" : "menos")} até o turno {objective.ByTurn}"
+            : $"{name}: {(atLeast ? "reach" : "bring down to")} {value} or {(atLeast ? "more" : "less")} by turn {objective.ByTurn}";
+    }
+
+    public static string ReportObjectivesHeader => IsPt ? "Objetivos do cenário" : "Scenario objectives";
+
+    public static string ReportScenarioStars(GameOutcome outcome, int stars, int maxStars)
+    {
+        if (outcome != GameOutcome.Victory)
+            return IsPt ? "Sem estrelas: elas só contam quando a cidade sobrevive à fase." : "No stars: they only count when the city survives the phase.";
+        return IsPt ? $"Resultado: {stars} de {maxStars} estrelas." : $"Result: {stars} of {maxStars} stars.";
+    }
+
+    public static string ThemeLearnMoreButton => IsPt ? "Saiba mais sobre esta cidade" : "Learn more about this city";
+
     public static string ModelReportFile(string modelVersion) => IsPt
         ? $"Modelo da cidade, versão {modelVersion}"
         : $"City model, version {modelVersion}";

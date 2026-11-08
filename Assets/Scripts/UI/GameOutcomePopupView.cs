@@ -67,6 +67,12 @@ public class GameOutcomePopupView : MonoBehaviour
     {
         Hide();
 
+        if (SessionMode.IsScenario)
+        {
+            SceneManager.LoadScene(MetaProgressionManager.ScenarioSelectionSceneName);
+            return;
+        }
+
         if (_outcomeToShowFor == GameOutcome.GameOver)
         {
             MetaProgressionManager.ResetRun();

@@ -331,6 +331,7 @@ public class PhaseReportView : MonoBehaviour
     private string BuildBody(GameOutcome outcome, TurnEvaluator evaluator, int turnsPlayed)
     {
         var body = new StringBuilder();
+        AppendObjectives(body, outcome);
 
         body.Append("<b>").Append(UIStrings.ReportDecisionsHeader).Append("</b>\n");
         if (_decisions.Count == 0)
@@ -364,6 +365,24 @@ public class PhaseReportView : MonoBehaviour
 
         body.Append("\n<size=80%>").Append(UIStrings.ReportExplanation).Append("</size>");
         return body.ToString();
+    }
+
+    private void AppendObjectives(StringBuilder body, GameOutcome outcome)
+    {
+        var scenario = _turnManager != null ? _turnManager.Scenario : null;
+        if (scenario == null)
+            return;
+
+        var states = ScenarioObjectiveEvaluator.EvaluateAll(scenario.Objectives, _history.Turns, outcome);
+        body.Append("<b>").Append(UIStrings.ReportObjectivesHeader).Append("</b>\n");
+        for (var i = 0; i < states.Count; i++)
+        {
+            var color = states[i] == ObjectiveState.Achieved ? PositiveColor : NegativeColor;
+            body.Append("• ").Append(UIStrings.ScenarioObjectiveLine(_displayData, scenario.Objectives[i]))
+                .Append(" <b><color=").Append(color).Append('>').Append(UIStrings.ScenarioStateLabel(states[i])).Append("</color></b>\n");
+        }
+        var stars = ScenarioObjectiveEvaluator.Stars(outcome, states);
+        body.Append(UIStrings.ReportScenarioStars(outcome, stars, ScenarioObjectiveEvaluator.MaxStars(states.Count))).Append("\n\n");
     }
 
     private PhaseTurnRecord FindTurn(int turnIndex)

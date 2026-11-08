@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bc3affcea5d73c6ba3abba886757eaf, type: 3}
   m_Name: ThemedPhaseLibrary
   m_EditorClassIdentifier: Metis.Runtime::ThemedPhaseLibraryData
-  _themes: []
+  _themes:
+  - {fileID: 11400000, guid: 666d80055ba9d0aa8b0f77596f67bf60, type: 2}
+  - {fileID: 11400000, guid: 1a4e2b64ecc5fd904b6231d87a629b7f, type: 2}
+  - {fileID: 11400000, guid: a3da0d20288f4996c99126006838dcb3, type: 2}

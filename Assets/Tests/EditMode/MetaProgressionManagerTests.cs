@@ -36,6 +36,65 @@ public class MetaProgressionManagerTests
         field.SetValue(null, value);
     }
 
+    // Usa os nomes de arquivo de verdade, dentro da pasta temporaria.
+    private void WithSlots(System.Action test)
+    {
+        SetStaticField("_savePathOverride", null);
+        SetStaticField("_saveFolderOverride", _directory);
+        try
+        {
+            test();
+        }
+        finally
+        {
+            SessionMode.EnterRoguelike();
+            SetStaticField("_saveFolderOverride", null);
+            SetStaticField("_savePathOverride", _path);
+        }
+    }
+
+    [Test]
+    public void Scenario_DoesNotTouchTheRoguelikeRun()
+    {
+        WithSlots(() =>
+        {
+            SessionMode.EnterRoguelike();
+            MetaProgressionManager.SetArchetype(CardArchetype.Industria);
+
+            SessionMode.EnterScenario("A", "Tema");
+            Assert.That(MetaProgressionManager.HasRunInProgress, Is.False);
+            MetaProgressionManager.BeginScenario("A", "Tema", CardArchetype.Automacao);
+            Assert.That(MetaProgressionManager.CurrentTheme, Is.EqualTo("Tema"));
+            Assert.That(MetaProgressionManager.IsNewPhase, Is.True);
+            Assert.That(MetaProgressionManager.PhasesCompleted, Is.EqualTo(0));
+            MetaProgressionManager.ResetRun();
+
+            SessionMode.EnterRoguelike();
+            Assert.That(MetaProgressionManager.HasRunInProgress, Is.True);
+            Assert.That(MetaProgressionManager.Archetype, Is.EqualTo(CardArchetype.Industria));
+        });
+    }
+
+    [Test]
+    public void Scenarios_KeepSeparateProgress()
+    {
+        WithSlots(() =>
+        {
+            SessionMode.EnterScenario("A", "TemaA");
+            MetaProgressionManager.BeginScenario("A", "TemaA", CardArchetype.Automacao);
+            MetaProgressionManager.SavePhase(new PhaseSaveData { TurnIndex = 7 });
+
+            SessionMode.EnterScenario("B", "TemaB");
+            MetaProgressionManager.BeginScenario("B", "TemaB", CardArchetype.Industria);
+
+            SessionMode.EnterScenario("A", "TemaA");
+            ForceReloadFromFile();
+            Assert.That(MetaProgressionManager.HasRunInProgress, Is.True);
+            Assert.That(MetaProgressionManager.SavedPhase.TurnIndex, Is.EqualTo(7));
+            Assert.That(MetaProgressionManager.CurrentTheme, Is.EqualTo("TemaA"));
+        });
+    }
+
     // Zera o cache estatico em memoria pra forcar a proxima leitura a vir do arquivo, provando a ida e volta pelo JSON.
     private static void ForceReloadFromFile()
     {

@@ -27,6 +27,7 @@
     <Compile Include="../../Assets/Scripts/Core/Utilities/StateScore.cs" Link="Game/StateScore.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/PhaseReport.cs" Link="Game/PhaseReport.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/PhaseHistory.cs" Link="Game/PhaseHistory.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/ScenarioObjectiveEvaluator.cs" Link="Game/ScenarioObjectiveEvaluator.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/SeededRandom.cs" Link="Game/SeededRandom.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/PhaseMapProvider.cs" Link="Game/PhaseMapProvider.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/NewsEditor.cs" Link="Game/NewsEditor.cs" />

@@ -138,6 +138,18 @@ public static class BalanceDataExporter
             }
         }
 
+        var scenarios = AssetDatabase.LoadAssetAtPath<ScenarioLibraryData>(ScenarioImporter.LibraryPath);
+        if (scenarios != null)
+        {
+            foreach (var scenario in scenarios.Scenarios)
+            {
+                var dto = new BalanceDataFormat.ScenarioDto { Id = scenario.name, Theme = scenario.Theme.name, FreeArchetype = scenario.FreeArchetype, Archetype = scenario.Archetype.ToString() };
+                foreach (var objective in scenario.Objectives)
+                    dto.Objectives.Add(new BalanceDataFormat.ObjectiveDto { Parameter = objective.Parameter.ToString(), Comparison = objective.Comparison.ToString(), Threshold = objective.Threshold, ByTurn = objective.ByTurn, MustHold = objective.MustHold });
+                data.Scenarios.Add(dto);
+            }
+        }
+
         return data;
     }
 

@@ -7,28 +7,30 @@ using UnityEngine;
 // O arquivo existir e o mesmo que haver uma rodada pra continuar.
 public static class MetaProgressionManager
 {
-    private const string FileName = "run_save.json";
-
     // Chave antiga, de quando a meta-progressao morava no PlayerPrefs.
     private const string LegacyPrefsKey = "Metis.MetaProgression";
 
     public const string CitySceneName = "City_Scene";
     public const string PhaseMapSceneName = "PhaseMap";
+    public const string ScenarioSelectionSceneName = "ScenarioSelection";
 
     // Caminho alternativo so pros testes, pra nunca tocar no save de verdade.
     private static string _savePathOverride;
+    private static string _saveFolderOverride;
 
     private static RunSaveData _save;
+    private static string _loadedPath;
     private static bool _runInProgress;
     private static bool _discardedIncompatibleSave;
 
-    private static string SavePath => _savePathOverride ?? Path.Combine(Application.persistentDataPath, FileName);
+    private static string SavePath => _savePathOverride ?? Path.Combine(_saveFolderOverride ?? Application.persistentDataPath, SessionMode.SaveFileName);
 
     private static RunSaveData Save
     {
         get
         {
-            if (_save == null)
+            // Trocar de modo troca o arquivo, e o que esta em memoria deixa de valer.
+            if (_save == null || _loadedPath != SavePath)
                 Load();
             return _save;
         }
@@ -47,7 +49,8 @@ public static class MetaProgressionManager
     public static string CurrentTheme => State.CurrentTheme;
 
     // A primeira fase de uma rodada usa a cidade e os parametros calibrados fixos; da segunda em diante e semialeatorio.
-    public static bool IsNewPhase => State.PhasesCompleted > 0;
+    // Cenario tem cidade propria desde o comeco, com o tracado da semente dele.
+    public static bool IsNewPhase => State.PhasesCompleted > 0 || string.IsNullOrEmpty(State.ScenarioId) == false;
 
     public static bool HasRunInProgress
     {
@@ -75,6 +78,16 @@ public static class MetaProgressionManager
 
     public static void SetArchetype(CardArchetype archetype)
     {
+        State.Archetype = archetype;
+        Write();
+    }
+
+    // Comeca o cenario do zero no arquivo dele.
+    public static void BeginScenario(string scenarioId, string themeName, CardArchetype archetype)
+    {
+        ResetRun();
+        State.ScenarioId = scenarioId;
+        State.CurrentTheme = themeName;
         State.Archetype = archetype;
         Write();
     }
@@ -143,6 +156,7 @@ public static class MetaProgressionManager
     public static void ResetRun()
     {
         _save = new RunSaveData();
+        _loadedPath = SavePath;
         _runInProgress = false;
         try
         {
@@ -163,6 +177,7 @@ public static class MetaProgressionManager
     private static void Load()
     {
         _save = new RunSaveData();
+        _loadedPath = SavePath;
         _runInProgress = false;
 
         if (PlayerPrefs.HasKey(LegacyPrefsKey))

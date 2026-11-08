@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d7ee7967762d5a42918462cd1124215, type: 3}
+  m_Name: Tema_PortoDaTemporada
+  m_EditorClassIdentifier: Metis.Runtime::ThemedPhaseData
+  _themeName: Porto da Temporada
+  _themeNameEn: Season Harbor
+  _summary: "Litoral que enche no ver\xE3o e cobra a conta na rede."
+  _summaryEn: A beach town that fills up in summer and strains its pipes.
+  _opening: "A temporada chegou e a cidade multiplicou de tamanho. Pousadas lotadas,
+    fila na padaria e caixa sorrindo por uma vez. Voc\xEA tem 20 turnos para que
+    a \xE1gua, o \xF4nibus e a paci\xEAncia de todo mundo aguentem."
+  _openingEn: The season is here and the city has multiplied in size. Inns are full,
+    the bakery has a line and the budget is smiling for once. You have 20 turns to
+    keep the water, the buses and everyone's patience going.
+  _victory: A temporada passou, os turistas voltaram para casa e a torneira continua
+    funcionando.
+  _victoryEn: The season is over, the tourists have gone home and the taps are still
+    running.
+  _inspiration: "Cidade fict\xEDcia. Na Baixada Santista e no Litoral Norte paulista,
+    a popula\xE7\xE3o chega a quintuplicar no ver\xE3o (Alesp, 2012)."
+  _inspirationEn: "Fictional city. On the S\xE3o Paulo coast, the population can
+    grow fivefold in summer (S\xE3o Paulo State Assembly, 2012)."
+  _knowledgeEntry: {fileID: 11400000, guid: 363d6be3fc107e78c81fab16ee515111, type: 2}
+  _overrides:
+  - Parameter: 3
+    InitialValue: 58
+  - Parameter: 0
+    InitialValue: 58
+  - Parameter: 5
+    InitialValue: 36
+  - Parameter: 1
+    InitialValue: 42
+  - Parameter: 8
+    InitialValue: 38
+  _derivaMultiplier: 1.15
+  _allowedEventIds:
+  - EventChuvasFortesEAlagamentos
+  - EventOndaDeCalor
+  - EventApagaoGeral
+  - EventBoomEconomico
+  - EventEpidemiaSazonal
+  - EventRepasseFederal
+  - EventOndaDeCriminalidade
+  - EventEscandaloDeCorrupcao
+  - EventTurnoTranquilo
+  - EventMutiraoComunitario
+  - EventCongestionamentoRecorde
+  - EventOndaMigratoria
+  - EventFestivalCultural
+  - EventPremioDeCidadeSustentavel
+  - EventDoacaoInternacional
+  - EventCriseHidrica
+  - EventEfeitoNIMBY
+  - EventEspeculacaoImobiliaria
+  - EventTragediaDosComunsUrbana
+  - EventReforcoDaCoesaoComunitaria
+  - EventFugaDeCerebros
+  - EventInfraestruturaUrbanaObsoleta
+  - EventBicicletasCompartilhadasBombam
+  - EventCidadeViraDestinoDeNomadesDigitais
+  - EventHackathonCivicoDaCidade
+  - EventDelegacaoInternacionalVisitaACidade
+  - EventDadosAbertosImpulsionamInovacaoLocal
+  - EventEpidemiaDeGolpesDigitais
+  - EventPremioInternacionalDeCidadeInteligente
+  _backgroundIndex: 7
+  _layoutSeed: 4242

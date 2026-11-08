@@ -13,6 +13,9 @@ public class MetaProgressionState
     // Fase tematica escolhida no mapa, vazia na cidade desconhecida, e temas ja jogados na rodada.
     public string CurrentTheme = string.Empty;
     public List<string> PlayedThemes = new List<string>();
+
+    // Cenario em jogo; vazio na rodada normal.
+    public string ScenarioId = string.Empty;
 }
 
 [Serializable]

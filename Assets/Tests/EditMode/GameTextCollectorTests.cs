@@ -10,8 +10,12 @@ public class GameTextCollectorTests
     public void EveryOriginHasTexts()
     {
         var items = GameTextCollector.Collect();
+        var hasThemes = AssetDatabase.FindAssets("t:ThemedPhaseData", new[] { "Assets/Data" }).Length > 0;
         foreach (GameTextOrigin origin in Enum.GetValues(typeof(GameTextOrigin)))
-            Assert.That(items.Any(item => item.Origin == origin), Is.True, origin.ToString());
+        {
+            if (origin != GameTextOrigin.Theme || hasThemes)
+                Assert.That(items.Any(item => item.Origin == origin), Is.True, origin.ToString());
+        }
     }
 
     [Test]

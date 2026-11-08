@@ -42,6 +42,9 @@ public sealed class SimPreset
 
     // Multiplica as derivas negativas na fase com este preset, pra fases 2+ poderem ser mais duras que a fase 1.
     public float DerivaMultiplier { get; init; } = 1f;
+
+    // Eventos que podem sair numa fase tematica; vazio libera todos.
+    public IReadOnlyList<string> AllowedEventIds { get; init; } = Array.Empty<string>();
 }
 
 public sealed class SimRules
@@ -74,6 +77,7 @@ public sealed class BalanceData
     public IReadOnlyList<SimEvent> Events { get; init; } = Array.Empty<SimEvent>();
     public IReadOnlyList<SimAdvantage> Advantages { get; init; } = Array.Empty<SimAdvantage>();
     public IReadOnlyList<SimPreset> Presets { get; init; } = Array.Empty<SimPreset>();
+    public IReadOnlyList<SimPreset> Themes { get; init; } = Array.Empty<SimPreset>();
 
     // Limiares de Pesquisa que liberam tiers novos, em ordem crescente.
     public IReadOnlyList<float> TierThresholds => Cards
@@ -183,6 +187,16 @@ public sealed class BalanceData
                     overrideValue => overrideValue.InitialValue),
                 DerivaMultiplier = preset.DerivaMultiplier ?? 1f,
             }).ToList(),
+            Themes = dto.Themes.Select(theme => new SimPreset
+            {
+                Id = theme.Id,
+                Name = theme.Name,
+                Overrides = theme.Overrides.ToDictionary(
+                    overrideValue => ParseEnum<CityParameterType>(overrideValue.Parameter),
+                    overrideValue => overrideValue.InitialValue),
+                DerivaMultiplier = theme.DerivaMultiplier ?? 1f,
+                AllowedEventIds = theme.AllowedEvents,
+            }).ToList(),
         };
     }
 
@@ -212,6 +226,7 @@ public sealed class BalanceData
         public List<EventDto> Events { get; set; } = new();
         public List<AdvantageDto> Advantages { get; set; } = new();
         public List<PresetDto> Presets { get; set; } = new();
+        public List<PresetDto> Themes { get; set; } = new();
     }
 
     private sealed class ModifierDto
@@ -280,5 +295,6 @@ public sealed class BalanceData
         public string Name { get; set; } = "";
         public List<OverrideDto> Overrides { get; set; } = new();
         public float? DerivaMultiplier { get; set; }
+        public List<string> AllowedEvents { get; set; } = new();
     }
 }

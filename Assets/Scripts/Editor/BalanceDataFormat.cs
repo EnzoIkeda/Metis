@@ -76,6 +76,16 @@ public static class BalanceDataFormat
     }
 
     [Serializable]
+    public class ThemeDto
+    {
+        public string Id;
+        public string Name;
+        public List<OverrideDto> Overrides = new List<OverrideDto>();
+        public float DerivaMultiplier;
+        public List<string> AllowedEvents = new List<string>();
+    }
+
+    [Serializable]
     public class ParameterDto
     {
         public string Parameter;
@@ -105,6 +115,7 @@ public static class BalanceDataFormat
         public List<EventDto> Events = new List<EventDto>();
         public List<AdvantageDto> Advantages = new List<AdvantageDto>();
         public List<PresetDto> Presets = new List<PresetDto>();
+        public List<ThemeDto> Themes = new List<ThemeDto>();
     }
 
     // Roda a acao com a cena da fase carregada, abrindo e fechando ela so se ainda nao estava aberta.

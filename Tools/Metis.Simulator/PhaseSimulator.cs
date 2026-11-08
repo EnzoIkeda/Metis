@@ -111,7 +111,8 @@ public static class PhaseSimulator
         var machine = new TurnMachine(stats, setup.VictoryTurnCount);
         var deck = DeckBuilder.Build(data.Cards, setup.Archetype, setup.LoadedCardIds);
         var hand = new CardHand<SimCard>(deck, new Random(seeds.Hand), setup.FiniteDeck);
-        var events = new RandomEventPool<SimEvent>(data.Events, new Random(seeds.Events));
+        var eventPool = CityPresetRules.AllowedEvents(data.Events, setup.Preset?.AllowedEventIds as IReadOnlyCollection<string>);
+        var events = new RandomEventPool<SimEvent>(eventPool, new Random(seeds.Events));
         var policyRandom = new Random(seeds.Policy);
         history?.CaptureStart(stats);
 
@@ -151,7 +152,7 @@ public static class PhaseSimulator
                     Data = data,
                     Random = policyRandom,
                     Deck = deck,
-                    Events = data.Events,
+                    Events = eventPool,
                     HandSize = setup.HandSize,
                     VictoryTurnCount = setup.VictoryTurnCount,
                     IsRevealed = hand.IsRevealed || revealedForPhase,

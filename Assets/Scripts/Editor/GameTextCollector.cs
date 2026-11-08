@@ -25,6 +25,12 @@ public static class GameTextCollector
             ("_tradeOffs", "_tradeOffsEn", "TradeOffsPt", "TradeOffsEn"));
         AddPairs(items, GameTextOrigin.News, "NewsStoryData", GameTextEditKind.News, ("_headline", "_headlineEn", "HeadlinePt", "HeadlineEn"), ("_body", "_bodyEn", "BodyPt", "BodyEn"));
         AddPairs(items, GameTextOrigin.News, "NewsColumnData", GameTextEditKind.NewsColumn, ("_text", "_textEn", "TextPt", "TextEn"));
+        AddPairs(items, GameTextOrigin.Theme, "ThemedPhaseData", GameTextEditKind.Theme,
+            ("_themeName", "_themeNameEn", "NamePt", "NameEn"),
+            ("_summary", "_summaryEn", "SummaryPt", "SummaryEn"),
+            ("_opening", "_openingEn", "OpeningPt", "OpeningEn"),
+            ("_victory", "_victoryEn", "VictoryPt", "VictoryEn"),
+            ("_inspiration", "_inspirationEn", "InspirationPt", "InspirationEn"));
         AddStructures(items);
         AddKnowledgeSources(items);
         AddNestedPairs(items, GameTextOrigin.RelationNote, "InteractionNotesData", "_notes", "TextPt", "TextEn", "Reference");

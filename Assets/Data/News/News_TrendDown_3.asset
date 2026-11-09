@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_TrendDown_3
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 11
+  _parameter: 0
+  _targetId: 
+  _headline: '{parametro} ladeira abaixo'
+  _headlineEn: '{parametro} heading downhill'
+  _body: "Perda de {variacao} em tr\xEAs turnos. Especialistas recomendam olhar o
+    mapa da cidade antes que a ladeira acabe."
+  _bodyEn: Down {variacao} in three turns. Experts suggest checking the city map
+    before the hill runs out.

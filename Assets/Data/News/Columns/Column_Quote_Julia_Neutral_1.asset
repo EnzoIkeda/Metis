@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc0deea8ee004ebaa891347377b0f40b, type: 3}
+  m_Name: Column_Quote_Julia_Neutral_1
+  m_EditorClassIdentifier: Metis.Runtime::NewsColumnData
+  _kind: 0
+  _citizen: 2
+  _mood: 1
+  _text: "Meu trabalho de escola \xE9 medir a cidade. Por enquanto, a conclus\xE3o
+    \xE9: precisa de mais dados."
+  _textEn: 'My school project is measuring the city. So far, the conclusion is: we
+    need more data.'

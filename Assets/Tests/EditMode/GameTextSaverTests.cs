@@ -70,6 +70,22 @@ public class GameTextSaverTests
     }
 
     [Test]
+    public void PrepareOnRealNewsColumnChangesOnlyThatTextAndWritesNothing()
+    {
+        if (File.Exists(GameTextSaver.NewsPath) == false)
+            Assert.Ignore("Fonte fora do repositório, ausente nesta máquina.");
+        var before = File.ReadAllText(GameTextSaver.NewsPath);
+        var item = GameTextCollector.Collect().First(text => text.EditKind == GameTextEditKind.NewsColumn);
+
+        var plan = GameTextSaver.Prepare(item, item.Pt + " teste", item.En);
+
+        Assert.That(plan.Errors, Is.Empty);
+        Assert.That(plan.Warnings.Where(w => w.StartsWith("A importação")), Is.Empty);
+        Assert.That(plan.NewContent.Length, Is.EqualTo(before.Length + " teste".Length));
+        Assert.That(File.ReadAllText(GameTextSaver.NewsPath), Is.EqualTo(before));
+    }
+
+    [Test]
     public void EveryEditableTextKnowsWhereToWrite()
     {
         foreach (var item in GameTextCollector.Collect())
@@ -85,7 +101,7 @@ public class GameTextSaverTests
                 continue;
             }
             Assert.That(item.PtField, Is.Not.Empty, item.Id);
-            if (item.EditKind == GameTextEditKind.News || item.EditKind == GameTextEditKind.Knowledge)
+            if (item.EditKind == GameTextEditKind.News || item.EditKind == GameTextEditKind.NewsColumn || item.EditKind == GameTextEditKind.Knowledge)
                 Assert.That(item.JsonPtKey, Is.Not.Empty, item.Id);
         }
     }

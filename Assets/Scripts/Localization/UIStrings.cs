@@ -481,16 +481,24 @@ public static class UIStrings
     public static string NewsMood(float wellbeing)
     {
         string mood;
-        if (wellbeing >= 70f)
-            mood = IsPt ? "eufórica" : "ecstatic";
-        else if (wellbeing >= 55f)
-            mood = IsPt ? "satisfeita" : "pleased";
-        else if (wellbeing >= 40f)
-            mood = IsPt ? "desconfiada" : "suspicious";
-        else if (wellbeing >= 25f)
-            mood = IsPt ? "irritada" : "grumpy";
-        else
-            mood = IsPt ? "em pé de guerra" : "up in arms";
+        switch (NewsRules.MoodLevel(wellbeing))
+        {
+            case 4:
+                mood = IsPt ? "eufórica" : "ecstatic";
+                break;
+            case 3:
+                mood = IsPt ? "satisfeita" : "pleased";
+                break;
+            case 2:
+                mood = IsPt ? "desconfiada" : "suspicious";
+                break;
+            case 1:
+                mood = IsPt ? "irritada" : "grumpy";
+                break;
+            default:
+                mood = IsPt ? "em pé de guerra" : "up in arms";
+                break;
+        }
         return IsPt
             ? $"{ParameterIcon(CityStats.AnchorParameter)} Humor da população: <b>{mood}</b>"
             : $"{ParameterIcon(CityStats.AnchorParameter)} Public mood: <b>{mood}</b>";
@@ -532,6 +540,36 @@ public static class UIStrings
     public static string NewsNextButton => IsPt ? "Próxima" : "Next";
     public static string NewsCloseButton => IsPt ? "Fechar" : "Close";
     public static string NewsWhyButton => IsPt ? "Por que mudou?" : "Why did it change?";
+    public static string NewsLearnMoreButton => IsPt ? "Saiba mais" : "Learn more";
+
+    public static string NewsCitizenQuote(NewsCitizen citizen, string quote)
+    {
+        string name;
+        switch (citizen)
+        {
+            case NewsCitizen.DonaCida:
+                name = IsPt ? "Dona Cida, da padaria" : "Mrs. Cida, from the bakery";
+                break;
+            case NewsCitizen.SeuArnaldo:
+                name = IsPt ? "Seu Arnaldo, taxista" : "Arnaldo, cab driver";
+                break;
+            default:
+                name = IsPt ? "Júlia, da escola técnica" : "Júlia, from the technical school";
+                break;
+        }
+        return $"<b>{name}:</b> {quote}";
+    }
+
+    public static string NewsColumnTitle(NewsColumnKind kind)
+    {
+        switch (kind)
+        {
+            case NewsColumnKind.Classified: return IsPt ? "Classificados" : "Classifieds";
+            case NewsColumnKind.Horoscope: return IsPt ? "Horóscopo da gestão" : "Management horoscope";
+            case NewsColumnKind.PollutionForecast: return IsPt ? "Previsão da poluição" : "Pollution forecast";
+            default: return string.Empty;
+        }
+    }
 
     public static string ModelReportTitle => IsPt ? "RELATÓRIO TÉCNICO 01" : "TECHNICAL REPORT 01";
     public static string ModelReportButton => IsPt ? "Relatório técnico" : "Technical report";

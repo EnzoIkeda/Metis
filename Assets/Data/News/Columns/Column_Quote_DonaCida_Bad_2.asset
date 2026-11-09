@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc0deea8ee004ebaa891347377b0f40b, type: 3}
+  m_Name: Column_Quote_DonaCida_Bad_2
+  m_EditorClassIdentifier: Metis.Runtime::NewsColumnData
+  _kind: 0
+  _citizen: 0
+  _mood: 0
+  _text: "O povo entra, pede caf\xE9 e reclama da cidade. O caf\xE9 eu cobro, a reclama\xE7\xE3o
+    sai de gra\xE7a."
+  _textEn: People come in, order coffee and complain about the city. Coffee I charge
+    for, complaints are free.

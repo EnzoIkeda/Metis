@@ -24,6 +24,7 @@ public static class GameTextCollector
             ("_realWorld", "_realWorldEn", "RealWorldPt", "RealWorldEn"),
             ("_tradeOffs", "_tradeOffsEn", "TradeOffsPt", "TradeOffsEn"));
         AddPairs(items, GameTextOrigin.News, "NewsStoryData", GameTextEditKind.News, ("_headline", "_headlineEn", "HeadlinePt", "HeadlineEn"), ("_body", "_bodyEn", "BodyPt", "BodyEn"));
+        AddPairs(items, GameTextOrigin.News, "NewsColumnData", GameTextEditKind.NewsColumn, ("_text", "_textEn", "TextPt", "TextEn"));
         AddStructures(items);
         AddKnowledgeSources(items);
         AddNestedPairs(items, GameTextOrigin.RelationNote, "InteractionNotesData", "_notes", "TextPt", "TextEn", "Reference");

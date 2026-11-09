@@ -41,11 +41,10 @@ public static class GameTextSaver
                 plan.Destination = item.Location;
                 break;
             case GameTextEditKind.News:
-                PrepareImported(plan, NewsPath, "Stories", path =>
-                {
-                    var report = NewsStoryImporter.Import(path, apply: false);
-                    return (report.Errors, report.Changes);
-                });
+                PrepareNews(plan, "Stories");
+                break;
+            case GameTextEditKind.NewsColumn:
+                PrepareNews(plan, "Columns");
                 break;
             case GameTextEditKind.Knowledge:
                 PrepareImported(plan, FichasPath, "Entries", path =>
@@ -91,6 +90,7 @@ public static class GameTextSaver
                 ApplyToAsset(item.Location, item.PtField, item.EnField, plan.Pt, plan.En);
                 return true;
             case GameTextEditKind.News:
+            case GameTextEditKind.NewsColumn:
                 WriteJson(NewsPath, plan.NewContent);
                 return Reported(NewsStoryImporter.Import(FullPath(NewsPath), apply: true).Errors, out error);
             case GameTextEditKind.Knowledge:
@@ -124,6 +124,15 @@ public static class GameTextSaver
     {
         error = errors.Count > 0 ? string.Join("\n", errors) : null;
         return errors.Count == 0;
+    }
+
+    private static void PrepareNews(Plan plan, string listKey)
+    {
+        PrepareImported(plan, NewsPath, listKey, path =>
+        {
+            var report = NewsStoryImporter.Import(path, apply: false);
+            return (report.Errors, report.Changes);
+        });
     }
 
     private static void PrepareImported(Plan plan, string relativePath, string listKey, Func<string, (List<string> Errors, List<string> Changes)> preview)

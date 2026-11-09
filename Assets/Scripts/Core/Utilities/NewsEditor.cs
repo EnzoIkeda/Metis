@@ -14,6 +14,35 @@ public enum NewsTrigger
     SharpDrop,
     ResearchTier,
     Crowding,
+    TrendUp,
+    TrendDown,
+    CardPlayed,
+    EventHappened,
+}
+
+// Tipo de texto curto fora das noticias. So acrescentar valores no fim.
+public enum NewsColumnKind
+{
+    CitizenQuote,
+    Classified,
+    Horoscope,
+    PollutionForecast,
+}
+
+// Moradores que comentam o turno. So acrescentar valores no fim.
+public enum NewsCitizen
+{
+    DonaCida,
+    SeuArnaldo,
+    Julia,
+}
+
+// Faixa usada para escolher o tom de uma fala, do horoscopo ou da previsao. So acrescentar valores no fim.
+public enum NewsMoodBand
+{
+    Bad,
+    Neutral,
+    Good,
 }
 
 // Regras de uma noticia, sem o texto, pra selecao rodar igual no jogo e nos testes.
@@ -24,6 +53,18 @@ public interface INewsStoryDefinition
 
     // So vale nos gatilhos que dependem de um parametro.
     CityParameterType Parameter { get; }
+
+    // Carta ou evento citado; vazio nos outros gatilhos.
+    string TargetId { get; }
+}
+
+// Regras de uma fala ou secao curta, sem o texto.
+public interface INewsColumnDefinition
+{
+    string Id { get; }
+    NewsColumnKind Kind { get; }
+    NewsCitizen Citizen { get; }
+    NewsMoodBand Mood { get; }
 }
 
 // Algo que aconteceu no turno e pode virar noticia.
@@ -34,6 +75,7 @@ public struct NewsSignal
     public float Value;
     public float Delta;
     public int Priority;
+    public string TargetId;
 }
 
 // Uma noticia publicada, com os numeros que o texto cita; o texto sai do asset na hora de mostrar.
@@ -50,6 +92,9 @@ public class NewsItem
     public bool HasCause;
     public ContributionSource CauseSource;
     public CityParameterType CauseFrom;
+
+    // Carta ou evento citado, para o jornal apontar a ficha.
+    public string TargetId = string.Empty;
 }
 
 // Edicao de um turno: a primeira noticia e a manchete, as outras sao notas.
@@ -61,6 +106,13 @@ public class NewsEdition
     public float Wellbeing;
     public float WellbeingDelta;
     public List<NewsItem> Items = new List<NewsItem>();
+
+    // Fala e secao curta da edicao; vazias em save antigo, e a tela esconde a area.
+    public string QuoteId = string.Empty;
+    public string ColumnId = string.Empty;
+
+    // Numero citado pela previsao da poluicao.
+    public float ColumnValue;
 }
 
 // Limiares do que vira noticia, tirados da configuracao da fase.
@@ -69,9 +121,12 @@ public sealed class NewsRules
     // Variacao no turno, no indice, a partir da qual a alta ou a queda vira noticia.
     public const float DefaultSharpChange = 6f;
 
+    // Variacao total, no indice, a partir da qual uma sequencia de turnos vira tendencia.
+    public const float DefaultTrendChange = 8f;
+
     private readonly Dictionary<CityParameterType, CityParameterConfig> _configs = new Dictionary<CityParameterType, CityParameterConfig>();
 
-    public NewsRules(IEnumerable<CityParameterConfig> parameters, float crisisThreshold, float excessThreshold, IReadOnlyList<float> tierThresholds, float sharpChange = DefaultSharpChange)
+    public NewsRules(IEnumerable<CityParameterConfig> parameters, float crisisThreshold, float excessThreshold, IReadOnlyList<float> tierThresholds, float sharpChange = DefaultSharpChange, float trendChange = DefaultTrendChange)
     {
         foreach (var config in parameters)
             _configs[config.Parameter] = config;
@@ -79,12 +134,14 @@ public sealed class NewsRules
         ExcessThreshold = excessThreshold;
         TierThresholds = tierThresholds ?? Array.Empty<float>();
         SharpChange = sharpChange;
+        TrendChange = trendChange;
     }
 
     public float CrisisThreshold { get; }
     public float ExcessThreshold { get; }
     public IReadOnlyList<float> TierThresholds { get; }
     public float SharpChange { get; }
+    public float TrendChange { get; }
 
     public static bool UsesParameter(NewsTrigger trigger)
     {
@@ -98,6 +155,67 @@ public sealed class NewsRules
             case NewsTrigger.SharpDrop:
                 return true;
             default:
+                return false;
+        }
+    }
+
+    public static bool IsTrend(NewsTrigger trigger)
+    {
+        return trigger == NewsTrigger.TrendUp || trigger == NewsTrigger.TrendDown;
+    }
+
+    // Noticia ligada a uma carta ou evento especifico.
+    public static bool UsesTarget(NewsTrigger trigger)
+    {
+        return trigger == NewsTrigger.CardPlayed || trigger == NewsTrigger.EventHappened;
+    }
+
+    // Faixa de 0 (pior) a 4 (melhor) do humor da populacao.
+    public static int MoodLevel(float wellbeing)
+    {
+        if (wellbeing >= 70f)
+            return 4;
+        if (wellbeing >= 55f)
+            return 3;
+        if (wellbeing >= 40f)
+            return 2;
+        return wellbeing >= 25f ? 1 : 0;
+    }
+
+    public static NewsMoodBand MoodBand(float wellbeing)
+    {
+        var level = MoodLevel(wellbeing);
+        if (level >= 3)
+            return NewsMoodBand.Good;
+        return level == 2 ? NewsMoodBand.Neutral : NewsMoodBand.Bad;
+    }
+
+    public NewsMoodBand ForecastBand(float sustainability)
+    {
+        if (sustainability <= CrisisThreshold)
+            return NewsMoodBand.Bad;
+        return sustainability >= ExcessThreshold ? NewsMoodBand.Good : NewsMoodBand.Neutral;
+    }
+
+    // Morador que entende do assunto; os outros parametros ficam sem dono.
+    public static bool TryCitizenFor(CityParameterType parameter, out NewsCitizen citizen)
+    {
+        switch (parameter)
+        {
+            case CityParameterType.Renda:
+            case CityParameterType.Saude:
+                citizen = NewsCitizen.DonaCida;
+                return true;
+            case CityParameterType.Mobilidade:
+            case CityParameterType.Energia:
+                citizen = NewsCitizen.SeuArnaldo;
+                return true;
+            case CityParameterType.Pesquisa:
+            case CityParameterType.Sustentabilidade:
+                citizen = NewsCitizen.Julia;
+                return true;
+            default:
+                citizen = default;
                 return false;
         }
     }
@@ -141,7 +259,12 @@ public sealed class NewsRules
             case NewsTrigger.SharpDrop: return 55;
             case NewsTrigger.SharpRise: return 50;
             case NewsTrigger.EnteredExcess: return 45;
+            case NewsTrigger.TrendUp:
+            case NewsTrigger.TrendDown:
+                return 42;
             case NewsTrigger.Crowding: return 40;
+            case NewsTrigger.EventHappened: return 35;
+            case NewsTrigger.CardPlayed: return 30;
             default: return 0;
         }
     }
@@ -175,6 +298,14 @@ public static class NewsEditor
 
     // Noticia publicada nestas ultimas edicoes so volta se nao houver outra.
     public const int RecentEditions = 5;
+
+    // Turnos seguidos no mesmo sentido para virar tendencia.
+    public const int TrendTurns = 3;
+
+    private const ulong QuoteSalt = 0xA24BAED4963EE407UL;
+    private const ulong ColumnSalt = 0x9FB21C651E98DF25UL;
+
+    private static readonly NewsColumnKind[] ColumnRotation = { NewsColumnKind.Classified, NewsColumnKind.Horoscope, NewsColumnKind.PollutionForecast };
 
     // Um sinal por parametro (o mais importante) e os sinais sem parametro, do mais ao menos importante.
     public static List<NewsSignal> DetectSignals(float[] before, float[] after, NewsRules rules)
@@ -230,7 +361,13 @@ public static class NewsEditor
         if (populacaoFrom <= rules.CrowdingBaseline && populacaoTo > rules.CrowdingBaseline)
             signals.Add(Signal(NewsTrigger.Crowding, CityParameterType.Populacao, populacaoTo, populacaoTo - populacaoFrom));
 
-        // Ordem estavel: prioridade, depois o tamanho da variacao, depois a ordem do enum.
+        SortSignals(signals);
+        return signals;
+    }
+
+    // Ordem estavel: prioridade, depois o tamanho da variacao, depois a ordem do enum.
+    private static void SortSignals(List<NewsSignal> signals)
+    {
         signals.Sort((a, b) =>
         {
             var byPriority = b.Priority.CompareTo(a.Priority);
@@ -239,6 +376,88 @@ public static class NewsEditor
             var byDelta = Math.Abs(b.Delta).CompareTo(Math.Abs(a.Delta));
             return byDelta != 0 ? byDelta : a.Parameter.CompareTo(b.Parameter);
         });
+    }
+
+    // Valores do comeco ao fim do trecho recente da fase, do mais antigo ao turno atual.
+    public static List<float[]> RecentSnapshots(float[] startValues, IReadOnlyList<PhaseTurnRecord> turns, PhaseTurnRecord turn)
+    {
+        var snapshots = new List<float[]>();
+        var previous = new List<PhaseTurnRecord>();
+        foreach (var candidate in turns)
+        {
+            if (candidate.TurnIndex < turn.TurnIndex)
+                previous.Add(candidate);
+        }
+        if (previous.Count <= TrendTurns - 1)
+            snapshots.Add(startValues);
+        for (var i = Math.Max(0, previous.Count - TrendTurns); i < previous.Count; i++)
+            snapshots.Add(previous[i].EndValues);
+        snapshots.Add(turn.EndValues);
+        return snapshots;
+    }
+
+    // Parametros que andaram no mesmo sentido nos ultimos turnos e ainda nao viraram noticia de tendencia ha pouco.
+    public static List<NewsSignal> DetectTrends(IReadOnlyList<float[]> snapshots, NewsRules rules, IReadOnlyList<NewsEdition> previous)
+    {
+        var signals = new List<NewsSignal>();
+        if (snapshots == null || snapshots.Count < TrendTurns + 1)
+            return signals;
+        var first = snapshots.Count - TrendTurns - 1;
+        for (var i = first; i < snapshots.Count; i++)
+        {
+            if (snapshots[i] == null || snapshots[i].Length != PhaseHistory.Parameters.Length)
+                return signals;
+        }
+
+        foreach (var parameter in PhaseHistory.Parameters)
+        {
+            var direction = 0;
+            for (var i = first + 1; i < snapshots.Count && (i == first + 1 || direction != 0); i++)
+            {
+                var step = Math.Sign(PhaseHistory.Read(snapshots[i], parameter) - PhaseHistory.Read(snapshots[i - 1], parameter));
+                direction = i == first + 1 || step == direction ? step : 0;
+            }
+            var total = PhaseHistory.Read(snapshots[snapshots.Count - 1], parameter) - PhaseHistory.Read(snapshots[first], parameter);
+            if (direction == 0 || Math.Abs(total) < rules.TrendChange || HadRecentTrend(previous, parameter))
+                continue;
+
+            var trigger = direction > 0 ? NewsTrigger.TrendUp : NewsTrigger.TrendDown;
+            var priority = NewsRules.BasePriority(trigger) + (parameter == CityStats.AnchorParameter ? AnchorPriorityBonus : 0);
+            signals.Add(new NewsSignal { Trigger = trigger, Parameter = parameter, Value = PhaseHistory.Read(snapshots[snapshots.Count - 1], parameter), Delta = total, Priority = priority });
+        }
+        return signals;
+    }
+
+    private static bool HadRecentTrend(IReadOnlyList<NewsEdition> previous, CityParameterType parameter)
+    {
+        if (previous == null)
+            return false;
+        for (var i = Math.Max(0, previous.Count - RecentEditions); i < previous.Count; i++)
+        {
+            foreach (var item in previous[i].Items)
+            {
+                if (NewsRules.IsTrend(item.Trigger) && item.Parameter == parameter)
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    // Tudo o que pode virar noticia no turno: sinais do turno, tendencias de parametros ainda sem sinal, evento e carta.
+    public static List<NewsSignal> BuildSignals(IReadOnlyList<float[]> snapshots, NewsRules rules, IReadOnlyList<NewsEdition> previous, string cardId, string eventId)
+    {
+        var count = snapshots != null ? snapshots.Count : 0;
+        var signals = count >= 2 ? DetectSignals(snapshots[count - 2], snapshots[count - 1], rules) : new List<NewsSignal>();
+        foreach (var trend in DetectTrends(snapshots, rules, previous))
+        {
+            if (signals.Exists(signal => NewsRules.UsesParameter(signal.Trigger) && signal.Parameter == trend.Parameter) == false)
+                signals.Add(trend);
+        }
+        if (string.IsNullOrEmpty(eventId) == false)
+            signals.Add(new NewsSignal { Trigger = NewsTrigger.EventHappened, Priority = NewsRules.BasePriority(NewsTrigger.EventHappened), TargetId = eventId });
+        if (string.IsNullOrEmpty(cardId) == false)
+            signals.Add(new NewsSignal { Trigger = NewsTrigger.CardPlayed, Priority = NewsRules.BasePriority(NewsTrigger.CardPlayed), TargetId = cardId });
+        SortSignals(signals);
         return signals;
     }
 
@@ -259,15 +478,15 @@ public static class NewsEditor
         {
             if (edition.Items.Count >= MaxItems)
                 break;
-            var story = Pick(stories, signal.Trigger, signal.Parameter, recent, edition, random);
+            var story = Pick(stories, signal.Trigger, signal.Parameter, signal.TargetId, recent, edition, random);
             if (story == null)
                 continue;
-            edition.Items.Add(new NewsItem { StoryId = story.Id, Trigger = signal.Trigger, Parameter = signal.Parameter, Value = signal.Value, Delta = signal.Delta });
+            edition.Items.Add(new NewsItem { StoryId = story.Id, Trigger = signal.Trigger, Parameter = signal.Parameter, Value = signal.Value, Delta = signal.Delta, TargetId = signal.TargetId ?? string.Empty });
         }
 
         if (edition.Items.Count == 0)
         {
-            var quiet = Pick(stories, NewsTrigger.QuietTurn, default, recent, edition, random);
+            var quiet = Pick(stories, NewsTrigger.QuietTurn, default, null, recent, edition, random);
             if (quiet != null)
                 edition.Items.Add(new NewsItem { StoryId = quiet.Id, Trigger = NewsTrigger.QuietTurn, Parameter = CityStats.AnchorParameter, Value = wellbeing, Delta = wellbeingDelta });
         }
@@ -281,7 +500,7 @@ public static class NewsEditor
         where TStory : class, INewsStoryDefinition
     {
         var edition = new NewsEdition { TurnIndex = 0, Wellbeing = wellbeing };
-        var story = Pick(stories, NewsTrigger.Inauguration, default, new HashSet<string>(), edition, random);
+        var story = Pick(stories, NewsTrigger.Inauguration, default, null, new HashSet<string>(), edition, random);
         if (story != null)
             edition.Items.Add(new NewsItem { StoryId = story.Id, Trigger = NewsTrigger.Inauguration, Parameter = CityStats.AnchorParameter, Value = wellbeing });
         return edition;
@@ -300,7 +519,7 @@ public static class NewsEditor
         return ids;
     }
 
-    private static TStory Pick<TStory>(IReadOnlyList<TStory> stories, NewsTrigger trigger, CityParameterType parameter,
+    private static TStory Pick<TStory>(IReadOnlyList<TStory> stories, NewsTrigger trigger, CityParameterType parameter, string targetId,
         HashSet<string> recent, NewsEdition edition, Random random)
         where TStory : class, INewsStoryDefinition
     {
@@ -312,6 +531,8 @@ public static class NewsEditor
                 continue;
             if (NewsRules.UsesParameter(trigger) && story.Parameter != parameter)
                 continue;
+            if (NewsRules.UsesTarget(trigger) && story.TargetId != targetId)
+                continue;
             if (edition.Items.Exists(item => item.StoryId == story.Id))
                 continue;
             any.Add(story);
@@ -319,8 +540,63 @@ public static class NewsEditor
                 fresh.Add(story);
         }
 
-        var pool = fresh.Count > 0 ? fresh : any;
+        // Carta ou evento tem texto proprio: repetido ha pouco, fica de fora e nao ocupa a vaga.
+        var pool = fresh.Count > 0 || NewsRules.UsesTarget(trigger) ? fresh : any;
         return pool.Count == 0 ? null : pool[random.Next(pool.Count)];
+    }
+
+    // Escolhe a fala e a secao da edicao, com sorteios separados dos que escolhem as noticias.
+    public static void ComposeColumns<TColumn>(NewsEdition edition, IReadOnlyList<TColumn> columns, IReadOnlyList<NewsEdition> previous, ulong phaseSeed, float sustainability, NewsRules rules)
+        where TColumn : class, INewsColumnDefinition
+    {
+        edition.ColumnValue = sustainability;
+        var mood = NewsRules.MoodBand(edition.Wellbeing);
+        var citizen = CitizenFor(edition, mood);
+        edition.QuoteId = PickColumn(columns, previous, edition.TurnIndex, phaseSeed ^ QuoteSalt, column => column.Citizen == citizen && column.Mood == mood, NewsColumnKind.CitizenQuote);
+
+        var kind = ColumnRotation[Math.Max(0, edition.TurnIndex) % ColumnRotation.Length];
+        var band = kind == NewsColumnKind.PollutionForecast ? rules.ForecastBand(sustainability) : mood;
+        edition.ColumnId = PickColumn(columns, previous, edition.TurnIndex, phaseSeed ^ ColumnSalt, column => kind == NewsColumnKind.Classified || column.Mood == band, kind);
+    }
+
+    // Quem entende do parametro da manchete; sem dono, os moradores se revezam a partir do humor.
+    private static NewsCitizen CitizenFor(NewsEdition edition, NewsMoodBand mood)
+    {
+        if (edition.Items.Count > 0)
+        {
+            var headline = edition.Items[0];
+            if ((NewsRules.UsesParameter(headline.Trigger) || NewsRules.IsTrend(headline.Trigger)) && NewsRules.TryCitizenFor(headline.Parameter, out var expert))
+                return expert;
+        }
+        var citizens = Enum.GetValues(typeof(NewsCitizen)).Length;
+        return (NewsCitizen)(((int)mood + Math.Max(0, edition.TurnIndex)) % citizens);
+    }
+
+    private static string PickColumn<TColumn>(IReadOnlyList<TColumn> columns, IReadOnlyList<NewsEdition> previous, int turnIndex, ulong seed, Func<TColumn, bool> fits, NewsColumnKind kind)
+        where TColumn : class, INewsColumnDefinition
+    {
+        var recent = new HashSet<string>(StringComparer.Ordinal);
+        if (previous != null)
+        {
+            for (var i = Math.Max(0, previous.Count - RecentEditions); i < previous.Count; i++)
+            {
+                recent.Add(previous[i].QuoteId);
+                recent.Add(previous[i].ColumnId);
+            }
+        }
+
+        var fresh = new List<TColumn>();
+        var any = new List<TColumn>();
+        foreach (var column in columns)
+        {
+            if (column == null || column.Kind != kind || fits(column) == false)
+                continue;
+            any.Add(column);
+            if (recent.Contains(column.Id) == false)
+                fresh.Add(column);
+        }
+        var pool = fresh.Count > 0 ? fresh : any;
+        return pool.Count == 0 ? string.Empty : pool[EditionRandom(seed, turnIndex).Next(pool.Count)].Id;
     }
 
     // Maior parcela do turno no mesmo sentido da variacao; o limite da escala nao conta como causa.
@@ -352,6 +628,30 @@ public static class NewsEditor
             found = true;
         }
         return found;
+    }
+
+    // Troca um marcador; unidade que ja termina em ponto nao ganha um segundo ponto da frase.
+    public static string FillMarker(string text, string marker, string value)
+    {
+        if (EndsWithPeriod(value))
+            text = text.Replace(marker + ".", value);
+        return text.Replace(marker, value);
+    }
+
+    // Olha o ultimo caractere visivel: a unidade pode vir fechada por marcacao de tamanho.
+    private static bool EndsWithPeriod(string value)
+    {
+        if (string.IsNullOrEmpty(value))
+            return false;
+        var end = value.Length;
+        while (end > 0 && value[end - 1] == '>')
+        {
+            var open = value.LastIndexOf('<', end - 1);
+            if (open < 0)
+                break;
+            end = open;
+        }
+        return end > 0 && value[end - 1] == '.';
     }
 
     // Gerador da edicao, pela semente da fase e o turno: reabrir ou continuar a rodada repete a mesma edicao.

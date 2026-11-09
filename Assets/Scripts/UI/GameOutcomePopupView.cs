@@ -28,9 +28,17 @@ public class GameOutcomePopupView : MonoBehaviour
         if (_titleText != null)
             _titleText.text = _outcomeToShowFor == GameOutcome.Victory ? UIStrings.VictoryTitle : UIStrings.GameOverTitle;
         if (_messageText != null)
-            _messageText.text = _outcomeToShowFor == GameOutcome.Victory ? UIStrings.VictoryMessage : UIStrings.GameOverMessage;
+            _messageText.text = OutcomeMessage();
 
         Hide();
+    }
+
+    private string OutcomeMessage()
+    {
+        if (_outcomeToShowFor != GameOutcome.Victory)
+            return UIStrings.GameOverMessage;
+        var theme = _turnManager != null ? _turnManager.Theme : null;
+        return theme != null ? theme.Victory : UIStrings.VictoryMessage;
     }
 
     private void OnDisable()
@@ -58,6 +66,12 @@ public class GameOutcomePopupView : MonoBehaviour
     private void HandleCloseClicked()
     {
         Hide();
+
+        if (SessionMode.IsScenario)
+        {
+            SceneManager.LoadScene(MetaProgressionManager.ScenarioSelectionSceneName);
+            return;
+        }
 
         if (_outcomeToShowFor == GameOutcome.GameOver)
         {

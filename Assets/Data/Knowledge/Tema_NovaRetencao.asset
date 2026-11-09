@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Tema_NovaRetencao
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Congestionamento e \xF4nibus"
+  _titleEn: Congestion and buses
+  _category: 2
+  _unlockTrigger: 12
+  _summary: "\xD4nibus presos no mesmo tr\xE2nsito dos carros fazem menos viagens
+    com a mesma frota e afastam passageiros, que voltam para o carro e pioram o tr\xE2nsito.
+    Faixas e corredores exclusivos cortam esse ciclo."
+  _summaryEn: Buses stuck in the same traffic as cars make fewer trips with the same
+    fleet and drive riders away, who go back to their cars and make traffic worse.
+    Dedicated lanes and corridors break that cycle.
+  _realWorld: "Em 2026, os \xF4nibus de S\xE3o Paulo rodavam a 15 km/h em m\xE9dia
+    no pico da manh\xE3, e a 20 km/h nos corredores. Em 2025, Curitiba, S\xE3o Paulo
+    e Recife lideraram as horas perdidas entre nove capitais."
+  _realWorldEn: "In 2026, S\xE3o Paulo buses averaged 15 km/h in the morning peak
+    and 20 km/h in corridors. In 2025, Curitiba, S\xE3o Paulo and Recife led hours
+    lost among nine state capitals."
+  _tradeOffs: "Faixa exclusiva tira espa\xE7o do carro e gera reclama\xE7\xE3o imediata;
+    o ganho fica com quem anda de \xF4nibus."
+  _tradeOffsEn: A bus lane takes space from cars and draws immediate complaints;
+    the gain goes to bus riders.
+  _sources:
+  - Label: "Di\xE1rio do Transporte, velocidade dos \xF4nibus (2026)"
+    Url: https://diariodotransporte.com.br/2026/09/25/sptrans-volta-a-suspender-contrato-de-estudos-de-tres-corredores-de-onibus-em-sao-paulo-em-meio-a-atrasos-nas-obras-e-velocidade-dos-coletivos-de-apenas-12-km-h-no-pico/
+  - Label: Gazeta do Povo, TomTom Traffic Index 2025
+    Url: https://www.gazetadopovo.com.br/brasil/ranking-revela-cidade-brasileira-com-mais-tempo-perdido-no-transito/
+  _relatedEntries:
+  - {fileID: 11400000, guid: ce4f74b0f684cddfab353af48126b8d8, type: 2}
+  _image: {fileID: 0}

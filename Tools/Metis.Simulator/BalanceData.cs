@@ -42,6 +42,19 @@ public sealed class SimPreset
 
     // Multiplica as derivas negativas na fase com este preset, pra fases 2+ poderem ser mais duras que a fase 1.
     public float DerivaMultiplier { get; init; } = 1f;
+
+    // Eventos que podem sair numa fase tematica; vazio libera todos.
+    public IReadOnlyList<string> AllowedEventIds { get; init; } = Array.Empty<string>();
+}
+
+// Cenario: uma fase tematica com objetivos que valem estrelas.
+public sealed class SimScenario
+{
+    public string Id { get; init; } = "";
+    public string ThemeId { get; init; } = "";
+    public bool FreeArchetype { get; init; } = true;
+    public CardArchetype Archetype { get; init; }
+    public IReadOnlyList<ScenarioObjective> Objectives { get; init; } = Array.Empty<ScenarioObjective>();
 }
 
 public sealed class SimRules
@@ -74,6 +87,8 @@ public sealed class BalanceData
     public IReadOnlyList<SimEvent> Events { get; init; } = Array.Empty<SimEvent>();
     public IReadOnlyList<SimAdvantage> Advantages { get; init; } = Array.Empty<SimAdvantage>();
     public IReadOnlyList<SimPreset> Presets { get; init; } = Array.Empty<SimPreset>();
+    public IReadOnlyList<SimPreset> Themes { get; init; } = Array.Empty<SimPreset>();
+    public IReadOnlyList<SimScenario> Scenarios { get; init; } = Array.Empty<SimScenario>();
 
     // Limiares de Pesquisa que liberam tiers novos, em ordem crescente.
     public IReadOnlyList<float> TierThresholds => Cards
@@ -183,6 +198,31 @@ public sealed class BalanceData
                     overrideValue => overrideValue.InitialValue),
                 DerivaMultiplier = preset.DerivaMultiplier ?? 1f,
             }).ToList(),
+            Themes = dto.Themes.Select(theme => new SimPreset
+            {
+                Id = theme.Id,
+                Name = theme.Name,
+                Overrides = theme.Overrides.ToDictionary(
+                    overrideValue => ParseEnum<CityParameterType>(overrideValue.Parameter),
+                    overrideValue => overrideValue.InitialValue),
+                DerivaMultiplier = theme.DerivaMultiplier ?? 1f,
+                AllowedEventIds = theme.AllowedEvents,
+            }).ToList(),
+            Scenarios = dto.Scenarios.Select(scenario => new SimScenario
+            {
+                Id = scenario.Id,
+                ThemeId = scenario.Theme,
+                FreeArchetype = scenario.FreeArchetype,
+                Archetype = ParseEnum<CardArchetype>(scenario.Archetype),
+                Objectives = scenario.Objectives.Select(objective => new ScenarioObjective
+                {
+                    Parameter = ParseEnum<CityParameterType>(objective.Parameter),
+                    Comparison = ParseEnum<ObjectiveComparison>(objective.Comparison),
+                    Threshold = objective.Threshold,
+                    ByTurn = objective.ByTurn,
+                    MustHold = objective.MustHold,
+                }).ToList(),
+            }).ToList(),
         };
     }
 
@@ -212,6 +252,26 @@ public sealed class BalanceData
         public List<EventDto> Events { get; set; } = new();
         public List<AdvantageDto> Advantages { get; set; } = new();
         public List<PresetDto> Presets { get; set; } = new();
+        public List<PresetDto> Themes { get; set; } = new();
+        public List<ScenarioDto> Scenarios { get; set; } = new();
+    }
+
+    private sealed class ObjectiveDto
+    {
+        public string Parameter { get; set; } = "";
+        public string Comparison { get; set; } = "";
+        public float Threshold { get; set; }
+        public int ByTurn { get; set; }
+        public bool MustHold { get; set; }
+    }
+
+    private sealed class ScenarioDto
+    {
+        public string Id { get; set; } = "";
+        public string Theme { get; set; } = "";
+        public bool FreeArchetype { get; set; } = true;
+        public string Archetype { get; set; } = nameof(CardArchetype.Geral);
+        public List<ObjectiveDto> Objectives { get; set; } = new();
     }
 
     private sealed class ModifierDto
@@ -280,5 +340,6 @@ public sealed class BalanceData
         public string Name { get; set; } = "";
         public List<OverrideDto> Overrides { get; set; } = new();
         public float? DerivaMultiplier { get; set; }
+        public List<string> AllowedEvents { get; set; } = new();
     }
 }

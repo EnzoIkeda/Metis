@@ -23,6 +23,7 @@ public class CityStatsManager : MonoBehaviour
     [SerializeField] private CityParameterConfig[] _initialParameters = Array.Empty<CityParameterConfig>();
     [SerializeField] private InteractionConfig _interactionConfig;
     [SerializeField] private CityParameterPresetData[] _phasePresets = Array.Empty<CityParameterPresetData>();
+    [SerializeField] private ThemedPhaseLibraryData _themes;
 
     public CityStats Stats { get; private set; }
 
@@ -31,6 +32,9 @@ public class CityStatsManager : MonoBehaviour
 
     // Nome do asset do preset aplicado nesta fase, vazio na cidade calibrada.
     public string PresetName { get; private set; } = string.Empty;
+
+    // Fase tematica em jogo; nula na cidade calibrada e na cidade desconhecida.
+    public ThemedPhaseData Theme { get; private set; }
 
     private void Awake()
     {
@@ -45,6 +49,15 @@ public class CityStatsManager : MonoBehaviour
             _interactionConfig.DerivaCorrecaoExcesso);
 
         var savedPhase = MetaProgressionManager.SavedPhase;
+        var themeName = MetaProgressionManager.CurrentTheme;
+        Theme = _themes != null ? _themes.Find(themeName) : null;
+        if (Theme == null && string.IsNullOrEmpty(themeName) == false && savedPhase != null)
+        {
+            Debug.LogWarning($"[CityStatsManager] Tema salvo '{themeName}' não existe mais, a fase recomeça do zero.");
+            MetaProgressionManager.DiscardSavedPhase();
+            savedPhase = null;
+        }
+
         CityParameterPresetData savedPreset = null;
         if (savedPhase != null && TryFindPreset(savedPhase.PresetName, out savedPreset) == false)
         {
@@ -54,7 +67,9 @@ public class CityStatsManager : MonoBehaviour
         }
 
         var preset = savedPhase != null ? savedPreset : DrawPreset();
-        var parameters = BuildInitialParameters(preset);
+        var parameters = Theme != null
+            ? CityPresetRules.Apply(_initialParameters, Theme.Overrides, Theme.DerivaMultiplier)
+            : BuildInitialParameters(preset);
         ParameterConfigs = parameters;
         Stats = new CityStats(parameters, interactions, _interactionConfig.PenalidadeColapso);
 
@@ -65,7 +80,7 @@ public class CityStatsManager : MonoBehaviour
     // Fase 1 de uma rodada usa a cidade calibrada padrao; da fase 2 em diante sorteia um preset.
     private CityParameterPresetData DrawPreset()
     {
-        if (MetaProgressionManager.IsNewPhase == false || _phasePresets.Length == 0)
+        if (Theme != null || MetaProgressionManager.IsNewPhase == false || _phasePresets.Length == 0)
             return null;
 
         return _phasePresets[UnityEngine.Random.Range(0, _phasePresets.Length)];

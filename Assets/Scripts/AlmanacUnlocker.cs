@@ -33,6 +33,8 @@ public class AlmanacUnlocker : MonoBehaviour
             _breakdownPopup.Opened += HandleBreakdownOpened;
 
         UnlockTrigger(KnowledgeUnlockTrigger.GameStart);
+        if (_cityStatsManager != null && _cityStatsManager.Theme != null)
+            AlmanacProgress.Unlock(_cityStatsManager.Theme.KnowledgeEntry);
 
         _stats = _cityStatsManager != null ? _cityStatsManager.Stats : null;
         if (_stats != null)

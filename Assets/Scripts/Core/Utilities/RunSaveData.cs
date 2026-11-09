@@ -9,6 +9,13 @@ public class MetaProgressionState
     public List<string> LoadedCardNames = new List<string>();
     public List<string> LoadedAdvantageNames = new List<string>();
     public int PhasesCompleted;
+
+    // Fase tematica escolhida no mapa, vazia na cidade desconhecida, e temas ja jogados na rodada.
+    public string CurrentTheme = string.Empty;
+    public List<string> PlayedThemes = new List<string>();
+
+    // Cenario em jogo; vazio na rodada normal.
+    public string ScenarioId = string.Empty;
 }
 
 [Serializable]
@@ -71,6 +78,9 @@ public class RunSaveData
     // A rodada parou no mapa entre fases, e nao dentro de uma fase.
     public bool InPhaseMap;
 
+    // Destinos sorteados na parada atual, para sair e voltar ao mapa mostrar os mesmos.
+    public List<PhaseMapNode> MapOffer = new List<PhaseMapNode>();
+
     public bool HasPhase;
     public PhaseSaveData Phase = new PhaseSaveData();
 }
@@ -104,6 +114,16 @@ public static class RunSaveRules
         AddIds(phase.DrawPile, hand.DrawPile);
         AddIds(phase.DiscardPile, hand.DiscardPile);
         return phase;
+    }
+
+    // Guarda o destino escolhido e encerra a oferta da parada.
+    public static void ApplyMapChoice(RunSaveData save, PhaseMapNode node)
+    {
+        var themed = node.Type == PhaseMapNodeType.Themed;
+        save.Meta.CurrentTheme = themed ? node.Id : string.Empty;
+        if (themed && save.Meta.PlayedThemes.Contains(node.Id) == false)
+            save.Meta.PlayedThemes.Add(node.Id);
+        save.MapOffer.Clear();
     }
 
     public static void CaptureHistory(PhaseSaveData phase, PhaseHistory history)

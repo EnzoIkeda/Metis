@@ -12,6 +12,7 @@ public class PlacementManager : MonoBehaviour
     // Usados so nas fases 2+ de uma rodada, pra sortear o conteudo dos quarteiroes por cima da malha de ruas fixa.
     [SerializeField] private StructureData[] _proceduralBuildingOptions;
     [SerializeField] private StructureData[] _proceduralGreenLotOptions;
+    [SerializeField] private ThemedPhaseLibraryData _themes;
 
     private Grid _placementGrid;
 
@@ -68,7 +69,8 @@ public class PlacementManager : MonoBehaviour
     private void RegenerateBlocks()
     {
         var savedPhase = MetaProgressionManager.SavedPhase;
-        LayoutSeed = savedPhase != null ? savedPhase.LayoutSeed : SeededRandom.NewSeed();
+        var theme = _themes != null ? _themes.Find(MetaProgressionManager.CurrentTheme) : null;
+        LayoutSeed = savedPhase != null ? savedPhase.LayoutSeed : theme != null && theme.HasLayoutSeed ? theme.LayoutSeed : SeededRandom.NewSeed();
 
         var generator = new CityLayoutGenerator(_proceduralBuildingOptions, _proceduralGreenLotOptions, new SeededRandom(LayoutSeed));
         foreach (var cell in generator.Generate(_placementGrid))

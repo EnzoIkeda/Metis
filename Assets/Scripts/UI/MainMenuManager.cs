@@ -23,6 +23,10 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Button _continueButton;
     [SerializeField] private TMP_Text _continueButtonText;
 
+    [Header("Cenarios")]
+    [SerializeField] private Button _scenariosButton;
+    [SerializeField] private TMP_Text _scenariosButtonText;
+
     // Dialogo reaproveitado pra confirmar uma rodada nova e pra avisar que um save antigo foi descartado.
     [SerializeField] private GameObject _dialogPanel;
     [SerializeField] private TMP_Text _dialogTitleText;
@@ -36,8 +40,13 @@ public class MainMenuManager : MonoBehaviour
 
     private void Start()
     {
+        // O menu sempre fala da rodada normal, mesmo voltando de um cenario.
+        SessionMode.EnterRoguelike();
+
         if (_continueButton != null)
             _continueButton.onClick.AddListener(ContinueGame);
+        if (_scenariosButton != null)
+            _scenariosButton.onClick.AddListener(OpenScenarios);
         if (_unitsButton != null)
             _unitsButton.onClick.AddListener(ToggleUnits);
         if (_dialogConfirmButton != null)
@@ -73,6 +82,8 @@ public class MainMenuManager : MonoBehaviour
             _continueButtonText.text = UIStrings.MainMenuContinue;
         if (_dialogCancelButtonText != null)
             _dialogCancelButtonText.text = UIStrings.CancelButton;
+        if (_scenariosButtonText != null)
+            _scenariosButtonText.text = UIStrings.MainMenuScenarios;
     }
 
     // Metodo para o botao de idioma nas Configuracoes
@@ -118,6 +129,11 @@ public class MainMenuManager : MonoBehaviour
             return;
 
         SceneManager.LoadScene(MetaProgressionManager.ContinueSceneName);
+    }
+
+    private static void OpenScenarios()
+    {
+        SceneManager.LoadScene(MetaProgressionManager.ScenarioSelectionSceneName);
     }
 
     private void OpenDialog(string title, string message, string confirmLabel, bool showCancel, bool startsNewRun)

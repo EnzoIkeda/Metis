@@ -125,6 +125,31 @@ public static class BalanceDataExporter
             data.Presets.Add(dto);
         }
 
+        var library = stats.FindProperty("_themes").objectReferenceValue as ThemedPhaseLibraryData;
+        if (library != null)
+        {
+            foreach (var theme in library.Themes)
+            {
+                var dto = new BalanceDataFormat.ThemeDto { Id = theme.name, Name = PortugueseText(theme, "_themeName"), DerivaMultiplier = theme.DerivaMultiplier };
+                foreach (var overrideValue in theme.Overrides)
+                    dto.Overrides.Add(new BalanceDataFormat.OverrideDto { Parameter = overrideValue.Parameter.ToString(), InitialValue = overrideValue.InitialValue });
+                dto.AllowedEvents.AddRange(theme.AllowedEventIds);
+                data.Themes.Add(dto);
+            }
+        }
+
+        var scenarios = AssetDatabase.LoadAssetAtPath<ScenarioLibraryData>(ScenarioImporter.LibraryPath);
+        if (scenarios != null)
+        {
+            foreach (var scenario in scenarios.Scenarios)
+            {
+                var dto = new BalanceDataFormat.ScenarioDto { Id = scenario.name, Theme = scenario.Theme.name, FreeArchetype = scenario.FreeArchetype, Archetype = scenario.Archetype.ToString() };
+                foreach (var objective in scenario.Objectives)
+                    dto.Objectives.Add(new BalanceDataFormat.ObjectiveDto { Parameter = objective.Parameter.ToString(), Comparison = objective.Comparison.ToString(), Threshold = objective.Threshold, ByTurn = objective.ByTurn, MustHold = objective.MustHold });
+                data.Scenarios.Add(dto);
+            }
+        }
+
         return data;
     }
 

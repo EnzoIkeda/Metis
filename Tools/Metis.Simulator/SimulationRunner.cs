@@ -65,14 +65,14 @@ public static class SimulationRunner
     {
         var setups = options.Setups.Count > 0
             ? options.Setups
-            : new[] { BaseSetupName }.Concat(data.Presets.Select(preset => preset.Id)).ToList();
+            : new[] { BaseSetupName }.Concat(data.Presets.Select(preset => preset.Id)).Concat(data.Themes.Select(theme => theme.Id)).ToList();
 
         var jobs = new List<SimulationJob>();
         foreach (var setupName in setups)
         {
             SimPreset preset = null;
             if (setupName != BaseSetupName)
-                preset = data.Presets.FirstOrDefault(candidate => candidate.Id == setupName)
+                preset = data.Presets.Concat(data.Themes).FirstOrDefault(candidate => candidate.Id == setupName)
                     ?? throw new ArgumentException($"Preset desconhecido: '{setupName}'.");
 
             foreach (var archetypeName in options.Archetypes)

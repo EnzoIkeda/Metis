@@ -24,7 +24,10 @@ public enum KnowledgeUnlockTrigger
     TierCidadeConectada,
     TierSmartCity,
     OpenRelationMap,
-    OpenChangeBreakdown
+    OpenChangeBreakdown,
+
+    // Liberada ao jogar a fase tematica que aponta para a ficha.
+    ThemedPhase
 }
 
 // Regras de quais momentos do jogo desbloqueiam fichas de conceito. So leitura: nao muda nenhum numero.

@@ -113,6 +113,19 @@ public sealed class RunRecord
 // Rodada inteira: fase 1 na cidade padrao, fases seguintes com preset sorteado e recompensas carregadas, ate perder ou completar.
 public static class RunSimulator
 {
+    // Escolha sorteada entre os destinos do mapa; sem temas, e o preset sorteado de sempre.
+    private static SimPreset DrawDestination(BalanceData data, List<string> playedThemes, Random random)
+    {
+        var offer = PhaseMapProvider.BuildOffer(data.Themes.Select(theme => theme.Id).ToList(), playedThemes, random);
+        var node = offer.Count > 1 ? offer[random.Next(offer.Count)] : offer[0];
+        if (node.Type == PhaseMapNodeType.Themed)
+        {
+            playedThemes.Add(node.Id);
+            return data.Themes.First(theme => theme.Id == node.Id);
+        }
+        return data.Presets.Count > 0 ? data.Presets[random.Next(data.Presets.Count)] : null;
+    }
+
     public static RunRecord Run(RunSetup setup, IPlayerPolicy policy, IRewardPolicy rewardPolicy, int baseSeed, int runIndex)
     {
         var data = setup.Data;
@@ -120,13 +133,14 @@ public static class RunSimulator
         var loadedCards = new List<string>();
         var loadedAdvantages = new List<string>();
         var phases = new List<PhaseRunRecord>();
+        var playedThemes = new List<string>();
         var won = 0;
 
         for (int phase = 1; phase <= setup.PhaseCount; phase++)
         {
             SimPreset preset = null;
-            if (phase > 1 && data.Presets.Count > 0)
-                preset = data.Presets[runRandom.Next(data.Presets.Count)];
+            if (phase > 1)
+                preset = DrawDestination(data, playedThemes, runRandom);
 
             var phaseSetup = new PhaseSetup
             {

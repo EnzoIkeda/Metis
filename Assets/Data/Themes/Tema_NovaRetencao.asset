@@ -78,5 +78,8 @@ MonoBehaviour:
   - EventApagaoDoSistemaCentralDeIA
   - EventFalhaEmCascataDeSistemasInterconectados
   - EventAuditoriaRevelaViesAlgoritmico
+  - DilemmaBrtOuViaduto
+  - DilemmaSensoresUrbanos
+  - DilemmaDadosAbertos
   _backgroundIndex: 9
   _layoutSeed: 1955

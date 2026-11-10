@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Dilema_ConcessaoSaneamento
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Concess\xF5es de saneamento"
+  _titleEn: Sanitation concessions
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Ampliar \xE1gua e esgoto exige muito investimento. Concess\xF5es trazem
+    capital, mas o resultado depende do contrato: metas de atendimento, regula\xE7\xE3o
+    e prote\xE7\xE3o a quem pode pagar menos."
+  _summaryEn: 'Expanding water and sewage takes heavy investment. Concessions bring
+    capital, but the outcome depends on the contract: service targets, regulation
+    and protection for those who can pay less.'
+  _realWorld: "A Lei 14.026/2020 fixou metas de 99% de \xE1gua pot\xE1vel e 90% de
+    coleta e tratamento de esgoto at\xE9 31 de dezembro de 2033. Em abril de 2021,
+    o leil\xE3o de blocos da Cedae, no Rio, arrecadou cerca de R$ 22,7 bilh\xF5es."
+  _realWorldEn: Brazilian Law 14,026/2020 set targets of 99% drinking water and 90%
+    sewage collection and treatment by December 31, 2033. In April 2021, the auction
+    of Cedae blocks in Rio raised about R$ 22.7 billion.
+  _tradeOffs: "A maior outorga enche o caixa agora, mas pode virar tarifa mais alta.
+    Manter p\xFAblico exige um or\xE7amento que muitas cidades n\xE3o t\xEAm."
+  _tradeOffsEn: The highest bid fills the coffers now but can turn into higher bills.
+    Keeping it public takes a budget many cities lack.
+  _sources:
+  - Label: Lei 14.026/2020 (Planalto)
+    Url: https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14026.htm
+  - Label: "Leil\xE3o da Cedae (Jornal do Brasil, 2021)"
+    Url: https://www.jb.com.br/economia/2021/04/1029896-leilao-da-cedae-vende-tres-blocos-da-companhia-por-rs-226-bilhoes.html
+  _relatedEntries:
+  - {fileID: 11400000, guid: b5b486b78494627a798be52bc54b3d22, type: 2}
+  - {fileID: 11400000, guid: 66f77601779bb77f6a9573bcd079d788, type: 2}
+  _image: {fileID: 0}

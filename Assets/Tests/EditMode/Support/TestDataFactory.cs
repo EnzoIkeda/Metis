@@ -48,7 +48,7 @@ public static class TestDataFactory
         return structure;
     }
 
-    private static void SetField<T>(UnityEngine.Object target, string fieldName, T value)
+    public static void SetField<T>(UnityEngine.Object target, string fieldName, T value)
     {
         var field = target.GetType().GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Instance);
         if (field == null)

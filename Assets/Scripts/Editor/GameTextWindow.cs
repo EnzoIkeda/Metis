@@ -32,6 +32,7 @@ public class GameTextWindow : EditorWindow
         { GameTextOrigin.Interface, "Interface" },
         { GameTextOrigin.SceneOrPrefab, "Cenas e prefabs" },
         { GameTextOrigin.Theme, "Fases temáticas" },
+        { GameTextOrigin.Dilemma, "Dilemas" },
     };
 
     private static readonly Dictionary<GameTextIssue, string> IssueNames = new Dictionary<GameTextIssue, string>

@@ -49,6 +49,17 @@ public static class BalanceDataFormat
         public int MaxTurn;
         public List<ConditionDto> Conditions = new List<ConditionDto>();
         public List<ModifierDto> Effects = new List<ModifierDto>();
+        public bool FollowUpOnly;
+        public List<ChoiceDto> Choices = new List<ChoiceDto>();
+    }
+
+    [Serializable]
+    public class ChoiceDto
+    {
+        public string Label;
+        public List<ModifierDto> Effects = new List<ModifierDto>();
+        public string FollowUpEventId;
+        public int FollowUpDelay;
     }
 
     [Serializable]

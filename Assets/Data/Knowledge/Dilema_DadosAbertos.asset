@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Dilema_DadosAbertos
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Dados abertos e privacidade
+  _titleEn: Open data and privacy
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Abrir dados p\xFAblicos permite fiscalizar o governo e criar servi\xE7os
+    novos. S\xF3 que trocar nomes por c\xF3digos n\xE3o basta: cruzando informa\xE7\xF5es,
+    muitas vezes d\xE1 para identificar as pessoas."
+  _summaryEn: 'Opening public data lets people oversee government and build new services.
+    But swapping names for codes is not enough: by cross-checking information, people
+    can often be identified.'
+  _realWorld: "Em 2014, Nova York liberou, por pedido de acesso \xE0 informa\xE7\xE3o,
+    registros de 173 milh\xF5es de corridas de t\xE1xi. Um engenheiro mostrou que
+    a anonimiza\xE7\xE3o podia ser revertida em menos de duas horas."
+  _realWorldEn: In 2014, New York released records of 173 million taxi trips through
+    a public records request. An engineer showed the anonymization could be reversed
+    in less than two hours.
+  _tradeOffs: "Revisar antes de publicar custa tempo e reduz o que pode ser aberto.
+    Manter tudo fechado evita o risco e impede a fiscaliza\xE7\xE3o."
+  _tradeOffsEn: Reviewing before publishing takes time and limits what can be opened.
+    Keeping everything closed avoids the risk and blocks oversight.
+  _sources:
+  - Label: How a Software Engineer Deanonymized Data on 173 Million NYC Taxi Trips
+      (Route Fifty, 2014)
+    Url: https://www.route-fifty.com/management/2014/09/how-software-engineer-deanonymized-data-173-million-nyc-taxi-trips/93320
+  _relatedEntries:
+  - {fileID: 11400000, guid: 201f7154992a7a7c0a92fcd424de6b63, type: 2}
+  - {fileID: 11400000, guid: fdbaaae7083cd5beda7c9ab0b6468ee1, type: 2}
+  _image: {fileID: 0}

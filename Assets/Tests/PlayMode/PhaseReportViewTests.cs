@@ -117,4 +117,67 @@ public class PhaseReportViewTests
         Assert.That(reportPanel.activeSelf, Is.False);
         Assert.That(outcomePanel.activeSelf, Is.True, "o desfecho abre ao sair do relatorio");
     }
+
+    [UnityTest]
+    public IEnumerator Report_ListsTheChoices_AndSaysWhenTheFollowUpNeverCame()
+    {
+        var crash = TestDataFactory.CreateCard("Desmonte", statEffects: new[]
+        {
+            new StatModifier { Parameter = CityParameterType.Energia, Amount = -100f },
+            new StatModifier { Parameter = CityParameterType.Renda, Amount = -100f },
+            new StatModifier { Parameter = CityParameterType.Populacao, Amount = -100f },
+            new StatModifier { Parameter = CityParameterType.Seguranca, Amount = -100f },
+        });
+        var followUp = TestDataFactory.CreateEvent("Consequencia");
+        TestDataFactory.SetField(followUp, "_isFollowUpOnly", true);
+        var dilemma = TestDataFactory.CreateEvent("Dilema");
+        TestDataFactory.SetField(dilemma, "_title", "Sensores");
+        TestDataFactory.SetField(dilemma, "_choices", new[]
+        {
+            new EventChoiceData { Label = "Implantar", Rule = new EventChoiceDefinition { Effects = new StatModifier[0], FollowUpEventId = "Consequencia", FollowUpDelay = 15 } },
+        });
+
+        _host = new GameObject("Host");
+        _host.SetActive(false);
+        var statsManager = _host.AddComponent<CityStatsManager>();
+        TestDataFactory.InvokePrivateMethod(statsManager, "Reset");
+        var turnManager = _host.AddComponent<TurnManager>();
+        TestDataFactory.SetField(turnManager, "_cityStatsManager", statsManager);
+        TestDataFactory.SetField(turnManager, "_cardPool", new[] { crash });
+        TestDataFactory.SetField(turnManager, "_eventPool", new[] { dilemma, followUp });
+        TestDataFactory.SetField(turnManager, "_advantagePool", new PassiveAdvantageData[0]);
+
+        _ui = new GameObject("Canvas", typeof(RectTransform), typeof(Canvas));
+        _ui.SetActive(false);
+        var reportPanel = Ui("ReportPanel", _ui.transform);
+        var body = Ui("Body", reportPanel.transform).AddComponent<TextMeshProUGUI>();
+        var report = Ui("ReportController", _ui.transform).AddComponent<PhaseReportView>();
+        TestDataFactory.SetField(report, "_turnManager", turnManager);
+        TestDataFactory.SetField(report, "_cityStatsManager", statsManager);
+        TestDataFactory.SetField(report, "_panelRoot", reportPanel);
+        TestDataFactory.SetField(report, "_bodyText", body);
+        var flow = Ui("PhaseEndFlow", _ui.transform).AddComponent<PhaseEndFlow>();
+        TestDataFactory.SetField(flow, "_turnManager", turnManager);
+        TestDataFactory.SetField(flow, "_report", report);
+
+        _host.SetActive(true);
+        _ui.SetActive(true);
+        yield return null;
+
+        for (var turn = 0; turn < 20 && turnManager.Machine.Outcome == GameOutcome.None; turn++)
+        {
+            Assert.That(turnManager.PlayCard(turnManager.Hand.Cards.First()), Is.True);
+            yield return null;
+            if (turnManager.Machine.CurrentPhase == TurnPhase.Event)
+            {
+                Assert.That(turnManager.ChooseEventOption(0), Is.True);
+                yield return null;
+            }
+        }
+
+        Assert.That(turnManager.Machine.Outcome, Is.EqualTo(GameOutcome.GameOver));
+        Assert.That(body.text, Does.Contain(UIStrings.ReportChoicesHeader));
+        Assert.That(body.text, Does.Contain(UIStrings.ReportChoiceLine(1, "Sensores", "Implantar")));
+        Assert.That(body.text, Does.Contain(UIStrings.ReportChoiceNoConsequence));
+    }
 }

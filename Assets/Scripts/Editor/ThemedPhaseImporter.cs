@@ -41,7 +41,7 @@ public static class ThemedPhaseImporter
     {
         var report = new Report();
         var file = JsonUtility.FromJson<ThemedPhaseImportFormat.FileDto>(File.ReadAllText(jsonPath));
-        report.Errors.AddRange(ThemedPhaseImportFormat.Validate(file, AssetNames("t:RandomEventData"), AssetNames("t:KnowledgeEntryData")));
+        report.Errors.AddRange(ThemedPhaseImportFormat.Validate(file, AssetNames("t:RandomEventData"), AssetNames("t:KnowledgeEntryData"), FollowUpNames()));
         foreach (var error in report.Errors)
             Debug.LogError($"[Temas] {error}");
         if (report.Errors.Count > 0)
@@ -84,6 +84,13 @@ public static class ThemedPhaseImporter
         if (apply)
             AssetDatabase.SaveAssets();
         return report;
+    }
+
+    private static HashSet<string> FollowUpNames()
+    {
+        return new HashSet<string>(AssetDatabase.FindAssets("t:RandomEventData", new[] { "Assets/Data" })
+            .Select(guid => AssetDatabase.LoadAssetAtPath<RandomEventData>(AssetDatabase.GUIDToAssetPath(guid)))
+            .Where(asset => asset.IsFollowUpOnly).Select(asset => asset.name));
     }
 
     private static HashSet<string> AssetNames(string filter)

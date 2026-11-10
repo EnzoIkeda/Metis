@@ -102,6 +102,8 @@ public class ThemedPhaseImportFormatTests
         public IReadOnlyList<StatModifier> StatEffects => Array.Empty<StatModifier>();
         public int MinTurn => 1;
         public int MaxTurn => 20;
+        public IReadOnlyList<EventChoiceDefinition> Choices => Array.Empty<EventChoiceDefinition>();
+        public bool IsFollowUpOnly => false;
     }
 
     [Test]

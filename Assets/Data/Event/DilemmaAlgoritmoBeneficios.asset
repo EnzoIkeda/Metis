@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a17274e29c4cba04cae830be71476a04, type: 3}
+  m_Name: DilemmaAlgoritmoBeneficios
+  m_EditorClassIdentifier: Metis.Runtime::RandomEventData
+  _title: Algoritmo contra fraudes
+  _description: "Um sistema promete apontar quem tem mais risco de fraudar benef\xEDcios
+    sociais, e a secretaria poderia investigar menos gente e gastar menos. Falta
+    decidir se algu\xE9m de fora vai conferir como ele pontua cada pessoa."
+  _titleEn: Anti-fraud algorithm
+  _descriptionEn: A system promises to flag who is most likely to commit welfare
+    fraud, so the department could investigate fewer people and spend less. It remains
+    to decide whether anyone outside will check how it scores each person.
+  _triggerConditions: []
+  _statEffects: []
+  _minTurn: 5
+  _maxTurn: 16
+  _choices:
+  - Rule:
+      Effects:
+      - Parameter: 0
+        Amount: -3
+      - Parameter: 2
+        Amount: 3
+      - Parameter: 4
+        Amount: 2
+      FollowUpEventId: 
+      FollowUpDelay: 0
+    Label: Usar com auditoria independente
+    LabelEn: Use it with an independent audit
+    Detail: "Especialistas de fora conferem os crit\xE9rios. Sai mais caro."
+    DetailEn: Outside experts check the criteria. It costs more.
+  - Rule:
+      Effects:
+      - Parameter: 0
+        Amount: 4
+      FollowUpEventId: ConsequenciaAlgoritmoDiscriminacao
+      FollowUpDelay: 4
+    Label: Usar sem auditoria
+    LabelEn: Use it without an audit
+    Detail: "Economia imediata. Ningu\xE9m de fora v\xEA como cada pessoa \xE9 pontuada."
+    DetailEn: Immediate savings. Nobody outside sees how each person is scored.
+  - Rule:
+      Effects:
+      - Parameter: 0
+        Amount: -2
+      - Parameter: 2
+        Amount: 1
+      FollowUpEventId: 
+      FollowUpDelay: 0
+    Label: "Manter a an\xE1lise manual"
+    LabelEn: Keep the manual review
+    Detail: Mais lenta e cara, mas cada caso passa por uma pessoa.
+    DetailEn: Slower and costlier, but every case goes through a person.
+  _isFollowUpOnly: 0
+  _knowledgeEntry: {fileID: 11400000, guid: 743eaf25c3271205d803c8f0027e773d, type: 2}

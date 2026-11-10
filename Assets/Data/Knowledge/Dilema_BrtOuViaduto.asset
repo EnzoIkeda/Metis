@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Dilema_BrtOuViaduto
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Demanda induzida
+  _titleEn: Induced demand
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Quando fica mais f\xE1cil dirigir, mais gente dirige. Por isso, ampliar
+    vias raramente resolve o congestionamento por muito tempo: o espa\xE7o novo atrai
+    carros novos."
+  _summaryEn: 'When driving gets easier, more people drive. That is why adding road
+    space rarely fixes congestion for long: new capacity attracts new cars.'
+  _realWorld: "Duranton e Turner viram, em cidades dos EUA, que a quilometragem dirigida
+    cresce na propor\xE7\xE3o das vias. Em Seul, a via elevada de Cheonggyecheon
+    (168 mil carros por dia) foi demolida a partir de 2003."
+  _realWorldEn: Duranton and Turner found, in US cities, that vehicle kilometers
+    grow in proportion to roads. In Seoul, the elevated Cheonggyecheon road (168,000
+    cars a day) was torn down starting in 2003.
+  _tradeOffs: "O mesmo estudo n\xE3o viu o transporte coletivo reduzir o tr\xE1fego
+    de carros. O corredor prioriza o \xF4nibus, mas tira espa\xE7o de quem dirige."
+  _tradeOffsEn: The same study found transit did not reduce car traffic. A corridor
+    prioritizes buses but takes space from drivers.
+  _sources:
+  - Label: Duranton e Turner, The Fundamental Law of Road Congestion (NBER)
+    Url: https://www.nber.org/papers/w15376
+  - Label: Revitalizing a City by Reviving a Stream (ADB)
+    Url: https://www.development.asia/case-study/revitalizing-city-reviving-stream
+  _relatedEntries:
+  - {fileID: 11400000, guid: b5b486b78494627a798be52bc54b3d22, type: 2}
+  - {fileID: 11400000, guid: 1397ecda6c5e2dd0c8224a71c78f6107, type: 2}
+  _image: {fileID: 0}

@@ -96,7 +96,108 @@ public sealed class MctsPolicy : IPlayerPolicy
             DrawPile = context.DrawPile,
             DiscardPile = context.DiscardPile,
             HandCards = context.HandCards,
+            AllEvents = context.AllEvents,
+            Schedule = context.Schedule,
         });
+    }
+
+    // Simula o resto da fase a partir de cada opcao, com as iteracoes divididas entre elas, e fica com a de melhor media.
+    public int ChooseEventOption(DecisionContext context, SimEvent dilemma)
+    {
+        var knowsDeck = _options.Informed || context.RevealedForPhase;
+        var planningDeck = context.Deck.Select(card => Planned(card, context.Data, knowsDeck)).ToList();
+        var planned = Known(new[] { dilemma })[0];
+        var perOption = Math.Max(1, _options.Iterations / dilemma.Choices.Count);
+
+        var averages = PolicyHelpers.OptionIndexes(dilemma).ToDictionary(index => index, index =>
+        {
+            var total = 0.0;
+            for (var iteration = 0; iteration < perOption; iteration++)
+                total += SimulateOption(planned, index, planningDeck, context);
+            return total / perOption;
+        });
+        return PolicyHelpers.PickBest(PolicyHelpers.OptionIndexes(dilemma), index => averages[index], context.Random);
+    }
+
+    private double SimulateOption(SimEvent dilemma, int option, List<SimCard> planningDeck, DecisionContext context)
+    {
+        var random = new Random(context.Random.Next());
+        var stats = context.Stats.Clone();
+        var hand = PlanningHand(planningDeck, context, random);
+        var events = PlanningPool(context, random);
+        var turn = context.TurnIndex;
+        var outcome = ForwardModel.FinishDilemma(stats, dilemma, option, turn, context.VictoryTurnCount, events);
+        var actions = (IReadOnlyList<SimCard>)Array.Empty<SimCard>();
+        if (outcome == GameOutcome.None)
+        {
+            turn++;
+            actions = ForwardModel.DrawPlayable(hand, context.HandSize, stats);
+        }
+
+        outcome = Rollout(stats, hand, events, ref turn, actions, outcome, context, random);
+        return Reward(outcome, stats, turn, context);
+    }
+
+    // Cada simulacao parte de uma copia da agenda; quem nao conhece as consequencias planeja sem elas.
+    private RandomEventPool<SimEvent> PlanningPool(DecisionContext context, Random random)
+    {
+        var schedule = context.Schedule == null ? null : _options.Informed ? context.Schedule.Clone() : context.Schedule.WithoutFollowUps();
+        return new RandomEventPool<SimEvent>(Known(context.Events), random, context.AllEvents == null ? null : Known(context.AllEvents), schedule, context.VictoryTurnCount);
+    }
+
+    private IReadOnlyList<SimEvent> Known(IReadOnlyList<SimEvent> events)
+    {
+        if (_options.Informed || events.All(candidate => candidate.Choices.All(choice => choice.HasFollowUp == false)))
+            return events;
+
+        return events.Select(candidate => candidate.Choices.Count == 0 ? candidate : new SimEvent
+        {
+            Id = candidate.Id,
+            Title = candidate.Title,
+            TriggerConditions = candidate.TriggerConditions,
+            StatEffects = candidate.StatEffects,
+            MinTurn = candidate.MinTurn,
+            MaxTurn = candidate.MaxTurn,
+            IsFollowUpOnly = candidate.IsFollowUpOnly,
+            ChoiceLabels = candidate.ChoiceLabels,
+            Choices = candidate.Choices.Select(choice => new EventChoiceDefinition { Effects = choice.Effects }).ToList(),
+        }).ToList();
+    }
+
+    private static Func<CityStats, SimEvent, int> RolloutChooser(DecisionContext context, Random random)
+    {
+        return (stats, dilemma) => BalancedPolicy.PickOption(stats, dilemma, context.Data, random);
+    }
+
+    // Simulacao ate o fim da fase com a politica equilibrada, barata e sem simular dentro da simulacao.
+    private GameOutcome Rollout(CityStats stats, CardHand<SimCard> hand, RandomEventPool<SimEvent> events, ref int turn, IReadOnlyList<SimCard> actions,
+        GameOutcome outcome, DecisionContext context, Random random)
+    {
+        var chooser = RolloutChooser(context, random);
+        while (outcome == GameOutcome.None)
+        {
+            SimCard chosen = null;
+            if (actions.Count > 0)
+            {
+                var plain = PolicyHelpers.PlainCards(actions);
+                chosen = plain.Count == 0 ? null : _rollout.Choose(new DecisionContext
+                {
+                    Stats = stats,
+                    PlayableCards = plain,
+                    TurnIndex = turn,
+                    Data = context.Data,
+                    Random = random,
+                });
+            }
+
+            outcome = ForwardModel.StepTurn(stats, chosen, turn, context.VictoryTurnCount, events, chooser);
+            if (outcome == GameOutcome.None)
+            {
+                turn++;
+                actions = ForwardModel.DrawPlayable(hand, context.HandSize, stats);
+            }
+        }
+        return outcome;
     }
 
     // Baralho finito: os futuros saem das cartas que restam na pilha (so a ordem e sorteada); a mao atual vai pro descarte.
@@ -120,7 +221,8 @@ public sealed class MctsPolicy : IPlayerPolicy
         var random = new Random(context.Random.Next());
         var stats = context.Stats.Clone();
         var hand = PlanningHand(planningDeck, context, random);
-        var events = new RandomEventPool<SimEvent>(context.Events, random);
+        var events = PlanningPool(context, random);
+        var chooser = RolloutChooser(context, random);
         var path = new List<Node> { root };
         var node = root;
         var turn = context.TurnIndex;
@@ -156,7 +258,7 @@ public sealed class MctsPolicy : IPlayerPolicy
                 path.Add(node);
             }
 
-            outcome = ForwardModel.StepTurnWithAbilities(stats, chosen, hand, turn, context.VictoryTurnCount, events, context.Data);
+            outcome = ForwardModel.StepTurnWithAbilities(stats, chosen, hand, turn, context.VictoryTurnCount, events, context.Data, chooser);
             if (outcome == GameOutcome.None)
             {
                 turn++;
@@ -164,30 +266,7 @@ public sealed class MctsPolicy : IPlayerPolicy
             }
         }
 
-        // Simulacao ate o fim da fase com a politica equilibrada, barata e sem simular dentro da simulacao.
-        while (outcome == GameOutcome.None)
-        {
-            SimCard chosen = null;
-            if (actions.Count > 0)
-            {
-                var plain = PolicyHelpers.PlainCards(actions);
-                chosen = plain.Count == 0 ? null : _rollout.Choose(new DecisionContext
-                {
-                    Stats = stats,
-                    PlayableCards = plain,
-                    TurnIndex = turn,
-                    Data = context.Data,
-                    Random = random,
-                });
-            }
-
-            outcome = ForwardModel.StepTurn(stats, chosen, turn, context.VictoryTurnCount, events);
-            if (outcome == GameOutcome.None)
-            {
-                turn++;
-                actions = ForwardModel.DrawPlayable(hand, context.HandSize, stats);
-            }
-        }
+        outcome = Rollout(stats, hand, events, ref turn, actions, outcome, context, random);
 
         var reward = Reward(outcome, stats, turn, context);
         foreach (var visited in path)

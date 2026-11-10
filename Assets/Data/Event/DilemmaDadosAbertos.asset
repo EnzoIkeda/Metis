@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a17274e29c4cba04cae830be71476a04, type: 3}
+  m_Name: DilemmaDadosAbertos
+  m_EditorClassIdentifier: Metis.Runtime::RandomEventData
+  _title: Dados abertos da cidade
+  _description: "Pesquisadores e jornalistas pedem acesso aos registros de viagens,
+    atendimentos e servi\xE7os da cidade. Publicar ajuda a fiscalizar e a inovar,
+    mas os registros descrevem a vida de pessoas reais."
+  _titleEn: Open city data
+  _descriptionEn: Researchers and journalists ask for access to the city records
+    of trips, appointments and services. Publishing helps oversight and innovation,
+    but the records describe the lives of real people.
+  _triggerConditions: []
+  _statEffects: []
+  _minTurn: 4
+  _maxTurn: 18
+  _choices:
+  - Rule:
+      Effects:
+      - Parameter: 4
+        Amount: 5
+      FollowUpEventId: ConsequenciaDadosReidentificados
+      FollowUpDelay: 2
+    Label: Publicar tudo agora
+    LabelEn: Publish everything now
+    Detail: "Transpar\xEAncia imediata. Trocar nomes por c\xF3digos costuma parecer
+      suficiente."
+    DetailEn: Immediate transparency. Swapping names for codes usually seems enough.
+  - Rule:
+      Effects:
+      - Parameter: 4
+        Amount: 3
+      - Parameter: 0
+        Amount: -1
+      FollowUpEventId: 
+      FollowUpDelay: 0
+    Label: "Publicar ap\xF3s revis\xE3o de privacidade"
+    LabelEn: Publish after a privacy review
+    Detail: "T\xE9cnicos testam se algu\xE9m poderia ser identificado. Demora e custa."
+    DetailEn: Technicians test whether anyone could be identified. It takes time
+      and money.
+  - Rule:
+      Effects:
+      - Parameter: 2
+        Amount: 2
+      - Parameter: 4
+        Amount: -1
+      FollowUpEventId: 
+      FollowUpDelay: 0
+    Label: Manter os dados fechados
+    LabelEn: Keep the data closed
+    Detail: "Sem risco de vazar, e sem ningu\xE9m de fora para conferir."
+    DetailEn: No risk of leaks, and nobody outside to check.
+  _isFollowUpOnly: 0
+  _knowledgeEntry: {fileID: 11400000, guid: 702058b4770f8833c867c5402b9547c2, type: 2}

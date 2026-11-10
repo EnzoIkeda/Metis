@@ -28,6 +28,10 @@ public class PhaseTurnRecord
 
     public string EventId = string.Empty;
 
+    // Opcao escolhida no dilema do turno; sem a marca, o turno nao teve escolha.
+    public bool HasEventChoice;
+    public int EventChoice;
+
     // Estado no fim do turno, depois do evento.
     public float[] EndValues = Array.Empty<float>();
 
@@ -145,6 +149,13 @@ public class PhaseHistory
     {
         BeginTurn(turnIndex);
         Current.EventId = eventId ?? string.Empty;
+    }
+
+    public void RecordEventChoice(int turnIndex, int choiceIndex)
+    {
+        BeginTurn(turnIndex);
+        Current.HasEventChoice = true;
+        Current.EventChoice = choiceIndex;
     }
 
     public void FinishTurn(int turnIndex, CityStats stats)

@@ -14,4 +14,9 @@ public sealed class RandomPolicy : IPlayerPolicy
     {
         return candidates[context.Random.Next(candidates.Count)];
     }
+
+    public int ChooseEventOption(DecisionContext context, SimEvent dilemma)
+    {
+        return context.Random.Next(dilemma.Choices.Count);
+    }
 }

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a17274e29c4cba04cae830be71476a04, type: 3}
+  m_Name: ConsequenciaSaneamentoTarifa
+  m_EditorClassIdentifier: Metis.Runtime::RandomEventData
+  _title: Tarifa sobe, periferia espera
+  _description: "A conta de \xE1gua sobe e as obras come\xE7am pelos bairros que
+    d\xE3o mais retorno. Quem mais precisava da rede continua esperando."
+  _titleEn: Bills rise, outskirts wait
+  _descriptionEn: Water bills go up and the works start in the most profitable districts.
+    Those who needed the network most keep waiting.
+  _triggerConditions: []
+  _statEffects:
+  - Parameter: 7
+    Amount: -7
+  - Parameter: 3
+    Amount: -4
+  - Parameter: 0
+    Amount: -2
+  _minTurn: 1
+  _maxTurn: 20
+  _choices: []
+  _isFollowUpOnly: 1
+  _knowledgeEntry: {fileID: 11400000, guid: 802cc537c5fee1126b327af8119edf63, type: 2}

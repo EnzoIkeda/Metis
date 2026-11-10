@@ -298,6 +298,18 @@ public static class ContentJsonEditor
         }, $"Id '{id}'");
     }
 
+    // Item de uma lista dentro de um objeto encontrado pelo campo Id.
+    public static bool TryReplaceInNested(string json, string listKey, string id, string nestedKey, int index, IReadOnlyList<Change> changes, out string result, out string error)
+    {
+        return Edit(json, changes, out result, out error, root =>
+        {
+            var list = root.Kind == NodeKind.Object ? root.Member(listKey) : null;
+            var owner = list?.Items.FirstOrDefault(item => item.Kind == NodeKind.Object && item.Member("Id")?.Text == id);
+            var nested = owner?.Member(nestedKey);
+            return nested != null && index >= 0 && index < nested.Items.Count ? nested.Items[index] : null;
+        }, $"Id '{id}', {nestedKey}[{index}]");
+    }
+
     // Linha de uma lista de listas, encontrada pelas duas primeiras celulas.
     public static bool TryReplaceInRow(string json, string first, string second, IReadOnlyList<Change> changes, out string result, out string error)
     {

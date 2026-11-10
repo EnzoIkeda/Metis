@@ -25,6 +25,9 @@ public sealed class SimEvent : IRandomEventDefinition
     public IReadOnlyList<StatModifier> StatEffects { get; init; } = Array.Empty<StatModifier>();
     public int MinTurn { get; init; } = 1;
     public int MaxTurn { get; init; } = 999;
+    public IReadOnlyList<EventChoiceDefinition> Choices { get; init; } = Array.Empty<EventChoiceDefinition>();
+    public IReadOnlyList<string> ChoiceLabels { get; init; } = Array.Empty<string>();
+    public bool IsFollowUpOnly { get; init; }
 }
 
 public sealed class SimAdvantage : IAdvantageDefinition
@@ -139,6 +142,26 @@ public sealed class BalanceData
 
     public static BalanceData Parse(string json)
     {
+        var data = ParseFields(json);
+        ValidateFollowUps(data);
+        return data;
+    }
+
+    private static void ValidateFollowUps(BalanceData data)
+    {
+        var known = data.Events.Select(randomEvent => randomEvent.Id).ToHashSet();
+        foreach (var randomEvent in data.Events)
+        {
+            foreach (var choice in randomEvent.Choices)
+            {
+                if (choice.HasFollowUp && known.Contains(choice.FollowUpEventId) == false)
+                    throw new InvalidDataException($"Evento '{randomEvent.Id}' agenda uma consequencia desconhecida: '{choice.FollowUpEventId}'.");
+            }
+        }
+    }
+
+    private static BalanceData ParseFields(string json)
+    {
         var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
         var dto = JsonSerializer.Deserialize<BalanceDataDto>(json, options)
             ?? throw new InvalidDataException("JSON de balanceamento vazio.");
@@ -182,6 +205,14 @@ public sealed class BalanceData
                     Comparison = ParseEnum<ComparisonType>(condition.Comparison),
                     Threshold = condition.Threshold,
                 }).ToList(),
+                IsFollowUpOnly = randomEvent.FollowUpOnly,
+                Choices = randomEvent.Choices.Select(choice => new EventChoiceDefinition
+                {
+                    Effects = ToModifiers(choice.Effects).ToArray(),
+                    FollowUpEventId = choice.FollowUpEventId,
+                    FollowUpDelay = choice.FollowUpDelay,
+                }).ToList(),
+                ChoiceLabels = randomEvent.Choices.Select(choice => choice.Label).ToList(),
             }).ToList(),
             Advantages = dto.Advantages.Select(advantage => new SimAdvantage
             {
@@ -319,6 +350,16 @@ public sealed class BalanceData
         public int MaxTurn { get; set; }
         public List<ConditionDto> Conditions { get; set; } = new();
         public List<ModifierDto> Effects { get; set; } = new();
+        public bool FollowUpOnly { get; set; }
+        public List<ChoiceDto> Choices { get; set; } = new();
+    }
+
+    private sealed class ChoiceDto
+    {
+        public string Label { get; set; } = "";
+        public List<ModifierDto> Effects { get; set; } = new();
+        public string FollowUpEventId { get; set; } = "";
+        public int FollowUpDelay { get; set; }
     }
 
     private sealed class AdvantageDto

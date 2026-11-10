@@ -84,27 +84,7 @@ public static class BalanceDataExporter
 
         foreach (var randomEvent in BalanceDataFormat.ReadObjectArray<RandomEventData>(turn.FindProperty("_eventPool")))
         {
-            var dto = new BalanceDataFormat.EventDto
-            {
-                Id = randomEvent.name,
-                Title = PortugueseText(randomEvent, "_title"),
-                MinTurn = randomEvent.MinTurn,
-                MaxTurn = randomEvent.MaxTurn,
-                Effects = ToDtos(randomEvent.StatEffects),
-            };
-            if (randomEvent.TriggerConditions != null)
-            {
-                foreach (var condition in randomEvent.TriggerConditions)
-                {
-                    dto.Conditions.Add(new BalanceDataFormat.ConditionDto
-                    {
-                        Parameter = condition.Parameter.ToString(),
-                        Comparison = condition.Comparison.ToString(),
-                        Threshold = condition.Threshold,
-                    });
-                }
-            }
-            data.Events.Add(dto);
+            data.Events.Add(ToEventDto(randomEvent));
         }
 
         foreach (var advantage in BalanceDataFormat.ReadObjectArray<PassiveAdvantageData>(turn.FindProperty("_advantagePool")))
@@ -157,6 +137,42 @@ public static class BalanceDataExporter
     private static string PortugueseText(UnityEngine.Object asset, string fieldName)
     {
         return new SerializedObject(asset).FindProperty(fieldName).stringValue;
+    }
+
+    public static BalanceDataFormat.EventDto ToEventDto(RandomEventData randomEvent)
+    {
+        var dto = new BalanceDataFormat.EventDto
+        {
+            Id = randomEvent.name,
+            Title = PortugueseText(randomEvent, "_title"),
+            MinTurn = randomEvent.MinTurn,
+            MaxTurn = randomEvent.MaxTurn,
+            Effects = ToDtos(randomEvent.StatEffects),
+            FollowUpOnly = randomEvent.IsFollowUpOnly,
+        };
+        foreach (var choice in randomEvent.ChoiceData)
+        {
+            dto.Choices.Add(new BalanceDataFormat.ChoiceDto
+            {
+                Label = choice.Label,
+                Effects = ToDtos(choice.Rule.Effects ?? Array.Empty<StatModifier>()),
+                FollowUpEventId = choice.Rule.FollowUpEventId,
+                FollowUpDelay = choice.Rule.FollowUpDelay,
+            });
+        }
+        if (randomEvent.TriggerConditions != null)
+        {
+            foreach (var condition in randomEvent.TriggerConditions)
+            {
+                dto.Conditions.Add(new BalanceDataFormat.ConditionDto
+                {
+                    Parameter = condition.Parameter.ToString(),
+                    Comparison = condition.Comparison.ToString(),
+                    Threshold = condition.Threshold,
+                });
+            }
+        }
+        return dto;
     }
 
     private static List<BalanceDataFormat.ModifierDto> ToDtos(IReadOnlyList<StatModifier> modifiers)

@@ -15,7 +15,7 @@ public static class GameTextCollector
     {
         var items = new List<GameTextItem>();
         AddPairs(items, GameTextOrigin.Card, "CardData", GameTextEditKind.Asset, ("_cardName", "_cardNameEn", "", ""), ("_description", "_descriptionEn", "", ""));
-        AddPairs(items, GameTextOrigin.Event, "RandomEventData", GameTextEditKind.Asset, ("_title", "_titleEn", "", ""), ("_description", "_descriptionEn", "", ""));
+        AddEvents(items);
         AddPairs(items, GameTextOrigin.Advantage, "PassiveAdvantageData", GameTextEditKind.Asset, ("_advantageName", "_advantageNameEn", "", ""), ("_description", "_descriptionEn", "", ""));
         AddPairs(items, GameTextOrigin.Preset, "CityParameterPresetData", GameTextEditKind.Asset, ("_presetName", "_presetNameEn", "", ""));
         AddPairs(items, GameTextOrigin.Knowledge, "KnowledgeEntryData", GameTextEditKind.Knowledge,
@@ -81,6 +81,47 @@ public static class GameTextCollector
                     JsonPtKey = field.JsonPt,
                     JsonEnKey = field.JsonEn,
                 });
+            }
+        }
+    }
+
+    // Dilemas e consequencias ficam em origem propria, editados no JSON em vez de direto no asset.
+    private static void AddEvents(List<GameTextItem> items)
+    {
+        foreach (var path in AssetPaths("RandomEventData"))
+        {
+            var so = Open(path);
+            var choices = so.FindProperty("_choices");
+            var isFollowUp = so.FindProperty("_isFollowUpOnly").boolValue;
+            var isDilemma = isFollowUp || choices.arraySize > 0;
+            var id = Path.GetFileNameWithoutExtension(path);
+
+            void Add(string field, string pt, string en, string ptField, string enField, string jsonPt, string jsonEn, string nested, int index) => items.Add(new GameTextItem
+            {
+                Origin = isDilemma ? GameTextOrigin.Dilemma : GameTextOrigin.Event,
+                Id = id,
+                Field = field,
+                Pt = pt,
+                En = en,
+                Location = path,
+                EditKind = isDilemma ? GameTextEditKind.Dilemma : GameTextEditKind.Asset,
+                PtField = ptField,
+                EnField = enField,
+                JsonPtKey = isDilemma ? jsonPt : string.Empty,
+                JsonEnKey = isDilemma ? jsonEn : string.Empty,
+                JsonListKey = isFollowUp ? "FollowUps" : "Dilemmas",
+                JsonNestedKey = nested,
+                ArrayIndex = index,
+            });
+
+            Add("_title", so.FindProperty("_title").stringValue, so.FindProperty("_titleEn").stringValue, "_title", "_titleEn", "TitlePt", "TitleEn", string.Empty, 0);
+            Add("_description", so.FindProperty("_description").stringValue, so.FindProperty("_descriptionEn").stringValue, "_description", "_descriptionEn", "DescriptionPt", "DescriptionEn", string.Empty, 0);
+
+            for (var i = 0; i < choices.arraySize; i++)
+            {
+                var choice = choices.GetArrayElementAtIndex(i);
+                Add($"_choices[{i}].Label", choice.FindPropertyRelative("Label").stringValue, choice.FindPropertyRelative("LabelEn").stringValue, "Label", "LabelEn", "LabelPt", "LabelEn", "Choices", i);
+                Add($"_choices[{i}].Detail", choice.FindPropertyRelative("Detail").stringValue, choice.FindPropertyRelative("DetailEn").stringValue, "Detail", "DetailEn", "DetailPt", "DetailEn", "Choices", i);
             }
         }
     }

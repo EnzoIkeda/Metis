@@ -104,6 +104,22 @@ public static class UIStrings
         return string.Join("\n", lines);
     }
 
+    // Efeitos imediatos de uma opcao de dilema, em indice, numa linha so.
+    public static string EventChoiceEffects(System.Collections.Generic.IReadOnlyList<StatModifier> effects)
+    {
+        if (effects == null || effects.Count == 0)
+            return IsPt ? "Sem efeito direto" : "No direct effect";
+
+        var parts = new System.Collections.Generic.List<string>();
+        foreach (var effect in effects)
+            parts.Add($"{ParameterIcon(effect.Parameter)} {effect.Amount:+0;-0;0}");
+        return string.Join("   ", parts);
+    }
+
+    public static string EventFollowUpOrigin(int turnIndex, string choiceLabel) => IsPt
+        ? $"Consequência da sua decisão no turno {turnIndex}: {choiceLabel}"
+        : $"A result of your decision on turn {turnIndex}: {choiceLabel}";
+
     // Popup "Por que mudou?" de um parametro.
     public static string BreakdownTitle(CityParameterType parameter) => IsPt
         ? $"Por que mudou: {parameter.GetFullName()}?"
@@ -410,6 +426,20 @@ public static class UIStrings
     public static string ReportDecisionLine(int rank, int turnIndex, string cardName, bool helped) => IsPt
         ? $"{rank}. Turno {turnIndex}, <b>{cardName}</b>: {(helped ? "ajudou" : "atrapalhou")}"
         : $"{rank}. Turn {turnIndex}, <b>{cardName}</b>: {(helped ? "helped" : "hurt")}";
+
+    public static string ReportChoicesHeader => IsPt ? "Escolhas" : "Choices";
+
+    public static string ReportChoiceLine(int turnIndex, string eventTitle, string choiceLabel) => IsPt
+        ? $"Turno {turnIndex}, <b>{eventTitle}</b>: {choiceLabel}"
+        : $"Turn {turnIndex}, <b>{eventTitle}</b>: {choiceLabel}";
+
+    public static string ReportChoiceConsequence(int turnIndex, string eventTitle) => IsPt
+        ? $"Consequência no turno {turnIndex}: {eventTitle}"
+        : $"Result on turn {turnIndex}: {eventTitle}";
+
+    public static string ReportChoiceNoConsequence => IsPt
+        ? "A fase acabou antes da consequência."
+        : "The phase ended before the result.";
 
     public static string ReportCollapseHeader(GameOutcome outcome) => outcome == GameOutcome.GameOver
         ? (IsPt ? "O que levou ao fim" : "What led to the end")

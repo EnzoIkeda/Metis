@@ -53,6 +53,9 @@ public class PhaseSaveData
     public ulong HandRandomState;
     public ulong EventRandomState;
 
+    // Consequencias de dilemas ainda por acontecer nesta fase.
+    public List<ScheduledFollowUp> FollowUps = new List<ScheduledFollowUp>();
+
     // Historico do relatorio de fim de fase: valores iniciais, turnos fechados e o turno em andamento.
     public float[] HistoryStart = Array.Empty<float>();
     public List<PhaseTurnRecord> History = new List<PhaseTurnRecord>();
@@ -139,6 +142,22 @@ public static class RunSaveRules
     {
         var current = phase.HasHistoryCurrent ? phase.HistoryCurrent : null;
         return new PhaseHistory(phase.HistoryStart, phase.History, current);
+    }
+
+    public static void CaptureSchedule(PhaseSaveData phase, EventSchedule schedule)
+    {
+        phase.FollowUps = new List<ScheduledFollowUp>(schedule.FollowUps);
+    }
+
+    // O que ja saiu na fase vem do historico, entao nao precisa de campo proprio no save.
+    public static EventSchedule RestoreSchedule(PhaseSaveData phase, PhaseHistory history)
+    {
+        var seen = new List<string>();
+        foreach (var turn in history.Turns)
+            seen.Add(turn.EventId);
+        if (history.Current != null)
+            seen.Add(history.Current.EventId);
+        return new EventSchedule(phase.FollowUps, seen);
     }
 
     public static void CaptureNews(PhaseSaveData phase, NewsArchive news)

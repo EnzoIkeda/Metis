@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a17274e29c4cba04cae830be71476a04, type: 3}
+  m_Name: ConsequenciaDadosReidentificados
+  m_EditorClassIdentifier: Metis.Runtime::RandomEventData
+  _title: "An\xF4nimos, mas nem tanto"
+  _description: "Um programador cruza a base publicada e mostra que d\xE1 para descobrir
+    quem \xE9 quem. A prefeitura tira os dados do ar, tarde demais."
+  _titleEn: Anonymous, but not quite
+  _descriptionEn: A programmer cross-checks the published data and shows it is possible
+    to tell who is who. City Hall takes it down, too late.
+  _triggerConditions: []
+  _statEffects:
+  - Parameter: 2
+    Amount: -7
+  - Parameter: 4
+    Amount: -2
+  _minTurn: 1
+  _maxTurn: 20
+  _choices: []
+  _isFollowUpOnly: 1
+  _knowledgeEntry: {fileID: 11400000, guid: 702058b4770f8833c867c5402b9547c2, type: 2}

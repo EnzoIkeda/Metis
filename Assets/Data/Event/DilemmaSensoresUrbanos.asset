@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a17274e29c4cba04cae830be71476a04, type: 3}
+  m_Name: DilemmaSensoresUrbanos
+  m_EditorClassIdentifier: Metis.Runtime::RandomEventData
+  _title: Sensores em toda a rua
+  _description: "Uma empresa de tecnologia oferece cobrir um bairro inteiro de sensores
+    para medir tr\xE2nsito, ru\xEDdo e energia. Em troca, quer acesso aos dados coletados
+    nas ruas. A decis\xE3o \xE9 da prefeitura."
+  _titleEn: Sensors on every street
+  _descriptionEn: A tech company offers to cover a whole district with sensors that
+    measure traffic, noise and energy. In return, it wants access to the data collected
+    on the streets. City Hall must decide.
+  _triggerConditions: []
+  _statEffects: []
+  _minTurn: 3
+  _maxTurn: 16
+  _choices:
+  - Rule:
+      Effects:
+      - Parameter: 0
+        Amount: -3
+      - Parameter: 4
+        Amount: 4
+      - Parameter: 2
+        Amount: 1
+      FollowUpEventId: 
+      FollowUpDelay: 0
+    Label: "Implantar com consulta p\xFAblica"
+    LabelEn: Install after public consultation
+    Detail: "A popula\xE7\xE3o ajuda a definir o que \xE9 coletado e quem acessa.
+      Custa tempo e dinheiro."
+    DetailEn: Residents help define what is collected and who sees it. It costs time
+      and money.
+  - Rule:
+      Effects:
+      - Parameter: 4
+        Amount: 5
+      - Parameter: 0
+        Amount: -2
+      FollowUpEventId: ConsequenciaSensoresProtesto
+      FollowUpDelay: 3
+    Label: Implantar sem consulta
+    LabelEn: Install without consultation
+    Detail: "Os dados chegam r\xE1pido. Ningu\xE9m foi ouvido sobre como ser\xE3o
+      usados."
+    DetailEn: The data arrives fast. Nobody was asked how it will be used.
+  - Rule:
+      Effects: []
+      FollowUpEventId: 
+      FollowUpDelay: 0
+    Label: Recusar a oferta
+    LabelEn: Turn down the offer
+    Detail: A cidade segue sem os sensores e sem o debate.
+    DetailEn: The city carries on without the sensors or the debate.
+  _isFollowUpOnly: 0
+  _knowledgeEntry: {fileID: 11400000, guid: 90a0e0e0b3936984c9e2b7deba8bcf81, type: 2}

@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a17274e29c4cba04cae830be71476a04, type: 3}
+  m_Name: DilemmaConcessaoSaneamento
+  m_EditorClassIdentifier: Metis.Runtime::RandomEventData
+  _title: "Concess\xE3o do saneamento"
+  _description: "Investidores querem assumir a \xE1gua e o esgoto da cidade. O dinheiro
+    aceleraria as obras, e o contrato pode priorizar a arrecada\xE7\xE3o da prefeitura
+    ou o atendimento de quem ainda n\xE3o tem rede."
+  _titleEn: Sanitation concession
+  _descriptionEn: Investors want to take over the city water and sewage. The money
+    would speed up the works, and the contract can favor City Hall revenue or service
+    for those still off the network.
+  _triggerConditions: []
+  _statEffects: []
+  _minTurn: 2
+  _maxTurn: 17
+  _choices:
+  - Rule:
+      Effects:
+      - Parameter: 0
+        Amount: -2
+      - Parameter: 7
+        Amount: 5
+      - Parameter: 5
+        Amount: 3
+      FollowUpEventId: 
+      FollowUpDelay: 0
+    Label: "Concess\xE3o com metas e tarifa social"
+    LabelEn: Concession with targets and social tariff
+    Detail: Menos dinheiro na assinatura, mas o contrato cobra atendimento e protege
+      quem pode pagar menos.
+    DetailEn: Less money up front, but the contract demands service and protects
+      those who can pay less.
+  - Rule:
+      Effects:
+      - Parameter: 0
+        Amount: 5
+      - Parameter: 7
+        Amount: 1
+      FollowUpEventId: ConsequenciaSaneamentoTarifa
+      FollowUpDelay: 3
+    Label: "Concess\xE3o pelo maior lance"
+    LabelEn: Concession to the highest bidder
+    Detail: "O caixa da prefeitura enche agora. O contrato n\xE3o fala de quem est\xE1
+      fora da rede."
+    DetailEn: City Hall coffers fill up now. The contract says nothing about those
+      off the network.
+  - Rule:
+      Effects:
+      - Parameter: 0
+        Amount: -6
+      - Parameter: 7
+        Amount: 6
+      - Parameter: 5
+        Amount: 4
+      FollowUpEventId: 
+      FollowUpDelay: 0
+    Label: "Manter p\xFAblico e investir"
+    LabelEn: Keep it public and invest
+    Detail: "A prefeitura banca a expans\xE3o com o pr\xF3prio caixa."
+    DetailEn: City Hall pays for the expansion out of its own budget.
+  _isFollowUpOnly: 0
+  _knowledgeEntry: {fileID: 11400000, guid: 802cc537c5fee1126b327af8119edf63, type: 2}

@@ -346,6 +346,161 @@ public class TurnManagerTests
         Assert.That(MetaProgressionManager.Archetype, Is.EqualTo(CardArchetype.Industria));
     }
 
+    // Consequencia agendada entra no save e acontece no turno certo depois de continuar.
+    [UnityTest]
+    public IEnumerator Resume_WithScheduledFollowUp_FiresItOnItsTurn()
+    {
+        var pool = DistinctCards(8);
+        var followUp = TestDataFactory.CreateEvent("Consequencia");
+        TestDataFactory.SetField(followUp, "_isFollowUpOnly", true);
+        var events = new[] { followUp };
+        CreateTurnManager(pool, handSize: 3, eventPool: events);
+        yield return null;
+
+        var phase = MetaProgressionManager.SavedPhase;
+        phase.FollowUps.Add(new ScheduledFollowUp { EventId = "Consequencia", Turn = 1 });
+        MetaProgressionManager.SavePhase(phase);
+        CloseAndForgetInMemoryState();
+
+        var resumed = CreateTurnManager(pool, handSize: 3, eventPool: events);
+        RandomEventData announced = null;
+        resumed.OnRandomEventTriggered += triggered => announced = triggered;
+        yield return null;
+        Assert.That(resumed.ResumedFromSave, Is.True);
+        Assert.That(resumed.PlayCard(resumed.Hand.Cards[0]), Is.True);
+        yield return new WaitForSeconds(2f);
+
+        Assert.That(announced, Is.SameAs(followUp));
+    }
+
+    // Consequencia que nao existe mais no jogo descarta so a fase, como a carta removida.
+    [UnityTest]
+    public IEnumerator Resume_WithUnknownFollowUp_StartsThePhaseFresh()
+    {
+        var pool = DistinctCards(6);
+        CreateTurnManager(pool);
+        yield return null;
+
+        var phase = MetaProgressionManager.SavedPhase;
+        phase.FollowUps.Add(new ScheduledFollowUp { EventId = "Removida", Turn = 3 });
+        MetaProgressionManager.SavePhase(phase);
+        CloseAndForgetInMemoryState();
+
+        var resumed = CreateTurnManager(pool);
+        yield return null;
+
+        Assert.That(resumed.ResumedFromSave, Is.False);
+        Assert.That(resumed.Machine.TurnIndex, Is.EqualTo(1));
+    }
+
+    private static RandomEventData CreateDilemma(string followUp = "", int delay = 0, float amount = -6f)
+    {
+        var dilemma = TestDataFactory.CreateEvent("Dilema");
+        var effects = new[] { new StatModifier { Parameter = CityParameterType.Renda, Amount = amount } };
+        TestDataFactory.SetField(dilemma, "_choices", new[]
+        {
+            new EventChoiceData { Label = "A", Rule = new EventChoiceDefinition { Effects = effects, FollowUpEventId = followUp, FollowUpDelay = delay } },
+            new EventChoiceData { Label = "B", Rule = new EventChoiceDefinition { Effects = new StatModifier[0] } },
+        });
+        return dilemma;
+    }
+
+    private IEnumerator PlayUntilDilemma(TurnManager turnManager)
+    {
+        yield return null;
+        Assert.That(turnManager.PlayCard(turnManager.Hand.Cards[0]), Is.True);
+        yield return new WaitForSeconds(2f);
+        Assert.That(turnManager.Machine.CurrentPhase, Is.EqualTo(TurnPhase.Event));
+    }
+
+    [UnityTest]
+    public IEnumerator Dilemma_DoesNotCloseWithoutAChoice()
+    {
+        var turnManager = CreateTurnManager(DistinctCards(6), handSize: 3, eventPool: new[] { CreateDilemma() });
+        yield return PlayUntilDilemma(turnManager);
+
+        turnManager.AcknowledgeEvent();
+        yield return null;
+
+        Assert.That(turnManager.Machine.CurrentPhase, Is.EqualTo(TurnPhase.Event));
+        Assert.That(turnManager.Machine.TurnIndex, Is.EqualTo(1));
+    }
+
+    [UnityTest]
+    public IEnumerator Dilemma_Choice_AppliesOnceRecordsItAndAdvances()
+    {
+        var turnManager = CreateTurnManager(DistinctCards(6), handSize: 3, eventPool: new[] { CreateDilemma() });
+        yield return PlayUntilDilemma(turnManager);
+        var stats = _host.GetComponent<CityStatsManager>().Stats;
+        var before = stats.GetValue(CityParameterType.Renda);
+
+        Assert.That(turnManager.ChooseEventOption(0), Is.True);
+        Assert.That(turnManager.ChooseEventOption(1), Is.False, "o segundo toque nao vale");
+        Assert.That(stats.GetValue(CityParameterType.Renda), Is.EqualTo(before - 6f));
+        Assert.That(turnManager.History.Current.EventChoice, Is.EqualTo(0));
+        Assert.That(turnManager.LastBreakdown, Is.Null.Or.Property("TurnIndex").Not.EqualTo(1));
+
+        yield return new WaitForSeconds(3f);
+
+        Assert.That(turnManager.Machine.TurnIndex, Is.EqualTo(2));
+        Assert.That(turnManager.History.Turns[0].HasEventChoice, Is.True);
+        var fromEvent = turnManager.LastBreakdown.Contributions.Where(part => part.Source == ContributionSource.Event && part.Target == CityParameterType.Renda);
+        Assert.That(fromEvent.Sum(part => part.Amount), Is.EqualTo(-6f).Within(0.001f), "a opcao entra na parcela do evento");
+    }
+
+    [UnityTest]
+    public IEnumerator Dilemma_InvalidOption_IsRefused()
+    {
+        var turnManager = CreateTurnManager(DistinctCards(6), handSize: 3, eventPool: new[] { CreateDilemma() });
+        yield return PlayUntilDilemma(turnManager);
+
+        Assert.That(turnManager.ChooseEventOption(5), Is.False);
+        Assert.That(turnManager.Machine.CurrentPhase, Is.EqualTo(TurnPhase.Event));
+    }
+
+    [UnityTest]
+    public IEnumerator Dilemma_WithNoEffectOption_ClosesWithoutAnimation()
+    {
+        var turnManager = CreateTurnManager(DistinctCards(6), handSize: 3, eventPool: new[] { CreateDilemma() });
+        yield return PlayUntilDilemma(turnManager);
+
+        Assert.That(turnManager.ChooseEventOption(1), Is.True);
+        yield return null;
+
+        Assert.That(turnManager.Machine.TurnIndex, Is.EqualTo(2));
+    }
+
+    // Fechar com o dilema aberto nao aplica nada; continuar ainda pede a escolha, e ela agenda a consequencia.
+    [UnityTest]
+    public IEnumerator Resume_WithDilemmaOpen_StillAsksAndSchedulesTheFollowUp()
+    {
+        var pool = DistinctCards(8);
+        var followUp = TestDataFactory.CreateEvent("Consequencia");
+        TestDataFactory.SetField(followUp, "_isFollowUpOnly", true);
+        var events = new[] { CreateDilemma("Consequencia", 2), followUp };
+        var turnManager = CreateTurnManager(pool, handSize: 3, eventPool: events);
+        yield return PlayUntilDilemma(turnManager);
+        var before = _host.GetComponent<CityStatsManager>().Stats.GetValue(CityParameterType.Renda);
+
+        CloseAndForgetInMemoryState();
+        var resumed = CreateTurnManager(pool, handSize: 3, eventPool: events);
+        for (int frame = 0; frame < 10 && resumed.Machine == null; frame++)
+            yield return null;
+        yield return null;
+        yield return null;
+
+        var stats = _host.GetComponent<CityStatsManager>().Stats;
+        Assert.That(stats.GetValue(CityParameterType.Renda), Is.EqualTo(before));
+        resumed.AcknowledgeEvent();
+        Assert.That(resumed.Machine.CurrentPhase, Is.EqualTo(TurnPhase.Event));
+
+        Assert.That(resumed.ChooseEventOption(0), Is.True);
+        yield return new WaitForSeconds(3f);
+
+        Assert.That(resumed.Machine.TurnIndex, Is.EqualTo(2));
+        Assert.That(MetaProgressionManager.SavedPhase.FollowUps.Single().Turn, Is.EqualTo(3));
+    }
+
     // Derrota apaga o save na hora, senao continuar repetiria o turno perdido.
     [UnityTest]
     public IEnumerator GameOver_DeletesTheSavedRun()

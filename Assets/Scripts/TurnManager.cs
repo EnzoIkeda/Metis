@@ -92,7 +92,7 @@ public class TurnManager : MonoBehaviour
         if (savedPhase == null)
             return;
 
-        if (TryRestoreHand(savedPhase) == false || TryRestoreEvent(savedPhase) == false)
+        if (TryRestoreHand(savedPhase) == false || TryRestoreEvent(savedPhase) == false || HasAllFollowUps(savedPhase) == false)
         {
             Debug.LogWarning("[TurnManager] Save com carta ou evento desconhecido, a fase recomeça do zero.");
             Hand = null;
@@ -130,7 +130,8 @@ public class TurnManager : MonoBehaviour
 
         Hand.OnHandChanged += HandleHandChanged;
         var theme = Theme;
-        _events = new RandomEventPool<RandomEventData>(CityPresetRules.AllowedEvents(_eventPool, theme != null ? theme.AllowedEventIds as IReadOnlyCollection<string> : null), _eventRandom);
+        _events = new RandomEventPool<RandomEventData>(CityPresetRules.AllowedEvents(_eventPool, theme != null ? theme.AllowedEventIds as IReadOnlyCollection<string> : null), _eventRandom, _eventPool,
+            savedPhase != null ? RunSaveRules.RestoreSchedule(savedPhase, History) : null, _victoryTurnCount);
 
         Machine = new TurnMachine(_cityStatsManager.Stats, _victoryTurnCount);
         Machine.OnPhaseChanged += HandlePhaseChanged;
@@ -153,6 +154,12 @@ public class TurnManager : MonoBehaviour
 
         _restoredEvent = _eventPool.FirstOrDefault(candidate => candidate != null && candidate.name == savedPhase.PendingEventId);
         return _restoredEvent != null;
+    }
+
+    private bool HasAllFollowUps(PhaseSaveData savedPhase)
+    {
+        return savedPhase.FollowUps == null || savedPhase.FollowUps.All(followUp =>
+            _eventPool.Any(candidate => candidate != null && candidate.name == followUp.EventId));
     }
 
     private bool TryRestoreHand(PhaseSaveData savedPhase)
@@ -184,6 +191,7 @@ public class TurnManager : MonoBehaviour
         phase.LayoutSeed = _placementManager != null ? _placementManager.LayoutSeed : 0UL;
         phase.BackgroundIndex = _background != null ? _background.BackgroundIndex : -1;
         RunSaveRules.CaptureHistory(phase, History);
+        RunSaveRules.CaptureSchedule(phase, _events.Schedule);
         RunSaveRules.CaptureNews(phase, News);
         MetaProgressionManager.SavePhase(phase);
     }
@@ -371,16 +379,42 @@ public class TurnManager : MonoBehaviour
         return true;
     }
 
+    public RandomEventData FindEvent(string eventId)
+    {
+        return _eventPool.FirstOrDefault(candidate => candidate != null && candidate.name == eventId);
+    }
+
+    // Um dilema so fecha com uma escolha.
     public void AcknowledgeEvent()
     {
-        if (_eventEffectPending)
+        if (_eventEffectPending || (_pendingEvent != null && _pendingEvent.Choices.Count > 0))
             return;
 
-        var closedEvent = _pendingEvent;
+        CloseEvent(_pendingEvent != null ? _pendingEvent.StatEffects : null);
+    }
+
+    // Aplica a opcao do dilema aberto e encerra o evento; recusa se nao houver o que escolher.
+    public bool ChooseEventOption(int choiceIndex)
+    {
+        if (_eventEffectPending || _pendingEvent == null)
+            return false;
+
+        var choices = _pendingEvent.Choices;
+        if (choiceIndex < 0 || choiceIndex >= choices.Count)
+            return false;
+
+        _events.ApplyChoice(_cityStatsManager.Stats, _pendingEvent, choiceIndex, Machine.TurnIndex);
+        History.RecordEventChoice(Machine.TurnIndex, choiceIndex);
+        CloseEvent(choices[choiceIndex].Effects);
+        return true;
+    }
+
+    private void CloseEvent(IReadOnlyList<StatModifier> effects)
+    {
         _pendingEvent = null;
 
-        var tone = closedEvent != null && _effects != null
-            ? CityEffectsController.ClassifyEventTone(closedEvent.StatEffects)
+        var tone = effects != null && _effects != null
+            ? CityEffectsController.ClassifyEventTone(effects)
             : EventTone.Neutral;
 
         if (tone == EventTone.PositiveOrMixed)

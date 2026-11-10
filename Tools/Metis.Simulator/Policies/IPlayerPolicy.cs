@@ -29,6 +29,10 @@ public sealed class DecisionContext
     public IReadOnlyList<SimCard> DrawPile { get; init; } = Array.Empty<SimCard>();
     public IReadOnlyList<SimCard> DiscardPile { get; init; } = Array.Empty<SimCard>();
     public IReadOnlyList<SimCard> HandCards { get; init; } = Array.Empty<SimCard>();
+
+    // Todos os eventos do jogo, onde as consequencias sao buscadas, e o que ja esta agendado na fase.
+    public IReadOnlyList<SimEvent> AllEvents { get; init; }
+    public EventSchedule Schedule { get; init; }
 }
 
 // Jogador simulado: escolhe uma das cartas jogaveis da mao.
@@ -40,6 +44,9 @@ public interface IPlayerPolicy
 
     // Escolha da carta que a busca traz pra mao.
     SimCard ChooseSearch(DecisionContext context, IReadOnlyList<SimCard> candidates);
+
+    // Indice da opcao escolhida no dilema; a consequencia oculta so entra na conta de quem a conhece.
+    int ChooseEventOption(DecisionContext context, SimEvent dilemma);
 }
 
 public static class PolicyHelpers
@@ -90,6 +97,17 @@ public static class PolicyHelpers
             return plain.Count == 0 ? double.NegativeInfinity : plain.Max(plainScore) + costScore(card);
         }
         return plainScore(card);
+    }
+
+    // Opcao de dilema vista como carta sem custo, pra usar as mesmas notas das politicas.
+    public static SimCard AsCard(EventChoiceDefinition choice)
+    {
+        return new SimCard { Id = "", StatEffects = (IReadOnlyList<StatModifier>)choice.Effects ?? Array.Empty<StatModifier>() };
+    }
+
+    public static IReadOnlyList<int> OptionIndexes(SimEvent dilemma)
+    {
+        return Enumerable.Range(0, dilemma.Choices.Count).ToList();
     }
 
     // Cartas repetidas na mao tem o mesmo efeito, avaliar uma vez so.

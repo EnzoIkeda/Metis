@@ -53,7 +53,7 @@ public static class ThemedPhaseImportFormat
         public ThemeDto[] Themes = Array.Empty<ThemeDto>();
     }
 
-    public static List<string> Validate(FileDto file, ICollection<string> knownEvents = null, ICollection<string> knownEntries = null)
+    public static List<string> Validate(FileDto file, ICollection<string> knownEvents = null, ICollection<string> knownEntries = null, ICollection<string> followUps = null)
     {
         var errors = new List<string>();
         if (file == null || file.Themes == null)
@@ -79,7 +79,7 @@ public static class ThemedPhaseImportFormat
             CheckText(errors, theme.Id, "Victory", theme.VictoryPt, theme.VictoryEn, MaxVictoryLength);
             CheckText(errors, theme.Id, "Inspiration", theme.InspirationPt, theme.InspirationEn, MaxInspirationLength);
             CheckOverrides(errors, theme);
-            CheckEvents(errors, theme, knownEvents);
+            CheckEvents(errors, theme, knownEvents, followUps);
 
             if (theme.DerivaMultiplier <= 0f)
                 errors.Add($"{theme.Id}: DerivaMultiplier precisa ser maior que zero");
@@ -144,7 +144,7 @@ public static class ThemedPhaseImportFormat
         }
     }
 
-    private static void CheckEvents(List<string> errors, ThemeDto theme, ICollection<string> knownEvents)
+    private static void CheckEvents(List<string> errors, ThemeDto theme, ICollection<string> knownEvents, ICollection<string> followUps)
     {
         var seen = new HashSet<string>(StringComparer.Ordinal);
         foreach (var randomEvent in theme.AllowedEvents ?? Array.Empty<string>())
@@ -153,6 +153,8 @@ public static class ThemedPhaseImportFormat
                 errors.Add($"{theme.Id}: evento repetido '{randomEvent}'");
             if (knownEvents != null && knownEvents.Contains(randomEvent) == false)
                 errors.Add($"{theme.Id}: evento desconhecido '{randomEvent}'");
+            if (followUps != null && followUps.Contains(randomEvent))
+                errors.Add($"{theme.Id}: '{randomEvent}' so acontece como consequencia, nao entra na lista");
         }
     }
 }

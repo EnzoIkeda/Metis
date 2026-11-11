@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_CidadeJardim
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Cidade-Jardim
+  _titleEn: Garden City
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Bairros espa\xE7osos, com casas, trabalho e campo lado a lado e um cintur\xE3o
+    verde em volta que impede a mancha urbana de crescer sem limite."
+  _summaryEn: Spacious neighborhoods with homes, work and countryside side by side,
+    and a green belt around them that keeps the city from spreading without limit.
+  _realWorld: "Ebenezer Howard prop\xF4s a cidade-jardim em 1898, e Letchworth, na
+    Inglaterra, come\xE7ou a ser constru\xEDda em 1903. Bairros como o Jardim Am\xE9rica,
+    em S\xE3o Paulo, seguiram a ideia."
+  _realWorldEn: "Ebenezer Howard proposed the garden city in 1898, and work on Letchworth,
+    England, began in 1903. Neighborhoods such as Jardim Am\xE9rica, in S\xE3o Paulo,
+    followed the idea."
+  _tradeOffs: "Baixa densidade p\xF5e menos gente por \xE1rea, encarece a infraestrutura
+    e o transporte, e as casas de Letchworth acabaram caras demais para os oper\xE1rios."
+  _tradeOffsEn: Low density fits fewer people per area and makes infrastructure and
+    transit pricier, and Letchworth's houses ended up too expensive for factory workers.
+  _sources:
+  - Label: Garden city movement (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Garden_city_movement
+  - Label: Letchworth (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Letchworth
+  _relatedEntries:
+  - {fileID: 11400000, guid: 6154e0a377c7bc759b376966fb85eb91, type: 2}
+  - {fileID: 11400000, guid: 77acdd2f916c0d35ebe14215b5c0bcbc, type: 2}
+  _image: {fileID: 0}

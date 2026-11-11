@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_HortasComunitarias
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Hortas Comunit\xE1rias"
+  _titleEn: Community Gardens
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Moradores transformam terrenos vazios em hortas e dividem a colheita:
+    mais verde, comida fresca perto de casa e vizinhan\xE7a reunida."
+  _summaryEn: 'Residents turn vacant lots into gardens and share the harvest: more
+    green space, fresh food close to home and neighbors working together.'
+  _realWorld: "Ros\xE1rio, na Argentina, lan\xE7ou em 2002, depois da crise de 2001,
+    um programa municipal que transforma terrenos vazios em hortas ecol\xF3gicas
+    de fam\xEDlias pobres, que vendem a colheita em feiras."
+  _realWorldEn: After the 2001 crisis, Rosario, Argentina, launched a city program
+    in 2002 that turns vacant lots into organic gardens run by low-income families,
+    who sell the harvest at farmers' markets.
+  _tradeOffs: 'Hortas precisam de gente que cuide delas toda semana e de terreno
+    garantido: quando o dono do lote ou a prefeitura muda de ideia, a horta some.'
+  _tradeOffsEn: 'Gardens need people to tend them every week and secure land: when
+    the lot owner or the city changes its mind, the garden disappears.'
+  _sources:
+  - Label: "UCLG, Agricultura urbana e inclusi\xF3n social, Rosario"
+    Url: https://www.uclg-cisdp.org/sites/default/files/observatory/files/2021-06/Rosario_ES.pdf
+  _relatedEntries:
+  - {fileID: 11400000, guid: c339ba29da16de56c8910a8e65b146ce, type: 2}
+  - {fileID: 11400000, guid: 9e42c249b92698688afcdb90cc733be0, type: 2}
+  _image: {fileID: 0}

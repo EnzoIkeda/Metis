@@ -10,12 +10,14 @@ public enum CardTier
 }
 
 // Baralho tematico da carta na planilha. Geral cobre tanto as cartas sem baralho proprio quanto o tier 0 compartilhado.
+// So acrescentar valores no fim: o save guarda o numero.
 public enum CardArchetype
 {
     Geral,
     Sustentabilidade,
     Industria,
-    Automacao
+    Automacao,
+    Comunitario
 }
 
 // Habilidade especial jogada como acao livre, sem encerrar a fase de acao. So acrescentar valores no fim.

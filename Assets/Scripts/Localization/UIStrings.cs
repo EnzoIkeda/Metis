@@ -316,6 +316,8 @@ public static class UIStrings
                 return IsPt ? "Indústria" : "Industry";
             case CardArchetype.Automacao:
                 return IsPt ? "Automação" : "Automation";
+            case CardArchetype.Comunitario:
+                return IsPt ? "Comunitário" : "Community";
             default:
                 return IsPt ? "Geral" : "General";
         }
@@ -394,6 +396,10 @@ public static class UIStrings
                 return IsPt
                     ? "Acelera Pesquisa e Mobilidade, mas pressiona Segurança e População."
                     : "Boosts Research and Mobility, but pressures Security and Population.";
+            case CardArchetype.Comunitario:
+                return IsPt
+                    ? "Aposta em comunidade e meio ambiente com cartas baratas, mas abre mão da Pesquisa."
+                    : "Bets on community and the environment with cheap cards, but gives up Research.";
             default:
                 return string.Empty;
         }

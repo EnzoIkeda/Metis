@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_BancoComunitario
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Banco Comunit\xE1rio"
+  _titleEn: Community Bank
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Um banco do pr\xF3prio bairro empresta pouco e cobra pouco, e uma moeda
+    social faz o dinheiro circular no com\xE9rcio local em vez de sair da cidade."
+  _summaryEn: A neighborhood bank lends small amounts at low interest, and a local
+    currency keeps money circulating in local shops instead of leaving town.
+  _realWorld: "O Banco Palmas foi criado em 1998 pela associa\xE7\xE3o de moradores
+    do Conjunto Palmeira, em Fortaleza. Os vizinhos garantem o empr\xE9stimo, e a
+    moeda palma vale um real no com\xE9rcio do bairro."
+  _realWorldEn: Banco Palmas was founded in 1998 by the residents' association of
+    Conjunto Palmeira, in Fortaleza, Brazil. Neighbors vouch for each loan, and the
+    palma currency is worth one real in local shops.
+  _tradeOffs: "A moeda social s\xF3 vale dentro do bairro, o banco depende de volunt\xE1rios
+    e parcerias para continuar, e o cr\xE9dito \xE9 pequeno perto de um banco comum."
+  _tradeOffsEn: The local currency only works inside the neighborhood, the bank relies
+    on volunteers and partners to keep going, and its lending is small next to a
+    regular bank.
+  _sources:
+  - Label: Banco Palmas (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Banco_Palmas
+  _relatedEntries:
+  - {fileID: 11400000, guid: c339ba29da16de56c8910a8e65b146ce, type: 2}
+  - {fileID: 11400000, guid: cb80dcfddda669ed6b20ede7cc8618b8, type: 2}
+  _image: {fileID: 0}

@@ -11,7 +11,7 @@ public static class DeckBuilder
         var pool = new List<TCard>();
         foreach (var card in fullPool)
         {
-            if (card.Tier == CardTier.Basica || card.Archetype == CardArchetype.Geral || card.Archetype == archetype)
+            if (IsShared(card) || card.Archetype == archetype)
                 AddCopies(pool, card);
         }
 
@@ -23,6 +23,14 @@ public static class DeckBuilder
         }
 
         return pool;
+    }
+
+    // Tier 0 entra em todo baralho, menos o do Comunitario, que e exclusivo dele.
+    private static bool IsShared(ICardDefinition card)
+    {
+        if (card.Archetype == CardArchetype.Geral)
+            return true;
+        return card.Tier == CardTier.Basica && card.Archetype != CardArchetype.Comunitario;
     }
 
     private static void AddCopies<TCard>(List<TCard> pool, TCard card) where TCard : class, ICardDefinition

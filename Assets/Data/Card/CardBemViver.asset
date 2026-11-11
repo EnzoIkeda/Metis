@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39c804f1a5f690765908711b18576891, type: 3}
+  m_Name: CardBemViver
+  m_EditorClassIdentifier: Metis.Runtime::CardData
+  _cardName: Bem Viver
+  _description: A cidade mede o sucesso pela vida em comunidade e pela natureza.
+  _cardNameEn: Good Living
+  _descriptionEn: The city measures success by community life and nature.
+  _cost: 1
+  _tier: 0
+  _archetype: 4
+  _requiredPesquisa: 0
+  _statEffects:
+  - Parameter: 0
+    Amount: -2
+  - Parameter: 2
+    Amount: 2
+  - Parameter: 3
+    Amount: -1
+  - Parameter: 4
+    Amount: -1
+  - Parameter: 5
+    Amount: 3
+  - Parameter: 7
+    Amount: 2
+  _ability: 0
+  _copies: 1
+  _structureToPlace: {fileID: 0}
+  _artwork: {fileID: 0}
+  _artworkFrames: []
+  _artworkFrameRate: 15
+  _knowledgeEntry: {fileID: 11400000, guid: 9d005b7a5c3ce1985968cf86069ee33e, type: 2}

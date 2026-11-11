@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Event_RedeDeCidadesSaudaveis
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 13
+  _parameter: 0
+  _targetId: EventRedeDeCidadesSaudaveis
+  _headline: "Cidade ganha vaga em rede internacional de sa\xFAde"
+  _headlineEn: City wins a seat in an international health network
+  _body: "A prefeitura promete pensar na sa\xFAde em toda decis\xE3o. O vereador
+    Josu\xE9 quer saber se isso inclui o cafezinho do gabinete."
+  _bodyEn: "City Hall promises to weigh health in every decision. Councilman Josu\xE9
+    asks whether that includes the office coffee."

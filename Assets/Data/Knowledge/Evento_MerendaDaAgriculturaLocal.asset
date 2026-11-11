@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_MerendaDaAgriculturaLocal
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Merenda compra do produtor local
+  _titleEn: School Meals Buy from Local Farms
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Quando a prefeitura compra comida de agricultores familiares da regi\xE3o,
+    o dinheiro p\xFAblico fica na economia local e a merenda chega mais fresca \xE0s
+    escolas."
+  _summaryEn: When the city buys food from local family farmers, public money stays
+    in the local economy and school meals arrive fresher.
+  _realWorld: "No Brasil, a Lei 11.947, de 2009, obrigou o programa de merenda escolar
+    a gastar ao menos 30% da verba federal com a agricultura familiar. Em 2025, o
+    m\xEDnimo subiu para 45%."
+  _realWorldEn: In Brazil, Law 11,947 of 2009 required the school meal program to
+    spend at least 30% of its federal funds on family farming. In 2025 the minimum
+    rose to 45%.
+  _tradeOffs: "Pequenos produtores nem sempre conseguem entregar com regularidade,
+    nota fiscal e padr\xE3o sanit\xE1rio, e a compra local pode sair mais cara."
+  _tradeOffsEn: Small farmers cannot always deliver on schedule, with invoices and
+    sanitary standards, and buying locally can cost more.
+  _sources:
+  - Label: Lei 11.947, de 16 de junho de 2009 (Planalto)
+    Url: https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2009/lei/l11947.htm
+  _relatedEntries:
+  - {fileID: 11400000, guid: 3fdfb4c4ec4633cd3b0252d86103f598, type: 2}
+  - {fileID: 11400000, guid: c339ba29da16de56c8910a8e65b146ce, type: 2}
+  _image: {fileID: 0}

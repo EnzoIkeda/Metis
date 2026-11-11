@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_SeloCittaslow
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Selo Cittaslow
+  _titleEn: Cittaslow Label
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "A cidade adota o ritmo lento: valoriza o com\xE9rcio e a comida da regi\xE3o,
+    cuida da paisagem e da tradi\xE7\xE3o e deixa o centro mais calmo para quem anda
+    a p\xE9."
+  _summaryEn: 'The town adopts a slower pace: it values local shops and food, protects
+    its landscape and traditions, and makes the center calmer for people on foot.'
+  _realWorld: "A rede Cittaslow foi fundada na It\xE1lia em 1999, a partir de Greve
+    in Chianti. S\xF3 cidades com menos de 50 mil habitantes s\xE3o membros plenos;
+    no Brasil, Socorro (SP) faz parte."
+  _realWorldEn: "The Cittaslow network was founded in Italy in 1999, starting from
+    Greve in Chianti. Only towns under 50,000 residents can be full members; in Brazil,
+    Socorro, in S\xE3o Paulo state, belongs."
+  _tradeOffs: "O selo combina com cidade pequena e turismo, mas n\xE3o serve de modelo
+    para metr\xF3poles, e frear o crescimento pode afastar quem chega procurando
+    emprego."
+  _tradeOffsEn: The label suits small towns and tourism but is no model for big cities,
+    and slowing growth can turn away people who arrive looking for work.
+  _sources:
+  - Label: Cittaslow (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Cittaslow
+  _relatedEntries:
+  - {fileID: 11400000, guid: c339ba29da16de56c8910a8e65b146ce, type: 2}
+  - {fileID: 11400000, guid: 6279f69e244b41f6dbe6dff280ad710f, type: 2}
+  _image: {fileID: 0}

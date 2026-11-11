@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_BairroDe15Minutos
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Bairro de 15 Minutos
+  _titleEn: 15-Minute Neighborhood
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Escola, posto, mercado, trabalho e lazer a at\xE9 15 minutos de casa,
+    a p\xE9 ou de bicicleta: menos deslocamento, menos tr\xE2nsito e menos combust\xEDvel
+    gasto."
+  _summaryEn: 'School, clinic, market, work and leisure within 15 minutes of home
+    on foot or by bike: less commuting, less traffic and less fuel burned.'
+  _realWorld: "Carlos Moreno prop\xF4s a cidade de 15 minutos em 2016, e Anne Hidalgo
+    fez dela promessa de campanha em Paris, em 2020, com p\xE1tios de escola abertos
+    ao p\xFAblico, \xE1rvores e ciclovias."
+  _realWorldEn: Carlos Moreno proposed the 15-minute city in 2016, and Anne Hidalgo
+    made it a campaign pledge in Paris in 2020, opening school yards to the public
+    and adding trees and bike lanes.
+  _tradeOffs: "Bairro bom de viver tende a encarecer e expulsar quem paga aluguel,
+    e a ideia funciona pior na periferia espalhada, onde faltam com\xE9rcio e servi\xE7os."
+  _tradeOffsEn: A pleasant neighborhood tends to get pricier and push out renters,
+    and the idea works worse in sprawling outskirts that lack shops and services.
+  _sources:
+  - Label: 15-minute city (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/15-minute_city
+  _relatedEntries:
+  - {fileID: 11400000, guid: 08cdbf2ee468763b7864300c69bfa9ce, type: 2}
+  - {fileID: 11400000, guid: 6279f69e244b41f6dbe6dff280ad710f, type: 2}
+  _image: {fileID: 0}

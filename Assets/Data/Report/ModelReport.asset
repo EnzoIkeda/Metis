@@ -15,7 +15,7 @@ MonoBehaviour:
   _file:
     Version: 1
     ModelVersion: 1.0
-    Fingerprint: P:55.000/0.000/100.000/10.000/1.000;50.000/0.000/100.000/10.000/-1.100;50.000/0.000/100.000/10.000/-1.100;40.000/0.000/100.000/10.000/0.000;10.000/0.000/100.000/-1.000/0.000;45.000/0.000/100.000/10.000/-1.100;50.000/0.000/100.000/10.000/0.000;50.000/0.000/100.000/10.000/-1.100;45.000/0.000/100.000/10.000/-1.100|Z:50.000/1.000/25.000/75.000/1.600/0.500/0.600/0.100/12.000|M:0.000,0.400,0.600,1.200,0.500,-0.200,0.300,0.300,0.800,0.300,0.000,0.000,-1.300,0.400,0.700,0.000,0.000,-0.600,0.400,0.000,0.000,-0.700,0.200,0.000,0.800,0.200,0.000,0.300,0.300,0.700,0.000,0.000,0.200,1.000,0.400,0.500,0.500,0.200,0.000,0.200,0.000,0.300,0.300,0.000,0.000,-0.200,-0.600,0.000,-1.000,0.800,0.000,0.000,0.000,-0.500,0.000,0.000,0.000,0.000,0.000,0.000,0.000,0.000,0.000,0.400,0.000,0.000,-0.600,0.400,0.700,0.500,0.000,0.200,0.500,0.300,0.000,-0.900,0.300,0.200,0.400,0.000,0.000|R:0.000/1200000000.000;-2000000.000/2000000.000;5.000/60.000;50000.000/600000.000;0.000/9000.000;2.000/60.000;0.000/10.000;0.500/6.000;8.000/35.000|T:6/20|C:20/14/12/10|E:50/24
+    Fingerprint: P:55.000/0.000/100.000/10.000/1.000;50.000/0.000/100.000/10.000/-1.100;50.000/0.000/100.000/10.000/-1.100;40.000/0.000/100.000/10.000/0.000;10.000/0.000/100.000/-1.000/0.000;45.000/0.000/100.000/10.000/-1.100;50.000/0.000/100.000/10.000/0.000;50.000/0.000/100.000/10.000/-1.100;45.000/0.000/100.000/10.000/-1.100|Z:50.000/1.000/25.000/75.000/1.600/0.500/0.600/0.100/12.000|M:0.000,0.400,0.600,1.200,0.500,-0.200,0.300,0.300,0.800,0.300,0.000,0.000,-1.300,0.400,0.700,0.000,0.000,-0.600,0.400,0.000,0.000,-0.700,0.200,0.000,0.800,0.200,0.000,0.300,0.300,0.700,0.000,0.000,0.200,1.000,0.400,0.500,0.500,0.200,0.000,0.200,0.000,0.300,0.300,0.000,0.000,-0.200,-0.600,0.000,-1.000,0.800,0.000,0.000,0.000,-0.500,0.000,0.000,0.000,0.000,0.000,0.000,0.000,0.000,0.000,0.400,0.000,0.000,-0.600,0.400,0.700,0.500,0.000,0.200,0.500,0.300,0.000,-0.900,0.300,0.200,0.400,0.000,0.000|R:0.000/1200000000.000;-2000000.000/2000000.000;5.000/60.000;50000.000/600000.000;0.000/9000.000;2.000/60.000;0.000/10.000;0.500/6.000;8.000/35.000|T:6/20|C:20/14/12/10|E:62/24
     Sheets:
     - Id: LeiaMe
       Tab:
@@ -523,11 +523,13 @@ MonoBehaviour:
           En: Model
           Tag: 
       Notes:
-      - Pt: "H\xE1 50 eventos poss\xEDveis. Todos t\xEAm uma janela de turnos e 24
+      - Pt: "H\xE1 56 eventos poss\xEDveis, 6 deles com uma escolha, e 6 consequ\xEAncias
+          que s\xF3 v\xEAm dessas escolhas. Todos t\xEAm uma janela de turnos e 24
           dependem do n\xEDvel de Pesquisa: uma cidade muito tecnol\xF3gica atrai
           pr\xEAmios e tamb\xE9m ataques cibern\xE9ticos; uma cidade que n\xE3o investe
           sofre com fuga de c\xE9rebros."
-        En: 'There are 50 possible events. All of them have a turn window and 24
+        En: 'There are 56 possible events, 6 of them with a choice, and 6 consequences
+          that only come from those choices. All of them have a turn window and 24
           depend on the Research level: a highly technological city attracts awards
           and also cyberattacks; a city that does not invest suffers from brain drain.'
         Tag: 
@@ -1400,11 +1402,11 @@ MonoBehaviour:
         - Pt: "Joga qualquer carta poss\xEDvel"
           En: Plays any playable card
           Tag: 
-        - Pt: 30%
-          En: 30%
+        - Pt: 34%
+          En: 34%
           Tag: 
-        - Pt: 15%
-          En: 15%
+        - Pt: 16%
+          En: 16%
           Tag: 
       - Cells:
         - Pt: Guloso
@@ -1413,11 +1415,11 @@ MonoBehaviour:
         - Pt: Escolhe a carta que deixa a cidade melhor logo depois do turno
           En: Picks the card that leaves the city best right after the turn
           Tag: 
-        - Pt: 68%
-          En: 68%
+        - Pt: 73%
+          En: 73%
           Tag: 
-        - Pt: 41%
-          En: 41%
+        - Pt: 44%
+          En: 44%
           Tag: 
       - Cells:
         - Pt: Cauteloso
@@ -1426,11 +1428,11 @@ MonoBehaviour:
         - Pt: "D\xE1 mais peso ao indicador que est\xE1 mais perto do cr\xEDtico"
           En: Gives more weight to the indicator closest to critical
           Tag: 
-        - Pt: 65%
-          En: 65%
+        - Pt: 70%
+          En: 70%
           Tag: 
-        - Pt: 49%
-          En: 49%
+        - Pt: 52%
+          En: 52%
           Tag: 
       - Cells:
         - Pt: Planejador
@@ -1441,11 +1443,11 @@ MonoBehaviour:
           En: Tries out many possible futures before choosing, knowing the cards'
             exact numbers
           Tag: 
-        - Pt: 80%
-          En: 80%
+        - Pt: 83%
+          En: 83%
           Tag: 
-        - Pt: 64%
-          En: 64%
+        - Pt: 66%
+          En: 66%
           Tag: 
       Notes:
       - Pt: "Foram 3.000 fases por jogador (300 para o planejador, que \xE9 mais
@@ -1457,10 +1459,10 @@ MonoBehaviour:
           energy or safety and wear down faster.
         Tag: 
       - Pt: "Planejar rende bem mais que jogar ao acaso, e os tr\xEAs baralhos ficaram
-          pr\xF3ximos entre si (entre 64% e 72% de vit\xF3rias na 1\xAA fase com
+          pr\xF3ximos entre si (entre 70% e 76% de vit\xF3rias na 1\xAA fase com
           os jogadores guloso e cauteloso)."
         En: Planning pays off far more than playing at random, and the three decks
-          ended up close to each other (between 64% and 72% wins in phase 1 with
+          ended up close to each other (between 70% and 76% wins in phase 1 with
           the greedy and cautious players).
         Tag: 
       - Pt: "Os testes mostram que o modelo \xE9 coerente como jogo. Eles n\xE3o

@@ -71,5 +71,8 @@ MonoBehaviour:
   - EventRodadaDeInvestimentoEmInovacaoUrbana
   - EventPremioInternacionalDeCidadeInteligente
   - EventApagaoDoSistemaCentralDeIA
+  - DilemmaConcessaoSaneamento
+  - DilemmaAutomacaoColeta
+  - DilemmaAlgoritmoBeneficios
   _backgroundIndex: 4
   _layoutSeed: 7301

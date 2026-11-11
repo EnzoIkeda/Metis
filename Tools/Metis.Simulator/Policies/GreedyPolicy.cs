@@ -18,6 +18,12 @@ public sealed class GreedyPolicy : IPlayerPolicy
         return PolicyHelpers.PickBest(PolicyHelpers.DistinctById(candidates), card => Evaluate(context, null, card), context.Random);
     }
 
+    public int ChooseEventOption(DecisionContext context, SimEvent dilemma)
+    {
+        return PolicyHelpers.PickBest(PolicyHelpers.OptionIndexes(dilemma),
+            index => GreedyLookahead.Score(context.Stats, PolicyHelpers.AsCard(dilemma.Choices[index]), context.Data.ScoreRules), context.Random);
+    }
+
     // Busca e revelacao entram pelo custo pago antes da carta comum, por isso o custo e aplicado no mesmo estado simulado.
     private static double Evaluate(DecisionContext context, SimCard paidFirst, SimCard card)
     {

@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Dilema_AutomacaoColeta
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Triagem mecanizada e catadores
+  _titleEn: Mechanized sorting and waste pickers
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Separar recicl\xE1veis com m\xE1quinas aumenta a escala, mas esse trabalho
+    \xE9 fonte de renda de muita gente. Automatizar sem plano de transi\xE7\xE3o
+    troca um problema ambiental por um problema social."
+  _summaryEn: Sorting recyclables by machine raises the scale, but this work is a
+    source of income for many people. Automating with no transition plan trades an
+    environmental problem for a social one.
+  _realWorld: "A Lei 12.305/2010 prev\xEA integrar os catadores. Em 2014, S\xE3o
+    Paulo abriu a primeira central mecanizada de triagem da Am\xE9rica Latina: 250
+    toneladas por dia e 50 catadores na opera\xE7\xE3o."
+  _realWorldEn: "Brazilian Law 12,305/2010 calls for integrating waste pickers. In
+    2014, S\xE3o Paulo opened the first mechanized sorting plant in Latin America:
+    250 tons a day and 50 waste pickers on the job."
+  _tradeOffs: "M\xE1quinas separam mais e substituem trabalho manual. Um plano de
+    transi\xE7\xE3o custa caro, mas evita que a conta caia sobre quem vive disso."
+  _tradeOffsEn: Machines sort more and replace manual work. A transition plan is
+    costly but keeps the bill from falling on those who live off it.
+  _sources:
+  - Label: Lei 12.305/2010 (Planalto)
+    Url: https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2010/lei/l12305.htm
+  - Label: "Prefeitura de S\xE3o Paulo: central mecanizada (2014)"
+    Url: https://prefeitura.sp.gov.br/noticia/sao-paulo-dobra-capacidade-de-reciclagem-com
+  _relatedEntries:
+  - {fileID: 11400000, guid: b5b486b78494627a798be52bc54b3d22, type: 2}
+  - {fileID: 11400000, guid: 129c6e618e980d5f3a6dcf18c110e3cb, type: 2}
+  _image: {fileID: 0}

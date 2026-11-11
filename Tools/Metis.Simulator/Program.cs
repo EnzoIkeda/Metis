@@ -48,6 +48,8 @@ else if (options.Mode == "jornal")
     NewsCoverage.Run(options, Console.Out);
 else if (options.Mode == "cenarios")
     ScenarioSimulation.Run(options, Console.Out);
+else if (options.Mode == "dilemas")
+    DilemmaSimulation.Run(options, Console.Out);
 else
     SimulationRunner.Run(options, Console.Out);
 return 0;

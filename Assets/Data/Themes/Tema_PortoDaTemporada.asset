@@ -73,5 +73,8 @@ MonoBehaviour:
   - EventDadosAbertosImpulsionamInovacaoLocal
   - EventEpidemiaDeGolpesDigitais
   - EventPremioInternacionalDeCidadeInteligente
+  - DilemmaConcessaoSaneamento
+  - DilemmaAutomacaoColeta
+  - DilemmaDadosAbertos
   _backgroundIndex: 7
   _layoutSeed: 4242

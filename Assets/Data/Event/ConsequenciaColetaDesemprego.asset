@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a17274e29c4cba04cae830be71476a04, type: 3}
+  m_Name: ConsequenciaColetaDesemprego
+  m_EditorClassIdentifier: Metis.Runtime::RandomEventData
+  _title: Catadores sem trabalho
+  _description: Sem material para separar, cooperativas fecham e muitos catadores
+    ficam sem renda. O protesto para a frente da prefeitura.
+  _titleEn: Waste pickers out of work
+  _descriptionEn: With nothing left to sort, cooperatives close and many waste pickers
+    lose their income. The protest stops traffic outside City Hall.
+  _triggerConditions: []
+  _statEffects:
+  - Parameter: 3
+    Amount: -7
+  - Parameter: 2
+    Amount: -6
+  - Parameter: 0
+    Amount: -3
+  - Parameter: 5
+    Amount: -2
+  _minTurn: 1
+  _maxTurn: 20
+  _choices: []
+  _isFollowUpOnly: 1
+  _knowledgeEntry: {fileID: 11400000, guid: f16f6aeb30c7429bf931f29768e26433, type: 2}

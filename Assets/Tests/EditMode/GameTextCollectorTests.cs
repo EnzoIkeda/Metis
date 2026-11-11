@@ -11,10 +11,41 @@ public class GameTextCollectorTests
     {
         var items = GameTextCollector.Collect();
         var hasThemes = AssetDatabase.FindAssets("t:ThemedPhaseData", new[] { "Assets/Data" }).Length > 0;
+        var hasDilemmas = AssetDatabase.FindAssets("t:RandomEventData", new[] { "Assets/Data" })
+            .Any(guid => AssetDatabase.LoadAssetAtPath<RandomEventData>(AssetDatabase.GUIDToAssetPath(guid)).Choices.Count > 0);
         foreach (GameTextOrigin origin in Enum.GetValues(typeof(GameTextOrigin)))
         {
-            if (origin != GameTextOrigin.Theme || hasThemes)
+            if ((origin != GameTextOrigin.Theme || hasThemes) && (origin != GameTextOrigin.Dilemma || hasDilemmas))
                 Assert.That(items.Any(item => item.Origin == origin), Is.True, origin.ToString());
+        }
+    }
+
+    [Test]
+    public void DilemmaTexts_ComeWithTheirOptions_AndAreEditedInTheJson()
+    {
+        const string folder = "Assets/Data/TesteDilema";
+        AssetDatabase.CreateFolder("Assets/Data", "TesteDilema");
+        try
+        {
+            var dilemma = TestDataFactory.CreateEvent("DilemaDoTeste");
+            TestDataFactory.SetField(dilemma, "_title", "Titulo");
+            TestDataFactory.SetField(dilemma, "_titleEn", "Title");
+            TestDataFactory.SetField(dilemma, "_choices", new[] { new EventChoiceData { Label = "Opcao", LabelEn = "Option" } });
+            AssetDatabase.CreateAsset(dilemma, folder + "/DilemaDoTeste.asset");
+
+            var items = GameTextCollector.Collect().Where(item => item.Id == "DilemaDoTeste").ToList();
+
+            Assert.That(items.Select(item => item.Origin), Is.All.EqualTo(GameTextOrigin.Dilemma));
+            Assert.That(items.Select(item => item.EditKind), Is.All.EqualTo(GameTextEditKind.Dilemma));
+            var label = items.Single(item => item.Field == "_choices[0].Label");
+            Assert.That(label.En, Is.EqualTo("Option"));
+            Assert.That(label.JsonListKey, Is.EqualTo("Dilemmas"));
+            Assert.That(label.JsonNestedKey, Is.EqualTo("Choices"));
+            Assert.That(label.JsonPtKey, Is.EqualTo("LabelPt"));
+        }
+        finally
+        {
+            AssetDatabase.DeleteAsset(folder);
         }
     }
 

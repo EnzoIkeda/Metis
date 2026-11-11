@@ -20,6 +20,7 @@ public enum GameTextOrigin
     Interface,
     SceneOrPrefab,
     Theme,
+    Dilemma,
 }
 
 public enum GameTextIssue
@@ -46,6 +47,7 @@ public enum GameTextEditKind
     Interface,
     NewsColumn,
     Theme,
+    Dilemma,
 }
 
 // Trecho do codigo-fonte onde esta um ramo de idioma; so e editavel se for feito apenas de textos.
@@ -92,6 +94,10 @@ public class GameTextItem
     public string EnField = string.Empty;
     public string JsonPtKey = string.Empty;
     public string JsonEnKey = string.Empty;
+
+    // Lista do JSON onde o item esta, e a lista dentro dele quando o texto e de uma opcao.
+    public string JsonListKey = string.Empty;
+    public string JsonNestedKey = string.Empty;
     public string NoteSource = string.Empty;
     public string NoteTarget = string.Empty;
     public int ArrayIndex;

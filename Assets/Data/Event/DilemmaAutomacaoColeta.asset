@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a17274e29c4cba04cae830be71476a04, type: 3}
+  m_Name: DilemmaAutomacaoColeta
+  m_EditorClassIdentifier: Metis.Runtime::RandomEventData
+  _title: "Triagem autom\xE1tica do lixo"
+  _description: "Uma central mecanizada separaria recicl\xE1veis em escala muito
+    maior que as cooperativas de catadores. Elas, que vivem desse trabalho, perguntam
+    o que ser\xE1 delas."
+  _titleEn: Automated waste sorting
+  _descriptionEn: A mechanized plant would sort recyclables at a far larger scale
+    than the waste picker cooperatives. They live off this work, and they are asking
+    what will become of them.
+  _triggerConditions: []
+  _statEffects: []
+  _minTurn: 6
+  _maxTurn: 17
+  _choices:
+  - Rule:
+      Effects:
+      - Parameter: 0
+        Amount: -3
+      - Parameter: 5
+        Amount: 4
+      - Parameter: 3
+        Amount: 2
+      FollowUpEventId: 
+      FollowUpDelay: 0
+    Label: Automatizar e requalificar
+    LabelEn: Automate and retrain
+    Detail: A central entra junto com um plano para os catadores. Custa bem mais.
+    DetailEn: The plant comes with a plan for the waste pickers. It costs far more.
+  - Rule:
+      Effects:
+      - Parameter: 5
+        Amount: 3
+      FollowUpEventId: ConsequenciaColetaDesemprego
+      FollowUpDelay: 3
+    Label: "Automatizar sem transi\xE7\xE3o"
+    LabelEn: Automate with no transition
+    Detail: Mais material reciclado com menos gente na folha de pagamento.
+    DetailEn: More material recycled with fewer people on the payroll.
+  - Rule:
+      Effects:
+      - Parameter: 0
+        Amount: -1
+      - Parameter: 5
+        Amount: 2
+      - Parameter: 3
+        Amount: 2
+      FollowUpEventId: 
+      FollowUpDelay: 0
+    Label: Fortalecer as cooperativas
+    LabelEn: Strengthen the cooperatives
+    Detail: "Menos escala, mas quem j\xE1 faz o trabalho continua nele."
+    DetailEn: Less scale, but those already doing the work keep it.
+  _isFollowUpOnly: 0
+  _knowledgeEntry: {fileID: 11400000, guid: f16f6aeb30c7429bf931f29768e26433, type: 2}

@@ -23,6 +23,9 @@ public sealed class PhaseSetup
     // Variante da carta de revelacao: depois de jogada, os numeros de todas as cartas ficam conhecidos ate o fim da fase.
     public bool PermanentReveal { get; init; }
 
+    // Opcao imposta por dilema, pra medir cada opcao nas mesmas sementes.
+    public IReadOnlyDictionary<string, int> ForcedChoices { get; init; }
+
     public int HandSize => HandSizeOverride ?? Data.Rules.HandSize;
     public int VictoryTurnCount => VictoryTurnCountOverride ?? Data.Rules.VictoryTurnCount;
 }
@@ -73,6 +76,9 @@ public sealed class TurnRecord
     // Vazio quando nenhum evento era elegivel.
     public string EventId { get; init; } = "";
 
+    // Opcao escolhida no dilema do turno; -1 quando nao houve escolha.
+    public int EventChoice { get; init; } = -1;
+
     // Estado no fim do turno, depois do evento, que e o que a checagem de derrota enxerga.
     public float[] Values { get; init; } = Array.Empty<float>();
     public int Collapsed { get; init; }
@@ -112,7 +118,7 @@ public static class PhaseSimulator
         var deck = DeckBuilder.Build(data.Cards, setup.Archetype, setup.LoadedCardIds);
         var hand = new CardHand<SimCard>(deck, new Random(seeds.Hand), setup.FiniteDeck);
         var eventPool = CityPresetRules.AllowedEvents(data.Events, setup.Preset?.AllowedEventIds as IReadOnlyCollection<string>);
-        var events = new RandomEventPool<SimEvent>(eventPool, new Random(seeds.Events));
+        var events = new RandomEventPool<SimEvent>(eventPool, new Random(seeds.Events), data.Events, null, setup.VictoryTurnCount);
         var policyRandom = new Random(seeds.Policy);
         history?.CaptureStart(stats);
 
@@ -141,29 +147,31 @@ public static class PhaseSimulator
             var freeActions = new List<string>();
             var searched = new List<string>();
 
+            DecisionContext Context(IReadOnlyList<SimCard> cards) => new DecisionContext
+            {
+                Stats = stats,
+                PlayableCards = cards,
+                TurnIndex = turn,
+                Data = data,
+                Random = policyRandom,
+                Deck = deck,
+                Events = eventPool,
+                HandSize = setup.HandSize,
+                VictoryTurnCount = setup.VictoryTurnCount,
+                IsRevealed = hand.IsRevealed || revealedForPhase,
+                RevealedForPhase = revealedForPhase,
+                SearchCandidates = cards.Any(card => card.Ability == CardAbility.SearchDeck) ? hand.SearchCandidates(stats) : Array.Empty<SimCard>(),
+                FiniteDeck = hand.FiniteDeck,
+                DrawPile = hand.FiniteDeck ? hand.DrawPile.ToList() : Array.Empty<SimCard>(),
+                DiscardPile = hand.FiniteDeck ? hand.DiscardPile.ToList() : Array.Empty<SimCard>(),
+                HandCards = hand.Cards.ToList(),
+                AllEvents = data.Events,
+                Schedule = events.Schedule,
+            };
+
             // Acoes livres podem vir antes da jogada do turno; o laco termina quando uma carta comum e jogada ou nada mais e jogavel.
             while (playable.Count > 0)
             {
-                DecisionContext Context(IReadOnlyList<SimCard> cards) => new DecisionContext
-                {
-                    Stats = stats,
-                    PlayableCards = cards,
-                    TurnIndex = turn,
-                    Data = data,
-                    Random = policyRandom,
-                    Deck = deck,
-                    Events = eventPool,
-                    HandSize = setup.HandSize,
-                    VictoryTurnCount = setup.VictoryTurnCount,
-                    IsRevealed = hand.IsRevealed || revealedForPhase,
-                    RevealedForPhase = revealedForPhase,
-                    SearchCandidates = playable.Any(card => card.Ability == CardAbility.SearchDeck) ? hand.SearchCandidates(stats) : Array.Empty<SimCard>(),
-                    FiniteDeck = hand.FiniteDeck,
-                    DrawPile = hand.FiniteDeck ? hand.DrawPile.ToList() : Array.Empty<SimCard>(),
-                    DiscardPile = hand.FiniteDeck ? hand.DiscardPile.ToList() : Array.Empty<SimCard>(),
-                    HandCards = hand.Cards.ToList(),
-                };
-
                 var chosen = policy.Choose(Context(playable));
                 if (chosen.PlacesStructure)
                     throw new NotSupportedException($"Carta '{chosen.Id}' coloca estrutura no grid, o simulador nao modela o grid.");
@@ -202,6 +210,15 @@ public static class PhaseSimulator
             machine.EndActionPhase();
             var triggered = events.TryTriggerEvent(stats, turn);
             history?.RecordEvent(turn, triggered?.Id);
+            var eventChoice = -1;
+            if (triggered != null && triggered.Choices.Count > 0)
+            {
+                eventChoice = setup.ForcedChoices != null && setup.ForcedChoices.TryGetValue(triggered.Id, out var forced)
+                    ? forced
+                    : policy.ChooseEventOption(Context(Array.Empty<SimCard>()), triggered);
+                events.ApplyChoice(stats, triggered, eventChoice, turn);
+                history?.RecordEventChoice(turn, eventChoice);
+            }
             history?.FinishTurn(turn, stats);
 
             var values = Parameters.Select(stats.GetValue).ToArray();
@@ -220,6 +237,7 @@ public static class PhaseSimulator
                 FreeActionIds = freeActions,
                 SearchedIds = searched,
                 EventId = triggered?.Id ?? "",
+                EventChoice = eventChoice,
                 Values = values,
                 Collapsed = stats.CountCollapsedParameters(),
             });

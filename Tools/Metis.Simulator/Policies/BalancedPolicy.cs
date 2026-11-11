@@ -22,6 +22,17 @@ public sealed class BalancedPolicy : IPlayerPolicy
         return PolicyHelpers.PickBest(PolicyHelpers.DistinctById(candidates), card => Score(card, weights), context.Random);
     }
 
+    public int ChooseEventOption(DecisionContext context, SimEvent dilemma)
+    {
+        return PickOption(context.Stats, dilemma, context.Data, context.Random);
+    }
+
+    public static int PickOption(CityStats stats, SimEvent dilemma, BalanceData data, Random random)
+    {
+        var weights = BuildWeights(stats, data);
+        return PolicyHelpers.PickBest(PolicyHelpers.OptionIndexes(dilemma), index => Score(PolicyHelpers.AsCard(dilemma.Choices[index]), weights), random);
+    }
+
     public static double Score(SimCard card, Dictionary<CityParameterType, double> weights)
     {
         var score = CostScore(card, weights);

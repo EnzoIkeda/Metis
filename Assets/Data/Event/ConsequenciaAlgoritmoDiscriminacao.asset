@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a17274e29c4cba04cae830be71476a04, type: 3}
+  m_Name: ConsequenciaAlgoritmoDiscriminacao
+  m_EditorClassIdentifier: Metis.Runtime::RandomEventData
+  _title: "Algoritmo sob investiga\xE7\xE3o"
+  _description: "Uma reportagem mostra que o sistema pontuava pior mulheres, pais
+    e quem n\xE3o domina o idioma local. A prefeitura suspende o programa e responde
+    a processos."
+  _titleEn: Algorithm under investigation
+  _descriptionEn: A report shows the system scored women, parents and people who
+    lack the local language worse. City Hall suspends the program and faces lawsuits.
+  _triggerConditions: []
+  _statEffects:
+  - Parameter: 0
+    Amount: -4
+  - Parameter: 2
+    Amount: -6
+  - Parameter: 3
+    Amount: -3
+  _minTurn: 1
+  _maxTurn: 20
+  _choices: []
+  _isFollowUpOnly: 1
+  _knowledgeEntry: {fileID: 11400000, guid: 743eaf25c3271205d803c8f0027e773d, type: 2}

@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a17274e29c4cba04cae830be71476a04, type: 3}
+  m_Name: DilemmaBrtOuViaduto
+  m_EditorClassIdentifier: Metis.Runtime::RandomEventData
+  _title: BRT ou viaduto?
+  _description: "O principal eixo da cidade est\xE1 saturado, e s\xF3 h\xE1 verba
+    para uma obra grande. Os engenheiros apresentam duas propostas: um corredor exclusivo
+    de \xF4nibus ou um viaduto novo para os carros."
+  _titleEn: BRT or overpass?
+  _descriptionEn: 'The main corridor of the city is saturated, and there is money
+    for only one big project. Engineers present two proposals: a dedicated bus corridor
+    or a new overpass for cars.'
+  _triggerConditions: []
+  _statEffects: []
+  _minTurn: 3
+  _maxTurn: 16
+  _choices:
+  - Rule:
+      Effects:
+      - Parameter: 0
+        Amount: -5
+      - Parameter: 8
+        Amount: 4
+      - Parameter: 5
+        Amount: 2
+      FollowUpEventId: 
+      FollowUpDelay: 0
+    Label: "Construir o corredor de \xF4nibus"
+    LabelEn: Build the bus corridor
+    Detail: "Prioridade para quem vai de \xF4nibus. Os carros perdem espa\xE7o e
+      reclamam."
+    DetailEn: Priority for bus riders. Cars lose space and complain.
+  - Rule:
+      Effects:
+      - Parameter: 0
+        Amount: -4
+      - Parameter: 8
+        Amount: 8
+      - Parameter: 5
+        Amount: -2
+      FollowUpEventId: ConsequenciaViadutoLotado
+      FollowUpDelay: 4
+    Label: Construir o viaduto
+    LabelEn: Build the overpass
+    Detail: "Al\xEDvio vis\xEDvel logo na inaugura\xE7\xE3o. Via nova costuma atrair
+      carro novo."
+    DetailEn: Visible relief right at the opening. New roads tend to attract new
+      cars.
+  - Rule:
+      Effects:
+      - Parameter: 0
+        Amount: 2
+      - Parameter: 8
+        Amount: -2
+      FollowUpEventId: 
+      FollowUpDelay: 0
+    Label: Adiar a obra
+    LabelEn: Postpone the project
+    Detail: "O dinheiro fica no caixa, e o tr\xE2nsito continua como est\xE1."
+    DetailEn: The money stays in the budget, and traffic stays as it is.
+  _isFollowUpOnly: 0
+  _knowledgeEntry: {fileID: 11400000, guid: e984065f6b91815948bb4c62b4a6f05c, type: 2}

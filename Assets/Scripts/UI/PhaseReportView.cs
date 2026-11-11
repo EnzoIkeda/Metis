@@ -345,6 +345,8 @@ public class PhaseReportView : MonoBehaviour
                 body.Append("<indent=6%>").Append(effects).Append("</indent>\n");
         }
 
+        AppendChoices(body);
+
         body.Append("\n<b>").Append(UIStrings.ReportCollapseHeader(outcome)).Append("</b>\n");
         var chain = PhaseReport.CollapseChain(_history, evaluator.Rules);
         if (chain.Count == 0)
@@ -365,6 +367,28 @@ public class PhaseReportView : MonoBehaviour
 
         body.Append("\n<size=80%>").Append(UIStrings.ReportExplanation).Append("</size>");
         return body.ToString();
+    }
+
+    private void AppendChoices(StringBuilder body)
+    {
+        var entries = DilemmaLog.Entries(_history, _turnManager.FindEvent);
+        if (entries.Count == 0)
+            return;
+
+        body.Append("\n<b>").Append(UIStrings.ReportChoicesHeader).Append("</b>\n");
+        foreach (var entry in entries)
+        {
+            var dilemma = _turnManager.FindEvent(entry.EventId);
+            body.Append("• ").Append(UIStrings.ReportChoiceLine(entry.Turn, dilemma.Title, dilemma.ChoiceData[entry.ChoiceIndex].DisplayLabel)).Append('\n');
+            if (entry.HasFollowUp == false)
+                continue;
+
+            var followUp = _turnManager.FindEvent(entry.FollowUpEventId);
+            var consequence = entry.FollowUpTurn > 0 && followUp != null
+                ? UIStrings.ReportChoiceConsequence(entry.FollowUpTurn, followUp.Title)
+                : UIStrings.ReportChoiceNoConsequence;
+            body.Append("<indent=6%>").Append(consequence).Append("</indent>\n");
+        }
     }
 
     private void AppendObjectives(StringBuilder body, GameOutcome outcome)

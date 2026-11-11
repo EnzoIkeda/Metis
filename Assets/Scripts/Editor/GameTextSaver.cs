@@ -12,6 +12,7 @@ public static class GameTextSaver
     public const string NewsPath = "Resources/Conteudo/jornal.json";
     public const string RelationsPath = "Resources/Conteudo/mapa_relacoes.json";
     public const string ThemesPath = "Resources/Conteudo/temas.json";
+    public const string DilemmasPath = "Resources/Conteudo/dilemas.json";
     public const string BackupFolder = "Resources/Conteudo/arquivo/backups_textos";
 
     public class Plan
@@ -61,6 +62,13 @@ public static class GameTextSaver
                     return (report.Errors, report.Changes);
                 });
                 break;
+            case GameTextEditKind.Dilemma:
+                PrepareImported(plan, DilemmasPath, item.JsonListKey, path =>
+                {
+                    var report = DilemmaImporter.Import(path, apply: false);
+                    return (report.Errors, report.Changes);
+                });
+                break;
             case GameTextEditKind.RelationNote:
                 PrepareRelation(plan);
                 break;
@@ -107,6 +115,9 @@ public static class GameTextSaver
             case GameTextEditKind.Theme:
                 WriteJson(ThemesPath, plan.NewContent);
                 return Reported(ThemedPhaseImporter.Import(FullPath(ThemesPath), apply: true).Errors, out error);
+            case GameTextEditKind.Dilemma:
+                WriteJson(DilemmasPath, plan.NewContent);
+                return Reported(DilemmaImporter.Import(FullPath(DilemmasPath), apply: true).Errors, out error);
             case GameTextEditKind.RelationNote:
                 WriteJson(RelationsPath, plan.NewContent);
                 ApplyToNote(item, plan.Pt, plan.En);
@@ -156,7 +167,10 @@ public static class GameTextSaver
         };
         if (TryReadSource(plan, relativePath, out var json) == false)
             return;
-        if (ContentJsonEditor.TryReplaceInObject(json, listKey, item.Id, changes, out var edited, out var error) == false)
+        var replaced = string.IsNullOrEmpty(item.JsonNestedKey)
+            ? ContentJsonEditor.TryReplaceInObject(json, listKey, item.Id, changes, out var edited, out var error)
+            : ContentJsonEditor.TryReplaceInNested(json, listKey, item.Id, item.JsonNestedKey, item.ArrayIndex, changes, out edited, out error);
+        if (replaced == false)
         {
             plan.Errors.Add(error);
             return;

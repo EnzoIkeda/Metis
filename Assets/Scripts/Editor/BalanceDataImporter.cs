@@ -74,6 +74,9 @@ public static class BalanceDataImporter
 
             foreach (var dto in data.Events)
             {
+                if (IsDilemmaContent(events[dto.Id]))
+                    continue;
+
                 var so = new SerializedObject(events[dto.Id]);
                 SetInt(so, "_minTurn", dto.MinTurn, $"{dto.Id}.MinTurn", report);
                 SetInt(so, "_maxTurn", dto.MaxTurn, $"{dto.Id}.MaxTurn", report);
@@ -121,6 +124,12 @@ public static class BalanceDataImporter
         report.Insert(0, $"{header}: {report.Count} campos diferentes em '{jsonPath}'.");
         Debug.Log(string.Join("\n", report));
         return report;
+    }
+
+    // Dilemas e consequencias tem fonte propria, entao os numeros deles nao vem daqui.
+    public static bool IsDilemmaContent(RandomEventData randomEvent)
+    {
+        return randomEvent.IsFollowUpOnly || randomEvent.Choices.Count > 0;
     }
 
     private static void RequireIds(string kind, IEnumerable<string> wanted, IEnumerable<string> known)

@@ -19,6 +19,47 @@ public class BalanceDataTests
     }
     """;
 
+    private const string DilemmaJson = """
+    {
+      "Rules": { "HandSize": 4, "VictoryTurnCount": 12, "RewardOptionCount": 2 },
+      "Events": [
+        { "Id": "D", "MinTurn": 1, "MaxTurn": 9, "Choices": [
+          { "Label": "Implantar", "Effects": [ { "Parameter": "Renda", "Amount": -2 } ], "FollowUpEventId": "F", "FollowUpDelay": 3 },
+          { "Label": "Recusar", "Effects": [] } ] },
+        { "Id": "F", "MinTurn": 1, "MaxTurn": 999, "FollowUpOnly": true, "Effects": [ { "Parameter": "Saude", "Amount": -4 } ] }
+      ]
+    }
+    """;
+
+    [Test]
+    public void Parse_ReadsChoicesAndFollowUps()
+    {
+        var data = BalanceData.Parse(DilemmaJson);
+
+        var dilemma = data.Events[0];
+        Assert.That(dilemma.Choices.Count, Is.EqualTo(2));
+        Assert.That(dilemma.ChoiceLabels[1], Is.EqualTo("Recusar"));
+        Assert.That(dilemma.Choices[0].Effects.Single().Amount, Is.EqualTo(-2f));
+        Assert.That(dilemma.Choices[0].FollowUpEventId, Is.EqualTo("F"));
+        Assert.That(dilemma.Choices[0].FollowUpDelay, Is.EqualTo(3));
+        Assert.That(data.Events[1].IsFollowUpOnly, Is.True);
+    }
+
+    [Test]
+    public void Parse_OldExportWithoutChoices_IsACommonEvent()
+    {
+        var randomEvent = BalanceData.Parse(MinimalJson).Events.Single();
+
+        Assert.That(randomEvent.Choices, Is.Empty);
+        Assert.That(randomEvent.IsFollowUpOnly, Is.False);
+    }
+
+    [Test]
+    public void Parse_UnknownFollowUp_IsRejected()
+    {
+        Assert.Throws<InvalidDataException>(() => BalanceData.Parse(DilemmaJson.Replace("\"F\", \"FollowUpDelay\"", "\"Sumiu\", \"FollowUpDelay\"")));
+    }
+
     [Test]
     public void Parse_MapsEveryFieldIncludingEnumsByName()
     {

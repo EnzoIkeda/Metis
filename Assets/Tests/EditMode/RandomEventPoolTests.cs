@@ -22,6 +22,72 @@ public class RandomEventPoolTests
     }
 
     [Test]
+    public void Asset_WithoutChoices_IsACommonEvent()
+    {
+        var evt = Event("Comum");
+
+        Assert.That(evt.Choices, Is.Empty);
+        Assert.That(evt.IsFollowUpOnly, Is.False);
+    }
+
+    [Test]
+    public void Asset_ExposesItsChoices_AndThePoolAppliesTheChosenOne()
+    {
+        var evt = Event("Dilema");
+        var effects = new[] { new StatModifier { Parameter = CityParameterType.Renda, Amount = -4f } };
+        TestDataFactory.SetField(evt, "_choices", new[]
+        {
+            new EventChoiceData(),
+            new EventChoiceData { Rule = new EventChoiceDefinition { Effects = effects, FollowUpEventId = "Depois", FollowUpDelay = 2 } },
+        });
+        var pool = new RandomEventPool<RandomEventData>(new List<RandomEventData> { evt });
+        var stats = EditModeCityStatsFactory.Build();
+        var before = stats.GetValue(CityParameterType.Renda);
+
+        Assert.That(evt.Choices.Count, Is.EqualTo(2));
+        pool.ApplyChoice(stats, evt, 1, 5);
+
+        Assert.That(stats.GetValue(CityParameterType.Renda), Is.EqualTo(before - 4f));
+        Assert.That(pool.Schedule.FollowUps[0].EventId, Is.EqualTo("Depois"));
+        Assert.That(pool.Schedule.FollowUps[0].Turn, Is.EqualTo(7));
+    }
+
+    [Test]
+    public void Export_CarriesOptionsAndFollowUps_AndCommonEventsStayEmpty()
+    {
+        var dilemma = Event("Dilema");
+        var effects = new[] { new StatModifier { Parameter = CityParameterType.Renda, Amount = -4f } };
+        TestDataFactory.SetField(dilemma, "_choices", new[]
+        {
+            new EventChoiceData { Label = "Implantar", Rule = new EventChoiceDefinition { Effects = effects, FollowUpEventId = "Depois", FollowUpDelay = 2 } },
+        });
+        var followUp = Event("Depois");
+        TestDataFactory.SetField(followUp, "_isFollowUpOnly", true);
+
+        var dto = BalanceDataExporter.ToEventDto(dilemma);
+
+        Assert.That(dto.Choices[0].Label, Is.EqualTo("Implantar"));
+        Assert.That(dto.Choices[0].Effects[0].Amount, Is.EqualTo(-4f));
+        Assert.That(dto.Choices[0].FollowUpEventId, Is.EqualTo("Depois"));
+        Assert.That(dto.Choices[0].FollowUpDelay, Is.EqualTo(2));
+        Assert.That(BalanceDataExporter.ToEventDto(followUp).FollowUpOnly, Is.True);
+        Assert.That(BalanceDataExporter.ToEventDto(Event("Comum")).Choices, Is.Empty);
+    }
+
+    [Test]
+    public void Importer_LeavesDilemmaContentToItsOwnSource()
+    {
+        var dilemma = Event("Dilema");
+        TestDataFactory.SetField(dilemma, "_choices", new[] { new EventChoiceData() });
+        var followUp = Event("Depois");
+        TestDataFactory.SetField(followUp, "_isFollowUpOnly", true);
+
+        Assert.That(BalanceDataImporter.IsDilemmaContent(dilemma), Is.True);
+        Assert.That(BalanceDataImporter.IsDilemmaContent(followUp), Is.True);
+        Assert.That(BalanceDataImporter.IsDilemmaContent(Event("Comum")), Is.False);
+    }
+
+    [Test]
     public void IsEligible_TurnWindow_IsInclusiveOnBothEnds()
     {
         var evt = Event("Janela", minTurn: 5, maxTurn: 10);

@@ -36,6 +36,34 @@ public class MetaProgressionManagerTests
         field.SetValue(null, value);
     }
 
+    [Test]
+    public void SavedPhase_KeepsFollowUpsAndTheChoice_ThroughTheFile()
+    {
+        var phase = new PhaseSaveData { TurnIndex = 4 };
+        phase.FollowUps.Add(new ScheduledFollowUp { EventId = "Consequencia", Turn = 8 });
+        phase.History.Add(new PhaseTurnRecord { TurnIndex = 2, EventId = "Dilema", HasEventChoice = true, EventChoice = 1 });
+        MetaProgressionManager.SavePhase(phase);
+        SetStaticField("_save", null);
+
+        var loaded = MetaProgressionManager.SavedPhase;
+
+        Assert.That(loaded.FollowUps[0].EventId, Is.EqualTo("Consequencia"));
+        Assert.That(loaded.FollowUps[0].Turn, Is.EqualTo(8));
+        Assert.That(loaded.History[0].HasEventChoice, Is.True);
+        Assert.That(loaded.History[0].EventChoice, Is.EqualTo(1));
+    }
+
+    [Test]
+    public void OldSave_WithoutDilemmaFields_LoadsWithNoChoiceAndNoFollowUp()
+    {
+        var phase = JsonUtility.FromJson<PhaseSaveData>("{\"TurnIndex\":3,\"History\":[{\"TurnIndex\":1,\"EventId\":\"Comum\"}]}");
+
+        Assert.That(phase.History[0].HasEventChoice, Is.False);
+        var restored = RunSaveRules.RestoreSchedule(phase, RunSaveRules.RestoreHistory(phase));
+        Assert.That(restored.PendingCount, Is.Zero);
+        Assert.That(restored.WasSeen("Comum"), Is.True);
+    }
+
     // Usa os nomes de arquivo de verdade, dentro da pasta temporaria.
     private void WithSlots(System.Action test)
     {

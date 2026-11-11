@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Dilema_SensoresUrbanos
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Sensores e consulta p\xFAblica"
+  _titleEn: Sensors and public consultation
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Sensores urbanos geram dados \xFAteis para planejar a cidade, mas tamb\xE9m
+    registram a rotina de quem vive nela. Decidir quem coleta, guarda e acessa esses
+    dados \xE9 uma escolha pol\xEDtica, n\xE3o s\xF3 t\xE9cnica."
+  _summaryEn: Urban sensors produce useful data for planning, but they also record
+    the routine of the people who live there. Deciding who collects, stores and accesses
+    that data is a political choice, not just a technical one.
+  _realWorld: "Em Toronto, o bairro Quayside seria feito com a Sidewalk Labs, do
+    grupo Alphabet. Ann Cavoukian, especialista em privacidade, saiu em 2018, e a
+    empresa desistiu em maio de 2020, citando incerteza econ\xF4mica."
+  _realWorldEn: In Toronto, Sidewalk Labs, part of Alphabet, was to build the Quayside
+    district. Privacy expert Ann Cavoukian left in 2018, and the company pulled out
+    in May 2020, citing economic uncertainty.
+  _tradeOffs: "Consulta p\xFAblica custa tempo e dinheiro, mas d\xE1 legitimidade.
+    Sem ela, o projeto avan\xE7a r\xE1pido e pode perder a confian\xE7a dos moradores."
+  _tradeOffsEn: Public consultation costs time and money but brings legitimacy. Without
+    it, a project moves fast and can lose the trust of residents.
+  _sources:
+  - Label: Sidewalk Toronto (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Sidewalk_Toronto
+  - Label: 'The Logic: Ann Cavoukian resigns as adviser to Sidewalk Labs (2018)'
+    Url: https://thelogic.co/news/privacy-expert-ann-cavoukian-resigns-as-adviser-to-sidewalk-labs/
+  _relatedEntries:
+  - {fileID: 11400000, guid: fdbaaae7083cd5beda7c9ab0b6468ee1, type: 2}
+  - {fileID: 11400000, guid: b5b486b78494627a798be52bc54b3d22, type: 2}
+  _image: {fileID: 0}

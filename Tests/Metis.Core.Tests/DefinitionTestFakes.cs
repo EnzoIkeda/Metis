@@ -22,4 +22,6 @@ internal sealed class FakeEvent : IRandomEventDefinition
     public IReadOnlyList<StatModifier> StatEffects { get; init; } = new StatModifier[0];
     public int MinTurn { get; init; } = 1;
     public int MaxTurn { get; init; } = 999;
+    public IReadOnlyList<EventChoiceDefinition> Choices { get; init; } = new EventChoiceDefinition[0];
+    public bool IsFollowUpOnly { get; init; }
 }

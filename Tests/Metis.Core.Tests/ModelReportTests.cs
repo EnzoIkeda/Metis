@@ -280,6 +280,7 @@ public class ModelReportTests
             Critical = new[] { 10.0, -1.0 },
             Deriva = new[] { 1.0, -1.1f },
             Interaction = new[] { 50.0, 1.6f },
+            ZoneRule = 2,
             Matrix = new[] { 0.0, 0.4f, -1.3, -0.0 },
             RealMin = new[] { 0.0, -2000000.0 },
             RealMax = new[] { 1.2e9, 2000000.0 },
@@ -292,7 +293,7 @@ public class ModelReportTests
 
         Assert.That(ModelReportFingerprint.Build(numbers), Is.EqualTo(
             "P:55.000/0.000/100.000/10.000/1.000;10.000/0.000/100.000/-1.000/-1.100" +
-            "|Z:50.000/1.600|M:0.000,0.400,-1.300,0.000" +
+            "|Z:50.000/1.600|ZR:2|M:0.000,0.400,-1.300,0.000" +
             "|R:0.000/1200000000.000;-2000000.000/2000000.000|T:6/20|C:20/14|E:50/24"));
     }
 

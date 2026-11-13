@@ -18,11 +18,12 @@ MonoBehaviour:
   _unlockTrigger: 2
   _summary: "Quando um setor est\xE1 muito fragilizado, os problemas se alimentam:
     um servi\xE7o ruim afasta quem paga impostos, o que piora o servi\xE7o. No jogo,
-    um par\xE2metro em crise sofre mais com as press\xF5es e recebe menos ajuda dos
-    outros."
+    um par\xE2metro em crise puxa os outros para baixo com mais for\xE7a e ajuda
+    menos quem depende dele. A Pesquisa \xE9 a exce\xE7\xE3o: n\xE3o entra em crise."
   _summaryEn: 'When a sector is badly weakened, problems feed on each other: a poor
     service drives away taxpayers, which makes the service worse. In the game, a
-    parameter in crisis suffers more from pressure and gets less help from the others.'
+    parameter in crisis drags the others down harder and helps less those who depend
+    on it. Research is the exception: it never enters crisis.'
   _realWorld: "Detroit perdeu mais da metade da popula\xE7\xE3o desde 1950; com menos
     arrecada\xE7\xE3o e servi\xE7os piores, a cidade decretou fal\xEAncia em 2013."
   _realWorldEn: Detroit lost more than half its population after 1950; with less
@@ -39,3 +40,4 @@ MonoBehaviour:
   _relatedEntries:
   - {fileID: 11400000, guid: ed88fd7c4313a9b05847320c9075b27c, type: 2}
   - {fileID: 11400000, guid: 3dc4ee9e524a6f138bf829d4e2cd1c01, type: 2}
+  _image: {fileID: 0}

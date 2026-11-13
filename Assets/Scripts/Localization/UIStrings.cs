@@ -281,17 +281,17 @@ public static class UIStrings
     public static string RelationReference(string reference) => IsPt ? $"Fonte: {reference}" : $"Source: {reference}";
 
     // Como a zona da fonte muda a forca da relacao, com o fator em porcentagem.
-    public static string RelationZoneNote(CityParameterType source, InteractionZone zone, float factor, bool support)
+    public static string RelationZoneNote(CityParameterType source, InteractionZone zone, float factor, bool takes)
     {
         var percent = (int)System.Math.Round(factor * 100f);
         var name = source.GetFullName();
         if (IsPt)
         {
-            var kind = support ? "o apoio que exerce" : "a pressão que exerce";
+            var kind = takes ? "o que tira dos outros" : "o que dá aos outros";
             var change = factor > 1f ? $"fica {percent - 100}% mais forte" : $"cai para {percent}% do normal";
             return $"{name} está em {ZoneName(zone)}: {kind} {change}.";
         }
-        var kindEn = support ? "the support it gives" : "the pressure it exerts";
+        var kindEn = takes ? "what it takes from others" : "what it gives to others";
         var changeEn = factor > 1f ? $"is {percent - 100}% stronger" : $"drops to {percent}% of normal";
         return $"{name} is in {ZoneName(zone)}: {kindEn} {changeEn}.";
     }

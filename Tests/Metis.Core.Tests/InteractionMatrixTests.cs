@@ -39,40 +39,102 @@ public class InteractionMatrixTests
             Assert.That(stats.GetValue(parameter), Is.EqualTo(CityStatsTestFactory.NeutralValue).Within(0.001f), parameter.ToString());
     }
 
-    [Test]
-    public void Resolve_SourceInCrisisZoneWithPositiveCoefficient_UsesApoioCriseMultiplier()
+    // Renda resolve primeiro (indice 0), entao le direto os valores de configuracao, sem contaminacao de Gauss-Seidel.
+    private static float RendaAfterTurn(InteractionMatrix matrix, CityParameterType fonte, float valorFonte)
     {
-        // Renda resolve primeiro (indice 0), entao le direto os valores de configuracao, sem contaminacao de Gauss-Seidel; Populacao tem coeficiente +1.2 sobre Renda.
-        var matrix = BuildMatrix(multiplicadorApoioCrise: 3f);
         var stats = CityStatsTestFactory.Build(matrix, customize: configs =>
         {
-            var populacao = configs[CityParameterType.Populacao];
-            populacao.InitialValue = 10f; // <= ZonaCrise
-            configs[CityParameterType.Populacao] = populacao;
+            var config = configs[fonte];
+            config.InitialValue = valorFonte;
+            configs[fonte] = config;
         });
-
         stats.ResolveTurn();
-
-        // (10-50)/50 * 1.2 * multiplicadorApoioCrise(3) = -0.8 * 1.2 * 3 = -2.88
-        Assert.That(stats.GetValue(CityParameterType.Renda), Is.EqualTo(50f - 2.88f).Within(0.001f));
+        return stats.GetValue(CityParameterType.Renda);
     }
 
     [Test]
-    public void Resolve_SourceInCrisisZoneWithNegativeCoefficient_UsesPressaoCriseMultiplier()
+    public void Resolve_SourceInCrisisWithPositiveCoefficient_TakesFromTargetWithPressaoMultiplier()
     {
-        // Sustentabilidade tem coeficiente -0.2 sobre Renda (que resolve primeiro).
-        var matrix = BuildMatrix(multiplicadorPressaoCrise: 4f);
-        var stats = CityStatsTestFactory.Build(matrix, customize: configs =>
-        {
-            var sustentabilidade = configs[CityParameterType.Sustentabilidade];
-            sustentabilidade.InitialValue = 10f; // <= ZonaCrise
-            configs[CityParameterType.Sustentabilidade] = sustentabilidade;
-        });
+        // Populacao tem +1.2 sobre Renda; em crise ela tira da Renda, e o que a fonte tira vale o multiplicador de pressao.
+        var matrix = BuildMatrix(multiplicadorPressaoCrise: 3f, multiplicadorApoioCrise: 7f);
 
-        stats.ResolveTurn();
+        // (10-50)/50 * 1.2 * 3 = -2.88
+        Assert.That(RendaAfterTurn(matrix, CityParameterType.Populacao, 10f), Is.EqualTo(50f - 2.88f).Within(0.001f));
+    }
 
-        // (10-50)/50 * -0.2 * multiplicadorPressaoCrise(4) = -0.8 * -0.2 * 4 = 0.64
-        Assert.That(stats.GetValue(CityParameterType.Renda), Is.EqualTo(50f + 0.64f).Within(0.001f));
+    [Test]
+    public void Resolve_SourceInCrisisWithNegativeCoefficient_GivesToTargetWithApoioMultiplier()
+    {
+        // Sustentabilidade tem -0.2 sobre Renda; em crise o termo fica positivo, e o que a fonte da vale o multiplicador de apoio.
+        var matrix = BuildMatrix(multiplicadorPressaoCrise: 7f, multiplicadorApoioCrise: 4f);
+
+        // (10-50)/50 * -0.2 * 4 = 0.64
+        Assert.That(RendaAfterTurn(matrix, CityParameterType.Sustentabilidade, 10f), Is.EqualTo(50f + 0.64f).Within(0.001f));
+    }
+
+    [Test]
+    public void Resolve_SourceInExcessWithPositiveCoefficient_GivesWithApoioExcessoMultiplier()
+    {
+        var matrix = BuildMatrix(multiplicadorApoioExcesso: 0.5f);
+
+        // (90-50)/50 * 1.2 * 0.5 = 0.48
+        Assert.That(RendaAfterTurn(matrix, CityParameterType.Populacao, 90f), Is.EqualTo(50f + 0.48f).Within(0.001f));
+    }
+
+    [Test]
+    public void Resolve_SourceInExcessWithNegativeCoefficient_TakesAtFullStrength()
+    {
+        var matrix = BuildMatrix(multiplicadorApoioExcesso: 0.5f);
+
+        // (90-50)/50 * -0.2 * 1 = -0.16
+        Assert.That(RendaAfterTurn(matrix, CityParameterType.Sustentabilidade, 90f), Is.EqualTo(50f - 0.16f).Within(0.001f));
+    }
+
+    [Test]
+    public void Resolve_PesquisaBelowCrisisThreshold_HasNoCrisisFactor()
+    {
+        // Pesquisa tem +0.5 sobre Renda; abaixo da zona de crise ela tira sem o multiplicador de pressao.
+        var matrix = BuildMatrix(multiplicadorPressaoCrise: 3f, multiplicadorApoioCrise: 3f);
+
+        // (10-50)/50 * 0.5 = -0.4
+        Assert.That(RendaAfterTurn(matrix, CityParameterType.Pesquisa, 10f), Is.EqualTo(50f - 0.4f).Within(0.001f));
+    }
+
+    [Test]
+    public void Resolve_PesquisaInExcess_StillUsesApoioExcessoMultiplier()
+    {
+        var matrix = BuildMatrix(multiplicadorApoioExcesso: 0.5f);
+
+        // (90-50)/50 * 0.5 * 0.5 = 0.2
+        Assert.That(RendaAfterTurn(matrix, CityParameterType.Pesquisa, 90f), Is.EqualTo(50f + 0.2f).Within(0.001f));
+    }
+
+    [Test]
+    public void GetZone_PesquisaNeverInCrisis_OthersAre()
+    {
+        var matrix = BuildMatrix();
+
+        Assert.That(matrix.GetZone(CityParameterType.Pesquisa, 10f), Is.EqualTo(InteractionZone.Saudavel));
+        Assert.That(matrix.GetZone(CityParameterType.Pesquisa, 90f), Is.EqualTo(InteractionZone.Excesso));
+        Assert.That(matrix.GetZone(CityParameterType.Saude, 10f), Is.EqualTo(InteractionZone.Crise));
+        Assert.That(InteractionMatrix.HasCrisisZone(CityParameterType.Pesquisa), Is.False);
+        Assert.That(InteractionMatrix.HasCrisisZone(CityParameterType.Renda), Is.True);
+    }
+
+    [TestCase(CityParameterType.Populacao, 10f, 1.6f)]
+    [TestCase(CityParameterType.Sustentabilidade, 10f, 0.5f)]
+    [TestCase(CityParameterType.Populacao, 90f, 0.6f)]
+    [TestCase(CityParameterType.Sustentabilidade, 90f, 1f)]
+    [TestCase(CityParameterType.Pesquisa, 10f, 1f)]
+    [TestCase(CityParameterType.Populacao, 40f, 1f)]
+    public void GetTermAndFactor_MatchResolve(CityParameterType fonte, float valor, float fatorEsperado)
+    {
+        var matrix = BuildMatrix(multiplicadorPressaoCrise: 1.6f, multiplicadorApoioCrise: 0.5f, multiplicadorApoioExcesso: 0.6f);
+        var coeficiente = InteractionMatrix.GetCoefficient(CityParameterType.Renda, fonte);
+
+        Assert.That(matrix.GetZoneFactor(fonte, valor, coeficiente), Is.EqualTo(fatorEsperado).Within(0.0001f));
+        Assert.That(50f + matrix.GetTerm(CityParameterType.Renda, fonte, valor),
+            Is.EqualTo(RendaAfterTurn(matrix, fonte, valor)).Within(0.0001f));
     }
 
     [Test]

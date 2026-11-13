@@ -89,7 +89,7 @@ public static class AlmanacTriggers
         var value = stats.GetValue(parameter);
         if (stats.Interactions != null)
         {
-            var zone = stats.Interactions.GetZone(value);
+            var zone = stats.Interactions.GetZone(parameter, value);
             if (zone == InteractionZone.Crise)
                 triggers.Add(KnowledgeUnlockTrigger.FirstCrisis);
             else if (zone == InteractionZone.Excesso)

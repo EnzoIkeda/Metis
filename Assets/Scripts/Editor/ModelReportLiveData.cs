@@ -26,6 +26,7 @@ public static class ModelReportLiveData
             RealMin = new double[parameters.Length],
             RealMax = new double[parameters.Length],
             Matrix = new double[parameters.Length * parameters.Length],
+            ZoneRule = InteractionMatrix.ZoneRuleVersion,
             HandSize = data.Rules.HandSize,
             VictoryTurns = data.Rules.VictoryTurnCount,
             Events = data.Events.Count,

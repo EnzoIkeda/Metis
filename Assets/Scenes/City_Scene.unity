@@ -9111,8 +9111,8 @@ MonoBehaviour:
     EscalaGlobal: 1
     ZonaCrise: 25
     ZonaExcesso: 75
-    MultiplicadorPressaoCrise: 1.6
-    MultiplicadorApoioCrise: 0.5
+    MultiplicadorPressaoCrise: 1.2
+    MultiplicadorApoioCrise: 0.8
     MultiplicadorApoioExcesso: 0.6
     DerivaCorrecaoExcesso: 0.1
     PenalidadeColapso: 12

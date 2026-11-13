@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Event_MerendaDaAgriculturaLocal
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 13
+  _parameter: 0
+  _targetId: EventMerendaDaAgriculturaLocal
+  _headline: "Merenda da escola agora vem da ro\xE7a da regi\xE3o"
+  _headlineEn: School lunch now comes from local farms
+  _body: "Alface colhida ontem, feij\xE3o do s\xEDtio vizinho. J\xFAlia garante que
+    o refeit\xF3rio nunca teve fila t\xE3o longa."
+  _bodyEn: "Lettuce picked yesterday, beans from the farm next door. J\xFAlia says
+    the cafeteria line has never been this long."

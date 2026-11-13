@@ -22,6 +22,15 @@ public class DeckBuilderTests
     }
 
     [Test]
+    public void Build_CommunityBasica_StaysOutOfTheOtherDecks()
+    {
+        var comunitaria = Card("Horta", CardTier.Basica, CardArchetype.Comunitario);
+
+        Assert.That(DeckBuilder.Build(new List<CardData> { comunitaria }, CardArchetype.Sustentabilidade, new List<string>()), Has.No.Member(comunitaria));
+        Assert.That(DeckBuilder.Build(new List<CardData> { comunitaria }, CardArchetype.Comunitario, new List<string>()), Has.Member(comunitaria));
+    }
+
+    [Test]
     public void Build_IncludesBasicaTierRegardlessOfArchetype()
     {
         var basica = Card("Basica", CardTier.Basica, CardArchetype.Industria);

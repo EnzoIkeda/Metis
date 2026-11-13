@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_MutiraoHabitacional
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Mutir\xE3o Habitacional"
+  _titleEn: Self-Build Housing
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Fam\xEDlias organizadas constroem juntas as pr\xF3prias casas, com projeto,
+    terreno e material pagos pelo poder p\xFAblico e decis\xF5es tomadas em assembleia."
+  _summaryEn: Organized families build their homes together, with design, land and
+    materials paid for by the government and decisions made in assemblies.
+  _realWorld: "Na gest\xE3o de Luiza Erundina em S\xE3o Paulo (1989 a 1992), cerca
+    de 8 mil moradias foram erguidas em mutir\xE3o autogerido, com as fam\xEDlias
+    cuidando da obra e do dinheiro."
+  _realWorldEn: "Under Mayor Luiza Erundina in S\xE3o Paulo (1989 to 1992), about
+    8,000 homes were built by self-managed crews, with the families running both
+    the work and the money."
+  _tradeOffs: "A obra \xE9 mais lenta, pede trabalho volunt\xE1rio nos fins de semana
+    e apoio t\xE9cnico, e em S\xE3o Paulo muitas fam\xEDlias ficaram anos sem o documento
+    do im\xF3vel."
+  _tradeOffsEn: "Construction is slower and takes weekend volunteer work and technical
+    support, and in S\xE3o Paulo many families went years without a title to their
+    homes."
+  _sources:
+  - Label: "C\xE2mara Municipal de S\xE3o Paulo, mutir\xF5es de autogest\xE3o (2013)"
+    Url: https://www.saopaulo.sp.leg.br/blog/movimentos-sociais-querem-a-volta-dos-mutiroes-de-autogestao/
+  _relatedEntries:
+  - {fileID: 11400000, guid: f82e5a0d834ec4341a55243f4bf22386, type: 2}
+  - {fileID: 11400000, guid: a25b1e31239122135ba59901588d23e5, type: 2}
+  _image: {fileID: 0}

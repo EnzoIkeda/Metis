@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_BemViver
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Bem Viver
+  _titleEn: Good Living
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "A cidade mede o sucesso pela vida em comunidade e pela natureza preservada,
+    n\xE3o pelo crescimento, e deixa em segundo plano a corrida por inova\xE7\xE3o."
+  _summaryEn: The city measures success by community life and preserved nature rather
+    than growth, and puts the race for innovation second.
+  _realWorld: "A Constitui\xE7\xE3o do Equador, de 2008, fala em alcan\xE7ar o buen
+    vivir, o sumak kawsay, em harmonia com a natureza, e a da Bol\xEDvia, de 2009,
+    p\xF5e o viver bem entre os seus princ\xEDpios."
+  _realWorldEn: Ecuador's 2008 Constitution speaks of reaching buen vivir, sumak
+    kawsay, in harmony with nature, and Bolivia's 2009 Constitution lists living
+    well among its principles.
+  _tradeOffs: "Os dois pa\xEDses seguiram pagando programas sociais com a exporta\xE7\xE3o
+    de petr\xF3leo, g\xE1s e min\xE9rios, o que mostra a dist\xE2ncia entre o princ\xEDpio
+    escrito e a economia real."
+  _tradeOffsEn: Both countries kept funding social programs with oil, gas and mineral
+    exports, which shows the gap between the written principle and the real economy.
+  _sources:
+  - Label: Buen vivir (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Buen_vivir
+  - Label: Sumak kawsay (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Sumak_kawsay
+  _relatedEntries:
+  - {fileID: 11400000, guid: 129c6e618e980d5f3a6dcf18c110e3cb, type: 2}
+  - {fileID: 11400000, guid: cb80dcfddda669ed6b20ede7cc8618b8, type: 2}
+  _image: {fileID: 0}

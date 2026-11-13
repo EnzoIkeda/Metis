@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Card_BancoComunitario
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 12
+  _parameter: 0
+  _targetId: CardBancoComunitario
+  _headline: "Bairro ganha banco pr\xF3prio e at\xE9 moeda nova"
+  _headlineEn: Neighborhood gets its own bank and even a new currency
+  _body: "Cr\xE9dito pequeno, juros baixos e dinheiro girando no com\xE9rcio local.
+    Dona Cida j\xE1 aceita a moeda nova no balc\xE3o da padaria."
+  _bodyEn: Small loans, low interest and money circulating in local shops. Mrs. Cida
+    already takes the new currency at the bakery counter.

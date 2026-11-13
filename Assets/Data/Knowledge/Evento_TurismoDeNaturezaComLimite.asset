@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_TurismoDeNaturezaComLimite
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Turismo de natureza com limite
+  _titleEn: Capped Nature Tourism
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Natureza preservada vira renda pelo turismo, desde que o n\xFAmero de
+    visitantes caiba no que o lugar aguenta, a chamada capacidade de carga."
+  _summaryEn: Preserved nature brings in tourism income, as long as the number of
+    visitors fits what the place can bear, its so-called carrying capacity.
+  _realWorld: "Bonito, em Mato Grosso do Sul, usa desde 1995 um voucher \xFAnico:
+    cada passeio tem limite di\xE1rio de visitantes, e a venda passa por ag\xEAncias
+    credenciadas da cidade."
+  _realWorldEn: 'Bonito, in Mato Grosso do Sul, Brazil, has used a single voucher
+    since 1995: each tour has a daily visitor cap, and sales go through accredited
+    local agencies.'
+  _tradeOffs: "Mesmo com limite, o turismo traz lixo, tr\xE2nsito e aluguel mais
+    caro, e a cidade fica dependente de uma atividade que encolhe numa crise."
+  _tradeOffsEn: Even with a cap, tourism brings litter, traffic and higher rents,
+    and the town comes to depend on an activity that shrinks in a crisis.
+  _sources:
+  - Label: Catraca Livre, Bonito e o controle de visitantes desde 1995
+    Url: https://catracalivre.com.br/viagem-livre/rios-de-aguas-cristalinas-grutas-cachoeiras-e-trilhas-a-pequena-cidade-do-centro-oeste-que-virou-referencia-mundial-em-ecoturismo-e-controla-o-numero-de-visitantes-em-seus-atrativos-desde-1995/
+  _relatedEntries:
+  - {fileID: 11400000, guid: d8cf481aa916f4a24b2fe99212b36f31, type: 2}
+  - {fileID: 11400000, guid: 6154e0a377c7bc759b376966fb85eb91, type: 2}
+  _image: {fileID: 0}

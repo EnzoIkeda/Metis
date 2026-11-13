@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Card_RedeDeTransicao
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 12
+  _parameter: 0
+  _targetId: CardRedeDeTransicao
+  _headline: "Vizinhos se organizam para depender menos do petr\xF3leo"
+  _headlineEn: Neighbors organize to depend less on oil
+  _body: "Comida da regi\xE3o, energia por perto e oficina de conserto. Seu Arnaldo
+    topou tudo, menos trocar o t\xE1xi pela bicicleta."
+  _bodyEn: Local food, nearby energy and a repair workshop. Arnaldo agreed to everything
+    except trading his cab for a bike.

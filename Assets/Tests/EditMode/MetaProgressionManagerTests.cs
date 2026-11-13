@@ -142,6 +142,16 @@ public class MetaProgressionManagerTests
     }
 
     [Test]
+    public void SetArchetype_Community_PersistsAcrossReload()
+    {
+        MetaProgressionManager.SetArchetype(CardArchetype.Comunitario);
+
+        ForceReloadFromFile();
+
+        Assert.That(MetaProgressionManager.Archetype, Is.EqualTo(CardArchetype.Comunitario));
+    }
+
+    [Test]
     public void SetArchetype_PersistsAcrossReload_AndStartsARun()
     {
         MetaProgressionManager.SetArchetype(CardArchetype.Automacao);

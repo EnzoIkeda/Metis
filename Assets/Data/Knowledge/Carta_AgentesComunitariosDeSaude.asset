@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_AgentesComunitariosDeSaude
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Agentes Comunit\xE1rios de Sa\xFAde"
+  _titleEn: Community Health Agents
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Moradores do pr\xF3prio bairro, treinados pela sa\xFAde p\xFAblica,
+    visitam casa a casa, acompanham gestantes, crian\xE7as e idosos e levam ao posto
+    quem precisa."
+  _summaryEn: Neighborhood residents trained by the public health system visit every
+    home, follow pregnant women, children and the elderly, and refer those in need
+    to the clinic.
+  _realWorld: "O Cear\xE1 come\xE7ou com agentes em 1987, para gerar emprego na seca
+    e reduzir a mortalidade infantil. O programa virou nacional em 1991 e chegou
+    a cerca de 204 mil agentes no SUS em 2008."
+  _realWorldEn: "Cear\xE1, in Brazil, started with health agents in 1987 to create
+    jobs during the drought and cut infant mortality. The program went national in
+    1991 and had about 204,000 agents by 2008."
+  _tradeOffs: "Cada agente cuida de cerca de 150 fam\xEDlias e foi recebendo tarefas
+    novas, como registro de dados e casos de viol\xEAncia, sem sal\xE1rio \xE0 altura."
+  _tradeOffsEn: Each agent looks after about 150 families and kept getting new tasks,
+    such as data entry and violence cases, without matching pay.
+  _sources:
+  - Label: "Agente comunit\xE1rio de sa\xFAde (Wikip\xE9dia)"
+    Url: https://pt.wikipedia.org/wiki/Agente_comunit%C3%A1rio_de_sa%C3%BAde
+  _relatedEntries:
+  - {fileID: 11400000, guid: 17b7ffccb5578d4ceb4650c05802105d, type: 2}
+  - {fileID: 11400000, guid: 8c51b9210a1e67375bf6524c541f4ad3, type: 2}
+  _image: {fileID: 0}

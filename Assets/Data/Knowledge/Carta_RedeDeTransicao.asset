@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_RedeDeTransicao
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Rede de Transi\xE7\xE3o"
+  _titleEn: Transition Network
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Grupos de moradores se organizam para a cidade depender menos de petr\xF3leo
+    e de cadeias longas de abastecimento, produzindo comida e energia por perto."
+  _summaryEn: Resident groups organize so the city depends less on oil and long supply
+    chains, producing food and energy close by.
+  _realWorld: "O movimento das cidades em transi\xE7\xE3o nasceu de um projeto de
+    estudantes na Irlanda, em 2004, e ganhou forma em Totnes, na Inglaterra, em 2006,
+    com comida local, energia e at\xE9 moeda pr\xF3pria."
+  _realWorldEn: The Transition Towns movement grew out of a student project in Ireland
+    in 2004 and took shape in Totnes, England, in 2006, with local food, energy and
+    even a local currency.
+  _tradeOffs: "Cada grupo depende do \xE2nimo dos volunt\xE1rios, e parte das iniciativas
+    n\xE3o durou: a libra de Totnes, moeda local da cidade, acabou em 2019."
+  _tradeOffsEn: 'Each group depends on volunteers'' energy, and some initiatives
+    did not last: the Totnes pound, the town''s local currency, ended in 2019.'
+  _sources:
+  - Label: Transition town (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Transition_town
+  _relatedEntries:
+  - {fileID: 11400000, guid: 66f77601779bb77f6a9573bcd079d788, type: 2}
+  - {fileID: 11400000, guid: 3fdfb4c4ec4633cd3b0252d86103f598, type: 2}
+  _image: {fileID: 0}

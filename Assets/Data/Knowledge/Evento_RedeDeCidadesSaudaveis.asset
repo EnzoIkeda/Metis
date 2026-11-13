@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Evento_RedeDeCidadesSaudaveis
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Cidade entra na rede de Cidades Saud\xE1veis"
+  _titleEn: City Joins the Healthy Cities Network
+  _category: 1
+  _unlockTrigger: 0
+  _summary: "Na rede de Cidades Saud\xE1veis, a prefeitura assume o compromisso pol\xEDtico
+    de pensar a sa\xFAde em todas as \xE1reas, do transporte \xE0 moradia, junto
+    com a popula\xE7\xE3o."
+  _summaryEn: In the Healthy Cities network, City Hall makes a political commitment
+    to weigh health in every area, from transit to housing, together with residents.
+  _realWorld: "A rede europeia de Cidades Saud\xE1veis da OMS completou 30 anos em
+    2018 e re\xFAne cerca de 100 cidades-membro e 30 redes nacionais, com uns 1.400
+    munic\xEDpios."
+  _realWorldEn: The WHO European Healthy Cities Network turned 30 in 2018 and brings
+    together about 100 member cities and 30 national networks, covering some 1,400
+    municipalities.
+  _tradeOffs: "Entrar na rede \xE9 um compromisso, n\xE3o um resultado: medir o efeito
+    na sa\xFAde \xE9 dif\xEDcil, e o selo vira s\xF3 propaganda se n\xE3o mudar as
+    decis\xF5es."
+  _tradeOffsEn: 'Joining is a commitment, not a result: measuring the health impact
+    is hard, and the label becomes mere publicity if decisions do not change.'
+  _sources:
+  - Label: WHO European Healthy Cities Network (OMS)
+    Url: https://www.who.int/europe/groups/who-european-healthy-cities-network
+  - Label: Healthy city (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Healthy_city
+  _relatedEntries:
+  - {fileID: 11400000, guid: b30e110df36011cb5ba863a28b7e9678, type: 2}
+  - {fileID: 11400000, guid: 9d005b7a5c3ce1985968cf86069ee33e, type: 2}
+  _image: {fileID: 0}

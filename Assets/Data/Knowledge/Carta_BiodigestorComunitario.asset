@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_BiodigestorComunitario
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Biodigestor Comunit\xE1rio"
+  _titleEn: Community Biodigester
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "Restos de comida e esterco fermentam num tanque fechado e viram biog\xE1s
+    para cozinhar e gerar energia, e o que sobra vira adubo para hortas e lavouras."
+  _summaryEn: Food scraps and manure ferment in a sealed tank and become biogas for
+    cooking and power, and what is left becomes fertilizer for gardens and farms.
+  _realWorld: "A \xCDndia mant\xE9m um programa nacional de biog\xE1s desde 1981,
+    com cerca de 5 milh\xF5es de biodigestores dom\xE9sticos, e a China tinha cerca
+    de 28 milh\xF5es funcionando em 2008."
+  _realWorldEn: India has run a national biogas program since 1981, with about 5
+    million household digesters, and China had about 28 million in operation in 2008.
+  _tradeOffs: "O biodigestor precisa de manuten\xE7\xE3o e de gente treinada: nas
+    campanhas chinesas dos anos 1970, muitos foram constru\xEDdos \xE0s pressas e
+    funcionaram mal."
+  _tradeOffsEn: 'A digester needs maintenance and trained people: in China''s campaigns
+    of the 1970s, many were built in a hurry and worked poorly.'
+  _sources:
+  - Label: "Energetica India, programa nacional de biog\xE1s (2018)"
+    Url: https://www.energetica-india.net/news/under-the-nbmmp-about-496-lakh-household-size-biogas-plants-have-been-installed
+  - Label: Biogas Technology in China (energypedia)
+    Url: https://energypedia.info/wiki/Biogas_Technology_in_China
+  _relatedEntries:
+  - {fileID: 11400000, guid: 9e42c249b92698688afcdb90cc733be0, type: 2}
+  - {fileID: 11400000, guid: 3fdfb4c4ec4633cd3b0252d86103f598, type: 2}
+  _image: {fileID: 0}

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Card_HortasComunitarias
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 12
+  _parameter: 0
+  _targetId: CardHortasComunitarias
+  _headline: "Terreno baldio vira horta e a vizinhan\xE7a colhe junto"
+  _headlineEn: Vacant lot becomes a garden, and the neighbors harvest together
+  _body: "Mais verde e comida fresca perto de casa. Dona Cida j\xE1 encomendou couve
+    para o pastel de sexta."
+  _bodyEn: More green space and fresh food close to home. Mrs. Cida has already ordered
+    kale for Friday's pastries.

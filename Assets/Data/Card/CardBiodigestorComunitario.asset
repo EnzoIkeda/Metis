@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39c804f1a5f690765908711b18576891, type: 3}
+  m_Name: CardBiodigestorComunitario
+  m_EditorClassIdentifier: Metis.Runtime::CardData
+  _cardName: "Biodigestor Comunit\xE1rio"
+  _description: "Restos de comida e esterco viram biog\xE1s e adubo."
+  _cardNameEn: Community Biodigester
+  _descriptionEn: Food scraps and manure become biogas and fertilizer.
+  _cost: 1
+  _tier: 0
+  _archetype: 4
+  _requiredPesquisa: 0
+  _statEffects:
+  - Parameter: 0
+    Amount: -1
+  - Parameter: 1
+    Amount: 4
+  - Parameter: 5
+    Amount: 2
+  - Parameter: 7
+    Amount: 1
+  _ability: 0
+  _copies: 1
+  _structureToPlace: {fileID: 0}
+  _artwork: {fileID: 0}
+  _artworkFrames: []
+  _artworkFrameRate: 15
+  _knowledgeEntry: {fileID: 11400000, guid: 4a3a3b54031691be789dab8e0d621ac7, type: 2}

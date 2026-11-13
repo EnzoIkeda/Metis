@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Card_ParqueAlagavel
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 12
+  _parameter: 0
+  _targetId: CardParqueAlagavel
+  _headline: Parque enche na chuva e o bairro fica seco
+  _headlineEn: Park fills up in the rain, and the neighborhood stays dry
+  _body: "O lago sobe na tempestade e guarda a \xE1gua que ia para as ruas. No sol,
+    J\xFAlia leva a turma para estudar as capivaras."
+  _bodyEn: "The lake rises in the storm and holds water bound for the streets. On
+    sunny days, J\xFAlia takes her class to study the capybaras."

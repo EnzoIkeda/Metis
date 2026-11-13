@@ -42116,6 +42116,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f3b14033e2973623889cbc21f1e1e8ab, type: 2}
   - {fileID: 11400000, guid: cedd5434c93cc1c31804b4bc82071b81, type: 2}
   - {fileID: 11400000, guid: 9f327b3063cfb7015aa2e98b4219cb54, type: 2}
+  - {fileID: 11400000, guid: 62cfef0c0c5366cb7ab343eb767e1a81, type: 2}
+  - {fileID: 11400000, guid: 58d5116ce93cdacd0ac09e5d103b2da1, type: 2}
+  - {fileID: 11400000, guid: 579b2f6745a561ceba60a509db080b8b, type: 2}
+  - {fileID: 11400000, guid: d5e8f3feb9dbb30eea90fd4b175cfdb4, type: 2}
+  - {fileID: 11400000, guid: 7bb6032300ae1a24ebc4a948f3a19ed1, type: 2}
+  - {fileID: 11400000, guid: 13f5fc819cb8d30289a3dba0da3e0160, type: 2}
+  - {fileID: 11400000, guid: 7525dde4716b7bdf8bb6b35f2825e6c2, type: 2}
+  - {fileID: 11400000, guid: f155480e4ffe0c7ff82e0d75e41bc621, type: 2}
+  - {fileID: 11400000, guid: 56f4aff8dae0f16c7886fec3e0bbdacb, type: 2}
+  - {fileID: 11400000, guid: 84e711d9f9cff9e2192c93ae399ba8c0, type: 2}
+  - {fileID: 11400000, guid: b8ad76ba87783e5908161515cdbd8326, type: 2}
   _debugCardToPlay: {fileID: 11400000, guid: 704c3dae3325fc2f9aab7b1e3e2c500c, type: 2}
   _eventPool:
   - {fileID: 11400000, guid: 9cc8b591b1ce4cd184ee2828e265103f, type: 2}
@@ -42180,6 +42191,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7176ec2926bd0e9878a3520c0d715d8d, type: 2}
   - {fileID: 11400000, guid: 56ccc850fe60ea9beb73ac9a959c3464, type: 2}
   - {fileID: 11400000, guid: a9f4abe8f36441548a0a731199c56ec9, type: 2}
+  - {fileID: 11400000, guid: 9f4abf63e7e2d55838904874c124d9e1, type: 2}
+  - {fileID: 11400000, guid: a749044c71f46d7488b19fcd1c63b9f9, type: 2}
+  - {fileID: 11400000, guid: fa95670bb950ff9d899d146cd34c910c, type: 2}
   _advantagePool:
   - {fileID: 11400000, guid: 26420df1a96afce63afe5f7e36c28ed3, type: 2}
   - {fileID: 11400000, guid: a0b91dfca70ed8f9f91034877687a04e, type: 2}

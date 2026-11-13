@@ -20,6 +20,10 @@ public class DeckSelectionManager : MonoBehaviour
     [SerializeField] private TMP_Text _automacaoText;
     [SerializeField] private TMP_Text _automacaoDescription;
 
+    [SerializeField] private Button _comunitarioButton;
+    [SerializeField] private TMP_Text _comunitarioText;
+    [SerializeField] private TMP_Text _comunitarioDescription;
+
     private void Start()
     {
         if (_titleText != null)
@@ -28,6 +32,7 @@ public class DeckSelectionManager : MonoBehaviour
         SetupOption(_sustentabilidadeButton, _sustentabilidadeText, _sustentabilidadeDescription, CardArchetype.Sustentabilidade);
         SetupOption(_industriaButton, _industriaText, _industriaDescription, CardArchetype.Industria);
         SetupOption(_automacaoButton, _automacaoText, _automacaoDescription, CardArchetype.Automacao);
+        SetupOption(_comunitarioButton, _comunitarioText, _comunitarioDescription, CardArchetype.Comunitario);
     }
 
     private void SetupOption(Button button, TMP_Text label, TMP_Text description, CardArchetype archetype)

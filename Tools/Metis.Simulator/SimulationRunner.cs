@@ -23,7 +23,7 @@ public sealed class SimulationOptions
     public int? MaxThreads { get; set; }
     public bool WriteTurns { get; set; } = true;
     public List<string> Policies { get; set; } = new() { "aleatoria", "gulosa", "equilibrada" };
-    public List<string> Archetypes { get; set; } = new() { "Sustentabilidade", "Industria", "Automacao" };
+    public List<string> Archetypes { get; set; } = new() { "Sustentabilidade", "Industria", "Automacao", "Comunitario" };
 
     // "fase1" e a cidade calibrada padrao; os outros nomes sao ids de preset.
     public List<string> Setups { get; set; } = new();

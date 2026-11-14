@@ -42127,6 +42127,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 56f4aff8dae0f16c7886fec3e0bbdacb, type: 2}
   - {fileID: 11400000, guid: 84e711d9f9cff9e2192c93ae399ba8c0, type: 2}
   - {fileID: 11400000, guid: b8ad76ba87783e5908161515cdbd8326, type: 2}
+  - {fileID: 11400000, guid: de57ac723f938201da8562c6e26b27b9, type: 2}
   _debugCardToPlay: {fileID: 11400000, guid: 704c3dae3325fc2f9aab7b1e3e2c500c, type: 2}
   _eventPool:
   - {fileID: 11400000, guid: 9cc8b591b1ce4cd184ee2828e265103f, type: 2}
@@ -42203,6 +42204,7 @@ MonoBehaviour:
   _effects: {fileID: 529777303}
   _background: {fileID: 815776291}
   _scenarios: {fileID: 11400000, guid: 62d62672d0615dc78b944634e4aa773c, type: 2}
+  _trades: {fileID: 11400000, guid: 8a5b3d2099d62fe04b28ce388dd38da5, type: 2}
   _handSize: 6
   _victoryTurnCount: 20
 --- !u!4 &1238303806

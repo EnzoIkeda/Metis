@@ -15,7 +15,8 @@ public class GameTextCollectorTests
             .Any(guid => AssetDatabase.LoadAssetAtPath<RandomEventData>(AssetDatabase.GUIDToAssetPath(guid)).Choices.Count > 0);
         foreach (GameTextOrigin origin in Enum.GetValues(typeof(GameTextOrigin)))
         {
-            if ((origin != GameTextOrigin.Theme || hasThemes) && (origin != GameTextOrigin.Dilemma || hasDilemmas))
+            var hasTrades = AssetDatabase.FindAssets("t:TradeOfferData", new[] { "Assets/Data" }).Length > 0;
+            if ((origin != GameTextOrigin.Theme || hasThemes) && (origin != GameTextOrigin.Dilemma || hasDilemmas) && (origin != GameTextOrigin.Trade || hasTrades))
                 Assert.That(items.Any(item => item.Origin == origin), Is.True, origin.ToString());
         }
     }

@@ -92,21 +92,21 @@ public static class StateScore
 // Olha um turno a frente: joga a carta numa copia do estado, resolve o turno e da a nota. Nao preve o evento.
 public static class GreedyLookahead
 {
-    // Aplica a carta como a mao aplicaria ao jogar: custo em Renda, depois os efeitos.
-    public static void ApplyCard(CityStats stats, ICardDefinition card)
+    // Aplica a carta como a mao aplicaria ao jogar: custo em Renda, com o ajuste das trocas, depois os efeitos.
+    public static void ApplyCard(CityStats stats, ICardDefinition card, int costOffset = 0)
     {
-        stats.ApplyModifier(new StatModifier { Parameter = CityParameterType.Renda, Amount = -card.Cost });
+        stats.ApplyModifier(new StatModifier { Parameter = CityParameterType.Renda, Amount = -TradeOfferRules.EffectiveCost(card.Cost, costOffset) });
         stats.ApplyModifiers(card.StatEffects);
     }
 
     // card nulo e passar a vez; paidFirst e a acao livre paga antes da carta comum, no mesmo estado.
-    public static double Score(CityStats state, ICardDefinition card, ScoreRules rules, ICardDefinition paidFirst = null)
+    public static double Score(CityStats state, ICardDefinition card, ScoreRules rules, ICardDefinition paidFirst = null, int costOffset = 0)
     {
         var future = state.Clone();
         if (paidFirst != null)
-            ApplyCard(future, paidFirst);
+            ApplyCard(future, paidFirst, costOffset);
         if (card != null)
-            ApplyCard(future, card);
+            ApplyCard(future, card, costOffset);
         future.ResolveTurn();
         return StateScore.Evaluate(future, rules);
     }

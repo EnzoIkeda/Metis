@@ -37,7 +37,26 @@ public static class BalanceDataFormat
         public bool PlacesStructure;
         public string Ability;
         public int Copies;
+        public bool ExtraOnly;
         public List<ModifierDto> Effects = new List<ModifierDto>();
+    }
+
+    [Serializable]
+    public class TradeTermDto
+    {
+        public string Kind;
+        public List<ModifierDto> Effects = new List<ModifierDto>();
+        public int Amount;
+        public string CardId;
+    }
+
+    [Serializable]
+    public class TradeOfferDto
+    {
+        public string Id;
+        public string Name;
+        public TradeTermDto Benefit = new TradeTermDto();
+        public TradeTermDto Drawback = new TradeTermDto();
     }
 
     [Serializable]
@@ -148,6 +167,7 @@ public static class BalanceDataFormat
         public List<PresetDto> Presets = new List<PresetDto>();
         public List<ThemeDto> Themes = new List<ThemeDto>();
         public List<ScenarioDto> Scenarios = new List<ScenarioDto>();
+        public List<TradeOfferDto> TradeOffers = new List<TradeOfferDto>();
     }
 
     // Roda a acao com a cena da fase carregada, abrindo e fechando ela so se ainda nao estava aberta.

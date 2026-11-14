@@ -55,7 +55,7 @@ public static class NewsImportFormat
     }
 
     // Lista de erros; vazia quando o arquivo pode ser aplicado.
-    public static List<string> Validate(FileDto file, ICollection<string> knownCards = null, ICollection<string> knownEvents = null)
+    public static List<string> Validate(FileDto file, ICollection<string> knownCards = null, ICollection<string> knownEvents = null, ICollection<string> knownTrades = null)
     {
         var errors = new List<string>();
         if (file == null || file.Stories == null || file.Stories.Length == 0)
@@ -105,26 +105,29 @@ public static class NewsImportFormat
             CheckLength(errors, id, "corpo", story.BodyPt, MaxBodyLength);
             CheckLength(errors, id, "corpo", story.BodyEn, MaxBodyLength);
             if (KnowledgeImportFormat.TryParse<NewsTrigger>(story.Trigger, out var parsedTrigger))
-                CheckTarget(errors, id, parsedTrigger, story.Target, knownCards, knownEvents);
+                CheckTarget(errors, id, parsedTrigger, story.Target, knownCards, knownEvents, knownTrades);
         }
         ValidateColumns(errors, file.Columns, ids);
         return errors;
     }
 
-    private static void CheckTarget(List<string> errors, string id, NewsTrigger trigger, string target, ICollection<string> knownCards, ICollection<string> knownEvents)
+    private static void CheckTarget(List<string> errors, string id, NewsTrigger trigger, string target, ICollection<string> knownCards, ICollection<string> knownEvents,
+        ICollection<string> knownTrades)
     {
         if (NewsRules.UsesTarget(trigger) == false)
         {
             if (string.IsNullOrEmpty(target) == false)
-                errors.Add($"{id}: {trigger} nao cita carta nem evento.");
+                errors.Add($"{id}: {trigger} nao cita carta, evento nem troca.");
             return;
         }
         if (string.IsNullOrEmpty(target))
         {
-            errors.Add($"{id}: {trigger} precisa citar uma carta ou evento.");
+            errors.Add($"{id}: {trigger} precisa citar uma carta, evento ou troca.");
             return;
         }
-        var known = trigger == NewsTrigger.CardPlayed ? knownCards : knownEvents;
+        var known = trigger == NewsTrigger.CardPlayed ? knownCards
+            : trigger == NewsTrigger.TradeAccepted ? knownTrades
+            : knownEvents;
         if (known != null && known.Contains(target) == false)
             errors.Add($"{id}: alvo desconhecido '{target}'.");
     }

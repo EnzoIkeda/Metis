@@ -80,6 +80,7 @@ public static class DilemmaSimulation
             Preset = setup.Preset,
             LoadedCardIds = setup.LoadedCardIds,
             LoadedAdvantageIds = setup.LoadedAdvantageIds,
+            AcceptedTradeIds = setup.AcceptedTradeIds,
             HandSizeOverride = setup.HandSizeOverride,
             VictoryTurnCountOverride = setup.VictoryTurnCountOverride,
             FiniteDeck = setup.FiniteDeck,

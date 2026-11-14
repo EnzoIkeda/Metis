@@ -42,6 +42,9 @@ public interface ICardDefinition
 
     // Quantas vezes a carta entra no baralho.
     int Copies { get; }
+
+    // Fica fora de todo baralho e das recompensas: so entra por troca do mapa.
+    bool IsExtraOnly { get; }
 }
 
 public static class CardRules

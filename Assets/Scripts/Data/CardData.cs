@@ -15,6 +15,9 @@ public class CardData : ScriptableObject, ICardDefinition
     [SerializeField] private StatModifier[] _statEffects;
     [SerializeField] private CardAbility _ability;
     [SerializeField, Min(1)] private int _copies = 1;
+
+    // Carta que nenhum baralho nem recompensa traz; entra so por troca do mapa.
+    [SerializeField] private bool _isExtraOnly;
     [SerializeField] private StructureData _structureToPlace;
 
     // Arte opcional da carta, mostrada no espaco reservado de imagem quando definida.
@@ -51,6 +54,8 @@ public class CardData : ScriptableObject, ICardDefinition
     public CardAbility Ability => _ability;
 
     public int Copies => _copies;
+
+    public bool IsExtraOnly => _isExtraOnly;
 
     public StructureData StructureToPlace => _structureToPlace;
 

@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b593341a6a94daa2bbfa7fb056d897af, type: 3}
+  m_Name: Troca_DadosBigTech
+  m_EditorClassIdentifier: Metis.Runtime::TradeOfferData
+  _offerName: Dados por infraestrutura
+  _offerNameEn: Data for infrastructure
+  _summary: "Uma grande empresa de tecnologia oferece sensores e internet de gra\xE7a.
+    Em troca, fica com os dados da cidade e imp\xF5e os pr\xF3prios termos de uso."
+  _summaryEn: A big tech company offers free sensors and internet. In return, it
+    keeps the city's data and imposes its own terms of use.
+  _knowledgeEntry: {fileID: 11400000, guid: 4ab5f9bb4c811d5a8a6df425ca732337, type: 2}
+  _benefit:
+    Kind: 0
+    Effects:
+    - Parameter: 8
+      Amount: 6
+    - Parameter: 4
+      Amount: 6
+    Amount: 0
+    CardId: 
+  _drawback:
+    Kind: 3
+    Effects: []
+    Amount: 0
+    CardId: CardTermosDeUso

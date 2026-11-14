@@ -68,7 +68,7 @@ public static class ModelReportLiveData
         }
 
         var tiers = (CardTier[])Enum.GetValues(typeof(CardTier));
-        numbers.TierCounts = tiers.Select(tier => data.Cards.Count(card => card.Tier == tier.ToString())).ToArray();
+        numbers.TierCounts = tiers.Select(tier => data.Cards.Count(card => card.ExtraOnly == false && card.Tier == tier.ToString())).ToArray();
         return numbers;
     }
 }

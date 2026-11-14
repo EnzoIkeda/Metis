@@ -78,6 +78,7 @@ public static class BalanceDataExporter
                 PlacesStructure = card.StructureToPlace != null,
                 Ability = card.Ability.ToString(),
                 Copies = card.Copies,
+                ExtraOnly = card.IsExtraOnly,
                 Effects = ToDtos(card.StatEffects),
             });
         }
@@ -130,7 +131,33 @@ public static class BalanceDataExporter
             }
         }
 
+        var trades = AssetDatabase.LoadAssetAtPath<TradeOfferLibraryData>(TradeOfferImporter.LibraryPath);
+        if (trades != null)
+        {
+            foreach (var offer in trades.Offers)
+            {
+                data.TradeOffers.Add(new BalanceDataFormat.TradeOfferDto
+                {
+                    Id = offer.name,
+                    Name = PortugueseText(offer, "_offerName"),
+                    Benefit = ToTermDto(offer.Benefit),
+                    Drawback = ToTermDto(offer.Drawback),
+                });
+            }
+        }
+
         return data;
+    }
+
+    private static BalanceDataFormat.TradeTermDto ToTermDto(TradeTerm term)
+    {
+        return new BalanceDataFormat.TradeTermDto
+        {
+            Kind = term.Kind.ToString(),
+            Effects = ToDtos(term.EffectsOrEmpty()),
+            Amount = term.Amount,
+            CardId = term.CardId ?? string.Empty,
+        };
     }
 
     // Texto em portugues direto do campo serializado, independente do idioma ativo no Editor.

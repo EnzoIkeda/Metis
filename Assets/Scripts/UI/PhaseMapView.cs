@@ -19,6 +19,8 @@ public class PhaseMapView : MonoBehaviour
     [SerializeField] private Sprite _themedPin;
     [SerializeField] private Sprite _unavailablePin;
     [SerializeField] private ThemedPhaseLibraryData _themes;
+    [SerializeField] private TradeOfferLibraryData _trades;
+    [SerializeField] private TradeOfferView _tradeView;
 
     private readonly List<PhaseMapNodeView> _nodes = new List<PhaseMapNodeView>();
 
@@ -34,6 +36,23 @@ public class PhaseMapView : MonoBehaviour
 
         var themeNames = _themes != null ? _themes.Names() : new List<string>();
         ShowNodes(MetaProgressionManager.GetMapOffer(themeNames, new System.Random()));
+        ShowTradeOffer();
+    }
+
+    // A proposta da parada aparece antes dos destinos; respondida, nao volta ao sair e entrar de novo.
+    private void ShowTradeOffer()
+    {
+        if (_trades == null || _tradeView == null)
+            return;
+        var offer = MetaProgressionManager.GetTradeOffer(_trades.Offers, new System.Random());
+        if (offer == null)
+            return;
+
+        AlmanacProgress.Unlock(offer.KnowledgeEntry);
+        var showTutorial = TutorialProgress.WasSeen(TutorialTip.Trade) == false;
+        if (showTutorial)
+            TutorialProgress.MarkSeen(TutorialTip.Trade);
+        _tradeView.Show(offer, showTutorial, (chosen, accepted) => MetaProgressionManager.DecideTrade(chosen.name, accepted));
     }
 
     public void ShowNodes(IReadOnlyList<PhaseMapNode> nodes)

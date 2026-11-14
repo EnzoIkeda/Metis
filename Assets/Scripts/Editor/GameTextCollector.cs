@@ -31,6 +31,9 @@ public static class GameTextCollector
             ("_opening", "_openingEn", "OpeningPt", "OpeningEn"),
             ("_victory", "_victoryEn", "VictoryPt", "VictoryEn"),
             ("_inspiration", "_inspirationEn", "InspirationPt", "InspirationEn"));
+        AddPairs(items, GameTextOrigin.Trade, "TradeOfferData", GameTextEditKind.Trade,
+            ("_offerName", "_offerNameEn", "NamePt", "NameEn"),
+            ("_summary", "_summaryEn", "SummaryPt", "SummaryEn"));
         AddStructures(items);
         AddKnowledgeSources(items);
         AddNestedPairs(items, GameTextOrigin.RelationNote, "InteractionNotesData", "_notes", "TextPt", "TextEn", "Reference");

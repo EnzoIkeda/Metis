@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Troca_IndustriaLicencaRapida
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Licen\xE7a ambiental por autodeclara\xE7\xE3o"
+  _titleEn: Self-declared environmental license
+  _category: 2
+  _unlockTrigger: 13
+  _summary: "Licenciar \xE9 o poder p\xFAblico conferir, antes da obra, se uma atividade
+    pode poluir e como evitar o dano. Na licen\xE7a por ades\xE3o e compromisso,
+    a empresa declara que cumpre as regras e a licen\xE7a sai sem an\xE1lise caso
+    a caso."
+  _summaryEn: Licensing means the government checks, before the works, whether an
+    activity may pollute and how to prevent harm. Under a license by adherence and
+    commitment, the company declares it follows the rules and the license is issued
+    without case-by-case review.
+  _realWorld: "A Lei Geral do Licenciamento Ambiental (Lei 15.190/2025) foi sancionada
+    com 63 vetos em agosto de 2025. Em novembro, o Congresso derrubou 52 deles e
+    devolveu a licen\xE7a por autodeclara\xE7\xE3o para atividades de m\xE9dio potencial
+    poluidor."
+  _realWorldEn: Brazil's General Environmental Licensing Law (Law 15,190/2025) was
+    signed with 63 vetoes in August 2025. In November, Congress overrode 52 of them
+    and restored self-declared licenses for activities with medium pollution potential.
+  _tradeOffs: "Licen\xE7a r\xE1pida atrai investimento e empregos, mas o dano que
+    ningu\xE9m conferiu aparece depois, na \xE1gua, no ar e na sa\xFAde."
+  _tradeOffsEn: A fast license attracts investment and jobs, but the harm no one
+    checked shows up later, in the water, the air and people's health.
+  _sources:
+  - Label: "CBIC, promulga\xE7\xE3o dos vetos derrubados (2025)"
+    Url: https://cbic.org.br/governo-promulga-vetos-derrubados-pelo-congresso-no-marco-legal-do-licenciamento-ambiental/
+  - Label: "C\xE2mara dos Deputados, Lei 15.190/2025"
+    Url: https://www2.camara.leg.br/legin/fed/lei/2025/lei-15190-8-agosto-2025-797833-promulgacaodevetos-177254-pl.html
+  _relatedEntries:
+  - {fileID: 11400000, guid: 2b192f000624e013aa9fad842858b5a7, type: 2}
+  _image: {fileID: 0}

@@ -28,6 +28,11 @@ public class CardHand<TCard> where TCard : class, ICardDefinition
 
     public event Action OnHandChanged;
 
+    // Ajuste das trocas aceitas no custo de toda carta; o custo cobrado nunca fica negativo.
+    public int CostOffset { get; set; }
+
+    public float CostOf(TCard card) => TradeOfferRules.EffectiveCost(card.Cost, CostOffset);
+
     // random e opcional, passar um com seed fixa deixa a compra reproduzivel.
     public CardHand(IReadOnlyList<TCard> pool, Random random = null, bool finiteDeck = false)
     {
@@ -98,7 +103,7 @@ public class CardHand<TCard> where TCard : class, ICardDefinition
         return card != null
             && _cards.Contains(card)
             && stats.GetValue(CityParameterType.Pesquisa) >= card.RequiredPesquisa
-            && stats.GetValue(CityParameterType.Renda) >= card.Cost;
+            && stats.GetValue(CityParameterType.Renda) >= CostOf(card);
     }
 
     // Joga uma carta da mao.
@@ -112,7 +117,7 @@ public class CardHand<TCard> where TCard : class, ICardDefinition
         var source = recorder != null ? recorder.CurrentSource : ContributionSource.Card;
         if (recorder != null)
             recorder.CurrentSource = ContributionSource.CardCost;
-        stats.ApplyModifier(new StatModifier { Parameter = CityParameterType.Renda, Amount = -card.Cost });
+        stats.ApplyModifier(new StatModifier { Parameter = CityParameterType.Renda, Amount = -CostOf(card) });
         if (recorder != null)
             recorder.CurrentSource = source;
         stats.ApplyModifiers(card.StatEffects);

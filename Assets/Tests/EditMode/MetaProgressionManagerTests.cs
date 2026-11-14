@@ -54,6 +54,44 @@ public class MetaProgressionManagerTests
     }
 
     [Test]
+    public void TradeOffer_AndTheAnswer_SurviveReloadingTheFile()
+    {
+        var offers = new[] { ScriptableObject.CreateInstance<TradeOfferData>(), ScriptableObject.CreateInstance<TradeOfferData>() };
+        offers[0].name = "Troca_A";
+        offers[1].name = "Troca_B";
+        try
+        {
+            var shown = MetaProgressionManager.GetTradeOffer(offers, new System.Random(1));
+            SetStaticField("_save", null);
+            Assert.That(MetaProgressionManager.GetTradeOffer(offers, new System.Random(2)), Is.SameAs(shown), "sair e voltar mostra a mesma proposta");
+
+            MetaProgressionManager.DecideTrade(shown.name, accepted: true);
+            SetStaticField("_save", null);
+
+            Assert.That(MetaProgressionManager.GetTradeOffer(offers, new System.Random(1)), Is.Null);
+            Assert.That(MetaProgressionManager.AcceptedTrades, Is.EqualTo(new[] { shown.name }));
+            Assert.That(MetaProgressionManager.ConsumePendingTradeNews(), Is.EqualTo(shown.name));
+            Assert.That(MetaProgressionManager.ConsumePendingTradeNews(), Is.Empty, "a noticia sai uma vez so");
+        }
+        finally
+        {
+            foreach (var offer in offers)
+                Object.DestroyImmediate(offer);
+        }
+    }
+
+    [Test]
+    public void OldSave_WithoutTradeFields_ReadsAsNoTrades()
+    {
+        var save = JsonUtility.FromJson<RunSaveData>("{\"Version\":1,\"Meta\":{\"PhasesCompleted\":1}}");
+
+        Assert.That(save.Meta.AcceptedTrades, Is.Empty);
+        Assert.That(save.Meta.OfferedTrades, Is.Empty);
+        Assert.That(save.TradeOffer, Is.Empty);
+        Assert.That(save.TradeOfferDecided, Is.False);
+    }
+
+    [Test]
     public void OldSave_WithoutDilemmaFields_LoadsWithNoChoiceAndNoFollowUp()
     {
         var phase = JsonUtility.FromJson<PhaseSaveData>("{\"TurnIndex\":3,\"History\":[{\"TurnIndex\":1,\"EventId\":\"Comum\"}]}");

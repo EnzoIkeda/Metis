@@ -43,7 +43,7 @@ public static class NewsStoryImporter
         var report = new Report();
         var file = JsonUtility.FromJson<NewsImportFormat.FileDto>(File.ReadAllText(jsonPath));
 
-        report.Errors.AddRange(NewsImportFormat.Validate(file, AssetNames("t:CardData"), AssetNames("t:RandomEventData")));
+        report.Errors.AddRange(NewsImportFormat.Validate(file, AssetNames("t:CardData"), AssetNames("t:RandomEventData"), AssetNames("t:TradeOfferData")));
         foreach (var error in report.Errors)
             Debug.LogError($"[Jornal] {error}");
         if (report.Errors.Count > 0)

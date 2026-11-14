@@ -16,6 +16,13 @@ public class MetaProgressionState
 
     // Cenario em jogo; vazio na rodada normal.
     public string ScenarioId = string.Empty;
+
+    // Trocas aceitas no mapa, que valem ate o fim da rodada, e todas as ja oferecidas, para nao repetir.
+    public List<string> AcceptedTrades = new List<string>();
+    public List<string> OfferedTrades = new List<string>();
+
+    // Troca aceita que a edicao de posse da proxima fase ainda vai noticiar.
+    public string PendingTradeNews = string.Empty;
 }
 
 [Serializable]
@@ -84,6 +91,10 @@ public class RunSaveData
     // Destinos sorteados na parada atual, para sair e voltar ao mapa mostrar os mesmos.
     public List<PhaseMapNode> MapOffer = new List<PhaseMapNode>();
 
+    // Oferta de troca da parada atual e se o jogador ja respondeu.
+    public string TradeOffer = string.Empty;
+    public bool TradeOfferDecided;
+
     public bool HasPhase;
     public PhaseSaveData Phase = new PhaseSaveData();
 }
@@ -127,6 +138,47 @@ public static class RunSaveRules
         if (themed && save.Meta.PlayedThemes.Contains(node.Id) == false)
             save.Meta.PlayedThemes.Add(node.Id);
         save.MapOffer.Clear();
+        save.TradeOffer = string.Empty;
+        save.TradeOfferDecided = false;
+    }
+
+    // Oferta de troca da parada, sorteada uma vez so; nula quando ja respondida ou quando nao sobrou nenhuma.
+    public static TOffer ResolveTradeOffer<TOffer>(RunSaveData save, IReadOnlyList<TOffer> offers, Random random)
+        where TOffer : class, ITradeOfferDefinition
+    {
+        if (save.TradeOfferDecided)
+            return null;
+
+        if (string.IsNullOrEmpty(save.TradeOffer) == false)
+        {
+            foreach (var offer in offers)
+            {
+                if (offer != null && offer.Id == save.TradeOffer)
+                    return offer;
+            }
+        }
+
+        var drawn = TradeOfferRules.Draw(offers, save.Meta.OfferedTrades, random);
+        save.TradeOffer = drawn != null ? drawn.Id : string.Empty;
+        if (drawn == null)
+        {
+            save.TradeOfferDecided = true;
+            return null;
+        }
+        if (save.Meta.OfferedTrades.Contains(drawn.Id) == false)
+            save.Meta.OfferedTrades.Add(drawn.Id);
+        return drawn;
+    }
+
+    // Resposta do jogador a oferta da parada; aceita, ela vale ate o fim da rodada e vira noticia na posse.
+    public static void ApplyTradeDecision(RunSaveData save, string offerId, bool accepted)
+    {
+        save.TradeOfferDecided = true;
+        if (accepted == false || string.IsNullOrEmpty(offerId))
+            return;
+        if (save.Meta.AcceptedTrades.Contains(offerId) == false)
+            save.Meta.AcceptedTrades.Add(offerId);
+        save.Meta.PendingTradeNews = offerId;
     }
 
     public static void CaptureHistory(PhaseSaveData phase, PhaseHistory history)

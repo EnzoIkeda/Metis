@@ -38,6 +38,9 @@ public sealed class SimulationOptions
     public string NewsPath { get; set; } = "";
     public int PhaseCount { get; set; } = 3;
     public int RewardRollouts { get; set; } = 40;
+
+    // Rodada sem a oferta de troca do mapa, para comparar com a rodada de antes da negociacao.
+    public bool NoTrades { get; set; }
     public int MctsIterations { get; set; } = new MctsOptions().Iterations;
     public double MctsExploration { get; set; } = new MctsOptions().Exploration;
 }
@@ -107,6 +110,11 @@ public static class SimulationRunner
         return playerPolicyName == "aleatoria" ? new RandomRewardPolicy() : new RolloutRewardPolicy(options.RewardRollouts);
     }
 
+    public static ITradePolicy CreateTradePolicy(string playerPolicyName, SimulationOptions options)
+    {
+        return playerPolicyName == "aleatoria" ? new RandomTradePolicy() : new RolloutTradePolicy(options.RewardRollouts);
+    }
+
     public static void RunRuns(SimulationOptions options, TextWriter log)
     {
         var data = BalanceData.Load(options.DataPath);
@@ -125,6 +133,7 @@ public static class SimulationRunner
         var parallel = new ParallelOptions { MaxDegreeOfParallelism = options.MaxThreads ?? Environment.ProcessorCount };
         var policies = jobs.Select(job => CreatePolicy(job.PolicyName, options)).ToList();
         var rewardPolicies = jobs.Select(job => CreateRewardPolicy(job.PolicyName, options)).ToList();
+        var tradePolicies = jobs.Select(job => options.NoTrades ? null : CreateTradePolicy(job.PolicyName, options)).ToList();
         Parallel.For(0, total, parallel, index =>
         {
             var jobIndex = index / options.GamesPerJob;
@@ -137,7 +146,7 @@ public static class SimulationRunner
                 HandSizeOverride = options.HandSize,
                 VictoryTurnCountOverride = options.VictoryTurnCount,
             };
-            results[index] = RunSimulator.Run(setup, policies[jobIndex], rewardPolicies[jobIndex], options.BaseSeed, index % options.GamesPerJob);
+            results[index] = RunSimulator.Run(setup, policies[jobIndex], rewardPolicies[jobIndex], options.BaseSeed, index % options.GamesPerJob, tradePolicies[jobIndex]);
 
             var finished = Interlocked.Increment(ref done);
             if (finished % Math.Max(1, total / 10) == 0)
@@ -147,7 +156,7 @@ public static class SimulationRunner
         Directory.CreateDirectory(options.OutputDirectory);
         using (var writer = new StreamWriter(Path.Combine(options.OutputDirectory, "runs.csv"), false, new UTF8Encoding(false)))
         {
-            writer.WriteLine("run_id,archetype,policy,reward_policy,run_index,phases_won,phase,preset,outcome,turns_played,offered_ids,chosen_id,chosen_redundant,redundant_offered");
+            writer.WriteLine("run_id,archetype,policy,reward_policy,run_index,phases_won,phase,preset,outcome,turns_played,offered_ids,chosen_id,chosen_redundant,redundant_offered,trade_offer,trade_accepted");
             for (int index = 0; index < results.Length; index++)
             {
                 var jobIndex = index / options.GamesPerJob;
@@ -169,6 +178,8 @@ public static class SimulationRunner
                         phase.ChosenId,
                         phase.ChosenWasRedundant ? "1" : "0",
                         phase.RedundantOffered.ToString(CultureInfo.InvariantCulture),
+                        phase.TradeOfferId,
+                        phase.TradeAccepted ? "1" : "0",
                     }));
                 }
             }
@@ -298,6 +309,7 @@ public static class SimulationRunner
             ["mode"] = options.Mode,
             ["phase_count"] = options.PhaseCount,
             ["reward_rollouts"] = options.RewardRollouts,
+            ["no_trades"] = options.NoTrades,
             ["mcts_iterations"] = options.MctsIterations,
             ["mcts_exploration"] = options.MctsExploration,
         };

@@ -329,6 +329,46 @@ public static class UIStrings
 
     public static string PhaseMapUnknownDescription => IsPt ? "Uma cidade sorteada, com problemas próprios." : "A random city with troubles of its own.";
 
+    // Tela da oferta de troca, na parada do mapa antes dos destinos.
+    public static string TradeHeader => IsPt ? "Proposta" : "Proposal";
+    public static string TradeBenefitHeader => IsPt ? "A cidade ganha" : "The city gets";
+    public static string TradeDrawbackHeader => IsPt ? "A cidade perde" : "The city gives up";
+    public static string TradeDuration => IsPt ? "Vale até o fim da rodada." : "Lasts until the end of the run.";
+    public static string TradeAccept => IsPt ? "Aceitar" : "Accept";
+    public static string TradeDecline => IsPt ? "Recusar" : "Decline";
+
+    // Um lado da troca em texto; cardName e o nome da carta acrescentada, quando houver.
+    public static string TradeTerm(TradeTerm term, string cardName)
+    {
+        switch (term.Kind)
+        {
+            case TradeTermKind.PhaseStartEffect:
+                return IsPt
+                    ? $"{EventChoiceEffects(term.EffectsOrEmpty())} no início de cada fase"
+                    : $"{EventChoiceEffects(term.EffectsOrEmpty())} at the start of each phase";
+            case TradeTermKind.CardCostOffset:
+                var cost = System.Math.Abs(term.Amount);
+                return IsPt
+                    ? $"Toda carta custa {cost} {ParameterIcon(CityParameterType.Renda)} {(term.Amount > 0 ? "a mais" : "a menos")}"
+                    : $"Every card costs {cost} {ParameterIcon(CityParameterType.Renda)} {(term.Amount > 0 ? "more" : "less")}";
+            case TradeTermKind.RewardOptionOffset:
+                var options = System.Math.Abs(term.Amount);
+                if (IsPt)
+                    return options == 1
+                        ? $"1 opção de recompensa {(term.Amount > 0 ? "a mais" : "a menos")} ao vencer uma fase"
+                        : $"{options} opções de recompensa {(term.Amount > 0 ? "a mais" : "a menos")} ao vencer uma fase";
+                return options == 1
+                    ? $"1 {(term.Amount > 0 ? "more" : "fewer")} reward option when you win a phase"
+                    : $"{options} {(term.Amount > 0 ? "more" : "fewer")} reward options when you win a phase";
+            case TradeTermKind.ExtraCard:
+                return IsPt
+                    ? $"A carta {cardName} entra no seu baralho e ocupa lugar na mão"
+                    : $"The card {cardName} joins your deck and takes up room in your hand";
+            default:
+                return string.Empty;
+        }
+    }
+
     public static string KnowledgeButton => IsPt ? "Saiba mais" : "Learn more";
     public static string KnowledgeSummaryHeader => IsPt ? "O que é" : "What it is";
     public static string KnowledgeRealWorldHeader => IsPt ? "Onde existe de verdade" : "In the real world";
@@ -702,6 +742,7 @@ public static class UIStrings
             case TutorialTip.Collapse: return IsPt ? "Colapso" : "Collapse";
             case TutorialTip.Tier: return IsPt ? "Novas tecnologias" : "New technologies";
             case TutorialTip.Newspaper: return IsPt ? "A Tribuna do Turno" : "The Turn Tribune";
+            case TutorialTip.Trade: return IsPt ? "Propostas" : "Proposals";
             default: return string.Empty;
         }
     }
@@ -742,6 +783,10 @@ public static class UIStrings
                 return IsPt
                     ? "O jornal da cidade comenta cada turno. O selo aceso no botão avisa que há uma edição nova."
                     : "The city's newspaper covers every turn. The lit badge on the button means there is a new edition.";
+            case TutorialTip.Trade:
+                return IsPt
+                    ? "Cada parada do mapa traz uma proposta. Aceitar dá uma vantagem e uma desvantagem até o fim da rodada; recusar não muda nada."
+                    : "Every map stop brings a proposal. Accepting gives an advantage and a drawback until the end of the run; declining changes nothing.";
             default:
                 return string.Empty;
         }

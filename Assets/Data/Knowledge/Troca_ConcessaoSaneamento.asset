@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Troca_ConcessaoSaneamento
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Concess\xE3o de servi\xE7o p\xFAblico"
+  _titleEn: Public service concession
+  _category: 2
+  _unlockTrigger: 13
+  _summary: "Na concess\xE3o, o poder p\xFAblico entrega a opera\xE7\xE3o de um servi\xE7o
+    a uma empresa por um prazo longo. A empresa investe e cobra tarifa; a prefeitura
+    ou o estado fiscaliza e cobra as metas do contrato."
+  _summaryEn: In a concession, the government hands the running of a service to a
+    company for a long term. The company invests and charges fees; the city or state
+    oversees it and enforces the contract's targets.
+  _realWorld: "Em 2021, a \xE1gua e o esgoto de 35 munic\xEDpios atendidos pela Cedae,
+    no Rio de Janeiro, foram leiloados em quatro blocos, com contratos de 35 anos.
+    Os blocos 1, 2 e 4 renderam cerca de R$ 22,7 bilh\xF5es em outorga."
+  _realWorldEn: In 2021, water and sewage in 35 municipalities served by Cedae, in
+    Rio de Janeiro, were auctioned in four blocks under 35-year contracts. Blocks
+    1, 2 and 4 raised about R$ 22.7 billion in concession fees.
+  _tradeOffs: "Contrato de d\xE9cadas \xE9 dif\xEDcil de rever: se a tarifa sobe
+    ou a meta n\xE3o sai, a cidade depende da fiscaliza\xE7\xE3o e da Justi\xE7a."
+  _tradeOffsEn: 'A decades-long contract is hard to revisit: if fees rise or targets
+    slip, the city depends on oversight and the courts.'
+  _sources:
+  - Label: "Reuters via Not\xEDcias Agr\xEDcolas, leil\xE3o da Cedae (2021)"
+    Url: https://www.noticiasagricolas.com.br/noticias/politica-economia/286784-aegea-e-igua-vencem-disputa-por-ativos-da-cedae-leilao-movimenta-r227-bi.amp.html
+  - Label: Lei 14.026/2020, Marco Legal do Saneamento
+    Url: https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14026.htm
+  _relatedEntries:
+  - {fileID: 11400000, guid: b054017a871e6ef47b006a016a55064c, type: 2}
+  - {fileID: 11400000, guid: 73dcd6e4dcd9079f283b5ab9dc70d596, type: 2}
+  _image: {fileID: 0}

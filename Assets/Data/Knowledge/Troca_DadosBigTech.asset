@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Troca_DadosBigTech
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Dados em troca de infraestrutura
+  _titleEn: Data in exchange for infrastructure
+  _category: 2
+  _unlockTrigger: 13
+  _summary: "Empresas de tecnologia oferecem sensores, c\xE2meras e internet a cidades
+    em troca do acesso aos dados que esses aparelhos coletam. A cidade ganha equipamento
+    sem pagar; a empresa ganha informa\xE7\xE3o sobre como as pessoas vivem e circulam."
+  _summaryEn: Tech companies offer cities sensors, cameras and internet in exchange
+    for access to the data those devices collect. The city gets equipment without
+    paying; the company gets information on how people live and move.
+  _realWorld: "Em Toronto, a Sidewalk Labs, do grupo do Google, planejou um bairro
+    cheio de sensores no projeto Quayside. Depois de anos de protesto e de uma a\xE7\xE3o
+    sobre privacidade, a empresa desistiu em maio de 2020."
+  _realWorldEn: In Toronto, Sidewalk Labs, part of Google's parent company, planned
+    a sensor-filled neighborhood called Quayside. After years of protests and a privacy
+    lawsuit, the company pulled out in May 2020.
+  _tradeOffs: "O equipamento sai de gra\xE7a, mas a cidade passa a depender da empresa
+    e perde o controle de quem usa os dados e para qu\xEA."
+  _tradeOffsEn: The equipment comes free, but the city grows dependent on the company
+    and loses control over who uses the data and for what.
+  _sources:
+  - Label: CBC, Sidewalk Labs cancela o projeto (2020)
+    Url: https://www.cbc.ca/news/canada/toronto/sidewalk-labs-cancels-project-1.5559370
+  - Label: Sidewalk Toronto (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Sidewalk_Toronto
+  _relatedEntries:
+  - {fileID: 11400000, guid: 3bb4c72dfbd0ad2a09251e50ca4524d6, type: 2}
+  - {fileID: 11400000, guid: 3da6fd19c7060e61fb03f48227ec3956, type: 2}
+  _image: {fileID: 0}

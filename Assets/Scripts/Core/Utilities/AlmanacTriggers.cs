@@ -27,7 +27,10 @@ public enum KnowledgeUnlockTrigger
     OpenChangeBreakdown,
 
     // Liberada ao jogar a fase tematica que aponta para a ficha.
-    ThemedPhase
+    ThemedPhase,
+
+    // Liberada quando a proposta de troca que aponta para a ficha aparece no mapa.
+    TradeOffer
 }
 
 // Regras de quais momentos do jogo desbloqueiam fichas de conceito. So leitura: nao muda nenhum numero.

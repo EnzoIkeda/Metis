@@ -59,7 +59,8 @@ public class CardView : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
         _pointerDown = false;
     }
 
-    public void Bind(CardData card, Action<CardData> onPlay, Action<CardData> onExpand, bool isPlayable, bool isRevealed = false)
+    // cost e o custo cobrado com as trocas da rodada; sem ele, o custo impresso na carta.
+    public void Bind(CardData card, Action<CardData> onPlay, Action<CardData> onExpand, bool isPlayable, bool isRevealed = false, float? cost = null)
     {
         _card = card;
         _onPlay = onPlay;
@@ -88,7 +89,7 @@ public class CardView : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
 
         if (_requirementsText != null)
         {
-            _requirementsText.text = UIStrings.CardRequirementsShort(_displayData, card.RequiredPesquisa, card.Cost);
+            _requirementsText.text = UIStrings.CardRequirementsShort(_displayData, card.RequiredPesquisa, cost ?? card.Cost);
             // Fica vermelho se a carta nao puder ser jogada agora, so como aviso visual antecipado.
             _requirementsText.color = isPlayable ? PlayableColor : UnplayableColor;
         }

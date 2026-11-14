@@ -12,7 +12,10 @@ public enum TutorialTip
     Crisis,
     Collapse,
     Tier,
-    Newspaper
+    Newspaper,
+
+    // Mostrada na propria tela da proposta, no mapa, e nao no balao da cidade.
+    Trade
 }
 
 // Retrato do que a dica precisa saber sobre a fase.

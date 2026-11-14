@@ -270,7 +270,7 @@ public class NewspaperView : MonoBehaviour
         return NewsEditor.FillMarker(column.Text, "{valor}", value);
     }
 
-    // Ficha da primeira carta ou evento citado na edicao.
+    // Ficha da primeira carta, evento ou troca citada na edicao.
     private KnowledgeEntryData TargetEntry(NewsEdition edition)
     {
         if (_turnManager == null)
@@ -291,6 +291,14 @@ public class NewspaperView : MonoBehaviour
                 {
                     if (randomEvent != null && randomEvent.name == item.TargetId)
                         return randomEvent.KnowledgeEntry;
+                }
+            }
+            else if (item.Trigger == NewsTrigger.TradeAccepted)
+            {
+                foreach (var trade in _turnManager.AcceptedTrades)
+                {
+                    if (trade != null && trade.name == item.TargetId)
+                        return trade.KnowledgeEntry;
                 }
             }
         }

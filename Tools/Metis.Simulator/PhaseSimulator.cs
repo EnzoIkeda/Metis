@@ -13,6 +13,9 @@ public sealed class PhaseSetup
     public IReadOnlyList<string> LoadedCardIds { get; init; } = Array.Empty<string>();
     public IReadOnlyList<string> LoadedAdvantageIds { get; init; } = Array.Empty<string>();
 
+    // Trocas aceitas no mapa, na ordem em que foram aceitas.
+    public IReadOnlyList<string> AcceptedTradeIds { get; init; } = Array.Empty<string>();
+
     // Sobrescrevem as regras exportadas, pra varrer alavancas sem reexportar.
     public int? HandSizeOverride { get; init; }
     public int? VictoryTurnCountOverride { get; init; }
@@ -101,6 +104,37 @@ public static class PhaseSimulator
 {
     public static readonly CityParameterType[] Parameters = (CityParameterType[])Enum.GetValues(typeof(CityParameterType));
 
+    // Troca que muda o custo das cartas: copias com o custo ja ajustado, para toda politica enxergar o custo cobrado.
+    // O jogo cobra o mesmo valor pela mao, com a mesma conta.
+    public static List<SimCard> WithCostOffset(List<SimCard> deck, int offset)
+    {
+        if (offset == 0)
+            return deck;
+        var copies = new Dictionary<SimCard, SimCard>();
+        return deck.Select(card =>
+        {
+            if (copies.TryGetValue(card, out var copy) == false)
+            {
+                copy = new SimCard
+                {
+                    Id = card.Id,
+                    Name = card.Name,
+                    Cost = TradeOfferRules.EffectiveCost(card.Cost, offset),
+                    Tier = card.Tier,
+                    Archetype = card.Archetype,
+                    RequiredPesquisa = card.RequiredPesquisa,
+                    PlacesStructure = card.PlacesStructure,
+                    StatEffects = card.StatEffects,
+                    Ability = card.Ability,
+                    Copies = card.Copies,
+                    IsExtraOnly = card.IsExtraOnly,
+                };
+                copies[card] = copy;
+            }
+            return copy;
+        }).ToList();
+    }
+
     // Mesma ordem do jogo: vantagens carregadas, mao comprada no inicio do turno, jogada, resolucao, evento, checagem de fim.
     // history, quando passado, recebe o mesmo registro que o relatorio de fim de fase usa no jogo.
     public static GameRecord Run(PhaseSetup setup, IPlayerPolicy policy, GameSeeds seeds, PhaseHistory history = null)
@@ -114,8 +148,12 @@ public static class PhaseSimulator
                 stats.ApplyModifiers(advantage.StatEffects);
         }
 
+        var trades = TradeOfferRules.Resolve(data.TradeOffers, setup.AcceptedTradeIds);
+        TradeOfferRules.ApplyPhaseStart(trades, stats);
+
         var machine = new TurnMachine(stats, setup.VictoryTurnCount);
-        var deck = DeckBuilder.Build(data.Cards, setup.Archetype, setup.LoadedCardIds);
+        var deck = WithCostOffset(DeckBuilder.Build(data.Cards, setup.Archetype, setup.LoadedCardIds, TradeOfferRules.ExtraCardIds(trades)),
+            TradeOfferRules.CardCostOffset(trades));
         var hand = new CardHand<SimCard>(deck, new Random(seeds.Hand), setup.FiniteDeck);
         var eventPool = CityPresetRules.AllowedEvents(data.Events, setup.Preset?.AllowedEventIds as IReadOnlyCollection<string>);
         var events = new RandomEventPool<SimEvent>(eventPool, new Random(seeds.Events), data.Events, null, setup.VictoryTurnCount);

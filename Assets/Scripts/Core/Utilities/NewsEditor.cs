@@ -18,6 +18,9 @@ public enum NewsTrigger
     TrendDown,
     CardPlayed,
     EventHappened,
+
+    // Troca aceita no mapa, noticiada na edicao de posse da fase seguinte.
+    TradeAccepted,
 }
 
 // Tipo de texto curto fora das noticias. So acrescentar valores no fim.
@@ -164,10 +167,10 @@ public sealed class NewsRules
         return trigger == NewsTrigger.TrendUp || trigger == NewsTrigger.TrendDown;
     }
 
-    // Noticia ligada a uma carta ou evento especifico.
+    // Noticia ligada a uma carta, evento ou troca especifica.
     public static bool UsesTarget(NewsTrigger trigger)
     {
-        return trigger == NewsTrigger.CardPlayed || trigger == NewsTrigger.EventHappened;
+        return trigger == NewsTrigger.CardPlayed || trigger == NewsTrigger.EventHappened || trigger == NewsTrigger.TradeAccepted;
     }
 
     // O que precisa sair mesmo sem texto novo: o alerta forte e a edicao sem nenhum outro assunto.
@@ -530,14 +533,21 @@ public static class NewsEditor
         return edition;
     }
 
-    // Edicao de posse, antes do primeiro turno.
-    public static NewsEdition Inauguration<TStory>(IReadOnlyList<TStory> stories, Random random, float wellbeing)
+    // Edicao de posse, antes do primeiro turno; tradeId e a troca aceita no mapa logo antes, que vira nota.
+    public static NewsEdition Inauguration<TStory>(IReadOnlyList<TStory> stories, Random random, float wellbeing, string tradeId = null)
         where TStory : class, INewsStoryDefinition
     {
         var edition = new NewsEdition { TurnIndex = 0, Wellbeing = wellbeing };
         var story = Pick(stories, NewsTrigger.Inauguration, default, null, new HashSet<string>(), edition, random);
         if (story != null)
             edition.Items.Add(new NewsItem { StoryId = story.Id, Trigger = NewsTrigger.Inauguration, Parameter = CityStats.AnchorParameter, Value = wellbeing });
+
+        if (string.IsNullOrEmpty(tradeId) == false)
+        {
+            var trade = Pick(stories, NewsTrigger.TradeAccepted, default, tradeId, new HashSet<string>(), edition, random);
+            if (trade != null)
+                edition.Items.Add(new NewsItem { StoryId = trade.Id, Trigger = NewsTrigger.TradeAccepted, Parameter = CityStats.AnchorParameter, Value = wellbeing, TargetId = tradeId });
+        }
         return edition;
     }
 

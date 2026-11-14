@@ -17,6 +17,7 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private CityEffectsController _effects;
     [SerializeField] private PhaseBackgroundRandomizer _background;
     [SerializeField] private ScenarioLibraryData _scenarios;
+    [SerializeField] private TradeOfferLibraryData _trades;
     [SerializeField, Min(1)] private int _handSize = 5;
     [SerializeField, Min(1)] private int _victoryTurnCount = TurnMachine.DefaultVictoryTurnCount;
 
@@ -70,6 +71,11 @@ public class TurnManager : MonoBehaviour
     // Cenario em jogo; nulo na rodada normal.
     public ScenarioData Scenario { get; private set; }
 
+    // Trocas aceitas no mapa nesta rodada, que valem ate o fim dela.
+    public IReadOnlyList<TradeOfferData> AcceptedTrades => _trades != null
+        ? _trades.Accepted(MetaProgressionManager.AcceptedTrades)
+        : new List<TradeOfferData>();
+
     // Todas as vantagens passivas cadastradas, exposto pro popup de recompensa sortear opcoes.
     public IReadOnlyList<PassiveAdvantageData> AdvantagePool => _advantagePool;
 
@@ -117,8 +123,10 @@ public class TurnManager : MonoBehaviour
             savedPhase = null;
             _restoredEvent = null;
             ApplyLoadedAdvantages();
+            var trades = AcceptedTrades;
+            TradeOfferRules.ApplyPhaseStart(trades, _cityStatsManager.Stats);
 
-            var pool = DeckBuilder.Build(_cardPool, MetaProgressionManager.Archetype, MetaProgressionManager.LoadedCardNames);
+            var pool = DeckBuilder.Build(_cardPool, MetaProgressionManager.Archetype, MetaProgressionManager.LoadedCardNames, TradeOfferRules.ExtraCardIds(trades));
             _handRandom = new SeededRandom(SeededRandom.NewSeed());
             // Baralho sempre finito: compra sem reposicao e reembaralha o baralho inteiro quando acaba.
             Hand = new CardHand<CardData>(pool, _handRandom, finiteDeck: true);
@@ -128,6 +136,7 @@ public class TurnManager : MonoBehaviour
             News = new NewsArchive(SeededRandom.NewSeed());
         }
 
+        Hand.CostOffset = TradeOfferRules.CardCostOffset(AcceptedTrades);
         Hand.OnHandChanged += HandleHandChanged;
         var theme = Theme;
         _events = new RandomEventPool<RandomEventData>(CityPresetRules.AllowedEvents(_eventPool, theme != null ? theme.AllowedEventIds as IReadOnlyCollection<string> : null), _eventRandom, _eventPool,
@@ -233,7 +242,10 @@ public class TurnManager : MonoBehaviour
         }
 
         var rules = ScoreRules.FromCards(_cityStatsManager.ParameterConfigs, _cardPool.Where(card => card != null));
-        return new TurnEvaluator(_cityStatsManager.Stats.Clone(), rules, id => cardsById.TryGetValue(id, out var card) ? card : null);
+        return new TurnEvaluator(_cityStatsManager.Stats.Clone(), rules, id => cardsById.TryGetValue(id, out var card) ? card : null)
+        {
+            CostOffset = Hand != null ? Hand.CostOffset : 0,
+        };
     }
 
     // Cartas comuns que dava pra jogar agora, as alternativas que o relatorio compara com a jogada.

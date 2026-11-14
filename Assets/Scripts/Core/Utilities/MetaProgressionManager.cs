@@ -48,6 +48,8 @@ public static class MetaProgressionManager
 
     public static string CurrentTheme => State.CurrentTheme;
 
+    public static IReadOnlyList<string> AcceptedTrades => State.AcceptedTrades;
+
     // A primeira fase de uma rodada usa a cidade e os parametros calibrados fixos; da segunda em diante e semialeatorio.
     // Cenario tem cidade propria desde o comeco, com o tracado da semente dele.
     public static bool IsNewPhase => State.PhasesCompleted > 0 || string.IsNullOrEmpty(State.ScenarioId) == false;
@@ -112,6 +114,32 @@ public static class MetaProgressionManager
         Save.MapOffer = PhaseMapProvider.ResolveOffer(Save.MapOffer, themeNames, State.PlayedThemes, random);
         Write();
         return Save.MapOffer;
+    }
+
+    // Oferta de troca da parada atual, sorteada uma vez so; nula quando ja respondida.
+    public static TOffer GetTradeOffer<TOffer>(IReadOnlyList<TOffer> offers, System.Random random)
+        where TOffer : class, ITradeOfferDefinition
+    {
+        var offer = RunSaveRules.ResolveTradeOffer(Save, offers, random);
+        Write();
+        return offer;
+    }
+
+    public static void DecideTrade(string offerId, bool accepted)
+    {
+        RunSaveRules.ApplyTradeDecision(Save, offerId, accepted);
+        Write();
+    }
+
+    // Troca aceita ainda nao noticiada; a edicao de posse le uma vez e limpa.
+    public static string ConsumePendingTradeNews()
+    {
+        var id = State.PendingTradeNews;
+        if (string.IsNullOrEmpty(id))
+            return string.Empty;
+        State.PendingTradeNews = string.Empty;
+        Write();
+        return id;
     }
 
     public static void ChooseMapNode(PhaseMapNode node)

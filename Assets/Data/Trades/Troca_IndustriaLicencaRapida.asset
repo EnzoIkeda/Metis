@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b593341a6a94daa2bbfa7fb056d897af, type: 3}
+  m_Name: Troca_IndustriaLicencaRapida
+  m_EditorClassIdentifier: Metis.Runtime::TradeOfferData
+  _offerName: "Ind\xFAstria com licen\xE7a r\xE1pida"
+  _offerNameEn: Fast-track factory
+  _summary: "Uma ind\xFAstria se instala com licen\xE7a ambiental por autodeclara\xE7\xE3o
+    e, em troca, banca obras da cidade. A conta das obras cai; a polui\xE7\xE3o sobe
+    sem quem fiscalize de perto."
+  _summaryEn: A factory moves in with a self-declared environmental license and,
+    in return, pays for city works. Works get cheaper; pollution rises with no one
+    watching closely.
+  _knowledgeEntry: {fileID: 11400000, guid: f5d8d6ed6f8a2697e8e20359753ad316, type: 2}
+  _benefit:
+    Kind: 1
+    Effects: []
+    Amount: -1
+    CardId: 
+  _drawback:
+    Kind: 0
+    Effects:
+    - Parameter: 5
+      Amount: -8
+    - Parameter: 7
+      Amount: -4
+    Amount: 0
+    CardId: 

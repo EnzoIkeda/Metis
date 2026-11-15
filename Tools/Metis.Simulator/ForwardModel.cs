@@ -5,13 +5,19 @@ namespace Metis.Simulator;
 // Avanco de turno sem a maquina de turno, pra quem planeja simular futuros a partir de qualquer turno da fase.
 public static class ForwardModel
 {
-    // Mesma ordem do jogo a partir da fase de acao: carta (ou nenhuma), resolucao, evento, checagem de fim.
-    // chooseOption responde os dilemas que sairem no caminho.
+    // Mesma ordem do jogo a partir da fase de acao: carta (ou nenhuma), chefe, resolucao, evento, checagem de fim.
+    // chooseOption responde os dilemas que sairem no caminho; boss, quando passado, e alterado (passar uma copia).
+    // hand recebe o que a jogada do chefe muda no baralho do jogador (cartas extras e custo).
     public static GameOutcome StepTurn(CityStats stats, SimCard card, int turnIndex, int victoryTurnCount, RandomEventPool<SimEvent> events,
-        Func<CityStats, SimEvent, int> chooseOption = null)
+        Func<CityStats, SimEvent, int> chooseOption = null, BossEncounter boss = null, CardHand<SimCard> hand = null, SimCard bossExtraCard = null)
     {
         if (card != null)
-            PolicyHelpers.ApplyCard(stats, card);
+            PolicyHelpers.ApplyCard(stats, card, boss?.CardCostOffset ?? 0);
+        if (boss != null)
+        {
+            var played = boss.PlayTurn(stats);
+            BossRules.ApplyToHand(boss, played, hand, bossExtraCard, 0);
+        }
 
         return Resolve(stats, turnIndex, victoryTurnCount, events, chooseOption);
     }
@@ -25,12 +31,12 @@ public static class ForwardModel
 
     // Acao livre simplificada: paga o custo e segue com a melhor carta comum pela politica equilibrada.
     public static GameOutcome StepTurnWithAbilities(CityStats stats, SimCard card, CardHand<SimCard> hand, int turnIndex, int victoryTurnCount,
-        RandomEventPool<SimEvent> events, BalanceData data, Func<CityStats, SimEvent, int> chooseOption = null)
+        RandomEventPool<SimEvent> events, BalanceData data, Func<CityStats, SimEvent, int> chooseOption = null, BossEncounter boss = null, SimCard bossExtraCard = null)
     {
         if (card == null || CardRules.IsFreeAction(card) == false)
-            return StepTurn(stats, card, turnIndex, victoryTurnCount, events, chooseOption);
+            return StepTurn(stats, card, turnIndex, victoryTurnCount, events, chooseOption, boss, hand, bossExtraCard);
 
-        PolicyHelpers.ApplyCard(stats, card);
+        PolicyHelpers.ApplyCard(stats, card, boss?.CardCostOffset ?? 0);
         var options = card.Ability == CardAbility.SearchDeck
             ? hand.SearchCandidates(stats)
             : hand.Cards.Where(other => CardRules.IsFreeAction(other) == false && hand.CanPlay(other, stats)).ToList();
@@ -39,9 +45,9 @@ public static class ForwardModel
         if (options.Count > 0)
         {
             var weights = BalancedPolicy.BuildWeights(stats, data);
-            follow = options.OrderByDescending(option => BalancedPolicy.Score(option, weights)).First();
+            follow = options.OrderByDescending(option => BalancedPolicy.Score(option, weights, boss?.CardCostOffset ?? 0)).First();
         }
-        return StepTurn(stats, follow, turnIndex, victoryTurnCount, events, chooseOption);
+        return StepTurn(stats, follow, turnIndex, victoryTurnCount, events, chooseOption, boss, hand, bossExtraCard);
     }
 
     private static GameOutcome Resolve(CityStats stats, int turnIndex, int victoryTurnCount, RandomEventPool<SimEvent> events, Func<CityStats, SimEvent, int> chooseOption)

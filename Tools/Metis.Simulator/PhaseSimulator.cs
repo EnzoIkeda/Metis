@@ -29,6 +29,9 @@ public sealed class PhaseSetup
     // Opcao imposta por dilema, pra medir cada opcao nas mesmas sementes.
     public IReadOnlyDictionary<string, int> ForcedChoices { get; init; }
 
+    // Chefe da fase; nulo numa fase comum.
+    public SimBoss Boss { get; init; }
+
     public int HandSize => HandSizeOverride ?? Data.Rules.HandSize;
     public int VictoryTurnCount => VictoryTurnCountOverride ?? Data.Rules.VictoryTurnCount;
 }
@@ -39,12 +42,14 @@ public readonly struct GameSeeds
     public int Hand { get; }
     public int Events { get; }
     public int Policy { get; }
+    public int Boss { get; }
 
     public GameSeeds(int baseSeed, int gameIndex)
     {
         Hand = Derive(baseSeed, gameIndex, 1);
         Events = Derive(baseSeed, gameIndex, 2);
         Policy = Derive(baseSeed, gameIndex, 3);
+        Boss = Derive(baseSeed, gameIndex, 4);
     }
 
     // Mistura estilo SplitMix64, sementes vizinhas viram sementes sem correlacao.
@@ -81,6 +86,9 @@ public sealed class TurnRecord
 
     // Opcao escolhida no dilema do turno; -1 quando nao houve escolha.
     public int EventChoice { get; init; } = -1;
+
+    // Carta jogada pelo chefe; vazia quando ele so acumulou Impeto ou fora da fase do chefe.
+    public string BossCardId { get; init; } = "";
 
     // Estado no fim do turno, depois do evento, que e o que a checagem de derrota enxerga.
     public float[] Values { get; init; } = Array.Empty<float>();
@@ -151,9 +159,12 @@ public static class PhaseSimulator
         var trades = TradeOfferRules.Resolve(data.TradeOffers, setup.AcceptedTradeIds);
         TradeOfferRules.ApplyPhaseStart(trades, stats);
 
-        var machine = new TurnMachine(stats, setup.VictoryTurnCount);
+        var boss = setup.Boss != null ? new BossEncounter(setup.Boss, new Random(seeds.Boss)) : null;
+        var machine = new TurnMachine(stats, setup.VictoryTurnCount, boss != null);
+        var tradeCostOffset = TradeOfferRules.CardCostOffset(trades);
         var deck = WithCostOffset(DeckBuilder.Build(data.Cards, setup.Archetype, setup.LoadedCardIds, TradeOfferRules.ExtraCardIds(trades)),
-            TradeOfferRules.CardCostOffset(trades));
+            tradeCostOffset);
+        var bossExtraCard = BossExtraCard(data, setup.Boss, tradeCostOffset);
         var hand = new CardHand<SimCard>(deck, new Random(seeds.Hand), setup.FiniteDeck);
         var eventPool = CityPresetRules.AllowedEvents(data.Events, setup.Preset?.AllowedEventIds as IReadOnlyCollection<string>);
         var events = new RandomEventPool<SimEvent>(eventPool, new Random(seeds.Events), data.Events, null, setup.VictoryTurnCount);
@@ -205,6 +216,9 @@ public static class PhaseSimulator
                 HandCards = hand.Cards.ToList(),
                 AllEvents = data.Events,
                 Schedule = events.Schedule,
+                Boss = boss,
+                CostOffset = hand.CostOffset,
+                BossExtraCard = bossExtraCard,
             };
 
             // Acoes livres podem vir antes da jogada do turno; o laco termina quando uma carta comum e jogada ou nada mais e jogavel.
@@ -246,6 +260,16 @@ public static class PhaseSimulator
             if (history != null && cardId.Length == 0)
                 history.RecordPlay(turn, "", stats, null);
             machine.EndActionPhase();
+            var bossCardId = "";
+            if (boss != null)
+            {
+                var before = history != null ? PhaseHistory.Snapshot(stats) : null;
+                var bossCard = boss.PlayTurn(stats);
+                BossRules.ApplyToHand(boss, bossCard, hand, bossExtraCard, 0);
+                bossCardId = bossCard?.Id ?? "";
+                history?.RecordBoss(turn, bossCardId, before);
+                machine.AcknowledgeBoss();
+            }
             var triggered = events.TryTriggerEvent(stats, turn);
             history?.RecordEvent(turn, triggered?.Id);
             var eventChoice = -1;
@@ -276,6 +300,7 @@ public static class PhaseSimulator
                 SearchedIds = searched,
                 EventId = triggered?.Id ?? "",
                 EventChoice = eventChoice,
+                BossCardId = bossCardId,
                 Values = values,
                 Collapsed = stats.CountCollapsedParameters(),
             });
@@ -291,6 +316,15 @@ public static class PhaseSimulator
             TierReachedTurn = tierReached,
             FinalAnchorBonus = stats.AnchorBonus,
         };
+    }
+
+    // Carta que o chefe poe no baralho, com o custo das trocas como as outras; nula fora das cartas extras.
+    public static SimCard BossExtraCard(BalanceData data, IBossDefinition boss, int tradeCostOffset)
+    {
+        if (boss == null || boss.Mechanic != BossMechanic.ExtraCards)
+            return null;
+        var card = data.Cards.FirstOrDefault(candidate => candidate.Id == boss.MechanicCardId);
+        return card != null ? WithCostOffset(new List<SimCard> { card }, tradeCostOffset)[0] : null;
     }
 
     // Mesma regra do jogo: carta precisa estar liberada e paga, e busca sem nada pra trazer nao conta como jogavel.

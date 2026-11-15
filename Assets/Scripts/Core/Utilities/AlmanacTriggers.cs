@@ -30,7 +30,10 @@ public enum KnowledgeUnlockTrigger
     ThemedPhase,
 
     // Liberada quando a proposta de troca que aponta para a ficha aparece no mapa.
-    TradeOffer
+    TradeOffer,
+
+    // Liberada no comeco da fase do chefe que aponta para a ficha.
+    Boss
 }
 
 // Regras de quais momentos do jogo desbloqueiam fichas de conceito. So leitura: nao muda nenhum numero.

@@ -34,6 +34,7 @@ public class GameTextWindow : EditorWindow
         { GameTextOrigin.Theme, "Fases temáticas" },
         { GameTextOrigin.Dilemma, "Dilemas" },
         { GameTextOrigin.Trade, "Negociação" },
+        { GameTextOrigin.Boss, "Chefes" },
     };
 
     private static readonly Dictionary<GameTextIssue, string> IssueNames = new Dictionary<GameTextIssue, string>

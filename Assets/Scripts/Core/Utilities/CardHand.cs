@@ -28,8 +28,20 @@ public class CardHand<TCard> where TCard : class, ICardDefinition
 
     public event Action OnHandChanged;
 
-    // Ajuste das trocas aceitas no custo de toda carta; o custo cobrado nunca fica negativo.
-    public int CostOffset { get; set; }
+    private int _costOffset;
+
+    // Soma das trocas e do chefe ao custo de toda carta; o custo cobrado nunca fica negativo. Mudar avisa a mao.
+    public int CostOffset
+    {
+        get => _costOffset;
+        set
+        {
+            if (_costOffset == value)
+                return;
+            _costOffset = value;
+            OnHandChanged?.Invoke();
+        }
+    }
 
     public float CostOf(TCard card) => TradeOfferRules.EffectiveCost(card.Cost, CostOffset);
 
@@ -176,6 +188,31 @@ public class CardHand<TCard> where TCard : class, ICardDefinition
         _cards.Add(card);
         OnHandChanged?.Invoke();
         return true;
+    }
+
+    // Poe copias de uma carta em posicoes sorteadas da pilha de compra; so com baralho finito.
+    public void InsertIntoDrawPile(TCard card, int count)
+    {
+        if (card == null || count <= 0 || _finiteDeck == false)
+            return;
+        for (var i = 0; i < count; i++)
+            _drawPile.Insert(_random.Next(_drawPile.Count + 1), card);
+        OnHandChanged?.Invoke();
+    }
+
+    // Quantas copias da carta estao na mao e nas pilhas.
+    public int CountInDeck(TCard card)
+    {
+        var count = 0;
+        foreach (var list in new[] { _cards, _drawPile, _discardPile })
+        {
+            foreach (var other in list)
+            {
+                if (other == card)
+                    count++;
+            }
+        }
+        return count;
     }
 
     private int DrawWithReplacement(int count, CityStats stats)

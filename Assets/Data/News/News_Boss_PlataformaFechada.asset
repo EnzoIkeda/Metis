@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Boss_PlataformaFechada
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 15
+  _parameter: 0
+  _targetId: BigTech_PlataformaFechada
+  _headline: "Sistema da cidade n\xE3o abre sem a senha da empresa"
+  _headlineEn: City system won't open without the company's password
+  _body: "Para mudar a cor do sem\xE1foro, a prefeitura agora abre um chamado e espera
+    a resposta do suporte."
+  _bodyEn: To change a traffic light color, City Hall now opens a ticket and waits
+    for support.

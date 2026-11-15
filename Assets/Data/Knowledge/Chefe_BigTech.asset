@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Chefe_BigTech
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Cidades inteligentes e dados dos moradores
+  _titleEn: Smart cities and residents' data
+  _category: 2
+  _unlockTrigger: 14
+  _summary: "Empresas de tecnologia oferecem sensores, aplicativos e plataformas
+    para administrar a cidade. Em troca, ficam com os dados de quem mora nela, sob
+    termos de uso que quase ningu\xE9m l\xEA. O pesquisador Ben Green defende uma
+    cidade inteligente o bastante, que usa tecnologia s\xF3 onde ela resolve um problema
+    real."
+  _summaryEn: Tech companies offer sensors, apps and platforms to run the city. In
+    return, they keep the data of the people who live there, under terms of service
+    almost nobody reads. Researcher Ben Green argues for a smart enough city, one
+    that uses technology only where it solves a real problem.
+  _realWorld: "Em Toronto, a Sidewalk Labs, empresa do mesmo grupo do Google, planejou
+    o bairro de Quayside cheio de sensores. Em outubro de 2018, Ann Cavoukian, ex-comiss\xE1ria
+    de privacidade de Ont\xE1rio, deixou o projeto porque a anonimiza\xE7\xE3o dos
+    dados seria s\xF3 incentivada, n\xE3o exigida. Em maio de 2020, a empresa desistiu."
+  _realWorldEn: In Toronto, Sidewalk Labs, a sister company of Google, planned the
+    Quayside district full of sensors. In October 2018, Ann Cavoukian, Ontario's
+    former privacy commissioner, left the project because anonymizing the data would
+    only be encouraged, not required. In May 2020, the company pulled out.
+  _tradeOffs: "A parceria traz investimento e servi\xE7os novos sem custo imediato
+    para a prefeitura. O pre\xE7o aparece depois: depend\xEAncia de um fornecedor,
+    perda de controle sobre os dados e decis\xF5es p\xFAblicas tomadas por uma empresa."
+  _tradeOffsEn: 'The partnership brings investment and new services at no upfront
+    cost to City Hall. The price shows up later: dependence on one vendor, loss of
+    control over the data and public decisions made by a company.'
+  _sources:
+  - Label: The Globe and Mail, Privacy expert Ann Cavoukian resigns from Sidewalk
+      Toronto (2018)
+    Url: https://theglobeandmail.com/business/article-privacy-expert-ann-cavoukian-resigns-from-sidewalk-toronto-smart-city/
+  - Label: Osgoode Hall Law School (IPOsgoode), Sidewalk Labs withdraws from Quayside
+      development project (2020)
+    Url: https://www.yorku.ca/osgoode/iposgoode/2020/05/21/sidewalk-labs-withdraws-from-quayside-development-project/
+  - Label: New Books Network, Ben Green, The Smart Enough City (MIT Press, 2019)
+    Url: https://newbooksnetwork.com/ben-green-the-smart-enough-city-putting-technology-in-its-place-to-reclaim-our-urban-future-mit-press-2019
+  _relatedEntries:
+  - {fileID: 11400000, guid: 6d6097358666b495990301d3df8cebe7, type: 2}
+  - {fileID: 11400000, guid: 4450a7aac01ec1ce6a7eb616fdd26afe, type: 2}
+  - {fileID: 11400000, guid: a16497e74769f0066b65644f094d7002, type: 2}
+  _image: {fileID: 0}

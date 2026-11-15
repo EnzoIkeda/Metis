@@ -50,6 +50,9 @@ public static class MetaProgressionManager
 
     public static IReadOnlyList<string> AcceptedTrades => State.AcceptedTrades;
 
+    // Chefe da fase em andamento; vazio fora da fase do chefe.
+    public static string CurrentBoss => State.CurrentBoss;
+
     // A primeira fase de uma rodada usa a cidade e os parametros calibrados fixos; da segunda em diante e semialeatorio.
     // Cenario tem cidade propria desde o comeco, com o tracado da semente dele.
     public static bool IsNewPhase => State.PhasesCompleted > 0 || string.IsNullOrEmpty(State.ScenarioId) == false;
@@ -108,10 +111,11 @@ public static class MetaProgressionManager
         Write();
     }
 
-    // Destinos da parada atual, sorteados uma vez so.
-    public static IReadOnlyList<PhaseMapNode> GetMapOffer(IReadOnlyList<string> themeNames, System.Random random)
+    // Destinos da parada atual, sorteados uma vez so; depois da ultima fase, so o chefe do baralho, se houver.
+    public static IReadOnlyList<PhaseMapNode> GetMapOffer(IReadOnlyList<string> themeNames, System.Random random, string bossId = null)
     {
-        Save.MapOffer = PhaseMapProvider.ResolveOffer(Save.MapOffer, themeNames, State.PlayedThemes, random);
+        var boss = State.PhasesCompleted + 1 >= BossRules.PhasesBeforeBoss ? bossId : null;
+        Save.MapOffer = PhaseMapProvider.ResolveOffer(Save.MapOffer, themeNames, State.PlayedThemes, random, boss);
         Write();
         return Save.MapOffer;
     }

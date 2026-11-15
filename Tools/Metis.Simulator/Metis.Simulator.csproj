@@ -27,6 +27,8 @@
     <Compile Include="../../Assets/Scripts/Core/Utilities/CityPresetRules.cs" Link="Game/CityPresetRules.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/RewardOptionPicker.cs" Link="Game/RewardOptionPicker.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/TradeOfferRules.cs" Link="Game/TradeOfferRules.cs" />
+    <Compile Include="../../Assets/Scripts/Data/IBossDefinition.cs" Link="Game/IBossDefinition.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/BossEncounter.cs" Link="Game/BossEncounter.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/StateScore.cs" Link="Game/StateScore.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/PhaseReport.cs" Link="Game/PhaseReport.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/PhaseHistory.cs" Link="Game/PhaseHistory.cs" />

@@ -41,6 +41,12 @@ public sealed class SimulationOptions
 
     // Rodada sem a oferta de troca do mapa, para comparar com a rodada de antes da negociacao.
     public bool NoTrades { get; set; }
+
+    // Rodada sem a fase do chefe, para comparar com a rodada de antes dos chefes.
+    public bool NoBoss { get; set; }
+
+    // Modo "fase": cada baralho joga contra o proprio chefe; baralho sem chefe fica de fora.
+    public bool BossPhase { get; set; }
     public int MctsIterations { get; set; } = new MctsOptions().Iterations;
     public double MctsExploration { get; set; } = new MctsOptions().Exploration;
 }
@@ -81,6 +87,9 @@ public static class SimulationRunner
             foreach (var archetypeName in options.Archetypes)
             {
                 var archetype = Enum.Parse<CardArchetype>(archetypeName);
+                var boss = options.BossPhase ? BossRules.ForArchetype(data.Bosses, archetype) : null;
+                if (options.BossPhase && boss == null)
+                    continue;
                 foreach (var policyName in options.Policies)
                 {
                     jobs.Add(new SimulationJob
@@ -96,6 +105,7 @@ public static class SimulationRunner
                             VictoryTurnCountOverride = options.VictoryTurnCount,
                             FiniteDeck = options.FiniteDeck,
                             PermanentReveal = options.PermanentReveal,
+                            Boss = boss,
                         },
                     });
                 }
@@ -142,6 +152,7 @@ public static class SimulationRunner
                 Data = data,
                 Archetype = jobs[jobIndex].Archetype,
                 PhaseCount = options.PhaseCount,
+                IncludeBoss = options.NoBoss == false,
                 FiniteDeck = options.FiniteDeck,
                 HandSizeOverride = options.HandSize,
                 VictoryTurnCountOverride = options.VictoryTurnCount,
@@ -156,7 +167,7 @@ public static class SimulationRunner
         Directory.CreateDirectory(options.OutputDirectory);
         using (var writer = new StreamWriter(Path.Combine(options.OutputDirectory, "runs.csv"), false, new UTF8Encoding(false)))
         {
-            writer.WriteLine("run_id,archetype,policy,reward_policy,run_index,phases_won,phase,preset,outcome,turns_played,offered_ids,chosen_id,chosen_redundant,redundant_offered,trade_offer,trade_accepted");
+            writer.WriteLine("run_id,archetype,policy,reward_policy,run_index,phases_won,phase,preset,outcome,turns_played,offered_ids,chosen_id,chosen_redundant,redundant_offered,trade_offer,trade_accepted,boss_id,is_boss,beat_boss");
             for (int index = 0; index < results.Length; index++)
             {
                 var jobIndex = index / options.GamesPerJob;
@@ -180,6 +191,9 @@ public static class SimulationRunner
                         phase.RedundantOffered.ToString(CultureInfo.InvariantCulture),
                         phase.TradeOfferId,
                         phase.TradeAccepted ? "1" : "0",
+                        results[index].BossId,
+                        phase.IsBoss ? "1" : "0",
+                        results[index].BeatBoss ? "1" : "0",
                     }));
                 }
             }
@@ -265,6 +279,7 @@ public static class SimulationRunner
         var header = new List<string> { "game_id", "turn", "card_id", "playable_count", "playable_ids", "free_actions", "searched", "event_id" };
         header.AddRange(PhaseSimulator.Parameters.Select(parameter => parameter.ToString()));
         header.Add("collapsed");
+        header.Add("boss_card_id");
         writer.WriteLine(string.Join(',', header));
 
         for (int index = 0; index < results.Length; index++)
@@ -284,6 +299,7 @@ public static class SimulationRunner
                 };
                 row.AddRange(turn.Values.Select(Format));
                 row.Add(turn.Collapsed.ToString(CultureInfo.InvariantCulture));
+                row.Add(turn.BossCardId);
                 writer.WriteLine(string.Join(',', row));
             }
         }
@@ -310,6 +326,8 @@ public static class SimulationRunner
             ["phase_count"] = options.PhaseCount,
             ["reward_rollouts"] = options.RewardRollouts,
             ["no_trades"] = options.NoTrades,
+            ["no_boss"] = options.NoBoss,
+            ["boss_phase"] = options.BossPhase,
             ["mcts_iterations"] = options.MctsIterations,
             ["mcts_exploration"] = options.MctsExploration,
         };

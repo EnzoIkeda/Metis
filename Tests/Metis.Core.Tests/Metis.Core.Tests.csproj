@@ -52,6 +52,8 @@
     <Compile Include="../../Assets/Scripts/Core/Utilities/CityPresetRules.cs" Link="Source/CityPresetRules.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/RewardOptionPicker.cs" Link="Source/RewardOptionPicker.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/TradeOfferRules.cs" Link="Source/TradeOfferRules.cs" />
+    <Compile Include="../../Assets/Scripts/Data/IBossDefinition.cs" Link="Source/IBossDefinition.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/BossEncounter.cs" Link="Source/BossEncounter.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/SeededRandom.cs" Link="Source/SeededRandom.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/RunSaveData.cs" Link="Source/RunSaveData.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/RunSaveFile.cs" Link="Source/RunSaveFile.cs" />
@@ -67,6 +69,7 @@
     <Compile Include="../../Assets/Scripts/Editor/DilemmaImportFormat.cs" Link="Source/DilemmaImportFormat.cs" />
     <Compile Include="../../Assets/Scripts/Editor/ScenarioImportFormat.cs" Link="Source/ScenarioImportFormat.cs" />
     <Compile Include="../../Assets/Scripts/Editor/TradeOfferImportFormat.cs" Link="Source/TradeOfferImportFormat.cs" />
+    <Compile Include="../../Assets/Scripts/Editor/BossImportFormat.cs" Link="Source/BossImportFormat.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/ScenarioObjectiveEvaluator.cs" Link="Source/ScenarioObjectiveEvaluator.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/SessionMode.cs" Link="Source/SessionMode.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/ModelReport.cs" Link="Source/ModelReport.cs" />

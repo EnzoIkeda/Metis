@@ -146,6 +146,28 @@ public static class BalanceDataExporter
             }
         }
 
+        var bosses = AssetDatabase.LoadAssetAtPath<BossLibraryData>(BossImporter.LibraryPath);
+        if (bosses != null)
+        {
+            foreach (var boss in bosses.Bosses)
+            {
+                var dto = new BalanceDataFormat.BossDto
+                {
+                    Id = boss.name,
+                    Name = PortugueseText(boss, "_bossName"),
+                    TargetArchetype = boss.TargetArchetype.ToString(),
+                    StartingMomentum = boss.StartingMomentum,
+                    MomentumPerTurn = boss.MomentumPerTurn,
+                    Mechanic = boss.Mechanic.ToString(),
+                    MechanicAmount = boss.MechanicAmount,
+                    MechanicCardId = boss.MechanicCardId,
+                };
+                foreach (var card in boss.BossCards)
+                    dto.Cards.Add(new BalanceDataFormat.BossCardDto { Id = card.Id, MomentumCost = card.MomentumCost, Effects = ToDtos(card.Effects) });
+                data.Bosses.Add(dto);
+            }
+        }
+
         return data;
     }
 

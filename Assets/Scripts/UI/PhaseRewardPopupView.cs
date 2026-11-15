@@ -50,8 +50,8 @@ public class PhaseRewardPopupView : MonoBehaviour
 
     private void HandleGameEnded(GameOutcome outcome)
     {
-        // Cenario volta para a selecao, sem recompensa nem mapa.
-        if (outcome != GameOutcome.Victory || SessionMode.IsScenario)
+        // Cenario volta para a selecao e o chefe encerra a rodada, sem recompensa nem mapa.
+        if (outcome != GameOutcome.Victory || SessionMode.IsScenario || _turnManager.Boss != null)
             return;
 
         _currentOptions = DrawOptions();

@@ -149,6 +149,9 @@ public sealed class RunSetup
     public BalanceData Data { get; init; } = null!;
     public CardArchetype Archetype { get; init; }
     public int PhaseCount { get; init; } = 3;
+
+    // Depois das fases, a fase do chefe do baralho, quando ele tem chefe.
+    public bool IncludeBoss { get; init; } = true;
     public bool FiniteDeck { get; init; }
     public int? HandSizeOverride { get; init; }
     public int? VictoryTurnCountOverride { get; init; }
@@ -157,6 +160,9 @@ public sealed class RunSetup
 public sealed class PhaseRunRecord
 {
     public int Phase { get; init; }
+
+    // Fase contra o chefe, depois das fases comuns.
+    public bool IsBoss { get; init; }
     public string PresetId { get; init; } = "";
     public GameRecord Game { get; init; } = null!;
     public IReadOnlyList<string> OfferedIds { get; init; } = Array.Empty<string>();
@@ -174,6 +180,11 @@ public sealed class PhaseRunRecord
 public sealed class RunRecord
 {
     public int PhasesWon { get; init; }
+
+    // Chefe do baralho, vazio sem chefe; chegou e venceu.
+    public string BossId { get; init; } = "";
+    public bool ReachedBoss { get; init; }
+    public bool BeatBoss { get; init; }
     public IReadOnlyList<PhaseRunRecord> Phases { get; init; } = Array.Empty<PhaseRunRecord>();
 }
 
@@ -207,12 +218,20 @@ public static class RunSimulator
         var phases = new List<PhaseRunRecord>();
         var playedThemes = new List<string>();
         var won = 0;
+        var boss = setup.IncludeBoss ? BossRules.ForArchetype(data.Bosses, setup.Archetype) : null;
+        var totalPhases = setup.PhaseCount + (boss != null ? 1 : 0);
+        var reachedBoss = false;
+        var beatBoss = false;
 
-        for (int phase = 1; phase <= setup.PhaseCount; phase++)
+        for (int phase = 1; phase <= totalPhases; phase++)
         {
+            var isBoss = boss != null && phase == totalPhases;
             SimPreset preset = null;
-            if (phase > 1)
+            if (isBoss)
+                preset = data.Presets.Count > 0 ? data.Presets[runRandom.Next(data.Presets.Count)] : null;
+            else if (phase > 1)
                 preset = DrawDestination(data, playedThemes, runRandom);
+            reachedBoss |= isBoss;
 
             var phaseSetup = new PhaseSetup
             {
@@ -225,17 +244,26 @@ public static class RunSimulator
                 FiniteDeck = setup.FiniteDeck,
                 HandSizeOverride = setup.HandSizeOverride,
                 VictoryTurnCountOverride = setup.VictoryTurnCountOverride,
+                Boss = isBoss ? boss : null,
             };
             var game = PhaseSimulator.Run(phaseSetup, policy, new GameSeeds(baseSeed, runIndex * 16 + phase));
             var presetId = preset?.Id ?? SimulationRunner.BaseSetupName;
 
             if (game.Outcome != GameOutcome.Victory)
             {
-                phases.Add(new PhaseRunRecord { Phase = phase, PresetId = presetId, Game = game });
+                phases.Add(new PhaseRunRecord { Phase = phase, IsBoss = isBoss, PresetId = presetId, Game = game });
                 break;
             }
 
             won++;
+
+            // Vencer o chefe encerra a rodada, sem recompensa.
+            if (isBoss)
+            {
+                beatBoss = true;
+                phases.Add(new PhaseRunRecord { Phase = phase, IsBoss = true, PresetId = presetId, Game = game });
+                break;
+            }
             var trades = TradeOfferRules.Resolve(data.TradeOffers, acceptedTrades);
             var deck = DeckBuilder.Build(data.Cards, setup.Archetype, loadedCards, TradeOfferRules.ExtraCardIds(trades));
             var options = DrawOptions(data, deck, loadedAdvantages, runRandom, TradeOfferRules.RewardOptionCount(data.Rules.RewardOptionCount, trades));
@@ -243,7 +271,7 @@ public static class RunSimulator
             // Parada do mapa antes da proxima fase: uma oferta de troca, como no jogo.
             string tradeId = "";
             var tradeAccepted = false;
-            if (phase < setup.PhaseCount && tradePolicy != null)
+            if (phase < totalPhases && tradePolicy != null)
             {
                 var offer = TradeOfferRules.Draw(data.TradeOffers, offeredTrades, tradeRandom);
                 if (offer != null)
@@ -300,7 +328,7 @@ public static class RunSimulator
             });
         }
 
-        return new RunRecord { PhasesWon = won, Phases = phases };
+        return new RunRecord { PhasesWon = won, Phases = phases, BossId = boss?.Id ?? "", ReachedBoss = reachedBoss, BeatBoss = beatBoss };
     }
 
     private static bool DecideTrade(string tradeId, ITradePolicy tradePolicy, RunSetup setup, List<string> loadedCards, List<string> loadedAdvantages,

@@ -23,6 +23,9 @@ public class MetaProgressionState
 
     // Troca aceita que a edicao de posse da proxima fase ainda vai noticiar.
     public string PendingTradeNews = string.Empty;
+
+    // Chefe da fase em andamento; vazio fora da fase do chefe.
+    public string CurrentBoss = string.Empty;
 }
 
 [Serializable]
@@ -73,6 +76,17 @@ public class PhaseSaveData
     public ulong NewsSeed;
     public List<NewsEdition> NewsEditions = new List<NewsEdition>();
     public int NewsLastReadTurn = -1;
+
+    // Chefe da fase: Impeto, cartas ja jogadas, pilhas, gerador e a jogada com o popup aberto.
+    public bool HasBoss;
+    public int BossMomentum;
+    public int BossCardsPlayed;
+    public string BossNext = string.Empty;
+    public List<string> BossDrawPile = new List<string>();
+    public List<string> BossDiscardPile = new List<string>();
+    public ulong BossRandomState;
+    public bool AtBoss;
+    public string PendingBossCardId = string.Empty;
 }
 
 // Arquivo de save inteiro: meta-progressao e, quando houver, a fase em andamento.
@@ -135,6 +149,7 @@ public static class RunSaveRules
     {
         var themed = node.Type == PhaseMapNodeType.Themed;
         save.Meta.CurrentTheme = themed ? node.Id : string.Empty;
+        save.Meta.CurrentBoss = node.Type == PhaseMapNodeType.Boss ? node.Id : string.Empty;
         if (themed && save.Meta.PlayedThemes.Contains(node.Id) == false)
             save.Meta.PlayedThemes.Add(node.Id);
         save.MapOffer.Clear();
@@ -179,6 +194,63 @@ public static class RunSaveRules
         if (save.Meta.AcceptedTrades.Contains(offerId) == false)
             save.Meta.AcceptedTrades.Add(offerId);
         save.Meta.PendingTradeNews = offerId;
+    }
+
+    // Guarda o chefe da fase; pendingCardId e a jogada com o popup aberto, ja aplicada.
+    public static void CaptureBoss(PhaseSaveData phase, BossEncounter boss, SeededRandom bossRandom, string pendingCardId)
+    {
+        phase.HasBoss = boss != null;
+        if (boss == null)
+            return;
+        phase.BossMomentum = boss.Momentum;
+        phase.BossCardsPlayed = boss.CardsPlayed;
+        phase.BossNext = boss.Next != null ? boss.Next.Id : string.Empty;
+        phase.BossDrawPile = new List<string>();
+        phase.BossDiscardPile = new List<string>();
+        foreach (var card in boss.Deck.DrawPile)
+            phase.BossDrawPile.Add(card.Id);
+        foreach (var card in boss.Deck.DiscardPile)
+            phase.BossDiscardPile.Add(card.Id);
+        phase.BossRandomState = bossRandom != null ? bossRandom.State : 0UL;
+        phase.AtBoss = string.IsNullOrEmpty(pendingCardId) == false;
+        phase.PendingBossCardId = pendingCardId ?? string.Empty;
+    }
+
+    // Falha quando alguma carta salva nao existe mais no chefe.
+    public static bool TryRestoreBoss(PhaseSaveData phase, IBossDefinition definition, out BossEncounter boss, out SeededRandom bossRandom)
+    {
+        boss = null;
+        bossRandom = null;
+        if (phase.HasBoss == false || definition == null)
+            return false;
+
+        if (TryResolveBossCards(definition, phase.BossDrawPile, out var drawPile) == false
+            || TryResolveBossCards(definition, phase.BossDiscardPile, out var discardPile) == false)
+            return false;
+        var next = BossRules.FindCard(definition, phase.BossNext);
+        if (string.IsNullOrEmpty(phase.BossNext) == false && next == null)
+            return false;
+        if (phase.AtBoss && BossRules.FindCard(definition, phase.PendingBossCardId) == null)
+            return false;
+
+        bossRandom = new SeededRandom(phase.BossRandomState);
+        boss = BossEncounter.FromState(definition, BossDeck.FromState(next, drawPile, discardPile, bossRandom), phase.BossMomentum, phase.BossCardsPlayed);
+        return true;
+    }
+
+    private static bool TryResolveBossCards(IBossDefinition definition, IEnumerable<string> ids, out List<IBossCardDefinition> cards)
+    {
+        cards = new List<IBossCardDefinition>();
+        if (ids == null)
+            return true;
+        foreach (var id in ids)
+        {
+            var card = BossRules.FindCard(definition, id);
+            if (card == null)
+                return false;
+            cards.Add(card);
+        }
+        return true;
     }
 
     public static void CaptureHistory(PhaseSaveData phase, PhaseHistory history)

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Boss_TorneirasSecas
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 15
+  _parameter: 0
+  _targetId: Enchente_TorneirasSecas
+  _headline: "\xC1gua por todo lado, mas nenhuma na torneira"
+  _headlineEn: Water everywhere, but none in the tap
+  _body: "As esta\xE7\xF5es de tratamento alagaram e a prefeitura pede economia.
+    Em 2024, 4 das 6 esta\xE7\xF5es de Porto Alegre pararam."
+  _bodyEn: The treatment plants flooded and City Hall asks residents to save water.
+    In 2024, 4 of Porto Alegre's 6 plants stopped.

@@ -293,6 +293,10 @@ public class NewspaperView : MonoBehaviour
                         return randomEvent.KnowledgeEntry;
                 }
             }
+            else if (item.Trigger == NewsTrigger.BossCardPlayed && _turnManager.BossDefinition != null)
+            {
+                return _turnManager.BossDefinition.KnowledgeEntry;
+            }
             else if (item.Trigger == NewsTrigger.TradeAccepted)
             {
                 foreach (var trade in _turnManager.AcceptedTrades)

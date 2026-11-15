@@ -21,6 +21,9 @@ public enum NewsTrigger
 
     // Troca aceita no mapa, noticiada na edicao de posse da fase seguinte.
     TradeAccepted,
+
+    // Carta jogada pelo chefe de fim de rodada.
+    BossCardPlayed,
 }
 
 // Tipo de texto curto fora das noticias. So acrescentar valores no fim.
@@ -170,7 +173,8 @@ public sealed class NewsRules
     // Noticia ligada a uma carta, evento ou troca especifica.
     public static bool UsesTarget(NewsTrigger trigger)
     {
-        return trigger == NewsTrigger.CardPlayed || trigger == NewsTrigger.EventHappened || trigger == NewsTrigger.TradeAccepted;
+        return trigger == NewsTrigger.CardPlayed || trigger == NewsTrigger.EventHappened || trigger == NewsTrigger.TradeAccepted
+            || trigger == NewsTrigger.BossCardPlayed;
     }
 
     // O que precisa sair mesmo sem texto novo: o alerta forte e a edicao sem nenhum outro assunto.
@@ -265,6 +269,7 @@ public sealed class NewsRules
             case NewsTrigger.LeftCollapse: return 85;
             case NewsTrigger.ResearchTier: return 80;
             case NewsTrigger.EnteredCrisis: return 70;
+            case NewsTrigger.BossCardPlayed: return 60;
             case NewsTrigger.SharpDrop: return 55;
             case NewsTrigger.SharpRise: return 50;
             case NewsTrigger.EnteredExcess: return 45;
@@ -456,7 +461,8 @@ public static class NewsEditor
     }
 
     // Tudo o que pode virar noticia no turno: sinais do turno, tendencias de parametros ainda sem sinal, evento e carta.
-    public static List<NewsSignal> BuildSignals(IReadOnlyList<float[]> snapshots, NewsRules rules, IReadOnlyList<NewsEdition> previous, string cardId, string eventId, IReadOnlyList<string> freeActionIds = null)
+    public static List<NewsSignal> BuildSignals(IReadOnlyList<float[]> snapshots, NewsRules rules, IReadOnlyList<NewsEdition> previous, string cardId, string eventId, IReadOnlyList<string> freeActionIds = null,
+        string bossCardId = null)
     {
         var count = snapshots != null ? snapshots.Count : 0;
         var signals = count >= 2 ? DetectSignals(snapshots[count - 2], snapshots[count - 1], rules) : new List<NewsSignal>();
@@ -465,6 +471,8 @@ public static class NewsEditor
             if (signals.Exists(signal => NewsRules.UsesParameter(signal.Trigger) && signal.Parameter == trend.Parameter) == false)
                 signals.Add(trend);
         }
+        if (string.IsNullOrEmpty(bossCardId) == false)
+            signals.Add(new NewsSignal { Trigger = NewsTrigger.BossCardPlayed, Priority = NewsRules.BasePriority(NewsTrigger.BossCardPlayed), TargetId = bossCardId });
         if (string.IsNullOrEmpty(eventId) == false)
             signals.Add(new NewsSignal { Trigger = NewsTrigger.EventHappened, Priority = NewsRules.BasePriority(NewsTrigger.EventHappened), TargetId = eventId });
         if (string.IsNullOrEmpty(cardId) == false)
@@ -524,7 +532,7 @@ public static class NewsEditor
         where TColumn : class, INewsColumnDefinition
     {
         var snapshots = RecentSnapshots(history.StartValues, history.Turns, turn);
-        var signals = BuildSignals(snapshots, rules, archive.Editions, turn.CardId, turn.EventId, turn.FreeActionIds);
+        var signals = BuildSignals(snapshots, rules, archive.Editions, turn.CardId, turn.EventId, turn.FreeActionIds, turn.BossCardId);
         var before = snapshots.Count >= 2 ? snapshots[snapshots.Count - 2] : null;
         var wellbeing = turn.GetEnd(CityStats.AnchorParameter);
         var wellbeingDelta = before != null && before.Length == PhaseHistory.Parameters.Length ? wellbeing - PhaseHistory.Read(before, CityStats.AnchorParameter) : 0f;

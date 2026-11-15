@@ -23,6 +23,8 @@ public static class UIStrings
 
     public static string VictoryTitle => IsPt ? "Vitória!" : "Victory!";
 
+    public static string RunVictoryTitle => IsPt ? "Rodada vencida!" : "Run complete!";
+
     public static string VictoryMessage => IsPt
         ? "Você governou com sucesso por 20 turnos, parabéns!"
         : "You successfully governed for 20 turns, congratulations!";
@@ -153,6 +155,7 @@ public static class UIStrings
                 ? $"Colapso de {collapsedCount} parâmetro(s)"
                 : $"Collapse of {collapsedCount} parameter(s)";
             case ContributionSource.Clamp: return IsPt ? "Limite da escala" : "Scale limit";
+            case ContributionSource.Boss: return IsPt ? "Ataque do desafio final" : "Final challenge attack";
             default: return source.ToString();
         }
     }
@@ -328,6 +331,81 @@ public static class UIStrings
     public static string PhaseMapUnknownTitle => IsPt ? "Cidade desconhecida" : "Unknown city";
 
     public static string PhaseMapUnknownDescription => IsPt ? "Uma cidade sorteada, com problemas próprios." : "A random city with troubles of its own.";
+
+    public static string PhaseMapBossTitle(string bossName) => IsPt ? $"Desafio final: {bossName}" : $"Final challenge: {bossName}";
+
+    // Chefe de fim de rodada, no HUD e no popup da jogada dele.
+    public static string BossMomentumLabel => IsPt ? "Ímpeto" : "Momentum";
+
+    public static string BossMomentumValue(int momentum, int cost) => $"{momentum}/{cost}";
+
+    public static string BossNextCard(string cardName) => IsPt ? $"Próxima: {cardName}" : $"Next: {cardName}";
+
+    public static string BossPlaysThisTurn => IsPt ? "Ataca neste turno" : "Strikes this turn";
+
+    public static string BossCharging(int turns) => IsPt
+        ? (turns == 1 ? "Ataca no próximo turno" : $"Ataca em {turns} turnos")
+        : (turns == 1 ? "Strikes next turn" : $"Strikes in {turns} turns");
+
+    public static string BossPlayedTitle(string bossName) => IsPt ? $"{bossName} ataca" : $"{bossName} strikes";
+
+    public static string BossGrowingDamage(float factor) => IsPt
+        ? $"Dano aumentado: ×{factor:0.0#}"
+        : $"Increased damage: ×{factor:0.0#}";
+
+    // Linha da regra especial no HUD.
+    public static string BossMechanicStatus(BossMechanic mechanic, float factor, int extraCards, int costOffset)
+    {
+        switch (mechanic)
+        {
+            case BossMechanic.GrowingDamage:
+                return IsPt ? $"Dano ×{factor:0.0#}" : $"Damage ×{factor:0.0#}";
+            case BossMechanic.CascadeSpread:
+                return IsPt ? "Apagão se espalha" : "Blackout spreads";
+            case BossMechanic.ExtraCards:
+                return IsPt ? $"Termos no baralho: {extraCards}" : $"Terms in deck: {extraCards}";
+            case BossMechanic.CostIncrease:
+                return IsPt ? $"Custo das cartas +{costOffset}" : $"Card cost +{costOffset}";
+            default:
+                return string.Empty;
+        }
+    }
+
+    // Regra especial explicada no popup da carta do chefe.
+    public static string BossMechanicRule(BossMechanic mechanic, int extraCards, string extraCardName)
+    {
+        switch (mechanic)
+        {
+            case BossMechanic.GrowingDamage:
+                return IsPt ? "Cada ataque deixa o próximo mais forte." : "Each strike makes the next one stronger.";
+            case BossMechanic.CascadeSpread:
+                return IsPt
+                    ? "A falta de Energia se espalha na hora para quem depende dela: Renda, População, Pesquisa e Mobilidade."
+                    : "The Energy loss spreads at once to what depends on it: Income, Population, Research and Mobility.";
+            case BossMechanic.ExtraCards:
+                return IsPt
+                    ? $"Cada ataque põe {extraCards} cartas {extraCardName} no seu baralho."
+                    : $"Each strike puts {extraCards} {extraCardName} cards in your deck.";
+            case BossMechanic.CostIncrease:
+                return IsPt
+                    ? "Os ataques deixam suas cartas mais caras até o fim da fase."
+                    : "The strikes make your cards more expensive until the end of the phase.";
+            default:
+                return string.Empty;
+        }
+    }
+
+    public static string BossExtraCardsAdded(int count, string cardName) => IsPt
+        ? $"+{count} {cardName} no seu baralho"
+        : $"+{count} {cardName} in your deck";
+
+    public static string BossCostIncreased(int offset) => IsPt
+        ? $"Suas cartas custam +{offset} até o fim da fase"
+        : $"Your cards cost +{offset} until the end of the phase";
+
+    public static string BossOkButton => IsPt ? "Aguentar" : "Hold on";
+
+    public static string BossLearnMoreButton => IsPt ? "Saiba mais sobre esta crise" : "Learn more about this crisis";
 
     // Tela da oferta de troca, na parada do mapa antes dos destinos.
     public static string TradeHeader => IsPt ? "Proposta" : "Proposal";
@@ -596,6 +674,8 @@ public static class UIStrings
                 return IsPt ? "Desgaste natural, explicam os técnicos, pela vigésima vez." : "Natural wear and tear, the experts explain, for the twentieth time.";
             case ContributionSource.ExcessCorrection:
                 return IsPt ? "O excesso está se acomodando sozinho, como sempre acontece." : "The excess is settling down on its own, as it always does.";
+            case ContributionSource.Boss:
+                return IsPt ? "A crise que a cidade enfrenta cobrou mais um pedaço." : "The crisis the city is facing took another bite.";
             default:
                 return string.Empty;
         }
@@ -743,6 +823,7 @@ public static class UIStrings
             case TutorialTip.Tier: return IsPt ? "Novas tecnologias" : "New technologies";
             case TutorialTip.Newspaper: return IsPt ? "A Tribuna do Turno" : "The Turn Tribune";
             case TutorialTip.Trade: return IsPt ? "Propostas" : "Proposals";
+            case TutorialTip.Boss: return IsPt ? "Desafio final" : "Final challenge";
             default: return string.Empty;
         }
     }
@@ -787,6 +868,10 @@ public static class UIStrings
                 return IsPt
                     ? "Cada parada do mapa traz uma proposta. Aceitar dá uma vantagem e uma desvantagem até o fim da rodada; recusar não muda nada."
                     : "Every map stop brings a proposal. Accepting gives an advantage and a drawback until the end of the run; declining changes nothing.";
+            case TutorialTip.Boss:
+                return IsPt
+                    ? "Uma crise ataca a cidade. A cada turno ela acumula Ímpeto e, quando ele basta, joga a carta mostrada aqui, depois da sua. Aguente os 20 turnos para vencer a rodada."
+                    : "A crisis is hitting the city. Every turn it builds Momentum and, once there is enough, plays the card shown here, right after yours. Hold out for 20 turns to win the run.";
             default:
                 return string.Empty;
         }

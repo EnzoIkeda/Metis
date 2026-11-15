@@ -14,6 +14,7 @@ public static class GameTextSaver
     public const string ThemesPath = "Resources/Conteudo/temas.json";
     public const string DilemmasPath = "Resources/Conteudo/dilemas.json";
     public const string TradesPath = "Resources/Conteudo/negociacao.json";
+    public const string BossesPath = "Resources/Conteudo/chefes.json";
     public const string BackupFolder = "Resources/Conteudo/arquivo/backups_textos";
 
     public class Plan
@@ -77,6 +78,13 @@ public static class GameTextSaver
                     return (report.Errors, report.Changes);
                 });
                 break;
+            case GameTextEditKind.Boss:
+                PrepareImported(plan, BossesPath, "Bosses", path =>
+                {
+                    var report = BossImporter.Import(path, apply: false);
+                    return (report.Errors, report.Changes);
+                });
+                break;
             case GameTextEditKind.RelationNote:
                 PrepareRelation(plan);
                 break;
@@ -129,6 +137,9 @@ public static class GameTextSaver
             case GameTextEditKind.Trade:
                 WriteJson(TradesPath, plan.NewContent);
                 return Reported(TradeOfferImporter.Import(FullPath(TradesPath), apply: true).Errors, out error);
+            case GameTextEditKind.Boss:
+                WriteJson(BossesPath, plan.NewContent);
+                return Reported(BossImporter.Import(FullPath(BossesPath), apply: true).Errors, out error);
             case GameTextEditKind.RelationNote:
                 WriteJson(RelationsPath, plan.NewContent);
                 ApplyToNote(item, plan.Pt, plan.En);

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Boss_Vazamento
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 15
+  _parameter: 0
+  _targetId: BigTech_Vazamento
+  _headline: Dados dos moradores vazam e a empresa pede desculpas
+  _headlineEn: Residents' data leaks and the company apologizes
+  _body: "O comunicado garante que nenhum dado sens\xEDvel vazou, s\xF3 nome, endere\xE7o,
+    trajeto e hor\xE1rio de cada um."
+  _bodyEn: The statement says no sensitive data leaked, only everyone's name, address,
+    route and schedule.

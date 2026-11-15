@@ -51,6 +51,29 @@ public static class BalanceDataFormat
     }
 
     [Serializable]
+    public class BossCardDto
+    {
+        public string Id;
+        public string Name;
+        public int MomentumCost;
+        public List<ModifierDto> Effects = new List<ModifierDto>();
+    }
+
+    [Serializable]
+    public class BossDto
+    {
+        public string Id;
+        public string Name;
+        public string TargetArchetype;
+        public int StartingMomentum;
+        public int MomentumPerTurn;
+        public string Mechanic;
+        public float MechanicAmount;
+        public string MechanicCardId;
+        public List<BossCardDto> Cards = new List<BossCardDto>();
+    }
+
+    [Serializable]
     public class TradeOfferDto
     {
         public string Id;
@@ -168,6 +191,7 @@ public static class BalanceDataFormat
         public List<ThemeDto> Themes = new List<ThemeDto>();
         public List<ScenarioDto> Scenarios = new List<ScenarioDto>();
         public List<TradeOfferDto> TradeOffers = new List<TradeOfferDto>();
+        public List<BossDto> Bosses = new List<BossDto>();
     }
 
     // Roda a acao com a cena da fase carregada, abrindo e fechando ela so se ainda nao estava aberta.

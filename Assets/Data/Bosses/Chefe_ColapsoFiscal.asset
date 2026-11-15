@@ -1,0 +1,137 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68297576211f45a468974674df2b4ecd, type: 3}
+  m_Name: Chefe_ColapsoFiscal
+  m_EditorClassIdentifier: Metis.Runtime::BossData
+  _bossName: O Colapso Fiscal
+  _bossNameEn: The Fiscal Collapse
+  _summary: "A d\xEDvida passou do que a cidade arrecada e o b\xE1sico come\xE7a
+    a parar. Cada golpe tira dos servi\xE7os, e a cada dois golpes suas cartas ficam
+    mais caras."
+  _summaryEn: Debt has outgrown what the city collects and basic services start to
+    stall. Each blow hits services, and every two blows your cards get more expensive.
+  _intro: "O caixa da prefeitura acabou e a d\xEDvida n\xE3o para de crescer. A cada
+    turno a crise ganha \xCDmpeto e, quando ele basta, joga uma carta logo depois
+    da sua; a cada dois golpes, todas as suas cartas custam 1 a mais at\xE9 o fim
+    da fase. Aguente os 20 turnos para vencer a rodada.\n\n<i>Inspirado na fal\xEAncia
+    de Detroit em 2013 e na calamidade financeira do Rio de Janeiro em 2016.</i>"
+  _introEn: 'City Hall''s coffers are empty and the debt keeps growing. Every turn
+    the crisis builds Momentum and, once there is enough, plays a card right after
+    yours; every two blows, all your cards cost 1 more until the end of the phase.
+    Hold out for 20 turns to win the run.
+
+
+    <i>Inspired by Detroit''s 2013 bankruptcy
+    and Rio de Janeiro''s 2016 financial emergency.</i>'
+  _victory: "As contas fecharam e os servi\xE7os voltaram, devagar. Fica a li\xE7\xE3o:
+    o que a cidade deve hoje decide o que ela consegue oferecer amanh\xE3."
+  _victoryEn: 'The books balanced and services came back, slowly. The lesson remains:
+    what a city owes today decides what it can offer tomorrow.'
+  _knowledgeEntry: {fileID: 11400000, guid: 97fc1c6e9345c5d429dd7efbe38ed2fa, type: 2}
+  _targetArchetype: 4
+  _startingMomentum: 0
+  _momentumPerTurn: 2
+  _mechanic: 4
+  _mechanicAmount: 0.5
+  _mechanicCardId: 
+  _cards:
+  - _id: Fiscal_DividaImpagavel
+    _cardName: "D\xEDvida impag\xE1vel"
+    _cardNameEn: Unpayable debt
+    _description: "A d\xEDvida passa do que a arrecada\xE7\xE3o consegue pagar. Em
+      2013, Detroit pediu fal\xEAncia com cerca de 18 bilh\xF5es de d\xF3lares em
+      d\xEDvidas."
+    _descriptionEn: Debt grows beyond what tax revenue can pay. In 2013, Detroit
+      filed for bankruptcy with about 18 billion dollars in debt.
+    _momentumCost: 6
+    _effects:
+    - Parameter: 0
+      Amount: -5
+  - _id: Fiscal_SalariosAtrasados
+    _cardName: "Sal\xE1rios atrasados"
+    _cardNameEn: Late paychecks
+    _description: "O governo atrasa o pagamento de servidores ativos e aposentados.
+      Em 2016, o estado do Rio de Janeiro atrasou sal\xE1rios \xE0s v\xE9speras da
+      Olimp\xEDada."
+    _descriptionEn: The government delays pay for active and retired public workers.
+      In 2016, Rio de Janeiro state paid salaries late on the eve of the Olympics.
+    _momentumCost: 5
+    _effects:
+    - Parameter: 0
+      Amount: -2
+    - Parameter: 7
+      Amount: -2
+    - Parameter: 2
+      Amount: -1
+  - _id: Fiscal_PostesApagados
+    _cardName: Postes apagados
+    _cardNameEn: Dark streetlights
+    _description: "Sem verba para manuten\xE7\xE3o, as l\xE2mpadas queimadas ficam
+      como est\xE3o. Em Detroit, cerca de 40% dos postes estavam apagados em 2013."
+    _descriptionEn: With no money for upkeep, burnt-out bulbs stay that way. In Detroit,
+      about 40% of streetlights were out in 2013.
+    _momentumCost: 4
+    _effects:
+    - Parameter: 2
+      Amount: -3
+    - Parameter: 8
+      Amount: -1
+  - _id: Fiscal_EmergenciaFechada
+    _cardName: "Emerg\xEAncia fechada"
+    _cardNameEn: ER closed
+    _description: "Hospitais fecham portas de emerg\xEAncia por falta de verba, como
+      aconteceu no Rio de Janeiro em 2016."
+    _descriptionEn: Hospitals close emergency rooms for lack of funds, as happened
+      in Rio de Janeiro in 2016.
+    _momentumCost: 5
+    _effects:
+    - Parameter: 7
+      Amount: -4
+  - _id: Fiscal_SocorroDemorado
+    _cardName: Socorro demorado
+    _cardNameEn: Slow emergency response
+    _description: "Viaturas e ambul\xE2ncias param por falta de conserto. Em 2013,
+      a pol\xEDcia de Detroit levava em m\xE9dia 58 minutos para atender um chamado."
+    _descriptionEn: Patrol cars and ambulances sit idle awaiting repair. In 2013,
+      Detroit police took 58 minutes on average to answer a call.
+    _momentumCost: 5
+    _effects:
+    - Parameter: 2
+      Amount: -2
+    - Parameter: 7
+      Amount: -2
+  - _id: Fiscal_Calamidade
+    _cardName: Decreto de calamidade
+    _cardNameEn: Financial emergency decree
+    _description: O governo declara calamidade financeira para conseguir socorro
+      e cortar gastos. O Rio de Janeiro fez isso em 17 de junho de 2016.
+    _descriptionEn: The government declares a financial emergency to get aid and
+      cut spending. Rio de Janeiro did so on June 17, 2016.
+    _momentumCost: 6
+    _effects:
+    - Parameter: 0
+      Amount: -3
+    - Parameter: 8
+      Amount: -2
+  - _id: Fiscal_OnibusCortados
+    _cardName: "Linhas de \xF4nibus cortadas"
+    _cardNameEn: Bus lines cut
+    _description: "A cidade corta linhas e hor\xE1rios para economizar, e quem depende
+      do \xF4nibus chega mais tarde ao trabalho."
+    _descriptionEn: The city cuts routes and schedules to save money, and bus riders
+      get to work later.
+    _momentumCost: 4
+    _effects:
+    - Parameter: 8
+      Amount: -3
+    - Parameter: 0
+      Amount: -1

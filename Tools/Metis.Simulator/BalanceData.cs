@@ -45,6 +45,26 @@ public sealed class SimTradeOffer : ITradeOfferDefinition
     public TradeTerm Drawback { get; init; }
 }
 
+public sealed class SimBossCard : IBossCardDefinition
+{
+    public string Id { get; init; } = "";
+    public int MomentumCost { get; init; }
+    public IReadOnlyList<StatModifier> Effects { get; init; } = Array.Empty<StatModifier>();
+}
+
+public sealed class SimBoss : IBossDefinition
+{
+    public string Id { get; init; } = "";
+    public CardArchetype TargetArchetype { get; init; }
+    public int StartingMomentum { get; init; }
+    public int MomentumPerTurn { get; init; }
+    public BossMechanic Mechanic { get; init; }
+    public float MechanicAmount { get; init; }
+    public string MechanicCardId { get; init; } = "";
+    public IReadOnlyList<SimBossCard> BossCards { get; init; } = Array.Empty<SimBossCard>();
+    public IReadOnlyList<IBossCardDefinition> Cards => BossCards;
+}
+
 public sealed class SimPreset
 {
     public string Id { get; init; } = "";
@@ -101,6 +121,7 @@ public sealed class BalanceData
     public IReadOnlyList<SimPreset> Themes { get; init; } = Array.Empty<SimPreset>();
     public IReadOnlyList<SimScenario> Scenarios { get; init; } = Array.Empty<SimScenario>();
     public IReadOnlyList<SimTradeOffer> TradeOffers { get; init; } = Array.Empty<SimTradeOffer>();
+    public IReadOnlyList<SimBoss> Bosses { get; init; } = Array.Empty<SimBoss>();
 
     // Limiares de Pesquisa que liberam tiers novos, em ordem crescente.
     public IReadOnlyList<float> TierThresholds => Cards
@@ -154,6 +175,7 @@ public sealed class BalanceData
         var data = ParseFields(json);
         ValidateFollowUps(data);
         ValidateTradeOffers(data);
+        ValidateBosses(data);
         return data;
     }
 
@@ -180,6 +202,25 @@ public sealed class BalanceData
                 if (term.Kind == TradeTermKind.ExtraCard && cards.Contains(term.CardId ?? "") == false)
                     throw new InvalidDataException($"Troca '{offer.Id}' acrescenta uma carta desconhecida: '{term.CardId}'.");
             }
+        }
+    }
+
+    private static void ValidateBosses(BalanceData data)
+    {
+        foreach (var boss in data.Bosses)
+        {
+            if (boss.BossCards.Count == 0)
+                throw new InvalidDataException($"Chefe '{boss.Id}' sem cartas.");
+            if (boss.BossCards.Any(card => card.MomentumCost <= 0))
+                throw new InvalidDataException($"Chefe '{boss.Id}' tem carta sem custo de Impeto.");
+            if (boss.Mechanic == BossMechanic.ExtraCards
+                && data.Cards.Any(card => card.Id == boss.MechanicCardId && card.IsExtraOnly) == false)
+                throw new InvalidDataException($"Chefe '{boss.Id}' poe a carta '{boss.MechanicCardId}', que nao existe ou nao e so de troca.");
+        }
+        foreach (var group in data.Bosses.GroupBy(boss => boss.TargetArchetype))
+        {
+            if (group.Count() > 1)
+                throw new InvalidDataException($"Mais de um chefe para o baralho '{group.Key}'.");
         }
     }
 
@@ -284,6 +325,22 @@ public sealed class BalanceData
                 Benefit = ToTerm(offer.Benefit),
                 Drawback = ToTerm(offer.Drawback),
             }).ToList(),
+            Bosses = dto.Bosses.Select(boss => new SimBoss
+            {
+                Id = boss.Id,
+                TargetArchetype = ParseEnum<CardArchetype>(boss.TargetArchetype),
+                StartingMomentum = boss.StartingMomentum,
+                MomentumPerTurn = boss.MomentumPerTurn,
+                Mechanic = ParseEnum<BossMechanic>(boss.Mechanic),
+                MechanicAmount = boss.MechanicAmount,
+                MechanicCardId = boss.MechanicCardId ?? "",
+                BossCards = boss.Cards.Select(card => new SimBossCard
+                {
+                    Id = card.Id,
+                    MomentumCost = card.MomentumCost,
+                    Effects = ToModifiers(card.Effects),
+                }).ToList(),
+            }).ToList(),
         };
     }
 
@@ -328,6 +385,26 @@ public sealed class BalanceData
         public List<PresetDto> Themes { get; set; } = new();
         public List<ScenarioDto> Scenarios { get; set; } = new();
         public List<TradeOfferDto> TradeOffers { get; set; } = new();
+        public List<BossDto> Bosses { get; set; } = new();
+    }
+
+    private sealed class BossCardDto
+    {
+        public string Id { get; set; } = "";
+        public int MomentumCost { get; set; }
+        public List<ModifierDto> Effects { get; set; } = new();
+    }
+
+    private sealed class BossDto
+    {
+        public string Id { get; set; } = "";
+        public string TargetArchetype { get; set; } = nameof(CardArchetype.Geral);
+        public int StartingMomentum { get; set; }
+        public int MomentumPerTurn { get; set; }
+        public string Mechanic { get; set; } = nameof(BossMechanic.None);
+        public float MechanicAmount { get; set; }
+        public string MechanicCardId { get; set; } = "";
+        public List<BossCardDto> Cards { get; set; } = new();
     }
 
     private sealed class TermDto

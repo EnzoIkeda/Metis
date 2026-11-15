@@ -1,0 +1,145 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68297576211f45a468974674df2b4ecd, type: 3}
+  m_Name: Chefe_GrandeEnchente
+  m_EditorClassIdentifier: Metis.Runtime::BossData
+  _bossName: A Grande Enchente
+  _bossNameEn: The Great Flood
+  _summary: Chuva sem fim, rios acima da cota e uma cidade que precisa aguentar.
+    Cada golpe da enchente deixa o seguinte mais forte.
+  _summaryEn: Endless rain, rivers above flood level and a city that has to hold
+    out. Each blow from the flood makes the next one stronger.
+  _intro: "A chuva n\xE3o para h\xE1 dias e os rios da regi\xE3o j\xE1 passaram da
+    cota de inunda\xE7\xE3o. A cada turno a enchente ganha \xCDmpeto e, quando ele
+    basta, joga uma carta logo depois da sua; cada golpe deixa o seguinte mais forte.
+    Aguente os 20 turnos para vencer a rodada.\n\n<i>Inspirada nas enchentes do Rio
+    Grande do Sul em maio de 2024.</i>"
+  _introEn: 'It has rained for days and the region''s rivers are already past flood
+    level. Every turn the flood builds Momentum and, once there is enough, plays
+    a card right after yours; each blow makes the next one stronger. Hold out for
+    20 turns to win the run.
+
+
+    <i>Inspired by the Rio Grande do Sul floods of
+    May 2024.</i>'
+  _victory: "A \xE1gua baixou e a cidade continua de p\xE9. Agora come\xE7a a reconstru\xE7\xE3o,
+    e fica a li\xE7\xE3o: o que se prepara antes da cheia decide o tamanho do estrago."
+  _victoryEn: 'The water has gone down and the city is still standing. Rebuilding
+    starts now, and the lesson remains: what is prepared before the flood decides
+    how much damage it does.'
+  _knowledgeEntry: {fileID: 11400000, guid: 5591ac4b4d76c87ef8ba25e061e4590a, type: 2}
+  _targetArchetype: 2
+  _startingMomentum: 0
+  _momentumPerTurn: 2
+  _mechanic: 1
+  _mechanicAmount: 0.1
+  _cards:
+  - _id: Enchente_ChuvaPersistente
+    _cardName: "Chuva sem tr\xE9gua"
+    _cardNameEn: Relentless rain
+    _description: "Dias seguidos de chuva forte encharcam o solo e enchem os rios
+      da regi\xE3o."
+    _descriptionEn: Days of heavy rain soak the ground and swell the region's rivers.
+    _momentumCost: 4
+    _effects:
+    - Parameter: 5
+      Amount: -3
+    - Parameter: 8
+      Amount: -2
+    - Parameter: 7
+      Amount: -1
+  - _id: Enchente_CheiaHistorica
+    _cardName: "Cheia hist\xF3rica"
+    _cardNameEn: Record flood
+    _description: "O lago passa da cota de inunda\xE7\xE3o e chega a um n\xEDvel
+      nunca medido. Em 2024, o Gua\xEDba marcou 5,35 m."
+    _descriptionEn: "The lake rises past flood level to a height never recorded.
+      In 2024, the Gua\xEDba reached 5.35 m."
+    _momentumCost: 6
+    _effects:
+    - Parameter: 2
+      Amount: -3
+    - Parameter: 3
+      Amount: -2
+    - Parameter: 0
+      Amount: -2
+  - _id: Enchente_BombasDesligadas
+    _cardName: Bombas desligadas
+    _cardNameEn: Pumps shut down
+    _description: "Casas de bombas alagadas param e a \xE1gua entra em bairros protegidos.
+      Em Porto Alegre, 19 de 23 foram desligadas."
+    _descriptionEn: Flooded pump stations stop and water pours into protected districts.
+      In Porto Alegre, 19 of 23 were shut down.
+    _momentumCost: 5
+    _effects:
+    - Parameter: 1
+      Amount: -2
+    - Parameter: 2
+      Amount: -2
+    - Parameter: 7
+      Amount: -2
+  - _id: Enchente_AeroportoAlagado
+    _cardName: "Aeroporto debaixo d'\xE1gua"
+    _cardNameEn: Airport under water
+    _description: A pista alaga e os voos param por meses. O Salgado Filho ficou
+      fechado de maio a outubro de 2024.
+    _descriptionEn: The runway floods and flights stop for months. Salgado Filho
+      airport stayed closed from May to October 2024.
+    _momentumCost: 5
+    _effects:
+    - Parameter: 0
+      Amount: -4
+    - Parameter: 8
+      Amount: -2
+  - _id: Enchente_FamiliasDesalojadas
+    _cardName: "Fam\xEDlias fora de casa"
+    _cardNameEn: Families displaced
+    _description: Milhares deixam suas casas por abrigos e casas de parentes. No
+      RS, foram mais de 570 mil desalojados.
+    _descriptionEn: Thousands leave home for shelters and relatives' houses. In Rio
+      Grande do Sul, over 570,000 people were displaced.
+    _momentumCost: 4
+    _effects:
+    - Parameter: 3
+      Amount: -3
+    - Parameter: 7
+      Amount: -2
+    - Parameter: 2
+      Amount: -1
+  - _id: Enchente_TorneirasSecas
+    _cardName: Torneiras secas
+    _cardNameEn: Taps run dry
+    _description: "Esta\xE7\xF5es de tratamento alagadas param e falta \xE1gua pot\xE1vel.
+      Em Porto Alegre, 4 das 6 esta\xE7\xF5es pararam."
+    _descriptionEn: Flooded treatment plants stop and drinking water runs short.
+      In Porto Alegre, 4 of the 6 plants stopped.
+    _momentumCost: 5
+    _effects:
+    - Parameter: 7
+      Amount: -4
+    - Parameter: 5
+      Amount: -2
+  - _id: Enchente_EstradasCortadas
+    _cardName: Estradas cortadas
+    _cardNameEn: Roads cut off
+    _description: Pontes caem e rodovias ficam bloqueadas, isolando cidades. O RS
+      chegou a ter 170 pontos de bloqueio.
+    _descriptionEn: Bridges fall and highways close, cutting towns off. Rio Grande
+      do Sul had up to 170 blocked points.
+    _momentumCost: 6
+    _effects:
+    - Parameter: 8
+      Amount: -3
+    - Parameter: 0
+      Amount: -2
+    - Parameter: 1
+      Amount: -1

@@ -16,9 +16,26 @@ public class GameTextCollectorTests
         foreach (GameTextOrigin origin in Enum.GetValues(typeof(GameTextOrigin)))
         {
             var hasTrades = AssetDatabase.FindAssets("t:TradeOfferData", new[] { "Assets/Data" }).Length > 0;
-            if ((origin != GameTextOrigin.Theme || hasThemes) && (origin != GameTextOrigin.Dilemma || hasDilemmas) && (origin != GameTextOrigin.Trade || hasTrades))
+            var hasBosses = AssetDatabase.FindAssets("t:BossData", new[] { "Assets/Data" }).Length > 0;
+            if ((origin != GameTextOrigin.Theme || hasThemes) && (origin != GameTextOrigin.Dilemma || hasDilemmas) && (origin != GameTextOrigin.Trade || hasTrades)
+                && (origin != GameTextOrigin.Boss || hasBosses))
                 Assert.That(items.Any(item => item.Origin == origin), Is.True, origin.ToString());
         }
+    }
+
+    [Test]
+    public void BossTexts_IncludeEveryCard_AndAreEditedInTheJson()
+    {
+        var boss = AssetDatabase.LoadAssetAtPath<BossData>("Assets/Data/Bosses/Chefe_GrandeEnchente.asset");
+        var items = GameTextCollector.Collect().Where(item => item.Origin == GameTextOrigin.Boss && item.Id == boss.name).ToList();
+
+        Assert.That(items.Count, Is.EqualTo(4 + boss.BossCards.Count * 2));
+        Assert.That(items.Select(item => item.EditKind), Is.All.EqualTo(GameTextEditKind.Boss));
+        var cardName = items.Single(item => item.Field == "_cards[0]._cardName");
+        Assert.That(cardName.JsonListKey, Is.EqualTo("Bosses"));
+        Assert.That(cardName.JsonNestedKey, Is.EqualTo("Cards"));
+        Assert.That(cardName.JsonPtKey, Is.EqualTo("NamePt"));
+        Assert.That(cardName.ArrayIndex, Is.EqualTo(0));
     }
 
     [Test]

@@ -70,6 +70,27 @@ public class PhaseMapViewTests
     }
 
     [UnityTest]
+    public IEnumerator ShowNodes_BossStop_ShowsOnlyTheBossWithItsName()
+    {
+        var boss = ScriptableObject.CreateInstance<BossData>();
+        boss.name = "Chefe";
+        TestDataFactory.SetField(boss, "_bossName", "A Grande Enchente");
+        var library = ScriptableObject.CreateInstance<BossLibraryData>();
+        TestDataFactory.SetField(library, "_bosses", new[] { boss });
+        TestDataFactory.SetField(_view, "_bosses", library);
+
+        _view.ShowNodes(PhaseMapProvider.BossOffer("Chefe"));
+        yield return null;
+
+        var shown = Shown();
+        Assert.That(shown, Has.Length.EqualTo(1));
+        Assert.That(shown[0].GetComponentInChildren<TMP_Text>().text, Does.Contain("A Grande Enchente"));
+        Assert.That(PinOf(shown[0]), Is.EqualTo(_unknown), "sem pino proprio, usa o da cidade desconhecida");
+        Object.DestroyImmediate(library);
+        Object.DestroyImmediate(boss);
+    }
+
+    [UnityTest]
     public IEnumerator ShowNodes_DrawsOneButtonPerDestination_WithThePinOfItsType()
     {
         _view.ShowNodes(new[]

@@ -23,9 +23,9 @@ MonoBehaviour:
     Kind: 0
     Effects:
     - Parameter: 8
-      Amount: 6
+      Amount: 3
     - Parameter: 4
-      Amount: 6
+      Amount: 3
     Amount: 0
     CardId: 
   _drawback:

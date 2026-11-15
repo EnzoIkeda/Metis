@@ -15,7 +15,7 @@ MonoBehaviour:
   _file:
     Version: 1
     ModelVersion: 1.0
-    Fingerprint: P:55.000/0.000/100.000/10.000/1.000;50.000/0.000/100.000/10.000/-1.100;50.000/0.000/100.000/10.000/-1.100;40.000/0.000/100.000/10.000/0.000;10.000/0.000/100.000/-1.000/0.000;45.000/0.000/100.000/10.000/-1.100;50.000/0.000/100.000/10.000/0.000;50.000/0.000/100.000/10.000/-1.100;45.000/0.000/100.000/10.000/-1.100|Z:50.000/1.000/25.000/75.000/1.200/0.800/0.600/0.100/12.000|ZR:2|M:0.000,0.400,0.600,1.200,0.500,-0.200,0.300,0.300,0.800,0.300,0.000,0.000,-1.300,0.400,0.700,0.000,0.000,-0.600,0.400,0.000,0.000,-0.700,0.200,0.000,0.800,0.200,0.000,0.300,0.300,0.700,0.000,0.000,0.200,1.000,0.400,0.500,0.500,0.200,0.000,0.200,0.000,0.300,0.300,0.000,0.000,-0.200,-0.600,0.000,-1.000,0.800,0.000,0.000,0.000,-0.500,0.000,0.000,0.000,0.000,0.000,0.000,0.000,0.000,0.000,0.400,0.000,0.000,-0.600,0.400,0.700,0.500,0.000,0.200,0.500,0.300,0.000,-0.900,0.300,0.200,0.400,0.000,0.000|R:0.000/1200000000.000;-2000000.000/2000000.000;5.000/60.000;50000.000/600000.000;0.000/9000.000;2.000/60.000;0.000/10.000;0.500/6.000;8.000/35.000|T:6/20|C:31/14/12/10|E:65/27
+    Fingerprint: P:55.000/0.000/100.000/10.000/1.000;50.000/0.000/100.000/10.000/-1.000;50.000/0.000/100.000/10.000/-1.000;40.000/0.000/100.000/10.000/0.000;10.000/0.000/100.000/-1.000/0.000;45.000/0.000/100.000/10.000/-1.000;50.000/0.000/100.000/10.000/0.000;50.000/0.000/100.000/10.000/-1.000;45.000/0.000/100.000/10.000/-1.000|Z:50.000/1.000/25.000/75.000/1.200/0.800/0.600/0.100/12.000|ZR:2|M:0.000,0.400,0.600,1.200,0.500,-0.200,0.300,0.300,0.800,0.300,0.000,0.000,-1.300,0.400,0.700,0.000,0.000,-0.600,0.400,0.000,0.000,-0.700,0.200,0.000,0.800,0.200,0.000,0.300,0.300,0.700,0.000,0.000,0.200,1.000,0.400,0.500,0.500,0.200,0.000,0.200,0.000,0.300,0.300,0.000,0.000,-0.200,-0.600,0.000,-1.000,0.800,0.000,0.000,0.000,-0.500,0.000,0.000,0.000,0.000,0.000,0.000,0.000,0.000,0.000,0.400,0.000,0.000,-0.600,0.400,0.700,0.500,0.000,0.200,0.500,0.300,0.000,-0.900,0.300,0.200,0.400,0.000,0.000|R:0.000/1200000000.000;-2000000.000/2000000.000;5.000/60.000;50000.000/600000.000;0.000/9000.000;2.000/60.000;0.000/10.000;0.500/6.000;8.000/35.000|T:6/20|C:31/14/12/10|E:65/27
     Sheets:
     - Id: LeiaMe
       Tab:
@@ -250,8 +250,8 @@ MonoBehaviour:
         - Pt: 10 (-1,6 mi kWh/dia)
           En: 10 (-1.6M kWh/day)
           Tag: 
-        - Pt: -1,1 (-44 mil kWh/dia)
-          En: -1.1 (-44k kWh/day)
+        - Pt: -1 (-40 mil kWh/dia)
+          En: -1 (-40k kWh/day)
           Tag: 
       - Cells:
         - Pt: "Popula\xE7\xE3o"
@@ -288,8 +288,8 @@ MonoBehaviour:
         - Pt: 10 (10,7 km/h)
           En: 10 (10.7 km/h)
           Tag: 
-        - Pt: -1,1 (-0,3 km/h)
-          En: -1.1 (-0.3 km/h)
+        - Pt: -1 (-0,27 km/h)
+          En: -1 (-0.27 km/h)
           Tag: 
       - Cells:
         - Pt: "Sa\xFAde"
@@ -307,8 +307,8 @@ MonoBehaviour:
         - Pt: 10 (1,05 leitos/mil)
           En: 10 (1.05 beds/1k)
           Tag: 
-        - Pt: -1,1 (-0,06 leitos/mil)
-          En: -1.1 (-0.06 beds/1k)
+        - Pt: -1 (-0,06 leitos/mil)
+          En: -1 (-0.06 beds/1k)
           Tag: 
       - Cells:
         - Pt: "Seguran\xE7a"
@@ -326,8 +326,8 @@ MonoBehaviour:
         - Pt: 10 (10,5 ag./10 mil)
           En: 10 (10.5 officers/10k)
           Tag: 
-        - Pt: -1,1 (-0,61 ag./10 mil)
-          En: -1.1 (-0.61 officers/10k)
+        - Pt: -1 (-0,55 ag./10 mil)
+          En: -1 (-0.55 officers/10k)
           Tag: 
       - Cells:
         - Pt: Sustentabilidade
@@ -345,8 +345,8 @@ MonoBehaviour:
         - Pt: "10 (7,8 m\xB2/hab.)"
           En: "10 (7.8 m\xB2/person)"
           Tag: 
-        - Pt: "-1,1 (-0,64 m\xB2/hab.)"
-          En: "-1.1 (-0.64 m\xB2/person)"
+        - Pt: "-1 (-0,58 m\xB2/hab.)"
+          En: "-1 (-0.58 m\xB2/person)"
           Tag: 
       - Cells:
         - Pt: Pesquisa
@@ -388,11 +388,11 @@ MonoBehaviour:
           Tag: 
       Notes:
       - Pt: "\"Sozinho, por turno\" \xE9 o quanto o indicador muda sem nenhuma decis\xE3o.
-          Cinco servi\xE7os se desgastam 1,1 ponto por turno, como uma rua que precisa
+          Cinco servi\xE7os se desgastam 1 ponto por turno, como uma rua que precisa
           de manuten\xE7\xE3o; a Renda cresce 1 ponto com a arrecada\xE7\xE3o normal."
         En: '"On its own, per turn" is how much the indicator changes with no decision
-          at all. Five services wear down 1.1 points per turn, like a street that
-          needs upkeep; Income grows 1 point from regular tax collection.'
+          at all. Five services wear down 1 point per turn, like a street that needs
+          upkeep; Income grows 1 point from regular tax collection.'
         Tag: 
       - Pt: "Energia \xE9 um saldo: 0 kWh/dia quer dizer que a cidade gera o mesmo
           que consome. Abaixo de zero, falta energia."
@@ -1402,11 +1402,11 @@ MonoBehaviour:
         - Pt: "Joga qualquer carta poss\xEDvel"
           En: Plays any playable card
           Tag: 
-        - Pt: 28%
-          En: 28%
+        - Pt: 32%
+          En: 32%
           Tag: 
-        - Pt: 10%
-          En: 10%
+        - Pt: 17%
+          En: 17%
           Tag: 
       - Cells:
         - Pt: Guloso
@@ -1415,11 +1415,11 @@ MonoBehaviour:
         - Pt: Escolhe a carta que deixa a cidade melhor logo depois do turno
           En: Picks the card that leaves the city best right after the turn
           Tag: 
-        - Pt: 64%
-          En: 64%
+        - Pt: 68%
+          En: 68%
           Tag: 
-        - Pt: 31%
-          En: 31%
+        - Pt: 42%
+          En: 42%
           Tag: 
       - Cells:
         - Pt: Cauteloso
@@ -1428,11 +1428,11 @@ MonoBehaviour:
         - Pt: "D\xE1 mais peso ao indicador que est\xE1 mais perto do cr\xEDtico"
           En: Gives more weight to the indicator closest to critical
           Tag: 
-        - Pt: 64%
-          En: 64%
+        - Pt: 67%
+          En: 67%
           Tag: 
-        - Pt: 39%
-          En: 39%
+        - Pt: 49%
+          En: 49%
           Tag: 
       - Cells:
         - Pt: Planejador
@@ -1446,8 +1446,8 @@ MonoBehaviour:
         - Pt: 77%
           En: 77%
           Tag: 
-        - Pt: 51%
-          En: 51%
+        - Pt: 62%
+          En: 62%
           Tag: 
       Notes:
       - Pt: "Foram 4.000 fases por jogador (400 para o planejador, que \xE9 mais
@@ -1459,9 +1459,9 @@ MonoBehaviour:
           energy or safety and wear down faster.
         Tag: 
       - Pt: "Planejar rende bem mais que jogar ao acaso. Na 1\xAA fase, os quatro
-          baralhos venceram entre 58% e 70% das vezes com os jogadores guloso e cauteloso."
+          baralhos venceram entre 65% e 72% das vezes com os jogadores guloso e cauteloso."
         En: Planning pays off far more than playing at random. In phase 1, the four
-          decks won between 58% and 70% of the time with the greedy and cautious
+          decks won between 65% and 72% of the time with the greedy and cautious
           players.
         Tag: 
       - Pt: "Os testes mostram que o modelo \xE9 coerente como jogo. Eles n\xE3o

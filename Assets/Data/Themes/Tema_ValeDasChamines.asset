@@ -37,7 +37,7 @@ MonoBehaviour:
     InitialValue: 30
   - Parameter: 7
     InitialValue: 38
-  _derivaMultiplier: 1.15
+  _derivaMultiplier: 0.95
   _allowedEventIds:
   - EventChuvasFortesEAlagamentos
   - EventOndaDeCalor

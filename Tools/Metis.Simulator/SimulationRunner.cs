@@ -49,6 +49,9 @@ public sealed class SimulationOptions
     public bool BossPhase { get; set; }
     public int MctsIterations { get; set; } = new MctsOptions().Iterations;
     public double MctsExploration { get; set; } = new MctsOptions().Exploration;
+
+    // Peso dos objetivos do cenario na politica que os conhece.
+    public double ObjectiveWeight { get; set; } = ObjectivePolicy.DefaultWeight;
 }
 
 public static class SimulationRunner
@@ -63,6 +66,7 @@ public static class SimulationRunner
             "aleatoria" => new RandomPolicy(),
             "gulosa" => new GreedyPolicy(),
             "equilibrada" => new BalancedPolicy(),
+            "equilibrada_objetivos" => new ObjectivePolicy(options.ObjectiveWeight),
             "mcts" => new MctsPolicy(new MctsOptions { Iterations = options.MctsIterations, Exploration = options.MctsExploration, Informed = true }),
             "mcts_desinformado" => new MctsPolicy(new MctsOptions { Iterations = options.MctsIterations, Exploration = options.MctsExploration, Informed = false }),
             "mcts_desinformado_revela" => new MctsPolicy(new MctsOptions { Iterations = options.MctsIterations, Exploration = options.MctsExploration, Informed = false, RevealWhenUninformed = true }),
@@ -330,6 +334,7 @@ public static class SimulationRunner
             ["boss_phase"] = options.BossPhase,
             ["mcts_iterations"] = options.MctsIterations,
             ["mcts_exploration"] = options.MctsExploration,
+            ["objective_weight"] = options.ObjectiveWeight,
         };
         File.WriteAllText(path, JsonSerializer.Serialize(info, new JsonSerializerOptions { WriteIndented = true }));
     }

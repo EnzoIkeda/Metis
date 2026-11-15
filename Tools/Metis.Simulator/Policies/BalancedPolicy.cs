@@ -41,7 +41,7 @@ public sealed class BalancedPolicy : IPlayerPolicy
         return score;
     }
 
-    private static double CostScore(SimCard card, Dictionary<CityParameterType, double> weights, int costOffset = 0)
+    public static double CostScore(SimCard card, Dictionary<CityParameterType, double> weights, int costOffset = 0)
     {
         return -TradeOfferRules.EffectiveCost(card.Cost, costOffset) * Weight(weights, CityParameterType.Renda);
     }

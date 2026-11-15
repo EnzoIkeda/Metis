@@ -17,4 +17,4 @@ MonoBehaviour:
   _overrides:
   - Parameter: 2
     InitialValue: 32
-  _derivaMultiplier: 1.25
+  _derivaMultiplier: 1.15

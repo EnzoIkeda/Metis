@@ -23,7 +23,7 @@ MonoBehaviour:
     Kind: 0
     Effects:
     - Parameter: 4
-      Amount: 8
+      Amount: 14
     Amount: 0
     CardId: 
   _drawback:

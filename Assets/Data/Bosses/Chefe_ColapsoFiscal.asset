@@ -15,18 +15,18 @@ MonoBehaviour:
   _bossName: O Colapso Fiscal
   _bossNameEn: The Fiscal Collapse
   _summary: "A d\xEDvida passou do que a cidade arrecada e o b\xE1sico come\xE7a
-    a parar. Cada golpe tira dos servi\xE7os, e a cada dois golpes suas cartas ficam
-    mais caras."
+    a parar. Cada golpe tira dos servi\xE7os, e a cada tr\xEAs golpes suas cartas
+    ficam mais caras."
   _summaryEn: Debt has outgrown what the city collects and basic services start to
-    stall. Each blow hits services, and every two blows your cards get more expensive.
+    stall. Each blow hits services, and every three blows your cards get more expensive.
   _intro: "O caixa da prefeitura acabou e a d\xEDvida n\xE3o para de crescer. A cada
     turno a crise ganha \xCDmpeto e, quando ele basta, joga uma carta logo depois
-    da sua; a cada dois golpes, todas as suas cartas custam 1 a mais at\xE9 o fim
-    da fase. Aguente os 20 turnos para vencer a rodada.\n\n<i>Inspirado na fal\xEAncia
+    da sua; a cada tr\xEAs golpes, todas as suas cartas custam 1 a mais at\xE9 o
+    fim da fase. Aguente os 20 turnos para vencer a rodada.\n\n<i>Inspirado na fal\xEAncia
     de Detroit em 2013 e na calamidade financeira do Rio de Janeiro em 2016.</i>"
   _introEn: 'City Hall''s coffers are empty and the debt keeps growing. Every turn
     the crisis builds Momentum and, once there is enough, plays a card right after
-    yours; every two blows, all your cards cost 1 more until the end of the phase.
+    yours; every three blows, all your cards cost 1 more until the end of the phase.
     Hold out for 20 turns to win the run.
 
 
@@ -41,7 +41,7 @@ MonoBehaviour:
   _startingMomentum: 0
   _momentumPerTurn: 2
   _mechanic: 4
-  _mechanicAmount: 0.5
+  _mechanicAmount: 0.34
   _mechanicCardId: 
   _cards:
   - _id: Fiscal_DividaImpagavel

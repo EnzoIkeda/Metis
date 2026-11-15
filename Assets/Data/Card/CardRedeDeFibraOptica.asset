@@ -16,7 +16,7 @@ MonoBehaviour:
   _description: "Cidade conectada: servi\xE7os digitais e teletrabalho."
   _cardNameEn: Fiber Optic Network
   _descriptionEn: 'A connected city: digital services and remote work.'
-  _cost: 3
+  _cost: 4
   _tier: 1
   _archetype: 3
   _requiredPesquisa: 15
@@ -35,6 +35,7 @@ MonoBehaviour:
     Amount: 1
   _ability: 0
   _copies: 1
+  _isExtraOnly: 0
   _structureToPlace: {fileID: 0}
   _artwork: {fileID: 21300000, guid: de6865c91bfb77da0b3c449f7d733eff, type: 3}
   _artworkFrames: []

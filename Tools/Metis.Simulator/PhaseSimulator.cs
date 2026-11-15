@@ -32,6 +32,9 @@ public sealed class PhaseSetup
     // Chefe da fase; nulo numa fase comum.
     public SimBoss Boss { get; init; }
 
+    // Objetivos do cenario, que so a politica que os conhece usa; vazio fora dos cenarios.
+    public IReadOnlyList<ScenarioObjective> Objectives { get; init; } = Array.Empty<ScenarioObjective>();
+
     public int HandSize => HandSizeOverride ?? Data.Rules.HandSize;
     public int VictoryTurnCount => VictoryTurnCountOverride ?? Data.Rules.VictoryTurnCount;
 }
@@ -219,6 +222,10 @@ public static class PhaseSimulator
                 Boss = boss,
                 CostOffset = hand.CostOffset,
                 BossExtraCard = bossExtraCard,
+                Objectives = setup.Objectives,
+                ObjectiveStates = setup.Objectives.Count > 0 && history != null
+                    ? ScenarioObjectiveEvaluator.EvaluateAll(setup.Objectives, history.Turns, GameOutcome.None)
+                    : null,
             };
 
             // Acoes livres podem vir antes da jogada do turno; o laco termina quando uma carta comum e jogada ou nada mais e jogavel.

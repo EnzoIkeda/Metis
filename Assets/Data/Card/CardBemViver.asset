@@ -24,17 +24,18 @@ MonoBehaviour:
   - Parameter: 0
     Amount: -2
   - Parameter: 2
-    Amount: 2
+    Amount: 3
   - Parameter: 3
     Amount: -1
   - Parameter: 4
     Amount: -1
   - Parameter: 5
-    Amount: 3
+    Amount: 4
   - Parameter: 7
-    Amount: 2
+    Amount: 3
   _ability: 0
   _copies: 1
+  _isExtraOnly: 0
   _structureToPlace: {fileID: 0}
   _artwork: {fileID: 0}
   _artworkFrames: []

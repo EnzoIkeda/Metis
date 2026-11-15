@@ -41,7 +41,8 @@ MonoBehaviour:
   _startingMomentum: 0
   _momentumPerTurn: 2
   _mechanic: 1
-  _mechanicAmount: 0.1
+  _mechanicAmount: 0.15
+  _mechanicCardId: 
   _cards:
   - _id: Enchente_ChuvaPersistente
     _cardName: "Chuva sem tr\xE9gua"

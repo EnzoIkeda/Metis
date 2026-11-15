@@ -27,5 +27,5 @@ MonoBehaviour:
   _drawback:
     Kind: 2
     Effects: []
-    Amount: -1
+    Amount: -2
     CardId: 

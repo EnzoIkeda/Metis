@@ -55,9 +55,9 @@ MonoBehaviour:
     _momentumCost: 5
     _effects:
     - Parameter: 2
-      Amount: -3
+      Amount: -5
     - Parameter: 3
-      Amount: -1
+      Amount: -2
   - _id: BigTech_DadosSemAnonimato
     _cardName: Dados sem anonimato
     _cardNameEn: Data without anonymity
@@ -68,9 +68,9 @@ MonoBehaviour:
     _momentumCost: 6
     _effects:
     - Parameter: 2
-      Amount: -4
+      Amount: -7
     - Parameter: 3
-      Amount: -1
+      Amount: -2
   - _id: BigTech_ContratoComIsencao
     _cardName: "Contrato com isen\xE7\xE3o"
     _cardNameEn: Tax-break deal
@@ -81,9 +81,9 @@ MonoBehaviour:
     _momentumCost: 5
     _effects:
     - Parameter: 0
-      Amount: -3
+      Amount: -5
     - Parameter: 2
-      Amount: -1
+      Amount: -2
   - _id: BigTech_SoPeloAplicativo
     _cardName: "Servi\xE7o s\xF3 pelo aplicativo"
     _cardNameEn: App-only services
@@ -94,9 +94,9 @@ MonoBehaviour:
     _momentumCost: 4
     _effects:
     - Parameter: 3
-      Amount: -2
+      Amount: -3
     - Parameter: 2
-      Amount: -1
+      Amount: -2
   - _id: BigTech_PlataformaFechada
     _cardName: Plataforma fechada
     _cardNameEn: Locked-in platform
@@ -107,9 +107,9 @@ MonoBehaviour:
     _momentumCost: 5
     _effects:
     - Parameter: 0
-      Amount: -3
+      Amount: -5
     - Parameter: 2
-      Amount: -1
+      Amount: -2
   - _id: BigTech_Vazamento
     _cardName: Vazamento de dados
     _cardNameEn: Data leak
@@ -118,9 +118,9 @@ MonoBehaviour:
     _momentumCost: 6
     _effects:
     - Parameter: 2
-      Amount: -4
+      Amount: -7
     - Parameter: 0
-      Amount: -1
+      Amount: -2
   - _id: BigTech_EmpresaVaiEmbora
     _cardName: A empresa vai embora
     _cardNameEn: The company walks away
@@ -131,6 +131,6 @@ MonoBehaviour:
     _momentumCost: 6
     _effects:
     - Parameter: 0
-      Amount: -3
+      Amount: -5
     - Parameter: 3
-      Amount: -2
+      Amount: -3

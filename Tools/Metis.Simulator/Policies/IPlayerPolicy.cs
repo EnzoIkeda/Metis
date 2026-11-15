@@ -42,6 +42,10 @@ public sealed class DecisionContext
 
     // Carta que o chefe poe no baralho do jogador; nula quando a regra dele e outra.
     public SimCard BossExtraCard { get; init; }
+
+    // Objetivos do cenario e o estado de cada um ate o turno anterior; nulo quando ninguem acompanha a fase.
+    public IReadOnlyList<ScenarioObjective> Objectives { get; init; } = Array.Empty<ScenarioObjective>();
+    public IReadOnlyList<ObjectiveState> ObjectiveStates { get; init; }
 }
 
 // Jogador simulado: escolhe uma das cartas jogaveis da mao.

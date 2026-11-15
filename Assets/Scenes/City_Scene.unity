@@ -9377,13 +9377,13 @@ MonoBehaviour:
     MinValue: 0
     MaxValue: 100
     CriticalLevel: 10
-    Deriva: -1.1
+    Deriva: -1
   - Parameter: 2
     InitialValue: 50
     MinValue: 0
     MaxValue: 100
     CriticalLevel: 10
-    Deriva: -1.1
+    Deriva: -1
   - Parameter: 3
     InitialValue: 40
     MinValue: 0
@@ -9401,7 +9401,7 @@ MonoBehaviour:
     MinValue: 0
     MaxValue: 100
     CriticalLevel: 10
-    Deriva: -1.1
+    Deriva: -1
   - Parameter: 6
     InitialValue: 50
     MinValue: 0
@@ -9413,13 +9413,13 @@ MonoBehaviour:
     MinValue: 0
     MaxValue: 100
     CriticalLevel: 10
-    Deriva: -1.1
+    Deriva: -1
   - Parameter: 8
     InitialValue: 45
     MinValue: 0
     MaxValue: 100
     CriticalLevel: 10
-    Deriva: -1.1
+    Deriva: -1
   _interactionConfig:
     ValorNeutro: 50
     EscalaGlobal: 1

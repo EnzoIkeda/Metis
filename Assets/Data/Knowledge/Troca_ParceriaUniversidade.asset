@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Troca_ParceriaUniversidade
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Parceria com a universidade
+  _titleEn: University partnership
+  _category: 2
+  _unlockTrigger: 13
+  _summary: "Cidades atraem pesquisa quando oferecem espa\xE7o, bolsas e problemas
+    reais para universidades e centros de inova\xE7\xE3o resolverem. A pesquisa forma
+    gente e cria empresas, mas leva anos para dar retorno."
+  _summaryEn: Cities attract research when they offer space, scholarships and real
+    problems for universities and innovation centers to solve. Research trains people
+    and creates companies, but takes years to pay off.
+  _realWorld: "O Porto Digital nasceu em 2000 no centro hist\xF3rico do Recife, apoiado
+    na inform\xE1tica da UFPE e no CESAR, criado por professores da universidade.
+    Em 2024, reunia 475 organiza\xE7\xF5es e 21,5 mil empregos."
+  _realWorldEn: Porto Digital was founded in 2000 in Recife's historic center, building
+    on UFPE's computer science and on CESAR, created by the university's professors.
+    In 2024 it gathered 475 organizations and 21,500 jobs.
+  _tradeOffs: "Bolsas e laborat\xF3rios saem do caixa j\xE1; o retorno em empregos
+    e empresas vem depois e nem sempre fica na cidade."
+  _tradeOffsEn: Scholarships and labs come out of the budget now; the payoff in jobs
+    and companies comes later and does not always stay in town.
+  _sources:
+  - Label: Porto Digital (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Porto_Digital
+  - Label: "Movimento Econ\xF4mico, Porto Digital chega a 21,5 mil postos (2025)"
+    Url: https://movimentoeconomico.com.br/tecnologia/2025/02/19/com-r-62-bi-porto-digital-cresce-14-e-chega-a-215-mil-postos-de-trabalho/
+  _relatedEntries:
+  - {fileID: 11400000, guid: 3bb4c72dfbd0ad2a09251e50ca4524d6, type: 2}
+  _image: {fileID: 0}

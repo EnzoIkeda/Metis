@@ -98,6 +98,9 @@ public sealed class MctsPolicy : IPlayerPolicy
             HandCards = context.HandCards,
             AllEvents = context.AllEvents,
             Schedule = context.Schedule,
+            Boss = context.Boss,
+            CostOffset = context.CostOffset,
+            BossExtraCard = context.BossExtraCard,
         });
     }
 
@@ -125,6 +128,7 @@ public sealed class MctsPolicy : IPlayerPolicy
         var stats = context.Stats.Clone();
         var hand = PlanningHand(planningDeck, context, random);
         var events = PlanningPool(context, random);
+        var boss = context.Boss?.Clone(random);
         var turn = context.TurnIndex;
         var outcome = ForwardModel.FinishDilemma(stats, dilemma, option, turn, context.VictoryTurnCount, events);
         var actions = (IReadOnlyList<SimCard>)Array.Empty<SimCard>();
@@ -134,7 +138,7 @@ public sealed class MctsPolicy : IPlayerPolicy
             actions = ForwardModel.DrawPlayable(hand, context.HandSize, stats);
         }
 
-        outcome = Rollout(stats, hand, events, ref turn, actions, outcome, context, random);
+        outcome = Rollout(stats, hand, events, boss, ref turn, actions, outcome, context, random);
         return Reward(outcome, stats, turn, context);
     }
 
@@ -170,7 +174,7 @@ public sealed class MctsPolicy : IPlayerPolicy
     }
 
     // Simulacao ate o fim da fase com a politica equilibrada, barata e sem simular dentro da simulacao.
-    private GameOutcome Rollout(CityStats stats, CardHand<SimCard> hand, RandomEventPool<SimEvent> events, ref int turn, IReadOnlyList<SimCard> actions,
+    private GameOutcome Rollout(CityStats stats, CardHand<SimCard> hand, RandomEventPool<SimEvent> events, BossEncounter boss, ref int turn, IReadOnlyList<SimCard> actions,
         GameOutcome outcome, DecisionContext context, Random random)
     {
         var chooser = RolloutChooser(context, random);
@@ -187,10 +191,11 @@ public sealed class MctsPolicy : IPlayerPolicy
                     TurnIndex = turn,
                     Data = context.Data,
                     Random = random,
+                    CostOffset = boss?.CardCostOffset ?? 0,
                 });
             }
 
-            outcome = ForwardModel.StepTurn(stats, chosen, turn, context.VictoryTurnCount, events, chooser);
+            outcome = ForwardModel.StepTurn(stats, chosen, turn, context.VictoryTurnCount, events, chooser, boss, hand, PlannedExtra(context));
             if (outcome == GameOutcome.None)
             {
                 turn++;
@@ -204,11 +209,19 @@ public sealed class MctsPolicy : IPlayerPolicy
     private CardHand<SimCard> PlanningHand(List<SimCard> planningDeck, DecisionContext context, Random random)
     {
         if (context.FiniteDeck == false)
-            return new CardHand<SimCard>(planningDeck, random);
+            return new CardHand<SimCard>(planningDeck, random) { CostOffset = context.CostOffset };
 
         SimCard Plan(SimCard card) => Planned(card, context.Data, _options.Informed || context.RevealedForPhase);
         var discard = context.DiscardPile.Concat(context.HandCards).Select(Plan);
-        return CardHand<SimCard>.FromPiles(planningDeck, context.DrawPile.Select(Plan), discard, random);
+        var hand = CardHand<SimCard>.FromPiles(planningDeck, context.DrawPile.Select(Plan), discard, random);
+        hand.CostOffset = context.CostOffset;
+        return hand;
+    }
+
+    // A carta do chefe e conhecida (nao tem efeito); so precisa ser a mesma instancia que o planejamento usa.
+    private SimCard PlannedExtra(DecisionContext context)
+    {
+        return context.BossExtraCard != null ? Planned(context.BossExtraCard, context.Data, _options.Informed || context.RevealedForPhase) : null;
     }
 
     private static List<SimCard> WithoutReveal(IReadOnlyList<SimCard> cards)
@@ -223,6 +236,7 @@ public sealed class MctsPolicy : IPlayerPolicy
         var hand = PlanningHand(planningDeck, context, random);
         var events = PlanningPool(context, random);
         var chooser = RolloutChooser(context, random);
+        var boss = context.Boss?.Clone(random);
         var path = new List<Node> { root };
         var node = root;
         var turn = context.TurnIndex;
@@ -258,7 +272,7 @@ public sealed class MctsPolicy : IPlayerPolicy
                 path.Add(node);
             }
 
-            outcome = ForwardModel.StepTurnWithAbilities(stats, chosen, hand, turn, context.VictoryTurnCount, events, context.Data, chooser);
+            outcome = ForwardModel.StepTurnWithAbilities(stats, chosen, hand, turn, context.VictoryTurnCount, events, context.Data, chooser, boss, PlannedExtra(context));
             if (outcome == GameOutcome.None)
             {
                 turn++;
@@ -266,7 +280,7 @@ public sealed class MctsPolicy : IPlayerPolicy
             }
         }
 
-        outcome = Rollout(stats, hand, events, ref turn, actions, outcome, context, random);
+        outcome = Rollout(stats, hand, events, boss, ref turn, actions, outcome, context, random);
 
         var reward = Reward(outcome, stats, turn, context);
         foreach (var visited in path)

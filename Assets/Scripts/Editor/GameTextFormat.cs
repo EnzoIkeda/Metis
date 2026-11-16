@@ -21,6 +21,8 @@ public enum GameTextOrigin
     SceneOrPrefab,
     Theme,
     Dilemma,
+    Trade,
+    Boss,
 }
 
 public enum GameTextIssue
@@ -48,6 +50,8 @@ public enum GameTextEditKind
     NewsColumn,
     Theme,
     Dilemma,
+    Trade,
+    Boss,
 }
 
 // Trecho do codigo-fonte onde esta um ramo de idioma; so e editavel se for feito apenas de textos.

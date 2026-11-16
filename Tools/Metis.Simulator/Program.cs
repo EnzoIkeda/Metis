@@ -24,19 +24,23 @@ for (int i = 0; i < args.Length; i++)
         case "--no-turns": options.WriteTurns = false; break;
         case "--finite-deck": options.FiniteDeck = true; break;
         case "--permanent-reveal": options.PermanentReveal = true; break;
+        case "--no-trades": options.NoTrades = true; break;
+        case "--no-boss": options.NoBoss = true; break;
+        case "--boss-phase": options.BossPhase = true; break;
         case "--mode": options.Mode = Next(); break;
         case "--news": options.NewsPath = Next(); break;
         case "--phases": options.PhaseCount = NextInt(); break;
         case "--reward-rollouts": options.RewardRollouts = NextInt(); break;
         case "--mcts-iterations": options.MctsIterations = NextInt(); break;
         case "--mcts-c": options.MctsExploration = double.Parse(Next(), CultureInfo.InvariantCulture); break;
+        case "--objective-weight": options.ObjectiveWeight = double.Parse(Next(), CultureInfo.InvariantCulture); break;
         default: throw new ArgumentException($"Opcao desconhecida: '{args[i]}'.");
     }
 }
 
 if (string.IsNullOrEmpty(options.DataPath) || string.IsNullOrEmpty(options.OutputDirectory))
 {
-    Console.Error.WriteLine("Uso: --data <balance_data.json> --out <pasta> [--games N] [--seed S] [--threads N] [--policies a,b] [--archetypes a,b] [--setups fase1,PresetX] [--hand-size N] [--turns N] [--no-turns] [--mcts-iterations N] [--mcts-c C] [--mode fase|rodada|relatorio|jornal|cenarios] [--news <jornal.json>] [--phases N] [--reward-rollouts N] [--finite-deck] [--permanent-reveal]");
+    Console.Error.WriteLine("Uso: --data <balance_data.json> --out <pasta> [--games N] [--seed S] [--threads N] [--policies a,b] [--archetypes a,b] [--setups fase1,PresetX] [--hand-size N] [--turns N] [--no-turns] [--mcts-iterations N] [--mcts-c C] [--objective-weight W] [--mode fase|rodada|relatorio|jornal|cenarios] [--news <jornal.json>] [--phases N] [--reward-rollouts N] [--finite-deck] [--permanent-reveal] [--no-trades]");
     return 1;
 }
 

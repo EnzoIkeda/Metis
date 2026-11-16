@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Trade_ConcessaoSaneamento
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 14
+  _parameter: 0
+  _targetId: Troca_ConcessaoSaneamento
+  _headline: "\xC1gua e esgoto passam para empresa privada"
+  _headlineEn: Water and sewage go to a private company
+  _body: "O contrato vale por d\xE9cadas e promete rede nova. Dona Cida guarda a
+    conta de \xE1gua para comparar."
+  _bodyEn: The contract runs for decades and promises new pipes. Dona Cida is keeping
+    her water bill to compare.

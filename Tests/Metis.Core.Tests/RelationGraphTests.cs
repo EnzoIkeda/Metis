@@ -107,10 +107,12 @@ public class RelationGraphTests
 
         var popToEnergia = edges.Single(e => e.From == CityParameterType.Populacao && e.To == CityParameterType.Energia);
         Assert.That(popToEnergia.IsSupport, Is.False);
-        Assert.That(popToEnergia.ZoneFactor, Is.EqualTo(1.6f), "pressao de fonte em crise e amplificada");
+        Assert.That(popToEnergia.CurrentAmount, Is.GreaterThan(0f));
+        Assert.That(popToEnergia.ZoneFactor, Is.EqualTo(0.5f), "o que a fonte em crise da aos outros cai pela metade");
 
         var popToRenda = edges.Single(e => e.From == CityParameterType.Populacao && e.To == CityParameterType.Renda);
-        Assert.That(popToRenda.ZoneFactor, Is.EqualTo(0.5f), "apoio de fonte em crise cai pela metade");
+        Assert.That(popToRenda.CurrentAmount, Is.LessThan(0f));
+        Assert.That(popToRenda.ZoneFactor, Is.EqualTo(1.6f), "o que a fonte em crise tira dos outros e amplificado");
 
         var rendaToEnergia = edges.Single(e => e.From == CityParameterType.Renda && e.To == CityParameterType.Energia);
         Assert.That(rendaToEnergia.ZoneFactor, Is.EqualTo(0.6f), "apoio de fonte em excesso tem retorno decrescente");
@@ -119,9 +121,9 @@ public class RelationGraphTests
         Assert.That(rendaToSust.ZoneFactor, Is.EqualTo(1f), "pressao de fonte em excesso continua inteira");
 
         var matrix = stats.Interactions;
-        Assert.That(matrix.GetZone(10f), Is.EqualTo(InteractionZone.Crise));
-        Assert.That(matrix.GetZone(50f), Is.EqualTo(InteractionZone.Saudavel));
-        Assert.That(matrix.GetZone(90f), Is.EqualTo(InteractionZone.Excesso));
+        Assert.That(matrix.GetZone(CityParameterType.Renda, 10f), Is.EqualTo(InteractionZone.Crise));
+        Assert.That(matrix.GetZone(CityParameterType.Renda, 50f), Is.EqualTo(InteractionZone.Saudavel));
+        Assert.That(matrix.GetZone(CityParameterType.Renda, 90f), Is.EqualTo(InteractionZone.Excesso));
     }
 
     [Test]

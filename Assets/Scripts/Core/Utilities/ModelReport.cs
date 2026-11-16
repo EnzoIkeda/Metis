@@ -577,6 +577,9 @@ public class ModelReportNumbers
     // Neutro, escala, crise, excesso, pressao na crise, apoio na crise, apoio no excesso, correcao e penalidade de Colapso.
     public double[] Interaction = Array.Empty<double>();
 
+    // Versao da regra das zonas, porque a mesma tabela de numeros pode valer por regras diferentes.
+    public int ZoneRule;
+
     // Coeficientes alvo por fonte, linha a linha.
     public double[] Matrix = Array.Empty<double>();
     public double[] RealMin = Array.Empty<double>();
@@ -602,6 +605,7 @@ public static class ModelReportFingerprint
             builder.Append(Join("/", numbers.Initial[i], numbers.Min[i], numbers.Max[i], numbers.Critical[i], numbers.Deriva[i]));
         }
         builder.Append("|Z:").Append(Join("/", numbers.Interaction));
+        builder.Append("|ZR:").Append(numbers.ZoneRule.ToString(CultureInfo.InvariantCulture));
         builder.Append("|M:").Append(Join(",", numbers.Matrix));
         builder.Append("|R:");
         for (var i = 0; i < numbers.RealMin.Length; i++)

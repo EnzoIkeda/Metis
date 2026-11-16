@@ -58,7 +58,7 @@ public class NewsRoom : MonoBehaviour
             ? PhaseHistory.Read(start, CityStats.AnchorParameter)
             : _cityStatsManager.Stats.GetValue(CityStats.AnchorParameter);
         var random = NewsEditor.EditionRandom(Archive.Seed, 0);
-        var edition = NewsEditor.Inauguration(Stories, random, wellbeing);
+        var edition = NewsEditor.Inauguration(Stories, random, wellbeing, MetaProgressionManager.ConsumePendingTradeNews());
         var sustainability = start.Length == PhaseHistory.Parameters.Length
             ? PhaseHistory.Read(start, CityParameterType.Sustentabilidade)
             : _cityStatsManager.Stats.GetValue(CityParameterType.Sustentabilidade);

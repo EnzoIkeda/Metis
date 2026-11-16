@@ -13,6 +13,7 @@ internal sealed class FakeCard : ICardDefinition
     public IReadOnlyList<StatModifier> StatEffects { get; init; } = new StatModifier[0];
     public CardAbility Ability { get; init; }
     public int Copies { get; init; } = 1;
+    public bool IsExtraOnly { get; init; }
 }
 
 internal sealed class FakeEvent : IRandomEventDefinition

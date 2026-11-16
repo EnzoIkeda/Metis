@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Boss_EstradasCortadas
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 15
+  _parameter: 0
+  _targetId: Enchente_EstradasCortadas
+  _headline: Pontes caem e a cidade fica isolada por terra
+  _headlineEn: Bridges collapse and the city is cut off by land
+  _body: "Caminh\xF5es param na beira da estrada partida. O GPS insiste em mandar
+    todo mundo pela ponte que n\xE3o existe mais."
+  _bodyEn: Trucks wait at the edge of the broken road. The GPS keeps sending everyone
+    over the bridge that is gone.

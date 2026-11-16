@@ -52,7 +52,7 @@ public class CardDetailPopupView : MonoBehaviour
         Hide();
     }
 
-    public void Show(CardData card, Action onPlay, bool isRevealed = false)
+    public void Show(CardData card, Action onPlay, bool isRevealed = false, float? cost = null)
     {
         _onPlay = onPlay;
 
@@ -61,7 +61,7 @@ public class CardDetailPopupView : MonoBehaviour
         if (_descriptionText != null)
             _descriptionText.text = isRevealed ? $"{card.Description}\n\n{UIStrings.CardEffects(card)}" : card.Description;
         if (_costText != null)
-            _costText.text = UIStrings.CardRequirementsFull(_displayData, card.RequiredPesquisa, card.Cost);
+            _costText.text = UIStrings.CardRequirementsFull(_displayData, card.RequiredPesquisa, cost ?? card.Cost);
 
         // Mostra a arte se a carta tiver uma, senao so o placeholder.
         var hasArtwork = card.Artwork != null;

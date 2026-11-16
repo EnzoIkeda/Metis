@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Boss_SoPeloAplicativo
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 15
+  _parameter: 0
+  _targetId: BigTech_SoPeloAplicativo
+  _headline: Para marcar consulta, baixe o app e aceite tudo
+  _headlineEn: To book a doctor, download the app and accept it all
+  _body: "Dona Cida tentou. O aplicativo pediu acesso aos contatos, \xE0 c\xE2mera
+    e \xE0 receita do p\xE3o de queijo."
+  _bodyEn: Dona Cida tried. The app asked for her contacts, her camera and her cheese
+    bread recipe.

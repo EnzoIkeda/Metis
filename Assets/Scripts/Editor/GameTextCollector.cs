@@ -31,6 +31,10 @@ public static class GameTextCollector
             ("_opening", "_openingEn", "OpeningPt", "OpeningEn"),
             ("_victory", "_victoryEn", "VictoryPt", "VictoryEn"),
             ("_inspiration", "_inspirationEn", "InspirationPt", "InspirationEn"));
+        AddPairs(items, GameTextOrigin.Trade, "TradeOfferData", GameTextEditKind.Trade,
+            ("_offerName", "_offerNameEn", "NamePt", "NameEn"),
+            ("_summary", "_summaryEn", "SummaryPt", "SummaryEn"));
+        AddBosses(items);
         AddStructures(items);
         AddKnowledgeSources(items);
         AddNestedPairs(items, GameTextOrigin.RelationNote, "InteractionNotesData", "_notes", "TextPt", "TextEn", "Reference");
@@ -122,6 +126,51 @@ public static class GameTextCollector
                 var choice = choices.GetArrayElementAtIndex(i);
                 Add($"_choices[{i}].Label", choice.FindPropertyRelative("Label").stringValue, choice.FindPropertyRelative("LabelEn").stringValue, "Label", "LabelEn", "LabelPt", "LabelEn", "Choices", i);
                 Add($"_choices[{i}].Detail", choice.FindPropertyRelative("Detail").stringValue, choice.FindPropertyRelative("DetailEn").stringValue, "Detail", "DetailEn", "DetailPt", "DetailEn", "Choices", i);
+            }
+        }
+    }
+
+    // O chefe e as cartas dele, que ficam dentro do mesmo asset e do mesmo objeto do JSON.
+    private static void AddBosses(List<GameTextItem> items)
+    {
+        foreach (var path in AssetPaths("BossData"))
+        {
+            var so = Open(path);
+            var id = Path.GetFileNameWithoutExtension(path);
+
+            void Add(string field, string pt, string en, string ptField, string enField, string jsonPt, string jsonEn, string nested, int index) => items.Add(new GameTextItem
+            {
+                Origin = GameTextOrigin.Boss,
+                Id = id,
+                Field = field,
+                Pt = pt,
+                En = en,
+                Location = path,
+                EditKind = GameTextEditKind.Boss,
+                PtField = ptField,
+                EnField = enField,
+                JsonPtKey = jsonPt,
+                JsonEnKey = jsonEn,
+                JsonListKey = "Bosses",
+                JsonNestedKey = nested,
+                ArrayIndex = index,
+            });
+
+            foreach (var (pt, en, jsonPt, jsonEn) in new[]
+            {
+                ("_bossName", "_bossNameEn", "NamePt", "NameEn"),
+                ("_summary", "_summaryEn", "SummaryPt", "SummaryEn"),
+                ("_intro", "_introEn", "IntroPt", "IntroEn"),
+                ("_victory", "_victoryEn", "VictoryPt", "VictoryEn"),
+            })
+                Add(pt, so.FindProperty(pt).stringValue, so.FindProperty(en).stringValue, pt, en, jsonPt, jsonEn, string.Empty, 0);
+
+            var cards = so.FindProperty("_cards");
+            for (var i = 0; i < cards.arraySize; i++)
+            {
+                var card = cards.GetArrayElementAtIndex(i);
+                Add($"_cards[{i}]._cardName", card.FindPropertyRelative("_cardName").stringValue, card.FindPropertyRelative("_cardNameEn").stringValue, "_cardName", "_cardNameEn", "NamePt", "NameEn", "Cards", i);
+                Add($"_cards[{i}]._description", card.FindPropertyRelative("_description").stringValue, card.FindPropertyRelative("_descriptionEn").stringValue, "_description", "_descriptionEn", "DescriptionPt", "DescriptionEn", "Cards", i);
             }
         }
     }

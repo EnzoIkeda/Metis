@@ -43,7 +43,7 @@ public static class NewsStoryImporter
         var report = new Report();
         var file = JsonUtility.FromJson<NewsImportFormat.FileDto>(File.ReadAllText(jsonPath));
 
-        report.Errors.AddRange(NewsImportFormat.Validate(file, AssetNames("t:CardData"), AssetNames("t:RandomEventData")));
+        report.Errors.AddRange(NewsImportFormat.Validate(file, AssetNames("t:CardData"), AssetNames("t:RandomEventData"), AssetNames("t:TradeOfferData"), BossCardIds()));
         foreach (var error in report.Errors)
             Debug.LogError($"[Jornal] {error}");
         if (report.Errors.Count > 0)
@@ -92,6 +92,14 @@ public static class NewsStoryImporter
         if (apply)
             AssetDatabase.SaveAssets();
         return report;
+    }
+
+    private static HashSet<string> BossCardIds()
+    {
+        return new HashSet<string>(AssetDatabase.FindAssets("t:BossData", new[] { "Assets/Data" })
+            .Select(guid => AssetDatabase.LoadAssetAtPath<BossData>(AssetDatabase.GUIDToAssetPath(guid)))
+            .Where(boss => boss != null)
+            .SelectMany(boss => boss.BossCards.Select(card => card.Id)));
     }
 
     private static HashSet<string> AssetNames(string filter)

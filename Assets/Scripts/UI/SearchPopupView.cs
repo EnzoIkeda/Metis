@@ -36,7 +36,7 @@ public class SearchPopupView : MonoBehaviour
         foreach (var card in candidates)
         {
             var view = Instantiate(_cardPrefab, _cardContainer);
-            view.Bind(card, Choose, Choose, true, _turnManager.Hand.IsRevealed);
+            view.Bind(card, Choose, Choose, true, _turnManager.Hand.IsRevealed, _turnManager.Hand.CostOf(card));
             _spawnedCards.Add(view);
         }
 

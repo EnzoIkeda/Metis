@@ -21,7 +21,7 @@ public sealed class ScenarioJob
 }
 
 // Modo "cenarios": taxa de vitoria e de cada objetivo por cenario, arquetipo e politica.
-// As politicas nao sabem dos objetivos, entao as taxas medem o que sai jogando so para sobreviver.
+// So a equilibrada com objetivos sabe deles; as outras jogam so para sobreviver.
 public static class ScenarioSimulation
 {
     public static SimPreset ThemeOf(BalanceData data, SimScenario scenario)
@@ -62,6 +62,7 @@ public static class ScenarioSimulation
             VictoryTurnCountOverride = options.VictoryTurnCount,
             FiniteDeck = options.FiniteDeck,
             PermanentReveal = options.PermanentReveal,
+            Objectives = scenario.Objectives,
         };
 
         var history = new PhaseHistory();

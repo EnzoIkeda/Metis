@@ -249,7 +249,7 @@ public class RelationMapView : MonoBehaviour
         if (matrix == null)
             return _healthyRing;
 
-        switch (matrix.GetZone(_stats.GetValue(parameter)))
+        switch (matrix.GetZone(parameter, _stats.GetValue(parameter)))
         {
             case InteractionZone.Crise: return _crisisRing;
             case InteractionZone.Excesso: return _excessRing;
@@ -376,7 +376,7 @@ public class RelationMapView : MonoBehaviour
             return;
         }
         var value = _stats.GetValue(parameter);
-        body.Append(UIStrings.RelationNodeHeader(parameter, Level(parameter, value), _stats.Interactions.GetZone(value))).Append('\n');
+        body.Append(UIStrings.RelationNodeHeader(parameter, Level(parameter, value), _stats.Interactions.GetZone(parameter, value))).Append('\n');
     }
 
     private void AppendList(StringBuilder body, CityParameterType selected)
@@ -431,8 +431,8 @@ public class RelationMapView : MonoBehaviour
                 body.Append(edge.Kind == RelationKind.WellbeingPart ? UIStrings.RelationPartNow(amount) : UIStrings.RelationNow(amount, edge.To)).Append('\n');
                 if (edge.Kind == RelationKind.Interaction && Mathf.Approximately(edge.ZoneFactor, 1f) == false)
                 {
-                    var zone = _stats.Interactions.GetZone(_stats.GetValue(edge.From));
-                    body.Append(UIStrings.RelationZoneNote(edge.From, zone, edge.ZoneFactor, edge.IsSupport)).Append('\n');
+                    var zone = _stats.Interactions.GetZone(edge.From, _stats.GetValue(edge.From));
+                    body.Append(UIStrings.RelationZoneNote(edge.From, zone, edge.ZoneFactor, edge.CurrentAmount < 0f)).Append('\n');
                 }
                 if (IsReversed(edge))
                     body.Append(UIStrings.RelationReversedNote(edge.From, edge.IsSupport)).Append('\n');

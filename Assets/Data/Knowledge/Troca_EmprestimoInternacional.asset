@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Troca_EmprestimoInternacional
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Empr\xE9stimo internacional"
+  _titleEn: International loan
+  _category: 2
+  _unlockTrigger: 13
+  _summary: "Bancos de desenvolvimento, como o BID e o Banco Mundial, emprestam a
+    prefeituras para obras grandes. O dinheiro chega antes, mas a cidade paga parcelas
+    e juros por muitos anos e costuma entrar com uma parte do pr\xF3prio caixa."
+  _summaryEn: Development banks such as the IDB and the World Bank lend to cities
+    for large works. The money arrives up front, but the city pays installments and
+    interest for many years and usually puts in part of its own cash.
+  _realWorld: "Em agosto de 2026, o Senado autorizou a cidade de S\xE3o Paulo a contratar
+    cerca de US$ 497 milh\xF5es com o BID e o Banco Mundial, para \xF4nibus el\xE9tricos
+    e hospitais, com garantia da Uni\xE3o. Todo empr\xE9stimo externo de um munic\xEDpio
+    passa por essa autoriza\xE7\xE3o."
+  _realWorldEn: "In August 2026, Brazil's Senate authorized the city of S\xE3o Paulo
+    to borrow about US$ 497 million from the IDB and the World Bank, for electric
+    buses and hospitals, guaranteed by the federal government. Every foreign loan
+    to a city needs this approval."
+  _tradeOffs: "A d\xEDvida amarra o or\xE7amento das pr\xF3ximas gest\xF5es; se a
+    obra atrasa, os juros correm do mesmo jeito."
+  _tradeOffsEn: The debt ties up the budget of future administrations; if the works
+    run late, the interest keeps running.
+  _sources:
+  - Label: "R\xE1dio Senado, empr\xE9stimos para a cidade de S\xE3o Paulo (2026)"
+    Url: https://www12.senado.leg.br/radio/1/noticia/2026/08/13/senado-autoriza-prefeitura-de-sao-paulo-a-contratar-emprestimos-para-transporte-e-saude
+  - Label: "Ag\xEAncia Senado, autoriza\xE7\xE3o de empr\xE9stimos de estados e munic\xEDpios
+      (2023)"
+    Url: https://www12.senado.leg.br/noticias/materias/2023/12/19/plenario-autoriza-emprestimos-de-estados-municipios-bancos-publicos-e-uniao
+  _relatedEntries:
+  - {fileID: 11400000, guid: a16497e74769f0066b65644f094d7002, type: 2}
+  _image: {fileID: 0}

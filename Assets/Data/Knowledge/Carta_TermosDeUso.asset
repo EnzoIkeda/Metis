@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Carta_TermosDeUso
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: Termos de Uso
+  _titleEn: Terms of Use
+  _category: 0
+  _unlockTrigger: 0
+  _summary: "As cl\xE1usulas do contrato de dados com a big tech chegam \xE0 mesa
+    da prefeitura a cada turno. Ocupam tempo da gest\xE3o e n\xE3o melhoram nada
+    na cidade."
+  _summaryEn: The clauses of the data contract with the big tech company land on
+    City Hall's desk every turn. They take up the administration's time and improve
+    nothing in the city.
+  _realWorld: "No projeto de Toronto, a proposta de um fundo independente para guardar
+    os dados urbanos foi criticada por especialistas, e a ex-comiss\xE1ria de privacidade
+    de Ont\xE1rio, Ann Cavoukian, deixou o cargo de consultora do projeto."
+  _realWorldEn: In the Toronto project, the proposal for an independent trust to
+    hold urban data was criticized by experts, and Ontario's former privacy commissioner,
+    Ann Cavoukian, quit her role as the project's adviser.
+  _tradeOffs: Ler e negociar termos custa caro; aceitar sem ler custa mais tarde.
+  _tradeOffsEn: Reading and negotiating terms is costly; accepting without reading
+    costs more later.
+  _sources:
+  - Label: Sidewalk Toronto (Wikipedia)
+    Url: https://en.wikipedia.org/wiki/Sidewalk_Toronto
+  _relatedEntries:
+  - {fileID: 11400000, guid: 4ab5f9bb4c811d5a8a6df425ca732337, type: 2}
+  _image: {fileID: 0}

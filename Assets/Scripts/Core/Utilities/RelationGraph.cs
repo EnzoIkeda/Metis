@@ -80,7 +80,7 @@ public static class RelationGraph
                     To = alvo,
                     Kind = RelationKind.Interaction,
                     Coefficient = coeficiente,
-                    ZoneFactor = hasState ? matrix.GetZoneFactor(valorFonte, coeficiente) : 1f,
+                    ZoneFactor = hasState ? matrix.GetZoneFactor(fonte, valorFonte, coeficiente) : 1f,
                     HasState = hasState,
                     CurrentAmount = hasState ? matrix.GetTerm(alvo, fonte, valorFonte) : 0f,
                 });

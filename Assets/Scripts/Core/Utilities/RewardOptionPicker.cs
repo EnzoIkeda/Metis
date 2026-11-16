@@ -24,7 +24,7 @@ public static class RewardOptionPicker
         var pool = new List<TCard>();
         foreach (var card in allCards)
         {
-            if (Contains(currentDeck, card) == false)
+            if (card.IsExtraOnly == false && Contains(currentDeck, card) == false)
                 pool.Add(card);
         }
         return pool;

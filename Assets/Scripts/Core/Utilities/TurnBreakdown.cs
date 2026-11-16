@@ -12,6 +12,9 @@ public enum ContributionSource
     CollapsePenalty,
     Clamp,
     CardCost,
+
+    // Carta jogada pelo chefe.
+    Boss,
 }
 
 // Uma parcela da variacao: quanto um parametro mudou por uma origem.

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Boss_SalariosAtrasados
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 15
+  _parameter: 0
+  _targetId: Fiscal_SalariosAtrasados
+  _headline: "Servidor recebe s\xF3 na semana que vem, talvez"
+  _headlineEn: Public workers will get paid next week, maybe
+  _body: "Na fila do banco, a pergunta do dia \xE9 \"j\xE1 caiu?\". A resposta do
+    dia \xE9 \"ainda n\xE3o\"."
+  _bodyEn: At the bank, the question of the day is "has it come in?". The answer
+    of the day is "not yet".

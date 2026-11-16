@@ -192,6 +192,24 @@ public class NewsEditorTests
     }
 
     [Test]
+    public void Inauguration_WithAcceptedTrade_AddsItsStoryAsANote()
+    {
+        var stories = new List<FakeStory>
+        {
+            Story("Posse", NewsTrigger.Inauguration),
+            new FakeStory { Id = "TrocaA", Trigger = NewsTrigger.TradeAccepted, TargetId = "A" },
+            new FakeStory { Id = "TrocaB", Trigger = NewsTrigger.TradeAccepted, TargetId = "B" },
+        };
+
+        var edition = NewsEditor.Inauguration(stories, new Random(0), 47f, "B");
+        var plain = NewsEditor.Inauguration(stories, new Random(0), 47f);
+
+        Assert.That(edition.Items.Select(item => item.StoryId), Is.EqualTo(new[] { "Posse", "TrocaB" }));
+        Assert.That(edition.Items[1].TargetId, Is.EqualTo("B"));
+        Assert.That(plain.Items.Select(item => item.StoryId), Is.EqualTo(new[] { "Posse" }));
+    }
+
+    [Test]
     public void TryMainCause_PicksTheLargestShareInTheDirectionOfTheChange()
     {
         var breakdown = new TurnBreakdown(3);

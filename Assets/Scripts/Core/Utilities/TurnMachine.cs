@@ -8,7 +8,10 @@ public enum TurnPhase
     Resolution,
     Event,
     EndCheck,
-    Advance
+    Advance,
+
+    // Jogada do chefe, entre a carta do jogador e a resolucao; so na fase do chefe.
+    Boss
 }
 
 public enum GameOutcome
@@ -28,6 +31,9 @@ public class TurnMachine
     // Turnos que precisam ser sobrevividos pra vencer a fase.
     public int VictoryTurnCount { get; }
 
+    // Fase contra um chefe: o turno para na jogada dele antes da resolucao.
+    public bool HasBoss { get; }
+
     public int TurnIndex { get; private set; }
     public TurnPhase CurrentPhase { get; private set; }
     public GameOutcome Outcome { get; private set; }
@@ -36,10 +42,11 @@ public class TurnMachine
     public event Action<int> OnTurnAdvanced;
     public event Action<GameOutcome> OnGameEnded;
 
-    public TurnMachine(CityStats cityStats, int victoryTurnCount = DefaultVictoryTurnCount)
+    public TurnMachine(CityStats cityStats, int victoryTurnCount = DefaultVictoryTurnCount, bool hasBoss = false)
     {
         _cityStats = cityStats;
         VictoryTurnCount = victoryTurnCount;
+        HasBoss = hasBoss;
     }
 
     public void StartGame()
@@ -65,6 +72,14 @@ public class TurnMachine
         SetPhase(TurnPhase.Event);
     }
 
+    // Retoma uma fase salva com a jogada do chefe ja aplicada, esperando a confirmacao.
+    public void ResumeAtBoss(int turnIndex)
+    {
+        TurnIndex = Math.Max(1, turnIndex);
+        Outcome = GameOutcome.None;
+        SetPhase(TurnPhase.Boss);
+    }
+
     private void BeginTurn()
     {
         SetPhase(TurnPhase.StartOfTurn);
@@ -79,6 +94,27 @@ public class TurnMachine
         if (Outcome != GameOutcome.None || CurrentPhase != TurnPhase.Action)
             return;
 
+        if (HasBoss)
+        {
+            SetPhase(TurnPhase.Boss);
+            // A carta do chefe sai em reacao a esta fase, e o turno so continua com a confirmacao.
+            return;
+        }
+
+        Resolve();
+    }
+
+    // Continua o turno depois da jogada do chefe.
+    public void AcknowledgeBoss()
+    {
+        if (Outcome != GameOutcome.None || CurrentPhase != TurnPhase.Boss)
+            return;
+
+        Resolve();
+    }
+
+    private void Resolve()
+    {
         SetPhase(TurnPhase.Resolution);
         _cityStats.ResolveTurn();
 

@@ -15,6 +15,7 @@
     <Compile Include="../../Assets/Scripts/Data/ICardDefinition.cs" Link="Game/ICardDefinition.cs" />
     <Compile Include="../../Assets/Scripts/Data/IRandomEventDefinition.cs" Link="Game/IRandomEventDefinition.cs" />
     <Compile Include="../../Assets/Scripts/Data/IAdvantageDefinition.cs" Link="Game/IAdvantageDefinition.cs" />
+    <Compile Include="../../Assets/Scripts/Data/ITradeOfferDefinition.cs" Link="Game/ITradeOfferDefinition.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/CityStats.cs" Link="Game/CityStats.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/TurnBreakdown.cs" Link="Game/TurnBreakdown.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/InteractionMatrix.cs" Link="Game/InteractionMatrix.cs" />
@@ -25,6 +26,9 @@
     <Compile Include="../../Assets/Scripts/Core/Utilities/DeckBuilder.cs" Link="Game/DeckBuilder.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/CityPresetRules.cs" Link="Game/CityPresetRules.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/RewardOptionPicker.cs" Link="Game/RewardOptionPicker.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/TradeOfferRules.cs" Link="Game/TradeOfferRules.cs" />
+    <Compile Include="../../Assets/Scripts/Data/IBossDefinition.cs" Link="Game/IBossDefinition.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/BossEncounter.cs" Link="Game/BossEncounter.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/StateScore.cs" Link="Game/StateScore.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/PhaseReport.cs" Link="Game/PhaseReport.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/PhaseHistory.cs" Link="Game/PhaseHistory.cs" />

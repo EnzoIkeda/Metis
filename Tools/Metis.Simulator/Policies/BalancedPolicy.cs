@@ -13,13 +13,13 @@ public sealed class BalancedPolicy : IPlayerPolicy
         var weights = BuildWeights(context.Stats, context.Data);
         var candidates = PolicyHelpers.DistinctById(context.PlayableCards);
         return PolicyHelpers.PickBest(candidates, card => PolicyHelpers.ScoreWithAbilities(
-            card, context, plain => Score(plain, weights), ability => CostScore(ability, weights)), context.Random);
+            card, context, plain => Score(plain, weights, context.CostOffset), ability => CostScore(ability, weights, context.CostOffset)), context.Random);
     }
 
     public SimCard ChooseSearch(DecisionContext context, IReadOnlyList<SimCard> candidates)
     {
         var weights = BuildWeights(context.Stats, context.Data);
-        return PolicyHelpers.PickBest(PolicyHelpers.DistinctById(candidates), card => Score(card, weights), context.Random);
+        return PolicyHelpers.PickBest(PolicyHelpers.DistinctById(candidates), card => Score(card, weights, context.CostOffset), context.Random);
     }
 
     public int ChooseEventOption(DecisionContext context, SimEvent dilemma)
@@ -33,17 +33,17 @@ public sealed class BalancedPolicy : IPlayerPolicy
         return PolicyHelpers.PickBest(PolicyHelpers.OptionIndexes(dilemma), index => Score(PolicyHelpers.AsCard(dilemma.Choices[index]), weights), random);
     }
 
-    public static double Score(SimCard card, Dictionary<CityParameterType, double> weights)
+    public static double Score(SimCard card, Dictionary<CityParameterType, double> weights, int costOffset = 0)
     {
-        var score = CostScore(card, weights);
+        var score = CostScore(card, weights, costOffset);
         foreach (var effect in card.StatEffects)
             score += effect.Amount * Weight(weights, effect.Parameter);
         return score;
     }
 
-    private static double CostScore(SimCard card, Dictionary<CityParameterType, double> weights)
+    public static double CostScore(SimCard card, Dictionary<CityParameterType, double> weights, int costOffset = 0)
     {
-        return -card.Cost * Weight(weights, CityParameterType.Renda);
+        return -TradeOfferRules.EffectiveCost(card.Cost, costOffset) * Weight(weights, CityParameterType.Renda);
     }
 
     // Bem-estar fica de fora: e recalculado a partir dos outros na resolucao, efeito direto nele nao dura.

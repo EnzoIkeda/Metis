@@ -6,6 +6,9 @@ public enum PhaseMapNodeType
 {
     Unknown,
     Themed,
+
+    // Fase do chefe, unico destino depois da ultima fase da rodada.
+    Boss,
 }
 
 // Um no do mapa entre fases. Id identifica o destino; no tema, e o nome do asset.
@@ -43,15 +46,26 @@ public static class PhaseMapProvider
         return offer;
     }
 
-    // Mantem a oferta ja sorteada, sem temas que deixaram de existir; sem oferta, sorteia uma.
-    public static List<PhaseMapNode> ResolveOffer(IReadOnlyList<PhaseMapNode> saved, IReadOnlyList<string> themeNames, IReadOnlyCollection<string> playedThemes, Random random)
+    // So o chefe, numa cidade sorteada.
+    public static List<PhaseMapNode> BossOffer(string bossId)
     {
+        return new List<PhaseMapNode> { new PhaseMapNode { Id = bossId, Type = PhaseMapNodeType.Boss, IsAvailable = true } };
+    }
+
+    // Mantem a oferta ja sorteada, sem temas que deixaram de existir; sem oferta, sorteia uma.
+    // Com bossId, a parada leva ao chefe e nada mais.
+    public static List<PhaseMapNode> ResolveOffer(IReadOnlyList<PhaseMapNode> saved, IReadOnlyList<string> themeNames, IReadOnlyCollection<string> playedThemes, Random random,
+        string bossId = null)
+    {
+        if (string.IsNullOrEmpty(bossId) == false)
+            return BossOffer(bossId);
+
         var offer = new List<PhaseMapNode>();
         if (saved != null)
         {
             foreach (var node in saved)
             {
-                if (node.Type != PhaseMapNodeType.Themed || Contains(themeNames, node.Id))
+                if (node.Type == PhaseMapNodeType.Unknown || (node.Type == PhaseMapNodeType.Themed && Contains(themeNames, node.Id)))
                     offer.Add(node);
             }
         }

@@ -105,6 +105,7 @@ public class TutorialTipView : MonoBehaviour
             Turn = _machine.TurnIndex,
             CanPass = _turnManager.CanPassTurn,
             EventHappened = _eventHappened,
+            HasBoss = _turnManager.Boss != null,
         };
         TutorialRules.ReadStats(ref situation, _cityStatsManager != null ? _cityStatsManager.Stats : null, _tierGates);
         return TutorialRules.Next(situation, TutorialProgress.WasSeen);

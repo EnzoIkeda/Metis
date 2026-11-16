@@ -1,0 +1,136 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68297576211f45a468974674df2b4ecd, type: 3}
+  m_Name: Chefe_BigTech
+  m_EditorClassIdentifier: Metis.Runtime::BossData
+  _bossName: A Big Tech
+  _bossNameEn: Big Tech
+  _summary: Uma gigante da tecnologia oferece sensores e aplicativos para a cidade
+    inteira, em troca dos dados de todo mundo. Cada golpe enche o seu baralho de
+    Termos de Uso.
+  _summaryEn: A tech giant offers sensors and apps for the whole city, in exchange
+    for everyone's data. Each blow stuffs your deck with Terms of Service.
+  _intro: "Uma gigante da tecnologia quer transformar a cidade na vitrine dela. A
+    cada turno a empresa ganha \xCDmpeto e, quando ele basta, joga uma carta logo
+    depois da sua; cada golpe p\xF5e 2 cartas Termos de Uso no seu baralho, que n\xE3o
+    fazem nada e ocupam lugar na m\xE3o. Aguente os 20 turnos para vencer a rodada.\n\n<i>Inspirada
+    no projeto da Sidewalk Labs em Toronto, abandonado em 2020.</i>"
+  _introEn: 'A tech giant wants to turn the city into its showcase. Every turn the
+    company builds Momentum and, once there is enough, plays a card right after yours;
+    each blow puts 2 Terms of Service cards in your deck, which do nothing and take
+    up room in your hand. Hold out for 20 turns to win the run.
+
+
+    <i>Inspired
+    by the Sidewalk Labs project in Toronto, abandoned in 2020.</i>'
+  _victory: "A cidade continua sua, e os dados dos moradores tamb\xE9m. Fica a li\xE7\xE3o:
+    tecnologia ajuda quando a cidade decide para que ela serve, e n\xE3o o contr\xE1rio."
+  _victoryEn: 'The city is still yours, and so is its residents'' data. The lesson
+    remains: technology helps when the city decides what it is for, not the other
+    way around.'
+  _knowledgeEntry: {fileID: 11400000, guid: c024a9efe31858830a474d3f36065a02, type: 2}
+  _targetArchetype: 3
+  _startingMomentum: 0
+  _momentumPerTurn: 2
+  _mechanic: 3
+  _mechanicAmount: 2
+  _mechanicCardId: CardTermosDeUso
+  _cards:
+  - _id: BigTech_SensoresEmTudo
+    _cardName: Sensores em cada poste
+    _cardNameEn: Sensors on every pole
+    _description: "C\xE2meras e sensores registram quem passa, e ningu\xE9m sabe
+      ao certo para onde v\xE3o os dados."
+    _descriptionEn: Cameras and sensors record everyone who walks by, and nobody
+      quite knows where the data goes.
+    _momentumCost: 5
+    _effects:
+    - Parameter: 2
+      Amount: -5
+    - Parameter: 3
+      Amount: -2
+  - _id: BigTech_DadosSemAnonimato
+    _cardName: Dados sem anonimato
+    _cardNameEn: Data without anonymity
+    _description: "A empresa s\xF3 promete incentivar que os dados sejam anonimizados.
+      Em 2018, Ann Cavoukian deixou o projeto de Toronto por isso."
+    _descriptionEn: The company only promises to encourage anonymizing the data.
+      In 2018, Ann Cavoukian left the Toronto project over it.
+    _momentumCost: 6
+    _effects:
+    - Parameter: 2
+      Amount: -7
+    - Parameter: 3
+      Amount: -2
+  - _id: BigTech_ContratoComIsencao
+    _cardName: "Contrato com isen\xE7\xE3o"
+    _cardNameEn: Tax-break deal
+    _description: "Para atrair a vitrine tecnol\xF3gica, a cidade abre m\xE3o de
+      impostos que pagariam outros servi\xE7os."
+    _descriptionEn: To land the tech showcase, the city gives up taxes that would
+      pay for other services.
+    _momentumCost: 5
+    _effects:
+    - Parameter: 0
+      Amount: -5
+    - Parameter: 2
+      Amount: -2
+  - _id: BigTech_SoPeloAplicativo
+    _cardName: "Servi\xE7o s\xF3 pelo aplicativo"
+    _cardNameEn: App-only services
+    _description: "Servi\xE7os p\xFAblicos passam a exigir cadastro no aplicativo
+      da empresa, e quem n\xE3o tem celular fica de fora."
+    _descriptionEn: Public services start requiring sign-up on the company's app,
+      and people without a phone are left out.
+    _momentumCost: 4
+    _effects:
+    - Parameter: 3
+      Amount: -3
+    - Parameter: 2
+      Amount: -2
+  - _id: BigTech_PlataformaFechada
+    _cardName: Plataforma fechada
+    _cardNameEn: Locked-in platform
+    _description: "Os sistemas da cidade s\xF3 conversam com os da empresa, e trocar
+      de fornecedor fica caro demais."
+    _descriptionEn: The city's systems only talk to the company's, and switching
+      vendors becomes too expensive.
+    _momentumCost: 5
+    _effects:
+    - Parameter: 0
+      Amount: -5
+    - Parameter: 2
+      Amount: -2
+  - _id: BigTech_Vazamento
+    _cardName: Vazamento de dados
+    _cardNameEn: Data leak
+    _description: "Uma falha exp\xF5e dados de moradores coletados pela plataforma."
+    _descriptionEn: A flaw exposes residents' data collected by the platform.
+    _momentumCost: 6
+    _effects:
+    - Parameter: 2
+      Amount: -7
+    - Parameter: 0
+      Amount: -2
+  - _id: BigTech_EmpresaVaiEmbora
+    _cardName: A empresa vai embora
+    _cardNameEn: The company walks away
+    _description: Depois de anos de planos, a empresa desiste do projeto. Em maio
+      de 2020, a Sidewalk Labs abandonou o bairro de Quayside, em Toronto.
+    _descriptionEn: After years of plans, the company drops the project. In May 2020,
+      Sidewalk Labs abandoned the Quayside district in Toronto.
+    _momentumCost: 6
+    _effects:
+    - Parameter: 0
+      Amount: -5
+    - Parameter: 3
+      Amount: -3

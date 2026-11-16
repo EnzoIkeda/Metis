@@ -78,6 +78,7 @@ public static class BalanceDataExporter
                 PlacesStructure = card.StructureToPlace != null,
                 Ability = card.Ability.ToString(),
                 Copies = card.Copies,
+                ExtraOnly = card.IsExtraOnly,
                 Effects = ToDtos(card.StatEffects),
             });
         }
@@ -130,7 +131,55 @@ public static class BalanceDataExporter
             }
         }
 
+        var trades = AssetDatabase.LoadAssetAtPath<TradeOfferLibraryData>(TradeOfferImporter.LibraryPath);
+        if (trades != null)
+        {
+            foreach (var offer in trades.Offers)
+            {
+                data.TradeOffers.Add(new BalanceDataFormat.TradeOfferDto
+                {
+                    Id = offer.name,
+                    Name = PortugueseText(offer, "_offerName"),
+                    Benefit = ToTermDto(offer.Benefit),
+                    Drawback = ToTermDto(offer.Drawback),
+                });
+            }
+        }
+
+        var bosses = AssetDatabase.LoadAssetAtPath<BossLibraryData>(BossImporter.LibraryPath);
+        if (bosses != null)
+        {
+            foreach (var boss in bosses.Bosses)
+            {
+                var dto = new BalanceDataFormat.BossDto
+                {
+                    Id = boss.name,
+                    Name = PortugueseText(boss, "_bossName"),
+                    TargetArchetype = boss.TargetArchetype.ToString(),
+                    StartingMomentum = boss.StartingMomentum,
+                    MomentumPerTurn = boss.MomentumPerTurn,
+                    Mechanic = boss.Mechanic.ToString(),
+                    MechanicAmount = boss.MechanicAmount,
+                    MechanicCardId = boss.MechanicCardId,
+                };
+                foreach (var card in boss.BossCards)
+                    dto.Cards.Add(new BalanceDataFormat.BossCardDto { Id = card.Id, MomentumCost = card.MomentumCost, Effects = ToDtos(card.Effects) });
+                data.Bosses.Add(dto);
+            }
+        }
+
         return data;
+    }
+
+    private static BalanceDataFormat.TradeTermDto ToTermDto(TradeTerm term)
+    {
+        return new BalanceDataFormat.TradeTermDto
+        {
+            Kind = term.Kind.ToString(),
+            Effects = ToDtos(term.EffectsOrEmpty()),
+            Amount = term.Amount,
+            CardId = term.CardId ?? string.Empty,
+        };
     }
 
     // Texto em portugues direto do campo serializado, independente do idioma ativo no Editor.

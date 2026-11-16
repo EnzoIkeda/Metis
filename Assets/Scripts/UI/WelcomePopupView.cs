@@ -25,18 +25,19 @@ public class WelcomePopupView : MonoBehaviour
     private void Start()
     {
         var theme = _turnManager != null ? _turnManager.Theme : null;
+        var boss = _turnManager != null ? _turnManager.BossDefinition : null;
         if (_titleText != null)
-            _titleText.text = theme != null ? theme.ThemeName : UIStrings.WelcomeTitle;
+            _titleText.text = boss != null ? boss.BossName : theme != null ? theme.ThemeName : UIStrings.WelcomeTitle;
         if (_messageText != null)
-            _messageText.text = theme != null ? $"{theme.Opening}\n\n<i>{theme.Inspiration}</i>" : UIStrings.WelcomeMessage;
+            _messageText.text = boss != null ? boss.Intro : theme != null ? $"{theme.Opening}\n\n<i>{theme.Inspiration}</i>" : UIStrings.WelcomeMessage;
         if (_startButton != null)
             _startButton.onClick.AddListener(Close);
         if (_reportButton != null)
         {
-            var entry = theme != null && _knowledgePopup != null ? theme.KnowledgeEntry : null;
+            var entry = _knowledgePopup == null ? null : boss != null ? boss.KnowledgeEntry : theme != null ? theme.KnowledgeEntry : null;
             var label = _reportButton.GetComponentInChildren<TMP_Text>();
             if (label != null)
-                label.text = entry != null ? UIStrings.ThemeLearnMoreButton : UIStrings.ModelReportWelcomeButton;
+                label.text = entry == null ? UIStrings.ModelReportWelcomeButton : boss != null ? UIStrings.BossLearnMoreButton : UIStrings.ThemeLearnMoreButton;
             _reportButton.gameObject.SetActive(entry != null || _reportView != null);
             if (entry != null)
                 _reportButton.onClick.AddListener(() => _knowledgePopup.Show(entry));

@@ -28,6 +28,23 @@ public class CardHand<TCard> where TCard : class, ICardDefinition
 
     public event Action OnHandChanged;
 
+    private int _costOffset;
+
+    // Soma das trocas e do chefe ao custo de toda carta; o custo cobrado nunca fica negativo. Mudar avisa a mao.
+    public int CostOffset
+    {
+        get => _costOffset;
+        set
+        {
+            if (_costOffset == value)
+                return;
+            _costOffset = value;
+            OnHandChanged?.Invoke();
+        }
+    }
+
+    public float CostOf(TCard card) => TradeOfferRules.EffectiveCost(card.Cost, CostOffset);
+
     // random e opcional, passar um com seed fixa deixa a compra reproduzivel.
     public CardHand(IReadOnlyList<TCard> pool, Random random = null, bool finiteDeck = false)
     {
@@ -98,7 +115,7 @@ public class CardHand<TCard> where TCard : class, ICardDefinition
         return card != null
             && _cards.Contains(card)
             && stats.GetValue(CityParameterType.Pesquisa) >= card.RequiredPesquisa
-            && stats.GetValue(CityParameterType.Renda) >= card.Cost;
+            && stats.GetValue(CityParameterType.Renda) >= CostOf(card);
     }
 
     // Joga uma carta da mao.
@@ -112,7 +129,7 @@ public class CardHand<TCard> where TCard : class, ICardDefinition
         var source = recorder != null ? recorder.CurrentSource : ContributionSource.Card;
         if (recorder != null)
             recorder.CurrentSource = ContributionSource.CardCost;
-        stats.ApplyModifier(new StatModifier { Parameter = CityParameterType.Renda, Amount = -card.Cost });
+        stats.ApplyModifier(new StatModifier { Parameter = CityParameterType.Renda, Amount = -CostOf(card) });
         if (recorder != null)
             recorder.CurrentSource = source;
         stats.ApplyModifiers(card.StatEffects);
@@ -171,6 +188,31 @@ public class CardHand<TCard> where TCard : class, ICardDefinition
         _cards.Add(card);
         OnHandChanged?.Invoke();
         return true;
+    }
+
+    // Poe copias de uma carta em posicoes sorteadas da pilha de compra; so com baralho finito.
+    public void InsertIntoDrawPile(TCard card, int count)
+    {
+        if (card == null || count <= 0 || _finiteDeck == false)
+            return;
+        for (var i = 0; i < count; i++)
+            _drawPile.Insert(_random.Next(_drawPile.Count + 1), card);
+        OnHandChanged?.Invoke();
+    }
+
+    // Quantas copias da carta estao na mao e nas pilhas.
+    public int CountInDeck(TCard card)
+    {
+        var count = 0;
+        foreach (var list in new[] { _cards, _drawPile, _discardPile })
+        {
+            foreach (var other in list)
+            {
+                if (other == card)
+                    count++;
+            }
+        }
+        return count;
     }
 
     private int DrawWithReplacement(int count, CityStats stats)

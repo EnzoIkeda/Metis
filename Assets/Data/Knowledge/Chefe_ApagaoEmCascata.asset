@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f424be585f9e04c79a96c8292e8b9db1, type: 3}
+  m_Name: Chefe_ApagaoEmCascata
+  m_EditorClassIdentifier: Metis.Runtime::KnowledgeEntryData
+  _title: "Redes el\xE9tricas e falhas em cascata"
+  _titleEn: Power grids and cascading failures
+  _category: 2
+  _unlockTrigger: 14
+  _summary: "Numa rede el\xE9trica muito acoplada, a falha de uma pe\xE7a derruba
+    as que dependem dela, e a falta de energia para bombas de \xE1gua, hospitais,
+    sem\xE1foros e com\xE9rcio. O soci\xF3logo Charles Perrow chamou esses desastres
+    de acidentes normais: em sistemas assim, cedo ou tarde eles acontecem."
+  _summaryEn: 'In a tightly coupled power grid, one failing part drags down those
+    that depend on it, and the outage stops water pumps, hospitals, traffic lights
+    and shops. Sociologist Charles Perrow called such disasters normal accidents:
+    in systems like these, sooner or later they happen.'
+  _realWorld: "Em 3 de novembro de 2020, um inc\xEAndio na subesta\xE7\xE3o de Macap\xE1
+    deixou ao menos 13 dos 16 munic\xEDpios do Amap\xE1 sem energia. Um dos tr\xEAs
+    transformadores estava parado desde 2019; a luz voltou em rod\xEDzio, houve um
+    segundo apag\xE3o total em 17 de novembro, e o fornecimento s\xF3 se normalizou
+    22 dias depois."
+  _realWorldEn: "On November 3, 2020, a fire at the Macap\xE1 substation left at
+    least 13 of Amap\xE1's 16 municipalities without power. One of its three transformers
+    had been down since 2019; power came back in rotation, a second total blackout
+    hit on November 17, and supply only returned to normal 22 days later."
+  _tradeOffs: "Redund\xE2ncia, como transformador reserva e linhas alternativas,
+    custa caro e fica parada quase sempre. Sem ela a rede sai mais barata, mas uma
+    \xFAnica falha alcan\xE7a a cidade inteira."
+  _tradeOffsEn: Redundancy, such as a backup transformer and alternative lines, is
+    expensive and sits idle most of the time. Without it the grid is cheaper, but
+    a single failure reaches the whole city.
+  _sources:
+  - Label: "Di\xE1rio do Nordeste, Amap\xE1 pode ficar at\xE9 15 dias sem luz ap\xF3s
+      inc\xEAndio em subesta\xE7\xE3o (2020)"
+    Url: https://diariodonordeste.verdesmares.com.br/ultima-hora/pais/amapa-pode-ficar-ate-15-dias-sem-luz-apos-incendio-em-subestacao-1.3008092
+  - Label: "IHU Unisinos, Amap\xE1 sofre novo apag\xE3o (2020)"
+    Url: https://ihu.unisinos.br/604796-amapa-sofre-novo-apagao-ministerio-diz-que-vai-investigar-causas
+  - Label: "IHU Unisinos, ap\xF3s 22 dias sem energia, Amap\xE1 volta a ter 100%
+      de energia (2020)"
+    Url: https://ihu.unisinos.br/publicacoes/78-noticias/605043-apos-22-dias-sem-energia-por-conta-de-apagao-amapa-volta-a-ter-100-de-energia
+  - Label: "Princeton University Press, Charles Perrow, Normal Accidents (1984, edi\xE7\xE3o
+      de 1999)"
+    Url: https://press.princeton.edu/isbn/9780691004129
+  _relatedEntries:
+  - {fileID: 11400000, guid: a1e63f6a131133cb2ba5a447f0a97420, type: 2}
+  - {fileID: 11400000, guid: a16497e74769f0066b65644f094d7002, type: 2}
+  - {fileID: 11400000, guid: ce4f74b0f684cddfab353af48126b8d8, type: 2}
+  _image: {fileID: 0}

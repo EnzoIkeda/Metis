@@ -27,7 +27,13 @@ public enum KnowledgeUnlockTrigger
     OpenChangeBreakdown,
 
     // Liberada ao jogar a fase tematica que aponta para a ficha.
-    ThemedPhase
+    ThemedPhase,
+
+    // Liberada quando a proposta de troca que aponta para a ficha aparece no mapa.
+    TradeOffer,
+
+    // Liberada no comeco da fase do chefe que aponta para a ficha.
+    Boss
 }
 
 // Regras de quais momentos do jogo desbloqueiam fichas de conceito. So leitura: nao muda nenhum numero.
@@ -89,7 +95,7 @@ public static class AlmanacTriggers
         var value = stats.GetValue(parameter);
         if (stats.Interactions != null)
         {
-            var zone = stats.Interactions.GetZone(value);
+            var zone = stats.Interactions.GetZone(parameter, value);
             if (zone == InteractionZone.Crise)
                 triggers.Add(KnowledgeUnlockTrigger.FirstCrisis);
             else if (zone == InteractionZone.Excesso)

@@ -63,6 +63,9 @@ public sealed class TurnEvaluator
 
     public ScoreRules Rules { get; }
 
+    // Ajuste das trocas aceitas no custo das cartas, o mesmo que a mao cobrou na fase.
+    public int CostOffset { get; set; }
+
     public bool CanEvaluate(PhaseTurnRecord turn)
     {
         return turn != null && turn.HasPlayState && turn.ValuesBeforePlay.Length == PhaseHistory.Parameters.Length;
@@ -84,7 +87,7 @@ public sealed class TurnEvaluator
         var card = _findCard != null ? _findCard(cardId) : null;
         if (card == null)
             return double.NaN;
-        return GreedyLookahead.Score(StateBeforePlay(turn), card, Rules);
+        return GreedyLookahead.Score(StateBeforePlay(turn), card, Rules, costOffset: CostOffset);
     }
 
     public double ScorePass(PhaseTurnRecord turn)

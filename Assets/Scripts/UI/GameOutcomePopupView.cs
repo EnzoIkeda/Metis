@@ -26,17 +26,28 @@ public class GameOutcomePopupView : MonoBehaviour
             _closeButton.onClick.AddListener(HandleCloseClicked);
 
         if (_titleText != null)
-            _titleText.text = _outcomeToShowFor == GameOutcome.Victory ? UIStrings.VictoryTitle : UIStrings.GameOverTitle;
+            _titleText.text = OutcomeTitle();
         if (_messageText != null)
             _messageText.text = OutcomeMessage();
 
         Hide();
     }
 
+    private bool IsBossVictory => _outcomeToShowFor == GameOutcome.Victory && _turnManager != null && _turnManager.Boss != null;
+
+    private string OutcomeTitle()
+    {
+        if (IsBossVictory)
+            return UIStrings.RunVictoryTitle;
+        return _outcomeToShowFor == GameOutcome.Victory ? UIStrings.VictoryTitle : UIStrings.GameOverTitle;
+    }
+
     private string OutcomeMessage()
     {
         if (_outcomeToShowFor != GameOutcome.Victory)
             return UIStrings.GameOverMessage;
+        if (IsBossVictory)
+            return _turnManager.BossDefinition.Victory;
         var theme = _turnManager != null ? _turnManager.Theme : null;
         return theme != null ? theme.Victory : UIStrings.VictoryMessage;
     }
@@ -73,7 +84,8 @@ public class GameOutcomePopupView : MonoBehaviour
             return;
         }
 
-        if (_outcomeToShowFor == GameOutcome.GameOver)
+        // A rodada ja foi apagada no fim da fase do chefe.
+        if (_outcomeToShowFor == GameOutcome.GameOver || IsBossVictory)
         {
             MetaProgressionManager.ResetRun();
             SceneManager.LoadScene("MainMenu");

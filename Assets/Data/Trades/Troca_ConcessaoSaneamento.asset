@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b593341a6a94daa2bbfa7fb056d897af, type: 3}
+  m_Name: Troca_ConcessaoSaneamento
+  m_EditorClassIdentifier: Metis.Runtime::TradeOfferData
+  _offerName: "Concess\xE3o do saneamento"
+  _offerNameEn: Sanitation concession
+  _summary: "Uma empresa privada assume a \xE1gua e o esgoto por d\xE9cadas e investe
+    na rede. O contrato longo deixa menos espa\xE7o para a cidade mudar de rumo depois."
+  _summaryEn: A private company takes over water and sewage for decades and invests
+    in the network. The long contract leaves the city less room to change course
+    later.
+  _knowledgeEntry: {fileID: 11400000, guid: 6fa003ddf70834053ad75830ccee6a3c, type: 2}
+  _benefit:
+    Kind: 0
+    Effects:
+    - Parameter: 7
+      Amount: 4
+    - Parameter: 5
+      Amount: 3
+    Amount: 0
+    CardId: 
+  _drawback:
+    Kind: 2
+    Effects: []
+    Amount: -1
+    CardId: 

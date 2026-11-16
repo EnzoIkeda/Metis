@@ -26,6 +26,7 @@ public static class ModelReportLiveData
             RealMin = new double[parameters.Length],
             RealMax = new double[parameters.Length],
             Matrix = new double[parameters.Length * parameters.Length],
+            ZoneRule = InteractionMatrix.ZoneRuleVersion,
             HandSize = data.Rules.HandSize,
             VictoryTurns = data.Rules.VictoryTurnCount,
             Events = data.Events.Count,
@@ -67,7 +68,7 @@ public static class ModelReportLiveData
         }
 
         var tiers = (CardTier[])Enum.GetValues(typeof(CardTier));
-        numbers.TierCounts = tiers.Select(tier => data.Cards.Count(card => card.Tier == tier.ToString())).ToArray();
+        numbers.TierCounts = tiers.Select(tier => data.Cards.Count(card => card.ExtraOnly == false && card.Tier == tier.ToString())).ToArray();
         return numbers;
     }
 }

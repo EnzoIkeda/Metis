@@ -17,6 +17,8 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private CityEffectsController _effects;
     [SerializeField] private PhaseBackgroundRandomizer _background;
     [SerializeField] private ScenarioLibraryData _scenarios;
+    [SerializeField] private TradeOfferLibraryData _trades;
+    [SerializeField] private BossLibraryData _bosses;
     [SerializeField, Min(1)] private int _handSize = 5;
     [SerializeField, Min(1)] private int _victoryTurnCount = TurnMachine.DefaultVictoryTurnCount;
 
@@ -32,6 +34,12 @@ public class TurnManager : MonoBehaviour
     // A fase veio de um save, e nao comecou do zero.
     public bool ResumedFromSave { get; private set; }
     private RandomEventData _pendingEvent;
+
+    // Jogada do chefe com o popup aberto: a salva, mostrada de novo ao retomar, e a do turno em andamento.
+    private BossCardEntry _restoredBossCard;
+    private BossCardEntry _pendingBossCard;
+    private SeededRandom _bossRandom;
+    private bool _bossEffectPending;
 
     // Guardas de reentrancia contra jogar carta ou confirmar evento duas vezes durante a animacao atrasada.
     private bool _actionEffectPending;
@@ -70,6 +78,18 @@ public class TurnManager : MonoBehaviour
     // Cenario em jogo; nulo na rodada normal.
     public ScenarioData Scenario { get; private set; }
 
+    // Chefe da fase e o estado dele; nulos numa fase comum.
+    public BossData BossDefinition { get; private set; }
+    public BossEncounter Boss { get; private set; }
+
+    // O chefe jogou uma carta; o turno so segue com a confirmacao.
+    public event Action<BossCardEntry> OnBossCardPlayed;
+
+    // Trocas aceitas no mapa nesta rodada, que valem ate o fim dela.
+    public IReadOnlyList<TradeOfferData> AcceptedTrades => _trades != null
+        ? _trades.Accepted(MetaProgressionManager.AcceptedTrades)
+        : new List<TradeOfferData>();
+
     // Todas as vantagens passivas cadastradas, exposto pro popup de recompensa sortear opcoes.
     public IReadOnlyList<PassiveAdvantageData> AdvantagePool => _advantagePool;
 
@@ -87,16 +107,21 @@ public class TurnManager : MonoBehaviour
     {
         if (SessionMode.IsScenario && _scenarios != null)
             Scenario = _scenarios.Find(SessionMode.ScenarioId);
+        if (Scenario == null && _bosses != null)
+            BossDefinition = _bosses.Find(MetaProgressionManager.CurrentBoss);
 
         var savedPhase = MetaProgressionManager.SavedPhase;
         if (savedPhase == null)
             return;
 
-        if (TryRestoreHand(savedPhase) == false || TryRestoreEvent(savedPhase) == false || HasAllFollowUps(savedPhase) == false)
+        if (TryRestoreHand(savedPhase) == false || TryRestoreEvent(savedPhase) == false || HasAllFollowUps(savedPhase) == false
+            || TryRestoreBoss(savedPhase) == false)
         {
-            Debug.LogWarning("[TurnManager] Save com carta ou evento desconhecido, a fase recomeça do zero.");
+            Debug.LogWarning("[TurnManager] Save com carta, evento ou chefe desconhecido, a fase recomeça do zero.");
             Hand = null;
             _restoredEvent = null;
+            _restoredBossCard = null;
+            Boss = null;
             MetaProgressionManager.DiscardSavedPhase();
         }
     }
@@ -116,9 +141,18 @@ public class TurnManager : MonoBehaviour
         {
             savedPhase = null;
             _restoredEvent = null;
+            _restoredBossCard = null;
+            if (BossDefinition != null)
+            {
+                _bossRandom = new SeededRandom(SeededRandom.NewSeed());
+                Boss = new BossEncounter(BossDefinition, _bossRandom);
+                AlmanacProgress.Unlock(BossDefinition.KnowledgeEntry);
+            }
             ApplyLoadedAdvantages();
+            var trades = AcceptedTrades;
+            TradeOfferRules.ApplyPhaseStart(trades, _cityStatsManager.Stats);
 
-            var pool = DeckBuilder.Build(_cardPool, MetaProgressionManager.Archetype, MetaProgressionManager.LoadedCardNames);
+            var pool = DeckBuilder.Build(_cardPool, MetaProgressionManager.Archetype, MetaProgressionManager.LoadedCardNames, TradeOfferRules.ExtraCardIds(trades));
             _handRandom = new SeededRandom(SeededRandom.NewSeed());
             // Baralho sempre finito: compra sem reposicao e reembaralha o baralho inteiro quando acaba.
             Hand = new CardHand<CardData>(pool, _handRandom, finiteDeck: true);
@@ -128,18 +162,21 @@ public class TurnManager : MonoBehaviour
             News = new NewsArchive(SeededRandom.NewSeed());
         }
 
+        Hand.CostOffset = TradeOfferRules.CardCostOffset(AcceptedTrades) + (Boss != null ? Boss.CardCostOffset : 0);
         Hand.OnHandChanged += HandleHandChanged;
         var theme = Theme;
         _events = new RandomEventPool<RandomEventData>(CityPresetRules.AllowedEvents(_eventPool, theme != null ? theme.AllowedEventIds as IReadOnlyCollection<string> : null), _eventRandom, _eventPool,
             savedPhase != null ? RunSaveRules.RestoreSchedule(savedPhase, History) : null, _victoryTurnCount);
 
-        Machine = new TurnMachine(_cityStatsManager.Stats, _victoryTurnCount);
+        Machine = new TurnMachine(_cityStatsManager.Stats, _victoryTurnCount, Boss != null);
         Machine.OnPhaseChanged += HandlePhaseChanged;
         Machine.OnTurnAdvanced += HandleTurnAdvanced;
         Machine.OnGameEnded += HandleGameEnded;
 
         if (savedPhase == null)
             Machine.StartGame();
+        else if (_restoredBossCard != null)
+            Machine.ResumeAtBoss(Math.Min(savedPhase.TurnIndex, _victoryTurnCount));
         else if (_restoredEvent != null)
             Machine.ResumeAtEvent(Math.Min(savedPhase.TurnIndex, _victoryTurnCount));
         else
@@ -154,6 +191,22 @@ public class TurnManager : MonoBehaviour
 
         _restoredEvent = _eventPool.FirstOrDefault(candidate => candidate != null && candidate.name == savedPhase.PendingEventId);
         return _restoredEvent != null;
+    }
+
+    // Fase comum salva sem chefe passa; fase do chefe precisa voltar com o chefe inteiro.
+    private bool TryRestoreBoss(PhaseSaveData savedPhase)
+    {
+        _restoredBossCard = null;
+        if (BossDefinition == null)
+            return savedPhase.HasBoss == false;
+        if (RunSaveRules.TryRestoreBoss(savedPhase, BossDefinition, out var boss, out var random) == false)
+            return false;
+
+        Boss = boss;
+        _bossRandom = random;
+        if (savedPhase.AtBoss)
+            _restoredBossCard = BossDefinition.FindCard(savedPhase.PendingBossCardId);
+        return true;
     }
 
     private bool HasAllFollowUps(PhaseSaveData savedPhase)
@@ -182,7 +235,7 @@ public class TurnManager : MonoBehaviour
     }
 
     // Ponto de retomada num momento estavel do turno; com evento, o popup dele abre de novo ao continuar.
-    private void SaveCheckpoint(RandomEventData pendingEvent = null)
+    private void SaveCheckpoint(RandomEventData pendingEvent = null, BossCardEntry pendingBossCard = null)
     {
         var phase = RunSaveRules.CapturePhase(Machine.TurnIndex, _cityStatsManager.Stats, Hand, _handRandom, _eventRandom);
         phase.AtEvent = pendingEvent != null;
@@ -193,6 +246,7 @@ public class TurnManager : MonoBehaviour
         RunSaveRules.CaptureHistory(phase, History);
         RunSaveRules.CaptureSchedule(phase, _events.Schedule);
         RunSaveRules.CaptureNews(phase, News);
+        RunSaveRules.CaptureBoss(phase, Boss, _bossRandom, pendingBossCard != null ? pendingBossCard.Id : null);
         MetaProgressionManager.SavePhase(phase);
     }
 
@@ -233,7 +287,10 @@ public class TurnManager : MonoBehaviour
         }
 
         var rules = ScoreRules.FromCards(_cityStatsManager.ParameterConfigs, _cardPool.Where(card => card != null));
-        return new TurnEvaluator(_cityStatsManager.Stats.Clone(), rules, id => cardsById.TryGetValue(id, out var card) ? card : null);
+        return new TurnEvaluator(_cityStatsManager.Stats.Clone(), rules, id => cardsById.TryGetValue(id, out var card) ? card : null)
+        {
+            CostOffset = Hand != null ? Hand.CostOffset : 0,
+        };
     }
 
     // Cartas comuns que dava pra jogar agora, as alternativas que o relatorio compara com a jogada.
@@ -379,6 +436,42 @@ public class TurnManager : MonoBehaviour
         return true;
     }
 
+    // Fecha a jogada do chefe e segue para a resolucao.
+    public void AcknowledgeBoss()
+    {
+        if (_bossEffectPending || _pendingBossCard == null || Machine == null || Machine.CurrentPhase != TurnPhase.Boss)
+            return;
+
+        _pendingBossCard = null;
+        if (_effects != null)
+        {
+            _bossEffectPending = true;
+            _effects.PlayExplosion(() =>
+            {
+                _bossEffectPending = false;
+                Machine?.AcknowledgeBoss();
+            });
+        }
+        else
+        {
+            Machine.AcknowledgeBoss();
+        }
+    }
+
+    // Jogada do chefe com o popup aberto agora, ou nula.
+    public BossCardEntry PendingBossCard => _pendingBossCard;
+
+    // Carta que o chefe poe no baralho do jogador; nula quando a regra dele e outra.
+    public CardData BossExtraCard
+    {
+        get
+        {
+            if (BossDefinition == null || BossDefinition.Mechanic != BossMechanic.ExtraCards || _cardPool == null)
+                return null;
+            return _cardPool.FirstOrDefault(card => card != null && card.name == BossDefinition.MechanicCardId);
+        }
+    }
+
     public RandomEventData FindEvent(string eventId)
     {
         return _eventPool.FirstOrDefault(candidate => candidate != null && candidate.name == eventId);
@@ -470,6 +563,10 @@ public class TurnManager : MonoBehaviour
             FinishRecording();
             OnTurnFinished?.Invoke(History.Turns[History.Turns.Count - 1]);
         }
+        else if (phase == TurnPhase.Boss && _restoredBossCard != null)
+            StartCoroutine(AnnounceRestoredBossCard());
+        else if (phase == TurnPhase.Boss)
+            HandleBossPhase();
         else if (phase == TurnPhase.Event && _restoredEvent != null)
             StartCoroutine(AnnounceRestoredEvent());
         else if (phase == TurnPhase.Event)
@@ -494,6 +591,38 @@ public class TurnManager : MonoBehaviour
         Debug.Log($"[RandomEvent] '{triggeredEvent.Title}': {triggeredEvent.Description}");
         SaveCheckpoint(triggeredEvent);
         OnRandomEventTriggered?.Invoke(triggeredEvent);
+    }
+
+    private void HandleBossPhase()
+    {
+        if (_currentBreakdown != null)
+            _currentBreakdown.CurrentSource = ContributionSource.Boss;
+        var stats = _cityStatsManager.Stats;
+        var before = PhaseHistory.Snapshot(stats);
+        var played = Boss.PlayTurn(stats) as BossCardEntry;
+        BossRules.ApplyToHand(Boss, played, Hand, BossExtraCard, TradeOfferRules.CardCostOffset(AcceptedTrades));
+        History.RecordBoss(Machine.TurnIndex, played != null ? played.Id : string.Empty, before);
+        if (played == null)
+        {
+            Machine.AcknowledgeBoss();
+            return;
+        }
+
+        Debug.Log($"[Boss] '{played.CardName}', Impeto {Boss.Momentum}");
+        _pendingBossCard = played;
+        SaveCheckpoint(pendingBossCard: played);
+        OnBossCardPlayed?.Invoke(played);
+    }
+
+    // Espera um frame pro popup do chefe, que se inscreve no proprio Start, ja estar ouvindo.
+    private IEnumerator AnnounceRestoredBossCard()
+    {
+        _pendingBossCard = _restoredBossCard;
+        _restoredBossCard = null;
+        yield return null;
+
+        Debug.Log($"[Boss] Retomado: '{_pendingBossCard.CardName}'");
+        OnBossCardPlayed?.Invoke(_pendingBossCard);
     }
 
     // Espera um frame pro popup de evento, que se inscreve no proprio Start, ja estar ouvindo.
@@ -551,8 +680,9 @@ public class TurnManager : MonoBehaviour
         }
 
         // Derrota apaga o save na hora, senao fechar o app no popup e continuar repetiria o turno perdido.
-        // Cenario nao tem fase seguinte, entao termina do mesmo jeito na vitoria.
-        if (outcome == GameOutcome.GameOver || SessionMode.IsScenario)
+        // Cenario e chefe nao tem fase seguinte, entao terminam do mesmo jeito na vitoria.
+        // Vencer o chefe encerra a rodada: nao ha recompensa nem mapa depois.
+        if (outcome == GameOutcome.GameOver || SessionMode.IsScenario || Boss != null)
             MetaProgressionManager.ResetRun();
     }
 

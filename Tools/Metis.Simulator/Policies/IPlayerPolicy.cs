@@ -33,6 +33,19 @@ public sealed class DecisionContext
     // Todos os eventos do jogo, onde as consequencias sao buscadas, e o que ja esta agendado na fase.
     public IReadOnlyList<SimEvent> AllEvents { get; init; }
     public EventSchedule Schedule { get; init; }
+
+    // Chefe da fase, com a proxima carta visivel; nulo fora da fase do chefe. Quem planeja clona antes de usar.
+    public BossEncounter Boss { get; init; }
+
+    // Aumento de custo das cartas que vale agora, alem do que ja esta nas copias das trocas.
+    public int CostOffset { get; init; }
+
+    // Carta que o chefe poe no baralho do jogador; nula quando a regra dele e outra.
+    public SimCard BossExtraCard { get; init; }
+
+    // Objetivos do cenario e o estado de cada um ate o turno anterior; nulo quando ninguem acompanha a fase.
+    public IReadOnlyList<ScenarioObjective> Objectives { get; init; } = Array.Empty<ScenarioObjective>();
+    public IReadOnlyList<ObjectiveState> ObjectiveStates { get; init; }
 }
 
 // Jogador simulado: escolhe uma das cartas jogaveis da mao.
@@ -52,9 +65,9 @@ public interface IPlayerPolicy
 public static class PolicyHelpers
 {
     // Aplica a carta como a mao aplicaria ao jogar: custo em Renda, depois os efeitos.
-    public static void ApplyCard(CityStats stats, SimCard card)
+    public static void ApplyCard(CityStats stats, SimCard card, int costOffset = 0)
     {
-        GreedyLookahead.ApplyCard(stats, card);
+        GreedyLookahead.ApplyCard(stats, card, costOffset);
     }
 
     // Maior pontuacao vence; empate e sorteado com o gerador da politica, pra nao favorecer a ordem da mao.

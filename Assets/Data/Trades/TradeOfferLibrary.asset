@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09af842460b68e2079290d4bd4334f28, type: 3}
+  m_Name: TradeOfferLibrary
+  m_EditorClassIdentifier: Metis.Runtime::TradeOfferLibraryData
+  _offers:
+  - {fileID: 11400000, guid: 1d38ada3ba883b3c6b11eb2eae5d49f5, type: 2}
+  - {fileID: 11400000, guid: 694ac65ac9dd3a1bc9f18932c5e36416, type: 2}
+  - {fileID: 11400000, guid: 08e837ca3ca916c8b9d2559aca219842, type: 2}
+  - {fileID: 11400000, guid: c51ee16ab64025581834ba1a6a9bbb4a, type: 2}
+  - {fileID: 11400000, guid: 37f5bfc69bb2bfe98899edc8274ab2f7, type: 2}
+  - {fileID: 11400000, guid: 6ed1b532d19941b2fb7c02e37ab195d1, type: 2}

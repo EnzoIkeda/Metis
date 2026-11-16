@@ -76,4 +76,50 @@ public class ScenarioSimulationTests
         Assert.That(scenario.Objectives.Single().MustHold, Is.True);
         Assert.That(BalanceData.Parse("""{ "Parameters": [], "Cards": [], "Events": [], "Advantages": [], "Presets": [] }""").Scenarios, Is.Empty);
     }
+
+    private static BalanceData ObjectiveData(ScenarioObjective objective)
+    {
+        var cards = Enumerable.Range(0, 6).Select(i => TestData.Card($"Saude{i}", (CityParameterType.Saude, 4f)))
+            .Concat(Enumerable.Range(0, 6).Select(i => TestData.Card($"Renda{i}", (CityParameterType.Renda, 3f))))
+            .ToList();
+        var baseData = TestData.Build(cards: cards);
+        return new BalanceData
+        {
+            Rules = baseData.Rules,
+            Parameters = baseData.Parameters,
+            Interaction = baseData.Interaction,
+            Cards = baseData.Cards,
+            Events = baseData.Events,
+            Themes = new[] { new SimPreset { Id = "Tema" } },
+            Scenarios = new[] { new SimScenario { Id = "Cenario", ThemeId = "Tema", Archetype = CardArchetype.Industria, FreeArchetype = false, Objectives = new[] { objective } } },
+        };
+    }
+
+    [Test]
+    public void ObjectivePolicy_ReachesMoreObjectivesThanTheBalancedOne()
+    {
+        var data = ObjectiveData(new ScenarioObjective { Parameter = CityParameterType.Renda, Comparison = ObjectiveComparison.AtLeast, Threshold = 59f, ByTurn = 4 });
+        var scenario = data.Scenarios.Single();
+        var options = new SimulationOptions { FiniteDeck = true };
+
+        int Achieved(string policy) => Enumerable.Range(0, 20)
+            .Count(index => ScenarioSimulation.Play(data, scenario, scenario.Archetype, SimulationRunner.CreatePolicy(policy, options), options, index).States[0] == ObjectiveState.Achieved);
+
+        Assert.That(Achieved("equilibrada_objetivos"), Is.GreaterThan(Achieved("equilibrada")));
+    }
+
+    [Test]
+    public void ObjectivePolicy_WithoutObjectivesPlaysLikeTheBalancedOne()
+    {
+        var data = ObjectiveData(new ScenarioObjective { Parameter = CityParameterType.Renda, Comparison = ObjectiveComparison.AtLeast, Threshold = 59f, ByTurn = 4 });
+        var setup = new PhaseSetup { Data = data, Archetype = CardArchetype.Industria, FiniteDeck = true };
+
+        for (var index = 0; index < 5; index++)
+        {
+            var seeds = new GameSeeds(7, index);
+            var balanced = PhaseSimulator.Run(setup, SimulationRunner.CreatePolicy("equilibrada"), seeds);
+            var objective = PhaseSimulator.Run(setup, SimulationRunner.CreatePolicy("equilibrada_objetivos"), seeds);
+            Assert.That(objective.Turns.Select(turn => turn.CardId), Is.EqualTo(balanced.Turns.Select(turn => turn.CardId)));
+        }
+    }
 }

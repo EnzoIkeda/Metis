@@ -18,7 +18,7 @@ MonoBehaviour:
   _objectives:
   - Parameter: 5
     Comparison: 0
-    Threshold: 48.3
+    Threshold: 63.8
     ByTurn: 15
     MustHold: 0
   - Parameter: 1

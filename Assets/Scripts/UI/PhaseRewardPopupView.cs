@@ -50,8 +50,8 @@ public class PhaseRewardPopupView : MonoBehaviour
 
     private void HandleGameEnded(GameOutcome outcome)
     {
-        // Cenario volta para a selecao, sem recompensa nem mapa.
-        if (outcome != GameOutcome.Victory || SessionMode.IsScenario)
+        // Cenario volta para a selecao e o chefe encerra a rodada, sem recompensa nem mapa.
+        if (outcome != GameOutcome.Victory || SessionMode.IsScenario || _turnManager.Boss != null)
             return;
 
         _currentOptions = DrawOptions();
@@ -80,12 +80,14 @@ public class PhaseRewardPopupView : MonoBehaviour
     // Sorteia so entre o que ainda acrescenta algo: cartas fora do baralho atual e vantagens nao carregadas.
     private UnityEngine.Object[] DrawOptions()
     {
-        var deck = DeckBuilder.Build(_turnManager.CardPool, MetaProgressionManager.Archetype, MetaProgressionManager.LoadedCardNames);
+        var deck = DeckBuilder.Build(_turnManager.CardPool, MetaProgressionManager.Archetype, MetaProgressionManager.LoadedCardNames,
+            TradeOfferRules.ExtraCardIds(_turnManager.AcceptedTrades));
         var pool = new List<UnityEngine.Object>();
         pool.AddRange(RewardOptionPicker.CardPool(_turnManager.CardPool, deck));
         pool.AddRange(RewardOptionPicker.AdvantagePool(_turnManager.AdvantagePool, MetaProgressionManager.LoadedAdvantageNames));
 
-        var count = Math.Min(_optionCount, _optionButtons.Length);
+        // As trocas aceitas mudam o numero de opcoes, ate o limite de botoes do painel.
+        var count = Math.Min(TradeOfferRules.RewardOptionCount(_optionCount, _turnManager.AcceptedTrades), _optionButtons.Length);
         return RewardOptionPicker.Draw(pool, count, _random).ToArray();
     }
 

@@ -26,6 +26,11 @@ public class PhaseTurnRecord
     public List<CityParameterType> CollapsedAtResolution = new List<CityParameterType>();
     public float CollapsePenalty;
 
+    // Jogada do chefe: o estado logo antes dela (com a carta do jogador ja aplicada) e a carta; vazia quando ele so acumulou Impeto.
+    public bool HasBossState;
+    public float[] ValuesBeforeBoss = Array.Empty<float>();
+    public string BossCardId = string.Empty;
+
     public string EventId = string.Empty;
 
     // Opcao escolhida no dilema do turno; sem a marca, o turno nao teve escolha.
@@ -48,7 +53,18 @@ public class PhaseTurnRecord
     {
         if (HasPlayState == false || HasResolution == false)
             return 0f;
-        return GetAfterPlay(parameter) - GetBeforePlay(parameter);
+        var afterCard = HasBossState ? PhaseHistory.Read(ValuesBeforeBoss, parameter) : GetAfterPlay(parameter);
+        return afterCard - GetBeforePlay(parameter);
+    }
+
+    public bool BossPlayedCard => string.IsNullOrEmpty(BossCardId) == false;
+
+    // O que a carta do chefe mudou no parametro, antes das interacoes do turno.
+    public float GetBossEffect(CityParameterType parameter)
+    {
+        if (HasBossState == false || HasResolution == false)
+            return 0f;
+        return GetAfterPlay(parameter) - PhaseHistory.Read(ValuesBeforeBoss, parameter);
     }
 }
 
@@ -128,6 +144,15 @@ public class PhaseHistory
             if (Current.PlayableCardIds.Contains(id) == false)
                 Current.PlayableCardIds.Add(id);
         }
+    }
+
+    // Chamado logo antes da jogada do chefe; cardId vazio quando ele so acumulou Impeto.
+    public void RecordBoss(int turnIndex, string cardId, float[] valuesBeforeBoss)
+    {
+        BeginTurn(turnIndex);
+        Current.HasBossState = true;
+        Current.ValuesBeforeBoss = valuesBeforeBoss ?? Array.Empty<float>();
+        Current.BossCardId = cardId ?? string.Empty;
     }
 
     // Chamado antes da resolucao, quando a penalidade de Colapso do turno ja esta decidida.

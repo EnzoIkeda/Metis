@@ -12,7 +12,13 @@ public enum TutorialTip
     Crisis,
     Collapse,
     Tier,
-    Newspaper
+    Newspaper,
+
+    // Mostrada na propria tela da proposta, no mapa, e nao no balao da cidade.
+    Trade,
+
+    // Fase contra o chefe de fim de rodada.
+    Boss
 }
 
 // Retrato do que a dica precisa saber sobre a fase.
@@ -25,6 +31,7 @@ public struct TutorialSituation
     public bool AnyCrisis;
     public bool AnyCollapse;
     public bool TierUnlocked;
+    public bool HasBoss;
 }
 
 // Escolhe a proxima dica a mostrar. So leitura: nao muda nenhum numero do jogo.
@@ -42,6 +49,8 @@ public static class TutorialRules
             return TutorialTip.Cards;
         if (situation.CanPass && wasSeen(TutorialTip.PassTurn) == false)
             return TutorialTip.PassTurn;
+        if (situation.HasBoss && wasSeen(TutorialTip.Boss) == false)
+            return TutorialTip.Boss;
         if (situation.AnyCollapse && wasSeen(TutorialTip.Collapse) == false)
             return TutorialTip.Collapse;
         if (situation.AnyCrisis && wasSeen(TutorialTip.Crisis) == false)

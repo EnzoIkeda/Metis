@@ -22,7 +22,7 @@ MonoBehaviour:
   _requiredPesquisa: 0
   _statEffects:
   - Parameter: 0
-    Amount: -3
+    Amount: -2
   - Parameter: 2
     Amount: 1
   - Parameter: 5
@@ -31,6 +31,7 @@ MonoBehaviour:
     Amount: 2
   _ability: 0
   _copies: 1
+  _isExtraOnly: 0
   _structureToPlace: {fileID: 0}
   _artwork: {fileID: 0}
   _artworkFrames: []

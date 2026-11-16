@@ -39,7 +39,7 @@ public class CardHandView : MonoBehaviour
         foreach (var card in _turnManager.Hand.Cards)
         {
             var view = Instantiate(_cardPrefab, _cardContainer);
-            view.Bind(card, HandleCardClicked, HandleCardExpandRequested, _turnManager.CanPlay(card), _turnManager.Hand.IsRevealed);
+            view.Bind(card, HandleCardClicked, HandleCardExpandRequested, _turnManager.CanPlay(card), _turnManager.Hand.IsRevealed, _turnManager.Hand.CostOf(card));
             _spawnedCards.Add(view);
         }
 
@@ -56,6 +56,6 @@ public class CardHandView : MonoBehaviour
     private void HandleCardExpandRequested(CardData card)
     {
         if (_detailPopup != null)
-            _detailPopup.Show(card, () => HandleCardClicked(card), _turnManager.Hand.IsRevealed);
+            _detailPopup.Show(card, () => HandleCardClicked(card), _turnManager.Hand.IsRevealed, _turnManager.Hand.CostOf(card));
     }
 }

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f97cfcc90e3caf3b8376c6f3bc1440f, type: 3}
+  m_Name: News_Boss_BombasDesligadas
+  m_EditorClassIdentifier: Metis.Runtime::NewsStoryData
+  _trigger: 15
+  _parameter: 0
+  _targetId: Enchente_BombasDesligadas
+  _headline: "Casas de bombas param e a \xE1gua entra nos bairros"
+  _headlineEn: Pump stations stop and water pours into town
+  _body: "Sem energia e com os motores alagados, as bombas desligam. Seu Arnaldo
+    trocou o t\xE1xi por um bote emprestado."
+  _bodyEn: With no power and flooded motors, the pumps shut down. Seu Arnaldo swapped
+    his taxi for a borrowed rowboat.

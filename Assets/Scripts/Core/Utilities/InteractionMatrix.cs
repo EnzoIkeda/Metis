@@ -27,6 +27,10 @@ public class InteractionMatrix
 
     private static readonly int ParamCount = Enum.GetValues(typeof(CityParameterType)).Length;
 
+    // Versao da regra das zonas, sobe quando a conta do fator muda; entra na impressao do relatorio tecnico.
+    // 1: na crise o fator dependia so do sinal do coeficiente. 2: vale o sentido do empurrao, e a Pesquisa nao tem crise.
+    public const int ZoneRuleVersion = 2;
+
     // Coeficientes de influencia entre alvo e fonte, na ordem canonica do enum de parametros.
     private static readonly float[,] Coefficients =
     {
@@ -83,9 +87,15 @@ public class InteractionMatrix
         return Coefficients[(int)alvo, (int)fonte];
     }
 
-    public InteractionZone GetZone(float valor)
+    // A Pesquisa nunca entra em crise como fonte: comeca baixa em toda cidade e puxaria todos para baixo desde o inicio.
+    public static bool HasCrisisZone(CityParameterType parameter)
     {
-        if (valor <= _zonaCrise)
+        return parameter != CityParameterType.Pesquisa;
+    }
+
+    public InteractionZone GetZone(CityParameterType parameter, float valor)
+    {
+        if (valor <= _zonaCrise && HasCrisisZone(parameter))
             return InteractionZone.Crise;
         if (valor >= _zonaExcesso)
             return InteractionZone.Excesso;
@@ -93,9 +103,9 @@ public class InteractionMatrix
     }
 
     // Multiplicador que a zona atual da fonte aplica a este coeficiente.
-    public float GetZoneFactor(float valorFonte, float coeficiente)
+    public float GetZoneFactor(CityParameterType fonte, float valorFonte, float coeficiente)
     {
-        return FatorZona(valorFonte, coeficiente);
+        return FatorZona(fonte, valorFonte, coeficiente);
     }
 
     // Parcela que a fonte, neste valor, soma ao alvo num turno; mesma conta da resolucao.
@@ -104,7 +114,7 @@ public class InteractionMatrix
         var coeficiente = Coefficients[(int)alvo, (int)fonte];
         if (coeficiente == 0f)
             return 0f;
-        var termo = (valorFonte - _valorNeutro) / _valorNeutro * coeficiente * FatorZona(valorFonte, coeficiente);
+        var termo = (valorFonte - _valorNeutro) / _valorNeutro * coeficiente * FatorZona(fonte, valorFonte, coeficiente);
         return termo * _escalaGlobal;
     }
 
@@ -136,7 +146,7 @@ public class InteractionMatrix
 
                 // Le o valor ja atualizado nesta mesma passada, se a fonte for um alvo anterior.
                 var valorFonte = stats.GetValue(fonte);
-                var fator = FatorZona(valorFonte, coeficiente);
+                var fator = FatorZona(fonte, valorFonte, coeficiente);
                 var termo = (valorFonte - _valorNeutro) / _valorNeutro * coeficiente * fator;
                 efeito += termo;
                 recorder?.Add(alvo, ContributionSource.Interaction, termo * _escalaGlobal, fonte);
@@ -153,14 +163,20 @@ public class InteractionMatrix
         }
     }
 
-    // Multiplicador aplicado a um coeficiente conforme a zona (crise ou excesso) da fonte.
-    private float FatorZona(float valorFonte, float coeficiente)
+    // Multiplicador conforme a zona da fonte e o sentido do termo: o que ela tira dos outros ou o que ela da.
+    // Na crise, o que tira pesa mais e o que da pesa menos; no excesso, so o que da perde forca.
+    private float FatorZona(CityParameterType fonte, float valorFonte, float coeficiente)
     {
-        if (valorFonte <= _zonaCrise)
-            return coeficiente < 0f ? _multiplicadorPressaoCrise : _multiplicadorApoioCrise;
-        if (valorFonte >= _zonaExcesso)
-            return coeficiente < 0f ? 1f : _multiplicadorApoioExcesso;
-        return 1f;
+        var tira = (valorFonte - _valorNeutro) * coeficiente < 0f;
+        switch (GetZone(fonte, valorFonte))
+        {
+            case InteractionZone.Crise:
+                return tira ? _multiplicadorPressaoCrise : _multiplicadorApoioCrise;
+            case InteractionZone.Excesso:
+                return tira ? 1f : _multiplicadorApoioExcesso;
+            default:
+                return 1f;
+        }
     }
 
     // Deriva extra negativa sobre o proprio alvo, so quando ele mesmo esta em excesso.

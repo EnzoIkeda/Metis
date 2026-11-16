@@ -1,0 +1,140 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68297576211f45a468974674df2b4ecd, type: 3}
+  m_Name: Chefe_ApagaoEmCascata
+  m_EditorClassIdentifier: Metis.Runtime::BossData
+  _bossName: "O Apag\xE3o em Cascata"
+  _bossNameEn: The Cascading Blackout
+  _summary: "Uma pe\xE7a da rede falha e derruba as que dependem dela. Cada golpe
+    tira Energia, e a falta de energia se espalha na hora para quem depende dela."
+  _summaryEn: One part of the grid fails and drags down what depends on it. Each
+    blow takes Energy, and the shortage spreads at once to whatever relies on it.
+  _intro: "Um transformador superaqueceu e a rede el\xE9trica come\xE7a a cair em
+    cascata. A cada turno o apag\xE3o ganha \xCDmpeto e, quando ele basta, joga uma
+    carta logo depois da sua; a Energia que ele tira tamb\xE9m derruba Renda, Popula\xE7\xE3o,
+    Pesquisa e Mobilidade. Aguente os 20 turnos para vencer a rodada.\n\n<i>Inspirado
+    no apag\xE3o do Amap\xE1 em novembro de 2020.</i>"
+  _introEn: "A transformer overheated and the power grid starts failing in a cascade.
+    Every turn the blackout builds Momentum and, once there is enough, plays a card
+    right after yours; the Energy it takes also drags down Income, Population, Research
+    and Mobility. Hold out for 20 turns to win the run.\n\n<i>Inspired by the Amap\xE1
+    blackout of November 2020.</i>"
+  _victory: "As luzes voltaram, bairro a bairro, e a cidade aguentou. Fica a li\xE7\xE3o:
+    uma rede sem reserva \xE9 barata at\xE9 o dia em que uma \xFAnica pe\xE7a falha."
+  _victoryEn: 'The lights came back, district by district, and the city held out.
+    The lesson remains: a grid with no backup is cheap until the day a single part
+    fails.'
+  _knowledgeEntry: {fileID: 11400000, guid: c386b3c44b7e9ea65b39362a31625c3a, type: 2}
+  _targetArchetype: 1
+  _startingMomentum: 0
+  _momentumPerTurn: 2
+  _mechanic: 2
+  _mechanicAmount: 1
+  _mechanicCardId: 
+  _cards:
+  - _id: Apagao_IncendioSubestacao
+    _cardName: "Inc\xEAndio na subesta\xE7\xE3o"
+    _cardNameEn: Substation fire
+    _description: "Um transformador superaquece e pega fogo. Em 2020, o inc\xEAndio
+      na subesta\xE7\xE3o de Macap\xE1 apagou ao menos 13 dos 16 munic\xEDpios do
+      Amap\xE1."
+    _descriptionEn: "A transformer overheats and catches fire. In 2020, the fire
+      at the Macap\xE1 substation blacked out at least 13 of Amap\xE1's 16 municipalities."
+    _momentumCost: 6
+    _effects:
+    - Parameter: 1
+      Amount: -5
+    - Parameter: 2
+      Amount: -1
+  - _id: Apagao_SemReserva
+    _cardName: Sem transformador reserva
+    _cardNameEn: No backup transformer
+    _description: "O equipamento reserva estava quebrado havia meses e ningu\xE9m
+      assume a carga. Em Macap\xE1, um dos tr\xEAs transformadores estava parado
+      desde 2019."
+    _descriptionEn: "The backup unit had been broken for months and nothing takes
+      the load. In Macap\xE1, one of the three transformers had been down since 2019."
+    _momentumCost: 4
+    _effects:
+    - Parameter: 1
+      Amount: -3
+    - Parameter: 2
+      Amount: -1
+  - _id: Apagao_HospitaisNoGerador
+    _cardName: Hospitais no gerador
+    _cardNameEn: Hospitals on generators
+    _description: "Hospitais passam a depender de geradores a diesel, e o combust\xEDvel
+      vira prioridade de toda a cidade."
+    _descriptionEn: Hospitals switch to diesel generators, and fuel becomes the whole
+      city's priority.
+    _momentumCost: 5
+    _effects:
+    - Parameter: 1
+      Amount: -2
+    - Parameter: 7
+      Amount: -3
+  - _id: Apagao_CorridaPorAgua
+    _cardName: "Corrida por \xE1gua"
+    _cardNameEn: Rush for water
+    _description: "Sem energia, as bombas param e a \xE1gua n\xE3o chega \xE0s torneiras.
+      Filas se formam nos po\xE7os e nos mercados."
+    _descriptionEn: Without power, the pumps stop and water no longer reaches the
+      taps. Lines form at wells and supermarkets.
+    _momentumCost: 5
+    _effects:
+    - Parameter: 1
+      Amount: -2
+    - Parameter: 7
+      Amount: -2
+    - Parameter: 5
+      Amount: -1
+  - _id: Apagao_Rodizio
+    _cardName: "Rod\xEDzio de energia"
+    _cardNameEn: Rolling blackouts
+    _description: "A luz volta por turnos, bairro a bairro. No Amap\xE1, o rod\xEDzio
+      durou semanas, e o fornecimento s\xF3 se normalizou 22 dias depois do inc\xEAndio."
+    _descriptionEn: "Power comes back in shifts, district by district. In Amap\xE1,
+      the rotation lasted weeks, and supply was only normal 22 days after the fire."
+    _momentumCost: 4
+    _effects:
+    - Parameter: 1
+      Amount: -3
+    - Parameter: 0
+      Amount: -1
+  - _id: Apagao_SegundoBlecaute
+    _cardName: Segundo blecaute
+    _cardNameEn: Second blackout
+    _description: "Quando a luz parecia voltar, a rede cai de novo. Em 17 de novembro
+      de 2020, o Amap\xE1 teve um segundo apag\xE3o total."
+    _descriptionEn: "Just when power seemed back, the grid fails again. On November
+      17, 2020, Amap\xE1 suffered a second total blackout."
+    _momentumCost: 6
+    _effects:
+    - Parameter: 1
+      Amount: -4
+    - Parameter: 2
+      Amount: -1
+    - Parameter: 8
+      Amount: -1
+  - _id: Apagao_SemaforosApagados
+    _cardName: "Sem\xE1foros apagados"
+    _cardNameEn: Dead traffic lights
+    _description: "Cruzamentos sem sinal viram disputa entre carros, \xF4nibus e
+      pedestres."
+    _descriptionEn: Intersections without signals turn into a contest between cars,
+      buses and pedestrians.
+    _momentumCost: 4
+    _effects:
+    - Parameter: 1
+      Amount: -2
+    - Parameter: 8
+      Amount: -2

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 548ccf709c57dcaef9b830e8873b9877, type: 3}
+  m_Name: BossLibrary
+  m_EditorClassIdentifier: Metis.Runtime::BossLibraryData
+  _bosses:
+  - {fileID: 11400000, guid: 261de31a855679ca7a459842a34c6d47, type: 2}
+  - {fileID: 11400000, guid: c07c5a3ee13bcf0b085acd2711200cdc, type: 2}
+  - {fileID: 11400000, guid: 97d2ee211f6d1ede2932d4d3ee1f78a2, type: 2}
+  - {fileID: 11400000, guid: 2e187f65e581120c4b1b2f22de07c173, type: 2}

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1100891b1d83b38afb468911d74e80a7, type: 3}
+  m_Name: ThemeMusic
+  m_EditorClassIdentifier: Metis.Runtime::ThemeMusicData
+  _opening: {fileID: 8300000, guid: f30f1f052c7757c50819794cd38b4ac2, type: 3}
+  _defeat: {fileID: 8300000, guid: 669d0b8dd88e28767a9d3eca408415f0, type: 3}
+  _victory: {fileID: 8300000, guid: 16bd471524792c12cba58539bf13cc61, type: 3}
+  _crisis: {fileID: 8300000, guid: e95cb03fa5777340d8ff65c7a65ca357, type: 3}

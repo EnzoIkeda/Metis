@@ -55,6 +55,9 @@ public class WelcomePopupView : MonoBehaviour
     {
         if (_panelRoot != null)
             _panelRoot.SetActive(false);
+        // A musica da abertura acompanha ate aqui e devolve a vez a trilha de fundo.
+        if (MusicPlayer.Instance != null)
+            MusicPlayer.Instance.EndSequence();
         Closed?.Invoke();
     }
 }

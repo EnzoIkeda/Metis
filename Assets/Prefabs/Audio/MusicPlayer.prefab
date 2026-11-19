@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Metis.Runtime::MusicPlayer
   _defaultPlaylist: {fileID: 11400000, guid: a3a0ba3a39cefcb96a22b41a7f13535c, type: 2}
+  _themes: {fileID: 11400000, guid: 765c2c70c7126abbf802cdc8be661ce8, type: 2}
 --- !u!114 &346868514880246783
 MonoBehaviour:
   m_ObjectHideFlags: 0

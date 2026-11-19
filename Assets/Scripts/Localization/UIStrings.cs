@@ -876,4 +876,59 @@ public static class UIStrings
                 return string.Empty;
         }
     }
+
+    public static string SkipButton => IsPt ? "Pular" : "Skip";
+
+    // Chave da legenda de cada tela da abertura, na ordem das imagens.
+    public static string IntroCaptionKey(int index) => $"intro.{index + 1}";
+
+    // Legendas das telas de abertura e de fim de rodada; a tela da posse cita o baralho escolhido.
+    public static string SlideCaption(string key, CardArchetype archetype)
+    {
+        switch (key)
+        {
+            case "intro.1":
+                return IsPt
+                    ? "A cidade chegou ao limite: ruas quebradas, céu fechado e contas no vermelho."
+                    : "The city has reached its limit: broken streets, gray skies and empty coffers.";
+            case "intro.2":
+                return IsPt
+                    ? "A gestão anterior não deu conta da crise."
+                    : "The previous administration could not handle the crisis.";
+            case "intro.3":
+                return IsPt
+                    ? "Agora é a sua vez de propor outro caminho."
+                    : "Now it is your turn to propose another way.";
+            case "intro.4":
+                return IsPt
+                    ? "A prefeitura muda de mãos."
+                    : "City Hall changes hands.";
+            case "intro.5":
+                return IsPt
+                    ? "O gabinete espera por você."
+                    : "The office is waiting for you.";
+            case "intro.6":
+                return IsPt
+                    ? $"Você toma posse com uma proposta de {(archetype == CardArchetype.Comunitario ? "cidade comunitária" : ArchetypeName(archetype))}."
+                    : $"You take office with a {ArchetypeName(archetype)} plan.";
+            case "intro.7":
+                return IsPt
+                    ? "Você sonha com moradia digna para todos..."
+                    : "You dream of decent housing for everyone...";
+            case "intro.8":
+                return IsPt
+                    ? "...com parques e ar limpo..."
+                    : "...of parks and clean air...";
+            case "intro.9":
+                return IsPt
+                    ? "...com uma cidade conectada ao mundo..."
+                    : "...of a city connected to the world...";
+            case "intro.10":
+                return IsPt
+                    ? "...e com gente feliz nas ruas. Cada cidade dura 20 turnos. Boa gestão!"
+                    : "...and of happy people in the streets. Each city lasts 20 turns. Good luck!";
+            default:
+                return string.Empty;
+        }
+    }
 }

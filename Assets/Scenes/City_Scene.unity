@@ -1569,6 +1569,126 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InitialGridOccupant
   _cellType: 1
   _structureData: {fileID: 0}
+--- !u!1 &39939560
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 39939561}
+  - component: {fileID: 39939564}
+  - component: {fileID: 39939563}
+  - component: {fileID: 39939562}
+  m_Layer: 0
+  m_Name: FlyoverSkip
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &39939561
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39939560}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1293635773}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &39939562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39939560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 0
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 0
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 39939563}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &39939563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39939560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &39939564
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39939560}
+  m_CullTransparentMesh: 1
 --- !u!1001 &44121807
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2182,6 +2302,7 @@ GameObject:
   - component: {fileID: 55835820}
   - component: {fileID: 55835819}
   - component: {fileID: 55835822}
+  - component: {fileID: 55835823}
   m_Layer: 0
   m_Name: ButtonZoomOut
   m_TagString: Untagged
@@ -2315,6 +2436,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
+--- !u!225 &55835823
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55835817}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &67346505
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7016,6 +7149,7 @@ MonoBehaviour:
   - {fileID: 714821780}
   - {fileID: 488717512}
   - {fileID: 215870123}
+  - {fileID: 39939560}
   _chromeHeight: 225
   _anchorGap: 36
   _screenMargin: 24
@@ -16135,6 +16269,7 @@ GameObject:
   - component: {fileID: 513837903}
   - component: {fileID: 513837902}
   - component: {fileID: 513837904}
+  - component: {fileID: 513837907}
   m_Layer: 0
   m_Name: BossHud
   m_TagString: Untagged
@@ -16261,6 +16396,18 @@ RectTransform:
   m_AnchoredPosition: {x: -16, y: -776}
   m_SizeDelta: {x: 330, y: 258}
   m_Pivot: {x: 1, y: 1}
+--- !u!225 &513837907
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 513837901}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &516749938
 GameObject:
   m_ObjectHideFlags: 0
@@ -35916,6 +36063,7 @@ GameObject:
   - component: {fileID: 1061829974}
   - component: {fileID: 1061829973}
   - component: {fileID: 1061829971}
+  - component: {fileID: 1061829975}
   m_Layer: 5
   m_Name: TopBar
   m_TagString: Untagged
@@ -36004,6 +36152,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1061829969}
   m_CullTransparentMesh: 1
+--- !u!225 &1061829975
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061829969}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &1062970234
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36669,6 +36829,7 @@ GameObject:
   - component: {fileID: 1075475709}
   - component: {fileID: 1075475707}
   - component: {fileID: 1075475711}
+  - component: {fileID: 1075475712}
   m_Layer: 5
   m_Name: CardHand
   m_TagString: Untagged
@@ -36781,6 +36942,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!225 &1075475712
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075475705}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1076031222
 GameObject:
   m_ObjectHideFlags: 0
@@ -38337,6 +38510,7 @@ GameObject:
   - component: {fileID: 1113663766}
   - component: {fileID: 1113663765}
   - component: {fileID: 1113663767}
+  - component: {fileID: 1113663770}
   m_Layer: 0
   m_Name: ButtonObjectives
   m_TagString: Untagged
@@ -38458,6 +38632,18 @@ RectTransform:
   m_AnchoredPosition: {x: -16, y: -684}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 1, y: 1}
+--- !u!225 &1113663770
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113663764}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1115462785
 GameObject:
   m_ObjectHideFlags: 0
@@ -40464,6 +40650,7 @@ GameObject:
   - component: {fileID: 1156948104}
   - component: {fileID: 1156948103}
   - component: {fileID: 1156948106}
+  - component: {fileID: 1156948107}
   m_Layer: 0
   m_Name: ButtonZoomIn
   m_TagString: Untagged
@@ -40597,6 +40784,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
+--- !u!225 &1156948107
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156948101}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &1161207727
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41571,6 +41770,7 @@ GameObject:
   - component: {fileID: 1187724193}
   - component: {fileID: 1187724192}
   - component: {fileID: 1187724191}
+  - component: {fileID: 1187724194}
   m_Layer: 5
   m_Name: TurnCounterText
   m_TagString: Untagged
@@ -41711,6 +41911,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1187724189}
   m_CullTransparentMesh: 1
+--- !u!225 &1187724194
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1187724189}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &1192037485
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45516,6 +45728,8 @@ RectTransform:
   - {fileID: 215870126}
   - {fileID: 327261320}
   - {fileID: 207650627}
+  - {fileID: 1743582452}
+  - {fileID: 39939561}
   - {fileID: 714821776}
   - {fileID: 1147418033}
   m_Father: {fileID: 0}
@@ -51593,6 +51807,7 @@ GameObject:
   - component: {fileID: 1443206987}
   - component: {fileID: 1443206986}
   - component: {fileID: 1443206990}
+  - component: {fileID: 1443206991}
   m_Layer: 0
   m_Name: ButtonPause
   m_TagString: Untagged
@@ -51714,6 +51929,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
+--- !u!225 &1443206991
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443206985}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &1445566708
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54069,6 +54296,7 @@ GameObject:
   - component: {fileID: 1493579919}
   - component: {fileID: 1493579918}
   - component: {fileID: 1493579920}
+  - component: {fileID: 1493579923}
   m_Layer: 0
   m_Name: ButtonRelations
   m_TagString: Untagged
@@ -54190,6 +54418,18 @@ RectTransform:
   m_AnchoredPosition: {x: -16, y: -500}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 1, y: 1}
+--- !u!225 &1493579923
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493579917}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &1496938630
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56798,6 +57038,7 @@ MonoBehaviour:
   _reportButton: {fileID: 342919726}
   _reportView: {fileID: 714821778}
   _knowledgePopup: {fileID: 714821777}
+  _flyover: {fileID: 1743582453}
 --- !u!114 &1575728843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61411,6 +61652,7 @@ GameObject:
   - component: {fileID: 1695067323}
   - component: {fileID: 1695067322}
   - component: {fileID: 1695067326}
+  - component: {fileID: 1695067327}
   m_Layer: 5
   m_Name: ButtonPassTurn
   m_TagString: Untagged
@@ -61532,6 +61774,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 802e74960a419946780ca3f1b00cf29f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Metis.Runtime::ButtonClickSound
+--- !u!225 &1695067327
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695067321}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &1701263861
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62796,6 +63050,76 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 828575677080323532, guid: 06ad1cdbca61a6aad8b03257964c705a, type: 3}
   m_PrefabInstance: {fileID: 1740505476}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1743582451
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1743582452}
+  - component: {fileID: 1743582453}
+  m_Layer: 0
+  m_Name: FlyoverController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1743582452
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743582451}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1293635773}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1743582453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743582451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc0254e50fb34e6ccbdaeb6ebced627e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::CityIntroFlyover
+  _camera: {fileID: 2044889011}
+  _cameraControls:
+  - {fileID: 2044889014}
+  - {fileID: 2044889015}
+  _hiddenGroups:
+  - {fileID: 1061829975}
+  - {fileID: 1075475712}
+  - {fileID: 513837907}
+  - {fileID: 1695067327}
+  - {fileID: 1187724194}
+  - {fileID: 1443206991}
+  - {fileID: 1493579923}
+  - {fileID: 2102132083}
+  - {fileID: 1113663770}
+  - {fileID: 1156948107}
+  - {fileID: 55835823}
+  _skipPanel: {fileID: 39939560}
+  _skipButton: {fileID: 39939562}
+  _duration: 4
+  _startSize: 7
+  _startPan: {x: -3, y: 2}
+  _revealDuration: 0.4
 --- !u!1001 &1744342260
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -63230,6 +63554,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3970261373664373580, guid: b251aac2e265df74f91db1dee1baee73, type: 3}
   m_PrefabInstance: {fileID: 1753723412}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1756118087
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1756118089}
+  - component: {fileID: 1756118088}
+  m_Layer: 0
+  m_Name: CrisisMusic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1756118088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1756118087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e792e7dd1c73624a4dfded6964dab6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::CrisisMusicController
+  _turnManager: {fileID: 1238303805}
+  _cityStatsManager: {fileID: 278176690}
+--- !u!4 &1756118089
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1756118087}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1756676342
 GameObject:
   m_ObjectHideFlags: 0
@@ -75251,6 +75621,7 @@ GameObject:
   - component: {fileID: 2102132081}
   - component: {fileID: 2102132079}
   - component: {fileID: 2102132078}
+  - component: {fileID: 2102132083}
   m_Layer: 0
   m_Name: ButtonNewspaper
   m_TagString: Untagged
@@ -75361,6 +75732,18 @@ RectTransform:
   m_AnchoredPosition: {x: -16, y: -592}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 1, y: 1}
+--- !u!225 &2102132083
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2102132077}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &2102339316
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -76234,3 +76617,4 @@ SceneRoots:
   - {fileID: 1233089691}
   - {fileID: 98775022}
   - {fileID: 1091674592}
+  - {fileID: 1756118089}

@@ -93,6 +93,15 @@ public class TurnManager : MonoBehaviour
     // Todas as vantagens passivas cadastradas, exposto pro popup de recompensa sortear opcoes.
     public IReadOnlyList<PassiveAdvantageData> AdvantagePool => _advantagePool;
 
+    // Resumo da rodada que acabou nesta fase (derrota ou vitoria contra o chefe); nulo enquanto ela continua.
+    public RunSummary EndedRun { get; private set; }
+
+    // Derrota na rodada ou vitoria contra o chefe encerram a rodada; cenario tem fluxo proprio.
+    public bool EndsRun(GameOutcome outcome)
+    {
+        return Scenario == null && SessionMode.IsScenario == false && (outcome == GameOutcome.GameOver || Boss != null);
+    }
+
     public event Action<RandomEventData> OnRandomEventTriggered;
 
     // Carta paga e jogada, comum ou acao livre.
@@ -682,6 +691,8 @@ public class TurnManager : MonoBehaviour
         // Derrota apaga o save na hora, senao fechar o app no popup e continuar repetiria o turno perdido.
         // Cenario e chefe nao tem fase seguinte, entao terminam do mesmo jeito na vitoria.
         // Vencer o chefe encerra a rodada: nao ha recompensa nem mapa depois.
+        if (EndsRun(outcome))
+            EndedRun = MetaProgressionManager.BuildRunSummary(outcome == GameOutcome.Victory ? RunEnding.BossVictory : RunEnding.Defeat);
         if (outcome == GameOutcome.GameOver || SessionMode.IsScenario || Boss != null)
             MetaProgressionManager.ResetRun();
     }

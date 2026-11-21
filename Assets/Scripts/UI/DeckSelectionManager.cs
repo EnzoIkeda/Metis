@@ -57,6 +57,6 @@ public class DeckSelectionManager : MonoBehaviour
         // Escolher o baralho comeca uma rodada nova, entao nada de uma rodada abandonada pode vazar pra ela.
         MetaProgressionManager.ResetRun();
         MetaProgressionManager.SetArchetype(archetype);
-        SceneManager.LoadScene("City_Scene");
+        SceneManager.LoadScene(RunIntroController.SceneName);
     }
 }

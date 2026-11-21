@@ -109,4 +109,88 @@ public class MusicPlayerTests
 
         Assert.That(audioSource.clip, Is.Not.SameAs(initialClip), "a faixa nao trocou em 2 s de tempo real com o jogo pausado");
     }
+
+    private static ThemeMusicData CreateThemes(AudioClip opening, AudioClip crisis = null)
+    {
+        var themes = ScriptableObject.CreateInstance<ThemeMusicData>();
+        TestDataFactory.SetField(themes, "_opening", opening);
+        TestDataFactory.SetField(themes, "_crisis", crisis);
+        return themes;
+    }
+
+    // A fusao anda em tempo real: espera ela terminar, com limite.
+    private static IEnumerator WaitForClip(AudioSource audioSource, AudioClip clip, float seconds = 3f)
+    {
+        var deadline = Time.realtimeSinceStartup + seconds;
+        while ((audioSource.clip != clip || audioSource.volume < 0.999f) && Time.realtimeSinceStartup < deadline)
+            yield return null;
+    }
+
+    [UnityTest]
+    public IEnumerator PlayTheme_AndResumePlaylist_WorkWhilePaused()
+    {
+        var track = TestDataFactory.CreateSilentClip("Track", 30f);
+        var theme = TestDataFactory.CreateSilentClip("Theme", 30f);
+        var player = CreatePlayer(TestDataFactory.CreatePlaylist(track));
+        var audioSource = player.GetComponent<AudioSource>();
+        yield return WaitUntilClipAssigned(audioSource);
+
+        Time.timeScale = 0f;
+        player.PlayTheme(theme, true, 0.3f);
+        yield return WaitForClip(audioSource, theme);
+        Assert.That(audioSource.clip, Is.SameAs(theme), "a fusao precisa terminar com o jogo pausado");
+        Assert.That(audioSource.loop, Is.True);
+        Assert.That(audioSource.volume, Is.EqualTo(1f).Within(1e-3));
+        Assert.That(player.CurrentTheme, Is.SameAs(theme));
+
+        player.ResumePlaylist(0.3f);
+        yield return WaitForClip(audioSource, track);
+        Assert.That(audioSource.clip, Is.SameAs(track));
+        Assert.That(audioSource.loop, Is.False, "a trilha volta a girar faixa por faixa");
+        Assert.That(player.CurrentTheme, Is.Null);
+    }
+
+    [UnityTest]
+    public IEnumerator PlayTheme_WithTheSameTrackDoesNotRestartIt()
+    {
+        var theme = TestDataFactory.CreateSilentClip("Theme", 30f);
+        var player = CreatePlayer(TestDataFactory.CreatePlaylist(TestDataFactory.CreateSilentClip("Track", 30f)));
+        var audioSource = player.GetComponent<AudioSource>();
+        yield return WaitUntilClipAssigned(audioSource);
+
+        player.PlayTheme(theme, true, 0f);
+        Assert.That(audioSource.clip, Is.SameAs(theme));
+        audioSource.time = 1.5f;
+        player.PlayTheme(theme, true, 0.3f);
+        yield return null;
+        Assert.That(audioSource.volume, Is.EqualTo(1f).Within(1e-3), "sem nova fusao");
+    }
+
+    [UnityTest]
+    public IEnumerator Sequence_TakesOverAndHandsBackToThePlaylist()
+    {
+        var track = TestDataFactory.CreateSilentClip("Track", 30f);
+        var opening = TestDataFactory.CreateSilentClip("Opening", 30f);
+        var host = new GameObject("MusicPlayer");
+        host.SetActive(false);
+        var player = host.AddComponent<MusicPlayer>();
+        TestDataFactory.SetField(player, "_defaultPlaylist", TestDataFactory.CreatePlaylist(track));
+        TestDataFactory.SetField(player, "_themes", CreateThemes(opening));
+        host.SetActive(true);
+        var audioSource = player.GetComponent<AudioSource>();
+        yield return WaitUntilClipAssigned(audioSource);
+
+        player.PlaySequence(null, true);
+        Assert.That(player.Mood, Is.EqualTo(MusicMood.Playlist), "sem faixa, a trilha continua");
+
+        player.PlaySequence(player.Themes.Opening, true);
+        Assert.That(player.Mood, Is.EqualTo(MusicMood.Sequence));
+        yield return WaitForClip(audioSource, opening);
+        Assert.That(audioSource.clip, Is.SameAs(opening));
+
+        player.EndSequence();
+        Assert.That(player.Mood, Is.EqualTo(MusicMood.Playlist));
+        yield return WaitForClip(audioSource, track);
+        Assert.That(audioSource.clip, Is.SameAs(track));
+    }
 }

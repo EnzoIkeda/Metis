@@ -876,4 +876,124 @@ public static class UIStrings
                 return string.Empty;
         }
     }
+
+    public static string SkipButton => IsPt ? "Pular" : "Skip";
+
+    // Chave da legenda de uma tela do fim de rodada; a imagem conta a partir de 0.
+    public static string RunEndCaptionKey(RunEnding ending, int imageIndex) => $"{(ending == RunEnding.Defeat ? "defeat" : "victory")}.{imageIndex + 1}";
+
+    public static string RunDefeatTitle => IsPt ? "Fim do mandato" : "End of term";
+
+    public static string RunSummaryHeader => IsPt ? "Resumo da rodada" : "Run summary";
+
+    public static string RunSummaryMenuButton => IsPt ? "Voltar ao menu" : "Back to menu";
+
+    // Uma linha do resumo da rodada; names ja vem traduzidos e separados por virgula.
+    public static string RunSummaryLine(RunSummaryLineKind kind, int number, CardArchetype archetype, string names)
+    {
+        switch (kind)
+        {
+            case RunSummaryLineKind.Archetype:
+                return IsPt ? $"Baralho: {ArchetypeName(archetype)}" : $"Deck: {ArchetypeName(archetype)}";
+            case RunSummaryLineKind.PhasesWon:
+                return IsPt ? $"Fases vencidas: {number}" : $"Phases won: {number}";
+            case RunSummaryLineKind.DefeatPhase:
+                return IsPt ? $"Derrota na fase {number}" : $"Defeated in phase {number}";
+            case RunSummaryLineKind.DefeatAtBoss:
+                return IsPt ? $"Derrota para {names} na fase {number}" : $"Defeated by {names} in phase {number}";
+            case RunSummaryLineKind.BossDefeated:
+                return IsPt ? $"Chefe vencido: {names}" : $"Boss defeated: {names}";
+            case RunSummaryLineKind.Themes:
+                return IsPt ? $"Cidades temáticas: {names}" : $"Themed cities: {names}";
+            case RunSummaryLineKind.RewardCards:
+                return IsPt ? $"Cartas conquistadas: {names}" : $"Cards earned: {names}";
+            case RunSummaryLineKind.RewardAdvantages:
+                return IsPt ? $"Vantagens conquistadas: {names}" : $"Advantages earned: {names}";
+            case RunSummaryLineKind.Trades:
+                return IsPt ? $"Propostas aceitas: {names}" : $"Proposals accepted: {names}";
+            default:
+                return string.Empty;
+        }
+    }
+
+    // Chave da legenda de cada tela da abertura, na ordem das imagens.
+    public static string IntroCaptionKey(int index) => $"intro.{index + 1}";
+
+    // Legendas das telas de abertura e de fim de rodada; a tela da posse cita o baralho escolhido.
+    public static string SlideCaption(string key, CardArchetype archetype)
+    {
+        switch (key)
+        {
+            case "intro.1":
+                return IsPt
+                    ? "A cidade chegou ao limite: ruas quebradas, céu fechado e contas no vermelho."
+                    : "The city has reached its limit: broken streets, gray skies and empty coffers.";
+            case "intro.2":
+                return IsPt
+                    ? "A gestão anterior não deu conta da crise."
+                    : "The previous administration could not handle the crisis.";
+            case "intro.3":
+                return IsPt
+                    ? "Agora é a sua vez de propor outro caminho."
+                    : "Now it is your turn to propose another way.";
+            case "intro.4":
+                return IsPt
+                    ? "A prefeitura muda de mãos."
+                    : "City Hall changes hands.";
+            case "intro.5":
+                return IsPt
+                    ? "O gabinete espera por você."
+                    : "The office is waiting for you.";
+            case "intro.6":
+                return IsPt
+                    ? $"Você toma posse com uma proposta de {(archetype == CardArchetype.Comunitario ? "cidade comunitária" : ArchetypeName(archetype))}."
+                    : $"You take office with a {ArchetypeName(archetype)} plan.";
+            case "intro.7":
+                return IsPt
+                    ? "Você sonha com moradia digna para todos..."
+                    : "You dream of decent housing for everyone...";
+            case "intro.8":
+                return IsPt
+                    ? "...com parques e ar limpo..."
+                    : "...of parks and clean air...";
+            case "intro.9":
+                return IsPt
+                    ? "...com uma cidade conectada ao mundo..."
+                    : "...of a city connected to the world...";
+            case "intro.10":
+                return IsPt
+                    ? "...e com gente feliz nas ruas. Cada cidade dura 20 turnos. Boa gestão!"
+                    : "...and of happy people in the streets. Each city lasts 20 turns. Good luck!";
+            case "defeat.1":
+                return IsPt
+                    ? "A confiança da população acabou, e a cidade voltou ao limite."
+                    : "The population's trust is gone, and the city is back at its limit.";
+            case "defeat.2":
+                return IsPt
+                    ? "Agora quem está em pânico é você. A próxima gestão recebe a chave."
+                    : "Now you are the one in a panic. The next administration gets the keys.";
+            case "victory.6":
+                return IsPt
+                    ? $"A cidade atravessou a crise, e a sua proposta de {(archetype == CardArchetype.Comunitario ? "cidade comunitária" : ArchetypeName(archetype))} saiu do papel."
+                    : $"The city made it through the crisis, and your {ArchetypeName(archetype)} plan came true.";
+            case "victory.7":
+                return IsPt
+                    ? "Hoje há moradia digna para mais gente..."
+                    : "Today more people have decent housing...";
+            case "victory.8":
+                return IsPt
+                    ? "...parques e ar mais limpo..."
+                    : "...parks and cleaner air...";
+            case "victory.9":
+                return IsPt
+                    ? "...uma cidade conectada ao mundo..."
+                    : "...a city connected to the world...";
+            case "victory.10":
+                return IsPt
+                    ? "...e gente feliz nas ruas. Missão cumprida!"
+                    : "...and happy people in the streets. Mission accomplished!";
+            default:
+                return string.Empty;
+        }
+    }
 }

@@ -16,6 +16,9 @@ public class GameOutcomePopupView : MonoBehaviour
     [SerializeField] private TMP_Text _messageText;
     [SerializeField] private Button _closeButton;
 
+    [Tooltip("Fim de rodada (derrota ou vitoria contra o chefe) tem sequencia e resumo proprios; aqui nao abre.")]
+    [SerializeField] private RunEndFlow _runEnd;
+
     private void Start()
     {
         if (_endFlow != null)
@@ -63,6 +66,8 @@ public class GameOutcomePopupView : MonoBehaviour
     private void HandleGameEnded(GameOutcome outcome)
     {
         if (outcome != _outcomeToShowFor)
+            return;
+        if (_runEnd != null && _runEnd.Handles(outcome))
             return;
 
         if (_panelRoot != null)

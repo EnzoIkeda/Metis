@@ -184,6 +184,12 @@ public static class MetaProgressionManager
         Write();
     }
 
+    // Resumo da rodada em jogo, tirado antes de o save ser apagado no fim dela.
+    public static RunSummary BuildRunSummary(RunEnding ending)
+    {
+        return RunSummary.Build(State, ending);
+    }
+
     // Encerra a rodada inteira, usado no Game Over e ao escolher o baralho de uma rodada nova.
     public static void ResetRun()
     {

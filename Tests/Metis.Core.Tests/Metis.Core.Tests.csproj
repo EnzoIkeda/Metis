@@ -74,6 +74,12 @@
     <Compile Include="../../Assets/Scripts/Core/Utilities/SessionMode.cs" Link="Source/SessionMode.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/ModelReport.cs" Link="Source/ModelReport.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/PaperZoom.cs" Link="Source/PaperZoom.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/MusicFade.cs" Link="Source/MusicFade.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/CrisisMusicRule.cs" Link="Source/CrisisMusicRule.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/MusicMoodSelector.cs" Link="Source/MusicMoodSelector.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/SlideSequence.cs" Link="Source/SlideSequence.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/FlyoverPath.cs" Link="Source/FlyoverPath.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/RunSummary.cs" Link="Source/RunSummary.cs" />
     <Compile Include="../../Assets/Scripts/Editor/ModelReportImportFormat.cs" Link="Source/ModelReportImportFormat.cs" />
   </ItemGroup>
 

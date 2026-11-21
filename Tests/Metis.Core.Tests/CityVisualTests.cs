@@ -90,6 +90,26 @@ public class CityWfcTests
     }
 
     [Test]
+    public void ParallelStreets_KeepAtLeastTwoLotsBetweenThem()
+    {
+        for (ulong seed = 1; seed <= 300; seed++)
+        {
+            var plan = CityWfc.Generate(seed);
+            for (var x = 0; x < plan.Width; x++)
+            {
+                for (var z = 0; z < plan.Height; z++)
+                {
+                    if (plan.IsRoad(x, z))
+                        continue;
+                    var northSouth = z > 0 && z < plan.Height - 1 && plan.IsRoad(x, z - 1) && plan.IsRoad(x, z + 1);
+                    var eastWest = x > 0 && x < plan.Width - 1 && plan.IsRoad(x - 1, z) && plan.IsRoad(x + 1, z);
+                    Assert.That(northSouth || eastWest, Is.False, $"lote {x},{z} entre duas ruas na semente {seed}");
+                }
+            }
+        }
+    }
+
+    [Test]
     public void Plans_HaveNoDeadEndsInside_AndNoTwoByTwoRoadSquares()
     {
         for (ulong seed = 1; seed <= 100; seed++)
@@ -451,5 +471,73 @@ public class CardMarkPlannerTests
 
         foreach (var mark in planner.Marks)
             Assert.That(mark.X <= 1 || mark.Z <= 1 || mark.X >= plan.Width - 2 || mark.Z >= plan.Height - 2, Is.True);
+    }
+}
+
+public class CityDecorTests
+{
+    [Test]
+    public void StreetLights_StandOnTheSidewalkOfStraightRoads()
+    {
+        var plan = CityWfc.Generate(31);
+        foreach (var item in CityDecor.Plan(plan))
+        {
+            if (item.Kind != CityDecorKind.StreetLight)
+                continue;
+            var shape = CityPlan.ShapeOf(plan.RoadAt(item.X, item.Z), out var rotation);
+            Assert.That(shape, Is.EqualTo(RoadShape.Straight));
+            // Na reta norte-sul o poste sai para leste ou oeste; na leste-oeste, para norte ou sul.
+            if (rotation == 0f)
+            {
+                Assert.That(Math.Abs(item.OffsetX), Is.EqualTo(CityDecor.SidewalkOffset));
+                Assert.That(item.OffsetZ, Is.EqualTo(0f));
+            }
+            else
+            {
+                Assert.That(item.OffsetX, Is.EqualTo(0f));
+                Assert.That(Math.Abs(item.OffsetZ), Is.EqualTo(CityDecor.SidewalkOffset));
+            }
+        }
+    }
+
+    [Test]
+    public void EveryJunction_GetsOneTrafficSignal_OnACorner()
+    {
+        var plan = CityWfc.Generate(31);
+        var signals = new HashSet<(int, int)>();
+        foreach (var item in CityDecor.Plan(plan))
+        {
+            if (item.Kind != CityDecorKind.TrafficSignal)
+                continue;
+            Assert.That(signals.Add((item.X, item.Z)), Is.True);
+            Assert.That(Math.Abs(item.OffsetX), Is.EqualTo(CityDecor.SidewalkOffset));
+            Assert.That(Math.Abs(item.OffsetZ), Is.EqualTo(CityDecor.SidewalkOffset));
+        }
+
+        var junctions = 0;
+        for (var x = 0; x < plan.Width; x++)
+        {
+            for (var z = 0; z < plan.Height; z++)
+            {
+                var shape = CityPlan.ShapeOf(plan.RoadAt(x, z), out _);
+                if (shape == RoadShape.TJunction || shape == RoadShape.Cross)
+                    junctions++;
+            }
+        }
+        Assert.That(signals.Count, Is.EqualTo(junctions));
+    }
+
+    [Test]
+    public void Decor_IsTheSameForTheSamePlan()
+    {
+        var a = CityDecor.Plan(CityWfc.Generate(8));
+        var b = CityDecor.Plan(CityWfc.Generate(8));
+        Assert.That(b.Count, Is.EqualTo(a.Count));
+        for (var i = 0; i < a.Count; i++)
+        {
+            Assert.That(b[i].X, Is.EqualTo(a[i].X));
+            Assert.That(b[i].Z, Is.EqualTo(a[i].Z));
+            Assert.That(b[i].Rotation, Is.EqualTo(a[i].Rotation));
+        }
     }
 }

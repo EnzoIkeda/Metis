@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ef77b3a770eb9270a1dadd5eaa1fe66, type: 3}
+  m_Name: StructureBuildingChickenShop
+  m_EditorClassIdentifier: Metis.Runtime::StructureData
+  _structureName: BuildingChickenShop
+  _category: 2
+  _prefab: {fileID: 1485064311220370104, guid: 24faf4d54078871bd855a61dd72a122f, type: 3}
+  _footprintCellType: 2
+  _statEffects: []

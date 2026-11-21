@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef77b3a770eb9270a1dadd5eaa1fe66, type: 3}
   m_Name: StructureGreenLotBigTree
   m_EditorClassIdentifier: Assembly-CSharp::StructureData
-  _structureName: "Lote Verde (\xC1rvore)"
+  _structureName: GreenLotBigTree
   _category: 3
-  _prefab: {fileID: 3773893741816359110, guid: 0fcf2a94da0b020eab17df8421d3f3d5, type: 3}
+  _prefab: {fileID: 7858489416907978446, guid: 8a5f7e64ec6d236f487126f118fb2dcf, type: 3}
   _footprintCellType: 2
   _statEffects: []

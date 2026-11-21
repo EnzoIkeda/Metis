@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef77b3a770eb9270a1dadd5eaa1fe66, type: 3}
   m_Name: StructureGreenLotBush
   m_EditorClassIdentifier: Assembly-CSharp::StructureData
-  _structureName: Lote Verde (Arbusto)
+  _structureName: GreenLotBush
   _category: 3
-  _prefab: {fileID: 4538097672745428151, guid: 1c9dffc61311ff86a9ae922c66929d54, type: 3}
+  _prefab: {fileID: 3685405883301580924, guid: d7bb9af9c9b2e39a880c22bce73bd97e, type: 3}
   _footprintCellType: 2
   _statEffects: []

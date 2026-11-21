@@ -9,15 +9,17 @@ public class PlacementManager : MonoBehaviour
     [FormerlySerializedAs("height")] [SerializeField] private int _height;
     [FormerlySerializedAs("cellSize")] [SerializeField] private float _cellSize = 1f;
 
-    // Usados so nas fases 2+ de uma rodada, pra sortear o conteudo dos quarteiroes por cima da malha de ruas fixa.
-    [SerializeField] private StructureData[] _proceduralBuildingOptions;
-    [SerializeField] private StructureData[] _proceduralGreenLotOptions;
+    [Tooltip("Pecas da cidade gerada: rua por forma, estruturas por uso de lote e decoracao.")]
+    [SerializeField] private CityTileSetData _tileSet;
     [SerializeField] private ThemedPhaseLibraryData _themes;
 
     private Grid _placementGrid;
 
-    // Semente do tracado sorteado nas fases 2+, salva pra reconstruir a mesma cidade ao continuar.
+    // Semente do tracado, salva pra reconstruir a mesma cidade ao continuar.
     public ulong LayoutSeed { get; private set; }
+
+    // Cidade planejada desta fase (ruas, usos e frentes dos lotes).
+    public CityPlan Plan { get; private set; }
 
     // Instancia pura do grid, exposta pra outros sistemas consultarem o layout.
     public Grid Grid => _placementGrid;
@@ -27,57 +29,82 @@ public class PlacementManager : MonoBehaviour
     private void Awake()
     {
         _placementGrid = new Grid(_width, _height);
-        RegisterInitialOccupants();
+        BuildCity();
     }
 
-    private void RegisterInitialOccupants()
-    {
-        var isNewPhase = MetaProgressionManager.IsNewPhase;
-
-        foreach (Transform child in transform)
-        {
-            var occupant = child.GetComponent<InitialGridOccupant>();
-            if (occupant == null)
-                continue;
-
-            var position = LocalPositionToCell(child.localPosition);
-            if (CheckIfPositionInBound(position) == false)
-            {
-                Debug.LogWarning($"[PlacementManager] '{child.name}' tem InitialGridOccupant fora dos limites do grid ({position}), ignorado.");
-                continue;
-            }
-
-            _placementGrid[position.x, position.z] = occupant.CellType;
-
-            var isBlockCell = occupant.CellType == CellType.Structure || occupant.CellType == CellType.SpecialStructure;
-            if (isBlockCell && isNewPhase)
-            {
-                // Fase nova: o quarteirao desenhado a mao vira o sorteado em RegenerateBlocks, entao some daqui.
-                child.gameObject.SetActive(false);
-                continue;
-            }
-
-            if (occupant.StructureData != null)
-                _placedStructureData[position] = occupant.StructureData;
-        }
-
-        if (isNewPhase)
-            RegenerateBlocks();
-    }
-
-    // Sorteia de novo o conteudo dos quarteiroes (nunca a malha de ruas) pras fases 2+ de uma rodada.
-    private void RegenerateBlocks()
+    // Toda fase sai do gerador: semente salva ao continuar, a do tema se houver, senao uma nova.
+    private void BuildCity()
     {
         var savedPhase = MetaProgressionManager.SavedPhase;
         var theme = _themes != null ? _themes.Find(MetaProgressionManager.CurrentTheme) : null;
         LayoutSeed = savedPhase != null ? savedPhase.LayoutSeed : theme != null && theme.HasLayoutSeed ? theme.LayoutSeed : SeededRandom.NewSeed();
+        Plan = CityWfc.Generate(LayoutSeed, new CityWfcOptions { Width = _width, Height = _height });
 
-        var generator = new CityLayoutGenerator(_proceduralBuildingOptions, _proceduralGreenLotOptions, new SeededRandom(LayoutSeed));
-        foreach (var cell in generator.Generate(_placementGrid))
+        if (_tileSet == null)
         {
-            var position = new Vector3Int(cell.X, 0, cell.Z);
-            PlaceTemporaryStructure(position, cell.Structure.Prefab, cell.Structure.FootprintCellType, cell.FacingDegrees);
-            _placedStructureData[position] = cell.Structure;
+            Debug.LogWarning("[PlacementManager] Sem conjunto de pecas da cidade; o grid fica so com os tipos de celula.");
+            FillGridTypes();
+            return;
+        }
+
+        // Gerador proprio para a escolha das estruturas, separado do tracado.
+        var random = new SeededRandom(LayoutSeed ^ 0x5DEECE66DUL);
+        for (var x = 0; x < _width; x++)
+        {
+            for (var z = 0; z < _height; z++)
+            {
+                var position = new Vector3Int(x, 0, z);
+                if (Plan.IsRoad(x, z))
+                {
+                    PlaceRoad(position, Plan.RoadAt(x, z));
+                    continue;
+                }
+
+                var options = _tileSet.StructuresFor(Plan.LotUseAt(x, z));
+                if (options.Count == 0)
+                {
+                    _placementGrid[x, z] = CellType.Structure;
+                    continue;
+                }
+                var structure = options[random.Next(options.Count)];
+                PlaceTemporaryStructure(position, structure.Prefab, structure.FootprintCellType, Plan.FacingAt(x, z));
+                _placedStructureData[position] = structure;
+            }
+        }
+
+        PlaceDecor();
+    }
+
+    private void FillGridTypes()
+    {
+        for (var x = 0; x < _width; x++)
+            for (var z = 0; z < _height; z++)
+                _placementGrid[x, z] = Plan.IsRoad(x, z) ? CellType.Road : CellType.Structure;
+    }
+
+    private void PlaceRoad(Vector3Int position, RoadSides sides)
+    {
+        var shape = CityPlan.ShapeOf(sides, out var rotation);
+        if (_tileSet.TryGetRoad(shape, out var piece) == false)
+        {
+            _placementGrid[position.x, position.z] = CellType.Road;
+            return;
+        }
+        PlaceTemporaryStructure(position, piece.Prefab, CellType.Road, rotation + piece.RotationOffset);
+    }
+
+    private void PlaceDecor()
+    {
+        var container = new GameObject("Decor").transform;
+        container.SetParent(transform, false);
+        foreach (var item in CityDecor.Plan(Plan))
+        {
+            var prefab = item.Kind == CityDecorKind.StreetLight ? _tileSet.StreetLight : _tileSet.TrafficSignal;
+            if (prefab == null)
+                continue;
+            var instance = Instantiate(prefab, container);
+            instance.transform.localPosition = CellToLocalPosition(new Vector3Int(item.X, 0, item.Z)) + new Vector3(item.OffsetX * _cellSize, 0f, item.OffsetZ * _cellSize);
+            instance.transform.localRotation = Quaternion.Euler(0f, item.Rotation, 0f) * instance.transform.localRotation;
         }
     }
 
@@ -96,31 +123,27 @@ public class PlacementManager : MonoBehaviour
         return _placementGrid[position.x, position.z] == type;
     }
 
-    internal void PlaceTemporaryStructure(Vector3Int position, GameObject structurePrefab, CellType type, float yRotationDegrees = 0f)
+    internal GameObject PlaceTemporaryStructure(Vector3Int position, GameObject structurePrefab, CellType type, float yRotationDegrees = 0f)
     {
         _placementGrid[position.x, position.z] = type;
-        CreateANewStructureModel(position, structurePrefab, type, yRotationDegrees);
+        return CreateANewStructureModel(CellToLocalPosition(position), structurePrefab, type, yRotationDegrees);
     }
 
-    private void CreateANewStructureModel(Vector3Int position, GameObject structurePrefab, CellType type, float yRotationDegrees = 0f)
+    private GameObject CreateANewStructureModel(Vector3 localPosition, GameObject structurePrefab, CellType type, float yRotationDegrees = 0f)
     {
         GameObject structure = new GameObject(type.ToString());
         structure.transform.SetParent(transform);
-        structure.transform.localPosition = CellToLocalPosition(position);
+        structure.transform.localPosition = localPosition;
         structure.transform.localRotation = Quaternion.Euler(0f, yRotationDegrees, 0f);
         var structureModel = structure.AddComponent<StructureModel>();
         structureModel.CreateModel(structurePrefab);
+        return structure;
     }
 
     // Converte uma celula pra posicao local, reaproveitavel por qualquer GameObject filho do grid.
     public Vector3 CellToLocalPosition(Vector3Int cell)
     {
         return new Vector3(cell.x * _cellSize, cell.y, cell.z * _cellSize);
-    }
-
-    private Vector3Int LocalPositionToCell(Vector3 localPosition)
-    {
-        return new Vector3Int(Mathf.RoundToInt(localPosition.x / _cellSize), 0, Mathf.RoundToInt(localPosition.z / _cellSize));
     }
 
     public bool PlaceStructure(Vector3Int position, StructureData structureData)
@@ -135,7 +158,7 @@ public class PlacementManager : MonoBehaviour
         return true;
     }
 
-    internal StructureData GetStructureDataAt(Vector3Int position)
+    public StructureData GetStructureDataAt(Vector3Int position)
     {
         _placedStructureData.TryGetValue(position, out var structureData);
         return structureData;

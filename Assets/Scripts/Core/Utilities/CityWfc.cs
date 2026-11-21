@@ -376,6 +376,53 @@ public static class CityWfc
                 domain[nx, nz] = after;
                 queue.Enqueue((nx, nz));
             }
+
+            if (EnforceBlockDepth(domain, queue, x, z, width, height) == false)
+                return false;
+        }
+        return true;
+    }
+
+    // Entre duas ruas paralelas cabem pelo menos 2 lotes: um lote nunca tem rua dos dois lados opostos.
+    // A regra olha tres celulas em linha, entao roda a parte da compatibilidade entre pares.
+    private static bool EnforceBlockDepth(int[,] domain, Queue<(int X, int Z)> queue, int x, int z, int width, int height)
+    {
+        const int noRoad = 1;
+        bool IsLot(int cx, int cz) => domain[cx, cz] == noRoad;
+        bool IsRoad(int cx, int cz) => (domain[cx, cz] & noRoad) == 0;
+        bool Inside(int cx, int cz) => cx >= 0 && cx < width && cz >= 0 && cz < height;
+
+        bool ForbidRoad(int cx, int cz)
+        {
+            var before = domain[cx, cz];
+            var after = before & noRoad;
+            if (after == before)
+                return true;
+            if (after == 0)
+                return false;
+            domain[cx, cz] = after;
+            queue.Enqueue((cx, cz));
+            return true;
+        }
+
+        for (var d = 0; d < 4; d++)
+        {
+            var ax = x + Dx[d];
+            var az = z + Dz[d];
+            if (Inside(ax, az) == false)
+                continue;
+
+            // Esta celula e lote no meio: rua de um lado proibe rua do outro.
+            var bx = x - Dx[d];
+            var bz = z - Dz[d];
+            if (IsLot(x, z) && Inside(bx, bz) && IsRoad(ax, az) && ForbidRoad(bx, bz) == false)
+                return false;
+
+            // Esta celula e rua na ponta: lote ao lado proibe rua logo depois dele.
+            var fx = x + 2 * Dx[d];
+            var fz = z + 2 * Dz[d];
+            if (IsRoad(x, z) && IsLot(ax, az) && Inside(fx, fz) && ForbidRoad(fx, fz) == false)
+                return false;
         }
         return true;
     }

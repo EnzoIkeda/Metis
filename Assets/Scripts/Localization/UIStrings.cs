@@ -94,6 +94,10 @@ public static class UIStrings
         ? (UnitDisplaySettings.ShowRealUnits ? "Valores: unidades reais" : "Valores: índice")
         : (UnitDisplaySettings.ShowRealUnits ? "Values: real units" : "Values: index");
 
+    public static string BloomButtonLabel => IsPt
+        ? (BloomSettings.Enabled ? "Brilho (bloom): ligado" : "Brilho (bloom): desligado")
+        : (BloomSettings.Enabled ? "Glow (bloom): on" : "Glow (bloom): off");
+
     // Efeitos exatos da carta, um parametro por linha, mostrados quando a mao foi revelada.
     public static string CardEffects(CardData card)
     {

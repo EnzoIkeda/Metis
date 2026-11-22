@@ -18,6 +18,8 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private TMP_Text _languageButtonText;
     [SerializeField] private Button _unitsButton;
     [SerializeField] private TMP_Text _unitsButtonText;
+    [SerializeField] private Button _bloomButton;
+    [SerializeField] private TMP_Text _bloomButtonText;
 
     [Header("Rodada salva")]
     [SerializeField] private Button _continueButton;
@@ -49,6 +51,8 @@ public class MainMenuManager : MonoBehaviour
             _scenariosButton.onClick.AddListener(OpenScenarios);
         if (_unitsButton != null)
             _unitsButton.onClick.AddListener(ToggleUnits);
+        if (_bloomButton != null)
+            _bloomButton.onClick.AddListener(ToggleBloom);
         if (_dialogConfirmButton != null)
             _dialogConfirmButton.onClick.AddListener(ConfirmDialog);
         if (_dialogCancelButton != null)
@@ -78,6 +82,8 @@ public class MainMenuManager : MonoBehaviour
             _languageButtonText.text = UIStrings.LanguageButtonLabel;
         if (_unitsButtonText != null)
             _unitsButtonText.text = UIStrings.UnitsButtonLabel;
+        if (_bloomButtonText != null)
+            _bloomButtonText.text = UIStrings.BloomButtonLabel;
         if (_continueButtonText != null)
             _continueButtonText.text = UIStrings.MainMenuContinue;
         if (_dialogCancelButtonText != null)
@@ -99,6 +105,13 @@ public class MainMenuManager : MonoBehaviour
     public void ToggleUnits()
     {
         UnitDisplaySettings.ShowRealUnits = UnitDisplaySettings.ShowRealUnits == false;
+        RefreshTexts();
+    }
+
+    // Botao do brilho nas Configuracoes.
+    public void ToggleBloom()
+    {
+        BloomSettings.Enabled = BloomSettings.Enabled == false;
         RefreshTexts();
     }
 

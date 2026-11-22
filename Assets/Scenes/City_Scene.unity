@@ -20331,6 +20331,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarTrafficController
   _placementManager: {fileID: 1483889502}
+  _turnManager: {fileID: 1238303805}
+  _cityStatsManager: {fileID: 278176690}
+  _minSpeed: 1.2
+  _maxSpeed: 2.2
+  _forwardAxisCorrectionDegrees: 0
+  _stepInterval: 0.3
   _carPrefabs:
   - {fileID: 899243954413507757, guid: f939653fea539134c908bf914ff23571, type: 3}
   - {fileID: 1022944502496512919, guid: dcd528f3c0b2bf042babb9d110962ab7, type: 3}
@@ -20339,11 +20345,9 @@ MonoBehaviour:
   - {fileID: 1101577590284328575, guid: 5d2ce4f2e805b5c4092a09a0930cf37d, type: 3}
   - {fileID: 7954715419065063505, guid: 10f4671cf44100d409a99458809783f8, type: 3}
   - {fileID: 771982215564958993, guid: 855cd82b21977fe458e741a8f5352a56, type: 3}
-  _carCount: 10
-  _minSpeed: 1.2
-  _maxSpeed: 2.2
+  _minCars: 4
+  _maxCars: 14
   _laneOffset: 0.22
-  _forwardAxisCorrectionDegrees: 0
 --- !u!1001 &837983900
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33252,6 +33256,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PedestrianTrafficController
   _placementManager: {fileID: 1483889502}
+  _turnManager: {fileID: 1238303805}
+  _cityStatsManager: {fileID: 278176690}
+  _minSpeed: 0.5
+  _maxSpeed: 0.9
+  _forwardAxisCorrectionDegrees: 0
+  _stepInterval: 0.3
   _pedestrianPrefabs:
   - {fileID: 4512452417682273497, guid: ca1e9d1d91cd33e31b020fb5882d60f3, type: 3}
   - {fileID: 5319887045266746918, guid: 8d4092a07aa9a8e49b5e5b3144790879, type: 3}
@@ -33261,12 +33271,10 @@ MonoBehaviour:
   - {fileID: 2505182254412857113, guid: e634a6df144d0bd769f47c433a033447, type: 3}
   - {fileID: 4182151124189024184, guid: 74b5b1a2046641194bee5a61a8e96677, type: 3}
   - {fileID: 2796389398324022688, guid: a0e451c8d05db1944aa940399869d236, type: 3}
-  _pedestrianCount: 12
-  _minSpeed: 0.5
-  _maxSpeed: 0.9
+  _minPedestrians: 4
+  _maxPedestrians: 18
   _edgeOffset: 0.4
   _crossingChance: 0.35
-  _forwardAxisCorrectionDegrees: 0
 --- !u!1001 &1283650335
 PrefabInstance:
   m_ObjectHideFlags: 0

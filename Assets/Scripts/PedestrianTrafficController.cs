@@ -1,13 +1,11 @@
 using UnityEngine;
 
-// Spawna e supervisiona os pedestres que andam pelas ruas da cidade.
-public class PedestrianTrafficController : MonoBehaviour
+// Pedestres nas calcadas: a Populacao da quantos, e a Mobilidade alta puxa mais gente a pe.
+public class PedestrianTrafficController : RoadTrafficController
 {
-    [SerializeField] private PlacementManager _placementManager;
     [SerializeField] private GameObject[] _pedestrianPrefabs;
-    [SerializeField] private int _pedestrianCount = 12;
-    [SerializeField] private float _minSpeed = 0.5f;
-    [SerializeField] private float _maxSpeed = 0.9f;
+    [SerializeField] private int _minPedestrians = 4;
+    [SerializeField] private int _maxPedestrians = 18;
 
     [Tooltip("Distância do centro da célula até a beira da calçada, precisa ficar claramente fora da faixa de carro (mais a metade da largura de um carro) pra nunca se sobrepor.")]
     [SerializeField] private float _edgeOffset = 0.4f;
@@ -16,47 +14,22 @@ public class PedestrianTrafficController : MonoBehaviour
     [Range(0f, 1f)]
     [SerializeField] private float _crossingChance = 0.35f;
 
-    [Tooltip("Graus somados por cima da rotação calculada na direção de movimento, pra compensar o eixo \"de frente\" de verdade dos meshes de pessoa do pacote CityPeople.")]
-    [SerializeField] private float _forwardAxisCorrectionDegrees;
+    protected override string ContainerName => "Pedestrians";
+    protected override bool HasPrefabs => _pedestrianPrefabs != null && _pedestrianPrefabs.Length > 0;
 
-    private RoadNetwork _roadNetwork;
-
-    private void Start()
+    protected override RoadActorDriver CreateActor(Transform parent)
     {
-        if (_placementManager == null || _placementManager.Grid == null)
-        {
-            Debug.LogWarning("[PedestrianTrafficController] Sem PlacementManager/Grid configurado, nenhum pedestre spawnado.");
-            return;
-        }
-        if (_pedestrianPrefabs == null || _pedestrianPrefabs.Length == 0)
-        {
-            Debug.LogWarning("[PedestrianTrafficController] Nenhum prefab de pedestre configurado, nenhum pedestre spawnado.");
-            return;
-        }
-
-        _roadNetwork = new RoadNetwork(_placementManager.Grid);
-        if (_roadNetwork.RoadCells.Count == 0)
-        {
-            Debug.LogWarning("[PedestrianTrafficController] Grid sem nenhuma célula CellType.Road, nenhum pedestre spawnado.");
-            return;
-        }
-
-        var pedestriansContainer = new GameObject("Pedestrians").transform;
-        pedestriansContainer.SetParent(_placementManager.transform, false);
-
-        for (var i = 0; i < _pedestrianCount; i++)
-            SpawnPedestrian(pedestriansContainer);
+        var instance = Instantiate(_pedestrianPrefabs[Random.Range(0, _pedestrianPrefabs.Length)], parent);
+        return instance.AddComponent<PedestrianDriver>();
     }
 
-    private void SpawnPedestrian(Transform parent)
+    protected override void LaunchActor(RoadActorDriver actor, (int X, int Z) startCell, float speed, int seed, bool growIn)
     {
-        var prefab = _pedestrianPrefabs[Random.Range(0, _pedestrianPrefabs.Length)];
-        var startCell = _roadNetwork.RoadCells[Random.Range(0, _roadNetwork.RoadCells.Count)];
-        var speed = Random.Range(_minSpeed, _maxSpeed);
-        var seed = Random.Range(int.MinValue, int.MaxValue);
-
-        var instance = Instantiate(prefab, parent);
-        var driver = instance.AddComponent<PedestrianDriver>();
-        driver.Initialize(_placementManager, _roadNetwork, startCell, speed, _edgeOffset, _crossingChance, _forwardAxisCorrectionDegrees, seed);
+        ((PedestrianDriver)actor).Initialize(Placement, Network, startCell, speed, _edgeOffset, _crossingChance, ForwardAxisCorrection, seed, growIn);
     }
+
+    protected override int CountFor(float population, float mobility) => TrafficDensity.PedestrianCount(population, mobility, _minPedestrians, _maxPedestrians);
+
+    // A pe o ritmo nao depende do transito.
+    protected override float SpeedFactorFor(float mobility) => 1f;
 }

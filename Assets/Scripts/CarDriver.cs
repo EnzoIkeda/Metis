@@ -13,10 +13,11 @@ public class CarDriver : RoadActorDriver
         float speed,
         float laneOffset,
         float forwardAxisCorrectionDegrees,
-        int randomSeed)
+        int randomSeed,
+        bool growIn = false)
     {
         _laneOffset = laneOffset;
-        InitializeMovement(placementManager, roadNetwork, startCell, speed, forwardAxisCorrectionDegrees, randomSeed);
+        InitializeMovement(placementManager, roadNetwork, startCell, speed, forwardAxisCorrectionDegrees, randomSeed, growIn);
     }
 
     // Rotaciona a direcao 90 graus em sentido horario pra achar o lado da faixa de mao-direita.

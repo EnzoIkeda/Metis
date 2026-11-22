@@ -20,7 +20,8 @@ public class PedestrianDriver : RoadActorDriver
         float edgeOffset,
         float crossingChance,
         float forwardAxisCorrectionDegrees,
-        int randomSeed)
+        int randomSeed,
+        bool growIn = false)
     {
         _edgeOffset = edgeOffset;
         _crossingChance = crossingChance;
@@ -28,7 +29,7 @@ public class PedestrianDriver : RoadActorDriver
         _lateralSign = (randomSeed & 1) == 0 ? 1 : -1;
 
         PlayWalkAnimation();
-        InitializeMovement(placementManager, roadNetwork, startCell, speed, forwardAxisCorrectionDegrees, randomSeed);
+        InitializeMovement(placementManager, roadNetwork, startCell, speed, forwardAxisCorrectionDegrees, randomSeed, growIn);
     }
 
     private void PlayWalkAnimation()

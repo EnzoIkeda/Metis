@@ -767,3 +767,110 @@ public class CityDecorTests
         }
     }
 }
+
+public class RoadTechGlowTests
+{
+    [Test]
+    public void BelowDigital_TheStreetsStayDark()
+    {
+        Assert.That(RoadTechGlow.CurbIntensity(14.9f), Is.EqualTo(0f));
+        Assert.That(RoadTechGlow.PulseCount(14.9f, 12), Is.EqualTo(0));
+        Assert.That(RoadTechGlow.SmartIntensity(14.9f), Is.EqualTo(0f));
+    }
+
+    [Test]
+    public void EachTier_LightsOneMoreLayer()
+    {
+        Assert.That(RoadTechGlow.CurbIntensity(RoadTechGlow.DigitalPesquisa), Is.GreaterThan(0f));
+        Assert.That(RoadTechGlow.PulseCount(RoadTechGlow.DigitalPesquisa, 12), Is.EqualTo(0));
+
+        Assert.That(RoadTechGlow.PulseCount(RoadTechGlow.ConnectedPesquisa, 12), Is.GreaterThan(0));
+        Assert.That(RoadTechGlow.SmartIntensity(RoadTechGlow.ConnectedPesquisa), Is.EqualTo(0f));
+
+        Assert.That(RoadTechGlow.SmartIntensity(RoadTechGlow.SmartPesquisa), Is.GreaterThan(0f));
+    }
+
+    [Test]
+    public void Glow_GrowsWithPesquisa_UpToTheMaximum()
+    {
+        var lastCurb = 0f;
+        var lastPulses = 0;
+        var lastSmart = 0f;
+        for (var p = 0f; p <= 100f; p += 0.5f)
+        {
+            var curb = RoadTechGlow.CurbIntensity(p);
+            var pulses = RoadTechGlow.PulseCount(p, 12);
+            var smart = RoadTechGlow.SmartIntensity(p);
+            Assert.That(curb, Is.GreaterThanOrEqualTo(lastCurb));
+            Assert.That(pulses, Is.GreaterThanOrEqualTo(lastPulses));
+            Assert.That(smart, Is.GreaterThanOrEqualTo(lastSmart));
+            Assert.That(curb, Is.LessThanOrEqualTo(1f));
+            Assert.That(smart, Is.LessThanOrEqualTo(1f));
+            Assert.That(pulses, Is.LessThanOrEqualTo(12));
+            (lastCurb, lastPulses, lastSmart) = (curb, pulses, smart);
+        }
+        Assert.That(RoadTechGlow.CurbIntensity(RoadTechGlow.FullPesquisa), Is.EqualTo(1f));
+        Assert.That(RoadTechGlow.SmartIntensity(RoadTechGlow.FullPesquisa), Is.EqualTo(1f));
+        Assert.That(RoadTechGlow.PulseCount(RoadTechGlow.FullPesquisa, 12), Is.EqualTo(12));
+        Assert.That(RoadTechGlow.PulseCount(100f, 0), Is.EqualTo(0));
+    }
+
+    [TestCase(31UL)]
+    [TestCase(7UL)]
+    [TestCase(2024UL)]
+    public void CurbLines_StayOnTheRoad_AndCloseEveryContour(ulong seed)
+    {
+        var plan = CityWfc.Generate(seed);
+        var segments = RoadTechGlow.CurbSegments(plan);
+        Assert.That(segments, Is.Not.Empty);
+
+        var ends = new Dictionary<(long, long), int>();
+        foreach (var segment in segments)
+        {
+            // O meio do trecho fica numa celula de rua, nunca num lote.
+            var cellX = (int)Math.Round((segment.X1 + segment.X2) / 2f);
+            var cellZ = (int)Math.Round((segment.Z1 + segment.Z2) / 2f);
+            Assert.That(plan.IsRoad(cellX, cellZ), Is.True, $"trecho fora da rua em {cellX},{cellZ}");
+            Assert.That(segment.Length, Is.GreaterThan(0f));
+            foreach (var (x, z) in new[] { (segment.X1, segment.Z1), (segment.X2, segment.Z2) })
+            {
+                var key = ((long)Math.Round(x * 1000f), (long)Math.Round(z * 1000f));
+                ends[key] = ends.TryGetValue(key, out var count) ? count + 1 : 1;
+            }
+        }
+
+        // Toda ponta dentro da cidade emenda em outra; so a borda do grid deixa ponta solta.
+        foreach (var pair in ends)
+        {
+            var x = pair.Key.Item1 / 1000f;
+            var z = pair.Key.Item2 / 1000f;
+            var onBorder = x <= -0.5f + 1e-3f || z <= -0.5f + 1e-3f || x >= plan.Width - 0.5f - 1e-3f || z >= plan.Height - 0.5f - 1e-3f;
+            if (onBorder == false)
+                Assert.That(pair.Value % 2, Is.EqualTo(0), $"ponta solta em {x},{z}");
+        }
+    }
+
+    [Test]
+    public void CenterLines_FollowEveryConnectedSide_AndCrossingsOutlineEveryJunction()
+    {
+        var plan = CityWfc.Generate(31);
+        var sides = 0;
+        var junctions = 0;
+        for (var x = 0; x < plan.Width; x++)
+        {
+            for (var z = 0; z < plan.Height; z++)
+            {
+                var road = plan.RoadAt(x, z);
+                for (var bit = 1; bit <= 8; bit <<= 1)
+                    if ((road & (RoadSides)bit) != 0)
+                        sides++;
+                var shape = CityPlan.ShapeOf(road, out _);
+                if (shape == RoadShape.TJunction || shape == RoadShape.Cross)
+                    junctions++;
+            }
+        }
+        Assert.That(RoadTechGlow.CenterSegments(plan).Count, Is.EqualTo(sides));
+        Assert.That(RoadTechGlow.CrossingSegments(plan).Count, Is.EqualTo(junctions * 4));
+        Assert.That(junctions, Is.GreaterThan(0));
+    }
+}

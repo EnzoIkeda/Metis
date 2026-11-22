@@ -16040,6 +16040,65 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &639602768
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 639602770}
+  - component: {fileID: 639602769}
+  m_Layer: 0
+  m_Name: RoadTechGlow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &639602769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639602768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 310ea13b497293be9bc4180847ebb524, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Metis.Runtime::RoadTechGlowController
+  _placementManager: {fileID: 1483889502}
+  _turnManager: {fileID: 1238303805}
+  _cityStatsManager: {fileID: 278176690}
+  _glowMaterial: {fileID: 2100000, guid: 392a800c74c2dc96cab23359e308ea07, type: 2}
+  _curbColor: {r: 0, g: 0.85, b: 1, a: 1}
+  _centerColor: {r: 1, g: 0.15, b: 0.85, a: 1}
+  _crossingColor: {r: 0.55, g: 1, b: 1, a: 1}
+  _pulseColor: {r: 0.6, g: 1, b: 1, a: 1}
+  _lineWidth: 0.06
+  _height: 0.014
+  _maxPulses: 12
+  _pulseSpeed: 2.6
+  _pulseSize: 0.2
+  _fadeSeconds: 1.2
+  _pulseStepInterval: 0.25
+--- !u!4 &639602770
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639602768}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &641624971
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -55130,3 +55189,4 @@ SceneRoots:
   - {fileID: 1756118089}
   - {fileID: 1118600691}
   - {fileID: 1760058185}
+  - {fileID: 639602770}

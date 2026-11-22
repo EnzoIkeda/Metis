@@ -407,14 +407,17 @@ public class CardMarkPlannerTests
         var roofs = new HashSet<(int, int)>();
         foreach (var mark in planner.Marks)
         {
-            if (mark.Kind == CardMarkKind.ReplaceLot)
+            foreach (var spot in mark.Spots)
             {
-                Assert.That(replaced.Add((mark.X, mark.Z)), Is.True, $"troca repetida em {mark.X},{mark.Z}");
-                Assert.That(roofs.Contains((mark.X, mark.Z)), Is.False, $"troca sobre telhado marcado em {mark.X},{mark.Z}");
-            }
-            else
-            {
-                Assert.That(roofs.Add((mark.X, mark.Z)), Is.True, $"telhado repetido em {mark.X},{mark.Z}");
+                if (mark.Kind == CardMarkKind.ReplaceLot)
+                {
+                    Assert.That(replaced.Add((spot.X, spot.Z)), Is.True, $"troca repetida em {spot.X},{spot.Z}");
+                    Assert.That(roofs.Contains((spot.X, spot.Z)), Is.False, $"troca sobre telhado marcado em {spot.X},{spot.Z}");
+                }
+                else
+                {
+                    Assert.That(roofs.Add((spot.X, spot.Z)), Is.True, $"telhado repetido em {spot.X},{spot.Z}");
+                }
             }
         }
     }
@@ -471,6 +474,229 @@ public class CardMarkPlannerTests
 
         foreach (var mark in planner.Marks)
             Assert.That(mark.X <= 1 || mark.Z <= 1 || mark.X >= plan.Width - 2 || mark.Z >= plan.Height - 2, Is.True);
+    }
+}
+
+public class CardMarkSizeTests
+{
+    private static readonly CardMarkRule Commerce = new CardMarkRule { Kind = CardMarkKind.ReplaceLot, Size = 4, Limit = 1000 };
+    private static readonly CardMarkRule Stadium = new CardMarkRule { Kind = CardMarkKind.ReplaceLot, Merge = true, Limit = 1000 };
+    private static readonly CardMarkRule Solar = new CardMarkRule { Kind = CardMarkKind.RoofProp, Size = 4, Limit = 1000 };
+    private static readonly CardMarkRule Bins = new CardMarkRule { Kind = CardMarkKind.StreetProp, Size = 4, Limit = 1000 };
+
+    [Test]
+    public void FirstSpot_IsTheMarkAnchor()
+    {
+        var planner = new CardMarkPlanner(CityWfc.Generate(4), 4);
+        foreach (var rule in new[] { Commerce, Stadium, Solar, Bins })
+        {
+            Assert.That(planner.TryMark("Card" + rule.Kind + rule.Merge, rule, 1, out var mark), Is.True);
+            Assert.That(mark.Spots.Length, Is.GreaterThan(0));
+            Assert.That((mark.Spots[0].X, mark.Spots[0].Z, mark.Spots[0].Side), Is.EqualTo((mark.X, mark.Z, mark.Side)));
+        }
+    }
+
+    [Test]
+    public void ReplaceLot_WithSize_TakesThatManyNeighbouringLots()
+    {
+        for (var seed = 1UL; seed <= 50; seed++)
+        {
+            var plan = CityWfc.Generate(seed);
+            var planner = new CardMarkPlanner(plan, seed);
+            Assert.That(planner.TryMark("CardZonaComercial", Commerce, 1, out var mark), Is.True);
+            Assert.That(mark.Spots.Length, Is.EqualTo(4), $"semente {seed}: cidade nova tem quadra com 4 lotes juntos");
+            var cells = new HashSet<(int, int)>();
+            foreach (var spot in mark.Spots)
+            {
+                Assert.That(plan.IsRoad(spot.X, spot.Z), Is.False);
+                Assert.That(cells.Add((spot.X, spot.Z)), Is.True);
+            }
+            // Conexo: todo lote encosta em outro da marca.
+            foreach (var spot in mark.Spots)
+            {
+                var touches = false;
+                foreach (var other in mark.Spots)
+                    touches |= Math.Abs(other.X - spot.X) + Math.Abs(other.Z - spot.Z) == 1;
+                Assert.That(touches, Is.True, $"semente {seed}");
+            }
+        }
+    }
+
+    [Test]
+    public void Merge_TakesAFreeTwoByTwoSquare()
+    {
+        for (var seed = 1UL; seed <= 50; seed++)
+        {
+            var plan = CityWfc.Generate(seed);
+            var planner = new CardMarkPlanner(plan, seed);
+            Assert.That(planner.TryMark("CardHospitalRegional", Stadium, 1, out var mark), Is.True);
+            Assert.That(mark.Merged, Is.True, $"semente {seed}");
+            Assert.That(mark.Spots.Length, Is.EqualTo(4));
+            foreach (var spot in mark.Spots)
+            {
+                Assert.That(spot.X - mark.X, Is.InRange(0, 1));
+                Assert.That(spot.Z - mark.Z, Is.InRange(0, 1));
+                Assert.That(plan.IsRoad(spot.X, spot.Z), Is.False);
+            }
+        }
+    }
+
+    [Test]
+    public void Merge_WithoutASquare_FallsBackToSingleLots()
+    {
+        var plan = CityWfc.Generate(9);
+        var planner = new CardMarkPlanner(plan, 9);
+        var marks = 0;
+        var merged = 0;
+        while (planner.TryMark("CardHospitalRegional", Stadium, marks + 1, out var mark))
+        {
+            marks++;
+            if (mark.Merged)
+                merged++;
+            else
+                Assert.That(mark.Spots.Length, Is.EqualTo(1), "sem tamanho pedido, sai um lote so");
+        }
+        Assert.That(merged, Is.GreaterThan(0));
+        Assert.That(marks, Is.GreaterThan(merged), "acabados os quadrados, continua lote a lote");
+    }
+
+    [Test]
+    public void MergedLots_NeverGetARoofProp()
+    {
+        var plan = CityWfc.Generate(13);
+        var planner = new CardMarkPlanner(plan, 13);
+        var merged = new HashSet<(int, int)>();
+        for (var turn = 1; turn <= 6; turn++)
+            if (planner.TryMark("CardUniversidadePublica", Stadium, turn, out var mark) && mark.Merged)
+                foreach (var spot in mark.Spots)
+                    merged.Add((spot.X, spot.Z));
+        for (var turn = 7; turn <= 200; turn++)
+            if (planner.TryMark("CardRedeSolarDistribuida", Solar, turn, out var mark))
+                foreach (var spot in mark.Spots)
+                    Assert.That(merged.Contains((spot.X, spot.Z)), Is.False);
+    }
+
+    [Test]
+    public void RoofAndStreetSpots_StayCloseToTheFirst()
+    {
+        for (var seed = 1UL; seed <= 30; seed++)
+        {
+            var plan = CityWfc.Generate(seed);
+            var planner = new CardMarkPlanner(plan, seed);
+            foreach (var rule in new[] { Solar, Bins })
+            {
+                Assert.That(planner.TryMark("Card" + rule.Kind, rule, 1, out var mark), Is.True);
+                // Telhado plano e mais raro: pode vir com menos lugares, nunca vazio.
+                if (rule.Kind == CardMarkKind.StreetProp)
+                    Assert.That(mark.Spots.Length, Is.EqualTo(4), $"semente {seed}");
+                else
+                    Assert.That(mark.Spots.Length, Is.InRange(1, 4), $"semente {seed}");
+                var places = new HashSet<(int, int, int)>();
+                foreach (var spot in mark.Spots)
+                {
+                    Assert.That(Math.Abs(spot.X - mark.X) + Math.Abs(spot.Z - mark.Z), Is.LessThanOrEqualTo(3));
+                    Assert.That(places.Add((spot.X, spot.Z, spot.Side)), Is.True);
+                    if (rule.Kind == CardMarkKind.StreetProp)
+                        Assert.That(CityPlan.ShapeOf(plan.RoadAt(spot.X, spot.Z), out _), Is.EqualTo(RoadShape.Straight));
+                }
+            }
+        }
+    }
+
+    [Test]
+    public void RoofProps_OnlyLandOnFlatRoofs()
+    {
+        var plan = CityWfc.Generate(17);
+        var planner = new CardMarkPlanner(plan, 17);
+        var flat = new CardMarkRule { Kind = CardMarkKind.ReplaceLot, ResultHasFlatRoof = true, Size = 4, Limit = 1000 };
+        var houses = new CardMarkRule { Kind = CardMarkKind.ReplaceLot, Size = 4, Limit = 1000 };
+        var flatCells = new HashSet<(int, int)>();
+        var houseCells = new HashSet<(int, int)>();
+        for (var turn = 1; turn <= 4; turn++)
+        {
+            if (planner.TryMark("CardIncubadoraDeStartups", flat, turn, out var mark))
+                foreach (var spot in mark.Spots)
+                    flatCells.Add((spot.X, spot.Z));
+            if (planner.TryMark("CardMutiraoHabitacional", houses, turn + 100, out mark))
+                foreach (var spot in mark.Spots)
+                    houseCells.Add((spot.X, spot.Z));
+        }
+        var roofs = 0;
+        for (var turn = 200; turn <= 400; turn++)
+        {
+            if (planner.TryMark("CardRedeSolarDistribuida", Solar, turn, out var mark) == false)
+                continue;
+            foreach (var spot in mark.Spots)
+            {
+                roofs++;
+                var cell = (spot.X, spot.Z);
+                Assert.That(houseCells.Contains(cell), Is.False, "casa nova tem telhado inclinado");
+                var use = plan.LotUseAt(spot.X, spot.Z);
+                Assert.That(flatCells.Contains(cell) || use == CityLotUse.Apartment || use == CityLotUse.Tower, Is.True, $"{use} em {cell}");
+            }
+        }
+        Assert.That(roofs, Is.GreaterThan(0));
+    }
+
+    [Test]
+    public void Size_IsClampedToTheMaximum()
+    {
+        var planner = new CardMarkPlanner(CityWfc.Generate(2), 2);
+        var rule = new CardMarkRule { Kind = CardMarkKind.ReplaceLot, Size = 50 };
+        Assert.That(planner.TryMark("CardZonaComercial", rule, 1, out var mark), Is.True);
+        Assert.That(mark.Spots.Length, Is.LessThanOrEqualTo(CardMarkPlanner.MaxSize));
+    }
+}
+
+public class CardMarkMotionTests
+{
+    [Test]
+    public void Drop_StartsHigh_AndLandsAtZero()
+    {
+        Assert.That(CardMarkMotion.Height(0f), Is.EqualTo(CardMarkMotion.StartHeight));
+        Assert.That(CardMarkMotion.Height(CardMarkMotion.DropDuration), Is.EqualTo(0f));
+        Assert.That(CardMarkMotion.HasLanded(CardMarkMotion.DropDuration), Is.True);
+        Assert.That(CardMarkMotion.HasLanded(CardMarkMotion.DropDuration - 0.01f), Is.False);
+    }
+
+    [Test]
+    public void Drop_SpeedsUp()
+    {
+        var steps = 10;
+        var last = 0f;
+        for (var i = 1; i <= steps; i++)
+        {
+            var fall = CardMarkMotion.Height((i - 1) * CardMarkMotion.DropDuration / steps) - CardMarkMotion.Height(i * CardMarkMotion.DropDuration / steps);
+            Assert.That(fall, Is.GreaterThan(last));
+            last = fall;
+        }
+    }
+
+    [Test]
+    public void Landing_SquashesThenRecovers()
+    {
+        Assert.That(CardMarkMotion.Scale(0.1f), Is.EqualTo((1f, 1f)));
+        var middle = CardMarkMotion.Scale(CardMarkMotion.DropDuration + CardMarkMotion.SettleDuration / 2f);
+        Assert.That(middle.Vertical, Is.EqualTo(1f - CardMarkMotion.Squash).Within(1e-4));
+        Assert.That(middle.Horizontal, Is.EqualTo(1f + CardMarkMotion.Spread).Within(1e-4));
+        Assert.That(CardMarkMotion.Scale(CardMarkMotion.Total), Is.EqualTo((1f, 1f)));
+    }
+
+    [Test]
+    public void OldPiece_SinksBeforeTheFirstDrop()
+    {
+        Assert.That(CardMarkMotion.SinkScale(0f), Is.EqualTo(1f));
+        Assert.That(CardMarkMotion.SinkScale(CardMarkMotion.SinkDuration), Is.EqualTo(0f));
+        Assert.That(CardMarkMotion.StartOf(0), Is.EqualTo(CardMarkMotion.SinkDuration));
+        Assert.That(CardMarkMotion.StartOf(2) - CardMarkMotion.StartOf(1), Is.EqualTo(CardMarkMotion.Stagger).Within(1e-6));
+        Assert.That(CardMarkMotion.Duration(4), Is.EqualTo(CardMarkMotion.StartOf(3) + CardMarkMotion.Total).Within(1e-6));
+    }
+
+    [Test]
+    public void FourPieces_FinishBeforeTheCardImpact()
+    {
+        // O impacto da carta dura 1,6 s; a marca precisa terminar antes do popup do evento.
+        Assert.That(CardMarkMotion.Duration(4), Is.LessThan(1.6f));
     }
 }
 

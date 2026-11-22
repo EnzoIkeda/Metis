@@ -26,6 +26,14 @@ public class PlacementManager : MonoBehaviour
 
     private readonly Dictionary<Vector3Int, StructureData> _placedStructureData = new Dictionary<Vector3Int, StructureData>();
 
+    // O que esta de pe em cada lote; um predio fundido aparece nos quatro lotes.
+    private readonly Dictionary<Vector3Int, GameObject> _lotObjects = new Dictionary<Vector3Int, GameObject>();
+
+    public float CellSize => _cellSize;
+
+    // Quanto a peca fundida cresce na altura (na largura cresce o lado do quadrado).
+    public const float MergedHeightFactor = 1.4f;
+
     private void Awake()
     {
         _placementGrid = new Grid(_width, _height);
@@ -67,7 +75,7 @@ public class PlacementManager : MonoBehaviour
                     continue;
                 }
                 var structure = options[random.Next(options.Count)];
-                PlaceTemporaryStructure(position, structure.Prefab, structure.FootprintCellType, Plan.FacingAt(x, z));
+                _lotObjects[position] = PlaceTemporaryStructure(position, structure.Prefab, structure.FootprintCellType, Plan.FacingAt(x, z));
                 _placedStructureData[position] = structure;
             }
         }
@@ -138,6 +146,43 @@ public class PlacementManager : MonoBehaviour
         var structureModel = structure.AddComponent<StructureModel>();
         structureModel.CreateModel(structurePrefab);
         return structure;
+    }
+
+    public GameObject LotObjectAt(Vector3Int cell)
+    {
+        _lotObjects.TryGetValue(cell, out var lot);
+        return lot;
+    }
+
+    // Poe uma peca nova nos lotes dados e devolve as que estavam ali, sem destruir, para quem anima a saida.
+    // Fundida, a peca fica no centro dos lotes em escala multiplicada pelo lado do quadrado.
+    public GameObject ReplaceLots(IReadOnlyList<Vector3Int> cells, GameObject prefab, float yRotationDegrees, bool merged, List<GameObject> removed)
+    {
+        if (cells == null || cells.Count == 0 || prefab == null)
+            return null;
+        foreach (var cell in cells)
+        {
+            var old = LotObjectAt(cell);
+            if (old != null && removed != null && removed.Contains(old) == false)
+                removed.Add(old);
+            _lotObjects.Remove(cell);
+            _placedStructureData.Remove(cell);
+        }
+
+        var center = Vector3.zero;
+        foreach (var cell in cells)
+            center += CellToLocalPosition(cell);
+        center /= cells.Count;
+        var piece = CreateANewStructureModel(merged ? center : CellToLocalPosition(cells[0]), prefab, CellType.Structure, yRotationDegrees);
+        if (merged)
+        {
+            // Mais largo do que alto: torre dobrada em tudo viraria uma caixa enorme.
+            var side = Mathf.Sqrt(cells.Count);
+            piece.transform.localScale = Vector3.Scale(piece.transform.localScale, new Vector3(side, MergedHeightFactor, side));
+        }
+        foreach (var cell in merged ? cells : new[] { cells[0] })
+            _lotObjects[cell] = piece;
+        return piece;
     }
 
     // Converte uma celula pra posicao local, reaproveitavel por qualquer GameObject filho do grid.

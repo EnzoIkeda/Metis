@@ -25,19 +25,43 @@ public struct CardMarkRule
 
     // Troca de lote que vira verde (parque, horta) deixa de ter telhado.
     public bool ResultIsGreen;
+
+    // Troca de lote que vira predio de telhado plano: depois pode receber peca no telhado.
+    public bool ResultHasFlatRoof;
     public int Limit;
+
+    // Quantos lugares vizinhos a marca ocupa de uma vez (1 a MaxSize), para a mudanca ser notada.
+    public int Size;
+
+    // Troca de lote: um so predio grande sobre um quadrado de 2x2 lotes, quando houver um livre.
+    public bool Merge;
+}
+
+public struct CardMarkSpot
+{
+    public int X;
+    public int Z;
+
+    // Na calcada, o lado da rua (0 norte, 1 leste, 2 sul, 3 oeste) em que a peca fica; -1 nas outras marcas.
+    public int Side;
 }
 
 public struct CardMark
 {
     public string CardId;
     public CardMarkKind Kind;
+
+    // Primeiro lugar da marca (o canto de menor X e Z quando funde 2x2).
     public int X;
     public int Z;
-
-    // Na calcada, o lado da rua (0 norte, 1 leste, 2 sul, 3 oeste) em que a peca fica; -1 nas outras marcas.
     public int Side;
     public int Turn;
+
+    // Todos os lugares ocupados, o primeiro igual a X, Z e Side.
+    public CardMarkSpot[] Spots;
+
+    // Os quatro lotes de Spots viraram um predio so.
+    public bool Merged;
 }
 
 // Escolhe onde cada carta jogada deixa a sua marca na cidade planejada. O sorteio sai da semente
@@ -45,6 +69,10 @@ public struct CardMark
 public class CardMarkPlanner
 {
     public const int DefaultLimit = 3;
+    public const int MaxSize = 4;
+
+    // Distancia maxima, em celulas, entre o primeiro lugar e os outros de uma mesma marca.
+    private const int Reach = 3;
 
     private static readonly int[] Dx = { 0, 1, 0, -1 };
     private static readonly int[] Dz = { 1, 0, -1, 0 };
@@ -54,6 +82,10 @@ public class CardMarkPlanner
     private readonly bool[,] _nearCrossing;
     private readonly Dictionary<(int X, int Z), bool> _replaced = new Dictionary<(int X, int Z), bool>();
     private readonly HashSet<(int X, int Z)> _roofs = new HashSet<(int X, int Z)>();
+    private readonly HashSet<(int X, int Z)> _merged = new HashSet<(int X, int Z)>();
+
+    // Lotes com telhado plano (predio e torre); casa tem telhado inclinado e loja tem letreiro.
+    private readonly HashSet<(int X, int Z)> _flatRoofs = new HashSet<(int X, int Z)>();
     private readonly HashSet<(int X, int Z, int Side)> _sidewalks = new HashSet<(int X, int Z, int Side)>();
     private readonly Dictionary<string, int> _countByCard = new Dictionary<string, int>();
     private readonly List<CardMark> _marks = new List<CardMark>();
@@ -65,6 +97,10 @@ public class CardMarkPlanner
         _plan = plan;
         _seed = layoutSeed;
         _nearCrossing = new bool[plan.Width, plan.Height];
+        for (var x = 0; x < plan.Width; x++)
+            for (var z = 0; z < plan.Height; z++)
+                if (plan.IsRoad(x, z) == false && (plan.LotUseAt(x, z) == CityLotUse.Apartment || plan.LotUseAt(x, z) == CityLotUse.Tower))
+                    _flatRoofs.Add((x, z));
         for (var x = 0; x < plan.Width; x++)
         {
             for (var z = 0; z < plan.Height; z++)
@@ -95,47 +131,150 @@ public class CardMarkPlanner
             return false;
 
         var random = new SeededRandom(Mix(_seed, (ulong)turn, Fnv(cardId)));
-        bool placed;
+        var size = Math.Max(1, Math.Min(MaxSize, rule.Size));
+        var spots = new List<CardMarkSpot>();
+        var merged = false;
         switch (rule.Kind)
         {
             case CardMarkKind.ReplaceLot:
-                placed = TryPick(LotCandidates(rule.Placement, roof: false), random, out var lot);
-                if (placed)
+                if (rule.Merge && TryPickSquare(rule.Placement, random, out var corner))
                 {
-                    _replaced[(lot.X, lot.Z)] = rule.ResultIsGreen;
-                    mark = NewMark(cardId, rule.Kind, lot.X, lot.Z, -1, turn);
+                    merged = true;
+                    for (var dx = 0; dx < 2; dx++)
+                        for (var dz = 0; dz < 2; dz++)
+                            spots.Add(Spot(corner.X + dx, corner.Z + dz, -1));
+                }
+                else
+                {
+                    PickCluster(LotCandidates(rule.Placement, roof: false), size, random, IsFreeLot, spots);
+                }
+                foreach (var spot in spots)
+                {
+                    _replaced[(spot.X, spot.Z)] = rule.ResultIsGreen;
+                    _flatRoofs.Remove((spot.X, spot.Z));
+                    if (merged)
+                        _merged.Add((spot.X, spot.Z));
+                    else if (rule.ResultHasFlatRoof && rule.ResultIsGreen == false)
+                        _flatRoofs.Add((spot.X, spot.Z));
                 }
                 break;
             case CardMarkKind.RoofProp:
-                placed = TryPick(LotCandidates(rule.Placement, roof: true), random, out var roof);
-                if (placed)
-                {
-                    _roofs.Add((roof.X, roof.Z));
-                    mark = NewMark(cardId, rule.Kind, roof.X, roof.Z, -1, turn);
-                }
+                var roofs = new List<CardMarkSpot>();
+                foreach (var cell in LotCandidates(rule.Placement, roof: true))
+                    roofs.Add(Spot(cell.X, cell.Z, -1));
+                PickNear(roofs, size, random, spots);
+                foreach (var spot in spots)
+                    _roofs.Add((spot.X, spot.Z));
                 break;
             default:
-                var spots = SidewalkCandidates(rule.Placement);
-                placed = spots.Count > 0;
-                if (placed)
-                {
-                    var spot = spots[random.Next(spots.Count)];
-                    _sidewalks.Add(spot);
-                    mark = NewMark(cardId, rule.Kind, spot.X, spot.Z, spot.Side, turn);
-                }
+                var sidewalks = new List<CardMarkSpot>();
+                foreach (var place in SidewalkCandidates(rule.Placement))
+                    sidewalks.Add(Spot(place.X, place.Z, place.Side));
+                PickNear(sidewalks, size, random, spots);
+                foreach (var spot in spots)
+                    _sidewalks.Add((spot.X, spot.Z, spot.Side));
                 break;
         }
 
-        if (placed == false)
+        if (spots.Count == 0)
             return false;
+        mark = new CardMark
+        {
+            CardId = cardId,
+            Kind = rule.Kind,
+            X = spots[0].X,
+            Z = spots[0].Z,
+            Side = spots[0].Side,
+            Turn = turn,
+            Spots = spots.ToArray(),
+            Merged = merged,
+        };
         _countByCard[cardId] = count + 1;
         _marks.Add(mark);
         return true;
     }
 
-    private static CardMark NewMark(string cardId, CardMarkKind kind, int x, int z, int side, int turn)
+    private static CardMarkSpot Spot(int x, int z, int side) => new CardMarkSpot { X = x, Z = z, Side = side };
+
+    private bool IsFreeLot(int x, int z)
     {
-        return new CardMark { CardId = cardId, Kind = kind, X = x, Z = z, Side = side, Turn = turn };
+        return _plan.IsInBounds(x, z) && _plan.IsRoad(x, z) == false && _replaced.ContainsKey((x, z)) == false && _roofs.Contains((x, z)) == false;
+    }
+
+    // Quadrado de 2x2 lotes livres, de preferencia no lugar pedido.
+    private bool TryPickSquare(CardMarkPlacement placement, Random random, out (int X, int Z) corner)
+    {
+        var all = new List<(int X, int Z)>();
+        var preferred = new List<(int X, int Z)>();
+        for (var x = 0; x < _plan.Width - 1; x++)
+        {
+            for (var z = 0; z < _plan.Height - 1; z++)
+            {
+                if (IsFreeLot(x, z) == false || IsFreeLot(x + 1, z) == false || IsFreeLot(x, z + 1) == false || IsFreeLot(x + 1, z + 1) == false)
+                    continue;
+                all.Add((x, z));
+                if (Prefers(placement, x, z) || Prefers(placement, x + 1, z + 1))
+                    preferred.Add((x, z));
+            }
+        }
+        return TryPick(preferred.Count > 0 ? preferred : all, random, out corner);
+    }
+
+    // Lotes vizinhos a partir de um sorteado, crescendo pela borda livre; tenta outros comecos
+    // ate achar o tamanho pedido e fica com o maior encontrado.
+    private static void PickCluster(List<(int X, int Z)> candidates, int size, Random random, Func<int, int, bool> isFree, List<CardMarkSpot> result)
+    {
+        const int tries = 8;
+        for (var attempt = 0; attempt < tries && candidates.Count > 0 && result.Count < size; attempt++)
+        {
+            var start = candidates[random.Next(candidates.Count)];
+            var cluster = new List<(int X, int Z)> { start };
+            var taken = new HashSet<(int X, int Z)> { start };
+            while (cluster.Count < size)
+            {
+                var frontier = new List<(int X, int Z)>();
+                foreach (var cell in cluster)
+                {
+                    for (var d = 0; d < 4; d++)
+                    {
+                        var next = (cell.X + Dx[d], cell.Z + Dz[d]);
+                        if (taken.Contains(next) == false && frontier.Contains(next) == false && isFree(next.Item1, next.Item2))
+                            frontier.Add(next);
+                    }
+                }
+                if (frontier.Count == 0)
+                    break;
+                var pick = frontier[random.Next(frontier.Count)];
+                cluster.Add(pick);
+                taken.Add(pick);
+            }
+            if (cluster.Count > result.Count)
+            {
+                result.Clear();
+                foreach (var cell in cluster)
+                    result.Add(Spot(cell.X, cell.Z, -1));
+            }
+        }
+    }
+
+    // Primeiro lugar sorteado e os outros entre os mais perto dele, ate Reach celulas.
+    private static void PickNear(List<CardMarkSpot> spots, int size, Random random, List<CardMarkSpot> result)
+    {
+        if (spots.Count == 0)
+            return;
+        var first = spots[random.Next(spots.Count)];
+        result.Add(first);
+        var near = new List<(CardMarkSpot Spot, int Distance, int Tie)>();
+        foreach (var spot in spots)
+        {
+            var distance = Math.Abs(spot.X - first.X) + Math.Abs(spot.Z - first.Z);
+            if (distance > Reach || (spot.X == first.X && spot.Z == first.Z && spot.Side == first.Side))
+                continue;
+            near.Add((spot, distance, random.Next(1000)));
+        }
+        near.Sort((a, b) => a.Distance != b.Distance ? a.Distance.CompareTo(b.Distance) : a.Tie.CompareTo(b.Tie));
+        for (var i = 0; i < near.Count && result.Count < size; i++)
+            result.Add(near[i].Spot);
     }
 
     // Lote livre para trocar (sem troca nem peca no telhado) ou telhado livre (predio, sem peca ainda).
@@ -152,10 +291,7 @@ public class CardMarkPlanner
 
                 if (roof)
                 {
-                    if (_roofs.Contains((x, z)))
-                        continue;
-                    var isGreen = _replaced.TryGetValue((x, z), out var replacedGreen) ? replacedGreen : _plan.LotUseAt(x, z) == CityLotUse.Green;
-                    if (isGreen)
+                    if (_roofs.Contains((x, z)) || _flatRoofs.Contains((x, z)) == false)
                         continue;
                 }
                 else if (_replaced.ContainsKey((x, z)) || _roofs.Contains((x, z)))

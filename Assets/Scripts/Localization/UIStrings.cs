@@ -883,6 +883,13 @@ public static class UIStrings
 
     public static string SkipButton => IsPt ? "Pular" : "Skip";
 
+    // Passeio a pe pela cidade.
+    public static string WalkBackButton => IsPt ? "Voltar" : "Back";
+
+    public static string WalkHint => IsPt
+        ? "Arraste à esquerda para andar e à direita para olhar."
+        : "Drag on the left to walk and on the right to look around.";
+
     // Chave da legenda de uma tela do fim de rodada; a imagem conta a partir de 0.
     public static string RunEndCaptionKey(RunEnding ending, int imageIndex) => $"{(ending == RunEnding.Defeat ? "defeat" : "victory")}.{imageIndex + 1}";
 

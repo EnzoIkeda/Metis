@@ -26,6 +26,9 @@ public abstract class RoadTrafficController : MonoBehaviour
 
     public int TargetCount { get; private set; }
     public int ActiveCount => _active.Count;
+
+    // Atores na rua agora (os que estao saindo tambem contam ate sumir).
+    public IReadOnlyList<RoadActorDriver> ActiveActors => _active;
     public float SpeedFactor { get; private set; } = 1f;
     public bool IsRunning => _roadNetwork != null;
 

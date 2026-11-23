@@ -86,6 +86,7 @@
     <Compile Include="../../Assets/Scripts/Core/Utilities/CardMarkPlanner.cs" Link="Source/CardMarkPlanner.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/CardMarkMotion.cs" Link="Source/CardMarkMotion.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/CityDecor.cs" Link="Source/CityDecor.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/StreetWalk.cs" Link="Source/StreetWalk.cs" />
     <Compile Include="../../Assets/Scripts/Editor/ModelReportImportFormat.cs" Link="Source/ModelReportImportFormat.cs" />
   </ItemGroup>
 

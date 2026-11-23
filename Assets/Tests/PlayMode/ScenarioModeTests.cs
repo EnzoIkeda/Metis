@@ -136,8 +136,7 @@ public class ScenarioModeTests
         TestDataFactory.SetField(reward, "_turnManager", _turnManager);
         TestDataFactory.SetField(reward, "_endFlow", flow);
         TestDataFactory.SetField(reward, "_panelRoot", rewardPanel);
-        TestDataFactory.SetField(reward, "_optionButtons", new Button[0]);
-        TestDataFactory.SetField(reward, "_optionTexts", new TMP_Text[0]);
+        TestDataFactory.SetField(reward, "_optionCards", new RewardCardView[0]);
 
         _host.SetActive(true);
         _ui.SetActive(true);

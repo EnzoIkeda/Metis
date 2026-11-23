@@ -30,6 +30,10 @@ public static class UIStrings
         : "You successfully governed for 20 turns, congratulations!";
 
     public static string RewardTitle => IsPt ? "Recompensa" : "Reward";
+    public static string RewardHint => IsPt ? "Escolha uma para levar às próximas cidades." : "Pick one to take to the next cities.";
+    public static string RewardChooseButton => IsPt ? "Escolher" : "Choose";
+    public static string RewardKindCard => IsPt ? "CARTA" : "CARD";
+    public static string RewardKindAdvantage => IsPt ? "VANTAGEM" : "ADVANTAGE";
 
     public static string PlayButton => IsPt ? "Jogar" : "Play";
     public static string BackButton => IsPt ? "Voltar" : "Back";

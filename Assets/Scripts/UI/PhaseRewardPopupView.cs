@@ -14,10 +14,15 @@ public class PhaseRewardPopupView : MonoBehaviour
     [SerializeField] private PhaseEndFlow _endFlow;
     [SerializeField] private GameObject _panelRoot;
     [SerializeField] private TMP_Text _titleText;
-    [SerializeField] private Button[] _optionButtons;
-    [SerializeField] private TMP_Text[] _optionTexts;
+    [SerializeField] private TMP_Text _hintText;
 
-    // Limitado pela quantidade de botoes de opcao montados no painel.
+    [Tooltip("Uma carta por opcao; o botao de escolher de cada uma faz a escolha.")]
+    [SerializeField] private RewardCardView[] _optionCards = Array.Empty<RewardCardView>();
+
+    [Tooltip("Distancia entre os centros das cartas; com menos opcoes, as que sobram ficam centralizadas.")]
+    [SerializeField, Min(0f)] private float _cardSpacing = 320f;
+
+    // Limitado pela quantidade de cartas de opcao montadas no painel.
     [SerializeField, Min(1)] private int _optionCount = 3;
 
     private readonly System.Random _random = new System.Random();
@@ -31,10 +36,11 @@ public class PhaseRewardPopupView : MonoBehaviour
             _turnManager.Machine.OnGameEnded += HandleGameEnded;
         if (_titleText != null)
             _titleText.text = UIStrings.RewardTitle;
-        for (int i = 0; i < _optionButtons.Length; i++)
+        for (int i = 0; i < _optionCards.Length; i++)
         {
             var index = i;
-            _optionButtons[i].onClick.AddListener(() => SelectOption(index));
+            if (_optionCards[i] != null && _optionCards[i].ChooseButton != null)
+                _optionCards[i].ChooseButton.onClick.AddListener(() => SelectOption(index));
         }
 
         Hide();
@@ -62,15 +68,21 @@ public class PhaseRewardPopupView : MonoBehaviour
             SceneManager.LoadScene("PhaseMap");
             return;
         }
-        for (int i = 0; i < _optionButtons.Length; i++)
+        if (_titleText != null)
+            _titleText.text = UIStrings.RewardTitle;
+        if (_hintText != null)
+            _hintText.text = UIStrings.RewardHint;
+        for (int i = 0; i < _optionCards.Length; i++)
         {
             var hasOption = i < _currentOptions.Length;
-            _optionButtons[i].gameObject.SetActive(hasOption);
+            _optionCards[i].gameObject.SetActive(hasOption);
             if (hasOption == false)
                 continue;
 
-            if (i < _optionTexts.Length)
-                _optionTexts[i].text = DescribeOption(_currentOptions[i]);
+            _optionCards[i].Bind(_currentOptions[i]);
+            // Centraliza a fileira pelo numero de opcoes de verdade.
+            var rect = (RectTransform)_optionCards[i].transform;
+            rect.anchoredPosition = new Vector2((i - (_currentOptions.Length - 1) / 2f) * _cardSpacing, rect.anchoredPosition.y);
         }
 
         if (_panelRoot != null)
@@ -86,18 +98,9 @@ public class PhaseRewardPopupView : MonoBehaviour
         pool.AddRange(RewardOptionPicker.CardPool(_turnManager.CardPool, deck));
         pool.AddRange(RewardOptionPicker.AdvantagePool(_turnManager.AdvantagePool, MetaProgressionManager.LoadedAdvantageNames));
 
-        // As trocas aceitas mudam o numero de opcoes, ate o limite de botoes do painel.
-        var count = Math.Min(TradeOfferRules.RewardOptionCount(_optionCount, _turnManager.AcceptedTrades), _optionButtons.Length);
+        // As trocas aceitas mudam o numero de opcoes, ate o limite de cartas do painel.
+        var count = Math.Min(TradeOfferRules.RewardOptionCount(_optionCount, _turnManager.AcceptedTrades), _optionCards.Length);
         return RewardOptionPicker.Draw(pool, count, _random).ToArray();
-    }
-
-    private static string DescribeOption(UnityEngine.Object option)
-    {
-        if (option is CardData card)
-            return $"{card.CardName}\n{card.Description}";
-        if (option is PassiveAdvantageData advantage)
-            return $"{advantage.AdvantageName}\n{advantage.Description}";
-        return string.Empty;
     }
 
     private void SelectOption(int index)

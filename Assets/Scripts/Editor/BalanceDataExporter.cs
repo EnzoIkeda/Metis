@@ -46,7 +46,7 @@ public static class BalanceDataExporter
         data.Rules.VictoryTurnCount = turn.FindProperty("_victoryTurnCount").intValue;
         data.Rules.RewardOptionCount = Math.Min(
             reward.FindProperty("_optionCount").intValue,
-            reward.FindProperty("_optionButtons").arraySize);
+            reward.FindProperty("_optionCards").arraySize);
 
         var parameters = stats.FindProperty("_initialParameters");
         for (int i = 0; i < parameters.arraySize; i++)

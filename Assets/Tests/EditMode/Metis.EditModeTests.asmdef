@@ -5,7 +5,8 @@
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "Metis.Runtime",
-        "Metis.Editor"
+        "Metis.Editor",
+        "Unity.TextMeshPro"
     ],
     "includePlatforms": [
         "Editor"

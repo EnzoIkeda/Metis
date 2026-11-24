@@ -46,7 +46,8 @@ public class PlacementManager : MonoBehaviour
         var savedPhase = MetaProgressionManager.SavedPhase;
         var theme = _themes != null ? _themes.Find(MetaProgressionManager.CurrentTheme) : null;
         LayoutSeed = savedPhase != null ? savedPhase.LayoutSeed : theme != null && theme.HasLayoutSeed ? theme.LayoutSeed : SeededRandom.NewSeed();
-        Plan = CityWfc.Generate(LayoutSeed, new CityWfcOptions { Width = _width, Height = _height });
+        var coast = theme != null ? theme.Coast : CoastSide.None;
+        Plan = CityWfc.Generate(LayoutSeed, new CityWfcOptions { Width = _width, Height = _height, Coast = coast });
 
         if (_tileSet == null)
         {
@@ -67,6 +68,11 @@ public class PlacementManager : MonoBehaviour
                     PlaceRoad(position, Plan.RoadAt(x, z));
                     continue;
                 }
+                if (Plan.IsCoast(x, z))
+                {
+                    PlaceCoast(position, Plan.CoastAt(x, z));
+                    continue;
+                }
 
                 var options = _tileSet.StructuresFor(Plan.LotUseAt(x, z));
                 if (options.Count == 0)
@@ -81,6 +87,7 @@ public class PlacementManager : MonoBehaviour
         }
 
         PlaceDecor();
+        PlaceCoastDecor();
     }
 
     private void FillGridTypes()
@@ -99,6 +106,56 @@ public class PlacementManager : MonoBehaviour
             return;
         }
         PlaceTemporaryStructure(position, piece.Prefab, CellType.Road, rotation + piece.RotationOffset);
+    }
+
+    // Mar e praia nao recebem estrutura nem carta: no grid ficam bloqueados como lote.
+    private void PlaceCoast(Vector3Int position, CoastCell cell)
+    {
+        _placementGrid[position.x, position.z] = CellType.Structure;
+        var prefab = cell == CoastCell.Water ? _tileSet.Water : _tileSet.Beach;
+        if (prefab == null)
+            return;
+        var instance = Instantiate(prefab, CoastContainer());
+        instance.transform.localPosition = CellToLocalPosition(position);
+        if (cell == CoastCell.Water)
+            CoastContainer().GetComponent<CoastAnimator>().AddWater(instance);
+    }
+
+    private void PlaceCoastDecor()
+    {
+        if (Plan.Coast == CoastSide.None)
+            return;
+        var container = CoastContainer();
+        var animator = container.GetComponent<CoastAnimator>();
+        // Gerador proprio para escolher as pecas, separado do lugar de cada uma.
+        var random = new SeededRandom(LayoutSeed ^ 0xB0A7UL);
+        foreach (var item in CoastDecor.Plan(Plan, LayoutSeed))
+        {
+            var options = _tileSet.CoastPieces(item.Kind);
+            if (options.Count == 0)
+                continue;
+            var prefab = options[random.Next(options.Count)];
+            if (prefab == null)
+                continue;
+            var instance = Instantiate(prefab, container);
+            instance.transform.localPosition = new Vector3(item.X * _cellSize, 0f, item.Z * _cellSize);
+            instance.transform.localRotation = Quaternion.Euler(0f, item.Rotation, 0f) * instance.transform.localRotation;
+            if (item.Kind == CoastDecorKind.Boat || item.Kind == CoastDecorKind.Ship || item.Kind == CoastDecorKind.Buoy)
+                animator.AddFloating(instance.transform, random.Next(1000) / 1000f);
+        }
+    }
+
+    private Transform _coastContainer;
+
+    private Transform CoastContainer()
+    {
+        if (_coastContainer != null)
+            return _coastContainer;
+        var container = new GameObject("Coast");
+        container.transform.SetParent(transform, false);
+        container.AddComponent<CoastAnimator>();
+        _coastContainer = container.transform;
+        return _coastContainer;
     }
 
     private void PlaceDecor()

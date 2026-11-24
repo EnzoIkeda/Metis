@@ -184,6 +184,7 @@ MonoBehaviour:
     Limit: 0
     Pieces:
     - {fileID: 1683082329577415933, guid: ac320f86378043221a045fd625a8be72, type: 3}
+    - {fileID: 7954193389670898105, guid: 21789f0c1587774a49bfb5f25ca319d2, type: 3}
   - Card: {fileID: 11400000, guid: 459498a1fb9aafd48a4e179be4f369f6, type: 2}
     Kind: 1
     Placement: 1
@@ -282,7 +283,7 @@ MonoBehaviour:
     Merge: 0
     Limit: 0
     Pieces:
-    - {fileID: 8929083518606365213, guid: 032652acf24e6b833a523897a375d5d3, type: 3}
+    - {fileID: 7035362040747128930, guid: 894c89049f0d24524b80324d9ceac512, type: 3}
   - Card: {fileID: 11400000, guid: 220c3b143cf3af8a8ab24bddda52a461, type: 2}
     Kind: 1
     Placement: 0
@@ -498,14 +499,15 @@ MonoBehaviour:
     Pieces:
     - {fileID: 3973478885779360084, guid: 6c4aefb8f81a9e2f2b6d4191c87d24ab, type: 3}
   - Card: {fileID: 11400000, guid: 4e3f2267caaf4de89452f4a7090ea0ed, type: 2}
-    Kind: 0
-    Placement: 0
+    Kind: 3
+    Placement: 2
     ResultIsGreen: 0
     ResultHasFlatRoof: 0
-    Size: 1
+    Size: 2
     Merge: 0
     Limit: 0
-    Pieces: []
+    Pieces:
+    - {fileID: 8043891294000146533, guid: 133b93f896d610fa8ba30e9106b9b731, type: 3}
   - Card: {fileID: 11400000, guid: 93df8f44d82fac6f08a29cfda9d58695, type: 2}
     Kind: 1
     Placement: 0
@@ -599,15 +601,15 @@ MonoBehaviour:
     - {fileID: 7923548036334418692, guid: f7e9db07d6b5bf4a0b9cf7249750f737, type: 3}
     - {fileID: 4005243397446154120, guid: d0987360da7c548dabf7618aa4003b83, type: 3}
   - Card: {fileID: 11400000, guid: cb6d23c267d2ed24b93fa999aebd953f, type: 2}
-    Kind: 3
-    Placement: 0
+    Kind: 1
+    Placement: 1
     ResultIsGreen: 0
     ResultHasFlatRoof: 0
-    Size: 4
+    Size: 2
     Merge: 0
     Limit: 0
     Pieces:
-    - {fileID: 4500710479008052742, guid: f9396631b69cef7d8bc9abfeebf28935, type: 3}
+    - {fileID: 4941731168939652713, guid: 3a03ef0941b7eaa219efb3fc80bc9587, type: 3}
   - Card: {fileID: 11400000, guid: 7525dde4716b7bdf8bb6b35f2825e6c2, type: 2}
     Kind: 3
     Placement: 0
@@ -698,7 +700,7 @@ MonoBehaviour:
     Merge: 1
     Limit: 0
     Pieces:
-    - {fileID: 2141419189519596669, guid: c5c5e4ec4419a0deeb121f7cb02355e0, type: 3}
+    - {fileID: 2570628665766292077, guid: beaf8ab76c67ab148acc891d02d8e209, type: 3}
   - Card: {fileID: 11400000, guid: f5a4acf1cda56f235964c3a64ee1f31f, type: 2}
     Kind: 3
     Placement: 2

@@ -28,6 +28,9 @@ public class ThemedPhaseData : ScriptableObject
     [SerializeField] private int _backgroundIndex = -1;
     [SerializeField] private int _layoutSeed;
 
+    // Borda com mar e praia; so muda a cara da cidade.
+    [SerializeField] private CoastSide _coast = CoastSide.None;
+
     public string ThemeName => Pick(_themeName, _themeNameEn);
     public string Summary => Pick(_summary, _summaryEn);
     public string Opening => Pick(_opening, _openingEn);
@@ -40,6 +43,7 @@ public class ThemedPhaseData : ScriptableObject
     public int BackgroundIndex => _backgroundIndex;
     public bool HasLayoutSeed => _layoutSeed != 0;
     public ulong LayoutSeed => (ulong)(uint)_layoutSeed;
+    public CoastSide Coast => _coast;
 
     private static string Pick(string portuguese, string english)
     {

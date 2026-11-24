@@ -22198,6 +22198,10 @@ MonoBehaviour:
   - {fileID: 1101577590284328575, guid: 5d2ce4f2e805b5c4092a09a0930cf37d, type: 3}
   - {fileID: 7954715419065063505, guid: 10f4671cf44100d409a99458809783f8, type: 3}
   - {fileID: 771982215564958993, guid: 855cd82b21977fe458e741a8f5352a56, type: 3}
+  - {fileID: 5403313426274758602, guid: 55684a74fd0314992b6cac982e3de19b, type: 3}
+  - {fileID: 7954193389670898105, guid: 21789f0c1587774a49bfb5f25ca319d2, type: 3}
+  - {fileID: 3939347431448555065, guid: cfec392615c92cbdebe50f2381ecfa9a, type: 3}
+  - {fileID: 4507296563768433380, guid: 696560ec20d7ce9b2b74e81cf6e16fd9, type: 3}
   _minCars: 4
   _maxCars: 14
   _laneOffset: 0.22

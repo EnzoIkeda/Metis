@@ -62,3 +62,25 @@ MonoBehaviour:
     - {fileID: 11400000, guid: da5e9e66159d03b319c34e8db551fcfb, type: 2}
   _streetLight: {fileID: 828575677079968236, guid: 06ad1cdbca61a6aad8b03257964c705a, type: 3}
   _trafficSignal: {fileID: 7147170747362519148, guid: 90b9dfb5a50785f979f4bdc4f6deb524, type: 3}
+  _water: {fileID: 1425104860249449224, guid: f4d1649f865cd5772b5bdb8725b857c1, type: 3}
+  _beach: {fileID: 8836990799035769074, guid: a1a14735d249d10ea8008e11c50b1c67, type: 3}
+  _palms:
+  - {fileID: 2667756900660612030, guid: b0657be6b4477e55e80ecd7955c561a6, type: 3}
+  - {fileID: 5286651639010966849, guid: 237be4d8e14a930678013ca0c3630e00, type: 3}
+  - {fileID: 408901139612023105, guid: b569b6cc01537f52b804afb98e09c98e, type: 3}
+  - {fileID: 1814791905264786861, guid: bd3737867fb6cb444a0053cc7e19f9f2, type: 3}
+  _rocks:
+  - {fileID: 5363232326624946713, guid: 273fe70dabfd42e9cbbd0ce36a199d5f, type: 3}
+  - {fileID: 5429838259888925953, guid: 3207356cb1335eca7b35d5e7f0483706, type: 3}
+  _boats:
+  - {fileID: 7228339285889193679, guid: f0b84c3fc47f18a00be99e29a91fedef, type: 3}
+  - {fileID: 3249978545774291159, guid: 19bd400abe872c998bed247744be5c7d, type: 3}
+  - {fileID: 5234109208334127928, guid: 6d7d535b061ac2efb8595af26cdac201, type: 3}
+  - {fileID: 5950550431636675827, guid: b93a7261f37e972ae89fc6ed3780ddc4, type: 3}
+  - {fileID: 4453826847940282278, guid: 9933512d6bbd8e01bb0530b0a74d959c, type: 3}
+  - {fileID: 4235023647320262323, guid: 89fa403fba67d03a699c4caa4b1afd9d, type: 3}
+  _buoys:
+  - {fileID: 2548706439407949017, guid: 4b441878a90b54b1cbda9af48cafe90d, type: 3}
+  - {fileID: 8689285912275024958, guid: c8c7607208b7d22e2a39c6e94e13026a, type: 3}
+  _pier: {fileID: 7052995544763761276, guid: 5c0f619d6f10cf57cb41ee7b51b2434b, type: 3}
+  _ship: {fileID: 4101833717176433173, guid: 0c63a441f8d726ac2887cf1d95d1f70f, type: 3}

@@ -33,12 +33,30 @@ public enum CityLotUse
     Green
 }
 
-// Cidade planejada: rua (com os lados ligados) ou lote (com uso e frente) em cada celula.
+// Litoral de uma cidade: a borda onde fica o mar e o que cada celula dessa faixa e.
+public enum CoastSide
+{
+    None,
+    North,
+    East,
+    South,
+    West
+}
+
+public enum CoastCell
+{
+    None,
+    Beach,
+    Water
+}
+
+// Cidade planejada: rua (com os lados ligados), lote (com uso e frente) ou litoral em cada celula.
 public class CityPlan
 {
     private readonly RoadSides[,] _roads;
     private readonly CityLotUse[,] _uses;
     private readonly float[,] _facing;
+    private readonly CoastCell[,] _coast;
 
     public int Width { get; }
     public int Height { get; }
@@ -54,11 +72,21 @@ public class CityPlan
         _roads = new RoadSides[width, height];
         _uses = new CityLotUse[width, height];
         _facing = new float[width, height];
+        _coast = new CoastCell[width, height];
     }
 
     public bool IsInBounds(int x, int z) => x >= 0 && x < Width && z >= 0 && z < Height;
 
     public bool IsRoad(int x, int z) => _roads[x, z] != RoadSides.None;
+
+    public CoastCell CoastAt(int x, int z) => _coast[x, z];
+
+    public bool IsCoast(int x, int z) => _coast[x, z] != CoastCell.None;
+
+    // Lote de verdade: nem rua nem litoral.
+    public bool IsLot(int x, int z) => IsRoad(x, z) == false && IsCoast(x, z) == false;
+
+    public CoastSide Coast { get; internal set; }
 
     public RoadSides RoadAt(int x, int z) => _roads[x, z];
 
@@ -68,6 +96,8 @@ public class CityPlan
     public float FacingAt(int x, int z) => _facing[x, z];
 
     internal void SetRoad(int x, int z, RoadSides sides) => _roads[x, z] = sides;
+
+    internal void SetCoast(int x, int z, CoastCell cell) => _coast[x, z] = cell;
 
     internal void SetLot(int x, int z, CityLotUse use, float facing)
     {
@@ -163,6 +193,13 @@ public class CityWfcOptions
     public int MinBorderExits = 2;
     public int MaxAttempts = 400;
 
+    // Litoral: faixa de mar e praia numa borda; a cidade e gerada no resto, com as mesmas regras.
+    public CoastSide Coast = CoastSide.None;
+    public int CoastWater = 2;
+    public int CoastBeach = 1;
+
+    public CityWfcOptions Clone() => (CityWfcOptions)MemberwiseClone();
+
     // Peso base de cada uso de lote, na ordem do enum.
     public double[] LotWeights = { 3.0, 2.0, 2.0, 1.0, 1.2 };
 
@@ -186,6 +223,9 @@ public static class CityWfc
     public static CityPlan Generate(ulong seed, CityWfcOptions options = null)
     {
         options ??= new CityWfcOptions();
+        var depth = Math.Max(0, options.CoastWater) + Math.Max(0, options.CoastBeach);
+        if (options.Coast != CoastSide.None && depth > 0)
+            return WithCoast(seed, options, depth);
         for (var attempt = 0; attempt < options.MaxAttempts; attempt++)
         {
             var random = new SeededRandom(seed + (ulong)attempt * 0x9E3779B97F4A7C15UL);
@@ -205,6 +245,52 @@ public static class CityWfc
         fallback.Attempts = options.MaxAttempts;
         fallback.UsedFallback = true;
         return fallback;
+    }
+
+    // A cidade sai numa area menor, sem a faixa do litoral, e e encaixada ao lado dela.
+    private static CityPlan WithCoast(ulong seed, CityWfcOptions options, int depth)
+    {
+        var horizontal = options.Coast == CoastSide.East || options.Coast == CoastSide.West;
+        var inner = options.Clone();
+        inner.Coast = CoastSide.None;
+        if (horizontal)
+            inner.Width = Math.Max(1, options.Width - depth);
+        else
+            inner.Height = Math.Max(1, options.Height - depth);
+        var city = Generate(seed, inner);
+
+        var offsetX = options.Coast == CoastSide.West ? options.Width - inner.Width : 0;
+        var offsetZ = options.Coast == CoastSide.South ? options.Height - inner.Height : 0;
+        var plan = new CityPlan(options.Width, options.Height)
+        {
+            Attempts = city.Attempts,
+            UsedFallback = city.UsedFallback,
+            Coast = options.Coast
+        };
+        for (var x = 0; x < options.Width; x++)
+        {
+            for (var z = 0; z < options.Height; z++)
+            {
+                var ix = x - offsetX;
+                var iz = z - offsetZ;
+                if (city.IsInBounds(ix, iz))
+                {
+                    plan.SetRoad(x, z, city.RoadAt(ix, iz));
+                    plan.SetLot(x, z, city.LotUseAt(ix, iz), city.FacingAt(ix, iz));
+                    continue;
+                }
+                // Distancia ate a borda do mar: as mais perto da cidade sao praia, o resto e agua.
+                var fromSea = options.Coast switch
+                {
+                    CoastSide.South => z,
+                    CoastSide.North => options.Height - 1 - z,
+                    CoastSide.West => x,
+                    _ => options.Width - 1 - x
+                };
+                plan.SetCoast(x, z, fromSea < Math.Max(0, options.CoastWater) ? CoastCell.Water : CoastCell.Beach);
+            }
+        }
+        return plan;
     }
 
     // Tracado em grade da cidade original: ruas nas colunas e linhas 3, 7 e 11, saindo pelas bordas.

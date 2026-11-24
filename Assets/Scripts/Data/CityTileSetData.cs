@@ -29,6 +29,20 @@ public class CityTileSetData : ScriptableObject
     [SerializeField] private GameObject _streetLight;
     [SerializeField] private GameObject _trafficSignal;
 
+    [Header("Litoral")]
+    [Tooltip("Celula de mar, 1 por 1, com a agua na altura das ruas.")]
+    [SerializeField] private GameObject _water;
+    [Tooltip("Celula de praia, 1 por 1.")]
+    [SerializeField] private GameObject _beach;
+    [SerializeField] private GameObject[] _palms = Array.Empty<GameObject>();
+    [SerializeField] private GameObject[] _rocks = Array.Empty<GameObject>();
+    [SerializeField] private GameObject[] _boats = Array.Empty<GameObject>();
+    [SerializeField] private GameObject[] _buoys = Array.Empty<GameObject>();
+    [SerializeField] private GameObject _pier;
+    [SerializeField] private GameObject _ship;
+
+    public GameObject Water => _water;
+    public GameObject Beach => _beach;
     public GameObject StreetLight => _streetLight;
     public GameObject TrafficSignal => _trafficSignal;
     public IReadOnlyList<CityRoadPiece> Roads => _roads ?? Array.Empty<CityRoadPiece>();
@@ -46,6 +60,21 @@ public class CityTileSetData : ScriptableObject
         }
         piece = default;
         return false;
+    }
+
+    // Opcoes de peca para cada tipo de decoracao do litoral.
+    public IReadOnlyList<GameObject> CoastPieces(CoastDecorKind kind)
+    {
+        switch (kind)
+        {
+            case CoastDecorKind.Palm: return _palms ?? Array.Empty<GameObject>();
+            case CoastDecorKind.Rock: return _rocks ?? Array.Empty<GameObject>();
+            case CoastDecorKind.Boat: return _boats ?? Array.Empty<GameObject>();
+            case CoastDecorKind.Buoy: return _buoys ?? Array.Empty<GameObject>();
+            case CoastDecorKind.Pier: return _pier != null ? new[] { _pier } : Array.Empty<GameObject>();
+            case CoastDecorKind.Ship: return _ship != null ? new[] { _ship } : Array.Empty<GameObject>();
+            default: return Array.Empty<GameObject>();
+        }
     }
 
     public IReadOnlyList<StructureData> StructuresFor(CityLotUse use)

@@ -874,3 +874,196 @@ public class RoadTechGlowTests
         Assert.That(junctions, Is.GreaterThan(0));
     }
 }
+
+public class CityCoastTests
+{
+    private static CityWfcOptions Coastal(CoastSide side) => new CityWfcOptions { Coast = side };
+
+    [Test]
+    public void SouthCoast_HasWaterThenBeach_AndTheCityAbove()
+    {
+        var plan = CityWfc.Generate(77, Coastal(CoastSide.South));
+        Assert.That(plan.Coast, Is.EqualTo(CoastSide.South));
+        for (var x = 0; x < plan.Width; x++)
+        {
+            Assert.That(plan.CoastAt(x, 0), Is.EqualTo(CoastCell.Water));
+            Assert.That(plan.CoastAt(x, 1), Is.EqualTo(CoastCell.Water));
+            Assert.That(plan.CoastAt(x, 2), Is.EqualTo(CoastCell.Beach));
+            for (var z = 0; z < 3; z++)
+            {
+                Assert.That(plan.IsRoad(x, z), Is.False, $"rua no litoral em {x},{z}");
+                Assert.That(plan.IsLot(x, z), Is.False);
+            }
+            for (var z = 3; z < plan.Height; z++)
+                Assert.That(plan.IsCoast(x, z), Is.False);
+        }
+    }
+
+    [Test]
+    public void TheCity_IsTheSameAsOneGeneratedInTheSmallerArea()
+    {
+        var plan = CityWfc.Generate(77, Coastal(CoastSide.South));
+        var inner = CityWfc.Generate(77, new CityWfcOptions { Height = 12 });
+        for (var x = 0; x < inner.Width; x++)
+        {
+            for (var z = 0; z < inner.Height; z++)
+            {
+                Assert.That(plan.RoadAt(x, z + 3), Is.EqualTo(inner.RoadAt(x, z)));
+                Assert.That(plan.LotUseAt(x, z + 3), Is.EqualTo(inner.LotUseAt(x, z)));
+                Assert.That(plan.FacingAt(x, z + 3), Is.EqualTo(inner.FacingAt(x, z)));
+            }
+        }
+    }
+
+    [Test]
+    public void WithoutCoast_NothingChanges()
+    {
+        var plain = CityWfc.Generate(4242);
+        var none = CityWfc.Generate(4242, new CityWfcOptions { Coast = CoastSide.None });
+        for (var x = 0; x < plain.Width; x++)
+        {
+            for (var z = 0; z < plain.Height; z++)
+            {
+                Assert.That(none.RoadAt(x, z), Is.EqualTo(plain.RoadAt(x, z)));
+                Assert.That(none.LotUseAt(x, z), Is.EqualTo(plain.LotUseAt(x, z)));
+                Assert.That(plain.IsCoast(x, z), Is.False);
+            }
+        }
+        Assert.That(plain.Coast, Is.EqualTo(CoastSide.None));
+    }
+
+    [TestCase(CoastSide.North)]
+    [TestCase(CoastSide.East)]
+    [TestCase(CoastSide.West)]
+    public void EverySide_PutsTheWaterOnTheBorder(CoastSide side)
+    {
+        var plan = CityWfc.Generate(9, Coastal(side));
+        var water = 0;
+        var beach = 0;
+        for (var x = 0; x < plan.Width; x++)
+        {
+            for (var z = 0; z < plan.Height; z++)
+            {
+                var onBorder = side switch
+                {
+                    CoastSide.North => z == plan.Height - 1,
+                    CoastSide.East => x == plan.Width - 1,
+                    _ => x == 0
+                };
+                if (onBorder)
+                    Assert.That(plan.CoastAt(x, z), Is.EqualTo(CoastCell.Water));
+                if (plan.CoastAt(x, z) == CoastCell.Water)
+                    water++;
+                if (plan.CoastAt(x, z) == CoastCell.Beach)
+                    beach++;
+            }
+        }
+        Assert.That(water, Is.EqualTo(2 * 15));
+        Assert.That(beach, Is.EqualTo(15));
+    }
+
+    [Test]
+    public void ManySeeds_KeepTheCityRules_AboveTheCoast()
+    {
+        var inner = new CityWfcOptions { Height = 12 };
+        for (ulong seed = 1; seed <= 200; seed++)
+        {
+            var plan = CityWfc.Generate(seed, Coastal(CoastSide.South));
+            Assert.That(plan.UsedFallback, Is.False, $"semente {seed}");
+            var roads = new RoadSides[15, 12];
+            for (var x = 0; x < 15; x++)
+                for (var z = 0; z < 12; z++)
+                    roads[x, z] = plan.RoadAt(x, z + 3);
+            Assert.That(CityWfc.PassesGlobalRules(roads, inner), Is.True, $"semente {seed}");
+        }
+    }
+
+    [Test]
+    public void CardMarks_NeverLandOnTheCoast()
+    {
+        var plan = CityWfc.Generate(77, Coastal(CoastSide.South));
+        var planner = new CardMarkPlanner(plan, 77);
+        var rules = new[]
+        {
+            new CardMarkRule { Kind = CardMarkKind.ReplaceLot, Placement = CardMarkPlacement.Edge, Size = 4, Limit = 50 },
+            new CardMarkRule { Kind = CardMarkKind.ReplaceLot, Size = 4, Merge = true, Limit = 50 },
+            new CardMarkRule { Kind = CardMarkKind.StreetProp, Size = 4, Limit = 50 },
+        };
+        for (var turn = 1; turn <= 40; turn++)
+        {
+            var rule = rules[turn % rules.Length];
+            if (planner.TryMark("Card" + (turn % rules.Length), rule, turn, out var mark) == false || rule.Kind == CardMarkKind.StreetProp)
+                continue;
+            foreach (var spot in mark.Spots)
+                Assert.That(plan.IsCoast(spot.X, spot.Z), Is.False, $"marca no litoral em {spot.X},{spot.Z}");
+        }
+    }
+}
+
+public class CoastDecorTests
+{
+    private static CityPlan Coastal(ulong seed) => CityWfc.Generate(seed, new CityWfcOptions { Coast = CoastSide.South });
+
+    [Test]
+    public void NoCoast_NoDecor()
+    {
+        Assert.That(CoastDecor.Plan(CityWfc.Generate(5), 5), Is.Empty);
+    }
+
+    [Test]
+    public void SameCityAndSeed_SameDecor()
+    {
+        var a = CoastDecor.Plan(Coastal(11), 11);
+        var b = CoastDecor.Plan(Coastal(11), 11);
+        Assert.That(b.Count, Is.EqualTo(a.Count));
+        for (var i = 0; i < a.Count; i++)
+        {
+            Assert.That(b[i].Kind, Is.EqualTo(a[i].Kind));
+            Assert.That(b[i].X, Is.EqualTo(a[i].X));
+            Assert.That(b[i].Z, Is.EqualTo(a[i].Z));
+        }
+    }
+
+    [Test]
+    public void EachPiece_StaysOnItsKindOfCell()
+    {
+        for (ulong seed = 1; seed <= 60; seed++)
+        {
+            var plan = Coastal(seed);
+            var items = CoastDecor.Plan(plan, seed);
+            foreach (var item in items)
+            {
+                var cell = plan.CoastAt(StreetWalk.CellOf(item.X), StreetWalk.CellOf(item.Z));
+                var expected = item.Kind == CoastDecorKind.Palm || item.Kind == CoastDecorKind.Rock ? CoastCell.Beach : CoastCell.Water;
+                if (item.Kind == CoastDecorKind.Ship)
+                    Assert.That(item.Z, Is.EqualTo(0f), "navio na faixa mais funda");
+                else
+                    Assert.That(cell, Is.EqualTo(expected), $"{item.Kind} em {item.X},{item.Z}, semente {seed}");
+            }
+            Assert.That(items.FindAll(i => i.Kind == CoastDecorKind.Ship).Count, Is.LessThanOrEqualTo(1));
+            Assert.That(items.FindAll(i => i.Kind == CoastDecorKind.Buoy).Count, Is.LessThanOrEqualTo(CoastDecor.BuoyCount));
+            Assert.That(items.FindAll(i => i.Kind == CoastDecorKind.Palm).Count, Is.GreaterThan(0), $"semente {seed}");
+        }
+    }
+
+    [Test]
+    public void APier_StandsInFrontOfEveryStreetThatReachesTheBeach()
+    {
+        for (ulong seed = 1; seed <= 60; seed++)
+        {
+            var plan = Coastal(seed);
+            var piers = CoastDecor.Plan(plan, seed).FindAll(i => i.Kind == CoastDecorKind.Pier);
+            var accesses = 0;
+            for (var x = 0; x < plan.Width; x++)
+            {
+                if ((plan.RoadAt(x, 3) & RoadSides.South) == 0)
+                    continue;
+                accesses++;
+                Assert.That(piers.Exists(p => p.X == x && p.Z == 1f), Is.True, $"sem pier em {x}, semente {seed}");
+            }
+            Assert.That(piers.Count, Is.EqualTo(accesses));
+            foreach (var pier in piers)
+                Assert.That(pier.Rotation, Is.EqualTo(180f), "o pier aponta para o mar (sul)");
+        }
+    }
+}

@@ -78,6 +78,90 @@ public class CityGenerationTests
         return placement;
     }
 
+    private PlacementManager BuildCoastal(CityTileSetData set)
+    {
+        var water = Template("Water");
+        var surface = GameObject.CreatePrimitive(PrimitiveType.Quad);
+        surface.transform.SetParent(water.transform, false);
+        var waterMaterial = new Material(Shader.Find("Universal Render Pipeline/Simple Lit"));
+        _created.Add(waterMaterial);
+        surface.GetComponent<Renderer>().sharedMaterial = waterMaterial;
+        TestDataFactory.SetField(set, "_water", water);
+        TestDataFactory.SetField(set, "_beach", Template("Beach"));
+        TestDataFactory.SetField(set, "_palms", new[] { Template("Palm") });
+        TestDataFactory.SetField(set, "_rocks", new[] { Template("Rock") });
+        TestDataFactory.SetField(set, "_boats", new[] { Template("Boat") });
+        TestDataFactory.SetField(set, "_buoys", new[] { Template("Buoy") });
+        TestDataFactory.SetField(set, "_pier", Template("Pier"));
+        TestDataFactory.SetField(set, "_ship", Template("Ship"));
+
+        var theme = ScriptableObject.CreateInstance<ThemedPhaseData>();
+        theme.name = "TemaLitoral";
+        TestDataFactory.SetField(theme, "_layoutSeed", 77);
+        TestDataFactory.SetField(theme, "_coast", CoastSide.South);
+        var library = ScriptableObject.CreateInstance<ThemedPhaseLibraryData>();
+        TestDataFactory.SetField(library, "_themes", new[] { theme });
+        _created.Add(theme);
+        _created.Add(library);
+        MetaProgressionManager.ChooseMapNode(new PhaseMapNode { Id = theme.name, Type = PhaseMapNodeType.Themed, IsAvailable = true });
+
+        var host = new GameObject("PlacementManager");
+        host.SetActive(false);
+        _created.Add(host);
+        var placement = host.AddComponent<PlacementManager>();
+        TestDataFactory.SetField(placement, "_width", 15);
+        TestDataFactory.SetField(placement, "_height", 15);
+        TestDataFactory.SetField(placement, "_tileSet", set);
+        TestDataFactory.SetField(placement, "_themes", library);
+        host.SetActive(true);
+        return placement;
+    }
+
+    [Test]
+    public void CoastalTheme_BuildsSeaBeachAndDecor_AndBlocksTheCoastInTheGrid()
+    {
+        var placement = BuildCoastal(TileSet());
+        var plan = placement.Plan;
+        Assert.That(plan.Coast, Is.EqualTo(CoastSide.South));
+        Assert.That(placement.LayoutSeed, Is.EqualTo(77UL));
+
+        var coast = placement.transform.Find("Coast");
+        Assert.That(coast, Is.Not.Null);
+        var water = 0;
+        var beach = 0;
+        for (var x = 0; x < plan.Width; x++)
+        {
+            for (var z = 0; z < plan.Height; z++)
+            {
+                if (plan.IsCoast(x, z) == false)
+                    continue;
+                Assert.That(placement.Grid[x, z], Is.EqualTo(CellType.Structure), "litoral bloqueado para estruturas");
+                if (plan.CoastAt(x, z) == CoastCell.Water)
+                    water++;
+                else
+                    beach++;
+            }
+        }
+        var decor = CoastDecor.Plan(plan, placement.LayoutSeed);
+        Assert.That(coast.childCount, Is.EqualTo(water + beach + decor.Count));
+
+        var animator = coast.GetComponent<CoastAnimator>();
+        var floating = decor.FindAll(item => item.Kind == CoastDecorKind.Boat || item.Kind == CoastDecorKind.Ship || item.Kind == CoastDecorKind.Buoy).Count;
+        Assert.That(animator.FloatingCount, Is.EqualTo(floating));
+        Assert.That(animator.WaterMaterial, Is.Not.Null);
+        foreach (var renderer in coast.GetComponentsInChildren<Renderer>(true))
+            Assert.That(renderer.sharedMaterial, Is.EqualTo(animator.WaterMaterial), "todo o mar usa a mesma copia do material");
+
+        // Nenhum lote nem rua cai na faixa do litoral.
+        foreach (Transform child in placement.transform)
+        {
+            var cell = new Vector3Int(Mathf.RoundToInt(child.localPosition.x), 0, Mathf.RoundToInt(child.localPosition.z));
+            if (child == coast || child.name == "Decor" || plan.IsInBounds(cell.x, cell.z) == false)
+                continue;
+            Assert.That(plan.IsCoast(cell.x, cell.z), Is.False, $"{child.name} no litoral em {cell}");
+        }
+    }
+
     [Test]
     public void City_IsBuiltFromThePlan_WithAConnectedRoadNetwork()
     {

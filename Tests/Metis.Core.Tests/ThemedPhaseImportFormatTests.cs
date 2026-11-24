@@ -54,6 +54,25 @@ public class ThemedPhaseImportFormatTests
     }
 
     [Test]
+    public void Validate_Coast_AcceptsSidesAndEmpty_AndReportsTheRest()
+    {
+        foreach (var good in new[] { "", "None", "North", "East", "South", "West" })
+        {
+            var theme = Theme();
+            theme.Coast = good;
+            Assert.That(Errors(theme), Is.Empty, good);
+        }
+        foreach (var bad in new[] { "south", "Sul", "2", "Beach" })
+        {
+            var theme = Theme();
+            theme.Coast = bad;
+            Assert.That(Errors(theme).Single(), Does.Contain("Coast"), bad);
+        }
+        Assert.That(ThemedPhaseImportFormat.TryParseCoast("South", out var side), Is.True);
+        Assert.That(side, Is.EqualTo(CoastSide.South));
+    }
+
+    [Test]
     public void Validate_DashIsReported()
     {
         var theme = Theme();

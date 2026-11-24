@@ -99,7 +99,7 @@ public class CardMarkPlanner
         _nearCrossing = new bool[plan.Width, plan.Height];
         for (var x = 0; x < plan.Width; x++)
             for (var z = 0; z < plan.Height; z++)
-                if (plan.IsRoad(x, z) == false && (plan.LotUseAt(x, z) == CityLotUse.Apartment || plan.LotUseAt(x, z) == CityLotUse.Tower))
+                if (plan.IsLot(x, z) && (plan.LotUseAt(x, z) == CityLotUse.Apartment || plan.LotUseAt(x, z) == CityLotUse.Tower))
                     _flatRoofs.Add((x, z));
         for (var x = 0; x < plan.Width; x++)
         {
@@ -198,7 +198,7 @@ public class CardMarkPlanner
 
     private bool IsFreeLot(int x, int z)
     {
-        return _plan.IsInBounds(x, z) && _plan.IsRoad(x, z) == false && _replaced.ContainsKey((x, z)) == false && _roofs.Contains((x, z)) == false;
+        return _plan.IsInBounds(x, z) && _plan.IsLot(x, z) && _replaced.ContainsKey((x, z)) == false && _roofs.Contains((x, z)) == false;
     }
 
     // Quadrado de 2x2 lotes livres, de preferencia no lugar pedido.
@@ -286,7 +286,7 @@ public class CardMarkPlanner
         {
             for (var z = 0; z < _plan.Height; z++)
             {
-                if (_plan.IsRoad(x, z))
+                if (_plan.IsLot(x, z) == false)
                     continue;
 
                 if (roof)

@@ -124,6 +124,8 @@ public static class ThemedPhaseImporter
         SetFloat(so, "_derivaMultiplier", dto.DerivaMultiplier, dto.Id, report);
         SetInt(so, "_backgroundIndex", dto.BackgroundIndex, dto.Id, report);
         SetInt(so, "_layoutSeed", dto.LayoutSeed, dto.Id, report);
+        ThemedPhaseImportFormat.TryParseCoast(dto.Coast, out var coast);
+        SetInt(so, "_coast", (int)coast, dto.Id, report);
         SetOverrides(so, dto, report);
         SetEvents(so, dto, report);
         if (apply)

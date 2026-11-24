@@ -30,6 +30,10 @@ public static class UIStrings
         : "You successfully governed for 20 turns, congratulations!";
 
     public static string RewardTitle => IsPt ? "Recompensa" : "Reward";
+    public static string RewardHint => IsPt ? "Escolha uma para levar às próximas cidades." : "Pick one to take to the next cities.";
+    public static string RewardChooseButton => IsPt ? "Escolher" : "Choose";
+    public static string RewardKindCard => IsPt ? "CARTA" : "CARD";
+    public static string RewardKindAdvantage => IsPt ? "VANTAGEM" : "ADVANTAGE";
 
     public static string PlayButton => IsPt ? "Jogar" : "Play";
     public static string BackButton => IsPt ? "Voltar" : "Back";
@@ -93,6 +97,10 @@ public static class UIStrings
     public static string UnitsButtonLabel => IsPt
         ? (UnitDisplaySettings.ShowRealUnits ? "Valores: unidades reais" : "Valores: índice")
         : (UnitDisplaySettings.ShowRealUnits ? "Values: real units" : "Values: index");
+
+    public static string BloomButtonLabel => IsPt
+        ? (BloomSettings.Enabled ? "Brilho (bloom): ligado" : "Brilho (bloom): desligado")
+        : (BloomSettings.Enabled ? "Glow (bloom): on" : "Glow (bloom): off");
 
     // Efeitos exatos da carta, um parametro por linha, mostrados quando a mao foi revelada.
     public static string CardEffects(CardData card)
@@ -878,6 +886,13 @@ public static class UIStrings
     }
 
     public static string SkipButton => IsPt ? "Pular" : "Skip";
+
+    // Passeio a pe pela cidade.
+    public static string WalkBackButton => IsPt ? "Voltar" : "Back";
+
+    public static string WalkHint => IsPt
+        ? "Arraste à esquerda para andar e à direita para olhar."
+        : "Drag on the left to walk and on the right to look around.";
 
     // Chave da legenda de uma tela do fim de rodada; a imagem conta a partir de 0.
     public static string RunEndCaptionKey(RunEnding ending, int imageIndex) => $"{(ending == RunEnding.Defeat ? "defeat" : "victory")}.{imageIndex + 1}";

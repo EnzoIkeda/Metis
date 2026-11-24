@@ -80,6 +80,14 @@
     <Compile Include="../../Assets/Scripts/Core/Utilities/SlideSequence.cs" Link="Source/SlideSequence.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/FlyoverPath.cs" Link="Source/FlyoverPath.cs" />
     <Compile Include="../../Assets/Scripts/Core/Utilities/RunSummary.cs" Link="Source/RunSummary.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/CityWfc.cs" Link="Source/CityWfc.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/TrafficDensity.cs" Link="Source/TrafficDensity.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/RoadTechGlow.cs" Link="Source/RoadTechGlow.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/CardMarkPlanner.cs" Link="Source/CardMarkPlanner.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/CardMarkMotion.cs" Link="Source/CardMarkMotion.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/CityDecor.cs" Link="Source/CityDecor.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/StreetWalk.cs" Link="Source/StreetWalk.cs" />
+    <Compile Include="../../Assets/Scripts/Core/Utilities/CoastDecor.cs" Link="Source/CoastDecor.cs" />
     <Compile Include="../../Assets/Scripts/Editor/ModelReportImportFormat.cs" Link="Source/ModelReportImportFormat.cs" />
   </ItemGroup>
 

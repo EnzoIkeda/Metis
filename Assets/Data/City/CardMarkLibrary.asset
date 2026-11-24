@@ -1,0 +1,764 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64ff2759e5b76bd5eb884133d5977dcf, type: 3}
+  m_Name: CardMarkLibrary
+  m_EditorClassIdentifier: Metis.Runtime::CardMarkLibraryData
+  _entries:
+  - Card: {fileID: 11400000, guid: 58d5116ce93cdacd0ac09e5d103b2da1, type: 2}
+    Kind: 0
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 1
+    Merge: 0
+    Limit: 0
+    Pieces: []
+  - Card: {fileID: 11400000, guid: 9f327b3063cfb7015aa2e98b4219cb54, type: 2}
+    Kind: 0
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 1
+    Merge: 0
+    Limit: 0
+    Pieces: []
+  - Card: {fileID: 11400000, guid: 62dc22f433e394fd0bb5aadad9ea8ab3, type: 2}
+    Kind: 3
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 4
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 4005243397446154120, guid: d0987360da7c548dabf7618aa4003b83, type: 3}
+    - {fileID: 8911390284015246493, guid: d0d7b4683f7ac338bb601d65d7dc4853, type: 3}
+  - Card: {fileID: 11400000, guid: 5e1e29e6be38568038f8f97a0c882e8f, type: 2}
+    Kind: 2
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 3
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 5326372959352344415, guid: 9149fe3d1a2e0480b88122f01f1581b2, type: 3}
+  - Card: {fileID: 11400000, guid: cfba2cb653cf442e9009c18a2d660b4a, type: 2}
+    Kind: 0
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 1
+    Merge: 0
+    Limit: 0
+    Pieces: []
+  - Card: {fileID: 11400000, guid: 56f4aff8dae0f16c7886fec3e0bbdacb, type: 2}
+    Kind: 1
+    Placement: 2
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 4
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 176587272521484007, guid: 1951d105026bbbc9c9f8fc443aaea944, type: 3}
+    - {fileID: 3637721617575954526, guid: 10492ef4a7204c7bd99a03e037f925fa, type: 3}
+    - {fileID: 7929597955601729249, guid: 12df522db1bd6b41da53d25594dcd298, type: 3}
+    - {fileID: 1373137084472036905, guid: bcf07109c652f4a098f8d8ae06b67c96, type: 3}
+    - {fileID: 2034227798996402190, guid: 163b4427edc7d382f9de0863f39f641f, type: 3}
+    - {fileID: 8339060549685050248, guid: f43be0469238cd69f92860a67579c430, type: 3}
+    - {fileID: 8689745973993729375, guid: 35392817ed1c46789b62734aad96bfc0, type: 3}
+    - {fileID: 282762719310147872, guid: c2abd1c71dd79d01f93128869a6a3d43, type: 3}
+    - {fileID: 800493266889588283, guid: 3ddde5db8554b9f09a4fd4be2b21e5be, type: 3}
+    - {fileID: 1929846795053168516, guid: 55e802438d38afa8dbece5eb19b9d55e, type: 3}
+  - Card: {fileID: 11400000, guid: 579b2f6745a561ceba60a509db080b8b, type: 2}
+    Kind: 1
+    Placement: 2
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 2
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 3637721617575954526, guid: 10492ef4a7204c7bd99a03e037f925fa, type: 3}
+    - {fileID: 8339060549685050248, guid: f43be0469238cd69f92860a67579c430, type: 3}
+    - {fileID: 8689745973993729375, guid: 35392817ed1c46789b62734aad96bfc0, type: 3}
+  - Card: {fileID: 11400000, guid: 84e711d9f9cff9e2192c93ae399ba8c0, type: 2}
+    Kind: 1
+    Placement: 0
+    ResultIsGreen: 1
+    ResultHasFlatRoof: 0
+    Size: 3
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 7858489416907978446, guid: 8a5f7e64ec6d236f487126f118fb2dcf, type: 3}
+    - {fileID: 3685405883301580924, guid: d7bb9af9c9b2e39a880c22bce73bd97e, type: 3}
+    - {fileID: 6139071509912570826, guid: 39e48822282b3882983a202e9b3ebb98, type: 3}
+  - Card: {fileID: 11400000, guid: b8ad76ba87783e5908161515cdbd8326, type: 2}
+    Kind: 1
+    Placement: 1
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 2
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 8654385135642554871, guid: 565fb99d64a044fc1950e98dbeabd88a, type: 3}
+  - Card: {fileID: 11400000, guid: 0caa90a4ca0c4386b9fba910cf2e4904, type: 2}
+    Kind: 0
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 1
+    Merge: 0
+    Limit: 0
+    Pieces: []
+  - Card: {fileID: 11400000, guid: f082b3d180bbb42bb9e07b44d21527ef, type: 2}
+    Kind: 2
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 4
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 1863999119589430071, guid: f189d0bbb17d26499b0bbbbf43c5b0af, type: 3}
+  - Card: {fileID: 11400000, guid: 3de5657a1e19f1d8ab35d952549ba92b, type: 2}
+    Kind: 2
+    Placement: 2
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 4
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 5326372959352344415, guid: 9149fe3d1a2e0480b88122f01f1581b2, type: 3}
+  - Card: {fileID: 11400000, guid: 2bda81d154c0185dab4f17eadcdad258, type: 2}
+    Kind: 1
+    Placement: 2
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 2
+    Merge: 1
+    Limit: 0
+    Pieces:
+    - {fileID: 1097772696335839078, guid: 62c9910a0ac5b97da9815ef4a42509fc, type: 3}
+  - Card: {fileID: 11400000, guid: 1ba8d5ecf53b2a5ca950789cdd830b5d, type: 2}
+    Kind: 3
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 4
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 7125904117541242928, guid: 13fe34dccd63749348066a6250189f34, type: 3}
+  - Card: {fileID: 11400000, guid: 7bb6032300ae1a24ebc4a948f3a19ed1, type: 2}
+    Kind: 1
+    Placement: 0
+    ResultIsGreen: 1
+    ResultHasFlatRoof: 0
+    Size: 4
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 7858489416907978446, guid: 8a5f7e64ec6d236f487126f118fb2dcf, type: 3}
+    - {fileID: 8929083518606365213, guid: 032652acf24e6b833a523897a375d5d3, type: 3}
+  - Card: {fileID: 11400000, guid: e2fc13b89f7a4682a9d2b70c7dfc02f7, type: 2}
+    Kind: 3
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 4
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 1683082329577415933, guid: ac320f86378043221a045fd625a8be72, type: 3}
+    - {fileID: 7954193389670898105, guid: 21789f0c1587774a49bfb5f25ca319d2, type: 3}
+  - Card: {fileID: 11400000, guid: 459498a1fb9aafd48a4e179be4f369f6, type: 2}
+    Kind: 1
+    Placement: 1
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 3
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 8654385135642554871, guid: 565fb99d64a044fc1950e98dbeabd88a, type: 3}
+  - Card: {fileID: 11400000, guid: a113cd01369249959acd9b20a87a0bbe, type: 2}
+    Kind: 1
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 1
+    Size: 2
+    Merge: 1
+    Limit: 0
+    Pieces:
+    - {fileID: 4321022594472804996, guid: 3a764cc9eef4a162a8fc14b7b01125f0, type: 3}
+    - {fileID: 1412646952571962331, guid: 110e9df703f89e58ca7f16cfbfb62da1, type: 3}
+    - {fileID: 2528130019445667417, guid: 2ea55da73469b77918140e67eb227f95, type: 3}
+  - Card: {fileID: 11400000, guid: 407a9df2245d906b08c0ccd19e213d15, type: 2}
+    Kind: 2
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 3
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 5273561503414761190, guid: 70c469d1a2568a9278d7be752e26b897, type: 3}
+  - Card: {fileID: 11400000, guid: 346b8c655cc74b339cb96f0356a05309, type: 2}
+    Kind: 1
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 1
+    Size: 2
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 905345028066238897, guid: 12368332217931a219f6753f1d7011bf, type: 3}
+    - {fileID: 8768165808800361472, guid: fb93ec6dce8d54c55a2411313995183e, type: 3}
+    - {fileID: 1438681469418448697, guid: ec8aeb44f133703d2a6cf9208e151352, type: 3}
+  - Card: {fileID: 11400000, guid: 08803a080deaab69886192a2beca486d, type: 2}
+    Kind: 1
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 1
+    Size: 2
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 7959390539914344536, guid: c38f76451c9d210f893f2bc3c8e32a6a, type: 3}
+    - {fileID: 3304467018936215388, guid: ebaf623d469be171ca8ef127c9c1cab2, type: 3}
+  - Card: {fileID: 11400000, guid: ef5779fba9e24d7e9365b578b37e2c55, type: 2}
+    Kind: 1
+    Placement: 2
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 3
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 7929597955601729249, guid: 12df522db1bd6b41da53d25594dcd298, type: 3}
+    - {fileID: 176587272521484007, guid: 1951d105026bbbc9c9f8fc443aaea944, type: 3}
+    - {fileID: 3637721617575954526, guid: 10492ef4a7204c7bd99a03e037f925fa, type: 3}
+  - Card: {fileID: 11400000, guid: b4e7885dcdf8aea408546cb57b2b16f8, type: 2}
+    Kind: 2
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 4
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 5326372959352344415, guid: 9149fe3d1a2e0480b88122f01f1581b2, type: 3}
+  - Card: {fileID: 11400000, guid: 299a0f5987e3e8cd88b038656552a0cb, type: 2}
+    Kind: 1
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 3
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 953951577524223460, guid: 8cedc90d0518ed0e58403957b621be33, type: 3}
+    - {fileID: 3958492111863112738, guid: 60ed67a9ae6bb54df8729029bb18ef1c, type: 3}
+    - {fileID: 4885595171105277443, guid: b6a039e4f3f6b6c38abd19ddac53a0ab, type: 3}
+  - Card: {fileID: 11400000, guid: 62cfef0c0c5366cb7ab343eb767e1a81, type: 2}
+    Kind: 1
+    Placement: 0
+    ResultIsGreen: 1
+    ResultHasFlatRoof: 0
+    Size: 3
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 7035362040747128930, guid: 894c89049f0d24524b80324d9ceac512, type: 3}
+  - Card: {fileID: 11400000, guid: 220c3b143cf3af8a8ab24bddda52a461, type: 2}
+    Kind: 1
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 1
+    Size: 2
+    Merge: 1
+    Limit: 0
+    Pieces:
+    - {fileID: 7890049841466439950, guid: 8c2a11bfe64d8d5b6b3f66f3b9d08608, type: 3}
+    - {fileID: 4476572080855344197, guid: 3ae9f7f152ca4baa1823d8e0812a95ed, type: 3}
+    - {fileID: 9071262341060683577, guid: de3b7aaee009c09d49cf7f241835bb7c, type: 3}
+  - Card: {fileID: 11400000, guid: 589808a7a0d37d25692af33045de3779, type: 2}
+    Kind: 3
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 4
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 828575677079968236, guid: 06ad1cdbca61a6aad8b03257964c705a, type: 3}
+  - Card: {fileID: 11400000, guid: af160334a7a19f87ebed7263690f8624, type: 2}
+    Kind: 1
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 1
+    Size: 2
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 7959390539914344536, guid: c38f76451c9d210f893f2bc3c8e32a6a, type: 3}
+    - {fileID: 3304467018936215388, guid: ebaf623d469be171ca8ef127c9c1cab2, type: 3}
+  - Card: {fileID: 11400000, guid: 0e6dbe87b6bf4b0ea40e197e4ac4c080, type: 2}
+    Kind: 3
+    Placement: 2
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 3
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 6646119417018070152, guid: 9a765ec681f47c278b8b5bd824407a42, type: 3}
+  - Card: {fileID: 11400000, guid: 61f078919b86386eda7b6e9ccc974cfd, type: 2}
+    Kind: 1
+    Placement: 1
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 2
+    Merge: 1
+    Limit: 0
+    Pieces:
+    - {fileID: 4433977834904748836, guid: e29202830b691fc7e8676dd725d1bec8, type: 3}
+  - Card: {fileID: 11400000, guid: 390ca06b827925bf19e9714f5ef119eb, type: 2}
+    Kind: 3
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 4
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 3398839707723932237, guid: b8779f1de79f5d0ef81506497e5c5cdd, type: 3}
+  - Card: {fileID: 11400000, guid: 98290c55d5dc871b0ae95f474871e68d, type: 2}
+    Kind: 3
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 3
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 2023190042342082008, guid: fa1f96c38ff35069e9271f68da49a4d1, type: 3}
+  - Card: {fileID: 11400000, guid: f3b14033e2973623889cbc21f1e1e8ab, type: 2}
+    Kind: 1
+    Placement: 1
+    ResultIsGreen: 1
+    ResultHasFlatRoof: 0
+    Size: 3
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 7858489416907978446, guid: 8a5f7e64ec6d236f487126f118fb2dcf, type: 3}
+  - Card: {fileID: 11400000, guid: 69a3c6cb4483ffc2aa92a741d409d583, type: 2}
+    Kind: 3
+    Placement: 2
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 3
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 7125904117541242928, guid: 13fe34dccd63749348066a6250189f34, type: 3}
+    - {fileID: 7147170747362519148, guid: 90b9dfb5a50785f979f4bdc4f6deb524, type: 3}
+  - Card: {fileID: 11400000, guid: d5e8f3feb9dbb30eea90fd4b175cfdb4, type: 2}
+    Kind: 1
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 4
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 953951577524223460, guid: 8cedc90d0518ed0e58403957b621be33, type: 3}
+    - {fileID: 3958492111863112738, guid: 60ed67a9ae6bb54df8729029bb18ef1c, type: 3}
+    - {fileID: 4885595171105277443, guid: b6a039e4f3f6b6c38abd19ddac53a0ab, type: 3}
+    - {fileID: 6044262888716502183, guid: f68ee3926ff75eb749466cf284918968, type: 3}
+    - {fileID: 7777791217135554071, guid: d78e3e6ed1cea58dabe2220ca70a8f12, type: 3}
+    - {fileID: 6768707664203949346, guid: af50991e242a5bc7d9c0c9ca61e1c561, type: 3}
+  - Card: {fileID: 11400000, guid: f2d23561850830c7ab1397b891b781db, type: 2}
+    Kind: 3
+    Placement: 2
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 4
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 6646119417018070152, guid: 9a765ec681f47c278b8b5bd824407a42, type: 3}
+  - Card: {fileID: 11400000, guid: 69a162d1cf820ca0898a3fc014cbe7e1, type: 2}
+    Kind: 0
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 1
+    Merge: 0
+    Limit: 0
+    Pieces: []
+  - Card: {fileID: 11400000, guid: 6f3a038a894858d65b6418d7b07cef38, type: 2}
+    Kind: 1
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 1
+    Size: 3
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 1308490146867507715, guid: 269e20ddee14a31dd96ffb38642953e0, type: 3}
+    - {fileID: 4517615093538923623, guid: daf3ab1da0e9f5851ad2788d42c8fb5b, type: 3}
+  - Card: {fileID: 11400000, guid: f155480e4ffe0c7ff82e0d75e41bc621, type: 2}
+    Kind: 1
+    Placement: 0
+    ResultIsGreen: 1
+    ResultHasFlatRoof: 0
+    Size: 4
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 3685405883301580924, guid: d7bb9af9c9b2e39a880c22bce73bd97e, type: 3}
+    - {fileID: 6139071509912570826, guid: 39e48822282b3882983a202e9b3ebb98, type: 3}
+  - Card: {fileID: 11400000, guid: ec431197086f3dac894cfc3f4c326e28, type: 2}
+    Kind: 1
+    Placement: 1
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 3
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 8846560615170872951, guid: dcab67cc330e27a679507e9c9fd6e381, type: 3}
+  - Card: {fileID: 11400000, guid: 4ed9a80575f6f2d09b3cf32e6d6936d7, type: 2}
+    Kind: 1
+    Placement: 1
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 1
+    Size: 3
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 7959390539914344536, guid: c38f76451c9d210f893f2bc3c8e32a6a, type: 3}
+    - {fileID: 3304467018936215388, guid: ebaf623d469be171ca8ef127c9c1cab2, type: 3}
+    - {fileID: 1308490146867507715, guid: 269e20ddee14a31dd96ffb38642953e0, type: 3}
+    - {fileID: 4517615093538923623, guid: daf3ab1da0e9f5851ad2788d42c8fb5b, type: 3}
+  - Card: {fileID: 11400000, guid: c203d3c943084ab7adaf9224123381af, type: 2}
+    Kind: 1
+    Placement: 0
+    ResultIsGreen: 1
+    ResultHasFlatRoof: 0
+    Size: 4
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 7858489416907978446, guid: 8a5f7e64ec6d236f487126f118fb2dcf, type: 3}
+    - {fileID: 3685405883301580924, guid: d7bb9af9c9b2e39a880c22bce73bd97e, type: 3}
+    - {fileID: 6139071509912570826, guid: 39e48822282b3882983a202e9b3ebb98, type: 3}
+  - Card: {fileID: 11400000, guid: cedd5434c93cc1c31804b4bc82071b81, type: 2}
+    Kind: 0
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 1
+    Merge: 0
+    Limit: 0
+    Pieces: []
+  - Card: {fileID: 11400000, guid: 51da548b2acc9bfbe8ab98cf60ade046, type: 2}
+    Kind: 1
+    Placement: 1
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 2
+    Merge: 1
+    Limit: 0
+    Pieces:
+    - {fileID: 1929846795053168516, guid: 55e802438d38afa8dbece5eb19b9d55e, type: 3}
+  - Card: {fileID: 11400000, guid: 91972e1778e144349f54ca75cea6dbff, type: 2}
+    Kind: 1
+    Placement: 2
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 2
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 3973478885779360084, guid: 6c4aefb8f81a9e2f2b6d4191c87d24ab, type: 3}
+  - Card: {fileID: 11400000, guid: 4e3f2267caaf4de89452f4a7090ea0ed, type: 2}
+    Kind: 3
+    Placement: 2
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 2
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 8043891294000146533, guid: 133b93f896d610fa8ba30e9106b9b731, type: 3}
+  - Card: {fileID: 11400000, guid: 93df8f44d82fac6f08a29cfda9d58695, type: 2}
+    Kind: 1
+    Placement: 0
+    ResultIsGreen: 1
+    ResultHasFlatRoof: 0
+    Size: 2
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 6139071509912570826, guid: 39e48822282b3882983a202e9b3ebb98, type: 3}
+  - Card: {fileID: 11400000, guid: f864d248eec15b38680edb50191766a6, type: 2}
+    Kind: 3
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 4
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 3398839707723932237, guid: b8779f1de79f5d0ef81506497e5c5cdd, type: 3}
+    - {fileID: 2023190042342082008, guid: fa1f96c38ff35069e9271f68da49a4d1, type: 3}
+  - Card: {fileID: 11400000, guid: 13f5fc819cb8d30289a3dba0da3e0160, type: 2}
+    Kind: 0
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 1
+    Merge: 0
+    Limit: 0
+    Pieces: []
+  - Card: {fileID: 11400000, guid: 47b710ab20a4397ecbcc71fb4e72eec0, type: 2}
+    Kind: 2
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 4
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 2243441485475325547, guid: e362606e403bee0c2bf3865a67bc8ab8, type: 3}
+  - Card: {fileID: 11400000, guid: 44c3bd1e8686b007887a2c272467e372, type: 2}
+    Kind: 1
+    Placement: 2
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 4
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 176587272521484007, guid: 1951d105026bbbc9c9f8fc443aaea944, type: 3}
+    - {fileID: 3637721617575954526, guid: 10492ef4a7204c7bd99a03e037f925fa, type: 3}
+    - {fileID: 7929597955601729249, guid: 12df522db1bd6b41da53d25594dcd298, type: 3}
+    - {fileID: 1373137084472036905, guid: bcf07109c652f4a098f8d8ae06b67c96, type: 3}
+    - {fileID: 2034227798996402190, guid: 163b4427edc7d382f9de0863f39f641f, type: 3}
+    - {fileID: 8339060549685050248, guid: f43be0469238cd69f92860a67579c430, type: 3}
+    - {fileID: 8689745973993729375, guid: 35392817ed1c46789b62734aad96bfc0, type: 3}
+    - {fileID: 282762719310147872, guid: c2abd1c71dd79d01f93128869a6a3d43, type: 3}
+    - {fileID: 800493266889588283, guid: 3ddde5db8554b9f09a4fd4be2b21e5be, type: 3}
+    - {fileID: 4321022594472804996, guid: 3a764cc9eef4a162a8fc14b7b01125f0, type: 3}
+    - {fileID: 1412646952571962331, guid: 110e9df703f89e58ca7f16cfbfb62da1, type: 3}
+    - {fileID: 2528130019445667417, guid: 2ea55da73469b77918140e67eb227f95, type: 3}
+  - Card: {fileID: 11400000, guid: a05c45dd1f7311ace8a2b5601d0502d1, type: 2}
+    Kind: 3
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 4
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 4500710479008052742, guid: f9396631b69cef7d8bc9abfeebf28935, type: 3}
+  - Card: {fileID: 11400000, guid: acce1df6716ee0fc2b1e65adac2391bf, type: 2}
+    Kind: 3
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 4
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 1683082329577415933, guid: ac320f86378043221a045fd625a8be72, type: 3}
+  - Card: {fileID: 11400000, guid: 4c5397ed854c5e68dbcaac2539457cff, type: 2}
+    Kind: 3
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 4
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 7923548036334418692, guid: f7e9db07d6b5bf4a0b9cf7249750f737, type: 3}
+    - {fileID: 4005243397446154120, guid: d0987360da7c548dabf7618aa4003b83, type: 3}
+  - Card: {fileID: 11400000, guid: cb6d23c267d2ed24b93fa999aebd953f, type: 2}
+    Kind: 1
+    Placement: 1
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 2
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 4941731168939652713, guid: 3a03ef0941b7eaa219efb3fc80bc9587, type: 3}
+  - Card: {fileID: 11400000, guid: 7525dde4716b7bdf8bb6b35f2825e6c2, type: 2}
+    Kind: 3
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 3
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 7923548036334418692, guid: f7e9db07d6b5bf4a0b9cf7249750f737, type: 3}
+  - Card: {fileID: 11400000, guid: 75cd0e3d6e5d4e2a3b351452c83f34bf, type: 2}
+    Kind: 3
+    Placement: 2
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 4
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 7147170747362519148, guid: 90b9dfb5a50785f979f4bdc4f6deb524, type: 3}
+  - Card: {fileID: 11400000, guid: 1f4ce87f34d42277f9910b1f2493c336, type: 2}
+    Kind: 1
+    Placement: 1
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 3
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 4433977834904748836, guid: e29202830b691fc7e8676dd725d1bec8, type: 3}
+  - Card: {fileID: 11400000, guid: 59cdc7e92106ca41d98d7e3e43e00c8c, type: 2}
+    Kind: 2
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 4
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 2243441485475325547, guid: e362606e403bee0c2bf3865a67bc8ab8, type: 3}
+    - {fileID: 5326372959352344415, guid: 9149fe3d1a2e0480b88122f01f1581b2, type: 3}
+  - Card: {fileID: 11400000, guid: 0d076784921fc23d1b1d975ee58be1bd, type: 2}
+    Kind: 2
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 3
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 5326372959352344415, guid: 9149fe3d1a2e0480b88122f01f1581b2, type: 3}
+  - Card: {fileID: 11400000, guid: 948ecf83e4bbf7535a69a29714c546ef, type: 2}
+    Kind: 2
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 4
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 6990986746552217376, guid: ea93faa0ac103b05badab4aec62f7546, type: 3}
+  - Card: {fileID: 11400000, guid: de57ac723f938201da8562c6e26b27b9, type: 2}
+    Kind: 0
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 1
+    Merge: 0
+    Limit: 0
+    Pieces: []
+  - Card: {fileID: 11400000, guid: ad60046554f414be68f40653be61f04c, type: 2}
+    Kind: 1
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 2
+    Merge: 1
+    Limit: 0
+    Pieces:
+    - {fileID: 1308490146867507715, guid: 269e20ddee14a31dd96ffb38642953e0, type: 3}
+    - {fileID: 4517615093538923623, guid: daf3ab1da0e9f5851ad2788d42c8fb5b, type: 3}
+  - Card: {fileID: 11400000, guid: bbe3dea69a914c90a93e978e9421e436, type: 2}
+    Kind: 1
+    Placement: 1
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 2
+    Merge: 1
+    Limit: 0
+    Pieces:
+    - {fileID: 2570628665766292077, guid: beaf8ab76c67ab148acc891d02d8e209, type: 3}
+  - Card: {fileID: 11400000, guid: f5a4acf1cda56f235964c3a64ee1f31f, type: 2}
+    Kind: 3
+    Placement: 2
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 4
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 6646119417018070152, guid: 9a765ec681f47c278b8b5bd824407a42, type: 3}
+  - Card: {fileID: 11400000, guid: ff6f615f7daf44f1890010ab08f4fb60, type: 2}
+    Kind: 1
+    Placement: 2
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 4
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 176587272521484007, guid: 1951d105026bbbc9c9f8fc443aaea944, type: 3}
+    - {fileID: 3637721617575954526, guid: 10492ef4a7204c7bd99a03e037f925fa, type: 3}
+    - {fileID: 7929597955601729249, guid: 12df522db1bd6b41da53d25594dcd298, type: 3}
+    - {fileID: 1373137084472036905, guid: bcf07109c652f4a098f8d8ae06b67c96, type: 3}
+    - {fileID: 2034227798996402190, guid: 163b4427edc7d382f9de0863f39f641f, type: 3}
+    - {fileID: 8339060549685050248, guid: f43be0469238cd69f92860a67579c430, type: 3}
+    - {fileID: 8689745973993729375, guid: 35392817ed1c46789b62734aad96bfc0, type: 3}
+    - {fileID: 282762719310147872, guid: c2abd1c71dd79d01f93128869a6a3d43, type: 3}
+    - {fileID: 800493266889588283, guid: 3ddde5db8554b9f09a4fd4be2b21e5be, type: 3}
+  - Card: {fileID: 11400000, guid: 487871b0f81ae0aa091d5b41fc027472, type: 2}
+    Kind: 1
+    Placement: 1
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 4
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 2141419189519596669, guid: c5c5e4ec4419a0deeb121f7cb02355e0, type: 3}
+    - {fileID: 1929846795053168516, guid: 55e802438d38afa8dbece5eb19b9d55e, type: 3}
+  - Card: {fileID: 11400000, guid: c6800adef283404799a36bc167d0458e, type: 2}
+    Kind: 1
+    Placement: 0
+    ResultIsGreen: 0
+    ResultHasFlatRoof: 0
+    Size: 4
+    Merge: 0
+    Limit: 0
+    Pieces:
+    - {fileID: 4321022594472804996, guid: 3a764cc9eef4a162a8fc14b7b01125f0, type: 3}
+    - {fileID: 1412646952571962331, guid: 110e9df703f89e58ca7f16cfbfb62da1, type: 3}
+    - {fileID: 2528130019445667417, guid: 2ea55da73469b77918140e67eb227f95, type: 3}
+    - {fileID: 176587272521484007, guid: 1951d105026bbbc9c9f8fc443aaea944, type: 3}
+    - {fileID: 3637721617575954526, guid: 10492ef4a7204c7bd99a03e037f925fa, type: 3}
+    - {fileID: 7929597955601729249, guid: 12df522db1bd6b41da53d25594dcd298, type: 3}
+    - {fileID: 1373137084472036905, guid: bcf07109c652f4a098f8d8ae06b67c96, type: 3}
+    - {fileID: 2034227798996402190, guid: 163b4427edc7d382f9de0863f39f641f, type: 3}
+    - {fileID: 8339060549685050248, guid: f43be0469238cd69f92860a67579c430, type: 3}
+    - {fileID: 8689745973993729375, guid: 35392817ed1c46789b62734aad96bfc0, type: 3}
+    - {fileID: 282762719310147872, guid: c2abd1c71dd79d01f93128869a6a3d43, type: 3}
+    - {fileID: 800493266889588283, guid: 3ddde5db8554b9f09a4fd4be2b21e5be, type: 3}
+  _landingDust: {fileID: 141433446842962269, guid: 9fe8f8b3288e45a44af36ff8aa04486e, type: 3}

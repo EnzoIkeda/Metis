@@ -45,6 +45,9 @@ public static class ThemedPhaseImportFormat
         public string[] AllowedEvents = Array.Empty<string>();
         public int BackgroundIndex = -1;
         public int LayoutSeed;
+
+        // Borda do mar (North, East, South ou West); vazio, sem litoral.
+        public string Coast = string.Empty;
     }
 
     [Serializable]
@@ -87,10 +90,21 @@ public static class ThemedPhaseImportFormat
                 errors.Add($"{theme.Id}: BackgroundIndex precisa ser -1 ou maior");
             if (theme.LayoutSeed < 0)
                 errors.Add($"{theme.Id}: LayoutSeed nao pode ser negativa");
+            if (TryParseCoast(theme.Coast, out _) == false)
+                errors.Add($"{theme.Id}: Coast desconhecido '{theme.Coast}' (use North, East, South, West ou vazio)");
             if (string.IsNullOrEmpty(theme.KnowledgeEntry) == false && knownEntries != null && knownEntries.Contains(theme.KnowledgeEntry) == false)
                 errors.Add($"{theme.Id}: ficha desconhecida '{theme.KnowledgeEntry}'");
         }
         return errors;
+    }
+
+    // Vazio e "None" sao sem litoral; o resto precisa ser um lado.
+    public static bool TryParseCoast(string value, out CoastSide coast)
+    {
+        coast = CoastSide.None;
+        if (string.IsNullOrEmpty(value))
+            return true;
+        return Enum.TryParse(value, false, out coast) && Enum.IsDefined(typeof(CoastSide), coast) && int.TryParse(value, out _) == false;
     }
 
     public static List<string> Warnings(FileDto file)

@@ -16,6 +16,7 @@ public class PausePopupView : MonoBehaviour
     [SerializeField] private Button _mainMenuButton;
     [SerializeField] private Button _languageButton;
     [SerializeField] private Button _unitsButton;
+    [SerializeField] private Button _bloomButton;
     [SerializeField] private Button _settingsBackButton;
 
     [SerializeField] private TMP_Text _titleText;
@@ -24,6 +25,7 @@ public class PausePopupView : MonoBehaviour
     [SerializeField] private TMP_Text _mainMenuButtonText;
     [SerializeField] private TMP_Text _languageButtonText;
     [SerializeField] private TMP_Text _unitsButtonText;
+    [SerializeField] private TMP_Text _bloomButtonText;
     [SerializeField] private TMP_Text _settingsBackButtonText;
 
     private void Start()
@@ -40,6 +42,8 @@ public class PausePopupView : MonoBehaviour
             _languageButton.onClick.AddListener(ToggleLanguage);
         if (_unitsButton != null)
             _unitsButton.onClick.AddListener(ToggleUnits);
+        if (_bloomButton != null)
+            _bloomButton.onClick.AddListener(ToggleBloom);
         if (_settingsBackButton != null)
             _settingsBackButton.onClick.AddListener(CloseSettings);
 
@@ -67,6 +71,8 @@ public class PausePopupView : MonoBehaviour
             _languageButtonText.text = UIStrings.LanguageButtonLabel;
         if (_unitsButtonText != null)
             _unitsButtonText.text = UIStrings.UnitsButtonLabel;
+        if (_bloomButtonText != null)
+            _bloomButtonText.text = UIStrings.BloomButtonLabel;
         if (_settingsBackButtonText != null)
             _settingsBackButtonText.text = UIStrings.MainMenuSettingsBack;
     }
@@ -115,6 +121,13 @@ public class PausePopupView : MonoBehaviour
     public void ToggleUnits()
     {
         UnitDisplaySettings.ShowRealUnits = UnitDisplaySettings.ShowRealUnits == false;
+        RefreshTexts();
+    }
+
+    // Botao do brilho dentro de Configuracoes.
+    public void ToggleBloom()
+    {
+        BloomSettings.Enabled = BloomSettings.Enabled == false;
         RefreshTexts();
     }
 

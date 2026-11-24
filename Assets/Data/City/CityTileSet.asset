@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28aa646bb1a6794fbb7fde211c366611, type: 3}
+  m_Name: CityTileSet
+  m_EditorClassIdentifier: Metis.Runtime::CityTileSetData
+  _roads:
+  - Shape: 1
+    Prefab: {fileID: 881948364479933467, guid: 96dc691180b2f1daebc7351ae8ae92b0, type: 3}
+    RotationOffset: 0
+  - Shape: 2
+    Prefab: {fileID: 3227616802718875380, guid: 64e7b19b633d272bf87eac5c7b8ac0c5, type: 3}
+    RotationOffset: 90
+  - Shape: 3
+    Prefab: {fileID: 7405187774012839362, guid: 10e3006c447915fe7b9c238a9f712983, type: 3}
+    RotationOffset: 90
+  - Shape: 4
+    Prefab: {fileID: 6941025058308289830, guid: ea4b7afca2a83ce74a1b81e652bf1be7, type: 3}
+    RotationOffset: 0
+  _lots:
+  - Use: 0
+    Structures:
+    - {fileID: 11400000, guid: 3594c0985eeaf0e768c7fd68109c99d9, type: 2}
+    - {fileID: 11400000, guid: e9be4e4cf4556389487f9e605f19ee86, type: 2}
+    - {fileID: 11400000, guid: 21403436149f23822a7bee3e8c14c6a9, type: 2}
+  - Use: 1
+    Structures:
+    - {fileID: 11400000, guid: 2c0e9b69dfcc033dbb59878fdbfd5baf, type: 2}
+  - Use: 2
+    Structures:
+    - {fileID: 11400000, guid: e95e15d383ba1683795d3bc88790c1f9, type: 2}
+    - {fileID: 11400000, guid: f6e06664cf06c0dc4829e9ab1f302c12, type: 2}
+    - {fileID: 11400000, guid: 40d3adfa33068050688f681855ff742b, type: 2}
+    - {fileID: 11400000, guid: ca0aafcd65692703c9db9d7ca662c4a9, type: 2}
+    - {fileID: 11400000, guid: fe37079fcf0e57df684c2b3b8d8e100f, type: 2}
+    - {fileID: 11400000, guid: 4bafafd6e18b6ced1bcf35a49193efb5, type: 2}
+    - {fileID: 11400000, guid: f8e51d82f7ce6f0d0b8de4f9809ea6f2, type: 2}
+    - {fileID: 11400000, guid: a7068a08f2cc3d9cd967a88607b76ef0, type: 2}
+    - {fileID: 11400000, guid: 3267554017c246700a05dd9d6bb63beb, type: 2}
+    - {fileID: 11400000, guid: 14e6808b451187a2ebf7a16ce9add637, type: 2}
+    - {fileID: 11400000, guid: 0ac01d73d0efbaa3e9ca013ce2b4ac80, type: 2}
+    - {fileID: 11400000, guid: f2e067d15671881e3923c022e6ee3e46, type: 2}
+    - {fileID: 11400000, guid: f31ebbb673bef085db9cf6f025658ee0, type: 2}
+    - {fileID: 11400000, guid: c33399b6f24f09b74a05e8780ab62e46, type: 2}
+    - {fileID: 11400000, guid: 0bb233f49519785bdb0ddc78db3c7258, type: 2}
+  - Use: 3
+    Structures:
+    - {fileID: 11400000, guid: e611d0dab3ddbe4a1b4270e7d408f538, type: 2}
+    - {fileID: 11400000, guid: e614415f9e0e97b60ac60d7f348e9a6d, type: 2}
+  - Use: 4
+    Structures:
+    - {fileID: 11400000, guid: 687b48f4a3346811e87af08d19de2f51, type: 2}
+    - {fileID: 11400000, guid: 814659170716e8c58bd3543d3839bccd, type: 2}
+    - {fileID: 11400000, guid: da5e9e66159d03b319c34e8db551fcfb, type: 2}
+  _streetLight: {fileID: 828575677079968236, guid: 06ad1cdbca61a6aad8b03257964c705a, type: 3}
+  _trafficSignal: {fileID: 7147170747362519148, guid: 90b9dfb5a50785f979f4bdc4f6deb524, type: 3}
+  _water: {fileID: 1425104860249449224, guid: f4d1649f865cd5772b5bdb8725b857c1, type: 3}
+  _beach: {fileID: 8836990799035769074, guid: a1a14735d249d10ea8008e11c50b1c67, type: 3}
+  _palms:
+  - {fileID: 2667756900660612030, guid: b0657be6b4477e55e80ecd7955c561a6, type: 3}
+  - {fileID: 5286651639010966849, guid: 237be4d8e14a930678013ca0c3630e00, type: 3}
+  - {fileID: 408901139612023105, guid: b569b6cc01537f52b804afb98e09c98e, type: 3}
+  - {fileID: 1814791905264786861, guid: bd3737867fb6cb444a0053cc7e19f9f2, type: 3}
+  _rocks:
+  - {fileID: 5363232326624946713, guid: 273fe70dabfd42e9cbbd0ce36a199d5f, type: 3}
+  - {fileID: 5429838259888925953, guid: 3207356cb1335eca7b35d5e7f0483706, type: 3}
+  _boats:
+  - {fileID: 7228339285889193679, guid: f0b84c3fc47f18a00be99e29a91fedef, type: 3}
+  - {fileID: 3249978545774291159, guid: 19bd400abe872c998bed247744be5c7d, type: 3}
+  - {fileID: 5234109208334127928, guid: 6d7d535b061ac2efb8595af26cdac201, type: 3}
+  - {fileID: 5950550431636675827, guid: b93a7261f37e972ae89fc6ed3780ddc4, type: 3}
+  - {fileID: 4453826847940282278, guid: 9933512d6bbd8e01bb0530b0a74d959c, type: 3}
+  - {fileID: 4235023647320262323, guid: 89fa403fba67d03a699c4caa4b1afd9d, type: 3}
+  _buoys:
+  - {fileID: 2548706439407949017, guid: 4b441878a90b54b1cbda9af48cafe90d, type: 3}
+  - {fileID: 8689285912275024958, guid: c8c7607208b7d22e2a39c6e94e13026a, type: 3}
+  _pier: {fileID: 7052995544763761276, guid: 5c0f619d6f10cf57cb41ee7b51b2434b, type: 3}
+  _ship: {fileID: 4101833717176433173, guid: 0c63a441f8d726ac2887cf1d95d1f70f, type: 3}
